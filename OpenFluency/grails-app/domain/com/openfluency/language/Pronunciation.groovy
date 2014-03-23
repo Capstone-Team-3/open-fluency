@@ -1,7 +1,7 @@
 package com.openfluency.language
 
 /**
-* A Pronunciation specifies how a Unit is pronounced in a given Alphabet
+* A Pronunciation specifies how a Unit in one Alphabet is pronounced in another Alphabet
 */
 class Pronunciation {
 
