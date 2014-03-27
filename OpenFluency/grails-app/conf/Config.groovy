@@ -121,6 +121,11 @@ log4j = {
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.openfluency.auth.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.openfluency.auth.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.openfluency.auth.Role'
+
+// Optimistic locking: we'll need to change this for production
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],

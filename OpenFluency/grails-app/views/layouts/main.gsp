@@ -1,3 +1,5 @@
+<%@ page import="grails.plugin.springsecurity.SpringSecurityUtils" %>
+
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -32,7 +34,37 @@
 						<g:link action="list" controller="alphabet">Alphabets</g:link>
 					</li>
 				</ul>
+
+				<!-- LOGGED IN -->
+				<sec:ifLoggedIn>
+					<ul class="gandalf nav navbar-nav navbar-right">
+						<li>
+							<g:link controller="user" action="profile"> <i class="icon-user icon-white"></i>
+								<sec:username/>
+							</g:link>
+						</li>
+						<li>
+							<g:link controller="logout">Logout</g:link>
+						</li>
+					</ul>
+				</sec:ifLoggedIn>
+
+				<!-- NOT LOGGED IN -->
+				<sec:ifNotLoggedIn>
+					<form class="navbar-form navbar-right" role="search" action="${request.contextPath}${SpringSecurityUtils.securityConfig.apf.filterProcessesUrl}" method="POST">
+						<div class="form-group">
+							<input type="text" name="j_username" placeholder="username" class="form-control"/>
+							<input type="password" name="j_password" placeholder="password" class="form-control"/>
+							<input type="hidden" name="spring-security-redirect" value="${request.requestURL}"/>
+							<button type="submit" class="btn btn-inverse">Sign in</button>
+						</div>
+					</form>
+				</sec:ifNotLoggedIn>
+			</p>
 			</div>
+
+
+
 		</nav>
 		<g:layoutBody/>
 		<r:layoutResources />

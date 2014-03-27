@@ -17,9 +17,13 @@ class User {
 	String email
 	Role userType
 
-	static hasMany = [decks : Deck,
-					  courses : Course,
-					  languageProficiencies : LanguageProficiency]
+	List<Deck> getDecks() {
+		return Deck.findAllByOwner(this)
+	}
+
+	List<Deck> getCourses() {
+		return Course.findAllByOwner(this)
+	}
 
 	static transients = ['springSecurityService']
 
@@ -28,9 +32,6 @@ class User {
 		password blank: false
 		email nullable: true
     	userType nullable: false
-    	languageProficiencies nullable: true
-    	decks nullable: true
-    	courses nullable: true
 	}
 
 	static mapping = {
