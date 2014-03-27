@@ -1,4 +1,5 @@
 import com.openfluency.language.*
+import com.openfluency.auth.*
 
 class BootStrap {
 
@@ -22,6 +23,28 @@ class BootStrap {
 
     	// Load sample language
     	languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin)
+
+        //load user roles
+        def studentRole = new Role(authority: 'Student').save(flush: true)
+        def instructorRole = new Role(authority: 'Instructor').save(flush: true)
+        def researcherRole = new Role(authority: 'Researcher').save(flush: true)
+        def adminRole = new Role(authority: 'Admin').save(flush: true)
+
+        //load language proficiency levels
+        def nativeP = new Proficiency(proficiency: 'Native').save(flush: true)
+        def fluentP = new Proficiency(proficiency: 'Fluent').save(flush: true)
+        def advancedP = new Proficiency(proficiency: 'Advanced').save(flush: true)
+        def intermediateP = new Proficiency(proficiency: 'Intermediate').save(flush: true)
+        def beginnerP = new Proficiency(proficiency: 'Beginner').save(flush: true)
+
+        //load a a language proficiency mapping
+        def langProf = new LanguageProficiency(language: japanese, proficiency: nativeP).save(flush: true)
+
+        //build an admin user
+        def testUser = new User(username: 'admin', password: 'admin', userType: adminRole)
+        testUser.addToLanguageProficiencies(langProf)
+        testUser.save(flush: true)
+        UserRole.create testUser, adminRole, true
 
     	log.info "Booted!"
 
