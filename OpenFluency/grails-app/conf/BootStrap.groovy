@@ -1,5 +1,6 @@
 import com.openfluency.language.*
 import com.openfluency.auth.*
+import com.openfluency.flashcard.*
 import com.openfluency.Constants
 
 class BootStrap {
@@ -47,9 +48,33 @@ class BootStrap {
         new UserLanguageProficiency(user: testUser, languageProficiency: langProf).save(failOnError: true)
 
     	// Load sample language
-    	languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin)
+        // If you have kanji_simple_short is locally, use this
+        languageService.loadLanguage("/Users/nicolastejera/Desktop/kanji_simple_short.xml", kanji, latin, true)
+        // Otherwise, use remote
+    	//languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
 
-    	log.info "Booted!"
+        // Build a bunch of sample decks
+        Deck restaurant = new Deck(title: "Restaurant", description: "Words that I would use in a restaurant context", owner: testUser).save(failOnError: true)
+        Deck business = new Deck(title: "Business", description: "Words that I would use in a business context", owner: testUser).save(failOnError: true)
+        Deck sports = new Deck(title: "Sports", description: "Words that I would use in a sports context", owner: testUser).save(failOnError: true)
+        
+        // Build a few flashcards
+        // The idea here is: find all the unitMappings where unit1 is alphabet Kanji
+        int f = 0;
+        UnitMapping.withCriteria {
+            unit1 {
+                eq('alphabet', kanji)
+            }
+        }.each { unitMapping ->
+            // Here we look for any pronunciations for the other unit in the mapping
+            Pronunciation pronunciation = Pronunciation.findByUnit(unitMapping.unit1)
+            if(pronunciation) {
+                new Flashcard(primaryAlphabet: unitMapping.unit1.alphabet, unitMapping: unitMapping, pronunciation: pronunciation, deck: business).save(failOnError: true)
+                log.info "Created ${++f} flashcards"    
+            }
+        }
+
+        log.info "Booted!"
 
     }
     def destroy = {

@@ -1,5 +1,6 @@
 package com.openfluency.flashcard
 
+import com.openfluency.language.Unit
 import com.openfluency.media.Image
 import com.openfluency.media.Audio
 import com.openfluency.language.UnitMapping
@@ -19,12 +20,20 @@ class Flashcard {
 	UnitMapping unitMapping 		// The mapping that this Flashcard displays
 	Pronunciation pronunciation 	// One of the Pronunciations of the unit in this card
 
-	Image image 	// The image to be displayed on the flashcard
-	Audio audio 	// Audio of the pronunciation
+	Image image 					// The image to be displayed on the flashcard
+	Audio audio 					// Audio of the pronunciation
+
+	Deck deck 						// A flashcard can only exist in the context of a deck
 
 	Date dateCreated
 	Date lastUpdated
 
+	Unit getPrimaryUnit() {
+		return unitMapping.unit1.alphabet == primaryAlphabet ? unitMapping.unit1 : unitMapping.unit2
+	}
+
     static constraints = {
+    	audio nullable: true
+    	image nullable: true
     }
 }

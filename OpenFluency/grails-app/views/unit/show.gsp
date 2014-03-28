@@ -36,13 +36,21 @@
 							<td>${unitInstance?.strokeCount}</td>
 						</tr>
 					</table>
+					<div class="panel-footer center">
+						<g:form action="create" controller="flashcard" name="createFlashcardForm">
+							<input type="hidden" name="unit" value="${unitInstance.id}"/>
+							<button class="btn btn-info" type="submit">Create Flashcard</button>
+						</g:form>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-12">
 				<g:each in="${unitInstance.mappings}">
 					<div class="col-lg-4">
 						<div class="panel panel-default">
-							<g:link action="show" id="${it.id}" controller="unit"><h1 class="unit-large">${it?.print}</h1></g:link>
+							<g:link action="show" id="${it.id}" controller="unit">
+								<h1 class="unit-large">${it?.print}</h1>
+							</g:link>
 							<table class="table">
 								<tr>
 									<th>Alphabet</th>

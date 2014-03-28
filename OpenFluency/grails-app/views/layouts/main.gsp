@@ -33,6 +33,9 @@
 					<li>
 						<g:link action="list" controller="alphabet">Alphabets</g:link>
 					</li>
+					<li>
+						<g:link action="list" controller="deck">Decks</g:link>
+					</li>
 				</ul>
 
 				<!-- LOGGED IN -->

@@ -11,6 +11,10 @@ class Deck {
 	Date dateCreated
 	Date lastUpdated
 
+	List<Flashcard> getFlashcards() {
+		Flashcard.findAllByDeck(this)
+	}
+
     static constraints = {
     }
 }

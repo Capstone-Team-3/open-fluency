@@ -25,18 +25,25 @@ class Unit {
     	return this.alphabet.language
     }
 
+    /**
+    * @return a list of all the UnitMappings where one of the units is this
+    */
+    List<UnitMapping> getUnitMappings() {
+        return UnitMapping.findAllByUnit1OrUnit2(this, this)
+    }
+
     /** 
     * @return a list of all the Units mapped to this Unit
     */
-    List getMappings() {
+    List<Unit> getMappings() {
         // The idea here is: first find all the UnitMappings where either Unit in the mapping is this Unit
         // After that, get the Unit from the mapping that is not this Unit
-        return UnitMapping.findAllByUnit1OrUnit2(this, this).collect { 
+        return this.unitMappings.collect { 
             it.unit1 == this  ? it.unit2 : it.unit1 
         }
     }
 
-    List getPronunciations() {
+    List<Pronunciation> getPronunciations() {
         return Pronunciation.findAllByUnit(this)
     }
 

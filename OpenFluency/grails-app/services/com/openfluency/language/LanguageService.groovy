@@ -11,7 +11,7 @@ class LanguageService {
 	* @param sourceAlphabet: the alphabet being created
 	* @param targetAlphabet: the alphabet of the meanings 
 	*/
-	void loadLanguage(String dictionaryUrl, Alphabet sourceAlphabet, Alphabet targetAlphabet) {
+	void loadLanguage(String dictionaryUrl, Alphabet sourceAlphabet, Alphabet targetAlphabet, boolean local=false) {
 
 		// Format of the XML is as follows:
 		// <dictionary>
@@ -32,7 +32,9 @@ class LanguageService {
 		// 		...
 		// </dictionary>
 
-		def dictionary = new XmlSlurper().parseText(dictionaryUrl.toURL().text)
+		def dictionaryText = local ? new File(dictionaryUrl).text : dictionaryUrl.toURL().text
+		
+		def dictionary = new XmlSlurper().parseText(dictionaryText)
 		int i = 0
 		for(ch in dictionary.ch) {
 			// Find or create Unit
