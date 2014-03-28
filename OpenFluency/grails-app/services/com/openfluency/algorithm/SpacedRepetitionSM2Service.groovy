@@ -1,5 +1,9 @@
+package com.openfluency.algorithm
+
 import grails.transaction.Transactional
 import groovy.time.TimeCategory
+import com.openfluency.flashcard.Flashcard
+
 /**
  * An implementation of the Spaced Repetition algorithm.
  * The algorithm is based on the SuperMemo 2 algorithm:
@@ -74,7 +78,7 @@ class SpacedRepetitionSM2Service
 	 * @param flashcard
 	 * @param quality
 	 */
-	void rankFlashcard(Flashcard flashcard ,int quality)
+	void rankFlashcard(Flashcard flashcard, int quality)
 	{
 		calcuateInterval(flashcard,quality) 
 		use(TimeCategory)
@@ -104,7 +108,7 @@ class SpacedRepetitionSM2Service
 	 * @param flashcard
 	 * @param quality - the ranking (0-5)
 	 */
-	void calcuateInterval(Flashcard flashcard ,int quality )
+	void calcuateInterval(Flashcard flashcard, int quality )
 	{
 		
 		//if quality < 3 then start repetitions for the item from the beginning without changing the E-Factor
