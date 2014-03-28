@@ -66,7 +66,7 @@ class SpacedRepetitionSM2Service
 		flashcard.setInterval(FIRST_INTERVAL)
 		use(TimeCategory) 
 		{
-			flashcard.setNextReprtitionDate((new Date()) + FIRST_INTERVAL.days)
+			flashcard.setNextRepetitionDate((new Date()) + FIRST_INTERVAL.days)
 		}
 
 		
@@ -78,12 +78,11 @@ class SpacedRepetitionSM2Service
 	 * @param flashcard
 	 * @param quality
 	 */
-	void rankFlashcard(Flashcard flashcard, int quality)
-	{
+	void rankFlashcard(Flashcard flashcard, int quality) {
 		calcuateInterval(flashcard,quality) 
-		use(TimeCategory)
-		{
-			flashcard.setNextReprtitionDate( (new Date())+ flashcard.getInterval().days)
+		
+		use(TimeCategory) {
+			flashcard.setNextRepetitionDate( (new Date())+ flashcard.getInterval().days)
 		}
 	}
 	/**
@@ -92,14 +91,13 @@ class SpacedRepetitionSM2Service
 	* @param flashcard
 	* @param quality - the ranking (0-5)
 	*/
-	void calcuateEFactor(Flashcard flashcard, int quality)
-	{
+	void calcuateEFactor(Flashcard flashcard, int quality) {
 	  float newFactor = flashcard.getEFactor() - 0.8 + (0.28 * quality) - (0.02 * quality * quality)
 	  //If EF is less than MIN_EF then let EF be MIN_EF
-	  if (newFactor < MIN_EFACTOR)
-	  {
+	  if (newFactor < MIN_EFACTOR){
 		  newFactor = MIN_EFACTOR
 	  }
+
 	  flashcard.setEFactor(newFactor)
 	}
 	/**
@@ -108,27 +106,25 @@ class SpacedRepetitionSM2Service
 	 * @param flashcard
 	 * @param quality - the ranking (0-5)
 	 */
-	void calcuateInterval(Flashcard flashcard, int quality )
-	{
+	void calcuateInterval(Flashcard flashcard, int quality ) {
 		
 		//if quality < 3 then start repetitions for the item from the beginning without changing the E-Factor
 		// (i.e. use intervals I(1), I(2) etc. as if the item was memorized anew)
-		if (quality < 3)
-		{
+		if (quality < 3) {
 			flashcard.setNumberOfRepetitions(1)
 		}
 		// numberOfRepetitions = the number of times the flashcard was viewed
 		int numberOfRepetitions = flashcard.getNumberOfRepetitions()
-		if (numberOfRepetitions == 1)
-		{
+		
+		if (numberOfRepetitions == 1) {
 			interval = FIRST_INTERVAL
 		}
-		if (numberOfRepetitions == 2)
-		{
+		
+		if (numberOfRepetitions == 2) {
 			interval = SECOND_INTERVAL
 		}
-		else if (numberOfRepetitions > 2)
-		{
+		
+		else if (numberOfRepetitions > 2) {
 		   //If interval is a fraction, round it up to the nearest integer.
 		   interval =  (int)Math.ceil(flashcard.getInterval() * flashcard.getEFactor())
 		}
