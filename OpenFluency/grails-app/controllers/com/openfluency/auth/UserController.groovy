@@ -8,7 +8,7 @@ import com.openfluency.language.*
 
 @Transactional(readOnly = true)
 class UserController {
-
+    
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -22,12 +22,12 @@ class UserController {
 
     def create() {
         def user = new User(params)
-        user.properties['userName', 'password', 'email', 'userType'] = params
         [userInstance: user, languages: Language.findAll(), proficiencies : Proficiency.findAll()]
     }
 
     @Transactional
     def save(User userInstance) {
+        
         if (userInstance == null) { 
             notFound()
             return
