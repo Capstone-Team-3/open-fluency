@@ -8,7 +8,7 @@ import com.openfluency.media.Audio
 import com.openfluency.auth.User
 import com.openfluency.language.Unit
 
-class FlashcardController {
+class FlashcardController { 
 
 	def springSecurityService
 	def flashcardService

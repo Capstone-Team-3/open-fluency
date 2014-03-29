@@ -4,7 +4,7 @@ import com.openfluency.language.*
 import com.openfluency.flashcard.Deck
 import com.openfluency.course.Course
 
-class User {
+class User { 
 
 	transient springSecurityService
 

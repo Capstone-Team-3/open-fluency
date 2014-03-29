@@ -59,39 +59,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.languageProficiencies}">
-				<li class="fieldcontain">
-					<span id="languageProficiencies-label" class="property-label"><g:message code="user.languageProficiencies.label" default="Language Proficiencies" /></span>
-					
-						<g:each in="${userInstance.languageProficiencies}" var="l">
-						<span class="property-value" aria-labelledby="languageProficiencies-label"><g:link controller="languageProficiency" action="show" id="${l.id}">${l?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.decks}">
-				<li class="fieldcontain">
-					<span id="decks-label" class="property-label"><g:message code="user.decks.label" default="Decks" /></span>
-					
-						<g:each in="${userInstance.decks}" var="d">
-						<span class="property-value" aria-labelledby="decks-label"><g:link controller="deck" action="show" id="${d.id}">${d?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${userInstance?.courses}">
-				<li class="fieldcontain">
-					<span id="courses-label" class="property-label"><g:message code="user.courses.label" default="Courses" /></span>
-					
-						<g:each in="${userInstance.courses}" var="c">
-						<span class="property-value" aria-labelledby="courses-label"><g:link controller="course" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${userInstance?.accountExpired}">
 				<li class="fieldcontain">
 					<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>

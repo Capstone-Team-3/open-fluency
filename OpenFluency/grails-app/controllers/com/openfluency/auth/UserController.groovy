@@ -4,6 +4,7 @@ package com.openfluency.auth
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import com.openfluency.language.*
 
 @Transactional(readOnly = true)
 class UserController {
@@ -20,12 +21,14 @@ class UserController {
     }
 
     def create() {
-        respond new User(params)
+        def user = new User(params)
+        user.properties['userName', 'password', 'email', 'userType'] = params
+        [userInstance: user, languages: Language.findAll(), proficiencies : Proficiency.findAll()]
     }
 
     @Transactional
     def save(User userInstance) {
-        if (userInstance == null) {
+        if (userInstance == null) { 
             notFound()
             return
         }
