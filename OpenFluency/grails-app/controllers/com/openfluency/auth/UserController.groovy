@@ -27,7 +27,7 @@ class UserController {
 
     @Transactional
     def save(User userInstance) {
-        
+        flash.each {k,v -> log.info "k,v: ${k}, ${v}"}
         if (userInstance == null) { 
             notFound()
             return

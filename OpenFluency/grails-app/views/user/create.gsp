@@ -26,10 +26,34 @@
 			</ul>
 			</g:hasErrors>
 			
+			<%-- Add a language -> proficiencies map to flash so that the mappings can be accesed in the controller--%>
+			<% flash.languageProcifiencies = [:] %>
+			<%-- example of adding a proficiencies pair--%>
+			<% flash.languageProcifiencies.japanese = 'fluent' %>
+			
 			<g:form url="[resource:userInstance, action:'save']" >
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
+
+				<div class="fieldcontain">
+					<label for="languages">
+						<g:message code="language.name.label" default="Language" />
+						<span class="required-indicator">*</span>
+					</label>
+					<g:select id="language" name="language.id" from="${languages}" optionKey="id" required="" value="${languages?.id}" class="many-to-one"/>
+
+				</div>
+
+				<div class="fieldcontain">
+					<label for="proficiencies">
+						<g:message code="proficiency.proficiency.label" default="Proficiency" />
+						<span class="required-indicator">*</span>
+					</label>
+					<g:select id="proficiency" name="proficiency.id" from="${proficiencies}" optionKey="id" required="" value="${proficiencies?.id}" class="many-to-one"/>
+
+				</div>
+
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /> 
 				</fieldset>

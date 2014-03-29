@@ -4,6 +4,8 @@ class Language {
 
 	String name
 
+	String toString() { name }
+
     static constraints = {
     }
 }
