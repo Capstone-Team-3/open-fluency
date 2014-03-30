@@ -39,9 +39,6 @@
 				<sec:ifLoggedIn>
 					<ul class="nav navbar-nav">
 						<li>
-							<g:link action="list" controller="alphabet">Alphabets</g:link>
-						</li>
-						<li>
 							<g:link action="list" controller="deck">Decks</g:link>
 						</li>
 					</ul>
