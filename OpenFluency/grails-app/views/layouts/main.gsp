@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css">
 
 	<!-- JS libraries -->
-	<r:require module="jquery"/>
+	<g:javascript src="jquery.min.js"/>
 	<g:javascript src="bootstrap.min.js"/>
 	<g:javascript library="application"/>
 
@@ -22,13 +22,19 @@
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
-		<div class="container-fluid">
+		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
 				<a class="navbar-brand" href="#">OpenFluency</a>
 			</div>
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse" id="navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li>
 						<g:link action="list" controller="alphabet">Alphabets</g:link>
@@ -63,13 +69,12 @@
 						</div>
 					</form>
 				</sec:ifNotLoggedIn>
-			</p>
-			</div>
+			
+			</div><!-- end navbar-collapse -->
+		</div><!-- end container -->
+	</nav>
 
-
-
-		</nav>
-		<g:layoutBody/>
-		<r:layoutResources />
+	<g:layoutBody/>
+	<r:layoutResources />
 </body>
-	</html>
+</html>
