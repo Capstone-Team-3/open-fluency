@@ -35,17 +35,17 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li>
-						<g:link action="list" controller="alphabet">Alphabets</g:link>
-					</li>
-					<li>
-						<g:link action="list" controller="deck">Decks</g:link>
-					</li>
-				</ul>
-
 				<!-- LOGGED IN -->
 				<sec:ifLoggedIn>
+					<ul class="nav navbar-nav">
+						<li>
+							<g:link action="list" controller="alphabet">Alphabets</g:link>
+						</li>
+						<li>
+							<g:link action="list" controller="deck">Decks</g:link>
+						</li>
+					</ul>
+				
 					<ul class="gandalf nav navbar-nav navbar-right">
 						<li>
 							<g:link controller="user" action="profile"><span class="glyphicon glyphicon-user"></span>
