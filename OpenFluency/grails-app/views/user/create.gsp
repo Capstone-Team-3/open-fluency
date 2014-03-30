@@ -6,58 +6,57 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<!--<a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 			</ul>
-		</div>
-		<div id="create-user" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<g:hasErrors bean="${userInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${userInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
-			
-			<%-- Add a language -> proficiencies map to flash so that the mappings can be accesed in the controller--%>
-			<% flash.languageProcifiencies = [:] %>
-			<%-- example of adding a proficiencies pair--%>
-			<% flash.languageProcifiencies.japanese = 'fluent' %>
-			
-			<g:form url="[resource:userInstance, action:'save']" >
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
+		</div> -->
+		<div class="container signup" role="main">
+			<div class="col-lg-4">
+				<h2>Sign Up</h2>
+				<p>Already have an account? <g:link action="auth" controller="login">Sign In</g:link>.</p>
 
-				<div class="fieldcontain">
-					<label for="languages">
+				<g:if test="${flash.message}">
+				<div class="message" role="status">${flash.message}</div>
+				</g:if>
+
+				<g:hasErrors bean="${userInstance}">
+				<ul class="errors" role="alert">
+					<g:eachError bean="${userInstance}" var="error">
+					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+					</g:eachError>
+				</ul>
+				</g:hasErrors>
+				
+				<%-- Add a language -> proficiencies map to flash so that the mappings can be accesed in the controller--%>
+				<% flash.languageProcifiencies = [:] %>
+				<%-- example of adding a proficiencies pair--%>
+				<% flash.languageProcifiencies.japanese = 'fluent' %>
+				
+				<g:form url="[resource:userInstance, action:'save']" >
+					
+					<g:render template="form"/>
+
+					<label for="languages" class="control-label">
 						<g:message code="language.name.label" default="Language" />
 						<span class="required-indicator">*</span>
 					</label>
-					<g:select id="language" name="language.id" from="${languages}" optionKey="id" required="" value="${languages?.id}" class="many-to-one"/>
+					
+					<g:select id="language" class="many-to-one form-control" name="language.id" from="${languages}" optionKey="id" required="" value="${languages?.id}"/>
 
-				</div>
-
-				<div class="fieldcontain">
-					<label for="proficiencies">
+					<label for="proficiencies" class="control-label">
 						<g:message code="proficiency.proficiency.label" default="Proficiency" />
 						<span class="required-indicator">*</span>
 					</label>
-					<g:select id="proficiency" name="proficiency.id" from="${proficiencies}" optionKey="id" required="" value="${proficiencies?.id}" class="many-to-one"/>
+					
+					<g:select id="proficiency" class="many-to-one form-control" name="proficiency.id" from="${proficiencies}" optionKey="id" required="" value="${proficiencies?.id}" />
 
-				</div>
+					<g:submitButton name="sign-up" class="btn btn-primary btn-block" value="Sign Up" /> 
 
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /> 
-				</fieldset>
-			</g:form>
-		</div>
+				</g:form>
+			</div><!-- end col-lg-4 -->
+		</div><!-- end container -->
 	</body>
 </html>
