@@ -19,3 +19,6 @@
     padding-top: 11px; /* padding plus a border */
 }
 
+.signin .alert {
+    margin-bottom: 0;
+}
