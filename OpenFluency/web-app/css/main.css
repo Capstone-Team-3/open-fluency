@@ -8,12 +8,14 @@
 }
 
 /* ---------------------------------------------------------------------------*/
-/* CUSTOM FORM STYLES 
+/* FORM STYLES 
 /* ---------------------------------------------------------------------------*/
 .signup .btn[type="submit"] {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
+.signin .control-label,
 .signup .control-label {
     padding-top: 11px; /* padding plus a border */
 }
+
