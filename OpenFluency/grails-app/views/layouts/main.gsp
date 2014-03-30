@@ -31,7 +31,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">OpenFluency</a>
+				<a class="navbar-brand" href="${createLink(uri: '/')}">OpenFluency</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="navbar-collapse-1">
@@ -48,7 +48,7 @@
 				<sec:ifLoggedIn>
 					<ul class="gandalf nav navbar-nav navbar-right">
 						<li>
-							<g:link controller="user" action="profile"> <i class="icon-user icon-white"></i>
+							<g:link controller="user" action="profile"><span class="glyphicon glyphicon-user"></span>
 								<sec:username/>
 							</g:link>
 						</li>
