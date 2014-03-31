@@ -27,7 +27,7 @@
 				<%-- Add a language -> proficiencies map to flash so that the mappings can be accesed in the controller--%>
 				<% flash.languageProcifiencies = [:] %>
 				<%-- example of adding a proficiencies pair--%>
-				<% flash.languageProcifiencies.japanese = 'fluent' %>
+				<% flash.languageProficiencies = [(languages[0]) : proficiencies[2]] %>
 				
 				<g:form url="[resource:userInstance, action:'save']" >
 					
