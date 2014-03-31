@@ -9,11 +9,18 @@ import com.openfluency.language.*
 @Transactional(readOnly = true)
 class UserController {
     
+    def userService
+    def springSecurityService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userInstanceCount: User.count()]
+    }
+
+    def profile() {
+        render view: "show", model: [userInstance: User.load(springSecurityService.principal.id)]
     }
 
     def show(User userInstance) {
@@ -22,31 +29,20 @@ class UserController {
 
     def create() {
         def user = new User(params)
-        [userInstance: user, languages: Language.findAll(), proficiencies : Proficiency.findAll()]
+        [userInstance: user, languages: Language.findAll()]
     }
 
     @Transactional
-    def save(User userInstance) {
-        flash['languageProficiencies'].each {k,v -> println "Blah ${k}, ${v}"} 
-        if (userInstance == null) { 
-            notFound()
-            return
-        }
+    def save() {
+        
+        User userInstance = userService.createUser(params.username, params.password, params.email, params.userType.id, params.list('language.id'), params.list('proficiency.id'))
 
         if (userInstance.hasErrors()) {
             respond userInstance.errors, view:'create'
             return
         }
 
-        userInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'userInstance.label', default: 'User'), userInstance.id])
-                redirect userInstance
-            }
-            '*' { respond userInstance, [status: CREATED] }
-        }
+        redirect action: 'show', id: userInstance.id
     }
 
     def edit(User userInstance) {

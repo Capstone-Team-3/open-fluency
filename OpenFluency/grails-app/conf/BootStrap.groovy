@@ -36,16 +36,13 @@ class BootStrap {
         def intermediateP = new Proficiency(proficiency: 'Intermediate').save(flush: true, failOnError: true)
         def beginnerP = new Proficiency(proficiency: 'Beginner').save(flush: true, failOnError: true)
 
-        // Load a language proficiency mapping
-        def langProf = new LanguageProficiency(language: japanese, proficiency: nativeP).save(flush: true, failOnError: true)
-
         // Build an admin user
         def testUser = new User(username: 'admin', password: 'admin', userType: adminRole)
         testUser.save(flush: true, failOnError: true)
         UserRole.create testUser, adminRole, true
 
         // Add language proficiency to admin user
-        new UserLanguageProficiency(user: testUser, languageProficiency: langProf).save(failOnError: true)
+        new LanguageProficiency(user: testUser, proficiency: nativeP, language: japanese).save(failOnError: true)
 
     	// Load sample language
         // If you have kanji_simple_short is locally, use this

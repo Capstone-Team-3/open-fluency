@@ -42,6 +42,10 @@ class User {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
 
+	List<LanguageProficiency> getLanguageProficiencies() {
+		return LanguageProficiency.findAllByUser(this)
+	}
+
 	def beforeInsert() {
 		encodePassword()
 	}
