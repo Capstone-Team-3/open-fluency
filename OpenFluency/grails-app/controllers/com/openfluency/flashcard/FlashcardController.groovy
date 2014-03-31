@@ -34,7 +34,7 @@ class FlashcardController {
             return
         }
 
-        redirect action: "show", id: flashcardInstance.id
+        redirect controller:"deck", action: "show", id: params.deck
     }
 
     /**

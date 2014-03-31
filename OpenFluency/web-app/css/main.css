@@ -1,14 +1,10 @@
-.unit-large {
-	text-align: center;
-	font-size: 40px;
-}
 
 .center {
 	text-align: center;
 }
 
 /* ---------------------------------------------------------------------------*/
-/* FORM STYLES 
+/* SIGN-IN AND SIGN-UP STYLES
 /* ---------------------------------------------------------------------------*/
 .signup .btn[type="submit"] {
     margin-top: 10px;
@@ -21,4 +17,45 @@
 
 .signin .alert {
     margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* UNIT STYLES
+/* ---------------------------------------------------------------------------*/
+
+.unit-index .instructions {
+    margin-bottom: 30px;
+}
+
+.unit-index table {
+    margin-top: 30px;
+}
+
+.unit-index .meaning:after {
+    content:",";
+}
+
+.unit-index .meaning:last-child:after {
+    content:"";
+}
+
+.unit-large {
+    text-align: center;
+    font-size: 40px;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* FLASHCARD STYLES
+/* ---------------------------------------------------------------------------*/
+
+.flashcard-create h1 {
+    margin-bottom: 30px;
+}
+
+.flashcard-create .control-label {
+    padding-top: 11px; /* padding plus a border */
+}
+
+.flashcard-create .btn {
+    margin-top: 10px;
 }
