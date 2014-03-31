@@ -9,11 +9,10 @@
 
 	<div class="container signup" role="main">
 		<div class="col-lg-4">
-			<h2>Sign Up</h2>
+			<h1>Sign Up</h1>
 			<p>
 				Already have an account?
-				<g:link action="auth" controller="login">Sign In</g:link>
-				.
+				<g:link action="auth" controller="login">Sign In</g:link>.
 			</p>
 
 			<g:if test="${flash.message}">
@@ -36,15 +35,16 @@
 			<g:render template="form"/>
 
 			<div class="proficiencies">
-				<h3>
+				<label class="control-label">
 					Language Proficiencies
 					<a id="addproficiency" class="btn btn-default">Add</a>
-				</h3>
+				</label>
 			</div>
-			<g:submitButton name="sign-up" class="btn btn-primary btn-block" value="Sign Up" />
+			<g:submitButton name="sign-up" class="btn btn-primary" value="Sign Up" />
 		</g:form>
 	</div>
 </div>
+
 <g:javascript>
 	$(function() {
 	$('#addproficiency').click(function(){
@@ -57,5 +57,6 @@
 	});
 })
 </g:javascript>
+
 </body>
 </html>
