@@ -4,19 +4,22 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container course-show">
 
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<g:if test="${flash.message}">
-					<div class="alert alert-info" style="display: block">${flash.message}</div>
-				</g:if>
-				<h1>${courseInstance.title}</h1>
-				<p>${courseInstance.description}</p>
-			</div>
-			<!-- end col-lg-6 -->
-		</div>
-		<!-- end row -->
+		<div class="course-header">
+			<g:if test="${flash.message}">
+				<div class="alert alert-info" style="display: block">${flash.message}</div>
+			</g:if>
+			<h1>
+				${courseInstance.title}
+				<sec:ifAllGranted roles="ROLE_STUDENT">
+					<!-- Displayed for students - need to check if the student is already enrolled in this course -->
+					<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll!</g:link>
+				</sec:ifAllGranted>
+			</h1>
+			<p>${courseInstance.description}</p>
+
+		</div><!-- end course-header -->
 
 		<div class="row">
 			<div class="col-lg-12">
@@ -45,15 +48,6 @@
 				</div>
 			</div>
 		</g:if>
-
-		<sec:ifAllGranted roles="ROLE_STUDENT">
-			<!-- Displayed for students - need to check if the student is already enrolled in this course -->
-			<div class="row">
-				<div class="col-lg-12">
-					<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll!</g:link>
-				</div>
-			</div>
-		</sec:ifAllGranted>
 
 	</div>
 	<!-- end container -->
