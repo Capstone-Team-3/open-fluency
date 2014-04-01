@@ -9,4 +9,8 @@ class UnitController {
     def list(Alphabet alphabet) {
     	render view: 'list', model: [alphabetInstance: alphabet, unitInstanceList: Unit.findAllByAlphabet(alphabet)]
     }
+
+    def index(Alphabet alphabet) {
+        render view: 'index', model: [alphabetInstanceList: Alphabet.list(), alphabetInstance: alphabet, unitInstanceList: Unit.findAllByAlphabet(alphabet)]
+    }
 }

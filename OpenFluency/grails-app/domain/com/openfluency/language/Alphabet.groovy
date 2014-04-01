@@ -7,6 +7,8 @@ class Alphabet {
 	String name 					// Kanji, Katakana, etc
 	Boolean encodeEntities = false	// Defines if the Units of this alphabet should be encoded into HTML entities
 
+    String toString() { name }
+
     static constraints = {
     }
 }

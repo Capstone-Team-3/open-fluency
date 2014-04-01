@@ -1,7 +1,7 @@
 package com.openfluency.auth
 
 
-
+import com.openfluency.Constants
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import com.openfluency.language.*
@@ -29,7 +29,7 @@ class UserController {
 
     def create() {
         def user = new User(params)
-        [userInstance: user, languages: Language.findAll()]
+        [userInstance: user, languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
     }
 
     @Transactional

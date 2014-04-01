@@ -1,19 +1,14 @@
-.unit-large {
-	text-align: center;
-	font-size: 40px;
-}
+/* ---------------------------------------------------------------------------*/
+/* GENERAL
+/* ---------------------------------------------------------------------------*/
 
 .center {
 	text-align: center;
 }
 
 /* ---------------------------------------------------------------------------*/
-/* FORM STYLES 
+/* SIGN-IN AND SIGN-UP STYLES
 /* ---------------------------------------------------------------------------*/
-.signup .btn[type="submit"] {
-    margin-top: 10px;
-}
-
 .signin .control-label,
 .signup .control-label {
     padding-top: 11px; /* padding plus a border */
@@ -21,4 +16,118 @@
 
 .signin .alert {
     margin-bottom: 0;
+}
+
+.proficiencies .panel label:first-child {
+    padding-top: 0;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* UNIT STYLES
+/* ---------------------------------------------------------------------------*/
+
+.unit-index .instructions {
+    margin-bottom: 30px;
+}
+
+.unit-index table {
+    margin-top: 30px;
+}
+
+.unit-index .meaning:after {
+    content:",";
+}
+
+.unit-index .meaning:last-child:after {
+    content:"";
+}
+
+.unit-large {
+    text-align: center;
+    font-size: 40px;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* FLASHCARD STYLES
+/* ---------------------------------------------------------------------------*/
+
+.flashcard-create h1 {
+    margin-bottom: 30px;
+}
+
+.flashcard-create .control-label {
+    padding-top: 11px; /* padding plus a border */
+}
+
+.flashcard-create .btn {
+    margin-top: 10px;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* DASHBOARD STYLES
+/* ---------------------------------------------------------------------------*/
+
+.dashboard h2 {
+    border-bottom: 1px solid #eee;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    padding-bottom: 10px;
+}
+
+.dashboard .container {
+    background: #eee;
+    padding: 30px 15px;
+}
+
+.dashboard .panel {
+    height: 300px;
+    margin: 0;
+    position: relative;
+}
+
+.dashboard .panel h3 {
+    border-bottom: 1px solid #eee;
+}
+
+.dashboard .panel .progress,
+.current-chapter {
+    margin-top: 30px;
+}
+
+.current-chapter {
+    text-align: center;
+}
+
+.current-chapter h4 {
+    font-size: 16px;
+}
+
+.dashboard .panel .btn {
+    position: absolute;
+    bottom: 15px;
+}
+
+.dashboard .view-more {
+    display: block;
+    margin-top: 10px;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* COURSE & DECK STYLES
+/* ---------------------------------------------------------------------------*/
+
+.course-search h1, 
+.course-list h1,
+.deck-list h1 {
+    margin-bottom: 30px;
+}
+
+.course-search table {
+    margin-top: 30px;
+}
+
+.course-show .course-header {
+    margin-bottom: 30px;
+    text-align: center;
 }

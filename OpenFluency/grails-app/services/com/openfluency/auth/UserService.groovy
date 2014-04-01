@@ -27,6 +27,9 @@ class UserService {
     			).save(flush: true)
     	}
 
+        // Create the role mappings
+        UserRole.create userInstance, userInstance.userType, true
+
     	return userInstance
     }
 }

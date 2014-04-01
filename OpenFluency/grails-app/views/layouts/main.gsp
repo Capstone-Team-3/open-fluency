@@ -9,12 +9,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- CSS includes -->
-	<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css">
 	<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 
 	<!-- JS libraries -->
 	<g:javascript src="jquery.min.js"/>
-	<g:javascript src="bootstrap.min.js"/>
+	<r:require modules="bootstrap"/>
 	<g:javascript library="application"/>
 
 	<g:layoutHead/>
@@ -40,6 +39,9 @@
 					<ul class="nav navbar-nav">
 						<li>
 							<g:link action="list" controller="deck">Decks</g:link>
+						</li>
+						<li>
+							<g:link action="list" controller="course">Courses</g:link>
 						</li>
 					</ul>
 				
