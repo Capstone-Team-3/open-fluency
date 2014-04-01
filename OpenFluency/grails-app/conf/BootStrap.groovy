@@ -60,9 +60,9 @@ class BootStrap {
 
     	// Load sample language
         // If you have kanji_simple_short is locally, use this
-        languageService.loadLanguage("/Users/nicolastejera/Desktop/kanji_simple_short.xml", kanji, latin, true)
+        //languageService.loadLanguage("/Users/nicolastejera/Desktop/kanji_simple_short.xml", kanji, latin, true)
         // Otherwise, use remote
-    	//languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
+    	languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
 
         // Build a bunch of sample decks
         Deck restaurant = new Deck(title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)

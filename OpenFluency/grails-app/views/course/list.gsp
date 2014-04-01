@@ -6,7 +6,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-
+			
 			<sec:ifAllGranted roles="ROLE_INSTRUCTOR">
 				<!-- Instructor -->
 				<div class="col-lg-6 col-lg-offset-3">
