@@ -36,12 +36,16 @@
 				<table class="table">
 					<tr>
 						<th>Title</th>
+						<th>Description</th>
+						<th>Instructor</th>
 					</tr>
 					<g:each in="${registrations}">
 						<tr>
 							<td>
 								<g:link action="show" controller="course" id="${it.course.id}">${it.course.title}</g:link>
 							</td>
+							<td>${it.course.description}</td>
+							<td>${it.course.owner.username}</td>
 						</tr>
 					</g:each>
 				</table>
