@@ -64,11 +64,10 @@
                                                 
                                                 <div class="description">${it.course.description}</div>
                                                 
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width:20%">
-                                                        20%
-                                                    </div><!-- end progress-bar -->
-                                                </div><!-- end progress -->
+                                                <div class="current-chapter">
+                                                    <h4>Current chapter</h4>
+                                                    <a href="#">Chapter 1: The Basics</a>
+                                                </div>
                                                 
                                                 <g:link class="btn btn-success" action="show" controller="course" id="${it.course.id}">Continue</g:link>
 

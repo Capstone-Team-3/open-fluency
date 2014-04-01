@@ -90,8 +90,17 @@
     border-bottom: 1px solid #eee;
 }
 
-.dashboard .panel .progress {
+.dashboard .panel .progress,
+.current-chapter {
     margin-top: 30px;
+}
+
+.current-chapter {
+    text-align: center;
+}
+
+.current-chapter h4 {
+    font-size: 16px;
 }
 
 .dashboard .panel .btn {
