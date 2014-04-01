@@ -38,10 +38,16 @@
 				<sec:ifLoggedIn>
 					<ul class="nav navbar-nav">
 						<li>
-							<g:link action="list" controller="deck">Decks</g:link>
+							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="deck">Decks<b class="caret"></b></g:link>
+							<ul class="dropdown-menu">
+                            	<li><g:link action="list" controller="deck">My decks</g:link></li>
+                            	<li><g:link action="create" controller="deck">Create new deck</g:link></li>
+                            	<li><a href="#">Search for decks</a></li>
+                        	</ul>
 						</li>
 						<li>
 							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="course">Courses<b class="caret"></b></g:link>
+							
 							<ul class="dropdown-menu">
 	                            <sec:ifAllGranted roles="ROLE_STUDENT">
 	                            	<li><g:link action="list" controller="course">Enrolled courses</g:link></li>
