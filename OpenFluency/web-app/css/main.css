@@ -105,13 +105,16 @@
 }
 
 /* ---------------------------------------------------------------------------*/
-/* COURSE SEARCH STYLES
+/* COURSE & DECK STYLES
 /* ---------------------------------------------------------------------------*/
 
-.course-search h1 {
+.course-search h1, 
+.course-list h1,
+.deck-list h1 {
     margin-bottom: 30px;
 }
 
 .course-search table {
     margin-top: 30px;
 }
+

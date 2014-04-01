@@ -4,25 +4,34 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container deck-list">
 		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<h1>My Decks <g:link action="create" controller="deck" class="btn btn-info">Create</g:link></h1>
-				<table class="table">
+			
+			<h1>My Decks <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link></h1>
+			
+			<table class="table">
+				<tr>
+					<th>Deck Title</th>
+					<th>Flashcards</th>
+					<th>Progress</th>
+				</tr>
+				<g:each in="${deckInstanceList}">
 					<tr>
-						<th>Title</th>
-						<th>Flashcards</th>
+						<td>
+							<g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link>
+						</td>
+						<td>${it.flashcards.size()}</td>
+						<td>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">
+                                    60%
+                                </div><!-- end progress-bar -->
+                            </div><!-- end progress -->
+						</td>
 					</tr>
-					<g:each in="${deckInstanceList}">
-						<tr>
-							<td>
-								<g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link>
-							</td>
-							<td>${it.flashcards.size()}</td>
-						</tr>
-					</g:each>
-				</table>
-			</div>
+				</g:each>
+			</table>
+
 		</div>
 	</div>
 </body>
