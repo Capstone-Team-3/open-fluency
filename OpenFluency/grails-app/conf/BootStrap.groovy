@@ -1,11 +1,13 @@
 import com.openfluency.language.*
 import com.openfluency.auth.*
 import com.openfluency.flashcard.*
+import com.openfluency.course.*
 import com.openfluency.Constants
 
 class BootStrap {
 
 	def languageService
+    def flashcardService
 
     def init = { servletContext ->
 
@@ -24,10 +26,10 @@ class BootStrap {
     	log.info "Created ${Alphabet.count()} alphabets"
 
         // Load user roles
-        def studentRole = new Role(authority: Constants.ROLE_STUDENT).save(flush: true, failOnError: true)
-        def instructorRole = new Role(authority: Constants.ROLE_INSTRUCTOR).save(flush: true, failOnError: true)
-        def researcherRole = new Role(authority: Constants.ROLE_RESEARCHER).save(flush: true, failOnError: true)
-        def adminRole = new Role(authority: Constants.ROLE_ADMIN).save(flush: true)
+        def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(flush: true, failOnError: true)
+        def instructorRole = new Role(name: "Instructor", authority: Constants.ROLE_INSTRUCTOR).save(flush: true, failOnError: true)
+        def researcherRole = new Role(name: "Researcher", authority: Constants.ROLE_RESEARCHER).save(flush: true, failOnError: true)
+        def adminRole = new Role(name: "Administrator", authority: Constants.ROLE_ADMIN).save(flush: true)
 
         // Load language proficiency levels
         def nativeP = new Proficiency(proficiency: 'Native').save(flush: true, failOnError: true)
@@ -36,43 +38,53 @@ class BootStrap {
         def intermediateP = new Proficiency(proficiency: 'Intermediate').save(flush: true, failOnError: true)
         def beginnerP = new Proficiency(proficiency: 'Beginner').save(flush: true, failOnError: true)
 
-        // Build an admin user
-        def testUser = new User(username: 'admin', password: 'admin', userType: adminRole)
-        testUser.save(flush: true, failOnError: true)
-        UserRole.create testUser, adminRole, true
+        // Build some users
+        def admin = new User(username: 'admin', password: 'admin', userType: adminRole)
+        admin.save(flush: true, failOnError: true)
+        UserRole.create admin, adminRole, true
 
-        // Add language proficiency to admin user
-        new LanguageProficiency(user: testUser, proficiency: nativeP, language: japanese).save(failOnError: true)
+        def student = new User(username: 'student', password: 'test', userType: studentRole)
+        student.save(flush: true, failOnError: true)
+        UserRole.create student, studentRole, true
+
+        def instructor = new User(username: 'instructor', password: 'test', userType: instructorRole)
+        instructor.save(flush: true, failOnError: true)
+        UserRole.create instructor, instructorRole, true
+
+        def researcher = new User(username: 'researcher', password: 'test', userType: researcherRole)
+        researcher.save(flush: true, failOnError: true)
+        UserRole.create researcher, researcherRole, true
+
+        // Add language proficiency to student user
+        new LanguageProficiency(user: student, proficiency: nativeP, language: japanese).save(failOnError: true)
 
     	// Load sample language
         // If you have kanji_simple_short is locally, use this
-        //languageService.loadLanguage("/Users/nicolastejera/Desktop/kanji_simple_short.xml", kanji, latin, true)
+        languageService.loadLanguage("/Users/nicolastejera/Desktop/kanji_simple_short.xml", kanji, latin, true)
         // Otherwise, use remote
-    	languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
+    	//languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
 
         // Build a bunch of sample decks
-        Deck restaurant = new Deck(title: "Restaurant", description: "Words that I would use in a restaurant context", owner: testUser).save(failOnError: true)
-        Deck business = new Deck(title: "Business", description: "Words that I would use in a business context", owner: testUser).save(failOnError: true)
-        Deck sports = new Deck(title: "Sports", description: "Words that I would use in a sports context", owner: testUser).save(failOnError: true)
+        Deck restaurant = new Deck(title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)
+        Deck business = new Deck(title: "Business", description: "Words that I would use in a business context", owner: student).save(failOnError: true)
+        Deck sports = new Deck(title: "Sports", description: "Words that I would use in a sports context", owner: student).save(failOnError: true)
         
-        // Build a few flashcards
-        // The idea here is: find all the unitMappings where unit1 is alphabet Kanji
-        int f = 0;
-        UnitMapping.withCriteria {
-            unit1 {
-                eq('alphabet', kanji)
-            }
-        }.each { unitMapping ->
-            // Here we look for any pronunciations for the other unit in the mapping
-            Pronunciation pronunciation = Pronunciation.findByUnit(unitMapping.unit1)
-            if(pronunciation) {
-                new Flashcard(primaryAlphabet: unitMapping.unit1.alphabet, unitMapping: unitMapping, pronunciation: pronunciation, deck: business).save(failOnError: true)
-                log.info "Created ${++f} flashcards"    
-            }
-        }
+        // Build a few flashcards for the business deck
+        flashcardService.createRandomFlashcards(business, kanji)        
+
+        // Build a few decks to be used in a course and a bunch of flashcards in each
+        Deck chapterDeck1 = new Deck(title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
+        Deck chapterDeck2 = new Deck(title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)        
+        flashcardService.createRandomFlashcards(chapterDeck1, kanji)
+        flashcardService.createRandomFlashcards(chapterDeck2, kanji)
+
+        // Create a course
+        Course kanji1 = new Course(title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
+        // Create two chapters for this course
+        new Chapter(title: "Chapter 1: The basics", description: "If you get lost in Japan, at least you need to know these words", deck: chapterDeck1, course: kanji1).save(failOnError: true)
+        new Chapter(title: "Chapter 2: A bit more into it", description: "Now that you can get to the bathroom, learn how to ask for a beer and other important phrases", deck: chapterDeck2, course: kanji1).save(failOnError: true)
 
         log.info "Booted!"
-
     }
     def destroy = {
     }
