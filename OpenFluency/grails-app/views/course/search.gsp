@@ -32,21 +32,33 @@
         </div><!-- end row -->
 
 		<table class="table">
-			<tr>
-				<th>Title</th>
-				<th>Description</th>
-				<th>Instructor</th>
-				<th></th>
-			</tr>
+			<thead>
+                <tr>
+                    <th>Course number</th>
+                    <th>Title/instructor</th>
+                    <th>Description</th>
+                    <th>Number of chapters</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Enrolled</th>
+                </tr>
+            </thead>
 			<g:each in="${courseInstanceList}">
 				<tr>
 					<td>
+						${it.id}
+					</td>
+					<td>
 						<g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
+						/${it.owner.username}<!-- should be the instructor name -->
 					</td>
 					<td>
 						${it.description}
 					</td>
-					<td>${it.owner.username}</td>
+					<td>5</td><!-- should be something like :it.chapterInstance.size() -->
+					<td>01/02/2014</td><!-- should be date property -->
+                    <td>15/05/2014</td><!-- should be date property -->
+                    <td>20</td><!-- should be enrolled property -->
 					<td>
 						<g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
 					</td>
