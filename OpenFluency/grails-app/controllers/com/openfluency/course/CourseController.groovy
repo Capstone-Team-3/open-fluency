@@ -2,6 +2,7 @@ package com.openfluency.course
 
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
+import com.openfluency.language.Language
 
 class CourseController {
 
@@ -40,7 +41,7 @@ class CourseController {
 	def search() {
 		// This needs to be changed to courses that the student is not already enrolled in
 		// And all the fancy search logic should go here
-		[courseInstanceList: Course.list()]
+		[courseInstanceList: Course.list(), languageInstanceList: Language.list()]
 	}
 
 	def enroll(Course courseInstance) {

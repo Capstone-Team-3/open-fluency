@@ -6,13 +6,13 @@
 <body>
 	<div class="container">
 		<div class="row">
-			
+
 			<sec:ifAllGranted roles="ROLE_INSTRUCTOR">
 				<!-- Instructor -->
 				<div class="col-lg-6 col-lg-offset-3">
 					<h1>
-						Courses I teach
-						<g:link action="create" controller="course" class="btn btn-info">Create</g:link>
+						My Courses
+						<g:link action="create" controller="course" class="btn btn-info">Create Course</g:link>
 					</h1>
 					<table class="table">
 						<tr>
@@ -33,8 +33,8 @@
 				<!-- Student -->
 				<div class="col-lg-6 col-lg-offset-3">
 					<h1>
-						Courses I'm taking
-						<g:link action="search" controller="course" class="btn btn-info">Add more</g:link>
+						Enrolled Courses
+						<g:link action="search" controller="course" class="btn btn-info">Add Courses</g:link>
 					</h1>
 					<table class="table">
 						<tr>
