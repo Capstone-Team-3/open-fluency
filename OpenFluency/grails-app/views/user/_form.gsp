@@ -40,11 +40,9 @@
 		<span class="required-indicator">*</span>
 	</label>
 	
-	%{-- <g:select id="userType" class="form-control many-to-one" name="userType.id" from="${com.openfluency.auth.Role.list()}" optionKey="id" required="" value="${userInstance?.userType?.id}" /> --}%
-
-	<select class="form-control">
-		<g:each var="role" in="${com.openfluency.auth.Role.list()}">
-            <option value="${userInstance?.userType?.id}">${role.toString().replace("ROLE_","")}</option>
+	<select name="userType.id" class="form-control">
+		<g:each var="role" in="${authorities}">
+            <option value="${role.id}">${role.name}</option>
         </g:each>
 	</select>
 </div>
