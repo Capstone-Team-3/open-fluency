@@ -46,7 +46,7 @@
 					<td>
 						${it.description}
 					</td>
-					<td>A. Name</td>
+					<td>${it.owner.username}</td>
 					<td>
 						<g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
 					</td>
