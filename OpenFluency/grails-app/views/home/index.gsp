@@ -60,16 +60,16 @@
                                         <div class="panel panel-default">
                                             <div class="panel-body">
 
-                                                <h3>${it.course.title}</h3>
-                                                
-                                                <div class="description">${it.course.description}</div>
+                                                <h3><g:link action="show" controller="course" id="${it.course.id}">${it.course.title}</g:link></h3>
                                                 
                                                 <div class="current-chapter">
                                                     <h4>Current chapter</h4>
                                                     <a href="#">Chapter 1: The Basics</a>
                                                 </div>
                                                 
-                                                <g:link class="btn btn-success" action="show" controller="course" id="${it.course.id}">Continue</g:link>
+                                                <div class="continue">
+                                                    <g:link class="btn btn-success" action="show" controller="course" id="${it.course.id}">Continue</g:link>
+                                                </div>
 
                                             </div><!-- end panel-body -->
                                         </div><!-- end panel -->
@@ -78,7 +78,7 @@
                             
                             </div><!-- end container -->
 
-                            <g:link class="view-more" action="list" controller="course">View More Courses</g:link>
+                            <g:link class="view-more" action="list" controller="course">View More Courses <span class="glyphicon glyphicon-arrow-right"></span></g:link>
 
                             <h2>In-Progress Decks</h2>
 
@@ -89,9 +89,7 @@
                                         <div class="panel panel-default">
                                             <div class="panel-body">
 
-                                                <h3>${it.title}</h3>
-                                                
-                                                <div class="description">${it.description}</div>
+                                                <h3><g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link></h3>
                                                 
                                                 <div class="progress">
                                                     <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">
@@ -99,7 +97,9 @@
                                                     </div><!-- end progress-bar -->
                                                 </div><!-- end progress -->
 
-                                                <g:link class="btn btn-success" action="show" controller="deck" id="${it.id}">Continue</g:link>
+                                                <div class="continue">
+                                                    <g:link class="btn btn-success" action="show" controller="deck" id="${it.id}">Continue</g:link>
+                                                </div>
 
                                             </div><!-- end panel-body -->
                                         </div><!-- end panel -->
@@ -108,12 +108,12 @@
 
                             </div><!-- end container -->
 
-                            <g:link class="view-more" action="list" controller="deck">View More Decks</g:link>
+                            <g:link class="view-more" action="list" controller="deck">View More Decks <span class="glyphicon glyphicon-arrow-right"></span></g:link>
                         </sec:ifAllGranted>
                         
                         <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
-                            <h2>My Courses</h2>
-                            <h2>My Decks</h2>
+                            <h2>Recently Updated Courses</h2>
+                            <h2>Recently Updated Decks</h2>
                         </sec:ifAllGranted>
 
                     </div><!-- end dashboard -->
