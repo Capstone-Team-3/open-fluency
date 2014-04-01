@@ -46,10 +46,11 @@
 	                            <sec:ifAllGranted roles="ROLE_STUDENT">
 	                            	<li><g:link action="list" controller="course">Enrolled courses</g:link></li>
                             	</sec:ifAllGranted>
-	                            <li><g:link action="search" controller="course">Search for courses</g:link></li>
-	                            <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
-	                            	<li><a href="#">Create new course</a></li>
+                            	<sec:ifAllGranted roles="ROLE_INSTRUCTOR">
+	                            	<li><g:link action="list" controller="course">My courses</g:link></li>
+	                            	<li><g:link action="create" controller="course">Create new course</g:link></li>
                             	</sec:ifAllGranted>
+                            	<li><g:link action="search" controller="course">Search for courses</g:link></li>
 	                        </ul>
 						</li>
                     </li>
