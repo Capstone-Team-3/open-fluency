@@ -16,12 +16,20 @@
 				<table class="table">
 					<tr>
 						<th>Title</th>
+                        <th>Students Enrolled</th>
+                        <th>Last Updated</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
 					</tr>
 					<g:each in="${myCourses}">
 						<tr>
 							<td>
 								<g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
 							</td>
+							<td><a href="#">5</a></td>
+							<td>Yesterday at 5:45pm</td>
+							<td>4/1/2014</td>
+							<td>5/30/2015</td>
 						</tr>
 					</g:each>
 				</table>

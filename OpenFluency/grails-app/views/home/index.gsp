@@ -112,8 +112,10 @@
                         </sec:ifAllGranted>
                         
                         <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
-                            <h2>Recently Updated Courses</h2>
-                            <h2>Recently Updated Decks</h2>
+                            <h2>Current Courses</h2>
+                            <h2>Scheduled Courses</h2>
+                            <h2>Tests</h2>
+                            <h2>Recently Updated Chapters</h2>
                         </sec:ifAllGranted>
 
                     </div><!-- end dashboard -->
