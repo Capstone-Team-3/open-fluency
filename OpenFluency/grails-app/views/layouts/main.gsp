@@ -41,8 +41,18 @@
 							<g:link action="list" controller="deck">Decks</g:link>
 						</li>
 						<li>
-							<g:link action="list" controller="course">Courses</g:link>
+							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="course">Courses<b class="caret"></b></g:link>
+							<ul class="dropdown-menu">
+	                            <sec:ifAllGranted roles="ROLE_STUDENT">
+	                            	<li><g:link action="list" controller="course">Enrolled courses</g:link></li>
+                            	</sec:ifAllGranted>
+	                            <li><g:link action="search" controller="course">Search for courses</g:link></li>
+	                            <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
+	                            	<li><a href="#">Create new course</a></li>
+                            	</sec:ifAllGranted>
+	                        </ul>
 						</li>
+                    </li>
 					</ul>
 				
 					<ul class="gandalf nav navbar-nav navbar-right">
