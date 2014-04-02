@@ -27,15 +27,32 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form url="[resource:userInstance, action:'update']" method="PUT" >
-				<g:hiddenField name="version" value="${userInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
+			<g:form url="[resource:userInstance, action:'update']" method="PUT" > 
+
+				<g:render template="form"/>
+
+				<div class="proficiencies">
+					<label class="control-label">
+						Language Proficiencies
+						<a id="addproficiency" class="btn btn-default">Add</a>
+					</label>
+				</div>
+				<g:submitButton name="update" class="btn btn-primary" value="Update" />
 			</g:form>
 		</div>
+
+		<g:javascript>
+			$(function() {
+				$('#addproficiency').click(function(){
+					$.ajax({
+						url: "${g.createLink(action: 'addLanguageProficiency', controller: 'language')}",
+						context: document.body
+					}).done(function(data) {
+						$('.proficiencies').append(data);
+					});
+				});
+			})
+		</g:javascript>
+
 	</body>
 </html>

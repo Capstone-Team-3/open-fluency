@@ -44,6 +44,7 @@ class UserController {
 
         //log new user in
         springSecurityService.reauthenticate userInstance.username
+        flash.message = "${userInstance.username}, welcome to OpenFluency!"
         redirect(uri: '/')
         //redirect action: 'show', id: userInstance.id
     }
@@ -64,15 +65,9 @@ class UserController {
             return
         }
 
-        userInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
-                redirect userInstance
-            }
-            '*'{ respond userInstance, [status: OK] }
-        }
+        userService.editUser(userInstance, params.list('language.id'), params.list('proficiency.id'))
+        flash.message = "${userInstance.username}, your profile has been updated."
+        redirect(uri:'/')
     }
 
     @Transactional

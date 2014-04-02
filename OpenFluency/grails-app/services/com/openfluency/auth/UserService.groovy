@@ -32,4 +32,21 @@ class UserService {
 
     	return userInstance
     }
+
+    def editUser(User userInstance,List<String> languageIds, List<String> proficiencyIds){
+        userInstance.save(flush: true)
+
+        //remove old proficiencies for the user
+        List<LanguageProficiency> oldProficiencyList = LanguageProficiency.findAllByUser(userInstance)
+        oldProficiencyList.each {oldLP -> oldLP.delete(flush: true)}
+
+        // Create current proficiencies for the user
+        languageIds.eachWithIndex() { languageId, i ->
+            new LanguageProficiency(
+                language: Language.load(languageId), 
+                proficiency: Proficiency.load(proficiencyIds[i]),
+                user: userInstance
+                ).save(flush: true)
+        }
+    }
 }

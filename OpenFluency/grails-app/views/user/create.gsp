@@ -30,7 +30,7 @@
 			</ul>
 		</g:hasErrors>
 
-		<g:form url="[resource:userInstance, action:'save']" >
+		<g:form url="[resource:userInstance, action:'save']" > 
 
 			<g:render template="form"/>
 
