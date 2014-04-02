@@ -1,5 +1,6 @@
 package com.openfluency.media
 
+import com.openfluency.auth.User
 import com.openfluency.language.Pronunciation
 
 /**
@@ -7,7 +8,7 @@ import com.openfluency.language.Pronunciation
 */
 class Audio {
 
-	// User owner 	// The user that uploaded the audio. It's commented out since the user class is not created yet, Ben is taking care of this
+	User owner 	// The user that uploaded the audio. 
 	String url		// The URL or the audio file, probably an S3 url
 
 	Pronunciation pronunciation 	// This is the Audio for a Pronunciation in some Alphabet

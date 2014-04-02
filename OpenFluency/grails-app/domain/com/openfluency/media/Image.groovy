@@ -1,6 +1,7 @@
 package com.openfluency.media
 
 import com.openfluency.language.UnitMapping
+import com.openfluency.auth.User
 
 /**
 * An Image represents a UnitMapping between two Units. 
@@ -10,7 +11,7 @@ import com.openfluency.language.UnitMapping
 */
 class Image {
 
-	// User owner 	// The user that uploaded the image. It's commented out since the user class is not created yet, Ben is taking care of this
+	User owner 	// The user that uploaded the image. It's commented out since the user class is not created yet, Ben is taking care of this
 	String url		// The URL or the image, probably an S3 url
 
 	UnitMapping unitMapping 	// The mapping that this Image represents

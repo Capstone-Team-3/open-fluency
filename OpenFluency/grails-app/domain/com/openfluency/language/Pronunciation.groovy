@@ -11,4 +11,8 @@ class Pronunciation {
 
     static constraints = {
     }
+
+    String toString(){
+    	literal
+    }
 }
