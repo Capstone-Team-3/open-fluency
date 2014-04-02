@@ -34,7 +34,7 @@ class UserController {
 
     @Transactional
     def save() {
-        
+        //create user instance via service
         User userInstance = userService.createUser(params.username, params.password, params.email, params.userType.id, params.list('language.id'), params.list('proficiency.id'))
 
         if (userInstance.hasErrors()) {
@@ -42,11 +42,14 @@ class UserController {
             return
         }
 
-        redirect action: 'show', id: userInstance.id
+        //log new user in
+        springSecurityService.reauthenticate userInstance.username
+        redirect(uri: '/')
+        //redirect action: 'show', id: userInstance.id
     }
 
     def edit(User userInstance) {
-        respond userInstance
+        [userInstance: user, languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
     }
 
     @Transactional
