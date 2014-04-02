@@ -48,8 +48,8 @@ class UserController {
         //redirect action: 'show', id: userInstance.id
     }
 
-    def edit(User userInstance) {
-        [userInstance: user, languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
+    def edit() {
+        [userInstance: User.load(springSecurityService.principal.id), languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
     }
 
     @Transactional
