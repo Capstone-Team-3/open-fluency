@@ -4,14 +4,13 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container chapter-show">
 
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<h1>${chapterInstance.title}</h1>
-				<p>${chapterInstance.description}</p>
-			</div><!-- end col-lg-6 -->
-		</div><!-- end row -->
+		<div class="chapter-header">
+			<g:link action="show" controller="course" id="${chapterInstance.course.id}">${chapterInstance.course.title}</g:link>
+			<h1>${chapterInstance.title}</h1>
+			<p>${chapterInstance.description}</p>
+		</div><!-- end chapter-header -->
 		
 		<div class="row">
 			<g:each in="${chapterInstance.deck.flashcards}">
