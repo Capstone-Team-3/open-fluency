@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.course.Registration" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,27 +54,26 @@
             </thead>
             <g:each in="${courseInstanceList}">
                 <tr>
-                    <td>${it.courseNumber}</td>
+                    <td>
+                        ${it.id}
+                    </td>
                     <td>
                         <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
-                        /${it.owner.username}
-                        <!-- should be the instructor name --> </td>
-                    <td>${it.description}</td>
-                    <td>5</td>
-                    <!-- should be something like :it.chapterInstance.size() -->
-                    <td>01/02/2014</td>
-                    <!-- should be date property -->
-                    <td>15/05/2014</td>
-                    <!-- should be date property -->
-                    <td>20</td>
-                    <!-- should be enrolled property -->
+                        /${it.owner.username}<!-- should be the instructor name -->
+                    </td>
+                    <td>
+                        ${it.description}
+                    </td>
+                    <td>5</td><!-- should be something like :it.chapterInstance.size() -->
+                    <td>01/02/2014</td><!-- should be date property -->
+                    <td>15/05/2014</td><!-- should be date property -->
+                    <td>${Registration.countByCourse(it).size()}</td>
                     <td>
                         <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
                     </td>
                 </tr>
             </g:each>
         </table>
-
     </div>
     <!-- end container -->
 </body>
