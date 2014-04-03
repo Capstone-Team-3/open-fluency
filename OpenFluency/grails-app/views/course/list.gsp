@@ -15,21 +15,25 @@
 				</h1>
 				<table class="table">
 					<tr>
+						<th>Code</th>
 						<th>Title</th>
-                        <th>Students Enrolled</th>
-                        <th>Last Updated</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+						<th>Students Enrolled</th>
+						<th>Last Updated</th>
+						<th>Start Date</th>
+						<th>End Date</th>
 					</tr>
 					<g:each in="${myCourses}">
 						<tr>
+							<td>${it.courseNumber}</td>
 							<td>
 								<g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
 							</td>
-							<td><a href="#">5</a></td>
-							<td>Yesterday at 5:45pm</td>
-							<td>4/1/2014</td>
-							<td>5/30/2015</td>
+							<td>
+								<a href="#">5</a>
+							</td>
+							<td>${it.lastUpdated}</td>
+							<td>${it.startDate}</td>
+							<td>${it.endDate}</td>
 						</tr>
 					</g:each>
 				</table>
@@ -39,7 +43,7 @@
 				<!-- Student -->
 				<h1>
 					Enrolled Courses
-				<g:link action="search" controller="course" class="btn btn-info">Add Courses</g:link>
+					<g:link action="search" controller="course" class="btn btn-info">Add Courses</g:link>
 				</h1>
 				<table class="table">
 					<tr>

@@ -20,7 +20,7 @@ class DeckController {
 	}
 
 	def save() {
-		def deckInstance = flashcardService.createDeck(params.title, params.description)
+		def deckInstance = flashcardService.createDeck(params.title, params.description, params['alphabet.id'])
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {

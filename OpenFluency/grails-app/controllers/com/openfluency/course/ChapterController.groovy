@@ -8,8 +8,11 @@ class ChapterController {
 	def springSecurityService
 	def courseService
 
+    /**
+    * Create a chapter for a particular course
+    */
 	def create(Course courseInstance) {
-		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
+		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwnerAndAlphabet(User.load(springSecurityService.principal.id), courseInstance.alphabet)]
 	}
 
 	def save() {

@@ -36,8 +36,8 @@ class FlashcardService {
     /**
     * Create a new deck owned by the currently logged in user
     */
-    Deck createDeck(String title, String description) {
-    	Deck deck = new Deck(title: title, description: description, owner: User.load(springSecurityService.principal.id))
+    Deck createDeck(String title, String description, String alphabetId) {
+    	Deck deck = new Deck(title: title, description: description, owner: User.load(springSecurityService.principal.id), alphabet: Alphabet.load(alphabetId))
     	deck.save()
     	return deck
     }

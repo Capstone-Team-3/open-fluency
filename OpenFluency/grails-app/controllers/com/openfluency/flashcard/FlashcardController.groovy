@@ -17,7 +17,8 @@ class FlashcardController {
 	* Render the create flashcard page for a particular unit
 	*/
     def create() {
-    	[flashcardInstance: new Flashcard(params), unitInstance: Unit.load(params.unit), userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
+        Unit unit = Unit.load(params.unit)
+    	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndAlphabet(User.load(springSecurityService.principal.id), unit.alphabet)]
     }
 
     /**

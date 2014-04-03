@@ -82,5 +82,6 @@ grails.project.dependency.resolution = {
         compile ":console:1.3"
         compile ":spring-security-core:2.0-RC2"
         compile ":twitter-bootstrap:3.1.1"
+        compile ":class-domain-uml:0.1.5"
     }
 }

@@ -12,8 +12,8 @@ class BootStrap {
     def init = { servletContext ->
 
     	// Create languages
-    	Language japanese = new Language(name: 'Japanese').save(failOnError: true)
-    	Language english = new Language(name: 'English').save(failOnError: true)
+    	Language japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
+    	Language english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
 
     	log.info "Created ${Language.count()} languages"
 
@@ -39,19 +39,19 @@ class BootStrap {
         def beginnerP = new Proficiency(proficiency: 'Beginner').save(flush: true, failOnError: true)
 
         // Build some users
-        def admin = new User(username: 'admin', password: 'admin', userType: adminRole)
+        def admin = new User(username: 'admin', password: 'admin', userType: adminRole, nativeLanguage: english)
         admin.save(flush: true, failOnError: true)
         UserRole.create admin, adminRole, true
 
-        def student = new User(username: 'student', password: 'test', userType: studentRole)
+        def student = new User(username: 'student', password: 'test', userType: studentRole, nativeLanguage: english)
         student.save(flush: true, failOnError: true)
         UserRole.create student, studentRole, true
 
-        def instructor = new User(username: 'instructor', password: 'test', userType: instructorRole)
+        def instructor = new User(username: 'instructor', password: 'test', userType: instructorRole, nativeLanguage: english)
         instructor.save(flush: true, failOnError: true)
         UserRole.create instructor, instructorRole, true
 
-        def researcher = new User(username: 'researcher', password: 'test', userType: researcherRole)
+        def researcher = new User(username: 'researcher', password: 'test', userType: researcherRole, nativeLanguage: english)
         researcher.save(flush: true, failOnError: true)
         UserRole.create researcher, researcherRole, true
 
@@ -65,21 +65,21 @@ class BootStrap {
     	languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
 
         // Build a bunch of sample decks
-        Deck restaurant = new Deck(title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)
-        Deck business = new Deck(title: "Business", description: "Words that I would use in a business context", owner: student).save(failOnError: true)
-        Deck sports = new Deck(title: "Sports", description: "Words that I would use in a sports context", owner: student).save(failOnError: true)
+        Deck restaurant = new Deck(alphabet: kanji, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)
+        Deck business = new Deck(alphabet: kanji, title: "Business", description: "Words that I would use in a business context", owner: student).save(failOnError: true)
+        Deck sports = new Deck(alphabet: kanji, title: "Sports", description: "Words that I would use in a sports context", owner: student).save(failOnError: true)
         
         // Build a few flashcards for the business deck
         flashcardService.createRandomFlashcards(business, kanji)        
 
         // Build a few decks to be used in a course and a bunch of flashcards in each
-        Deck chapterDeck1 = new Deck(title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
-        Deck chapterDeck2 = new Deck(title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)        
+        Deck chapterDeck1 = new Deck(alphabet: kanji, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
+        Deck chapterDeck2 = new Deck(alphabet: kanji, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)        
         flashcardService.createRandomFlashcards(chapterDeck1, kanji)
         flashcardService.createRandomFlashcards(chapterDeck2, kanji)
 
         // Create a course
-        Course kanji1 = new Course(title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
+        Course kanji1 = new Course(alphabet: kanji, title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
         // Create two chapters for this course
         new Chapter(title: "Chapter 1: The basics", description: "If you get lost in Japan, at least you need to know these words", deck: chapterDeck1, course: kanji1).save(failOnError: true)
         new Chapter(title: "Chapter 2: A bit more into it", description: "Now that you can get to the bathroom, learn how to ask for a beer and other important phrases", deck: chapterDeck2, course: kanji1).save(failOnError: true)
