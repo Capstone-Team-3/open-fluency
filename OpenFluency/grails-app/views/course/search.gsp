@@ -67,7 +67,7 @@
                     <td>5</td><!-- should be something like :it.chapterInstance.size() -->
                     <td>01/02/2014</td><!-- should be date property -->
                     <td>15/05/2014</td><!-- should be date property -->
-                    <td>${Registration.countByCourse(it).size()}</td>
+                    <td>${Registration.countByCourse(it)}</td>
                     <td>
                         <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
                     </td>
