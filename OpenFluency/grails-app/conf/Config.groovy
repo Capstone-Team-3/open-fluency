@@ -1,6 +1,9 @@
-// locations to search for config files that get merged into the main config;
-// config files can be ConfigSlurper scripts, Java properties files, or classes
-// in the classpath in ConfigSlurper format
+// This tells the app where to look for configuration files. The properties defined in these files can
+// then be accessed as:
+// grailsApplication.config.[propertyName]
+// Example:
+// grailsApplication.config.kanjiDictionaryURL
+grails.config.locations = [ "classpath:open-fluency-config.properties"]
 
 // grails.config.locations = [ "classpath:${appName}-config.properties",
 //                             "classpath:${appName}-config.groovy",

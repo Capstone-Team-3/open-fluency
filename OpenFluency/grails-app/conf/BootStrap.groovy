@@ -8,6 +8,7 @@ class BootStrap {
 
 	def languageService
     def flashcardService
+    def grailsApplication
 
     def init = { servletContext ->
 
@@ -58,11 +59,17 @@ class BootStrap {
         // Add language proficiency to student user
         new LanguageProficiency(user: student, proficiency: nativeP, language: japanese).save(failOnError: true)
 
-    	// Load sample language
-        // If you have kanji_simple_short is locally, use this
-        //languageService.loadLanguage("/Users/nicolastejera/Desktop/kanji_simple_short.xml", kanji, latin, true)
-        // Otherwise, use remote
-    	languageService.loadLanguage("https://s3.amazonaws.com/OpenFluency/resources/kanji_simple_short.xml", kanji, latin, false)
+    	// Load sample language - the configuration is now externalized. 
+        // The settings are in: conf/open-fluency-config.properties
+        boolean local = grailsApplication.config.localDictionary == 'true'
+        if(local) {
+            log.info "Loading local dictionary from ${grailsApplication.config.kanjiDictinoaryLocal}"
+            languageService.loadLanguage(grailsApplication.config.kanjiDictinoaryLocal, kanji, latin, local)
+        } 
+        else {
+            log.info "Loading remote dictionary from ${grailsApplication.config.kanjiDictionaryURL}"
+            languageService.loadLanguage(grailsApplication.config.kanjiDictionaryURL, kanji, latin, local)
+        }
 
         // Build a bunch of sample decks
         Deck restaurant = new Deck(alphabet: kanji, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)

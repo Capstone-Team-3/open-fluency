@@ -18,6 +18,10 @@ class Deck {
 		Flashcard.findAllByDeck(this)
 	}
 
+	Integer getFlashcardCount() {
+		Flashcard.countByDeck(this)	
+	}
+
     static constraints = {
     }
 }
