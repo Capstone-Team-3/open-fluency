@@ -1,4 +1,4 @@
-<%@ page import="com.openfluency.language.Language" %>
+<%@ page import="com.openfluency.language.Alphabet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<h1>Create New Deck</h1>
+				<h1>New Deck</h1>
 
 				<g:hasErrors bean="${deckInstance}">
 					<ul class="errors" role="alert">
@@ -32,13 +32,13 @@
 						<textarea class="form-control" name="description" value="${deckInstance?.description}"></textarea>
 					</div>
 
-					<label for="language" class="control-label">
-						Language
+					<label for="alphabet" class="control-label">
+						Alphabet
 						<span class="required-indicator">*</span>
 					</label>
-					<select class="form-control" name="language.id">
-						<g:each in="${Language.list()}">
-							<option value="${it.id}">${it.name}</option>
+					<select class="form-control" name="alphabet.id">
+						<g:each in="${Alphabet.list()}">
+							<option value="${it.id}">${it.language.name} - ${it.name}</option>
 						</g:each>
 					</select>
 
