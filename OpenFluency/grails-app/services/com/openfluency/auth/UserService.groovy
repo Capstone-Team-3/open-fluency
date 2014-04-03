@@ -10,8 +10,11 @@ import grails.transaction.Transactional
 class UserService {
 
     def createUser(String username, String password, String email, String userTypeId, List<String> languageIds, List<String> proficiencyIds) {
-    	// Create the user
-    	def userInstance = new User(username: username, password: password, email: email, userType: Role.load(userTypeId))
+        // TODO find nativeLanguage specified - aka the language selected along with a proficiencyId of 1 for native
+
+        // Create the user
+        // TODO substitute in hardcoded '1' for nativeLanguage below with actual
+    	def userInstance = new User(username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(1))
     	userInstance.save(flush: true)
 
     	if(userInstance.hasErrors()) {
