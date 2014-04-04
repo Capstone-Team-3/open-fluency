@@ -10,7 +10,7 @@ import com.openfluency.language.Unit
 
 class FlashcardController { 
 
-	def springSecurityService
+	def springSecurityService 
 	def flashcardService
 
 	/**
@@ -18,7 +18,7 @@ class FlashcardController {
 	*/
     def create() {
         Unit unit = Unit.load(params.unit)
-    	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndAlphabet(User.load(springSecurityService.principal.id), unit.alphabet)]
+    	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language)]
     }
 
     /**
@@ -27,7 +27,7 @@ class FlashcardController {
     def save() {
 
         def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.image, params.audio, params.deck)
-
+        
     	// Check for errors
         if (flashcardInstance.hasErrors()) {
             log.info "Unit has errors!"

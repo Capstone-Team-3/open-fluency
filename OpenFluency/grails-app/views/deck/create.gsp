@@ -1,4 +1,4 @@
-<%@ page import="com.openfluency.language.Alphabet" %>
+<%@ page import="com.openfluency.language.Language" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +33,12 @@
 					</div>
 
 					<label for="alphabet" class="control-label">
-						Alphabet
+						Language
 						<span class="required-indicator">*</span>
 					</label>
-					<select class="form-control" name="alphabet.id">
-						<g:each in="${Alphabet.list()}">
-							<option value="${it.id}">${it.language.name} - ${it.name}</option>
+					<select class="form-control" name="language.id">
+						<g:each in="${Language.list()}">
+							<option value="${it.id}">${it.name}</option>
 						</g:each>
 					</select>
 

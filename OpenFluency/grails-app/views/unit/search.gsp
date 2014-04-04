@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.language.Alphabet" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,30 +8,40 @@
 <body>
     <div class="container unit-index">
         <h1>Flashcard Search</h1>
-        <p class="instructions">Choose a character, word, or phrase for which you'd like to create a flashcard.</p>
+        <p class="instructions">
+            Choose a character, word, or phrase for which you'd like to create a flashcard.
+        </p>
 
         <div class="row">
-            
-            <div class="col-lg-4">
-                <select id="filter-lang" class="form-control" name="filter-lang">
-                    <g:each in="${alphabetInstanceList}">
-                        <option value="${it.id}">
-                            ${it.language} - ${it.name}
-                        </option>
-                    </g:each>
-                </select>
-            </div>
-            
-           <div class="col-lg-4">
-                <div class="input-group">
-                    <g:textField class="form-control" name="search-text" placeholder="Type a keyword" id="search-text" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
-                </div><!-- end input-group -->
-            </div><!-- end col-lg-4 -->
 
-        </div><!-- end row -->
+            <g:form action="search" controller="unit" name="searchFlashcardForm">
+                <div class="col-lg-4">
+                    <select id="filter-lang" class="form-control" name="filter-alph">
+                        <g:each in="${Alphabet.list()}">
+                            <g:if test="${it.id == alphabetId}">
+                                <option value="${it.id}" selected>${it.language} - ${it.name}</option>
+                            </g:if>
+                            <g:else>
+                                <option value="${it.id}">${it.language} - ${it.name}</option>
+                            </g:else>
+                        </g:each>
+                    </select>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <g:textField class="form-control" name="search-text" placeholder="Type a keyword" id="search-text" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </g:form>
+
+        </div>
+        <!-- end row -->
 
         <table class="table">
             <thead>
@@ -63,6 +74,7 @@
                 </g:each>
             </tbody>
         </table>
-    </div><!-- end container -->
+    </div>
+    <!-- end container -->
 </body>
 </html>
