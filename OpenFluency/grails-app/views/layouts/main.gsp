@@ -13,10 +13,6 @@
 
 	<!-- JS libraries -->
 	<g:javascript src="jquery.min.js"/>
-	<g:javascript src="jquery.mousewheel.js"/>
-	<g:javascript src="jquery.easing.1.3.js"/>
-	<g:javascript src="jquery.contentcarousel.js"/>
-	
 	<r:require modules="bootstrap"/>
 	<g:javascript library="application"/>
 
