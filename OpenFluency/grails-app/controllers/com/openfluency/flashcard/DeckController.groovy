@@ -36,4 +36,11 @@ class DeckController {
     def show(Deck deckInstance) {
     	[deckInstance: deckInstance]
     }
+
+    def practice(Deck deckInstance, Integer max) {
+        params.max = max ?: 1
+        log.info(params)
+        def flashcardInstance = Flashcard.findAllByDeck(deckInstance, params)
+        [deckInstance: deckInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
+    }
 }

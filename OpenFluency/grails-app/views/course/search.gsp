@@ -50,6 +50,7 @@
                     <th>Start date</th>
                     <th>End date</th>
                     <th>Enrolled</th>
+                    <th></th>
                 </tr>
             </thead>
             <g:each in="${courseInstanceList}">
@@ -65,6 +66,7 @@
                         ${it.description}
                     </td>
                     <td>${it.getChapters().size()}</td><!-- should be something like :it.chapterInstance.size() -->
+
                     <td>${it.startDate}</td>
                     <td>${it.endDate}</td>
                     <td>${Registration.countByCourse(it)}</td>
