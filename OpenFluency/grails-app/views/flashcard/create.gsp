@@ -46,6 +46,16 @@
 						<g:select class="form-control" name="deck" from="${userDecks}" noSelection="['':'-- Choose a deck --']" optionKey="id" optionValue="title"/>
 					</div>
 
+					<div class="form-group">
+						<label class="control-label">What image should be associated with this card (optional)?</label>
+						<g:textField class="form-control" name="image" value="${flashcardInstance?.image}"/>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label">What audio clip provides pronunciation for this card (optional)?</label>
+						<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
+					</div>
+
 					<button class="center btn btn-success">Create it!</button>
 				</g:form>
 			</div>

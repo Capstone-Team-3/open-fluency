@@ -12,21 +12,25 @@ import grails.transaction.Transactional
 @Transactional
 class FlashcardService {
 
-	def springSecurityService
+	def springSecurityService 
+    def mediaService
 
 	/**
 	* Creates a new flashcard - the alternative is to pass a Map as an argument
 	*/
-    def createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageId, String audioId, String deckId) {
+    def createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioLink, String deckId) {
 
         Unit unitInstance = Unit.load(unitId)
+
+        Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
+        Audio audioInstance = mediaService.createAudio(audioLink, pronunciationId)
 
         def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
             unitMapping: UnitMapping.load(unitMappingId), 
             pronunciation: Pronunciation.load(pronunciationId), 
-            image: Image.load(imageId), 
-            audio: Audio.load(audioId), 
+            image: imageInstance, 
+            audio: audioInstance, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
 
         println "Created flashcard $flashcardInstance"

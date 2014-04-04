@@ -6,7 +6,7 @@ import com.openfluency.language.Pronunciation
 /**
 * Every Unit has many Pronunciations in different Alphabets. Each Pronunciation can have different Audio files depending on the context (UnitMapping)
 */
-class Audio {
+class Audio { 
 
 	User owner 	// The user that uploaded the audio. 
 	String url		// The URL or the audio file, probably an S3 url
@@ -18,4 +18,9 @@ class Audio {
 
     static constraints = {
     }
+
+    String toString(){
+    	"${pronunciation} -> ${url}"
+    }
+
 }
