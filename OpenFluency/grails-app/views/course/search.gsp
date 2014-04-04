@@ -55,7 +55,7 @@
             <g:each in="${courseInstanceList}">
                 <tr>
                     <td>
-                        ${it.id}
+                        ${it.getCourseNumber()}
                     </td>
                     <td>
                         <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
@@ -64,17 +64,18 @@
                     <td>
                         ${it.description}
                     </td>
-                    <td>5</td><!-- should be something like :it.chapterInstance.size() -->
-                    <td>01/02/2014</td><!-- should be date property -->
-                    <td>15/05/2014</td><!-- should be date property -->
+                    <td>${it.getChapters().size()}</td><!-- should be something like :it.chapterInstance.size() -->
+                    <td>${it.startDate}</td>
+                    <td>${it.endDate}</td>
                     <td>${Registration.countByCourse(it)}</td>
                     <td>
-                        <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
+                          <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
                     </td>
                 </tr>
             </g:each>
         </table>
     </div>
     <!-- end container -->
+   
 </body>
 </html>
