@@ -8,7 +8,10 @@
 
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<h1>${deckInstance.title}</h1>
+				<h1>
+					${deckInstance.title}
+					<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
+				</h1>
 				<p>${deckInstance.description}</p>
 				<g:link action="index" id="1" controller="unit">Add Flashcards</g:link>
 			</div><!-- end col-lg-6 -->
