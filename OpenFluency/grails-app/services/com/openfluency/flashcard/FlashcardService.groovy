@@ -1,6 +1,7 @@
 package com.openfluency.flashcard
 
 import com.openfluency.auth.User
+import com.openfluency.language.Language
 import com.openfluency.language.Alphabet
 import com.openfluency.language.Unit
 import com.openfluency.language.UnitMapping
@@ -40,8 +41,8 @@ class FlashcardService {
     /**
     * Create a new deck owned by the currently logged in user
     */
-    Deck createDeck(String title, String description, String alphabetId) {
-    	Deck deck = new Deck(title: title, description: description, owner: User.load(springSecurityService.principal.id), alphabet: Alphabet.load(alphabetId))
+    Deck createDeck(String title, String description, String languageId) {
+    	Deck deck = new Deck(title: title, description: description, owner: User.load(springSecurityService.principal.id), language: Language.load(languageId))
     	deck.save()
     	return deck
     }

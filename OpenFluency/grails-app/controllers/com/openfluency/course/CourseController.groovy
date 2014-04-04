@@ -23,7 +23,7 @@ class CourseController {
 
 	def save() {
 
-		def courseInstance = courseService.createCourse(params.title, params.description, params.alphabet.id)
+		def courseInstance = courseService.createCourse(params.title, params.description, params.language.id)
 
 		// Check for errors
     	if (courseInstance.hasErrors()) {
