@@ -22,18 +22,6 @@
 			</g:each>
 		</div>
 		<!-- end row -->
-
-		<!-- this is the panel that indicates progress through the deck, perhaps this should move to a template for decks too -->
-		<div>
-			<p>
-				<button id="previous">Previous</button>
-				<span id="offset">1</span>
-				of
-				<span id="total">${chapterInstance.deck.flashcardCount}</span>
-				<button id="next">Next</button>
-			</p>
-		</div>
-
 	</div>
 	<!-- end container -->
 

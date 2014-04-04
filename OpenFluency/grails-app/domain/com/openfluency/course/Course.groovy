@@ -1,7 +1,7 @@
 package com.openfluency.course
 
 import com.openfluency.auth.User
-import com.openfluency.language.Alphabet
+import com.openfluency.language.Language
 
 class Course {
 
@@ -10,7 +10,7 @@ class Course {
 	String title
 	String description
 
-	Alphabet alphabet
+	Language language
 
 	Date startDate
 	Date endDate
@@ -19,7 +19,7 @@ class Course {
 	Date lastUpdated
 
 	String getCourseNumber() {
-		return "${alphabet.language.code}-${this.id}"
+		return "${language.code}-${this.id}"
 	}
 
 	List<Chapter> getChapters() {

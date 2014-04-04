@@ -12,7 +12,7 @@ class ChapterController {
     * Create a chapter for a particular course
     */
 	def create(Course courseInstance) {
-		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwnerAndAlphabet(User.load(springSecurityService.principal.id), courseInstance.alphabet)]
+		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), courseInstance.language)]
 	}
 
 	def save() {

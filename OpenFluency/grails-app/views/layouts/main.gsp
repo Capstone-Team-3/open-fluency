@@ -91,6 +91,7 @@
 	</nav>
 
 	<g:layoutBody/>
+
 	<r:layoutResources />
 </body>
 </html>

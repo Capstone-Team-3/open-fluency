@@ -2,15 +2,19 @@ package com.openfluency.language
 
 class UnitController {
 
-    def show(Unit unit) {
-    	render view: 'show', model: [unitInstance: unit]
-    }
+	def languageService
 
-    def list(Alphabet alphabet) {
-    	render view: 'list', model: [alphabetInstance: alphabet, unitInstanceList: Unit.findAllByAlphabet(alphabet)]
-    }
+	def show(Unit unit) {
+		render view: 'show', model: [unitInstance: unit]
+	}
 
-    def index(Alphabet alphabet) {
-        render view: 'index', model: [alphabetInstanceList: Alphabet.list(), alphabetInstance: alphabet, unitInstanceList: Unit.findAllByAlphabet(alphabet)]
-    }
+	def list(Alphabet alphabet) {
+		render view: 'list', model: [alphabetInstance: alphabet, unitInstanceList: Unit.findAllByAlphabet(alphabet)]
+	}
+
+	def search() {
+		Long alphabetId = params['filter-alph'] as Long
+		String keyword = params['search-text']
+		[keyword: keyword, alphabetId: alphabetId, unitInstanceList: languageService.searchUnits(alphabetId, keyword)]
+	}
 }

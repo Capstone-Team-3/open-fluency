@@ -30,7 +30,7 @@
                     <div class="input-group">
                         <g:textField class="form-control" name="search-text" placeholder="Type a keyword" id="search-text" value="${keyword}"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
+                            <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>

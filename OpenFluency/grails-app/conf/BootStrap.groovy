@@ -72,21 +72,21 @@ class BootStrap {
         }
 
         // Build a bunch of sample decks
-        Deck restaurant = new Deck(alphabet: kanji, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)
-        Deck business = new Deck(alphabet: kanji, title: "Business", description: "Words that I would use in a business context", owner: student).save(failOnError: true)
-        Deck sports = new Deck(alphabet: kanji, title: "Sports", description: "Words that I would use in a sports context", owner: student).save(failOnError: true)
+        Deck restaurant = new Deck(language: japanese, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)
+        Deck business = new Deck(language: japanese, title: "Business", description: "Words that I would use in a business context", owner: student).save(failOnError: true)
+        Deck sports = new Deck(language: japanese, title: "Sports", description: "Words that I would use in a sports context", owner: student).save(failOnError: true)
         
         // Build a few flashcards for the business deck
         flashcardService.createRandomFlashcards(business, kanji)        
 
         // Build a few decks to be used in a course and a bunch of flashcards in each
-        Deck chapterDeck1 = new Deck(alphabet: kanji, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
-        Deck chapterDeck2 = new Deck(alphabet: kanji, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)        
+        Deck chapterDeck1 = new Deck(language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
+        Deck chapterDeck2 = new Deck(language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)        
         flashcardService.createRandomFlashcards(chapterDeck1, kanji)
         flashcardService.createRandomFlashcards(chapterDeck2, kanji)
 
         // Create a course
-        Course kanji1 = new Course(alphabet: kanji, title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
+        Course kanji1 = new Course(language: japanese, title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
         // Create two chapters for this course
         new Chapter(title: "Chapter 1: The basics", description: "If you get lost in Japan, at least you need to know these words", deck: chapterDeck1, course: kanji1).save(failOnError: true)
         new Chapter(title: "Chapter 2: A bit more into it", description: "Now that you can get to the bathroom, learn how to ask for a beer and other important phrases", deck: chapterDeck2, course: kanji1).save(failOnError: true)
