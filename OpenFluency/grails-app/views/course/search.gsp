@@ -65,7 +65,7 @@
                     <td>
                         ${it.description}
                     </td>
-                    <td>${it.getChapters().size()}</td><!-- should be something like :it.chapterInstance.size() -->
+                    <td>${it.getChapters().size()}</td>
 
                     <td>${it.startDate}</td>
                     <td>${it.endDate}</td>
