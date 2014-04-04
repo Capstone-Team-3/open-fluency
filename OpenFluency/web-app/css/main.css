@@ -128,7 +128,7 @@
 }
 
 .course-show .course-header,
-.deck-show .deck-header {
+.deck-header {
     margin-bottom: 30px;
     text-align: center;
 }
@@ -147,4 +147,46 @@
     font-size: 20px;
     padding: 30px 0;
     text-align: center;
+}
+
+.deck-practice .flashcard {
+    float: none;
+    margin: auto;
+    min-width: 250px;
+    width: 25%;
+}
+
+.pagination .prevLink,
+.pagination .nextLink {
+    background: #ddd;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.pagination, .pagination a {
+    color: #333;
+}
+
+.pagination .step, 
+.pagination .currentStep {
+    padding: 6px 12px;
+}
+
+.pagination .currentStep {
+    font-weight: bold;
 }
