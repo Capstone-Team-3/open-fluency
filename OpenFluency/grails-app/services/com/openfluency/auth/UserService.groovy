@@ -9,12 +9,17 @@ import grails.transaction.Transactional
 @Transactional
 class UserService {
 
-    def createUser(String username, String password, String email, String userTypeId, List<String> languageIds, List<String> proficiencyIds) {
-        // TODO find nativeLanguage specified - aka the language selected along with a proficiencyId of 1 for native
+    def createUser(String username, String password, String email, String userTypeId, List<String> languageIds, List<String> proficiencyIds) {        
+        // Find native language ID to pass to userInstance User constructor
+        String nativeLangId
+        languageIds.eachWithIndex() { languageId, i ->
+            if (proficiencyIds[i] == "1"){ // native
+                nativeLangId = languageId
+            }
+        }
 
         // Create the user
-        // TODO substitute in hardcoded '1' for nativeLanguage below with actual
-    	def userInstance = new User(username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(1))
+    	def userInstance = new User(username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(nativeLangId))
     	userInstance.save(flush: true)
 
     	if(userInstance.hasErrors()) {
