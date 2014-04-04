@@ -1,5 +1,6 @@
 package com.openfluency.course
 
+import com.openfluency.language.Language
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
 import grails.transaction.Transactional
@@ -12,8 +13,8 @@ class CourseService {
     /**
     * Create a new course owned by the currently logged in user
     */
-    Course createCourse(String title, String description) {
-    	Course course = new Course(title: title, description: description, owner: User.load(springSecurityService.principal.id))
+    Course createCourse(String title, String description, String languageId) {
+    	Course course = new Course(title: title, description: description, language: Language.load(languageId), owner: User.load(springSecurityService.principal.id))
     	course.save()
     	return course
     }
@@ -40,7 +41,29 @@ class CourseService {
             log.info "User ID: ${loggedUser.id} enrolled in Course ID: ${courseInstance.id}"
             registration.save()
         }
-    	
-    	return registration
+
+        return registration
+    }
+
+    List<Course> searchCourses(Long languageId, String keyword) {
+        log.info "Searching Courses with languageId: $languageId and Keywords: $keyword"
+
+        Course.withCriteria {
+
+            // Apply language criteria
+            if(languageId) {
+                language {
+                    eq('id', languageId)
+                }
+            }
+
+            // Search using keywords in the title or description
+            if(keyword) {
+                or {
+                    ilike("title", "%${keyword}%")
+                    ilike("description", "%${keyword}%")
+                }
+            }
+        }
     }
 }

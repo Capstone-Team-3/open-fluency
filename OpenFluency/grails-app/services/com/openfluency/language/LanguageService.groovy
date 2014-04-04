@@ -71,6 +71,23 @@ class LanguageService {
 		return unit
 	}
 
+	List<Unit> searchUnits(Long alphabetId, String keyword) {
+		log.info "Searching Units with alphabetId: $alphabetId and Keywords: $keyword"
+
+		Unit.withCriteria {
+
+            // Apply language criteria
+            if(alphabetId) {
+                alphabet {
+                    eq('id', alphabetId)
+                }
+            }
+
+            // Search using keywords in any meaning
+            // this is going to be harder since we have to search through all the meanings
+        }
+	}
+
 	/**
 	* Utility to convert a String to an Int
 	* @return the number if conversion was succesful, null otherwise

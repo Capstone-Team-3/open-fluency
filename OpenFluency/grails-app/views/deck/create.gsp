@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.language.Language" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
 				<h1>New Deck</h1>
-				
+
 				<g:hasErrors bean="${deckInstance}">
 					<ul class="errors" role="alert">
 						<g:eachError bean="${deckInstance}" var="error">
@@ -31,7 +32,20 @@
 						<textarea class="form-control" name="description" value="${deckInstance?.description}"></textarea>
 					</div>
 
-					<button class="btn btn-info">Create</button>
+					<label for="alphabet" class="control-label">
+						Language
+						<span class="required-indicator">*</span>
+					</label>
+					<select class="form-control" name="language.id">
+						<g:each in="${Language.list()}">
+							<option value="${it.id}">${it.name}</option>
+						</g:each>
+					</select>
+
+					<br>
+					<div class="center">
+						<button class="btn btn-info">Create</button>
+					</div>
 				</g:form>
 			</div>
 		</div>

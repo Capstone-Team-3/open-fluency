@@ -23,7 +23,7 @@ class CourseController {
 
 	def save() {
 
-		def courseInstance = courseService.createCourse(params.title, params.description)
+		def courseInstance = courseService.createCourse(params.title, params.description, params.language.id)
 
 		// Check for errors
     	if (courseInstance.hasErrors()) {
@@ -40,8 +40,9 @@ class CourseController {
 
 	def search() {
 		// This needs to be changed to courses that the student is not already enrolled in
-		// And all the fancy search logic should go here
-		[courseInstanceList: Course.list(), languageInstanceList: Language.list()]
+		Long languageId = params['filter-lang'] as Long
+		String keyword = params['search-text']
+		[keyword: keyword, languageId: languageId, courseInstanceList: courseService.searchCourses(languageId, keyword), languageInstanceList: Language.list()]
 	}
 
 	def enroll(Course courseInstance) {

@@ -10,4 +10,8 @@ class UnitMapping {
 
     static constraints = {
     }
+
+    String toString(){
+    	"${unit1.getPrint()} -> ${unit2.getPrint()}"
+    }
 }

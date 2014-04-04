@@ -20,13 +20,15 @@ class DeckController {
 	}
 
 	def save() {
-		def deckInstance = flashcardService.createDeck(params.title, params.description)
+		def deckInstance = flashcardService.createDeck(params.title, params.description, params['language.id'])
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {
     		render(view: "create", model: [deckInstance: deckInstance])
     		return
     	}
+
+    	flash.message = "Well done! You succesfully created a new deck!"
 
     	redirect action: "show", id: deckInstance.id
     }

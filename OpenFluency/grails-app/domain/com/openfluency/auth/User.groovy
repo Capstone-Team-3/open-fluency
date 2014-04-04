@@ -17,6 +17,8 @@ class User {
 	String email
 	Role userType
 
+	Language nativeLanguage
+
 	List<Deck> getDecks() {
 		return Deck.findAllByOwner(this)
 	}
