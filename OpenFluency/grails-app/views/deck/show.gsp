@@ -14,7 +14,9 @@
 
 				<h1>
 					${deckInstance?.title}
-					<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
+					<g:if test="${deckInstance.getFlashcardCount() > 0}">
+						<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
+					</g:if>
 				</h1>
 				<p>${deckInstance?.description}</p>
 				<g:link action="search" controller="unit">Add Flashcards</g:link>
@@ -22,7 +24,7 @@
 			<!-- end col-lg-6 -->
 		</div>
 		<!-- end row -->
-		
+
 		<div class="row">
 			<g:each in="${deckInstance?.flashcards}">
 				<div class="col-lg-3">
