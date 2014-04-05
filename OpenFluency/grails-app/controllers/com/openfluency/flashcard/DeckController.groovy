@@ -1,6 +1,7 @@
 package com.openfluency.flashcard
 
 import com.openfluency.auth.User
+import com.openfluency.language.Language
 
 class DeckController {
 
@@ -46,6 +47,6 @@ class DeckController {
     }
 
     def search() {
-        [deckInstanceList: Deck.findAll()]        
+        [deckInstanceList: Deck.findAll(), languageInstanceList: Language.list()]
     }
 }
