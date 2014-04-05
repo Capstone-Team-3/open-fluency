@@ -62,11 +62,8 @@
                         <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
                         /${it.owner.username}<!-- should be the instructor name -->
                     </td>
-                    <td>
-                        ${it.description}
-                    </td>
-                    <td>${it.getChapters().size()}</td><!-- should be something like :it.chapterInstance.size() -->
-
+                    <td>${it.description}</td>
+                    <td>${it.getChapters().size()}</td>
                     <td>${it.startDate}</td>
                     <td>${it.endDate}</td>
                     <td>${Registration.countByCourse(it)}</td>
