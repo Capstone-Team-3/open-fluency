@@ -33,13 +33,14 @@ class DeckController {
     	redirect action: "show", id: deckInstance.id
     }
 
-    def show(Deck deckInstance) {
-    	[deckInstance: deckInstance]
+    def show(Deck deckInstance, Integer max) {
+    	params.max = Math.min(max ?: 12, 100)
+        def flashcards = Flashcard.findAllByDeck(deckInstance, params)
+        respond flashcards, model:[deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
     }
 
     def practice(Deck deckInstance, Integer max) {
         params.max = max ?: 1
-        log.info(params)
         def flashcardInstance = Flashcard.findAllByDeck(deckInstance, params)
         [deckInstance: deckInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
     }

@@ -1,5 +1,3 @@
-
-<%@ page import="com.openfluency.auth.User" %>
 <!DOCTYPE html>
 <html>
 	<head>

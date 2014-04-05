@@ -13,7 +13,7 @@
 
 			<h1>
 				${deckInstance?.title}
-				<g:if test="${deckInstance.getFlashcardCount() > 0}">
+				<g:if test="${flashcardCount > 0}">
 					<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
 				</g:if>
 			</h1>
@@ -23,7 +23,7 @@
 		<!-- end deck-header -->
 
 		<div class="row">
-			<g:each in="${deckInstance?.flashcards}">
+			<g:each in="${flashcardInstanceList}">
 				<div class="col-lg-3">
 					<g:render template="/flashcard/flashcard" model="[flashcardInstance: it]"/>
 				</div>
@@ -34,11 +34,12 @@
 
 		<!-- this is the panel that indicates progress through the deck, perhaps this should move to a template for decks too -->
 		<div class="pagination center-block text-center">
-			<button class="btn" id="previous">Previous</button>
+			%{-- <button class="btn" id="previous">Previous</button>
 			<span id="offset">1</span>
 			of
 			<span id="total">${deckInstance.flashcardCount}</span>
-			<button class="btn" id="next">Next</button>
+			<button class="btn" id="next">Next</button> --}%
+			<g:paginate controller="deck" action="show" id="${deckInstance.id}" total="${flashcardCount ?: 0}" />
 		</div>
 
 	</div>
