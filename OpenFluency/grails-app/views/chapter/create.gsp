@@ -33,10 +33,7 @@
 						<label>Title</label>
 						<span class="required-indicator">*</span>
 						<input class="form-control" type="text" name="title" value="${chapterInstance?.title}"/>
-<<<<<<< HEAD
-=======
-	
->>>>>>> FETCH_HEAD
+
 					</div>
 
 					<div class="form-group">
