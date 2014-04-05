@@ -8,7 +8,7 @@
 		<ul class="breadcrumb">
             <li><a href="${createLink(uri:'/') }">Home</a></li>
             <li><g:link action="search" controller="course" >Courses</g:link></li>
-            <li><g:link action="list" controller="course">My courses</g:link></li>
+            <li><g:link action="list" controller="course">Enrolled Courses</g:link></li>
         </ul>
 		<div class="row">
 
