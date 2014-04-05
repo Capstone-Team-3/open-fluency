@@ -5,7 +5,12 @@
 </head>
 <body>
 	<div class="container course-show">
-
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li><g:link action="search" controller="course" >Courses</g:link></li>
+            <li><g:link action="search" controller="course" >Search for Course</g:link></li>
+            <li><a href="#">${courseInstance.getCourseNumber()}: ${courseInstance.title}</a></li>
+        </ul>
 		<div class="course-header">
 			<g:if test="${flash.message}">
 				<div class="alert alert-info" style="display: block">${flash.message}</div>

@@ -5,8 +5,13 @@
     <meta name="layout" content="main"/>
 </head>
 <body>
-    <div class="container course-search">
 
+    <div class="container course-search">
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li><g:link action="search" controller="course" >Courses</g:link></li>
+            <li><g:link action="search" controller="course" >Search for Course</g:link></li>
+        </ul>
         <h1>Course Search</h1>
 
         <div class="row">

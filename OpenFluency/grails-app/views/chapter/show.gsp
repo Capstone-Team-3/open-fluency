@@ -5,9 +5,14 @@
 </head>
 <body>
 	<div class="container chapter-show">
-
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li><g:link action="search" controller="course" >Courses</g:link></li>
+            <li><g:link action="search" controller="course" >Search for Course</g:link></li>
+            <li><g:link action="show" controller="course" id="${chapterInstance.course.id}">${chapterInstance.course.getCourseNumber()}: ${chapterInstance.course.title}</g:link></li>
+            <li><a href="#">${chapterInstance.title}</a></li>
+        </ul>
 		<div class="chapter-header">
-			<g:link action="show" controller="course" id="${chapterInstance.course.id}">${chapterInstance.course.title}</g:link>
 			<h1>${chapterInstance.title}</h1>
 			<p>${chapterInstance.description}</p>
 		</div>
