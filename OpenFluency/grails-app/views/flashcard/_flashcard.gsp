@@ -6,7 +6,7 @@
 			${flashcardInstance?.pronunciation.literal}
 		</div>
 		<div class="meaning">
-			%{-- ${flashcardInstance?.unitMapping} --}%
+			${flashcardInstance?.secondaryUnit.print}
 		</div>
 	</div>
-</div>
+</div> 

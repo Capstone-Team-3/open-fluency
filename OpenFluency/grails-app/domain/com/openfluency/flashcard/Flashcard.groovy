@@ -32,6 +32,10 @@ class Flashcard {
 		return unitMapping.unit1.alphabet == primaryAlphabet ? unitMapping.unit1 : unitMapping.unit2
 	}
 
+	Unit getSecondaryUnit() {
+		return unitMapping.unit1.alphabet != primaryAlphabet ? unitMapping.unit1 : unitMapping.unit2
+	}
+
     static constraints = {
     	audio nullable: true
     	image nullable: true
