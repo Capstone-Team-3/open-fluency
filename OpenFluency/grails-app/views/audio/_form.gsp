@@ -1,8 +1,5 @@
 <%@ page import="com.openfluency.media.Audio" %>
 
-
-
-
 <div class="fieldcontain ${hasErrors(bean: audioInstance, field: 'pronunciation', 'error')} required">
 	<label for="pronunciation">
 		<g:message code="audio.pronunciation.label" default="Pronunciation" />
