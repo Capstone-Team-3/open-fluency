@@ -33,7 +33,7 @@
 	                            </div><!-- end progress -->
 							</td>
 							<td>
-								<g:link class="pull-right btn btn-sm btn-success" action="practice" controller="deck">Practice Flashcards</g:link>
+								<g:link class="pull-right btn btn-sm btn-success" action="practice" controller="deck" id="${it.id}">Practice Flashcards</g:link>
 							</td>
 						</tr>
 					</g:each>
