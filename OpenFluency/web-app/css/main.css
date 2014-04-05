@@ -119,11 +119,13 @@
 
 .course-search h1, 
 .course-list h1,
-.deck-list h1 {
+.deck-list h1,
+.deck-search h1 {
     margin-bottom: 30px;
 }
 
-.course-search table {
+.course-search table,
+.deck-search table {
     margin-top: 30px;
 }
 

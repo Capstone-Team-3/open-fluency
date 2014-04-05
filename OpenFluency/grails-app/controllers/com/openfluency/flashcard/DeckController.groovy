@@ -44,4 +44,8 @@ class DeckController {
         def flashcardInstance = Flashcard.findAllByDeck(deckInstance, params)
         [deckInstance: deckInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
     }
+
+    def search() {
+        [deckInstanceList: Deck.findAll()]        
+    }
 }

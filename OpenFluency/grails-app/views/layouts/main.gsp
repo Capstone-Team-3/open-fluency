@@ -42,7 +42,7 @@
 							<ul class="dropdown-menu">
                             	<li><g:link action="list" controller="deck">My decks</g:link></li>
                             	<li><g:link action="create" controller="deck">Create new deck</g:link></li>
-                            	<li><a href="#">Search for decks</a></li>
+                            	<li><g:link action="search" controller="deck">Search for decks</g:link></li>
                         	</ul>
 						</li>
 						<li>
