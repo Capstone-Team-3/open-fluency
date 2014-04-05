@@ -6,6 +6,11 @@
 </head>
 <body>
 	<div class="container">
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li><g:link action="search" controller="course" >Courses</g:link></li>
+            <li><a href="#">Create New Course</a></li>
+        </ul>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
 				<h1>New Course</h1>
