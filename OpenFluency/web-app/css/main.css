@@ -151,7 +151,8 @@
     text-align: center;
 }
 
-.deck-practice .flashcard {
+.deck-practice .flashcard,
+.chapter-practice .flashcard {
     float: none;
     margin: auto;
     min-width: 250px;

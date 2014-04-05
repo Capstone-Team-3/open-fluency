@@ -1,6 +1,6 @@
 package com.openfluency.course
 
-import com.openfluency.flashcard.Deck
+import com.openfluency.flashcard.*
 import com.openfluency.auth.User
 
 class ChapterController {
@@ -28,6 +28,12 @@ class ChapterController {
     }
 
     def show(Chapter chapterInstance) {
-    	[chapterInstance: chapterInstance]
+    	[chapterInstance: chapterInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck)]
+    }
+
+    def practice(Chapter chapterInstance, Integer max) {
+        params.max = max ?: 1
+        def flashcardInstance = Flashcard.findAllByDeck(chapterInstance.deck, params)
+        [chapterInstance: chapterInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck)]
     }
 }
