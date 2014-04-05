@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.course.Registration" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +19,9 @@
 			<h1>
 				${courseInstance.title}
 				<sec:ifAllGranted roles="ROLE_STUDENT">
-					<!-- Displayed for students - need to check if the student is already enrolled in this course -->
-					<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll!</g:link>
+					<g:if test="${!Registration.findAllByCourseAndUser(courseInstance, userInstance)}">
+						<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll</g:link>
+					</g:if>
 				</sec:ifAllGranted>
 
 				<g:if test="${isOwner}">

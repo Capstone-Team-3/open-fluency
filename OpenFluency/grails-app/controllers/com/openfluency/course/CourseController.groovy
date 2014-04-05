@@ -35,14 +35,14 @@ class CourseController {
 	}
 
 	def show(Course courseInstance) {
-		[courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id]
+		[courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
 	}
 
 	def search() {
-		// This needs to be changed to courses that the student is not already enrolled in
 		Long languageId = params['filter-lang'] as Long
 		String keyword = params['search-text']
-		[keyword: keyword, languageId: languageId, courseInstanceList: courseService.searchCourses(languageId, keyword), languageInstanceList: Language.list()]
+		[keyword: keyword, languageId: languageId, courseInstanceList: courseService.searchCourses(languageId, keyword), 
+            languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
 	}
 
 	def enroll(Course courseInstance) {
@@ -55,6 +55,6 @@ class CourseController {
     	}
 
     	flash.message = "Well done! You're now registered in this course!"
-    	render view: "show", model: [courseInstance: courseInstance]
+    	render view: "show", model: [courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
 	}
 }

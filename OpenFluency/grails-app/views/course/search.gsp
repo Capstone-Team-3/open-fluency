@@ -73,7 +73,9 @@
                     <td>${it.endDate}</td>
                     <td>${Registration.countByCourse(it)}</td>
                     <td>
-                          <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
+                        <g:if test="${!Registration.findAllByCourseAndUser(it, userInstance)}">
+                            <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
+                        </g:if>
                     </td>
                 </tr>
             </g:each>
