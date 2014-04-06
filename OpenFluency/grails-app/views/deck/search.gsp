@@ -14,7 +14,7 @@
 
         <div class="row">
 
-            <g:form action="search" controller="Course">
+            <g:form action="search" controller="Deck">
                 <div class="col-lg-4">
                     <select id="filter-lang" class="form-control" name="filter-lang">
                         <g:each in="${languageInstanceList}">
@@ -49,6 +49,7 @@
                     <th>Deck title</th>
                     <th>Language</th>
                     <th>Description</th>
+                    <th>Flashcards</th>
                     <th>Created by</th>
                     <th>Last Updated</th>
                     <th></th>
@@ -61,6 +62,7 @@
                     </td>
                     <td>${it.language}</td>
                     <td>${it.description}</td>
+                    <td>${it.flashcardCount}</td>
                     <td>${it.owner.username}</td>
                     <td>${it.lastUpdated}</td>
                     <td>

@@ -38,60 +38,90 @@
 				<sec:ifLoggedIn>
 					<ul class="nav navbar-nav">
 						<li>
-							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="deck">Decks<b class="caret"></b></g:link>
-							<ul class="dropdown-menu">
-                            	<li><g:link action="list" controller="deck">My decks</g:link></li>
-                            	<li><g:link action="create" controller="deck">Create new deck</g:link></li>
-                            	<li><g:link action="search" controller="deck">Search for decks</g:link></li>
-                        	</ul>
-						</li>
-						<li>
-							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="course">Courses<b class="caret"></b></g:link>
-							
-							<ul class="dropdown-menu">
-	                            <sec:ifAllGranted roles="ROLE_STUDENT">
-	                            	<li><g:link action="list" controller="course">Enrolled courses</g:link></li>
-                            	</sec:ifAllGranted>
-                            	<sec:ifAllGranted roles="ROLE_INSTRUCTOR">
-	                            	<li><g:link action="list" controller="course">My courses</g:link></li>
-	                            	<li><g:link action="create" controller="course">Create new course</g:link></li>
-                            	</sec:ifAllGranted>
-                            	<li><g:link action="search" controller="course">Search for courses</g:link></li>
-	                        </ul>
-						</li>
-                    </li>
-					</ul>
-				
-					<ul class="gandalf nav navbar-nav navbar-right">
-						<li>
-							<g:link controller="user" action="profile"><span class="glyphicon glyphicon-user"></span>
-								<sec:username/>
+							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="deck">
+								Decks <b class="caret"></b>
 							</g:link>
+							<ul class="dropdown-menu">
+								<li>
+									<g:link action="list" controller="deck">My decks</g:link>
+								</li>
+								<li>
+									<g:link action="create" controller="deck">Create new deck</g:link>
+								</li>
+								<li>
+									<g:link action="search" controller="deck">Search for decks</g:link>
+								</li>
+							</ul>
 						</li>
 						<li>
-							<g:link controller="logout">Logout</g:link>
+							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="course">
+								Courses <b class="caret"></b>
+							</g:link>
+
+							<ul class="dropdown-menu">
+								<sec:ifAllGranted roles="ROLE_STUDENT">
+									<li>
+										<g:link action="list" controller="course">Enrolled courses</g:link>
+									</li>
+								</sec:ifAllGranted>
+								<sec:ifAllGranted roles="ROLE_INSTRUCTOR">
+									<li>
+										<g:link action="list" controller="course">My courses</g:link>
+									</li>
+									<li>
+										<g:link action="create" controller="course">Create new course</g:link>
+									</li>
+								</sec:ifAllGranted>
+								<li>
+									<g:link action="search" controller="course">Search for courses</g:link>
+								</li>
+							</ul>
 						</li>
-					</ul>
-				</sec:ifLoggedIn>
+					</li>
+				</ul>
 
-				<!-- NOT LOGGED IN -->
-				<sec:ifNotLoggedIn>
-					<form class="navbar-form navbar-right" role="search" action="${request.contextPath}${SpringSecurityUtils.securityConfig.apf.filterProcessesUrl}" method="POST">
-						<div class="form-group">
-							<input type="text" name="j_username" placeholder="username" class="form-control"/>
-							<input type="password" name="j_password" placeholder="password" class="form-control"/>
-							<input type="hidden" name="spring-security-redirect" value="${request.requestURL}"/>
-							<button type="submit" class="btn btn-inverse">Sign in</button>
-						</div>
-					</form>
-				</sec:ifNotLoggedIn>
-			
-			</div><!-- end navbar-collapse -->
-		</div><!-- end container -->
-	</nav>
+				<ul class="gandalf nav navbar-nav navbar-right">
+					<li>
+						<g:link controller="user" action="profile">
+							<span class="glyphicon glyphicon-user"></span>
+							<sec:username/>
+						</g:link>
+					</li>
+					<li>
+						<g:link controller="logout">Logout</g:link>
+					</li>
+				</ul>
+			</sec:ifLoggedIn>
 
-	<g:layoutBody/>
+			<!-- NOT LOGGED IN -->
+			<sec:ifNotLoggedIn>
+				<form class="navbar-form navbar-right" role="search" action="${request.contextPath}${SpringSecurityUtils.securityConfig.apf.filterProcessesUrl}" method="POST">
+					<div class="form-group">
+						<input type="text" name="j_username" placeholder="username" class="form-control"/>
+						<input type="password" name="j_password" placeholder="password" class="form-control"/>
+						<input type="hidden" name="spring-security-redirect" value="${request.requestURL}"/>
+						<button type="submit" class="btn btn-inverse">Sign in</button>
+					</div>
+				</form>
+			</sec:ifNotLoggedIn>
 
-	<r:layoutResources />
+		</div>
+		<!-- end navbar-collapse -->
+	</div>
+	<!-- end container -->
+</nav>
+
+<g:if test="${flash.message}">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-lg-offset-4">
+				<div class="alert alert-info" role="status">${flash.message}</div>
+			</div>
+		</div>
+	</div>
+</g:if>
+<g:layoutBody/>
+
+<r:layoutResources />
 </body>
 </html>

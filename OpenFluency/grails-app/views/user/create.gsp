@@ -15,10 +15,6 @@
 				<g:link action="auth" controller="login">Sign In</g:link>.
 			</p>
 
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
-
 			<g:hasErrors bean="${userInstance}">
 				<ul class="errors" role="alert">
 					<g:eachError bean="${userInstance}" var="error">
@@ -31,9 +27,7 @@
 		</g:hasErrors>
 
 		<g:form url="[resource:userInstance, action:'save']" > 
-
 			<g:render template="form"/>
-
 			<div class="proficiencies">
 				<label class="control-label">
 					Language Proficiencies
@@ -53,6 +47,10 @@
 			context: document.body
 		}).done(function(data) {
 			$('.proficiencies').append(data);
+			$('.remove-proficiency').unbind('click').click(function(){
+				$(this).parents('.panel').remove();
+				return false;
+			});
 		});
 	});
 })

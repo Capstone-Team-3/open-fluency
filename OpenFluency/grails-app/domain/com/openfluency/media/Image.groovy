@@ -11,7 +11,7 @@ import com.openfluency.auth.User
 */
 class Image { 
 
-	User owner 	// The user that uploaded the image. It's commented out since the user class is not created yet, Ben is taking care of this
+	User owner 		// The user that uploaded the image.
 	String url		// The URL or the image, probably an S3 url
 
 	UnitMapping unitMapping 	// The mapping that this Image represents

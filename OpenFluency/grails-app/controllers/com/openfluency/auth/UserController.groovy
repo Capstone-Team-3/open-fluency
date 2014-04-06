@@ -35,7 +35,7 @@ class UserController {
     @Transactional
     def save() {
         //create user instance via service
-        User userInstance = userService.createUser(params.username, params.password, params.email, params.userType.id, params.list('language.id'), params.list('proficiency.id'))
+        User userInstance = userService.createUser(params.username, params.password, params.email, params.userType.id, params['nativeLanguage.id'], params.list('language.id'), params.list('proficiency.id'))
 
         if (userInstance.hasErrors()) {
             respond userInstance.errors, view:'create'

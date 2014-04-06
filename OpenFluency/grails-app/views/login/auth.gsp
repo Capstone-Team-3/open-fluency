@@ -11,10 +11,6 @@
 			<h2>Sign In</h2>
 			<p>New user? <g:link action='create' controller='user'>Sign Up</g:link>.</p>
 
-			<g:if test='${flash.message}'>
-				<div class='login_message alert alert-danger'>${flash.message}</div>
-			</g:if>
-
 			<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 
 				<label for='username' class="control-label"><g:message code="springSecurity.login.username.label"/>:</label>

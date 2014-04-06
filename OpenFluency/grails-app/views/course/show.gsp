@@ -13,9 +13,6 @@
             <li><a href="#">${courseInstance.getCourseNumber()}: ${courseInstance.title}</a></li>
         </ul>
 		<div class="course-header">
-			<g:if test="${flash.message}">
-				<div class="alert alert-info" style="display: block">${flash.message}</div>
-			</g:if>
 			<h1>
 				${courseInstance.title}
 				<sec:ifAllGranted roles="ROLE_STUDENT">

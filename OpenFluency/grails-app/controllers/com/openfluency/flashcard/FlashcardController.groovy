@@ -26,7 +26,7 @@ class FlashcardController {
     */
     def save() {
 
-        def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.image, params.audio, params.deck)
+        def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.imageLink, params.audio, params.deck)
         
     	// Check for errors
         if (flashcardInstance.hasErrors()) {

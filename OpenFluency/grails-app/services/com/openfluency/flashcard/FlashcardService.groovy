@@ -66,4 +66,29 @@ class FlashcardService {
 
         log.info "Created ${f} flashcards for deck: ${deck.title}"
     }
+
+    /**
+    * Search for Decks
+    */
+    List<Deck> searchDecks(Long languageId, String keyword) {
+        log.info "Searching Decks with languageId: $languageId and Keywords: $keyword"
+
+        Deck.withCriteria {
+
+            // Apply language criteria
+            if(languageId) {
+                language {
+                    eq('id', languageId)
+                }
+            }
+
+            // Search using keywords in the title or description
+            if(keyword) {
+                or {
+                    ilike("title", "%${keyword}%")
+                    ilike("description", "%${keyword}%")
+                }
+            }
+        }
+    }
 }

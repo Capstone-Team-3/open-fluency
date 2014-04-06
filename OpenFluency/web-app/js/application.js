@@ -7,3 +7,46 @@ if (typeof jQuery !== 'undefined') {
 		});
 	})(jQuery);
 }
+
+/**
+* Searches for an Image in Flicker
+* @param query: the search query to run
+* @param resultsId: the selector of the div where the results will be appended (it's cleared before appending)
+* @param urlField: the selector for the field where the url of the image should be saved on click
+*/
+var searchImage = function(query, results, urlField) {
+	
+	// set helpful and need variables
+	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
+	var sMethod = "flickr.photos.search";
+	var respFormat = "&format=json&jsoncallback=?"
+	var numPics = "5";
+	var src;
+
+	// Build base Flickr query url
+	var baseUrl = "https://api.flickr.com/services/rest/?api_key=" + apiKey + "&method=" + sMethod + "&sort=relevance&per_page=" + numPics + "&text=";
+
+	// Remove previous pics
+	$(results).empty();
+
+	// Build full URL
+	var queryStr = baseUrl + $("#query").val() + respFormat;
+
+	// Run query
+	$.getJSON(queryStr, function(data){
+
+		// Add responses to target
+		$.each(data.photos.photo, function(i,item){
+			src = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_m.jpg";
+
+			// Append results to result list
+			$("<div/>").css("background-image", "url(" + src + ")").data('imageLink', src).attr("class", "img-rounded img-result").appendTo(results).click(function(){
+				$(urlField).val($(this).data('imageLink'));
+			});
+
+			if (i >= numPics) {
+				return false;
+			}
+		});
+	});
+}

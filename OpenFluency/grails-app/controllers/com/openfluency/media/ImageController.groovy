@@ -1,13 +1,13 @@
 package com.openfluency.media
 
-
-
+import com.openfluency.auth.User
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true) 
 class ImageController {
 
+    def mediaService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -24,7 +24,10 @@ class ImageController {
     }
 
     @Transactional
-    def save(Image imageInstance) {
+    def save() {
+        
+        Image imageInstance = mediaService.createImage(params.url, params['unitMapping.id'])
+
         if (imageInstance == null) {
             notFound()
             return
@@ -34,8 +37,6 @@ class ImageController {
             respond imageInstance.errors, view:'create'
             return
         }
-
-        imageInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

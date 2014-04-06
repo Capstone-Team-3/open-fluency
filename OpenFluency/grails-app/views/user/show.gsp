@@ -9,25 +9,28 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<p> <b>username:</b>
+				<h1>User Profile</h1>
+				<p><b>User type:</b> ${userInstance.userType.name}</p>
+				<p> <b>Username:</b>
 					${userInstance.username}
 				</p>
-				<p> <b>password:</b>
-					${userInstance.password}
+				<p>
+					<b>Email:</b>
+					${userInstance.email}
 				</p>
 				<p>
-					<b>email:</b>
-					${userInstance.email}
+					<b>Native Language:</b>
+					${userInstance.nativeLanguage.name}
 				</p>
 				<h3>Proficiencies</h3>
 				<g:each in="${userInstance.languageProficiencies}">
-					<p>
-						<b>${it.language.name}</b>
-						${it.proficiency.proficiency}
-					</p>
-				</g:each>
-			</div>
+				<p>
+					<b>${it.language.name}</b>
+					${it.proficiency.proficiency}
+				</p>
+			</g:each>
 		</div>
 	</div>
+</div>
 </body>
 </html>

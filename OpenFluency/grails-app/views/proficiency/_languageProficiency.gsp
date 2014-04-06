@@ -6,6 +6,7 @@
 		<label for="language" class="control-label">
 			<g:message code="proficiency.language.label" default="Language" />
 			<span class="required-indicator">*</span>
+			<button class="remove-proficiency btn btn-danger btn-xs">Remove</button>
 		</label>
 		<g:select id="language" class="form-control" name="language.id" from="${Language.list()}" optionKey="id" required="" value="${languages?.id}"/>
 

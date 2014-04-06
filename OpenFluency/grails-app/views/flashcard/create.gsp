@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 	<meta name="layout" content="main"/>
@@ -7,8 +7,7 @@
 <body>
 	<div class="container flashcard-create">
 		<div class="row">
-			<div class="col-lg-6">
-
+			<div class="col-lg-5">
 				<g:hasErrors bean="${flashcardInstance}">
 					<ul class="errors" role="alert">
 						<g:eachError bean="${flashcardInstance}" var="error">
@@ -38,28 +37,43 @@
 
 					<div class="form-group">
 						<label class="control-label">What pronunciation do you want to use?</label>
-						<g:select class="form-control" name="pronunciation" from="${unitInstance.pronunciations}" noSelection="['':'-- Choose a pronunciation --']" optionKey="id" optionValue="literal"/>
+						<g:select class="form-control" name="pronunciation" from="${unitInstance.pronunciations}" optionKey="id" optionValue="literal"/>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label">What deck should this card go into?</label>
-						<g:select class="form-control" name="deck" from="${userDecks}" noSelection="['':'-- Choose a deck --']" optionKey="id" optionValue="title"/>
+						<g:select class="form-control" name="deck" from="${userDecks}" optionKey="id" optionValue="title"/>
 					</div>
 
 					<div class="form-group">
 						<label class="control-label">What image should be associated with this card (optional)?</label>
-						<g:textField class="form-control" name="image" value="${flashcardInstance?.image}"/>
+						<g:textField class="form-control" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">What audio clip provides pronunciation for this card (optional)?</label>
+						<label class="control-label">
+							What audio clip provides pronunciation for this card (optional)?
+						</label>
 						<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
 					</div>
-
 					<button class="center btn btn-success">Create it!</button>
 				</g:form>
 			</div>
+			<div class="col-lg-7">
+				<h1>Flickr Search</h1>
+				<label for="query">Query:</label>
+				<input id="query" name="query" type="text" size="60" />
+				<button id="flickr_search">Search</button>
+				<div id="results"></div>
+			</div>
 		</div>
 	</div>
+	<g:javascript>
+		$(function() {
+		$("#flickr_search").click(function(){
+			searchImage("#query", "#results", "#imageLink");
+		});
+	})
+	</g:javascript>
 </body>
 </html>

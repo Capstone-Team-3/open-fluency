@@ -36,17 +36,19 @@ class DeckController {
 
     def show(Deck deckInstance, Integer max) {
     	params.max = Math.min(max ?: 12, 100)
-        def flashcards = Flashcard.findAllByDeck(deckInstance, params)
-        respond flashcards, model:[deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
+        List<Flashcard> flashcards = Flashcard.findAllByDeck(deckInstance, params)
+        respond flashcards, model:[deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id)]
     }
 
     def practice(Deck deckInstance, Integer max) {
-        params.max = max ?: 1
-        def flashcardInstance = Flashcard.findAllByDeck(deckInstance, params)
+        Flashcard flashcardInstance = Flashcard.findByDeck(deckInstance, params)
         [deckInstance: deckInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
     }
 
     def search() {
-        [deckInstanceList: Deck.findAll(), languageInstanceList: Language.list()]
+        Long languageId = params['filter-lang'] as Long
+        String keyword = params['search-text']
+        [keyword: keyword, languageId: languageId, deckInstanceList: flashcardService.searchDecks(languageId, keyword), 
+        languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
     }
 }

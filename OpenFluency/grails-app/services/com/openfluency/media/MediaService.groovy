@@ -13,7 +13,7 @@ class MediaService {
 
     def createImage(String imageLink, String unitmappingId) {
     	
-    	if (!(imageLink)){ return null }
+    	if (!imageLink){ return null }
 
     	def imageInstance = new Image(
     		owner: User.load(springSecurityService.principal.id),
