@@ -1,6 +1,6 @@
 <%@ page import="com.openfluency.media.Image" %>
 
-
+ 
 
 <div class="fieldcontain ${hasErrors(bean: imageInstance, field: 'owner', 'error')} required">
 	<label for="owner">
@@ -25,7 +25,7 @@
 		<g:message code="image.url.label" default="Url" />
 		
 	</label>
-	<g:textField name="url" value="${imageInstance?.url}"/>
+	<g:textField id="url" name="url" value="${imageInstance?.url}"/>
 
 </div>
 

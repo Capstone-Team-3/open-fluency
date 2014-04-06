@@ -4,7 +4,7 @@ import com.openfluency.language.*
 import com.openfluency.flashcard.Deck
 import com.openfluency.course.Course
 
-class User { 
+class User {  
 
 	transient springSecurityService
 
@@ -60,5 +60,9 @@ class User {
 
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
+	}
+
+	String toString(){
+		username
 	}
 }

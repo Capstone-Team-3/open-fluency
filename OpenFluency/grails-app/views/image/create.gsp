@@ -34,5 +34,55 @@
 				</fieldset>
 			</g:form>
 		</div>
+
+		<div id="wrapper">
+
+			<h1>Flickr Search Tester (Ajax)</h1>
+
+			<g:form id="my_form">
+				<label for="query">Query: </label>
+				<input id="query" name="query" type="text" size="60" /><br /><br />
+				<input id="flickr_search" name="flickr_search" type="button" value="Search" />
+			</g:form>
+			<!-- Results will be placed into the following container. -->
+			<div id="results"></div>
+
+		</div>
+
 	</body>
+
+	<g:javascript>
+		$(function(){
+			<!-- set helpful and need variables-->
+			var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
+			var sMethod = "flickr.photos.search";
+			var respFormat = "&format=json&jsoncallback=?"
+			var numPics = "5";
+			var src;
+			<!-- build the base of the query string-->
+			var baseUrl = "https://api.flickr.com/services/rest/?api_key=" + apiKey + "&method=" + sMethod + "&sort=relevance&per_page=" + numPics + "&text=";
+			
+			<!-- add search buttin click handler -->
+			$("#flickr_search").click(function(){
+				<!--remove previous pics -->
+				$("#results").empty();
+				<!-- build query url-->
+				var queryStr = baseUrl + $("#query").val() + respFormat;
+				<!-- query the flickr api-->
+				$.getJSON(queryStr, function(data){
+					<!-- iterate through responses and display them -->
+					$.each(data.photos.photo, function(i,item){
+        				src = "http://farm" + item.farm + ".static.flickr.com/" + item.server + "/" + item.id + "_" + item.secret + "_m.jpg";
+        				$("<img/>").attr("src", src).appendTo("#results");
+        				<!-- click handler on the image -->
+        				$("<img/>").click(function(){
+        					$("#url").val(src);
+        				});
+        				if ( i >= numPics ) return false;
+    				});
+				});
+			});
+		});
+	</g:javascript>
+
 </html>
