@@ -6,9 +6,13 @@
 <body>
     <div class="container deck-search">
         <ul class="breadcrumb">
-            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li>
+                <a href="${createLink(uri:'/') }">Home</a>
+            </li>
             <li>Decks</li>
-            <li><g:link action="search" controller="deck" >Search for Decks</g:link></li>
+            <li>
+                <g:link action="search" controller="deck" >Search for Decks</g:link>
+            </li>
         </ul>
         <h1>Deck Search</h1>
 
@@ -66,13 +70,15 @@
                     <td>${it.owner.username}</td>
                     <td>${it.lastUpdated}</td>
                     <td>
-                          <g:link action="add" controller="decks" id="${it.id}" class="btn btn-info">Add to My Decks</g:link>
+                        <g:if test="${userInstance.id != it.owner.id}">
+                            <g:link action="add" controller="deck" id="${it.id}" class="btn btn-info btn-xs">Add to My Decks</g:link>
+                        </g:if>
                     </td>
                 </tr>
             </g:each>
         </table>
     </div>
     <!-- end container -->
-    </div>
+</div>
 </body>
 </html>

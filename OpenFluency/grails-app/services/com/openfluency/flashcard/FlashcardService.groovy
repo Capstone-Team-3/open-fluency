@@ -1,6 +1,7 @@
 package com.openfluency.flashcard
 
 import com.openfluency.auth.User
+import com.openfluency.flashcard.Share
 import com.openfluency.language.Language
 import com.openfluency.language.Alphabet
 import com.openfluency.language.Unit
@@ -88,6 +89,26 @@ class FlashcardService {
                     ilike("title", "%${keyword}%")
                     ilike("description", "%${keyword}%")
                 }
+            }
+        }
+    }
+
+    /**
+    * Add a deck to my list of shared courses
+    */
+    Share addDeck(Deck deck) {
+        return new Share(deck: deck, receiver: User.load(springSecurityService.principal.id)).save(flush: true);
+    }
+
+    Boolean removeDeck(Deck deck) {
+        Share share = Share.findByReceiverAndDeck(User.load(springSecurityService.principal.id), deck)
+        if(share) {
+            try {
+                share.delete()
+                return true
+            } 
+            catch(Exception e) {
+                return false
             }
         }
     }

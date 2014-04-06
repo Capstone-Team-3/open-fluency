@@ -13,15 +13,16 @@ class DeckController {
 	}
 
 	def list() {
-		[deckInstanceList: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
-	}
+        User loggedUser = User.load(springSecurityService.principal.id)
+        [deckInstanceList: Deck.findAllByOwner(loggedUser), othersDeckInstanceList: Share.findAllByReceiver(loggedUser).collect {it.deck}, userInstance: loggedUser]
+    }
 
-	def create() {
-		[deckInstance: new Deck(params)]
-	}
+    def create() {
+      [deckInstance: new Deck(params)]
+  }
 
-	def save() {
-		def deckInstance = flashcardService.createDeck(params.title, params.description, params['language.id'])
+  def save() {
+      def deckInstance = flashcardService.createDeck(params.title, params.description, params['language.id'])
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {
@@ -50,5 +51,33 @@ class DeckController {
         String keyword = params['search-text']
         [keyword: keyword, languageId: languageId, deckInstanceList: flashcardService.searchDecks(languageId, keyword), 
         languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
+    }
+
+    def add(Deck deckInstance) {
+        Share shareInstance
+
+        if(deckInstance) {
+            shareInstance = flashcardService.addDeck(deckInstance)
+        }
+
+        if(shareInstance) {
+            flash.message = "You succesfully added ${deckInstance.title} to your decks!"
+        } 
+        else {
+            flash.message = "Could not add this deck!"
+        }
+
+        redirect action: "list"
+    }
+
+    def remove(Deck deckInstance) {
+        if(deckInstance && flashcardService.removeDeck(deckInstance)) {
+            flash.message = "You succesfully removed ${deckInstance.title} from your decks!"
+        }
+        else {
+            flash.message = "Could not remove ${deckInstance.title} from your decks!"
+        }
+
+        redirect action: "list"
     }
 }
