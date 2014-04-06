@@ -68,12 +68,27 @@
 }
 
 .flashcard-img {
-    height: 200px;
-    width: 100%;
     background-size: 100% auto;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-color: whiteSmoke;
+    height: 200px;;
+    margin: 20px auto;
+    width: 80%;
+}
+
+.flashcard .panel {
+    font-size: 20px;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.deck-practice .flashcard,
+.chapter-practice .flashcard {
+    float: none;
+    margin: auto;
+    min-width: 250px;
+    width: 25%;
 }
 
 /* ---------------------------------------------------------------------------*/
@@ -156,20 +171,6 @@
 .chapter-show .chapter-header {
     margin-bottom: 30px;
     text-align: center;
-}
-
-.flashcard .panel {
-    font-size: 20px;
-    padding: 30px 0;
-    text-align: center;
-}
-
-.deck-practice .flashcard,
-.chapter-practice .flashcard {
-    float: none;
-    margin: auto;
-    min-width: 250px;
-    width: 25%;
 }
 
 .pagination .prevLink,
