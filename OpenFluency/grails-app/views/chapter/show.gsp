@@ -15,6 +15,9 @@
 		<div class="chapter-header">
 			<h1>${chapterInstance.title}</h1>
 			<p>${chapterInstance.description}</p>
+			<g:if test="${flashcardCount > 0}"><!-- should also only display if enrolled -->
+				<g:link class="btn btn-success" action="practice" id="${chapterInstance.id}" controller="chapter">Practice Flashcards</g:link>
+			</g:if>
 		</div>
 		<!-- end chapter-header -->
 

@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<h1>New Deck</h1>
+				<h1>Create New Deck</h1>
 
 				<g:hasErrors bean="${deckInstance}">
 					<ul class="errors" role="alert">
@@ -44,7 +44,7 @@
 
 					<br>
 					<div class="center">
-						<button class="btn btn-info">Create</button>
+						<button class="btn btn-info">Create Deck</button>
 					</div>
 				</g:form>
 			</div>
