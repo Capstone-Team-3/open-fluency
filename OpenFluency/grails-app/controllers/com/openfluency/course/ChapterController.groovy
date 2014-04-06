@@ -32,8 +32,7 @@ class ChapterController {
     }
 
     def practice(Chapter chapterInstance, Integer max) {
-        params.max = max ?: 1
-        def flashcardInstance = Flashcard.findAllByDeck(chapterInstance.deck, params)
+        def flashcardInstance = Flashcard.findByDeck(chapterInstance.deck, params)
         [chapterInstance: chapterInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck)]
     }
 }
