@@ -73,7 +73,7 @@
     background-repeat: no-repeat;
     background-color: whiteSmoke;
     height: 200px;;
-    margin: 20px auto;
+    margin: 20px auto 0;
     width: 80%;
 }
 
@@ -89,6 +89,10 @@
     margin: auto;
     min-width: 250px;
     width: 25%;
+}
+
+.meaning {
+    margin-top: 20px;
 }
 
 /* ---------------------------------------------------------------------------*/
