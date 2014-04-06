@@ -16,7 +16,7 @@
         <g:render template="/flashcard/flashcard"/>
         
         <div class="pagination center-block text-center">
-            <g:paginate controller="deck" action="practice" maxsteps="0" id="${deckInstance.id}" total="${flashcardCount ?: 0}" />
+            <g:paginate controller="deck" action="practice" max="1" id="${deckInstance.id}" total="${flashcardCount ?: 0}" />
         </div>
     </div><!-- end container -->
 </body>
