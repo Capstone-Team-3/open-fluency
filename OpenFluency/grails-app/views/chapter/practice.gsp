@@ -20,13 +20,15 @@
         </div>
     </div><!-- end container -->
 
-    <script>
-        var $meaningContainer = $('.meaning');
-        var meaning = $meaningContainer.html();
-        $meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
-        $('#show-meaning').on('click', function() { 
-            $meaningContainer.html(meaning);
-        });
-    </script>
+    <g:javascript>
+        $(function(){
+            var $meaningContainer = $('.meaning');
+            var meaning = $meaningContainer.html();
+            $meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
+            $('#show-meaning').on('click', function() { 
+                $meaningContainer.html(meaning);
+            });
+        })
+    </g:javascript>
 </body>
 </html>
