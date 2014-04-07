@@ -68,12 +68,31 @@
 }
 
 .flashcard-img {
-    height: 200px;
-    width: 100%;
     background-size: 100% auto;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-color: whiteSmoke;
+    height: 200px;;
+    margin: 20px auto 0;
+    width: 200px;
+}
+
+.flashcard .panel {
+    font-size: 20px;
+    padding: 10px 0 20px;
+    text-align: center;
+}
+
+.deck-practice .flashcard,
+.chapter-practice .flashcard {
+    float: none;
+    margin: auto;
+    min-width: 250px;
+    width: 25%;
+}
+
+.meaning {
+    margin-top: 20px;
 }
 
 /* ---------------------------------------------------------------------------*/
@@ -148,28 +167,13 @@
     text-align: center;
 }
 
-.course-show .panel,
-.chapter-show .panel {
+.course-show .panel {
     height: 300px;
 }
 
 .chapter-show .chapter-header {
     margin-bottom: 30px;
     text-align: center;
-}
-
-.flashcard .panel {
-    font-size: 20px;
-    padding: 30px 0;
-    text-align: center;
-}
-
-.deck-practice .flashcard,
-.chapter-practice .flashcard {
-    float: none;
-    margin: auto;
-    min-width: 250px;
-    width: 25%;
 }
 
 .pagination .prevLink,

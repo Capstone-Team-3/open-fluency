@@ -9,13 +9,13 @@
 		<div class="deck-header text-center center-block">
 			<h1>
 				${deckInstance?.title}
-				<g:if test="${flashcardCount}">
-					<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
-				</g:if>
 			</h1>
 			<p>${deckInstance?.description}</p>
+			<g:if test="${flashcardCount}">
+				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
+			</g:if>
 			<g:if test="${isOwner}">
-				<g:link action="search" controller="unit" params="${['filter-alph': deckInstance.language.id]}">Add Flashcards</g:link>
+				<g:link class="btn" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>
 		<!-- end deck-header -->
