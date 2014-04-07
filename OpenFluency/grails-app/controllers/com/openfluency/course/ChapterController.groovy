@@ -27,8 +27,10 @@ class ChapterController {
     	redirect action: "show", controller: "course", id: "${params.courseId}"
     }
 
-    def show(Chapter chapterInstance) {
-    	[chapterInstance: chapterInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck)]
+    def show(Chapter chapterInstance, Integer max) {
+		params.max = Math.min(max ?: 12, 100)
+		List<Flashcard> flashcards = Flashcard.findAllByDeck(chapterInstance.deck, params)
+		respond flashcards, model:[chapterInstance: chapterInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck)]
     }
 
     def practice(Chapter chapterInstance, Integer max) {
