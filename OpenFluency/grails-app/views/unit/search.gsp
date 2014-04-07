@@ -7,6 +7,11 @@
 </head>
 <body>
     <div class="container unit-index">
+   	 	<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li>Decks</li>
+            <li><a href="#">Flashcard Search</a></li>
+        </ul>
         <h1>Flashcard Search</h1>
         <p class="instructions">
             Choose a character, word, or phrase for which you'd like to create a flashcard.

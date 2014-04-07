@@ -6,6 +6,12 @@
 </head>
 <body>
 	<div class="container flashcard-create">
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li>Decks</li>
+            <li><a href="${createLink(uri:'/unit/search?filter-alph=1') }">Flashcard Search</a></li>
+            <li><a href="#">Create Flashcard </a></li>
+        </ul>
 		<div class="row">
 			<div class="col-lg-5">
 				<g:hasErrors bean="${flashcardInstance}">
