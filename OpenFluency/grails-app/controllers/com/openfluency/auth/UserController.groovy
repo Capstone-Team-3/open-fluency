@@ -38,7 +38,7 @@ class UserController {
         User userInstance = userService.createUser(params.username, params.password, params.email, params.userType.id, params['nativeLanguage.id'], params.list('language.id'), params.list('proficiency.id'))
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'create'
+            render view: "create", model: [userInstance: userInstance, languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
             return
         }
 
