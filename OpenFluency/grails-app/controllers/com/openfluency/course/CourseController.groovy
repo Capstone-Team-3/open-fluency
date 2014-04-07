@@ -3,6 +3,7 @@ package com.openfluency.course
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
 import com.openfluency.language.Language
+
 import grails.plugin.springsecurity.annotation.Secured
 
 class CourseController {
@@ -44,7 +45,7 @@ class CourseController {
 	}
 
 	@Secured(['isAuthenticated()'])
-	def search() {
+	def search(Integer max) {
 		Long languageId = params['filter-lang'] as Long
 		String keyword = params['search-text']
 		[keyword: keyword, languageId: languageId, courseInstanceList: courseService.searchCourses(languageId, keyword), 

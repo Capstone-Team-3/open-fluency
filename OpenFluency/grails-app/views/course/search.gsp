@@ -80,6 +80,10 @@
                 </tr>
             </g:each>
         </table>
+   
+        <div class="pagination center-block text-center">
+            <g:paginate controller="course" action="search"  total="${courseInstanceList.size() ?: 0}" />
+        </div>
     </div>
     <!-- end container -->
    

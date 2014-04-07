@@ -77,6 +77,9 @@
                 </tr>
             </g:each>
         </table>
+        <div class="pagination center-block text-center">
+            <g:paginate controller="deck" action="search"  total="${deckInstanceList.size() ?: 0}" />
+        </div>
     </div>
     <!-- end container -->
 </div>

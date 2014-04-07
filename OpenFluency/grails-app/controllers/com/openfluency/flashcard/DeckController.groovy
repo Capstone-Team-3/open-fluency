@@ -48,7 +48,7 @@ class DeckController {
         [deckInstance: deckInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
     }
 
-    def search() {
+    def search(Integer max) {
         Long languageId = params['filter-lang'] as Long
         String keyword = params['search-text']
         [keyword: keyword, languageId: languageId, deckInstanceList: flashcardService.searchDecks(languageId, keyword), 

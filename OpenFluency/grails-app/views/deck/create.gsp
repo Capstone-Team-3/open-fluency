@@ -6,6 +6,12 @@
 </head>
 <body>
 	<div class="container">
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li>Decks</li>
+            <li><g:link action="create" controller="deck" >Create New Deck</g:link></li>
+    
+        </ul>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
 				<h1>Create New Deck</h1>

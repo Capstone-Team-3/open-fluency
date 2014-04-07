@@ -5,7 +5,12 @@
 </head>
 <body>
 	<div class="container deck-show">
-
+		<ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li>Decks</li>
+            <li><g:link action="search" controller="deck" >Search for Decks</g:link></li>
+            <li><a href="#">${deckInstance?.title}</a></li>
+        </ul>
 		<div class="deck-header text-center center-block">
 			<h1>
 				${deckInstance?.title}
