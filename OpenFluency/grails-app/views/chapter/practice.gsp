@@ -9,14 +9,14 @@
         
         <div class="chapter-header text-center">
             <h1>
-                Deck: ${chapterInstance.title}
+                ${chapterInstance.title}
             </h1>
         </div><!-- end deck-header -->
 
         <g:render template="/flashcard/flashcard"/>
         
         <div class="pagination center-block text-center">
-            <g:paginate controller="chapter" action="practice" max="1" id="${chapterInstance.id}" total="${flashcardCount ?: 0}" />
+            <g:paginate controller="chapter" action="practice" max="1" maxsteps="1" id="${chapterInstance.id}" total="${flashcardCount ?: 0}" />
         </div>
     </div><!-- end container -->
 
