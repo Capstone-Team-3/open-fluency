@@ -16,8 +16,17 @@
         <g:render template="/flashcard/flashcard"/>
         
         <div class="pagination center-block text-center">
-            <g:paginate controller="chapter" action="practice" maxsteps="0" id="${chapterInstance.id}" total="${flashcardCount ?: 0}" />
+            <g:paginate controller="chapter" action="practice" max="1" id="${chapterInstance.id}" total="${flashcardCount ?: 0}" />
         </div>
     </div><!-- end container -->
+
+    <script>
+        var $meaningContainer = $('.meaning');
+        var meaning = $meaningContainer.html();
+        $meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
+        $('#show-meaning').on('click', function() { 
+            $meaningContainer.html(meaning);
+        });
+    </script>
 </body>
 </html>
