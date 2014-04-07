@@ -2,19 +2,19 @@ package com.openfluency.course
 
 import com.openfluency.flashcard.*
 import com.openfluency.auth.User
+import grails.plugin.springsecurity.annotation.Secured
 
 class ChapterController {
 
 	def springSecurityService
 	def courseService
 
-    /**
-    * Create a chapter for a particular course
-    */
+    @Secured(['isAuthenticated()'])
 	def create(Course courseInstance) {
 		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), courseInstance.language)]
 	}
 
+    @Secured(['isAuthenticated()'])
 	def save() {
 		def chapterInstance = courseService.createChapter(params.title, params.description, params.deckId, params.courseId)
 

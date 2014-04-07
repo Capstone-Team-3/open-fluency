@@ -3,24 +3,28 @@ package com.openfluency.course
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
 import com.openfluency.language.Language
+import grails.plugin.springsecurity.annotation.Secured
 
 class CourseController {
 
 	def springSecurityService
 	def courseService
 
-	/**
-	* A list of the courses that the person owns or is enrolled in
-	*/
+	// Researchers will not be able to enroll or create courses
+	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT', 'ROLE_ADMIN'])
 	def list() {
 		def user = User.load(springSecurityService.principal.id)
 		[myCourses: Course.findAllByOwner(user), registrations: Registration.findAllByUser(user)]
 	}
 
+	// Only instructors are able to create courses
+	@Secured(['ROLE_INSTRUCTOR'])
 	def create() {
 		[courseInstance: new Course(params)]
 	}
 
+	// Only instructors are able to create or edit courses
+	@Secured(['ROLE_INSTRUCTOR'])
 	def save() {
 
 		def courseInstance = courseService.createCourse(params.title, params.description, params.language.id)
@@ -34,10 +38,12 @@ class CourseController {
     	redirect action: "show", id: courseInstance.id
 	}
 
+	@Secured(['isAuthenticated()'])
 	def show(Course courseInstance) {
-		[courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
+		[courseInstance: courseInstance, isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
 	}
 
+	@Secured(['isAuthenticated()'])
 	def search() {
 		Long languageId = params['filter-lang'] as Long
 		String keyword = params['search-text']
@@ -45,6 +51,8 @@ class CourseController {
             languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
 	}
 
+	// Only students can enroll in courses
+	@Secured(['ROLE_STUDENT'])
 	def enroll(Course courseInstance) {
 		Registration registrationInstance = courseService.createRegistration(courseInstance)
 

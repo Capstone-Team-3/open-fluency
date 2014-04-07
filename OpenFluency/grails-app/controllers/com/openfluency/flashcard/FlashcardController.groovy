@@ -7,7 +7,9 @@ import com.openfluency.media.Image
 import com.openfluency.media.Audio
 import com.openfluency.auth.User
 import com.openfluency.language.Unit
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['isAuthenticated()'])
 class FlashcardController { 
 
 	def springSecurityService 

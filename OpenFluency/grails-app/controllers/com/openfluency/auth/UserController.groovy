@@ -5,6 +5,7 @@ import com.openfluency.Constants
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import com.openfluency.language.*
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 class UserController {
@@ -19,6 +20,7 @@ class UserController {
         respond User.list(params), model:[userInstanceCount: User.count()]
     }
 
+    @Secured(['isAuthenticated()'])
     def profile() {
         render view: "show", model: [userInstance: User.load(springSecurityService.principal.id)]
     }
@@ -49,6 +51,7 @@ class UserController {
         //redirect action: 'show', id: userInstance.id
     }
 
+    @Secured(['isAuthenticated()'])
     def edit() {
         [userInstance: User.load(springSecurityService.principal.id), languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
     }

@@ -2,7 +2,9 @@ package com.openfluency.flashcard
 
 import com.openfluency.auth.User
 import com.openfluency.language.Language
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(['isAuthenticated()'])
 class DeckController {
 
 	def springSecurityService
@@ -12,17 +14,17 @@ class DeckController {
 		redirect action: "list"
 	}
 
-	def list() {
-        User loggedUser = User.load(springSecurityService.principal.id)
+    def list() {
+        User loggedUser = User.load(springSecurityService?.principal?.id)
         [deckInstanceList: Deck.findAllByOwner(loggedUser), othersDeckInstanceList: Share.findAllByReceiver(loggedUser).collect {it.deck}, userInstance: loggedUser]
     }
 
     def create() {
-      [deckInstance: new Deck(params)]
-  }
+        [deckInstance: new Deck(params)]
+    }
 
-  def save() {
-      def deckInstance = flashcardService.createDeck(params.title, params.description, params['language.id'])
+    def save() {
+        def deckInstance = flashcardService.createDeck(params.title, params.description, params['language.id'])
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {
