@@ -6,6 +6,13 @@
 </head>
 <body>
     <div class="container deck-practice">
+   	   <ul class="breadcrumb">
+            <li><a href="${createLink(uri:'/') }">Home</a></li>
+            <li>Decks</li>
+            <li><g:link action="search" controller="deck" >Search for Decks</g:link></li>
+            <li><g:link action="show" controller="deck" id="${deckInstance.id}">${deckInstance.title}</g:link></li>
+            <li><a href="#">Practice</a></li>
+        </ul>
         
         <div class="deck-header text-center">
             <h1>
