@@ -20,7 +20,7 @@ var searchImage = function(query, results, urlField) {
 	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
 	var sMethod = "flickr.photos.search";
 	var respFormat = "&format=json&jsoncallback=?"
-	var numPics = "5";
+	var numPics = "6";
 	var src;
 
 	// Build base Flickr query url
