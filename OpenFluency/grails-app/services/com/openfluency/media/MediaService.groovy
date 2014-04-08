@@ -27,13 +27,16 @@ class MediaService {
     	return imageInstance
     }
 
-    def createAudio(String audioLink, String pronunciationId){
+    def createAudio(String audioLink, Byte[] audioFile, String pronunciationId){ 
 
-    	if (!(audioLink)){ return null }
+        if ((!audioLink) && (!audioFile)){ 
+            return null 
+        }
 
     	def audioInstance = new Audio(
     		owner: User.load(springSecurityService.principal.id),
     		url: audioLink,
+            audioWAV: audioFile,
     		pronunciation: Pronunciation.load(pronunciationId),
     		dateCreated: new Date(),
     		lastUpdated: new Date()

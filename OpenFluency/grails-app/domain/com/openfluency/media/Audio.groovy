@@ -19,6 +19,7 @@ class Audio {
 
     static constraints = {
     	audioWAV nullable: true, maxSize: 1000000
+    	url nullable: true
     }
 
     String toString(){

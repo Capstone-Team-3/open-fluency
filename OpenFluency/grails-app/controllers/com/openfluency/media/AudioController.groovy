@@ -1,13 +1,13 @@
 package com.openfluency.media
 
-
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
-class AudioController {
 
+@Transactional(readOnly = true)
+class AudioController { 
+
+    def mediaService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -24,9 +24,10 @@ class AudioController {
     }
 
     @Transactional
-    def save(Audio audioInstance) {
+    def save() {
 
-        params.each {k,v -> println "k,v -> ${k}, ${v}"}
+        Byte[] blob = (Byte[]) params.audioWAV
+        Audio audioInstance = mediaService.createAudio(params.url, blob, params['pronunciation.id'])
 
         if (audioInstance == null) {
             notFound()

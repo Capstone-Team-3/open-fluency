@@ -5,7 +5,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true) 
-class ImageController {
+class ImageController { 
 
     def mediaService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

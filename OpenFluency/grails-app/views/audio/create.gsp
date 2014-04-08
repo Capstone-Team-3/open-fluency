@@ -50,7 +50,7 @@
 		<g:javascript src="recorderWorker.js"/>
 		<g:javascript src="recorder.js"/>
 
-		<g:javascript>
+		<g:javascript> 
 			var recorder;
 			var audio = document.querySelector('audio');
 
@@ -83,7 +83,7 @@
 				recorder.stop();
 				recorder.exportWAV(function(s){
 					audio.src = window.URL.createObjectURL(s);
-					$('#audioWAV').val(audio.src);
+					$('#audioWAV').val(s);
 					console.log(audio.src);
 				});
 			}

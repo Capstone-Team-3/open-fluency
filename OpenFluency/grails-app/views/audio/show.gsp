@@ -64,6 +64,14 @@
 					
 				</li>
 				</g:if>
+
+				<g:if test="${audioInstance?.audioWAV}">
+				<li class="fieldcontain">
+					</br>
+					<audio id="audioClip" src="${audioInstance?.audioWAV}" type="audio/wav"></audio>
+					</br>
+				</li>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:audioInstance, action:'delete']" method="DELETE">
