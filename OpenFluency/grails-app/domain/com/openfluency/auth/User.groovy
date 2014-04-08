@@ -32,8 +32,7 @@ class User {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-		email nullable: true
-    	userType nullable: false
+		userType nullable: false
 	}
 
 	static mapping = {
