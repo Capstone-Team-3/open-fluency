@@ -25,6 +25,9 @@ class AudioController {
 
     @Transactional
     def save(Audio audioInstance) {
+
+        params.each {k,v -> println "k,v -> ${k}, ${v}"}
+
         if (audioInstance == null) {
             notFound()
             return

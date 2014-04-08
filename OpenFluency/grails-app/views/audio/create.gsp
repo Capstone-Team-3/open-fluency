@@ -28,6 +28,15 @@
 			<g:form url="[resource:audioInstance, action:'save']" >
 				<fieldset class="form">
 					<g:render template="form"/>
+
+					</br>
+					<audio id="audioClip" value="${audioInstance?.audioWAV}" controls autoplay></audio>
+					</br>
+					<input id="start_button" name="start_button" type="button" value="Start Recording" />
+					<input id="stop_button" name="stop_button" type="button" value="Stop Recording" />
+					<input id="audioWAV" name="audioWAV" value="" type="hidden"/>
+					</br></br>
+
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
@@ -36,10 +45,7 @@
 		</div>
 		
 		</br>
-		<audio controls autoplay></audio>
-		</br>
-		<input id="start_button" name="start_button" type="button" value="Start Recording" />
-		<input id="stop_button" name="stop_button" type="button" value="Stop Recording" />
+		
 
 		<g:javascript src="recorderWorker.js"/>
 		<g:javascript src="recorder.js"/>
@@ -77,6 +83,8 @@
 				recorder.stop();
 				recorder.exportWAV(function(s){
 					audio.src = window.URL.createObjectURL(s);
+					$('#audioWAV').val(audio.src);
+					console.log(audio.src);
 				});
 			}
 
