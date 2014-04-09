@@ -4,6 +4,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import com.openfluency.auth.*
 import com.openfluency.language.*
+import grails.converters.JSON
 
 
 @Transactional(readOnly = true)
@@ -50,29 +51,11 @@ class AudioController {
 
     @Transactional
     def save() {
+        // Create the audio instance
+        Audio audioInstance = mediaService.createAudio(params.url, params.blob.getBytes(), params['pronunciation.id'])
 
-        Audio audioInstance = mediaService.createAudio(params.url, params.audioWAV.getBytes(), params['pronunciation.id'])
-        println "ID: ${audioInstance.id}, Content: ${audioInstance.audioWAV}"
-
-        if (audioInstance == null) {
-            notFound()
-            return
-        }
-
-        if (audioInstance.hasErrors()) {
-            respond audioInstance.errors, view:'create'
-            return
-        }
-
-        audioInstance.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'audioInstance.label', default: 'Audio'), audioInstance.id])
-                redirect audioInstance
-            }
-            '*' { respond audioInstance, [status: CREATED] }
-        }
+        JSON.use('deep')
+        render audioInstance as JSON            
     }
 
     def edit(Audio audioInstance) {
