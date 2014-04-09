@@ -18,7 +18,8 @@ class FlashcardService {
     def mediaService
 
 	/**
-	* Creates a new flashcard - the alternative is to pass a Map as an argument
+	* Creates a new flashcard - the alternative is to pass a Map as an argument 
+    * does not currently support audio file storage
 	*/
     def createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioLink, String deckId) {
 
