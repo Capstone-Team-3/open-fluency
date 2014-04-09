@@ -25,7 +25,7 @@ class FlashcardService {
         Unit unitInstance = Unit.load(unitId)
 
         Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
-        Audio audioInstance = mediaService.createAudio(audioLink, pronunciationId)
+        Audio audioInstance = mediaService.createAudio(audioLink, null, pronunciationId)  //dirty fix remove null to fix audio
 
         def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
