@@ -40,19 +40,19 @@ class BootStrap {
         def beginnerP = new Proficiency(proficiency: 'Beginner').save(flush: true, failOnError: true)
 
         // Build some users
-        def admin = new User(username: 'admin', password: 'admin', userType: adminRole, nativeLanguage: english)
+        def admin = new User(email: "admin@openfluency.com", username: 'admin', password: 'admin', userType: adminRole, nativeLanguage: english)
         admin.save(flush: true, failOnError: true)
         UserRole.create admin, adminRole, true
 
-        def student = new User(username: 'student', password: 'test', userType: studentRole, nativeLanguage: english)
+        def student = new User(email: "student@openfluency.com", username: 'student', password: 'test', userType: studentRole, nativeLanguage: english)
         student.save(flush: true, failOnError: true)
         UserRole.create student, studentRole, true
 
-        def instructor = new User(username: 'instructor', password: 'test', userType: instructorRole, nativeLanguage: english)
+        def instructor = new User(email: "instructor@openfluency.com", username: 'instructor', password: 'test', userType: instructorRole, nativeLanguage: english)
         instructor.save(flush: true, failOnError: true)
         UserRole.create instructor, instructorRole, true
 
-        def researcher = new User(username: 'researcher', password: 'test', userType: researcherRole, nativeLanguage: english)
+        def researcher = new User(email: "researcher@openfluency.com", username: 'researcher', password: 'test', userType: researcherRole, nativeLanguage: english)
         researcher.save(flush: true, failOnError: true)
         UserRole.create researcher, researcherRole, true
 
