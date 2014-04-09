@@ -65,10 +65,12 @@
 				</li>
 				</g:if>
 
+				<!-- how do get the audio source ????? -->
 				<g:if test="${audioInstance?.audioWAV}">
+				<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
 				<li class="fieldcontain">
 					</br>
-					<audio id="audioClip" src="${audioInstance?.audioWAV}" type="audio/wav"></audio>
+					<audio id="audioClip" src="${audioSource + audioInstance.id}" controls play></audio>
 					</br>
 				</li>
 				</g:if>
@@ -81,5 +83,6 @@
 				</fieldset>
 			</g:form>
 		</div>
+
 	</body>
 </html>

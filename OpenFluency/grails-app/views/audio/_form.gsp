@@ -14,7 +14,7 @@
 		<g:message code="audio.url.label" default="Url" />
 		
 	</label>
-	<g:textField name="url" value="${audioInstance?.url}"/>
+	<g:textField id="url" name="url" value="${audioInstance?.url}"/>
 
 </div>
 

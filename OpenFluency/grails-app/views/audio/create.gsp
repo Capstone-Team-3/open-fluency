@@ -30,7 +30,7 @@
 					<g:render template="form"/>
 
 					</br>
-					<audio id="audioClip" value="${audioInstance?.audioWAV}" controls autoplay></audio>
+					<audio id="audioClip" controls autoplay></audio>
 					</br>
 					<input id="start_button" name="start_button" type="button" value="Start Recording" />
 					<input id="stop_button" name="stop_button" type="button" value="Stop Recording" />
@@ -45,11 +45,11 @@
 		</div>
 		
 		</br>
-		
 
 		<g:javascript src="recorderWorker.js"/>
 		<g:javascript src="recorder.js"/>
 
+		<!-- This will be moved to the application.js file-->
 		<g:javascript> 
 			var recorder;
 			var audio = document.querySelector('audio');
@@ -84,6 +84,7 @@
 				recorder.exportWAV(function(s){
 					audio.src = window.URL.createObjectURL(s);
 					$('#audioWAV').val(s);
+					$('#url').val(audio.src);
 					console.log(audio.src);
 				});
 			}

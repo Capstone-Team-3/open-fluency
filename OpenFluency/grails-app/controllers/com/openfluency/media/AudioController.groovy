@@ -2,12 +2,16 @@ package com.openfluency.media
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import com.openfluency.auth.*
+import com.openfluency.language.*
 
 
 @Transactional(readOnly = true)
 class AudioController { 
 
     def mediaService
+    def springSecurityService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -23,11 +27,32 @@ class AudioController {
         respond new Audio(params)
     }
 
+    /**
+    *   This function is designed to serve audio clips to the Audio and Flashcard views.
+    *   I am doing something wrong - either here or in the audio>show view.  Probably sourcing
+    *   this incorrectly their.
+    */
+    def sourceAudio(long id){
+        Audio audioInstance = Audio.get(id)
+        if (audioInstance == null){
+            flash.message = "Audio not found"
+        } else {
+            response.setContentType('audio/wav')
+            response.setContentLength(audioInstance.audioWAV.length)
+            response.setHeader("Content-Disposition", "Attachment;Filename=\"${audioInstance.pronunciation.toString()}\"")
+            
+            def outputStream = response.getOutputStream()
+            outputStream << audioInstance.audioWAV
+            outputStream.flush()
+            outputStream.close()
+        }
+    }
+
     @Transactional
     def save() {
 
-        Byte[] blob = (Byte[]) params.audioWAV
-        Audio audioInstance = mediaService.createAudio(params.url, blob, params['pronunciation.id'])
+        Audio audioInstance = mediaService.createAudio(params.url, params.audioWAV.getBytes(), params['pronunciation.id'])
+        println "ID: ${audioInstance.id}, Content: ${audioInstance.audioWAV}"
 
         if (audioInstance == null) {
             notFound()
