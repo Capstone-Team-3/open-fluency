@@ -11,7 +11,8 @@ class ChapterController {
 
     @Secured(['isAuthenticated()'])
 	def create(Course courseInstance) {
-		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), courseInstance.language)]
+		render view: "create", model: [courseInstance: courseInstance, userCourses: Course.findAllByOwner(User.load(springSecurityService.principal.id))]
+		
 	}
 
     @Secured(['isAuthenticated()'])
