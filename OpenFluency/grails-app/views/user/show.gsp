@@ -6,31 +6,23 @@
 	<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<h1>User Profile</h1>
-				<p><b>User type:</b> ${userInstance.userType.name}</p>
-				<p> <b>Username:</b>
-					${userInstance.username}
-				</p>
-				<p>
-					<b>Email:</b>
-					${userInstance.email}
-				</p>
-				<p>
-					<b>Native Language:</b>
-					${userInstance.nativeLanguage.name}
-				</p>
-				<h3>Proficiencies</h3>
-				<g:each in="${userInstance.languageProficiencies}">
-				<p>
-					<b>${it.language.name}</b>
-					${it.proficiency.proficiency}
-				</p>
-			</g:each>
-		</div>
-	</div>
-</div>
+	<div class="container profile">
+		<h1>Profile</h1>
+			<ul class="list-group">
+				<li class="list-group-item"><b>Username:</b> ${userInstance.username}</li>
+				<li class="list-group-item"><b>User Type:</b> ${userInstance.userType.name}</li>
+				<li class="list-group-item"><b>Email:</b> ${userInstance.email}</li>
+				<li class="list-group-item"><b>Native Language:</b> ${userInstance.nativeLanguage.name}</li>
+				<li class="list-group-item"><b>Proficiencies:</b>
+					<ul class="proficiencies">
+						<g:each in="${userInstance.languageProficiencies}">
+							<li>
+								${it.proficiency.proficiency} ${it.language.name}
+							</li>
+						</g:each>
+					</ul>
+				</li>
+			</ul>
+	</div><!-- end container -->
 </body>
 </html>
