@@ -14,7 +14,7 @@ if (typeof jQuery !== 'undefined') {
 * @param resultsId: the selector of the div where the results will be appended (it's cleared before appending)
 * @param urlField: the selector for the field where the url of the image should be saved on click
 */
-var searchImage = function(query, results, urlField) {
+var searchImage = function(query, results, urlField, resultPage) {
 	
 	// set helpful and need variables
 	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
@@ -24,7 +24,7 @@ var searchImage = function(query, results, urlField) {
 	var src;
 
 	// Build base Flickr query url
-	var baseUrl = "https://api.flickr.com/services/rest/?api_key=" + apiKey + "&method=" + sMethod + "&sort=relevance&per_page=" + numPics + "&text=";
+	var baseUrl = "https://api.flickr.com/services/rest/?api_key=" + apiKey + "&method=" + sMethod + "&sort=relevance&per_page=" + numPics + "&page=" + resultPage + "&text=";
 
 	// Remove previous pics
 	$(results).empty();
@@ -49,4 +49,4 @@ var searchImage = function(query, results, urlField) {
 			}
 		});
 	});
-}
+} 
