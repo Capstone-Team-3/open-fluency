@@ -79,9 +79,13 @@
 				<input id="query" name="query" type="text" size="60" placeholder="Type here to find your photo" />
 				<button id="flickr_search">Search</button>
 				<div id="results"></div>
+				<button id="flickr_back">Back</button>
+				<label id="flickr_page_number"></label>
+				<button id="flickr_next">Next</button>
 			</div>
 		</div>
 	</div>
+
 	<g:javascript>
 		$(function() {
 		$("#flickr_search").click(function(){
@@ -109,5 +113,9 @@
 			});
 		})
 </g:javascript>
+
+	<g:javascript src="create_flashcard.js"/>
+
+
 </body>
-</html>
+</html> 
