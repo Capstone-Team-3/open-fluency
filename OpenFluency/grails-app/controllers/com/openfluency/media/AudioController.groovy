@@ -26,8 +26,9 @@ class AudioController {
 
     def create() {
         respond new Audio(params)
+		render template: "/audio/form"
     }
-
+	
     /**
     *   This function is designed to serve audio clips to the Audio and Flashcard views.
     *   I am doing something wrong - either here or in the audio>show view.  Probably sourcing

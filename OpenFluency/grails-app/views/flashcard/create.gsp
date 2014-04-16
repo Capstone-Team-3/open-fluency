@@ -55,20 +55,28 @@
 						<label class="control-label">What image should be associated with this card (optional)?</label>
 						<g:textField class="form-control" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
 					</div>
-
-					<div class="form-group">
+					<g:if test="${flashcardInstance?.audio}">
+						<div class="form-group">
+							<label class="control-label">
+								What audio clip provides pronunciation for this card (optional)?
+							</label>
+							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
+						</div>
+					</g:if>
+					<div class="audio">
 						<label class="control-label">
-							What audio clip provides pronunciation for this card (optional)?
+							Create your own audio clip (optional)
+							<a id="addaudio" class="btn btn-default">create new audio</a>
 						</label>
-						<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
 					</div>
+					<br></br>		
 					<button class="center btn btn-success">Create it!</button>
 				</g:form>
 			</div>
 			<div class="col-lg-7">
 				<h1>Flickr Search</h1>
 				<label for="query">Query:</label>
-				<input id="query" name="query" type="text" size="60" />
+				<input id="query" name="query" type="text" size="60" placeholder="Type here to find your photo" />
 				<button id="flickr_search">Search</button>
 				<div id="results"></div>
 			</div>
@@ -81,5 +89,25 @@
 		});
 	})
 	</g:javascript>
+	<g:javascript><!-- just an example of how to integrate the audio part -->
+		$(function() {
+		$('#addaudio').click(function(){
+			$.ajax({
+				url: "${g.createLink(action:'create', controller: 'audio')}",
+					context: document.body
+				}).done(function(data) 
+				{
+					$('.audio').append(data);
+					$('.audio').append('<input id="start_button" name="start_button" type="button" value="Start Recording" />');
+							
+					$('.remove-audio').unbind('click').click(function()
+						{
+							$(this).parents('.panel').remove();
+							return false;
+						});
+				});
+			});
+		})
+</g:javascript>
 </body>
 </html>
