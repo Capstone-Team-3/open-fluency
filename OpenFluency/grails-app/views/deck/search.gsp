@@ -14,7 +14,7 @@
                 <g:link action="search" controller="deck" >Search for Decks</g:link>
             </li>
         </ul>
-        <h1>Deck Search</h1>
+        <h1 id="main">Deck Search</h1>
 
         <div class="row">
 
@@ -37,7 +37,7 @@
                     <div class="input-group">
                         <g:textField class="form-control" name="search-text" placeholder="Type a keyword" id="search-text" value="${keyword}"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default" type="submit" id="run-search">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
@@ -47,7 +47,7 @@
         </div>
         <!-- end row -->
 
-        <table class="table">
+        <table class="table decks-table">
             <thead>
                 <tr>
                     <th>Deck title</th>
@@ -60,7 +60,7 @@
                 </tr>
             </thead>
             <g:each in="${deckInstanceList}">
-                <tr>
+                <tr class="deck-result">
                     <td>
                         <g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link>
                     </td>

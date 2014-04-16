@@ -22,7 +22,7 @@
 		<g:message code="user.email.label" default="Email" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField class="form-control" name="email" required="" value="${userInstance?.email}"/>
+	<input class="form-control" type="email" name="email" required="" value="${userInstance?.email}"/>
 </div>
 
 <div class="${hasErrors(bean: userInstance, field: 'userType', 'error')} required">

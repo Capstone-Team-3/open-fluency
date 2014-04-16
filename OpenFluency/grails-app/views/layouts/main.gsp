@@ -38,27 +38,27 @@
 				<sec:ifLoggedIn>
 					<ul class="nav navbar-nav">
 						<li>
-							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="deck">
+							<g:link class="decks-nav dropdown-toggle" data-toggle="dropdown" action="list" controller="deck">
 								Decks <b class="caret"></b>
 							</g:link>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu deckNavList">
 								<li>
-									<g:link action="list" controller="deck">My decks</g:link>
+									<g:link action="list" controller="deck" class="my-decks">My decks</g:link>
 								</li>
 								<li>
-									<g:link action="create" controller="deck">Create new deck</g:link>
+									<g:link action="create" controller="deck" class="create-deck">Create new deck</g:link>
 								</li>
 								<li>
-									<g:link action="search" controller="deck">Search for decks</g:link>
+									<g:link action="search" controller="deck" class="deck-search">Search for decks</g:link>
 								</li>
 							</ul>
 						</li>
 						<li>
-							<g:link class="dropdown-toggle" data-toggle="dropdown" action="list" controller="course">
+							<g:link class="courses-nav dropdown-toggle" data-toggle="dropdown" action="list" controller="course">
 								Courses <b class="caret"></b>
 							</g:link>
 
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu courseNavList">
 								<sec:ifAllGranted roles="ROLE_STUDENT">
 									<li>
 										<g:link action="list" controller="course">Enrolled courses</g:link>
