@@ -14,7 +14,7 @@
         </ul>
 		<div class="course-header">
 			<h1>
-				${courseInstance.title}
+				<span class="course-title">${courseInstance.title}</span>
 				<sec:ifAllGranted roles="ROLE_STUDENT">
 					<g:if test="${!Registration.findAllByCourseAndUser(courseInstance, userInstance)}">
 						<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll</g:link>
@@ -26,7 +26,7 @@
 					<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
 				</g:if>
 			</h1>
-			<p>${courseInstance.description}</p>
+			<p class="course-description">${courseInstance.description}</p>
 
 		</div><!-- end course-header -->
 

@@ -33,32 +33,30 @@
 		<g:hasErrors bean="${audioInstance}">
 			<ul class="errors" role="alert">
 				<g:eachError bean="${audioInstance}" var="error">
-					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>
-					>
-					<g:message error="${error}"/>
-				</li>
-			</g:eachError>
-		</ul>
-	</g:hasErrors>
-	<g:form url="[resource:audioInstance, action:'save']" >
-		<fieldset class="form">
-			<g:render template="form"/>
+					<li>
+						<g:message error="${error}"/>
+					</li>
+				</g:eachError>
+			</ul>
+		</g:hasErrors>
+		<g:form url="[resource:audioInstance, action:'save']" >
+			<fieldset class="form">
+				<g:render template="form"/>
+				<br/>
+				<audio id="audioClip" controls autoplay></audio>
+				<br/>
+				<input id="start_button" name="start_button" type="button" value="Start Recording"/>
+				<input id="stop_button" name="stop_button" type="button" value="Stop Recording"/>
+				<input id="audioWAV" name="audioWAV" value="" type="hidden"/>
+				<br/>
+				<br/>
 
-		</br>
-		<audio id="audioClip" controls autoplay></audio>
-	</br>
-	<input id="start_button" name="start_button" type="button" value="Start Recording" />
-	<input id="stop_button" name="stop_button" type="button" value="Stop Recording" />
-	<input id="audioWAV" name="audioWAV" value="" type="hidden"/>
-</br>
-</br>
-
-</fieldset>
-<fieldset class="buttons">
-<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-</fieldset>
-</g:form>
-</div>
+			</fieldset>
+			<fieldset class="buttons">
+				<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+			</fieldset>
+		</g:form>
+	</div>
 
 </br>
 
@@ -67,7 +65,7 @@
 
 <!-- This will be moved to the application.js file-->
 <g:javascript>
-var recorder;
+	var recorder;
 var audio = document.querySelector('audio');
 
 var onFail = function(e){

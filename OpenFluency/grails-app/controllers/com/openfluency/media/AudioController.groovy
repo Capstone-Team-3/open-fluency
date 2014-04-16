@@ -26,7 +26,6 @@ class AudioController {
 
     def create() {
         respond new Audio(params)
-		render template: "/audio/form"
     }
 	
     /**

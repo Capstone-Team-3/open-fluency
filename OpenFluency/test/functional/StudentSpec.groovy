@@ -14,6 +14,7 @@ import pages.deck.SearchDeckPage
 
 import pages.course.ListCoursePage
 import pages.course.SearchCoursePage
+import pages.course.ShowCoursePage
 
 @Stepwise
 class StudentSpec extends GebReportingSpec {
@@ -141,5 +142,34 @@ class StudentSpec extends GebReportingSpec {
 		searchCourse.click()
 		then:
 		at SearchCoursePage
+		$(".course-result").size() == 2
+	}
+
+	def "Student searches for english courses - should return 0 results"() {
+		when:
+		languageFilter.value('2')
+		searchCourseButton.click()
+		then:
+		at SearchCoursePage
+		$(".deck-result").size() == 0
+	}
+
+	def "Student searches for course with keywords 'Advanced' - should get 1 result"() {
+		when:
+		keywordFilter = "Advanced"
+		languageFilter.value('1')
+		searchCourseButton.click()
+		then:
+		at SearchCoursePage
+		$(".course-result").size() == 1
+	}
+
+	def "Student enrolls in course"() {
+		when:
+		$('.enroll').click()
+		then:
+		at ShowCoursePage
+		flashMessage.text() == "Well done! You're now registered in this course!"
+		courseTitle.text() == "Kanji for More Advanced Dummies"
 	}
 }

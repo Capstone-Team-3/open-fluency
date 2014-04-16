@@ -35,7 +35,7 @@
                     <div class="input-group">
                         <g:textField class="form-control" name="search-text" placeholder="Type a keyword" id="search-text" value="${keyword}"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
+                            <button class="btn btn-default" type="submit" id="run-search">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
@@ -45,7 +45,7 @@
         </div>
         <!-- end row -->
 
-        <table class="table">
+        <table class="table courses-table">
             <thead>
                 <tr>
                     <th>Course number</th>
@@ -59,7 +59,7 @@
                 </tr>
             </thead>
             <g:each in="${courseInstanceList}">
-                <tr>
+                <tr class="course-result">
                     <td>
                         ${it.getCourseNumber()}
                     </td>
@@ -74,7 +74,7 @@
                     <td>${Registration.countByCourse(it)}</td>
                     <td>
                         <g:if test="${!Registration.findAllByCourseAndUser(it, userInstance)}">
-                            <g:link action="enroll" controller="course" id="${it.id}" class="btn btn-info">Enroll</g:link>
+                            <g:link action="enroll" controller="course" id="${it.id}" class="enroll btn btn-info">Enroll</g:link>
                         </g:if>
                     </td>
                 </tr>

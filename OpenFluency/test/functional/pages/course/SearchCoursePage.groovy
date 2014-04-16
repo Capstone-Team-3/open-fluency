@@ -14,6 +14,6 @@ class SearchCoursePage extends MainLayoutPage {
 		decksTable(wait: true) { $(".decks-table") }
 		languageFilter(wait: true) { $("#filter-lang") }
 		keywordFilter(wait: true) { $("#search-text") }
-		searchDeckButton(wait: true) { $("#run-search") }
+		searchCourseButton(wait: true) { $("#run-search") }
 	}
 }
