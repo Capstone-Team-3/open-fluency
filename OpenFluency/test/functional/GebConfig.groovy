@@ -10,7 +10,7 @@ driver = { new ChromeDriver() }
 
 environments {
 	
-	// run as “grails -Dgeb.env=chrome test-app”
+	// run as “grails -Dgeb.env=chrome test-app functional:”
 	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
 	chrome {
 		driver = { 

@@ -9,7 +9,11 @@ import pages.DashboardPage
 
 import pages.deck.CreateDeckPage
 import pages.deck.ShowDeckPage
+import pages.deck.ListDeckPage
 import pages.deck.SearchDeckPage
+
+import pages.course.ListCoursePage
+import pages.course.SearchCoursePage
 
 @Stepwise
 class StudentSpec extends GebReportingSpec {
@@ -30,7 +34,7 @@ class StudentSpec extends GebReportingSpec {
 		registerButton.click()
 		then: "Register"
 		at DashboardPage
-		$(".alert.alert-info").text() == "testuser, welcome to OpenFluency!"
+		flashMessage.text() == "testuser, welcome to OpenFluency!"
 		$(".dashboard > h1").text() == "testuser's Dashboard"
 	}
 
@@ -52,7 +56,7 @@ class StudentSpec extends GebReportingSpec {
 		createDeckButton.click()
 		then:
 		at ShowDeckPage
-		$(".alert.alert-info").text() == "Well done! You succesfully created a new deck!"
+		flashMessage.text() == "Well done! You succesfully created a new deck!"
 		deckTitle.text() == "Test Deck"
 		deckDescription.text() == "This is a test deck!"
 	}
@@ -77,15 +81,6 @@ class StudentSpec extends GebReportingSpec {
 		$(".deck-result").size() == 0
 	}
 
-	def "Student searches for japanese decks - should return 6 results"() {
-		when:
-		languageFilter.value('1')
-		searchDeckButton.click()
-		then:
-		at SearchDeckPage
-		$(".deck-result").size() == 6
-	}
-
 	def "Student searches for deck with keywords 'Test Deck' - should get 1 result"() {
 		when:
 		keywordFilter = "Test Deck"
@@ -94,5 +89,57 @@ class StudentSpec extends GebReportingSpec {
 		then:
 		at SearchDeckPage
 		$(".deck-result").size() == 1
+	}
+
+	def "Student searches for japanese decks - should return 8 results"() {
+		when:
+		languageFilter.value('1')
+		keywordFilter = ""
+		searchDeckButton.click()
+		then:
+		at SearchDeckPage
+		$(".deck-result").size() == 8
+	}
+
+	def "Student adds a deck to his/her own collection"() {
+		when:
+		$('.add-deck-4').click()
+		then: 
+		at ListDeckPage
+		flashMessage.text() == "You succesfully added Kanji for Dummies 1 to your decks!"
+		$('a[href="/OpenFluency/deck/show/4"]').size() == 1
+		$('.other-decks tbody tr').size() == 1
+	}
+
+	def "Student removes the added deck from his/her own collection"() {
+		when:
+		$('a[href="/OpenFluency/deck/remove/4"]').click()
+		then: 
+		at ListDeckPage
+		flashMessage.text() == "You succesfully removed Kanji for Dummies 1 from your decks!"
+		$('.other-decks tbody tr').size() == 0	
+	}
+
+	def "Student navigates to enrolled courses - no registrations should exist"() {
+		when:
+		coursesNav.click()
+		waitFor { 
+			courseNavList.present
+		}
+		enrolledCourses.click()
+		then:
+		at ListCoursePage
+		$(".enrolled-courses tbody > tr").size() == 0
+	}
+
+	def "Student navigates to search courses"() {
+		when:
+		coursesNav.click()
+		waitFor { 
+			courseNavList.present
+		}
+		searchCourse.click()
+		then:
+		at SearchCoursePage
 	}
 }

@@ -61,19 +61,19 @@
 							<ul class="dropdown-menu courseNavList">
 								<sec:ifAllGranted roles="ROLE_STUDENT">
 									<li>
-										<g:link action="list" controller="course">Enrolled courses</g:link>
+										<g:link action="list" controller="course" class="enrolled-courses">Enrolled courses</g:link>
 									</li>
 								</sec:ifAllGranted>
 								<sec:ifAllGranted roles="ROLE_INSTRUCTOR">
 									<li>
-										<g:link action="list" controller="course">My courses</g:link>
+										<g:link action="list" controller="course" class="my-courses">My courses</g:link>
 									</li>
 									<li>
-										<g:link action="create" controller="course">Create new course</g:link>
+										<g:link action="create" controller="course" class="create-course">Create new course</g:link>
 									</li>
 								</sec:ifAllGranted>
 								<li>
-									<g:link action="search" controller="course">Search for courses</g:link>
+									<g:link action="search" controller="course" class="course-search">Search for courses</g:link>
 								</li>
 							</ul>
 						</li>

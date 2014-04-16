@@ -12,7 +12,7 @@
             <li><g:link action="search" controller="course" >Courses</g:link></li>
             <li><g:link action="search" controller="course" >Search for Course</g:link></li>
         </ul>
-        <h1>Course Search</h1>
+        <h1 id="main">Course Search</h1>
 
         <div class="row">
 

@@ -80,16 +80,25 @@ class BootStrap {
         flashcardService.createRandomFlashcards(business, kanji)        
 
         // Build a few decks to be used in a course and a bunch of flashcards in each
-        Deck chapterDeck1 = new Deck(language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
-        Deck chapterDeck2 = new Deck(language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)        
-        flashcardService.createRandomFlashcards(chapterDeck1, kanji)
-        flashcardService.createRandomFlashcards(chapterDeck2, kanji)
+        Deck chapterDeck1_1 = new Deck(language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
+        Deck chapterDeck1_2 = new Deck(language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)
+        Deck chapterDeck2_1 = new Deck(language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
+        Deck chapterDeck2_2 = new Deck(language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)
+        flashcardService.createRandomFlashcards(chapterDeck1_1, kanji)
+        flashcardService.createRandomFlashcards(chapterDeck1_2, kanji)
+        flashcardService.createRandomFlashcards(chapterDeck2_1, kanji)
+        flashcardService.createRandomFlashcards(chapterDeck2_2, kanji)
 
-        // Create a course
+        // Create 2 courses
         Course kanji1 = new Course(language: japanese, title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
         // Create two chapters for this course
-        new Chapter(title: "Chapter 1: The basics", description: "If you get lost in Japan, at least you need to know these words", deck: chapterDeck1, course: kanji1).save(failOnError: true)
-        new Chapter(title: "Chapter 2: A bit more into it", description: "Now that you can get to the bathroom, learn how to ask for a beer and other important phrases", deck: chapterDeck2, course: kanji1).save(failOnError: true)
+        new Chapter(title: "Chapter 1: The basics", description: "If you get lost in Japan, at least you need to know these words", deck: chapterDeck1_1, course: kanji1).save(failOnError: true)
+        new Chapter(title: "Chapter 2: A bit more into it", description: "Now that you can get to the bathroom, learn how to ask for a beer and other important phrases", deck: chapterDeck1_2, course: kanji1).save(failOnError: true)
+
+        Course kanji2 = new Course(language: japanese, title: "Kanji for More Advanced Dummies", description: "A sequel of the acclaimed, award-winning course Kanji for Dummies", owner: instructor).save(failOnError: true)
+        // Create two chapters for this course
+        new Chapter(title: "Chapter 1: Welcome back!", description: "Continuing to learn more Japanese", deck: chapterDeck2_1, course: kanji2).save(failOnError: true)
+        new Chapter(title: "Chapter 2: Still a dummy? Don't think so!", description: "Now that's what I call a Japanese-speaking dummy", deck: chapterDeck2_2, course: kanji2).save(failOnError: true)
 
         log.info "Booted!"
     }

@@ -71,7 +71,7 @@
                     <td>${it.lastUpdated}</td>
                     <td>
                         <g:if test="${userInstance.id != it.owner.id}">
-                            <g:link action="add" controller="deck" id="${it.id}" class="btn btn-info btn-xs">Add to My Decks</g:link>
+                            <g:link action="add" controller="deck" id="${it.id}" class="add-deck-${it.id} btn btn-info btn-xs">Add to My Decks</g:link>
                         </g:if>
                     </td>
                 </tr>

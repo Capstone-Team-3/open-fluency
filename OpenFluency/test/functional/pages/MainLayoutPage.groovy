@@ -15,5 +15,11 @@ class MainLayoutPage extends Page {
 		searchDeck { $(".deck-search") }
 		
 		courseNavList { $(".courseNavList") }
+		enrolledCourses { $(".enrolled-courses") }
+		myCourses { $(".my-courses") }
+		createCourse { $(".create-course") }
+		searchCourse { $(".course-search") }
+
+		flashMessage { $(".alert.alert-info") }
 	}
 }
