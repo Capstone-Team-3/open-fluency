@@ -12,15 +12,15 @@
             <li><a href="#">${deckInstance?.title}</a></li>
         </ul>
 		<div class="deck-header text-center center-block">
-			<h1>
+			<h1 class="deck-title">
 				${deckInstance?.title}
 			</h1>
-			<p>${deckInstance?.description}</p>
+			<p class="deck-description">${deckInstance?.description}</p>
 			<g:if test="${flashcardCount}">
 				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
-				<g:link class="btn" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id]}">Add Flashcards</g:link>
+				<g:link class="btn add-flashcards" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>
 		<!-- end deck-header -->

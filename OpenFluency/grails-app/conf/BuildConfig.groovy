@@ -22,6 +22,7 @@ grails.project.fork = [
 ]
 
 grails.project.dependency.resolver = "maven" // or ivy
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -56,6 +57,7 @@ grails.project.dependency.resolution = {
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
         test "org.gebish:geb-spock:$gebVersion"
         test "org.gebish:geb-junit4:$gebVersion"
+        test "org.seleniumhq.selenium:selenium-support:2.31.0"
     }
 
     plugins {
