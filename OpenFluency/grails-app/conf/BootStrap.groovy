@@ -61,7 +61,7 @@ class BootStrap {
 
     	// Load sample language - the configuration is now externalized. 
         // The settings are in: conf/open-fluency-config.properties
-        boolean local = grailsApplication.config.localDictionary == 'true'
+        boolean local = grailsApplication.config.localDictionary == 'false'
         if(local) {
             log.info "Loading local dictionary from ${grailsApplication.config.kanjiDictinoaryLocal}"
             languageService.loadLanguage(grailsApplication.config.kanjiDictinoaryLocal, kanji, latin, local)

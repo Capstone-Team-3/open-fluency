@@ -86,13 +86,9 @@
 		</div>
 	</div>
 
-	<g:javascript>
-		$(function() {
-		$("#flickr_search").click(function(){
-			searchImage("#query", "#results", "#imageLink");
-		});
-	})
-	</g:javascript>
+	<!-- all click event handlers relating to image searh are in the create_flashcard.js file -->
+	<g:javascript src="create_flashcard.js"/>
+	
 	<g:javascript><!-- just an example of how to integrate the audio part -->
 		$(function() {
 		$('#addaudio').click(function(){
@@ -113,9 +109,6 @@
 			});
 		})
 </g:javascript>
-
-	<g:javascript src="create_flashcard.js"/>
-
 
 </body>
 </html> 
