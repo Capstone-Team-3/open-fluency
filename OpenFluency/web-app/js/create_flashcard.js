@@ -16,3 +16,32 @@ $("#flickr_back").click(function(){
 		$("#flickr_page_number").val(targetPage).text(targetPage);
 	}
 });
+
+$("#start_rec_button").click(function(){ startRecording(); });
+$("#stop_rec_button").click(function(){ 
+	stopRecording($("#fc_pronunciation").val(), ""); 
+	$("#save_rec_button").show();
+});
+
+
+function saveAudioRecording(formDataObj){
+	// Create the packet
+	var fd = formDataObj;
+	// Send it
+	$.ajax({
+		type: 'POST',
+		url: '/OpenFluency/audio/save',
+		data: fd,
+		processData: false,
+		contentType: false
+	}).done(function(audioInstance) {
+		if(audioInstance.id) {
+			console.log("Success!");
+			$("#audio_id").val(audioInstance.id);
+			console.log(audioInstance.id);
+			//window.location = "/OpenFluency/flashcard/save/";
+		} else {
+			console.log("Something went wrong!");
+		}
+	});
+}

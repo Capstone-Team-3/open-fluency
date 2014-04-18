@@ -1,10 +1,11 @@
-package com.openfluency.flashcard
+package com.openfluency.flashcard 
 
 import com.openfluency.language.UnitMapping
 import com.openfluency.language.Pronunciation
 import com.openfluency.language.Alphabet
 import com.openfluency.media.Image
 import com.openfluency.media.Audio
+import com.openfluency.media.MediaService
 import com.openfluency.auth.User
 import com.openfluency.language.Unit
 import grails.plugin.springsecurity.annotation.Secured
@@ -14,6 +15,7 @@ class FlashcardController {
 
 	def springSecurityService 
 	def flashcardService
+    def mediaService
 
 	/**
 	* Render the create flashcard page for a particular unit
@@ -28,7 +30,9 @@ class FlashcardController {
     */
     def save() {
 
-        def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.imageLink, params.audio, params.deck)
+        //Audio audioInstance = mediaService.createAudio(params.url, params.blob.getBytes(), params['pronunciation.id'])
+        println "AudioID = " + params.audio_id
+        def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.imageLink, params.audio_id, params.deck)
         
     	// Check for errors
         if (flashcardInstance.hasErrors()) {

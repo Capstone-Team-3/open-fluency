@@ -43,7 +43,7 @@
 
 					<div class="form-group">
 						<label class="control-label">What pronunciation do you want to use?</label>
-						<g:select class="form-control" name="pronunciation" from="${unitInstance.pronunciations}" optionKey="id" optionValue="literal"/>
+						<g:select class="form-control" name="pronunciation" from="${unitInstance.pronunciations}" optionKey="id" optionValue="literal" id="fc_pronunciation"/>
 					</div>
 
 					<div class="form-group">
@@ -63,14 +63,23 @@
 							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
 						</div>
 					</g:if>
-					<div class="audio">
+					<div class="form-group audio">
 						<label class="control-label">
-							Create your own audio clip (optional)
-							<a id="addaudio" class="btn btn-default">create new audio</a>
+							Record a pronunciation (optional)
+							<!--a id="addaudio" class="btn btn-default">create new audio</a>-->
 						</label>
+						<audio id="audioClip" controls autoplay></audio>
+						</br>
+						<input id="start_rec_button" name="start_button" type="button" value="Start Recording"/>
+						<input id="stop_rec_button" name="stop_button" type="button" value="Stop Recording"/>
+						<input id="save_rec_button" name="save_button" type="button" value="Save Recording"/>
+						<input id="audio_id" name="audio_id" type="hidden" value=""/>
+						</br>
+						<span><i>*may need to click 'Allow' in audio permissions pop up</i></span>
+						</br>
 					</div>
-					<br></br>		
-					<button class="center btn btn-success">Create it!</button>
+					<br></br>
+					<button id="goCreate" class="center btn btn-success">Create it!</button>
 				</g:form>
 			</div>
 			<div class="col-lg-7">
@@ -86,29 +95,17 @@
 		</div>
 	</div>
 
-	<!-- all click event handlers relating to image searh are in the create_flashcard.js file -->
+	<!-- all page specific click event handlers relating to image searh and audio are in the create_flashcard.js file -->
 	<g:javascript src="create_flashcard.js"/>
+	<!-- all the javascript references needed for audio recording -->
+	<g:javascript src="recorderWorker.js"/>
+	<g:javascript src="recorder.js"/>
+	<g:javascript src="create_audio.js"/>
+	<!-- this line is left hear as it relies on taking a formData created in create_audio.js and passes to create_flashcard.js -->
+	<g:javascript>
+		$("#save_rec_button").hide();
+		$("#save_rec_button").click(function(){saveAudioRecording(formData);});
+	</g:javascript>
 	
-	<g:javascript><!-- just an example of how to integrate the audio part -->
-		$(function() {
-		$('#addaudio').click(function(){
-			$.ajax({
-				url: "${g.createLink(action:'create', controller: 'audio')}",
-					context: document.body
-				}).done(function(data) 
-				{
-					$('.audio').append(data);
-					$('.audio').append('<input id="start_button" name="start_button" type="button" value="Start Recording" />');
-							
-					$('.remove-audio').unbind('click').click(function()
-						{
-							$(this).parents('.panel').remove();
-							return false;
-						});
-				});
-			});
-		})
-</g:javascript>
-
 </body>
 </html> 

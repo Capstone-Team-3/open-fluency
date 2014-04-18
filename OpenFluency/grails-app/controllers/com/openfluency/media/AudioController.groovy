@@ -28,10 +28,6 @@ class AudioController {
         respond new Audio(params)
     }
 
-    def create_bu() {
-        respond new Audio(params)
-    }
-	
     /**
     *   This function is designed to serve audio clips to the Audio and Flashcard views.
     *   I am doing something wrong - either here or in the audio>show view.  Probably sourcing
@@ -66,7 +62,7 @@ class AudioController {
         respond audioInstance
     }
 
-    @Transactional
+    @Transactional 
     def update(Audio audioInstance) {
         if (audioInstance == null) {
             notFound()
@@ -87,6 +83,14 @@ class AudioController {
             }
             '*'{ respond audioInstance, [status: OK] }
         }
+    }
+
+    def removeAudioInstance(long audioInstanceId) {
+        Audio audioInstance
+        if (audioInstanceId){
+            audioInstance = Audio.load(audioInstanceId);
+        }
+        delete(audioInstance);
     }
 
     @Transactional

@@ -21,19 +21,18 @@ class FlashcardService {
 	* Creates a new flashcard - the alternative is to pass a Map as an argument 
     * does not currently support audio file storage
 	*/
-    def createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioLink, String deckId) {
+    def createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioId, String deckId) {
 
         Unit unitInstance = Unit.load(unitId)
 
         Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
-        Audio audioInstance = mediaService.createAudio(audioLink, null, pronunciationId)  //dirty fix remove null to fix audio
-
+        
         def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
             unitMapping: UnitMapping.load(unitMappingId), 
             pronunciation: Pronunciation.load(pronunciationId), 
             image: imageInstance, 
-            audio: audioInstance, 
+            audio: Audio?.load(audioId), 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
 
         println "Created flashcard $flashcardInstance"

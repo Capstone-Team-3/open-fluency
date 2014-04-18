@@ -1,5 +1,5 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
+<html> 
 <head>
 	<meta name="layout" content="main">
 	<g:set var="entityName" value="${message(code: 'audio.label', default: 'Audio')}" />
@@ -61,82 +61,16 @@
 
 </br>
 
+<!-- all the javascript references needed for audio recording -->
 <g:javascript src="recorderWorker.js"/>
 <g:javascript src="recorder.js"/>
-
-<!-- This will be moved to the application.js file-->
+<g:javascript src="create_audio.js"/>
 <g:javascript>
-	var recorder;
-var audio = document.querySelector('audio');
-
-var onFail = function(e){
-	console.log('Rejected!',e);
-}
-
-var onSuccess = function(s){
-	console.log("In onSuccess");
-	var context = new webkitAudioContext();
-	var mediaStreamSource = context.createMediaStreamSource(s);
-	recorder = new Recorder(mediaStreamSource);
-	recorder.record();
-}
-
-window.URL = window.URL || window.webkitURL;
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-function startRecording() {
-	console.log("Started Recording");
-	if (navigator.getUserMedia) {
-		navigator.getUserMedia({audio: true}, onSuccess, onFail);
-	} else {
-		console.log('navigator.getUserMedia not present');
-	}
-}
-
-function stopRecording(){
-	console.log("Stopped Recording");
-	recorder.stop();
-	recorder.exportWAV(function(s){
-		console.log(s);
-		uploadBlob(s);
-	});
-}
-
-$("#start_button").click(function(){
-	startRecording();
-});
-
-$("#stop_button").click(function(){
-	stopRecording();
-});
-
-$("#create_button").click(function(){
 	
-});
+	$("#start_button").click(function(){ startRecording(); });
+	$("#stop_button").click(function(){ stopRecording($("#pronunciation").val(),$("#url").val()); });
+	$("#create_button").click(function(){ saveAudio(); });
 
-function uploadBlob(blob){
-	// Create the packet
-	var fd = new FormData();
-	fd.append('blob', blob);
-	fd.append('url','test');
-	fd.append('pronunciation.id', $('#pronunciation').val());
-	
-	// Send it
-	$.ajax({
-		type: 'POST',
-		url: '/OpenFluency/audio/save',
-		data: fd,
-		processData: false,
-		contentType: false
-	}).done(function(audioInstance) {
-		if(audioInstance.id) {
-			console.log("Success!");
-			window.location = "/OpenFluency/audio/show/" + audioInstance.id;
-		} else {
-			console.log("Something went wrong!");
-		}
-	});
-}
 </g:javascript>
 
 </body>
