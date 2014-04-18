@@ -92,6 +92,23 @@ class UserController {
         }
     }
 
+    // Reset User password
+    def reset(){
+        if(params.email){
+            def user = userService.resetUserPassword(params.email)
+
+            if(!user){
+                flash.message = "Could not find user with email: $params.email"
+            }
+            else {
+                flash.message = "New password sent to $params.email"   
+            }
+        }
+        else {
+            flash.message = "Please enter your email"
+        }
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {

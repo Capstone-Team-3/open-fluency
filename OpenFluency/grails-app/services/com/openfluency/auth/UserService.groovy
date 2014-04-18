@@ -9,6 +9,8 @@ import grails.transaction.Transactional
 @Transactional
 class UserService {
 
+    def mailService
+
     def createUser(String username, String password, String email, String userTypeId, String nativeLanguageId, List<String> languageIds, List<String> proficiencyIds) {        
         
         // Create the user
@@ -49,5 +51,27 @@ class UserService {
                 user: userInstance
                 ).save(flush: true)
         }
+    }
+
+    def resetUserPassword(String email){
+        def user = User.findByEmail(email)
+
+        if(!user){
+            return null
+        }
+
+        // Generate new random password
+        def newPassword = (0..7).collect{(('a'..'z')+('A'..'Z')+(0..9))[new Random().nextInt(62)]}.join()
+        user.password = newPassword
+        user.enabled = true
+        user.save(flush: true, failOnError: true)
+
+        mailService.sendMail {
+            to email
+            subject 'OpenFluency - Password reset'
+            html "<body><p>Hi $user.username. Your new password is: <b>$newPassword</b>. Please login and change it to something more friendly!</p></body>"
+        }
+
+        return user
     }
 }

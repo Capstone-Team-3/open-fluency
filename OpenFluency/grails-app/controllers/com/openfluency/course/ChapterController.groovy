@@ -8,6 +8,7 @@ class ChapterController {
 
 	def springSecurityService
 	def courseService
+    def deckService
 
     @Secured(['isAuthenticated()'])
 	def create(Course courseInstance) {
@@ -35,7 +36,9 @@ class ChapterController {
     }
 
     def practice(Chapter chapterInstance, Integer max) {
-        Flashcard flashcardInstance = Flashcard.findByDeck(chapterInstance.deck, params)
-        [chapterInstance: chapterInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck)]
+        // Add the progress to the deck
+        chapterInstance.deck.metaClass.progress = deckService.getDeckProgress(chapterInstance.deck)
+        CardUsage cardUsageInstance = deckService.getNextFlashcard(chapterInstance.deck, params.cardUsageId, params.ranking as Integer)
+        [chapterInstance: chapterInstance, cardUsageInstance: cardUsageInstance]
     }
 }

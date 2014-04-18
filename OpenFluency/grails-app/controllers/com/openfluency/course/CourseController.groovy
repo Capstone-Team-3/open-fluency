@@ -10,6 +10,7 @@ class CourseController {
 
 	def springSecurityService
 	def courseService
+	def deckService
 
 	// Researchers will not be able to enroll or create courses
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT', 'ROLE_ADMIN'])
@@ -31,16 +32,22 @@ class CourseController {
 		def courseInstance = courseService.createCourse(params.title, params.description, params.language.id)
 
 		// Check for errors
-    	if (courseInstance.hasErrors()) {
-    		render(view: "create", model: [courseInstance: courseInstance])
-    		return
-    	}
+		if (courseInstance.hasErrors()) {
+			render(view: "create", model: [courseInstance: courseInstance])
+			return
+		}
 
-    	redirect action: "show", id: courseInstance.id
+		redirect action: "show", id: courseInstance.id
 	}
 
 	@Secured(['isAuthenticated()'])
 	def show(Course courseInstance) {
+		
+		// Add progress  to chapters
+		courseInstance.chapters.each {
+			it.metaClass.progress = deckService.getDeckProgress(it.deck)
+		}
+
 		[courseInstance: courseInstance, isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
 	}
 
@@ -49,7 +56,7 @@ class CourseController {
 		Long languageId = params['filter-lang'] as Long
 		String keyword = params['search-text']
 		[keyword: keyword, languageId: languageId, courseInstanceList: courseService.searchCourses(languageId, keyword), 
-            languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
+		languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
 	}
 
 	// Only students can enroll in courses
@@ -58,12 +65,12 @@ class CourseController {
 		Registration registrationInstance = courseService.createRegistration(courseInstance)
 
 		// Check for errors
-    	if (registrationInstance.hasErrors()) {
-    		redirect action: "show", id: courseInstance.id
-    		return
-    	}
+		if (registrationInstance.hasErrors()) {
+			redirect action: "show", id: courseInstance.id
+			return
+		}
 
-    	flash.message = "Well done! You're now registered in this course!"
-    	render view: "show", model: [courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
+		flash.message = "Well done! You're now registered in this course!"
+		render view: "show", model: [courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
 	}
 }

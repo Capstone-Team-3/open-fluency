@@ -94,5 +94,6 @@ grails.project.dependency.resolution = {
         // Geb testing framework
         test ":geb:$gebVersion"
         compile ":remote-control:1.4"
+        compile ":mail:1.0.4"
     }
 }

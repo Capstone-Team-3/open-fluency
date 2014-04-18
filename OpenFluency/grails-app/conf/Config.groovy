@@ -142,3 +142,18 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
+// Mail configuration
+grails {
+  mail {
+   host = "smtp.gmail.com"
+   port = 465
+   username = "ofluency@gmail.com"
+   password = "openfluency1234"
+   props = ["mail.smtp.auth":"true",                     
+   "mail.smtp.socketFactory.port":"465",
+   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+   "mail.smtp.socketFactory.fallback":"false"]
+ }
+}
+
+grails.mail.default.from="OpenFluency<ofluency@gmail.org>"
