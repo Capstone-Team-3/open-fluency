@@ -26,13 +26,15 @@ class FlashcardService {
         Unit unitInstance = Unit.load(unitId)
 
         Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
+        Audio audioInstance = null;
+        if (audioId != "") { audioInstance = Audio.load(audioId); }
         
         def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
             unitMapping: UnitMapping.load(unitMappingId), 
             pronunciation: Pronunciation.load(pronunciationId), 
             image: imageInstance, 
-            audio: Audio?.load(audioId), 
+            audio: audioInstance, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
 
         println "Created flashcard $flashcardInstance"

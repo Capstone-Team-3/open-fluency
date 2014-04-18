@@ -17,7 +17,12 @@ $("#flickr_back").click(function(){
 	}
 });
 
-$("#start_rec_button").click(function(){ startRecording(); });
+$("#start_rec_button").click(function(){ 
+	startRecording(); 
+	$("#audioSaveMessage").show();
+	$("#goCreate").removeClass('btn-success').addClass('btn-warning');
+});
+
 $("#stop_rec_button").click(function(){ 
 	stopRecording($("#fc_pronunciation").val(), ""); 
 	$("#save_rec_button").show();

@@ -70,27 +70,27 @@
 						</label>
 						<audio id="audioClip" controls autoplay></audio>
 						</br>
-						<input id="start_rec_button" name="start_button" type="button" value="Start Recording"/>
-						<input id="stop_rec_button" name="stop_button" type="button" value="Stop Recording"/>
-						<input id="save_rec_button" name="save_button" type="button" value="Save Recording"/>
+						<input id="start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
+						<input id="stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
+						<input id="save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
 						<input id="audio_id" name="audio_id" type="hidden" value=""/>
 						</br>
 						<span><i>*may need to click 'Allow' in audio permissions pop up</i></span>
 						</br>
 					</div>
-					<br></br>
 					<button id="goCreate" class="center btn btn-success">Create it!</button>
+					<span id="audioSaveMessage"><i>*did you save your audio?</i></span>
 				</g:form>
 			</div>
 			<div class="col-lg-7">
 				<h1>Flickr Search</h1>
 				<label for="query">Query:</label>
 				<input id="query" name="query" type="text" size="60" placeholder="Type here to find your photo" />
-				<button id="flickr_search">Search</button>
+				<button id="flickr_search" class="btn btn-info">Search</button>
 				<div id="results"></div>
-				<button id="flickr_back">Back</button>
+				<button id="flickr_back" class="btn btn-info">Back</button>
 				<label id="flickr_page_number"></label>
-				<button id="flickr_next">Next</button>
+				<button id="flickr_next" class="btn btn-info">Next</button>
 			</div>
 		</div>
 	</div>
@@ -103,8 +103,13 @@
 	<g:javascript src="create_audio.js"/>
 	<!-- this line is left hear as it relies on taking a formData created in create_audio.js and passes to create_flashcard.js -->
 	<g:javascript>
+		$("#audioSaveMessage").hide();
 		$("#save_rec_button").hide();
-		$("#save_rec_button").click(function(){saveAudioRecording(formData);});
+		$("#save_rec_button").click(function(){
+			saveAudioRecording(formData);
+			$("#audioSaveMessage").hide();
+			$("#goCreate").removeClass('btn-warning').addClass('btn-success');
+		});
 	</g:javascript>
 	
 </body>
