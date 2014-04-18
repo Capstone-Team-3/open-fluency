@@ -8,15 +8,27 @@ import grails.plugin.springsecurity.annotation.Secured
 class DeckController {
 
 	def springSecurityService
-	def flashcardService
+    def deckService
 
-	def index() {
-		redirect action: "list"
-	}
+    def index() {
+        redirect action: "list"
+    }
 
     def list() {
         User loggedUser = User.load(springSecurityService?.principal?.id)
-        [deckInstanceList: Deck.findAllByOwner(loggedUser), othersDeckInstanceList: Share.findAllByReceiver(loggedUser).collect {it.deck}, userInstance: loggedUser]
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
+        List<Deck> othersDeckInstanceList = Share.findAllByReceiver(loggedUser).collect {it.deck}
+        
+        // This is highly inefficient
+        deckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
+        othersDeckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
+        [deckInstanceList: deckInstanceList, othersDeckInstanceList: othersDeckInstanceList, userInstance: loggedUser]
     }
 
     def create() {
@@ -24,7 +36,7 @@ class DeckController {
     }
 
     def save() {
-        def deckInstance = flashcardService.createDeck(params.title, params.description, params['language.id'])
+        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'])
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {
@@ -40,18 +52,24 @@ class DeckController {
     def show(Deck deckInstance, Integer max) {
     	params.max = Math.min(max ?: 12, 100)
         List<Flashcard> flashcards = Flashcard.findAllByDeck(deckInstance, params)
-        respond flashcards, model:[deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id)]
+
+        // Add the progress to the deck
+        deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
+
+        respond flashcards, model:[deckProgress: deckService.getDeckProgress(deckInstance), deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id)]
     }
 
-    def practice(Deck deckInstance, Integer max) {
-        Flashcard flashcardInstance = Flashcard.findByDeck(deckInstance, params)
-        [deckInstance: deckInstance, flashcardInstance: flashcardInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
+    def practice(Deck deckInstance) {
+        // Add the progress to the deck
+        deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
+        CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer)
+        [deckInstance: deckInstance, cardUsageInstance: cardUsageInstance, flashcardCount: Flashcard.countByDeck(deckInstance)]
     }
 
     def search(Integer max) {
         Long languageId = params['filter-lang'] as Long
         String keyword = params['search-text']
-        [keyword: keyword, languageId: languageId, deckInstanceList: flashcardService.searchDecks(languageId, keyword), 
+        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword), 
         languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
     }
 
@@ -59,7 +77,7 @@ class DeckController {
         Share shareInstance
 
         if(deckInstance) {
-            shareInstance = flashcardService.addDeck(deckInstance)
+            shareInstance = deckService.addDeck(deckInstance)
         }
 
         if(shareInstance) {
@@ -73,7 +91,7 @@ class DeckController {
     }
 
     def remove(Deck deckInstance) {
-        if(deckInstance && flashcardService.removeDeck(deckInstance)) {
+        if(deckInstance && deckService.removeDeck(deckInstance)) {
             flash.message = "You succesfully removed ${deckInstance.title} from your decks!"
         }
         else {
