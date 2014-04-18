@@ -108,7 +108,7 @@ class SpacedRepetitionSM2Service
 	 */
 	void calcuateInterval(Flashcard flashcard, int quality ) {
 		
-		//if quality < 3 then start repetitions for the item from the beginning without changing the E-Factor
+		// if quality < 3 then start repetitions for the item from the beginning without changing the E-Factor
 		// (i.e. use intervals I(1), I(2) etc. as if the item was memorized anew)
 		if (quality < 3) {
 			flashcard.setNumberOfRepetitions(1)

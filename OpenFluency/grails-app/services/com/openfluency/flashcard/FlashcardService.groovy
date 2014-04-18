@@ -41,22 +41,13 @@ class FlashcardService {
     }
 
     /**
-    * Create a new deck owned by the currently logged in user
-    */
-    Deck createDeck(String title, String description, String languageId) {
-    	Deck deck = new Deck(title: title, description: description, owner: User.load(springSecurityService.principal.id), language: Language.load(languageId))
-    	deck.save()
-    	return deck
-    }
-
-    /**
     * For development purposes
     */
     def createRandomFlashcards(Deck deck, Alphabet alphabet) {
         // Build a few flashcards
         // The idea here is: find all the unitMappings where unit1 is alphabet the given alphabet
         int f=0;
-        UnitMapping.withCriteria(max: 50) {
+        UnitMapping.createCriteria().list(max: 5) {
             unit1 { eq('alphabet', alphabet) }
         }.each { unitMapping ->
             Pronunciation pronunciation = Pronunciation.findByUnit(unitMapping.unit1)
@@ -67,50 +58,5 @@ class FlashcardService {
         }
 
         log.info "Created ${f} flashcards for deck: ${deck.title}"
-    }
-
-    /**
-    * Search for Decks
-    */
-    List<Deck> searchDecks(Long languageId, String keyword) {
-        log.info "Searching Decks with languageId: $languageId and Keywords: $keyword"
-
-        Deck.withCriteria {
-
-            // Apply language criteria
-            if(languageId) {
-                language {
-                    eq('id', languageId)
-                }
-            }
-
-            // Search using keywords in the title or description
-            if(keyword) {
-                or {
-                    ilike("title", "%${keyword}%")
-                    ilike("description", "%${keyword}%")
-                }
-            }
-        }
-    }
-
-    /**
-    * Add a deck to my list of shared courses
-    */
-    Share addDeck(Deck deck) {
-        return new Share(deck: deck, receiver: User.load(springSecurityService.principal.id)).save(flush: true);
-    }
-
-    Boolean removeDeck(Deck deck) {
-        Share share = Share.findByReceiverAndDeck(User.load(springSecurityService.principal.id), deck)
-        if(share) {
-            try {
-                share.delete()
-                return true
-            } 
-            catch(Exception e) {
-                return false
-            }
-        }
     }
 }
