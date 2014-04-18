@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 	<meta name="layout" content="main">
@@ -67,6 +67,7 @@
 <!-- This will be moved to the application.js file-->
 <g:javascript>
 	var recorder;
+	var formData;
 var audio = document.querySelector('audio');
 
 var onFail = function(e){
@@ -74,7 +75,6 @@ var onFail = function(e){
 }
 
 var onSuccess = function(s){
-	console.log("In onSuccess");
 	var context = new webkitAudioContext();
 	var mediaStreamSource = context.createMediaStreamSource(s);
 	recorder = new Recorder(mediaStreamSource);
@@ -86,7 +86,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 
 function startRecording() {
 	console.log("Started Recording");
-	if (navigator.getUserMedia) {
+	if (navigator.getUserMedia) {onSuccess
 		navigator.getUserMedia({audio: true}, onSuccess, onFail);
 	} else {
 		console.log('navigator.getUserMedia not present');
@@ -97,8 +97,9 @@ function stopRecording(){
 	console.log("Stopped Recording");
 	recorder.stop();
 	recorder.exportWAV(function(s){
+		audio.src = window.URL.createObjectURL(s);
 		console.log(s);
-		uploadBlob(s);
+		stashBlob(s);
 	});
 }
 
@@ -111,16 +112,19 @@ $("#stop_button").click(function(){
 });
 
 $("#create_button").click(function(){
-	
+	saveAudio();
 });
 
-function uploadBlob(blob){
+function stashBlob(blob){
+	formData = new FormData();
+	formData.append('blob', blob);
+	formData.append('pronunciation.id', $('#pronunciation').val());
+	formData.append('url', 'test');
+}
+
+function saveAudio(){
 	// Create the packet
-	var fd = new FormData();
-	fd.append('blob', blob);
-	fd.append('url','test');
-	fd.append('pronunciation.id', $('#pronunciation').val());
-	
+	var fd = formData;
 	// Send it
 	$.ajax({
 		type: 'POST',
@@ -131,7 +135,7 @@ function uploadBlob(blob){
 	}).done(function(audioInstance) {
 		if(audioInstance.id) {
 			console.log("Success!");
-			window.location = "/OpenFluency/audio/show/" + audioInstance.id;
+			window.location = "/OpenFluency/audio/index/";
 		} else {
 			console.log("Something went wrong!");
 		}

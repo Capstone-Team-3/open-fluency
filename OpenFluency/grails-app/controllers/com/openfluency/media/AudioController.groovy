@@ -7,7 +7,7 @@ import com.openfluency.language.*
 import grails.converters.JSON
 
 
-@Transactional(readOnly = true)
+@Transactional(readOnly = true) 
 class AudioController { 
 
     def mediaService
@@ -25,6 +25,10 @@ class AudioController {
     }
 
     def create() {
+        respond new Audio(params)
+    }
+
+    def create_bu() {
         respond new Audio(params)
     }
 	
