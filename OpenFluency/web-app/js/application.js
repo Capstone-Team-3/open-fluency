@@ -49,4 +49,19 @@ var searchImage = function(query, results, urlField, resultPage) {
 			}
 		});
 	});
-} 
+}
+
+var initializePracticeCards = function() {
+	var $meaningContainer = $('.meaning');
+    var meaning = $meaningContainer.html();
+    $meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
+    $('#show-meaning').on('click', function() { 
+        $meaningContainer.html(meaning);
+    });
+
+    $(".ranker").click(function() {
+        // Set the ranking value in the form and submit it
+        $("#ranking").val($(this).data('value'));
+        $('.rankCardForm').submit();
+    });
+}

@@ -15,11 +15,7 @@
 				</td>
 				<td>${it.flashcardCount}</td>
 				<td>
-					<div class="progress">
-						<div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:${it.progress}%">${it.progress}%</div>
-						<!-- end progress-bar -->
-					</div>
-					<!-- end progress -->
+					<g:render template="/deck/progress" model="[progress: it.progress]"/>
 				</td>
 				<td class="right">
 					<g:if test="${it.flashcardCount}">
