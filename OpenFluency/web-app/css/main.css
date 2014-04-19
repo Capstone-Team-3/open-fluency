@@ -91,12 +91,17 @@ body {
 .chapter-practice .flashcard {
     float: none;
     margin: auto;
-    min-width: 250px;
+    min-width: 310px;
     width: 25%;
 }
 
 .meaning {
     margin-top: 20px;
+}
+
+.audio-practice {
+    display: table;
+    margin: 0 auto;
 }
 
 /* ---------------------------------------------------------------------------*/

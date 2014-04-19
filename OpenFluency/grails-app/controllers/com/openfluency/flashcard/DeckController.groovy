@@ -63,7 +63,7 @@ class DeckController {
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
         CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer)
-        [deckInstance: deckInstance, cardUsageInstance: cardUsageInstance]
+        [deckInstance: deckInstance, cardUsageInstance: cardUsageInstance] 
     }
 
     def search(Integer max) {
