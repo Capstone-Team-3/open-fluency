@@ -48,7 +48,7 @@
 
 					<div class="form-group">
 						<label class="control-label">What deck should this card go into?</label>
-						<g:select class="form-control" name="deck" from="${userDecks}" optionKey="id" optionValue="title"/>
+						<g:select class="form-control" name="deck" from="${userDecks}" optionKey="id" optionValue="title" value="${deckId}"/>
 					</div>
 
 					<div class="form-group">
@@ -65,7 +65,8 @@
 					</g:if>
 					<div class="form-group audio">
 						<label class="control-label">
-							Record a pronunciation (optional)
+							Record a pronunciation (optional)?
+							<!--a id="addaudio" class="btn btn-default">create new audio</a>-->
 						</label>
 						<audio id="audioClip" controls autoplay></audio>
 						</br>
@@ -78,7 +79,7 @@
 						</br>
 					</div>
 					<button id="goCreate" class="center btn btn-success">Create it!</button>
-					<span id="audioSaveMessage"><i>*did you save your audio?</i></span>
+					<span id="audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
 				</g:form>
 			</div>
 			<div class="col-lg-7">
@@ -102,14 +103,8 @@
 	<g:javascript src="create_audio.js"/>
 	<!-- this line is left hear as it relies on taking a formData created in create_audio.js and passes to create_flashcard.js -->
 	<g:javascript>
-		$("#audioSaveMessage").hide();
-		$("#save_rec_button").hide();
-		$("#save_rec_button").click(function(){
-			saveAudioRecording(formData);
-			$("#audioSaveMessage").hide();
-			$("#goCreate").removeClass('btn-warning').addClass('btn-success');
-		});
+
 	</g:javascript>
-	
+
 </body>
 </html> 
