@@ -1,3 +1,4 @@
+
 $("#flickr_search").click(function(){
 	$("#flickr_page_number").val(1).text(1);
 	searchImage("#query", "#results", "#imageLink",1);
@@ -28,6 +29,15 @@ $("#stop_rec_button").click(function(){
 	$("#save_rec_button").show();
 });
 
+
+$("#audioSaveMessage").hide();
+$("#save_rec_button").hide();
+$("#save_rec_button").click(function(){
+	saveAudioRecording(formData);
+	$("#audioSaveMessage").hide();
+	$("#save_rec_button").hide();
+	$("#goCreate").removeClass('btn-warning').addClass('btn-success');
+});
 
 function saveAudioRecording(formDataObj){
 	// Create the packet

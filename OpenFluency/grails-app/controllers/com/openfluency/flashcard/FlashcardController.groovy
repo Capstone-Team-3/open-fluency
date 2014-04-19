@@ -22,7 +22,8 @@ class FlashcardController {
 	*/
     def create() {
         Unit unit = Unit.load(params.unit)
-    	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language)]
+        def deckId = params?.deckId
+    	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language), deckId: deckId]
     }
 
     /**

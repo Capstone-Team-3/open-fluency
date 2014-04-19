@@ -14,7 +14,9 @@ class UnitController {
 
 	def search() {
 		Long alphabetId = params['filter-alph'] as Long
+		Long deck_id = (params['deck-id']) ? (params['deck-id'] as Long) : null
+		println "Deck id -> " + deck_id
 		String keyword = params['search-text']
-		[keyword: keyword, alphabetId: alphabetId, unitInstanceList: languageService.searchUnits(alphabetId, keyword)]
+		[keyword: keyword, alphabetId: alphabetId, unitInstanceList: languageService.searchUnits(alphabetId, keyword), deck_id: deck_id]
 	}
 }
