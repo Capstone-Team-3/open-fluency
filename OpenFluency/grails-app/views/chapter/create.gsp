@@ -55,7 +55,7 @@
 								<g:message code="chapter.choose a course.label" default="Choose a course" />
 								<span class="required-indicator">*</span>
 							</label>
-							<g:select class="form-control" name="courseId" required="" from="${userCourses}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
+							<g:select class="form-control" name="deckId" required="" from="${userCourses}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
 						</div>
 					</div>
 
