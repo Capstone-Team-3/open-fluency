@@ -66,7 +66,6 @@
 					<div class="form-group audio">
 						<label class="control-label">
 							Record a pronunciation (optional)
-							<!--a id="addaudio" class="btn btn-default">create new audio</a>-->
 						</label>
 						<audio id="audioClip" controls autoplay></audio>
 						</br>

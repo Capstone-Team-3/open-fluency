@@ -19,7 +19,7 @@
 			<g:if test="${chapterInstance.deck.flashcardCount > 0}"><!-- should also only display if enrolled -->
 				<g:link class="btn btn-success" action="practice" id="${chapterInstance.id}" controller="chapter">Practice Flashcards</g:link>
 			</g:if>
-			<g:if test="${isOwner }">
+			<g:if test="${isOwner}">
 				<g:link class="btn" action="search" controller="unit" params="${['filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>

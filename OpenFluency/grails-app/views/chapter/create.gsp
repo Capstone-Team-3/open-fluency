@@ -28,7 +28,7 @@
 				<g:form action="save" controller="chapter" name="createChapterForm">
 
 					<input type="hidden" value="${courseInstance.id}" name="courseId"/>
-					
+
 					<div class="form-group">
 						<div class="${hasErrors(bean: chapterInstance, field: 'title', 'error')} required">
 							<label for="title" class="control-label">
@@ -38,7 +38,7 @@
 							<input class="form-control" type="text" name="title"  required="" value="${chapterInstance?.title}"/>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="${hasErrors(bean: chapterInstance, field: 'description', 'error')} required">
 							<label for="description" class="control-label">
@@ -48,7 +48,7 @@
 							<textarea class="form-control" name="description" required="" value="${chapterInstance?.description}"></textarea>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="${hasErrors(bean: chapterInstance, field: 'Choose a course', 'error')} required">
 							<label for="choose a course" class="control-label">
@@ -58,7 +58,7 @@
 							<g:select class="form-control" name="courseId" required="" from="${userCourses}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
 						</div>
 					</div>
-					
+
 					<button class="btn btn-info">Create</button>
 				</g:form>
 			</div>
