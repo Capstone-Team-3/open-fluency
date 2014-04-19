@@ -15,6 +15,7 @@
 		<div class="row other-decks">
 			<h1>
 				Other's Decks
+				<g:link action="search" controller="deck" class="btn btn-info">Search For Decks</g:link>
 			</h1>
 			<g:render template="table" model="[deckInstanceList: othersDeckInstanceList, userInstance: userInstance]"/>
 		</div>
