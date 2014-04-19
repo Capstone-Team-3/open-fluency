@@ -1,4 +1,20 @@
 <%@ page import="com.openfluency.Constants" %>
+
+<div class="row">
+    <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
+    <button id="customizationBtn" class="btn btn-info">Customize?</button>
+</div>
+<g:javascript>
+    $('#customizationBtn').click(function(){ 
+        $('#customize-container').show();
+        $('#customizationBtn').hide();
+    });
+    $('#customizationCreate').click(function(){
+        $('#customize-container').hide();
+        $('#customizationBtn').show();
+    });
+</g:javascript>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="deck-header text-center">
@@ -29,3 +45,4 @@
         </div>
     </div>
 </div>
+
