@@ -72,7 +72,8 @@
                         <td>
                             <g:form action="create" controller="flashcard" name="createFlashcardForm">
                                 <input type="hidden" name="unit" value="${it?.id}"/>
-                                <button class="btn btn-success" type="submit">Create Flashcard</button>
+                                <input type="hidden" name="deckId" value="${deck_id}"/>
+                                <button class="btn btn-success" type="submit">Create Flashcard</button> 
                             </g:form>
                         </td>
                     </tr>

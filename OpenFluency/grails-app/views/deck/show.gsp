@@ -24,7 +24,7 @@
 				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
-				<g:link class="btn add-flashcards" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id]}">Add Flashcards</g:link>
+				<g:link class="btn add-flashcards" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id, 'deck-id': deckInstance.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>
 		<!-- end deck-header -->
