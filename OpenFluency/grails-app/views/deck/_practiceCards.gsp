@@ -1,4 +1,37 @@
 <%@ page import="com.openfluency.Constants" %>
+
+<div class="row">
+    <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
+    <button id="customizationBtn" class="btn btn-info">Customize Flashcard?</button>
+    <button id="closeCustomization" class="btn btn-danger">X</button>
+</div>
+<g:javascript>
+    $("#closeCustomization").hide();
+    $("#closeCustomization").click(function(){
+        $("#customizationBtn").show();
+        $("#closeCustomization").hide();
+        $('#custom-image-container').hide();
+        $('#custom-image').show();
+        $('#custom-audio-container').hide();
+        $('#custom-audio').show();
+        $("#customize-container").hide();
+        $('#custom-image-container').hide();
+        $('#custom-image').show();
+    });
+
+    $('#customizationBtn').click(function(){ 
+        $('#customize-container').show();
+        $("#closeCustomization").show();
+        $('#customizationBtn').hide();
+    });
+    $('#customizationCreate').click(function(){
+        $('#customize-container').hide();
+        $('#customizationBtn').show();
+        $("#closeCustomization").hide();
+        
+    });
+</g:javascript>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="deck-header text-center">
@@ -29,3 +62,4 @@
         </div>
     </div>
 </div>
+

@@ -25,11 +25,11 @@ function startRecording() {
 	}
 }
 
-function stopRecording(pronunciationID, urlStr){
+function stopRecording(audioId, pronunciationID, urlStr){
 	console.log("Stopped Recording");
 	recorder.stop();
 	recorder.exportWAV(function(s){
-		audio.src = window.URL.createObjectURL(s);
+		document.querySelector(audioId).src = window.URL.createObjectURL(s);
 		console.log(s);
 		stashBlob(s, pronunciationID, urlStr);
 	});
