@@ -59,7 +59,7 @@ $('#customizationCreate').click(function(){
     $('#customize-container').hide();
     $('#customizationBtn').show();
     $("#closeCustomization").hide();
-    saveCustomization();   
+    saveCustomization();
 });
 
 function saveCustomization(){
@@ -77,12 +77,7 @@ function saveCustomization(){
 		processData: false,
 		contentType: false
 	}).done(function(customizationInstance) {
-		if(customizationInstance.id) {
-			console.log("Success!");
-			console.log(customizationInstance.id);
-		} else {
-			console.log("Something went wrong!");
-		}
+		window.location.replace(document.URL);
 	});
 }
 

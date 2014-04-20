@@ -48,22 +48,26 @@ class MediaService {
     }
 
     def createCustomization(String flashcardId, String unitMappingId, String imageLink, String audioId){
-        
+        //get all the intances needed for building a customization
         Image imageInstance = createImage(imageLink, unitMappingId)
         Audio audioInstance = null;
         User userInstance = User.load(springSecurityService.principal.id)
         Flashcard flashcardInstance = Flashcard.load(flashcardId)
 
-        if (audioId != "") { audioInstance = Audio.load(audioId); }
+        //as audio is not required, only try to load audio if an id is given 
+        if (audioId != "") { audioInstance = Audio?.load(audioId); }
 
+        //if neither audio nor image is set, then we don't create a customization
         if ((!audioInstance) && (!imageInstance)){
             println "null customization - not saved"
             return null
         }
 
+        //make sure to delete any old customizations the user had for this card - they would wind up unlinked
         def oldCustomizations = Customization?.findAllByOwnerAndCard(userInstance, flashcardInstance)
         oldCustomizations.each { it.delete(flush: true) }
 
+        //create the customization
         def customizationInstance = new Customization(
             owner: userInstance,
             card: flashcardInstance,

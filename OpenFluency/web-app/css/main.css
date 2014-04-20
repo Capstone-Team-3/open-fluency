@@ -113,8 +113,8 @@ body {
 /* CUSTOMIZATION STYLES
 /* ---------------------------------------------------------------------------*/
 
-.customize-container {
-    display: none;
+#customize-container {
+    background-color: #F8F8F8;
 }
 
 /* ---------------------------------------------------------------------------*/

@@ -7,12 +7,11 @@
 		
 		<!-- image association -->
 		<!--g:if test="${flashcardInstance.image}"-->
-		<g:set var="imageSource" value="${flashcardInstance.image.url}"/>
+		<g:set var="imageSource" value="${flashcardInstance?.image?.url}"/>
 		<g:if test="${imageURL}">
 			<g:set var="imageSource" value="${imageURL}"/>
 		</g:if>
 		<g:if test="${imageSource}">
-			<!--div class="flashcard-img" style="background-image: url(${flashcardInstance.image.url});"></div-->
 			<div class="flashcard-img" style="background-image: url(${imageSource});"></div>
 		</g:if>
 
@@ -24,7 +23,7 @@
 			<!--g:if test="${flashcardInstance.audio?.audioWAV}"-->
 			<g:if test="${audioSysId}">
 				<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
-				<!--g:set var="audioId" value="${flashcardInstance.audio.id}"/-->
+				
 				<g:set var="audioId" value="${audioSysId}"/>
 				<li class="fieldcontain">
 					<div class="audio-practice">
