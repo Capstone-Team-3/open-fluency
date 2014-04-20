@@ -31,7 +31,10 @@
 					<input type="hidden" name="unit" value="${unitInstance.id}"/>
 
 					<div class="form-group">
-						<label class="control-label">What meaning do you want to use?</label>
+						<label class="control-label">
+							<span style="cursor:help;" title="What meaning do you want to use?">Meaning</span>
+							<span class="required-indicator">*</span>
+						</label>
 						<select name="unitMapping" class="form-control">
 							<g:each in="${unitInstance.unitMappings}">
 								<option value="${it.id}">
@@ -42,31 +45,38 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">What pronunciation do you want to use?</label>
+						<label class="control-label">
+							<span style="cursor:help;" title="What pronunciation do you want to use?">Pronunciation</span>
+							<span class="required-indicator">*</span>
+						</label>
 						<g:select class="form-control" name="pronunciation" from="${unitInstance.pronunciations}" optionKey="id" optionValue="literal" id="fc_pronunciation"/>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">What deck should this card go into?</label>
+						<label class="control-label">
+							<span style="cursor:help;" title="What deck should this card go into?">Choose a Deck</span>
+							<span class="required-indicator">*</span>
+						</label>
 						<g:select class="form-control" name="deck" from="${userDecks}" optionKey="id" optionValue="title" value="${deckId}"/>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">What image should be associated with this card (optional)?</label>
+						<label class="control-label">
+							<span style="cursor:help;" title="What image should be associated with this card?">Image</span>
+						</label>
 						<g:textField class="form-control" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
 					</div>
 					<g:if test="${flashcardInstance?.audio}">
 						<div class="form-group">
 							<label class="control-label">
-								What audio clip provides pronunciation for this card (optional)?
+								<span style="cursor:help;" title="What audio clip provides pronunciation for this card?">Audio</span>
 							</label>
 							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
 						</div>
 					</g:if>
 					<div class="form-group audio">
 						<label class="control-label">
-							Record a pronunciation (optional)?
-							<!--a id="addaudio" class="btn btn-default">create new audio</a>-->
+							<span style="cursor:help;" title="Record a pronunciation">Record an Audio (pronunciation)</span>
 						</label>
 						<audio id="audioClip" controls autoplay></audio>
 						</br>
