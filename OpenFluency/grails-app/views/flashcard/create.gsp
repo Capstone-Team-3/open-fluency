@@ -60,11 +60,23 @@
 						<g:select class="form-control" name="deck" from="${userDecks}" optionKey="id" optionValue="title" value="${deckId}"/>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group-image">
 						<label class="control-label">
 							<span style="cursor:help;" title="What image should be associated with this card?">Image</span>
-						</label>
-						<g:textField class="form-control" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
+						</label>	
+						<table >
+							<tr>
+								<td>
+									<g:textField class="form-control" size = "70" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
+								</td>
+								<td>
+									&nbsp
+								</td>
+								<td>
+									<input id="show_flickr_search" style="margin-bottom:10px;" type="button" onclick="showHideFlickrSearch()" value="Flickr Search" class="btn btn-info"/>
+								</td>
+							</tr>
+						</table>
 					</div>
 					<g:if test="${flashcardInstance?.audio}">
 						<div class="form-group">
@@ -92,7 +104,7 @@
 					<span id="audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
 				</g:form>
 			</div>
-			<div class="col-lg-7">
+			<div id = "flickr_div" style="padding-bottom:5px; display:none; border:3px solid #C0C0C0; border-radius:10px; " class="col-lg-7" border = "1">
 				<h1>Flickr Search</h1>
 				<label for="query">Query:</label>
 				<input id="query" name="query" type="text" size="60" placeholder="Type here to find your photo" />
@@ -100,7 +112,7 @@
 				<div id="results"></div>
 				<button id="flickr_back" class="btn btn-info">Back</button>
 				<label id="flickr_page_number"></label>
-				<button id="flickr_next" class="btn btn-info">Next</button>
+				<button id="flickr_next" class="btn btn-info">Next</button>				
 			</div>
 		</div>
 	</div>
@@ -113,6 +125,12 @@
 	<g:javascript src="create_audio.js"/>
 	<!-- this line is left hear as it relies on taking a formData created in create_audio.js and passes to create_flashcard.js -->
 	<g:javascript>
+	function showHideFlickrSearch(){
+		if(document.getElementById('flickr_div').style.display == 'block')
+			document.getElementById('flickr_div').style.display = 'none'
+		else if(document.getElementById('flickr_div').style.display == 'none')
+			document.getElementById('flickr_div').style.display = 'block'			
+	} 
 
 	</g:javascript>
 
