@@ -26,7 +26,6 @@
 				</g:hasErrors>
 
 				<g:form action="save" controller="course" name="createCourseForm">
-
 					<div class="form-group">
 						<label>Title</label>
 						<input class="form-control" type="text" name="title" value="${courseInstance?.title}"/>
