@@ -30,7 +30,7 @@ var searchImage = function(query, results, urlField, resultPage) {
 	$(results).empty();
 
 	// Build full URL
-	var queryStr = baseUrl + $("#query").val() + respFormat;
+	var queryStr = baseUrl + $(query).val() + respFormat;
 
 	// Run query
 	$.getJSON(queryStr, function(data){

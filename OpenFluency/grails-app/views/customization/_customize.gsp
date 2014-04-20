@@ -1,6 +1,6 @@
 <div id="customize-container" class="col-lg-7">
 
-	<g:form action="save" controller="customization" name="createCustomizationForm">
+	<!--g:form action="save" controller="customization" name="createCustomizationForm"-->
 		<input type="hidden" name="flashcardId" value="${flashcardInstance.id}"/>
 		<input type="hidden" name="unitMappingId" value="${flashcardInstance.unitMapping.id}"/>
 		<input type="hidden" id="c_pId" name="pronunciationId" value="${flashcardInstance.pronunciation.id}"/>
@@ -8,17 +8,18 @@
 		<div class="form-group">
 			<input class="btn btn-info" id="custom-image" value="Customize Image?"/>
 			<div id="custom-image-container">
-				<g:textField class="form-control" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
+				<label for="c_imageLink">URL:</label>
+				<input type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image.url}"/>
 			
 				<div class="flickr-search-container">
-					<h1>Flickr Search</h1>
+					<h4>Flickr Image Search</h4>
 					<label for="query">Query:</label>
-					<input id="query" name="query" type="text" size="60" placeholder="Type here to find your photo" />
-					<button id="flickr_search" class="btn btn-info">Search</button>
-					<div id="results"></div>
-					<button id="flickr_back" class="btn btn-info">Back</button>
-					<label id="flickr_page_number"></label>
-					<button id="flickr_next" class="btn btn-info">Next</button>
+					<input id="c_query" name="c_query" type="text" size="60" placeholder="Type here to find your photo" />
+					<button id="c_flickr_search" class="btn btn-info">Search</button>
+					<div id="c_results"></div>
+					<button id="c_flickr_back" class="btn btn-info">Back</button>
+					<label id="c_flickr_page_number"></label>
+					<button id="c_flickr_next" class="btn btn-info">Next</button>
 				</div>
 			</div>
 		</div>
@@ -26,7 +27,7 @@
 		<div class="form-group audio">
 			<input class="btn btn-info" id="custom-audio" value="Customize Audio?"/>
 			<div id="custom-audio-container">
-				<audio id="audioClip" controls autoplay></audio>
+				<audio id="c_audioClip" controls autoplay></audio>
 				</br>
 				<input id="c_start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
 				<input id="c_stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
@@ -40,7 +41,7 @@
 		
 		<button id="customizationCreate" class="center btn btn-success">Customize it!</button>
 		<span id="c_audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
-	</g:form>
+	<!--/g:form-->
 </div>
 
 <g:javascript>
@@ -54,14 +55,25 @@
 $('#custom-image-container').hide();
 $('#custom-audio-container').hide();
 
-$("#c_start_rec_button").click(function(){ 
+$('#custom-image').click(function(){
+	$('#custom-image-container').show();
+	$('#custom-image').hide();
+});
+
+$('#custom-audio').click(function(){
+	$('#custom-audio-container').show();
+	$('#custom-audio').hide();
+});
+
+$("#c_start_rec_button").click(function(){
+	setWorkerPath("../../js/recorderWorker.js"); 
 	startRecording(); 
 	$("#c_audioSaveMessage").show();
 	$("#customizationCreate").removeClass('btn-success').addClass('btn-warning');
 });
 
 $("#c_stop_rec_button").click(function(){ 
-	stopRecording($("#c_pId").val(), ""); 
+	stopRecording("#c_audioClip", $("#c_pId").val(), ""); 
 	$("#c_save_rec_button").show();
 });
 
@@ -95,4 +107,25 @@ function saveAudioRecording(formDataObj){
 		}
 	});
 }
+
+$("#c_flickr_search").click(function(){
+	$("#c_flickr_page_number").val(1).text(1);
+	console.log($('#c_query').val());
+	searchImage("#c_query", "#c_results", "#c_imageLink",1);
+});
+$("#c_flickr_next").click(function(){
+	var targetPage = $("#c_flickr_page_number").val();
+	targetPage++;
+	searchImage("#c_query", "#c_results", "#c_imageLink", targetPage);
+	$("#c_flickr_page_number").val(targetPage).text(targetPage);
+});
+$("#c_flickr_back").click(function(){
+	var targetPage = $("#c_flickr_page_number").val();
+	if (targetPage > 1) { 
+		targetPage--;
+		searchImage("#c_query", "#c_results", "#c_imageLink", targetPage);
+		$("#c_flickr_page_number").val(targetPage).text(targetPage);
+	}
+});
+
 </g:javascript>
