@@ -3,6 +3,7 @@ package com.openfluency.flashcard
 import com.openfluency.auth.User
 import com.openfluency.language.Language
 import grails.plugin.springsecurity.annotation.Secured
+import com.openfluency.media.Customization
 
 @Secured(['isAuthenticated()'])
 class DeckController {
@@ -63,7 +64,28 @@ class DeckController {
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
         CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer)
-        [deckInstance: deckInstance, cardUsageInstance: cardUsageInstance] 
+        
+        User userInstance = User.load(springSecurityService.principal.id)
+        Customization customizationInstance = Customization?.findByOwnerAndCard(userInstance, cardUsageInstance.flashcard)
+        
+        //get the right image - take the customization if made, else the flashcard provided image if made, else null
+        String imageURL = null
+        if (customizationInstance?.imageAssoc){
+            imageURL = customizationInstance.imageAssoc?.url
+        } else if (cardUsageInstance.flashcard?.image){
+            imageURL = cardUsageInstance.flashcard.image.url
+        }
+        //get the right audio - take the customization if made, else the flahscard proviced audio if made, else null
+        Long audioSysId = null
+        if (customizationInstance?.audioAssoc){
+            audioSysId = customizationInstance.audioAssoc?.id
+        } else if (cardUsageInstance.flashcard?.audio){
+            audioSysId = cardUsageInstance.flashcard.audio.id
+        }
+
+        println "Customization = ${customizationInstance?.id}, image = ${imageURL}, audio = ${audioSysId}"
+        
+        [deckInstance: deckInstance, cardUsageInstance: cardUsageInstance, imageURL: imageURL, audioSysId: audioSysId]  
     }
 
     def search(Integer max) {

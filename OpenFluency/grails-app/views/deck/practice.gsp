@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </div>
-        <g:render template="/deck/practiceCards" model="[id: deckInstance.id, deckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck']"/>
+        <g:render template="/deck/practiceCards" model="[id: deckInstance.id, deckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck', imageURL: imageURL, audioSysId: audioSysId]"/>
     </div>
     <!-- end container -->
     <g:javascript>initializePracticeCards();</g:javascript>

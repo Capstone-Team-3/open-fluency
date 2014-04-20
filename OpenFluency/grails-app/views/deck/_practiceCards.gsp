@@ -43,7 +43,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true]"/>
+        <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
 
         <g:form id="${id}" controller="${controller}" action="practice" name="rankCardForm" class="rankCardForm form">
             <input type="hidden" name="cardUsageId" value="${cardUsageInstance?.id}"/>

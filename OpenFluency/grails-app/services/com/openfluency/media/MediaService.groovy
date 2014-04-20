@@ -51,6 +51,9 @@ class MediaService {
         
         Image imageInstance = createImage(imageLink, unitMappingId)
         Audio audioInstance = null;
+        User userInstance = User.load(springSecurityService.principal.id)
+        Flashcard flashcardInstance = Flashcard.load(flashcardId)
+
         if (audioId != "") { audioInstance = Audio.load(audioId); }
 
         if ((!audioInstance) && (!imageInstance)){
@@ -58,9 +61,12 @@ class MediaService {
             return null
         }
 
+        def oldCustomizations = Customization?.findAllByOwnerAndCard(userInstance, flashcardInstance)
+        oldCustomizations.each { it.delete(flush: true) }
+
         def customizationInstance = new Customization(
-            owner: User.load(springSecurityService.principal.id),
-            card: Flashcard.load(flashcardId),
+            owner: userInstance,
+            card: flashcardInstance,
             audioAssoc: audioInstance,
             imageAssoc: imageInstance
         ).save(flush: true, failOnError: true)
