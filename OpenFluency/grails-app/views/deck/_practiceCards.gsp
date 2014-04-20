@@ -24,12 +24,7 @@
         $("#closeCustomization").show();
         $('#customizationBtn').hide();
     });
-    $('#customizationCreate').click(function(){
-        $('#customize-container').hide();
-        $('#customizationBtn').show();
-        $("#closeCustomization").hide();
-        
-    });
+    
 </g:javascript>
 
 <div class="row">

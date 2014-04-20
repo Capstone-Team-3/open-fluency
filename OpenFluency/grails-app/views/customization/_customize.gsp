@@ -1,8 +1,8 @@
 <div id="customize-container" class="col-lg-7">
 
 	<!--g:form action="save" controller="customization" name="createCustomizationForm"-->
-		<input type="hidden" name="flashcardId" value="${flashcardInstance.id}"/>
-		<input type="hidden" name="unitMappingId" value="${flashcardInstance.unitMapping.id}"/>
+		<input type="hidden" id="c_fId" name="flashcardId" value="${flashcardInstance.id}"/>
+		<input type="hidden" id="c_umId" name="unitMappingId" value="${flashcardInstance.unitMapping.id}"/>
 		<input type="hidden" id="c_pId" name="pronunciationId" value="${flashcardInstance.pronunciation.id}"/>
 					
 		<div class="form-group">
@@ -32,7 +32,7 @@
 				<input id="c_start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
 				<input id="c_stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
 				<input id="c_save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
-				<input id="c_audio_id" name="c_audio_id" type="hidden" value=""/>
+				<input id="c_audio_id" name="c_audio_id" type="hidden" value=""/> 
 				</br>
 				<span><i>*may need to click 'Allow' in audio permissions pop up</i></span>
 				</br>
@@ -54,6 +54,37 @@
 <g:javascript>
 $('#custom-image-container').hide();
 $('#custom-audio-container').hide();
+
+$('#customizationCreate').click(function(){
+    $('#customize-container').hide();
+    $('#customizationBtn').show();
+    $("#closeCustomization").hide();
+    saveCustomization();   
+});
+
+function saveCustomization(){
+	// Create the packet
+	var custData = new FormData();
+	custData.append('flashcardId', $('#c_fId').val());
+	custData.append('unitMappingId', $('#c_umId').val());
+	custData.append('imageLink', $('#c_imageLink').val());
+	custData.append('audioId', $('#c_audio_id').val());
+	// Send it
+	$.ajax({
+		type: 'POST',
+		url: '/OpenFluency/customization/save',
+		data: custData,
+		processData: false,
+		contentType: false
+	}).done(function(customizationInstance) {
+		if(customizationInstance.id) {
+			console.log("Success!");
+			console.log(customizationInstance.id);
+		} else {
+			console.log("Something went wrong!");
+		}
+	});
+}
 
 $('#custom-image').click(function(){
 	$('#custom-image-container').show();

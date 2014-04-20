@@ -4,9 +4,12 @@ package com.openfluency.media
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import com.openfluency.media.MediaService
 
 @Transactional(readOnly = true)
 class CustomizationController {
+
+    def MediaService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -24,8 +27,12 @@ class CustomizationController {
     }
 
     @Transactional
-    def save(Customization customizationInstance) {
-        if (customizationInstance == null) {
+    def save() {
+        
+        def customizationInstance = mediaService.createCustomization(params.flashcardId, params.unitMappingId, params.imageLink, params.audioId)
+        
+
+        if (customizationInstance == null) { 
             notFound()
             return
         }

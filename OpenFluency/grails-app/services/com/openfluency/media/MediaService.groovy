@@ -4,6 +4,7 @@ import grails.transaction.Transactional
 import static org.springframework.http.HttpStatus.*
 import com.openfluency.auth.User
 import com.openfluency.language.*
+import com.openfluency.flashcard.*
 
 
 @Transactional
@@ -44,5 +45,27 @@ class MediaService {
 
     	println "Associated Audio ${audioInstance}"
     	return audioInstance
+    }
+
+    def createCustomization(String flashcardId, String unitMappingId, String imageLink, String audioId){
+        
+        Image imageInstance = createImage(imageLink, unitMappingId)
+        Audio audioInstance = null;
+        if (audioId != "") { audioInstance = Audio.load(audioId); }
+
+        if ((!audioInstance) && (!imageInstance)){
+            println "null customization - not saved"
+            return null
+        }
+
+        def customizationInstance = new Customization(
+            owner: User.load(springSecurityService.principal.id),
+            card: Flashcard.load(flashcardId),
+            audioAssoc: audioInstance,
+            imageAssoc: imageInstance
+        ).save(flush: true, failOnError: true)
+
+        println "Created Customization ${customizationInstance}"
+        return customizationInstance
     }
 }
