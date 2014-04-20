@@ -32,7 +32,8 @@ class ChapterController {
     def show(Chapter chapterInstance, Integer max) {
 		params.max = Math.min(max ?: 12, 100)
 		List<Flashcard> flashcards = Flashcard.findAllByDeck(chapterInstance.deck, params)
-		respond flashcards, model:[chapterInstance: chapterInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck),isOwner: (springSecurityService.principal.id == chapterInstance.deck.owner.id)]
+		respond flashcards, model:[chapterInstance: chapterInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck),isOwner: (springSecurityService.principal.id == chapterInstance.deck.owner.id),
+			userInstance: User.load(springSecurityService.principal.id)]
     }
 
     def practice(Chapter chapterInstance, Integer max) {

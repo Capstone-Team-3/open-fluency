@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.course.Registration" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 		<div class="chapter-header">
 			<h1>${chapterInstance.title}</h1>
 			<p>${chapterInstance.description}</p>
-			<g:if test="${chapterInstance.deck.flashcardCount > 0}"><!-- should also only display if enrolled -->
+			<g:if test="${chapterInstance.deck.flashcardCount > 0 && Registration.findAllByCourseAndUser(chapterInstance.course, userInstance)}">
 				<g:link class="btn btn-success" action="practice" id="${chapterInstance.id}" controller="chapter">Practice Flashcards</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
