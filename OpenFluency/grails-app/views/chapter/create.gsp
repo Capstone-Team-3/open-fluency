@@ -50,12 +50,12 @@
 					</div>
 
 					<div class="form-group">
-						<div class="${hasErrors(bean: chapterInstance, field: 'Choose a course', 'error')} required">
+						<div class="${hasErrors(bean: chapterInstance, field: 'Choose a deck', 'error')} required">
 							<label for="choose a course" class="control-label">
-								<g:message code="chapter.choose a course.label" default="Choose a course" />
+								<g:message code="chapter.choose a deck.label" default="Choose a deck" />
 								<span class="required-indicator">*</span>
 							</label>
-							<g:select class="form-control" name="courseId" required="" from="${userCourses}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
+							<g:select class="form-control" name="deckId" required="" from="${userDecks}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
 						</div>
 					</div>
 

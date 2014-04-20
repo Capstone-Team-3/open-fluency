@@ -9,7 +9,9 @@
 			<div class="flashcard-img" style="background-image: url(${flashcardInstance.image.url});"></div>
 		</g:if>
 
-		<div class="meaning">${flashcardInstance?.secondaryUnit.print}</div>
+		<div class="meaning">${flashcardInstance?.secondaryUnit.print}
+			<!--  <button class="btn btn-default" id="hide-meaning" onclick = "this.style.visibility='hidden'">Hide Meaning</button> -->
+		</div>
 		<!-- 'practicing' needs to be set to true in the model passed to this page for audio to try to show - practiceCards does this -->
 		<g:if test="${practicing}">
 			<g:if test="${flashcardInstance.audio?.audioWAV}">
