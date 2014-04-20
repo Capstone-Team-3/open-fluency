@@ -9,7 +9,7 @@
 			<input class="btn btn-info" id="custom-image" value="Customize Image?"/>
 			<div id="custom-image-container">
 				<label for="c_imageLink">URL:</label>
-				<input type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image.url}"/>
+				<input type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image?.url}"/>
 			
 				<div class="flickr-search-container">
 					<h4>Flickr Image Search</h4>
