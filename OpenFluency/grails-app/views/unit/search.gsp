@@ -53,8 +53,6 @@
                 <tr>
                     <th>Character, Word or Phrase</th>
                     <th>Meaning(s)</th>
-                    <th>Stroke Count</th>
-                    <th>Grade Level</th>
                     <th></th>
                 </tr>
             </thead>
@@ -67,10 +65,8 @@
                                 <span class="meaning">${meaning?.print}</span>
                             </g:each>
                         </td>
-                        <td>${it?.strokeCount}</td>
-                        <td>${it?.grade}</td>
                         <td>
-                            <g:form action="create" controller="flashcard" name="createFlashcardForm">
+                            <g:form class="pull-right" action="create" controller="flashcard" name="createFlashcardForm">
                                 <input type="hidden" name="unit" value="${it?.id}"/>
                                 <input type="hidden" name="deckId" value="${deck_id}"/>
                                 <button class="btn btn-success" type="submit">Create Flashcard</button> 
