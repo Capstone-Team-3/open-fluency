@@ -2,10 +2,12 @@
 <div class="flashcard">
 	<div class="panel panel-default">
 
-		<h1>${flashcardInstance?.primaryUnit.print}</h1>
-		<div class="pronunciation">${flashcardInstance?.pronunciation.literal}</div>
+		<div class="flashcard-header">
+			<a id="customizationBtn"><span class="glyphicon glyphicon-pencil"></span></a>
+			<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
+			<div class="pronunciation">pronounced '${flashcardInstance?.pronunciation.literal}'</div>
+		</div><!-- end flashcard-header -->
 		
-		<!-- image association -->
 		<!--g:if test="${flashcardInstance.image}"-->
 		<g:set var="imageSource" value="${flashcardInstance?.image?.url}"/>
 		<g:if test="${imageURL}">
@@ -18,7 +20,8 @@
 		<div class="meaning">${flashcardInstance?.secondaryUnit.print}
 			<!--  <button class="btn btn-default" id="hide-meaning" onclick = "this.style.visibility='hidden'">Hide Meaning</button> -->
 		</div>
-		<!-- 'practicing' needs to be set to true in the model passed to this page for audio to try to show - practiceCards does this -->
+
+		<!-- 'practicing' needs to be set to true in the model passed to this page for audio to show - practiceCards does this -->
 		<g:if test="${practicing}">
 			<!--g:if test="${flashcardInstance.audio?.audioWAV}"-->
 			<g:if test="${audioSysId}">

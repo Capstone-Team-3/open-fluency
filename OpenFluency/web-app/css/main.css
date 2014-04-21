@@ -59,8 +59,33 @@ body {
 /* FLASHCARD STYLES
 /* ---------------------------------------------------------------------------*/
 
-.flashcard h1 {
+.flashcard .panel {
+    font-size: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.flashcard-header {
+    background-color: #eee;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.flashcard #customizationBtn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+
+.flashcard-unit {
     font-size: 60px;
+    margin: 0;
+    padding: 20px 0 10px;
+}
+
+.flashcard .pronunciation {
+    font-size: .85em;
 }
 
 .flashcard-create h1 {
@@ -83,12 +108,6 @@ body {
     height: 200px;;
     margin: 20px auto 0;
     width: 200px;
-}
-
-.flashcard .panel {
-    font-size: 20px;
-    padding: 10px 0 20px;
-    text-align: center;
 }
 
 .deck-practice .flashcard,
