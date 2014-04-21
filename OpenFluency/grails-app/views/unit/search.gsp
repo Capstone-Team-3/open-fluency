@@ -35,7 +35,7 @@
 
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <g:textField class="form-control" name="search-text" placeholder="Type a keyword" id="search-text" />
+                        <g:textField class="form-control" name="search-text" placeholder="Type a keyword to search by meaning" id="search-text" />
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
