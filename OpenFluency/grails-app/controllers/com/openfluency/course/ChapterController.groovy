@@ -9,6 +9,7 @@ class ChapterController {
 	def springSecurityService
 	def courseService
     def deckService
+    def flashcardService
 
     @Secured(['isAuthenticated()'])
 	def create(Course courseInstance) {

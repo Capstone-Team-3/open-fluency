@@ -32,7 +32,7 @@ class FlashcardController {
     def save() {
 
         //Audio audioInstance = mediaService.createAudio(params.url, params.blob.getBytes(), params['pronunciation.id'])
-        println "AudioID = " + params.audio_id 
+        //println "AudioID = " + params.audio_id 
         def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.imageLink, params.audio_id, params.deck)
         
     	// Check for errors
