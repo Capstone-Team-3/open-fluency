@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.Constants" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +20,11 @@
                     <g:link action="show" controller="deck" id="${deckInstance.id}">${deckInstance.title}</g:link>
                 </li>
                 <li>
-                    <a href="#">Practice</a>
+                    <a href="#">Practice - ${Constants.RANKING_TYPES[rankingType as Integer]}</a>
                 </li>
             </ul>
         </div>
-        <g:render template="/deck/practiceCards" model="[id: deckInstance.id, deckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck', imageURL: imageURL, audioSysId: audioSysId]"/>
+        <g:render template="/deck/practiceCards" model="[id: deckInstance.id, practiceDeckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck', imageURL: imageURL, audioSysId: audioSysId]"/>
     </div>
     <!-- end container -->
     <g:javascript>initializePracticeCards();</g:javascript>

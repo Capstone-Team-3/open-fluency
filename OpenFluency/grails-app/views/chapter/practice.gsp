@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.Constants" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,10 @@
                     <a href="${createLink(uri:'/') }">Home</a>
                 </li>
                 <li>
-                    <g:link action="search" controller="course" >Courses</g:link>
+                    <g:link action="search" controller="course">Courses</g:link>
                 </li>
                 <li>
-                    <g:link action="search" controller="course" >Search for Course</g:link>
+                    <g:link action="search" controller="course">Search for Course</g:link>
                 </li>
                 <li>
                     <g:link action="show" controller="course" id="${chapterInstance.course.id}">
@@ -26,17 +27,11 @@
                     <g:link action="show" controller="chapter" id="${chapterInstance.id}">${chapterInstance.title}</g:link>
                 </li>
                 <li>
-                    <a href="#">Practice</a>
+                    <a href="#">Practice - ${Constants.RANKING_TYPES[rankingType as Integer]}</a>
                 </li>
             </ul>
-
-            <div class="col-lg-12">
-                <div class="chapter-header text-center">
-                    <h1>${chapterInstance.title}</h1>
-                </div>
-            </div>
         </div>
-        <g:render template="/deck/practiceCards" model="[id: chapterInstance.id, deckInstance: chapterInstance.deck, cardUsageInstance: cardUsageInstance, controller: 'chapter']"/>
+        <g:render template="/deck/practiceCards" model="[id: chapterInstance.id, practiceDeckInstance: chapterInstance.deck, cardUsageInstance: cardUsageInstance, controller: 'chapter']"/>
     </div>
     
     <!-- end container -->
