@@ -73,6 +73,7 @@ body {
 }
 
 .flashcard #customizationBtn {
+    cursor: pointer;
     position: absolute;
     right: 8px;
     top: 8px;
@@ -118,6 +119,13 @@ body {
     width: 25%;
 }
 
+h4#custom-audio, 
+h4#custom-image {
+    background-color: #25A39A;
+    color: #fff;
+    padding: 10px;
+}
+
 .progress-container {
     margin-top: 30px;
 }
@@ -152,6 +160,7 @@ body {
 
 #customize-container {
     background-color: #F8F8F8;
+    padding: 10px 30px 30px;
 }
 
 /* ---------------------------------------------------------------------------*/

@@ -1,64 +1,101 @@
-<div id="customize-container" class="col-lg-7">
+<div id="customize-container">
 
+	<button id="closeCustomization" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
+	
 	<!--g:form action="save" controller="customization" name="createCustomizationForm"-->
 		<input type="hidden" id="c_fId" name="flashcardId" value="${flashcardInstance.id}"/>
 		<input type="hidden" id="c_umId" name="unitMappingId" value="${flashcardInstance.unitMapping.id}"/>
 		<input type="hidden" id="c_pId" name="pronunciationId" value="${flashcardInstance.pronunciation.id}"/>
-					
-		<div class="form-group">
-			<input class="btn btn-info" id="custom-image" value="Customize Image?"/>
-			<div id="custom-image-container">
-				<label for="c_imageLink">URL:</label>
-				<input type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image?.url}"/>
+		
+		<h3>Customize Flashcard</h3>
 			
-				<div class="flickr-search-container">
-					<h4>Flickr Image Search</h4>
-					<label for="query">Query:</label>
-					<input id="c_query" name="c_query" type="text" size="60" placeholder="Type here to find your photo" />
-					<button id="c_flickr_search" class="btn btn-info">Search</button>
-					<div id="c_results"></div>
-					<button id="c_flickr_back" class="btn btn-info">Back</button>
-					<label id="c_flickr_page_number"></label>
-					<button id="c_flickr_next" class="btn btn-info">Next</button>
+		<h4 id="custom-image">Add/Change Image</h4>
+		
+		<div id="custom-image-container">
+			<div class="form-group">
+				<label for="c_imageLink">Paste an image URL:</label>
+				<div class="row">
+					<div class="col-lg-4">
+						<input class="form-control" type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image?.url}"/>
+					</div>
 				</div>
 			</div>
-		</div>
+
+			<div class="flickr-search-container">
+				<div class="form-group">
+					<label>Or, search Flickr for an image:</label>
+					<div class="row">
+						<div class="col-lg-4">
+							<input class="form-control" id="c_query" name="c_query" type="text" size="60" placeholder="Enter a keyword here to search photos" />
+						</div>
+						<button id="c_flickr_search" class="btn btn-info">Search</button>
+					</div>
+				</div>
+				
+				<div id="c_results"></div>
+				<button id="c_flickr_back" class="btn btn-info hidden">Back</button>
+				<label id="c_flickr_page_number"></label>
+				<button id="c_flickr_next" class="btn btn-info hidden">Next</button>
+			</div><!-- end flickr-search-container -->
+		
+		</div><!-- end custom-image-container -->
 
 		<div class="form-group audio">
-			<input class="btn btn-info" id="custom-audio" value="Customize Audio?"/>
+			
+			<h4 id="custom-audio">Add/Change Audio</h4>
+			
 			<div id="custom-audio-container">
+				
 				<audio id="c_audioClip" controls autoplay></audio>
-				</br>
-				<input id="c_start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
-				<input id="c_stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
-				<input id="c_save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
-				<input id="c_audio_id" name="c_audio_id" type="hidden" value=""/> 
-				</br>
-				<span><i>*may need to click 'Allow' in audio permissions pop up</i></span>
-				</br>
-			</div>
-		</div>
+
+				<div class="audio-controls">
+					<input id="c_start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
+					<input id="c_stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
+					<input id="c_save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
+					<input id="c_audio_id" name="c_audio_id" type="hidden" value=""/> 
+					<p>Note: A browser pop-up may appear asking you to 'Allow' microphone use!</p>
+				</div>
+
+			</div><!-- end custom-audio-container -->
+
+		</div><!-- end form-group audio -->
 		
-		<button id="customizationCreate" class="center btn btn-success">Customize it!</button>
+		<button id="customizationCreate" class="center btn btn-success">Save Changes</button>
+		<a href="#" id="cancel-customize">Cancel</a>
 		<span id="c_audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
 	<!--/g:form-->
-</div>
 
-<g:javascript>
-	$('#customize-container').hide();
-</g:javascript>
+</div><!-- end customize-container -->
 
 <g:javascript src="recorderWorker.js"/>
 <g:javascript src="recorder.js"/>
 <g:javascript src="create_audio.js"/>
+
 <g:javascript>
+
+/* Customize panel hidden by default at page load */
+$('#customize-container').hide();
 $('#custom-image-container').hide();
 $('#custom-audio-container').hide();
 
+$("#closeCustomization, #cancel-customize").click(function(){
+    $("#customizationBtn").show();
+    $('#customize-container').hide();
+    $("#closeCustomization").hide();
+    $('#custom-image-container').hide();
+    $('#custom-audio-container').hide();
+    //resetChevrons();
+});
+
+$('#customizationBtn').click(function(){ 
+    $('#customize-container').show();
+    $('#customizationBtn').hide();
+});
+
 $('#customizationCreate').click(function(){
     $('#customize-container').hide();
+    //resetChevrons();
     $('#customizationBtn').show();
-    $("#closeCustomization").hide();
     saveCustomization();
 });
 
@@ -81,15 +118,30 @@ function saveCustomization(){
 	});
 }
 
-$('#custom-image').click(function(){
-	$('#custom-image-container').show();
-	$('#custom-image').hide();
+$('#custom-image').on('click', function(){
+	$('#custom-image-container').toggle();
+	toggleChevron(this);
 });
 
-$('#custom-audio').click(function(){
-	$('#custom-audio-container').show();
-	$('#custom-audio').hide();
+$('#custom-audio').on('click', function(){
+	$('#custom-audio-container').toggle();
+	toggleChevron('#custom-audio');
 });
+
+function toggleChevron(container) {
+	var $glyph = $('.glyphicon-chevron-*', container);
+	$glyph.toggleClass('glyphicon-chevron-right');
+	$glyph.toggleClass('glyphicon-chevron-down');
+}
+
+function resetChevrons() {
+	var $glyphicons = $('.glyphicon-chevron-down');
+
+	$glyphicons.each(function(glyph){
+		glyph.removeClass('glyphicon-chevron-down');
+		glyph.addClass('glyphicon-chevron-right');
+	});
+}
 
 $("#c_start_rec_button").click(function(){
 	setWorkerPath("../../js/recorderWorker.js"); 
@@ -135,8 +187,11 @@ function saveAudioRecording(formDataObj){
 }
 
 $("#c_flickr_search").click(function(){
+	$('#c_flickr_back').removeClass('hidden');
+	$('#c_flickr_next').removeClass('hidden');
+
 	$("#c_flickr_page_number").val(1).text(1);
-	console.log($('#c_query').val());
+	//console.log($('#c_query').val());
 	searchImage("#c_query", "#c_results", "#c_imageLink",1);
 });
 $("#c_flickr_next").click(function(){

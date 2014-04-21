@@ -1,26 +1,5 @@
 <%@ page import="com.openfluency.Constants" %>
 
-<g:javascript>
-    $("#closeCustomization").hide();
-    $("#closeCustomization").click(function(){
-        $('#customize-container').hide();
-        $("#customizationBtn").show();
-        $("#closeCustomization").hide();
-        $('#custom-image-container').hide();
-        $('#custom-image').show();
-        $('#custom-audio-container').hide();
-        $('#custom-audio').show();
-        $('#custom-image-container').hide();
-        $('#custom-image').show();
-    });
-
-    $('#customizationBtn').click(function(){ 
-        $('#customize-container').show();
-        $("#closeCustomization").show();
-        $('#customizationBtn').hide();
-    });
-</g:javascript>
-
     <div class="row">
         <div class="col-lg-12">
             <div class="deck-header text-center">
@@ -31,10 +10,10 @@
                 <g:else>
                     <h1>${practiceDeckInstance.title}</h1>
                 </g:else>
-                
-                <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
-                <button id="closeCustomization" class="btn btn-danger">X</button>
+
             </div><!-- end deck-heaer -->
+
+            <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
         </div><!-- end col-leg-12 -->
     </div><!-- end row -->
 
