@@ -7,11 +7,15 @@
 <body>
 	<div class="container">
 		<ul class="breadcrumb">
-            <li><a href="${createLink(uri:'/') }">Home</a></li>
-            <li>Decks</li>
-            <li><g:link action="create" controller="deck" >Create New Deck</g:link></li>
-    
-        </ul>
+			<li>
+				<a href="${createLink(uri:'/') }">Home</a>
+			</li>
+			<li>Decks</li>
+			<li>
+				<g:link action="create" controller="deck" >Create New Deck</g:link>
+			</li>
+
+		</ul>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
 				<h1 id="main">Create New Deck</h1>
@@ -38,15 +42,29 @@
 						<textarea class="form-control" name="description" value="${deckInstance?.description}"></textarea>
 					</div>
 
-					<label for="alphabet" class="control-label">
-						Language
-						<span class="required-indicator">*</span>
-					</label>
-					<select class="form-control" name="language.id">
-						<g:each in="${Language.list()}">
-							<option value="${it.id}">${it.name}</option>
-						</g:each>
-					</select>
+					<div class="form-group">
+						<label for="alphabet" class="control-label">
+							Source Language - The language you already know
+							<span class="required-indicator">*</span>
+						</label>
+						<select class="form-control" name="sourceLanguage.id">
+							<g:each in="${Language.list()}">
+								<option value="${it.id}">${it.name}</option>
+							</g:each>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="alphabet" class="control-label">
+							Language - The language you're learning
+							<span class="required-indicator">*</span>
+						</label>
+						<select class="form-control" name="language.id">
+							<g:each in="${Language.list()}">
+								<option value="${it.id}">${it.name}</option>
+							</g:each>
+						</select>
+					</div>
 
 					<br>
 					<div class="center">

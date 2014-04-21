@@ -38,7 +38,7 @@ class DeckController {
     }
 
     def save() {
-        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'])
+        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'])
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {

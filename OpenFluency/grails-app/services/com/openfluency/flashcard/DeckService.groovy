@@ -100,8 +100,12 @@ class DeckService {
 	/**
     * Create a new deck owned by the currently logged in user
     */
-    Deck createDeck(String title, String description, String languageId) {
-    	Deck deck = new Deck(title: title, description: description, owner: User.load(springSecurityService.principal.id), language: Language.load(languageId))
+    Deck createDeck(String title, String description, String languageId, String sourceLanguageId) {
+    	Deck deck = new Deck(title: title, 
+    		description: description, 
+    		owner: User.load(springSecurityService.principal.id), 
+    		language: Language.load(languageId),
+    		sourceLanguage: Language.load(sourceLanguageId))
     	deck.save()
     	return deck
     }
