@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.Constants" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,8 @@
 			<h1 class="deck-title">${deckInstance?.title}</h1>
 			<p class="deck-description">${deckInstance?.description}</p>
 			<g:if test="${flashcardCount}">
-				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck">Practice Flashcards</g:link>
+				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
+				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
 				<g:link class="btn add-flashcards" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id, 'deck-id': deckInstance.id]}">Add Flashcards</g:link>

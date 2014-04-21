@@ -2,6 +2,8 @@
 	<thead>
 		<tr>
 			<th>Deck Title</th>
+			<th>Source Language</th>
+			<th>Learning</th>
 			<th>Flashcards</th>
 			<th>Progress</th>
 			<th></th>
@@ -13,6 +15,8 @@
 				<td>
 					<g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link>
 				</td>
+				<td>${it.sourceLanguage.name}</td>
+				<td>${it.language.name}</td>
 				<td>${it.flashcardCount}</td>
 				<td>
 					<g:render template="/deck/progress" model="[progress: it.progress]"/>

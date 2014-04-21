@@ -42,6 +42,13 @@ class FlashcardService {
     }
 
     /**
+    * Get the last ranking that the user gave this flashcard
+    */
+    CardRanking getLastRanking(Long flashcardId) {
+        return CardRanking.findByFlashcardAndUser(Flashcard.load(flashcardId), User.load(springSecurityService.principal.id))
+    }
+
+    /**
     * For development purposes
     */
     def createRandomFlashcards(Deck deck, Alphabet alphabet) {

@@ -8,7 +8,9 @@ class Deck {
 	String title
 	String description
 	User owner
-	Language language
+	
+	Language language // the language the user is trying to learn
+	Language sourceLanguage // the language the user already knows
 
 	Date dateCreated
 	Date lastUpdated

@@ -10,6 +10,7 @@ class DeckController {
 
 	def springSecurityService
     def deckService
+    def flashcardService
 
     def index() {
         redirect action: "list"
@@ -20,7 +21,7 @@ class DeckController {
         List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
         List<Deck> othersDeckInstanceList = Share.findAllByReceiver(loggedUser).collect {it.deck}
         
-        // This is highly inefficient
+        // Get the progress for each deck
         deckInstanceList.each {
             it.metaClass.progress = deckService.getDeckProgress(it)
         }
@@ -63,7 +64,7 @@ class DeckController {
     def practice(Deck deckInstance) {
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
-        CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer)
+        CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer, params.rankingType as Integer)
         
         User userInstance = User.load(springSecurityService.principal.id)
         Customization customizationInstance = Customization?.findByOwnerAndCard(userInstance, cardUsageInstance.flashcard)
@@ -85,7 +86,12 @@ class DeckController {
 
         println "Customization = ${customizationInstance?.id}, image = ${imageURL}, audio = ${audioSysId}"
         
-        [deckInstance: deckInstance, cardUsageInstance: cardUsageInstance, imageURL: imageURL, audioSysId: audioSysId]  
+        [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
+        deckInstance: deckInstance, 
+        cardUsageInstance: cardUsageInstance, 
+        imageURL: imageURL, 
+        audioSysId: audioSysId, 
+        rankingType: params.rankingType]
     }
 
     def search(Integer max) {

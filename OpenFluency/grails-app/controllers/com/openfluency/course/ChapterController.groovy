@@ -38,8 +38,13 @@ class ChapterController {
 
     def practice(Chapter chapterInstance, Integer max) {
         // Add the progress to the deck
+        log.info "Deck ${chapterInstance.deck.id}"
         chapterInstance.deck.metaClass.progress = deckService.getDeckProgress(chapterInstance.deck)
-        CardUsage cardUsageInstance = deckService.getNextFlashcard(chapterInstance.deck, params.cardUsageId, params.ranking as Integer)
-        [chapterInstance: chapterInstance, cardUsageInstance: cardUsageInstance]
+        CardUsage cardUsageInstance = deckService.getNextFlashcard(chapterInstance.deck, params.cardUsageId, params.ranking as Integer, params.rankingType as Integer)
+
+        [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
+        chapterInstance: chapterInstance, 
+        cardUsageInstance: cardUsageInstance, 
+        rankingType: params.rankingType]
     }
 }

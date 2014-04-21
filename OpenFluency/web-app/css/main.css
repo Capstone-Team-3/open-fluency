@@ -59,6 +59,10 @@ body {
 /* FLASHCARD STYLES
 /* ---------------------------------------------------------------------------*/
 
+.flashcard h1 {
+    font-size: 60px;
+}
+
 .flashcard-create h1 {
     margin-bottom: 30px;
 }

@@ -12,6 +12,7 @@ class CardUsage {
 	Flashcard flashcard
 	User user
 
+	String rankingType			// this can be meaning, pronunciation, etc depending on what the User is ranking for this card.
 	Integer ranking 	// the difficulty level the user assigned to the flaschard (1,2,3)
 	Date endTime
 

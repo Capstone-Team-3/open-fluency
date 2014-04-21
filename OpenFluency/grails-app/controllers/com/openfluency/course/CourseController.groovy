@@ -71,6 +71,6 @@ class CourseController {
 		}
 
 		flash.message = "Well done! You're now registered in this course!"
-		render view: "show", model: [courseInstance: courseInstance, isOwner: springSecurityService.principal.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
+		redirect action: "show", id: courseInstance.id
 	}
 }
