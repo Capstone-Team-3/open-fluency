@@ -31,7 +31,7 @@
                 </li>
             </ul>
         </div>
-        <g:render template="/deck/practiceCards" model="[id: chapterInstance.id, practiceDeckInstance: chapterInstance.deck, cardUsageInstance: cardUsageInstance, controller: 'chapter']"/>
+        <g:render template="/deck/practiceCards" model="[id: chapterInstance.id, practiceDeckInstance: chapterInstance.deck, cardUsageInstance: cardUsageInstance, controller: 'chapter', imageURL: imageURL, audioSysId: audioSysId]"/>
     </div>
     
     <!-- end container -->

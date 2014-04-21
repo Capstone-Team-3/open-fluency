@@ -3,6 +3,7 @@ package com.openfluency.course
 import com.openfluency.flashcard.*
 import com.openfluency.auth.User
 import grails.plugin.springsecurity.annotation.Secured
+import com.openfluency.media.Customization
 
 class ChapterController {
 
@@ -42,10 +43,29 @@ class ChapterController {
         log.info "Deck ${chapterInstance.deck.id}"
         chapterInstance.deck.metaClass.progress = deckService.getDeckProgress(chapterInstance.deck)
         CardUsage cardUsageInstance = deckService.getNextFlashcard(chapterInstance.deck, params.cardUsageId, params.ranking as Integer, params.rankingType as Integer)
+        
+        User userInstance = User.load(springSecurityService.principal.id)
+        Customization customizationInstance = Customization?.findByOwnerAndCard(userInstance, cardUsageInstance.flashcard)
+        //get the right image - take the customization if made, else the flashcard provided image if made, else null
+        String imageURL = null
+        if (customizationInstance?.imageAssoc){
+            imageURL = customizationInstance.imageAssoc?.url
+        } else if (cardUsageInstance.flashcard?.image){
+            imageURL = cardUsageInstance.flashcard.image.url
+        }
+        //get the right audio - take the customization if made, else the flahscard proviced audio if made, else null
+        Long audioSysId = null
+        if (customizationInstance?.audioAssoc){
+            audioSysId = customizationInstance.audioAssoc?.id
+        } else if (cardUsageInstance.flashcard?.audio){
+            audioSysId = cardUsageInstance.flashcard.audio.id
+        }
 
         [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
         chapterInstance: chapterInstance, 
-        cardUsageInstance: cardUsageInstance, 
+        cardUsageInstance: cardUsageInstance,
+        imageURL: imageURL, 
+        audioSysId: audioSysId, 
         rankingType: params.rankingType]
     }
 }
