@@ -77,7 +77,7 @@ function saveCustomization(){
 		processData: false,
 		contentType: false
 	}).done(function(customizationInstance) {
-		window.location.replace(document.URL);
+		//window.location.replace(document.URL);
 	});
 }
 
