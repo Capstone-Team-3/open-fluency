@@ -14,7 +14,7 @@
 			<g:set var="imageSource" value="${imageURL}"/>
 		</g:if>
 		<g:if test="${imageSource}">
-			<div class="flashcard-img" style="background-image: url(${imageSource});"></div>
+			<div id="flashcard-image" class="flashcard-img" style="background-image: url(${imageSource});"></div>
 		</g:if>
 
 		<div class="meaning">${flashcardInstance?.secondaryUnit.print}

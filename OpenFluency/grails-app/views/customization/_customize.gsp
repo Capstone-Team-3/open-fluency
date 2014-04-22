@@ -119,7 +119,7 @@ function saveCustomization(){
 		processData: false,
 		contentType: false
 	}).done(function(customizationInstance) {
-		window.location.replace(document.URL);
+		//window.location.replace(document.URL);
 	});
 }
 
@@ -136,7 +136,7 @@ function deleteCustomization(){
 		processData: false,
 		contentType: false
 	}).done(function(resp) {
-		window.location.replace(document.URL);
+		//window.location.replace(document.URL);
 		console.log('Delete Done');
 	});
 }
