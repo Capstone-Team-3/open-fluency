@@ -23,7 +23,7 @@
 				</td>
 				<td class="right">
 					<g:if test="${it.flashcardCount}">
-						<g:link class="btn btn-sm btn-success" action="practice" controller="deck" id="${it.id}">Practice Flashcards</g:link>
+						<g:link class="btn btn-sm btn-info" action="show" controller="deck" id="${it.id}">View Deck</g:link>
 					</g:if>
 					<g:if test="${it.owner.id != userInstance.id}">
 						<g:link class="btn btn-sm btn-danger" action="remove" controller="deck" id="${it.id}">Remove</g:link>
