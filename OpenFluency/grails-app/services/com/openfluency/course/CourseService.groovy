@@ -1,5 +1,6 @@
 package com.openfluency.course
 
+import com.openfluency.flashcard.Flashcard
 import com.openfluency.language.Language
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
@@ -9,6 +10,7 @@ import grails.transaction.Transactional
 class CourseService {
 
 	def springSecurityService
+    def deckService
 
     /**
     * Create a new course owned by the currently logged in user
@@ -69,7 +71,9 @@ class CourseService {
 
 
     Quiz createQuiz(String title, Integer maxCardTime, Integer testElement, List flashcardIds, Course courseInstance) {
-        
+
+        log.info "FlashcardIDs: ${flashcardIds}"
+
         // First check that it's the owner of the course who's creating it
         if(courseInstance.owner.id != springSecurityService.principal.id){
             return null    
@@ -78,16 +82,29 @@ class CourseService {
         User loggedUser = User.load(springSecurityService.principal.id)
 
         // Create the quiz
-        Quiz quizInstance = new Quiz(course: courseInstance, title: title, testElement: testElement, enabled: true, liveTime: null, maxCardTime: maxCardTime).save()
+        Quiz quizInstance = new Quiz(course: courseInstance, title: title, testElement: testElement, enabled: true, liveTime: null, maxCardTime: maxCardTime).save(failOnError: true)
 
-        if(!quizInstance.hasErrors()) {
+        if(quizInstance.hasErrors()) {
             return quizInstance
         }
 
         // Now create the questions for each flashcard
+        Random rand = new Random() // randomize the options for the questions
+        
         flashcardIds.each {
-            // here need to create all the randomized options
-            new Question(quiz: quizInstance, flashcard: Flashcard.load(it)).save()
+            log.info "Creating question for flashcard ${it}"
+            Flashcard flashcardInstance = Flashcard.get(it)
+
+            // First create the question itself
+            Question question = new Question(quiz: quizInstance, flashcard: flashcardInstance).save()
+            
+            // Now create a number of options - right now it's hard coded to 3 but it can be easily user defined
+            int maxOptions = 3
+            (1..maxOptions).each {
+                new QuestionOption(question: question, flashcard: deckService.getRandomFlashcard(flashcardInstance)).save()
+            }
         }
+
+        return quizInstance
     }
 }

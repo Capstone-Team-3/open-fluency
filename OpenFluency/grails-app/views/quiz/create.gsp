@@ -7,11 +7,12 @@
 	<title><g:message code="default.create.label" args="[entityName]" /></title> 
 </head>
 <body>
-	<g:form action="save" controller="quiz" id="${courseInstance.id}">
+	<g:form action="save" controller="quiz">
+		<input name="course.id" value="${courseInstance.id}" type="hidden">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Create Quiz</h1>
+					<h1>Create Quiz for ${courseInstance.title}</h1>
 					<div class="well">
 						<div class="form-group">
 							<label for="title">Title</label>

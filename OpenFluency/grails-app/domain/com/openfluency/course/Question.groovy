@@ -7,6 +7,10 @@ class Question {
 	Flashcard flashcard
 	Quiz quiz
 
+	List<QuestionOption> getOptions() {
+		return QuestionOption.findAllByQuestion(this)
+	}
+
     static constraints = {
     }
 }

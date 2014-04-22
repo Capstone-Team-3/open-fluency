@@ -154,4 +154,11 @@ class DeckService {
             }
         }
     }
+
+    /**
+    * Get a random flashcard from a deck where the given flashcard lives but is not the given flashcard
+    */
+    Flashcard getRandomFlashcard(Flashcard flashcardInstance) {
+    	Flashcard.executeQuery('FROM Flashcard WHERE deck = ? AND id <> ? ORDER BY rand()', [flashcardInstance.deck, flashcardInstance.id], [max: 1])[0]
+    }
 }
