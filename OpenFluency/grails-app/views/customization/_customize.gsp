@@ -63,6 +63,7 @@
 		<button id="customizationCreate" class="center btn btn-success">Save Changes</button>
 		<a href="#" id="cancel-customize">Cancel</a>
 		<span id="c_audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
+		<button id="customizationDelete" class="center btn btn-danger">Remove Current Customizations</button>
 	<!--/g:form-->
 
 </div><!-- end customize-container -->
@@ -99,6 +100,10 @@ $('#customizationCreate').click(function(){
     saveCustomization();
 });
 
+$('#customizationDelete').click(function(){
+	deleteCustomization();
+});
+
 function saveCustomization(){
 	// Create the packet
 	var custData = new FormData();
@@ -114,7 +119,25 @@ function saveCustomization(){
 		processData: false,
 		contentType: false
 	}).done(function(customizationInstance) {
-		//window.location.replace(document.URL);
+		window.location.replace(document.URL);
+	});
+}
+
+function deleteCustomization(){
+	// Create deletion packet
+	var custDeleteData = new FormData();
+	custDeleteData.append('flashcardId', $('#c_fId').val());
+	console.log('deleting: ' + $('#c_fId').val());
+	// Send it
+	$.ajax({
+		type: 'POST',
+		url: '/OpenFluency/customization/remove',
+		data: custDeleteData,
+		processData: false,
+		contentType: false
+	}).done(function(resp) {
+		window.location.replace(document.URL);
+		console.log('Delete Done');
 	});
 }
 

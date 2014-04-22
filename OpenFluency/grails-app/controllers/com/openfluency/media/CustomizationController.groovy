@@ -5,13 +5,16 @@ package com.openfluency.media
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import com.openfluency.media.MediaService
+import com.openfluency.auth.User
+import com.openfluency.flashcard.Flashcard
 
 @Transactional(readOnly = true)
 class CustomizationController {
 
     def MediaService
+    def SpringSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", remove: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -24,6 +27,17 @@ class CustomizationController {
 
     def create() {
         respond new Customization(params)
+    }
+
+    def remove() { 
+        User userInstance = User.load(springSecurityService.principal.id)
+        Customization customizationInstance
+
+        if (params?.flashcardId) {
+            Flashcard flashcardInstance = Flashcard.load(params.flashcardId)
+            customizationInstance = Customization?.findByOwnerAndCard(userInstance, flashcardInstance)
+        }
+        delete(customizationInstance)
     }
 
     @Transactional

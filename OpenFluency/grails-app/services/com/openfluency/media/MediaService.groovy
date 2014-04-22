@@ -64,8 +64,7 @@ class MediaService {
         }
 
         //make sure to delete any old customizations the user had for this card - they would wind up unlinked
-        def oldCustomizations = Customization?.findAllByOwnerAndCard(userInstance, flashcardInstance)
-        oldCustomizations.each { it.delete(flush: true) }
+        deleteCustomization(flashcardId)
 
         //create the customization
         def customizationInstance = new Customization(
@@ -77,5 +76,16 @@ class MediaService {
 
         println "Created Customization ${customizationInstance}"
         return customizationInstance
+    }
+
+    def deleteCustomization(String flashcardId) {
+        User userInstance = User.load(springSecurityService.principal.id)
+        Flashcard flashcardInstance = Flashcard.load(flashcardId)
+
+        def oldCustomizations = Customization?.findAllByOwnerAndCard(userInstance, flashcardInstance)
+        oldCustomizations.each { 
+            println "Removing Customization ${it.id}"
+            it.delete(flush: true) 
+        }
     }
 }
