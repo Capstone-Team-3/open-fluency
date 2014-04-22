@@ -9,20 +9,21 @@
 		
 		<h3>Customize Flashcard</h3>
 			
-		<h4 id="custom-image">Add/Change Image</h4>
-		
-		<div id="custom-image-container">
-			<div class="form-group">
-				<label for="c_imageLink">Paste an image URL:</label>
-				<div class="row">
-					<div class="col-lg-4">
-						<input class="form-control" type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image?.url}"/>
+		<div class="customize-image">
+
+			<h4 id="custom-image"><span class="small glyphicon glyphicon-chevron-right"></span> Add/Change Image</h4>
+			
+			<div id="custom-image-container">
+				<div class="form-group">
+					<label for="c_imageLink">Paste an image URL:</label>
+					<div class="row">
+						<div class="col-lg-4">
+							<input class="form-control" type="text" size="80" id="c_imageLink" name="c_imageLink" value="${flashcardInstance?.image?.url}"/>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="flickr-search-container">
-				<div class="form-group">
+				<div class="flickr-search-container">
 					<label>Or, search Flickr for an image:</label>
 					<div class="row">
 						<div class="col-lg-4">
@@ -30,30 +31,30 @@
 						</div>
 						<button id="c_flickr_search" class="btn btn-info">Search</button>
 					</div>
-				</div>
-				
-				<div id="c_results"></div>
-				<button id="c_flickr_back" class="btn btn-info hidden">Back</button>
-				<label id="c_flickr_page_number"></label>
-				<button id="c_flickr_next" class="btn btn-info hidden">Next</button>
-			</div><!-- end flickr-search-container -->
-		
-		</div><!-- end custom-image-container -->
+					
+					<div id="c_results"></div>
+					<button id="c_flickr_back" class="btn btn-info hidden">Back</button>
+					<label id="c_flickr_page_number"></label>
+					<button id="c_flickr_next" class="btn btn-info hidden">Next</button>
+				</div><!-- end flickr-search-container -->
+			
+			</div><!-- end custom-image-container -->
 
-		<div class="form-group audio">
+		</div><!-- end customize-image -->
+
+		<div class="customize-audio">
 			
-			<h4 id="custom-audio">Add/Change Audio</h4>
+			<h4 id="custom-audio"><span class="small glyphicon glyphicon-chevron-right"></span> Add/Change Audio</h4>
 			
-			<div id="custom-audio-container">
+			<div class="form-group" id="custom-audio-container">
 				
+				<small class="clearfix"><strong>Note:</strong> A browser pop-up may appear asking you to 'Allow' microphone use!</small>
 				<audio id="c_audioClip" controls autoplay></audio>
-
 				<div class="audio-controls">
 					<input id="c_start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
 					<input id="c_stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
 					<input id="c_save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
 					<input id="c_audio_id" name="c_audio_id" type="hidden" value=""/> 
-					<p>Note: A browser pop-up may appear asking you to 'Allow' microphone use!</p>
 				</div>
 
 			</div><!-- end custom-audio-container -->
@@ -61,9 +62,9 @@
 		</div><!-- end form-group audio -->
 		
 		<button id="customizationCreate" class="center btn btn-success">Save Changes</button>
+		<button id="customizationDelete" class="center btn btn-danger">Remove Current Customizations</button>
 		<a href="#" id="cancel-customize">Cancel</a>
 		<span id="c_audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
-		<button id="customizationDelete" class="center btn btn-danger">Remove Current Customizations</button>
 	<!--/g:form-->
 
 </div><!-- end customize-container -->
@@ -79,28 +80,27 @@ $('#customize-container').hide();
 $('#custom-image-container').hide();
 $('#custom-audio-container').hide();
 
-$("#closeCustomization, #cancel-customize").click(function(){
+$("#closeCustomization, #cancel-customize").on('click', function(){
+    resetChevrons();
     $("#customizationBtn").show();
     $('#customize-container').hide();
-    $("#closeCustomization").hide();
     $('#custom-image-container').hide();
     $('#custom-audio-container').hide();
-    //resetChevrons();
 });
 
-$('#customizationBtn').click(function(){ 
+$('#customizationBtn').on('click', function(){ 
     $('#customize-container').show();
     $('#customizationBtn').hide();
 });
 
-$('#customizationCreate').click(function(){
+$('#customizationCreate').on('click', function(){
+    resetChevrons();
     $('#customize-container').hide();
-    //resetChevrons();
     $('#customizationBtn').show();
     saveCustomization();
 });
 
-$('#customizationDelete').click(function(){
+$('#customizationDelete').on('click', function(){
 	deleteCustomization();
 });
 
@@ -142,38 +142,41 @@ function deleteCustomization(){
 }
 
 $('#custom-image').on('click', function(){
-	$('#custom-image-container').toggle();
+	$('#custom-image-container').toggle('slow');
 	toggleChevron(this);
 });
 
 $('#custom-audio').on('click', function(){
-	$('#custom-audio-container').toggle();
-	toggleChevron('#custom-audio');
+	$('#custom-audio-container').toggle('slow');
+	toggleChevron(this);
 });
 
 function toggleChevron(container) {
-	var $glyph = $('.glyphicon-chevron-*', container);
+	var $glyph = $('.glyphicon', container);
 	$glyph.toggleClass('glyphicon-chevron-right');
 	$glyph.toggleClass('glyphicon-chevron-down');
 }
 
 function resetChevrons() {
-	var $glyphicons = $('.glyphicon-chevron-down');
-
-	$glyphicons.each(function(glyph){
-		glyph.removeClass('glyphicon-chevron-down');
-		glyph.addClass('glyphicon-chevron-right');
-	});
+	var $audioContainer = $('#custom-audio span'),
+		$imageContainer = $('#custom-image span');
+	
+	if ($imageContainer.hasClass('glyphicon-chevron-down')){
+		toggleChevron('#custom-image');
+	}
+	if ($audioContainer.hasClass('glyphicon-chevron-down')){
+		toggleChevron('#custom-audio');
+	}
 }
 
-$("#c_start_rec_button").click(function(){
+$("#c_start_rec_button").on('click', function(){
 	setWorkerPath("../../js/recorderWorker.js"); 
 	startRecording(); 
 	$("#c_audioSaveMessage").show();
 	$("#customizationCreate").removeClass('btn-success').addClass('btn-warning');
 });
 
-$("#c_stop_rec_button").click(function(){ 
+$("#c_stop_rec_button").on('click', function(){ 
 	stopRecording("#c_audioClip", $("#c_pId").val(), ""); 
 	$("#c_save_rec_button").show();
 });
@@ -181,7 +184,7 @@ $("#c_stop_rec_button").click(function(){
 
 $("#c_audioSaveMessage").hide();
 $("#c_save_rec_button").hide();
-$("#c_save_rec_button").click(function(){
+$("#c_save_rec_button").on('click', function(){
 	saveAudioRecording(formData);
 	$("#c_audioSaveMessage").hide();
 	$("#c_save_rec_button").hide();
@@ -209,7 +212,7 @@ function saveAudioRecording(formDataObj){
 	});
 }
 
-$("#c_flickr_search").click(function(){
+$("#c_flickr_search").on('click', function(){
 	$('#c_flickr_back').removeClass('hidden');
 	$('#c_flickr_next').removeClass('hidden');
 
@@ -217,13 +220,13 @@ $("#c_flickr_search").click(function(){
 	//console.log($('#c_query').val());
 	searchImage("#c_query", "#c_results", "#c_imageLink",1);
 });
-$("#c_flickr_next").click(function(){
+$("#c_flickr_next").on('click', function(){
 	var targetPage = $("#c_flickr_page_number").val();
 	targetPage++;
 	searchImage("#c_query", "#c_results", "#c_imageLink", targetPage);
 	$("#c_flickr_page_number").val(targetPage).text(targetPage);
 });
-$("#c_flickr_back").click(function(){
+$("#c_flickr_back").on('click', function(){
 	var targetPage = $("#c_flickr_page_number").val();
 	if (targetPage > 1) { 
 		targetPage--;

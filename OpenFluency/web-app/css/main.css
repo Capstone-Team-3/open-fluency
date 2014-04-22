@@ -10,6 +10,10 @@
     text-align: right;
 }
 
+.hidden {
+    display: none; /* override Bootstrap default to avoid awkward spacing */
+}
+
 body {
     padding-bottom: 40px;
 }
@@ -119,13 +123,6 @@ body {
     width: 25%;
 }
 
-h4#custom-audio, 
-h4#custom-image {
-    background-color: #25A39A;
-    color: #fff;
-    padding: 10px;
-}
-
 .progress-container {
     margin-top: 30px;
 }
@@ -161,6 +158,54 @@ h4#custom-image {
 #customize-container {
     background-color: #F8F8F8;
     padding: 10px 30px 30px;
+}
+
+#c_flickr_search {
+    margin-left: -10px;
+}
+
+#closeCustomization {
+    margin-top: 20px;
+    padding: 3px 6px 1px;
+}
+
+h4#custom-audio, 
+h4#custom-image {
+    background-color: #25A39A;
+    color: #fff;
+    margin-bottom: 0;
+    padding: 10px;
+}
+
+#custom-audio .small,
+#custom-image .small {
+    color: white;
+}
+
+#c_audioClip {
+    margin-top: 5px;
+}
+
+.customize-image {
+    margin-top: 20px;
+}
+
+.customize-audio {
+    margin-bottom: 20px;
+}
+
+#custom-image-container {
+    background-color: #fff;
+    padding: 10px 20px 0;
+}
+
+#custom-audio-container {
+    background-color: #fff;
+    padding: 10px 20px 20px;
+}
+
+.audio-controls {
+    margin-top: 5px;
 }
 
 /* ---------------------------------------------------------------------------*/
