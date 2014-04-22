@@ -158,16 +158,9 @@
 	<g:javascript src="create_audio.js"/>
 	<!-- this line is left hear as it relies on taking a formData created in create_audio.js and passes to create_flashcard.js -->
 	<g:javascript>
-	$('#image-tooltip').tooltip();
-
-	$('#flickr_search').on('click', function() {
-		showHideFlickrSearch();
-	});
-
-	function showHideFlickrSearch(){
-		$('#flickr_div').toggle();
-	} 
-
+		$('#flickr_search').on('click', function() {
+			$('#flickr_div').css('display', 'block');
+		});
 	</g:javascript>
 
 </body>
