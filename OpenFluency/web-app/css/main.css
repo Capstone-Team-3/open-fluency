@@ -60,6 +60,63 @@ body {
 }
 
 /* ---------------------------------------------------------------------------*/
+/* CREATE FLASHCARD STYLES
+/* ---------------------------------------------------------------------------*/
+
+.customize-heading {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group-image,
+.form-group-audio {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.form-group-image {
+    padding-bottom: 5px;
+}
+
+.flashcard-create h1 {
+    margin-bottom: 30px;
+}
+
+.flashcard-create .audio-controls input {
+    margin-top: 0;
+}
+
+#flickr_search {
+    margin-top: 0;
+}
+
+#flickr_div {
+    display: none;
+}
+/*
+.flashcard-create-form {
+    border-right: 1px solid #eee;
+}*/
+
+.flashcard-create #goCreate {
+    margin-top: 15px;
+}
+
+#flickr_div .pagination {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#flickr_back {
+    margin-right: 8px;
+}
+
+#flickr_next {
+    margin-left: 8px;
+}
+
+/* ---------------------------------------------------------------------------*/
 /* FLASHCARD STYLES
 /* ---------------------------------------------------------------------------*/
 
@@ -91,18 +148,6 @@ body {
 
 .flashcard .pronunciation {
     font-size: .85em;
-}
-
-.flashcard-create h1 {
-    margin-bottom: 30px;
-}
-
-.flashcard-create .control-label {
-    padding-top: 11px; /* padding plus a border */
-}
-
-.flashcard-create .btn {
-    margin-top: 10px;
 }
 
 .flashcard-img {
@@ -182,7 +227,7 @@ h4#custom-image {
     color: white;
 }
 
-#c_audioClip {
+#c_audioClip, #audioClip {
     margin-top: 5px;
 }
 
