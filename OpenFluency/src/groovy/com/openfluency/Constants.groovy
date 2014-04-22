@@ -15,5 +15,6 @@ public class Constants {
 	// The different things that a User can rank a flashcard on
 	public static final int MEANING = 0
 	public static final int PRONUNCIATION = 1
-	public static final List RANKING_TYPES = ["Meaning", "Pronunciation"]
+	public static final int SYMBOL = 2
+	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol"]
 }

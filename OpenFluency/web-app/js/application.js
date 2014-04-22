@@ -65,3 +65,25 @@ var initializePracticeCards = function() {
         $('.rankCardForm').submit();
     });
 }
+
+/**
+* Initialize the form used to create Quizes
+*/
+var initializeQuizCreator = function() {
+	$('.chapter-selector').change(function() {
+		if($(this).prop('checked')) {
+			that = this;
+			$.ajax({
+				url: "/OpenFluency/chapter/flashcardSelect/" + $(this).data('chapter')
+			})
+			.done(function(html) {
+				$("#include-chapters").append(html);
+			});
+		} else {
+			var element = $("#flashcard-select-" + $(this).data('chapter'));
+			element.slideUp("slow", function() {
+				element.remove();	
+			})
+		}
+	});
+}

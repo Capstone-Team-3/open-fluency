@@ -27,7 +27,7 @@
                     <g:link action="show" controller="chapter" id="${chapterInstance.id}">${chapterInstance.title}</g:link>
                 </li>
                 <li>
-                    <a href="#">Practice - ${Constants.RANKING_TYPES[rankingType as Integer]}</a>
+                    <a href="#">Practice - ${Constants.CARD_ELEMENTS[rankingType as Integer]}</a>
                 </li>
             </ul>
         </div>

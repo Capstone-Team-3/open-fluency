@@ -66,4 +66,28 @@ class CourseService {
             }
         }
     }
+
+
+    Quiz createQuiz(String title, Integer maxCardTime, Integer testElement, List flashcardIds, Course courseInstance) {
+        
+        // First check that it's the owner of the course who's creating it
+        if(courseInstance.owner.id != springSecurityService.principal.id){
+            return null    
+        }
+
+        User loggedUser = User.load(springSecurityService.principal.id)
+
+        // Create the quiz
+        Quiz quizInstance = new Quiz(course: courseInstance, title: title, testElement: testElement, enabled: true, liveTime: null, maxCardTime: maxCardTime).save()
+
+        if(!quizInstance.hasErrors()) {
+            return quizInstance
+        }
+
+        // Now create the questions for each flashcard
+        flashcardIds.each {
+            // here need to create all the randomized options
+            new Question(quiz: quizInstance, flashcard: Flashcard.load(it)).save()
+        }
+    }
 }

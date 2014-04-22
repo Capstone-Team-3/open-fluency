@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="deck-header text-center">
-                <h3>Practice by ${Constants.RANKING_TYPES[rankingType as Integer]}</h3>
+                <h3>Practice by ${Constants.CARD_ELEMENTS[rankingType as Integer]}</h3>
                 <g:if test="${chapterInstance}">                    
                     <h1>${chapterInstance?.title}</h1>
                 </g:if>

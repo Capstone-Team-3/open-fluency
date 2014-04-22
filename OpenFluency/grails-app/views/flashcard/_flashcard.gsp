@@ -26,7 +26,6 @@
 			<!--g:if test="${flashcardInstance.audio?.audioWAV}"-->
 			<g:if test="${audioSysId}">
 				<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
-				
 				<g:set var="audioId" value="${audioSysId}"/>
 				<li class="fieldcontain">
 					<div class="audio-practice">

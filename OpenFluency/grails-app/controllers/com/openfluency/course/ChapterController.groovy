@@ -68,4 +68,11 @@ class ChapterController {
         audioSysId: audioSysId, 
         rankingType: params.rankingType]
     }
+
+        /**
+    * Returns the flaskcard for a deck
+    */
+    def flashcardSelect(Chapter chapterInstance) {
+        render template: "selectFlashcards", bean: chapterInstance, var: "chapterInstance"
+    }
 }

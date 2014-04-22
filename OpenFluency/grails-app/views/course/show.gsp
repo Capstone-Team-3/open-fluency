@@ -32,6 +32,7 @@
 				<g:if test="${isOwner}">
 					<!-- This is only displayed for the owner of the course -->
 					<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
+					<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Test</g:link>
 				</g:if>
 			</h1>
 			<p class="course-description">${courseInstance.description}</p>

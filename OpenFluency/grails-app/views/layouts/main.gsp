@@ -10,6 +10,7 @@
 
 	<!-- CSS includes -->
 	<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
+	<link rel="stylesheet" href="${resource(dir: 'css', file: 'animate.css')}" type="text/css">
 
 	<!-- JS libraries -->
 	<g:javascript src="jquery.min.js"/>
