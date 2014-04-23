@@ -32,6 +32,11 @@
 								</g:each>
 							</select>
 						</div>
+						<div class="form-group">
+							<label for="maxCardTime">Live time</label>
+							<g:datePicker name="liveTime" value="${new Date()}"
+              class="form-control"/>
+						</div>
 					</div>
 
 					<h4>Chapters to include</h4>
@@ -56,7 +61,6 @@
 				</div>
 			</div>
 		</div>
-
 	</g:form>
 	<g:javascript>initializeQuizCreator();</g:javascript>
 </body>

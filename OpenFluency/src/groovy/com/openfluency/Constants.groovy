@@ -17,4 +17,9 @@ public class Constants {
 	public static final int PRONUNCIATION = 1
 	public static final int SYMBOL = 2
 	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol"]
+
+	// Answer statuses
+	public static final int NOT_ANSWERED = 0
+	public static final int VIEWED = 1
+	public static final int ANSWERED = 2
 }

@@ -42,6 +42,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
+				<h2>Chapters</h2>
 				<g:each in="${courseInstance.chapters}">
 					<div class="col-lg-3">
 						<div class="panel panel-default">
@@ -51,6 +52,28 @@
 								</h3>
 								<p>${it.deck.flashcards.size()} Flashcards</p>
 								<g:render template="/deck/progress" model="[progress: it.progress]"/>
+							</div>
+						</div>
+					</div>
+					<!-- end col-lg-3 -->
+				</g:each>
+			</div>
+		</div>
+		<!-- end row -->
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Tests</h2>
+				<g:each in="${quizesInstanceList}">
+					<div class="col-lg-3">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h3>${it.title}</h3>
+								<p>${it.questions.size()} Questions</p>
+								<br>
+								<div class="center">
+									<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-info">Take Quiz</g:link>
+								</div>
 							</div>
 						</div>
 					</div>

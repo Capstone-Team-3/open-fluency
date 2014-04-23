@@ -12,6 +12,7 @@
 				<h3>Course: ${quizInstance.course.title}</h3>
 				<p>Testing ${Constants.CARD_ELEMENTS[quizInstance.testElement]}</p>
 				<p>Max Card Time: ${quizInstance.maxCardTime}</p>
+				<p>Live Time: ${quizInstance.liveTime.format('MM/dd/YYYY')}</p>
 			</div>
 
 			<g:each in="${quizInstance.questions}">

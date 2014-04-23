@@ -23,10 +23,10 @@
 				</td>
 				<td class="right">
 					<g:if test="${it.flashcardCount}">
-						<g:link class="btn btn-sm btn-info" action="show" controller="deck" id="${it.id}">View Deck</g:link>
+						<g:link class="btn btn-sm btn-info show-deck-${it.id}" action="show" controller="deck" id="${it.id}">View Deck</g:link>
 					</g:if>
 					<g:if test="${it.owner.id != userInstance.id}">
-						<g:link class="btn btn-sm btn-danger" action="remove" controller="deck" id="${it.id}">Remove</g:link>
+						<g:link class="btn btn-sm btn-danger remove-deck-${it.id}" action="remove" controller="deck" id="${it.id}">Remove</g:link>
 					</g:if>
 				</td>
 			</tr>

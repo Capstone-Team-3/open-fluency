@@ -3,7 +3,6 @@ import geb.spock.GebReportingSpec
 import spock.lang.*
 
 import com.openfluency.auth.User
-import pages.login.AuthPage
 import pages.user.RegisterPage
 import pages.DashboardPage
 
@@ -54,6 +53,7 @@ class StudentSpec extends GebReportingSpec {
 		when:
 		deckTitle = "Test Deck"
 		deckDescription = "This is a test deck!"
+		sourceLanguageSelect.value('2')
 		createDeckButton.click()
 		then:
 		at ShowDeckPage
@@ -108,13 +108,13 @@ class StudentSpec extends GebReportingSpec {
 		then: 
 		at ListDeckPage
 		flashMessage.text() == "You succesfully added Kanji for Dummies 1 to your decks!"
-		$('a[href="/OpenFluency/deck/show/4"]').size() == 1
+		$(".show-deck-4").size() == 1
 		$('.other-decks tbody tr').size() == 1
 	}
 
 	def "Student removes the added deck from his/her own collection"() {
 		when:
-		$('a[href="/OpenFluency/deck/remove/4"]').click()
+		$(".remove-deck-4").click()
 		then: 
 		at ListDeckPage
 		flashMessage.text() == "You succesfully removed Kanji for Dummies 1 from your decks!"

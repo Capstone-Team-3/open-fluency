@@ -13,6 +13,7 @@ class CreateDeckPage extends MainLayoutPage {
 	static content = {
 		
 		deckTitle(wait: true) { $("input", name: 'title') }
+		sourceLanguageSelect(wait: true) { $("select", name: 'sourceLanguage.id') }
 		deckDescription(wait: true) { $("textarea", name: 'description') }
 		deckLanguage(wait: true) { $("select", name: 'language.id') }
 		createDeckButton(wait: true) { $("#create-deck") }

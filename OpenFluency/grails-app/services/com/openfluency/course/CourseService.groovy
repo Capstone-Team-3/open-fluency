@@ -47,6 +47,22 @@ class CourseService {
         return registration
     }
 
+    /**
+    * Returns a list of all the courses that are enabled and have a live time that is either null or before the current date
+    */
+    List<Quiz> getLiveQuizes(Course courseInstance) {
+        Quiz.withCriteria {
+            eq('enabled', true)
+            or {
+                le('liveTime', new Date())
+                isNull('liveTime')
+            }
+        }
+    }
+
+    /**
+    * Search for courses of a given language and that contain the given keywords in the title or description
+    */
     List<Course> searchCourses(Long languageId, String keyword) {
         log.info "Searching Courses with languageId: $languageId and Keywords: $keyword"
 
@@ -70,7 +86,7 @@ class CourseService {
     }
 
 
-    Quiz createQuiz(String title, Integer maxCardTime, Integer testElement, List flashcardIds, Course courseInstance) {
+    Quiz createQuiz(String title, Date liveTime, Integer maxCardTime, Integer testElement, List flashcardIds, Course courseInstance) {
 
         log.info "FlashcardIDs: ${flashcardIds}"
 
@@ -82,7 +98,7 @@ class CourseService {
         User loggedUser = User.load(springSecurityService.principal.id)
 
         // Create the quiz
-        Quiz quizInstance = new Quiz(course: courseInstance, title: title, testElement: testElement, enabled: true, liveTime: null, maxCardTime: maxCardTime).save(failOnError: true)
+        Quiz quizInstance = new Quiz(course: courseInstance, title: title, testElement: testElement, enabled: true, liveTime: liveTime, maxCardTime: maxCardTime).save(failOnError: true)
 
         if(quizInstance.hasErrors()) {
             return quizInstance
