@@ -1,4 +1,4 @@
-<div id="customize-container">
+<div id="customize-container" class="hidden">
 
 	<button id="closeCustomization" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
 	
@@ -64,7 +64,7 @@
 		<button id="customizationCreate" class="center btn btn-success">Save Changes</button>
 		<button id="customizationDelete" class="center btn btn-danger">Remove Current Customizations</button>
 		<a href="#" id="cancel-customize">Cancel</a>
-		<span id="c_audioSaveMessage" class="audio-save-message">*did you save your audio?</span>
+		<span id="c_audioSaveMessage" class="audio-save-message hidden">* Did you save your audio recording?</span>
 	<!--/g:form-->
 
 </div><!-- end customize-container -->
@@ -72,12 +72,4 @@
 <g:javascript src="recorderWorker.js"/>
 <g:javascript src="recorder.js"/>
 <g:javascript src="create_audio.js"/>
-
-
-<g:javascript>
-$('#customize-container').hide();
-$('#custom-image-container').hide();
-$('#custom-audio-container').hide();
-</g:javascript>
-
 <g:javascript src="customize.js"/>

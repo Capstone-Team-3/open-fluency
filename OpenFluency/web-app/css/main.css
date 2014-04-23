@@ -93,10 +93,6 @@ body {
 #flickr_div {
     display: none;
 }
-/*
-.flashcard-create-form {
-    border-right: 1px solid #eee;
-}*/
 
 .flashcard-create #goCreate {
     margin-top: 15px;
@@ -196,12 +192,21 @@ body {
     font-style: italic;
 }
 
+#flashcard-play-audio {
+    cursor: pointer;
+    padding-left: 10px;
+    position: relative;
+    top: 3px;
+}
+
 /* ---------------------------------------------------------------------------*/
 /* CUSTOMIZATION STYLES
 /* ---------------------------------------------------------------------------*/
 
 #customize-container {
     background-color: #F8F8F8;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
     padding: 10px 30px 30px;
 }
 
