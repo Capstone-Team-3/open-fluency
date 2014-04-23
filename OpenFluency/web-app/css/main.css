@@ -93,10 +93,6 @@ body {
 #flickr_div {
     display: none;
 }
-/*
-.flashcard-create-form {
-    border-right: 1px solid #eee;
-}*/
 
 .flashcard-create #goCreate {
     margin-top: 15px;
@@ -194,6 +190,13 @@ body {
 .audio-save-message {
     color: red;
     font-style: italic;
+}
+
+#flashcard-play-audio {
+    cursor: pointer;
+    padding-left: 10px;
+    position: relative;
+    top: 3px;
 }
 
 /* ---------------------------------------------------------------------------*/

@@ -116,7 +116,7 @@ $(document).ready(function(){
 
     $("#c_flickr_back").on('click', function(){
         var targetPage = $("#c_flickr_page_number").val();
-        if (targetPage > 1) { 
+        if (targetPage > 1) {
             targetPage--;
             searchImage("#c_query", "#c_results", "#c_imageLink", targetPage);
             $("#c_flickr_page_number").val(targetPage).text(targetPage);
@@ -126,6 +126,7 @@ $(document).ready(function(){
 /*----------------------------------------------------------------------------*/
 /* Remove Customizations (image and audio file) from flashcard */
 /*----------------------------------------------------------------------------*/
+    
     $('#customizationDelete').on('click', function(){
         deleteCustomization();
     });
