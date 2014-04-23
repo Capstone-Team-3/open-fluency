@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    var rankTypeVal = $('h3').data('rank-type');
 
 /*----------------------------------------------------------------------------*/
 /* Show/hide customization panel
@@ -175,7 +176,11 @@ $(document).ready(function(){
             processData: false,
             contentType: false
         }).done(function(customizationInstance) {
-            //window.location.replace(document.URL);
+            // set url so has ranking type at end
+            window.location.replace(window.location.href + "?rankingType=" + rankTypeVal);
+
+            // force reload from server
+            window.location.reload(true);
         });
     }
 

@@ -205,6 +205,8 @@ body {
 
 #customize-container {
     background-color: #F8F8F8;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
     padding: 10px 30px 30px;
 }
 

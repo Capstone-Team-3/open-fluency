@@ -5,7 +5,7 @@
 
 		<div class="flashcard-header">
 			
-			<a href="#" id="customizationBtn"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a id="customizationBtn"><span class="glyphicon glyphicon-pencil"></span></a>
 			
 			<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
 			
@@ -21,7 +21,7 @@
 					</div>
 				</g:if>
 
-			</div>
+			</div><!-- end pronunciation -->
 
 		</div><!-- end flashcard-header -->
 
@@ -34,7 +34,8 @@
 			<div id="flashcard-image" class="flashcard-img" style="background-image: url(${imageSource});"></div>
 		</g:if>
 
-		<div class="meaning">${flashcardInstance?.secondaryUnit.print}
+		<div class="meaning">
+			${flashcardInstance?.secondaryUnit.print}
 			<!--  <button class="btn btn-default" id="hide-meaning" onclick = "this.style.visibility='hidden'">Hide Meaning</button> -->
 		</div>
 

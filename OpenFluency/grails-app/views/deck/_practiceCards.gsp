@@ -1,9 +1,10 @@
 <%@ page import="com.openfluency.Constants" %>
 
     <div class="row">
-        <div class="col-lg-12">
             <div class="deck-header text-center">
-                <h3>Practice by ${Constants.CARD_ELEMENTS[rankingType as Integer]}</h3>
+                <h3 data-rank-type="${rankingType as Integer}">
+                    Practice by ${Constants.CARD_ELEMENTS[rankingType as Integer]}
+                </h3>
                 <g:if test="${chapterInstance}">                    
                     <h1>${chapterInstance?.title}</h1>
                 </g:if>
@@ -14,7 +15,6 @@
             </div><!-- end deck-heaer -->
 
             <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
-        </div><!-- end col-leg-12 -->
     </div><!-- end row -->
 
     <div class="practice-body row">
@@ -33,12 +33,6 @@
                 <button id="hard" class="btn btn-danger ranker" data-value="${Constants.HARD}">Hard</button>
             </div>
 
-            %{-- <div class="history">
-                <h4>History</h4>
-                <p>Last time you ranked this card as:</p>
-                <p>Meaning: ${cardRankingInstance?.meaningRanking ? Constants.DIFFICULTIES[cardRankingInstance?.meaningRanking] : "Unranked"}</p>
-                <p>Pronunciation: ${cardRankingInstance?.pronunciationRanking ? Constants.DIFFICULTIES[cardRankingInstance?.pronunciationRanking] : "Unranked"}</p>
-            </div> --}%
         </div><!-- end col-lg-4 -->
     </div><!-- end row -->
 
