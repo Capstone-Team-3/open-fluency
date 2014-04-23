@@ -1,22 +1,22 @@
-var recorder;
-var formData;
-var audio = document.querySelector('audio');
+var recorder,
+	formData,
+	audio = document.querySelector('audio');
 
 var onFail = function(e){
 	console.log('Rejected!',e);
-}
+};
 
 var onSuccess = function(s){
 	var context = new webkitAudioContext();
 	var mediaStreamSource = context.createMediaStreamSource(s);
 	recorder = new Recorder(mediaStreamSource);
 	recorder.record();
-}
+};
 
 window.URL = window.URL || window.webkitURL;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-function startRecording() {
+function startRecording(){
 	console.log("Started Recording");
 	if (navigator.getUserMedia) {onSuccess
 		navigator.getUserMedia({audio: true}, onSuccess, onFail);

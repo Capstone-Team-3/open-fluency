@@ -3,7 +3,7 @@
 	<div class="panel panel-default">
 
 		<div class="flashcard-header">
-			<a id="customizationBtn"><span class="glyphicon glyphicon-pencil"></span></a>
+			<a href="#" id="customizationBtn"><span class="glyphicon glyphicon-pencil"></span></a>
 			<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
 			<div class="pronunciation">pronounced '${flashcardInstance?.pronunciation.literal}'</div>
 		</div><!-- end flashcard-header -->
