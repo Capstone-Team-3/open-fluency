@@ -37,6 +37,3 @@
 
 	</div>
 </div>
-<g:javascript>
-	console.log($())
-</g:javascript>

@@ -3,8 +3,6 @@
 <html>
 <head>
 	<meta name="layout" content="main">
-	<g:set var="entityName" value="${message(code: 'quiz.label', default: 'Quiz')}" />
-	<title><g:message code="default.create.label" args="[entityName]" /></title> 
 </head>
 <body>
 	<g:form action="save" controller="quiz">

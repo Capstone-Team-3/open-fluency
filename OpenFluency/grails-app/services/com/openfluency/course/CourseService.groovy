@@ -84,43 +84,4 @@ class CourseService {
             }
         }
     }
-
-
-    Quiz createQuiz(String title, Date liveTime, Integer maxCardTime, Integer testElement, List flashcardIds, Course courseInstance) {
-
-        log.info "FlashcardIDs: ${flashcardIds}"
-
-        // First check that it's the owner of the course who's creating it
-        if(courseInstance.owner.id != springSecurityService.principal.id){
-            return null    
-        }
-
-        User loggedUser = User.load(springSecurityService.principal.id)
-
-        // Create the quiz
-        Quiz quizInstance = new Quiz(course: courseInstance, title: title, testElement: testElement, enabled: true, liveTime: liveTime, maxCardTime: maxCardTime).save(failOnError: true)
-
-        if(quizInstance.hasErrors()) {
-            return quizInstance
-        }
-
-        // Now create the questions for each flashcard
-        Random rand = new Random() // randomize the options for the questions
-        
-        flashcardIds.each {
-            log.info "Creating question for flashcard ${it}"
-            Flashcard flashcardInstance = Flashcard.get(it)
-
-            // First create the question itself
-            Question question = new Question(quiz: quizInstance, flashcard: flashcardInstance).save()
-            
-            // Now create a number of options - right now it's hard coded to 3 but it can be easily user defined
-            int maxOptions = 3
-            (1..maxOptions).each {
-                new QuestionOption(question: question, flashcard: deckService.getRandomFlashcard(flashcardInstance)).save()
-            }
-        }
-
-        return quizInstance
-    }
 }
