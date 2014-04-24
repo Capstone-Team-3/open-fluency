@@ -73,4 +73,10 @@ class CourseController {
 		flash.message = "Well done! You're now registered in this course!"
 		redirect action: "show", id: courseInstance.id
 	}
+	// Only instructors can see enrolled students
+	@Secured(['ROLE_INSTRUCTOR'])
+	def students(Course courseInstance) {
+		render view: "students", model: [courseInstance: courseInstance, enrolledStudents: Registration.findAllByCourse(courseInstance)]
+		
+	}
 }
