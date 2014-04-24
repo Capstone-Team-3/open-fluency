@@ -18,10 +18,10 @@ class QuizController {
 		Course courseInstance = Course.load(params["course.id"] as Long)
 
 		// First check that it's the owner of the course who's creating it
-        if(courseInstance.owner.id != springSecurityService.principal.id){
-        	flash.message = "You're not authorized to create a quiz for a course you don't own!"
-        	redirect action: "index", controller: "home"
-        }
+		if(courseInstance.owner.id != springSecurityService.principal.id){
+			flash.message = "You're not authorized to create a quiz for a course you don't own!"
+			redirect action: "index", controller: "home"
+		}
 
 		// Build the quiz
 		Quiz quizInstance = quizService.createQuiz(
@@ -65,6 +65,13 @@ class QuizController {
 			return
 		}
 
+		// Check if the student has completed this quiz
+		Grade gradeInstance = quizService.getGrade(quizInstance)
+		if(gradeInstance) {
+			redirect action: "report", id: gradeInstance.id
+			return
+		}
+
 		// Check that it's live
 		if(quizInstance.liveTime != null && quizInstance.liveTime > new Date()) {
 			flash.message = "The test is not live yet!"
@@ -72,19 +79,37 @@ class QuizController {
 			return
 		}
 
-		if(quizService.startQuiz()) {
-
+		// Validate the quiz can be started
+		Answer firstAnswer = quizService.startQuiz(quizInstance, session.id)
+		if(firstAnswer) {
+			// Render view to answer first question
+			render view: "quiz", model: [answerInstance: firstAnswer]
+		}
+		else {
+			flash.message = "Quiz cannot be started"
+			redirect action: "index", controller: "home"
 		}
 	}
 
-	def nextQuestion(Quiz quizInstance) {
-		Answer answer = quizService.nextQuestion(quizInstance)
+	def nextQuestion(Answer answerInstance) {
 
-		// No more questions left
+		// Answer current question
+		quizService.answerQuestion(answerInstance, params.option as Long, session.id)
+		
+		Answer answer = quizService.nextQuestion(answerInstance.question.quiz)
+
+		// No more questions left - check if the user has completed the course
 		if(!answer) {
-
+			Grade gradeInstance = quizService.finalizeQuiz(answerInstance.question.quiz)
+			if(gradeInstance) {
+				redirect action: "report", id: gradeInstance.id
+			}
 		}
 
 		render view: "quiz", model: [answerInstance: answer]
+	}
+
+	def report(Grade gradeInstance) {
+		[answerInstanceList: quizService.getAnswersByLoggedUser(gradeInstance.quiz), gradeInstance: gradeInstance]
 	}
 }

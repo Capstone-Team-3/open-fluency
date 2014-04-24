@@ -52,6 +52,7 @@ class CourseService {
     */
     List<Quiz> getLiveQuizes(Course courseInstance) {
         Quiz.withCriteria {
+            eq('course', courseInstance)
             eq('enabled', true)
             or {
                 le('liveTime', new Date())

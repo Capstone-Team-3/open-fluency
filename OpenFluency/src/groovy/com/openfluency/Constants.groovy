@@ -22,4 +22,9 @@ public class Constants {
 	public static final int NOT_ANSWERED = 0
 	public static final int VIEWED = 1
 	public static final int ANSWERED = 2
+
+	// Quiz statuses
+	public static final int NOT_STARTED = 0
+	public static final int IN_PROGRESS = 1
+	public static final int COMPLETED = 2
 }

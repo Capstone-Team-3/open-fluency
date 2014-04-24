@@ -1,5 +1,7 @@
 package com.openfluency.course
 
+import com.openfluency.Constants
+
 class Quiz {
 
 	Course course
@@ -14,6 +16,10 @@ class Quiz {
 
 	List<Question> getQuestions() {
 		Question.findAllByQuiz(this)
+	}
+
+	Integer countQuestions() {
+		Question.countByQuiz(this)
 	}
 
     static constraints = {
