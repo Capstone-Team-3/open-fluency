@@ -2,6 +2,7 @@ import com.openfluency.language.*
 import com.openfluency.auth.*
 import com.openfluency.flashcard.*
 import com.openfluency.course.*
+import com.openfluency.algorithm.*
 import com.openfluency.Constants
 
 class BootStrap {
@@ -10,6 +11,7 @@ class BootStrap {
     def flashcardService
     def grailsApplication
     def quizService
+    def algorithmService
 
     def init = { servletContext ->
 
@@ -107,6 +109,13 @@ class BootStrap {
 
         // Sign up the student for course 1
         new Registration(user: student, course: kanji1).save()
+
+        // Register some CardServiceAlgorithms
+        CardServer linearWithShuffle = new LinearWithShuffle()
+        algorithmService.addCardServer(Constants.CARD_SERVERS[0], linearWithShuffle)
+        CardServiceAlgorithm wrappedLinearWithShuffle = new CardServiceAlgorithm(Constants.CARD_SERVERS[0]).save(flush: true)
+
+        log.info "Added the ${wrappedLinearWithShuffle} algo"
 
         log.info "Booted!"
     }

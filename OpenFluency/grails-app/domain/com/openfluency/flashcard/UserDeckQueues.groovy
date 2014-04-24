@@ -23,6 +23,8 @@ class UserDeckQueues {
 		this.queues = new TreeMap<String, SortedSet<FlashcardInfo>>()
 		//add a queue for every testable/learnable card element
 		Constants.CARD_ELEMENTS.each { this.queues.put(it,new TreeSet<FlashcardInfo>()); }
+        //if there are cards in a deck add them to the queues
+        deckInstance.flashcards.each { addNewFlashcardToQueues(it, deckInstance.algorithm) }
 	}
 
     static constraints = {
@@ -37,28 +39,52 @@ class UserDeckQueues {
     void addNewFlashcardToQueues(Flashcard flashcardInstance, CardServiceAlgorithm algoInstance){
     	//add an algo built and initialized FlashcardInfo for the Flashcard instance to each queue
     	for (Entry<String, SortedSet<FlashcardInfo>> entry : this.queues.entrySet()){
-    		def aQueue = entry.getValue()
-    		aQueue.add(algoInstance.buildNewFlashcardInfo(flashcardInstance))
+    		def aQueueInstance = entry.getValue()
+            //get the priority of the next card to be served from the queue - if the queue isn't empty, else return 1.0
+            double nextCardPriority = (aQueueInstance.size() > 0) ? this.nextFlashcard(Constants.CARD_ELEMENTS.findIndexOf(entry.getKey())).viewPriority : 1.0
+    		aQueueInstance.add(algoInstance.buildNewFlashcardInfo(flashcardInstance, nextCardPriority))
     	}
+        this.save(flush: true)
     }
 
-    /**  This method will return the FlashcardInfo with the HIGHEST viewPriority value - important to note this! Cards to be seen sooner need Higher priority values
+    /** Simply removes the FlashcardInfos for a given Flashcard from the queues - if they held it
+    */
+    void removeFlashcardFromQueues(Flashcard flashcardInstance) {
+        for (Entry<String, SortedSet<FlashcardInfo>> entry : this.queues.entrySet()){
+            def aQueueInstance = entry.getValue()
+            FlashcardInfo removalCard = null
+            for (FlashcardInfo fi : aQueueInstance) { if (fi.flashcard == flashcardInstance) { removalCard = fi } }
+            if (fi != null) { aQueueInstance.remove(fi) }
+        }
+    }
+
+    /**  This method will return the FlashcardInfo with the LOWEST viewPriority value - important to note this! Cards to be seen sooner need LOWER priority values
     * @param integer elementQueueCode - the int corresponding to the appropriate Constant Rankable Card elements contained in the Constants.CARD_ELEMENTS list 
-    * @return FlashcardInfo of the highest priority card in the given queue
+    * @return FlashcardInfo of the next priority card in the given queue
     */
     FlashcardInfo nextFlashcard(int elementQueueCode){
-    	return this.queues.get(Constants.CARD_ELEMENTS[elementQueueCode]).last()
+    	return this.queues.get(Constants.CARD_ELEMENTS[elementQueueCode]).first()
     }
 
+    /**  This method uses a CardServiceAlgorithm.updateFlashcardInfo to update the info for an instance in the priority queue. 
+    *    It leverages the 'nextFlashcard' function to get the card to update.  This is the only method that should be used to update card info
+    * @param algoInstance an instantiated CardServiceAlgorithm instance
+    * @param cUsageInstance the CardUsage for the current card
+    */
     boolean updateViewedFlashcard(CardServiceAlgorithm algoInstance, CardUsage cUsageInstance){
     	//get the top priority flashcardInfo - its the one that was just viewed
-    	int aQueue = (cUsageInstance.rankingType as int)
-    	FlashcardInfo infoToUpdate = nextFlashcard(aQueue)
+    	int aQueueNum = (cUsageInstance.rankingType as int)
+    	FlashcardInfo infoToUpdate = nextFlashcard(aQueueNum)
+
     	//the infoToUpdate should look at same flashcard as cUsageInstance
     	if (infoToUpdate.flashcard.id == cUsageInstance.flashcard.id){
-	    	this.queues.get(Constants.CARD_ELEMENTS[aQueue]).remove(infoToUpdate)
-	    	infoToUpdate = algoInstance.updateFlashcardInfo(infoToUpdate, cUsageInstance)
-	    	this.queues.get(Constants.CARD_ELEMENTS[aQueue]).add(infoToUpdate)
+	    	this.queues.get(Constants.CARD_ELEMENTS[aQueueNum]).remove(infoToUpdate)
+	    	
+            //update the flashcardInfo
+            infoToUpdate = algoInstance.updateFlashcardInfo(infoToUpdate, cUsageInstance)
+	    	
+            this.queues.get(Constants.CARD_ELEMENTS[aQueueNum]).add(infoToUpdate)
+            this.save(flush: true)
 	    	return true
     	} else {
     		log.info "We have a problem with queue integrity - queue updates suspended"

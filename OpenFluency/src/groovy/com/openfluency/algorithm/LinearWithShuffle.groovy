@@ -2,7 +2,7 @@ package com.openfluency.algorithm
 
 import com.openfluency.flashcard.*
 
-class LinearWithShuffle extends CardServiceAlgorithm{
+class LinearWithShuffle implements CardServer{
 
 	/**
 	*  This is where the algo initiailizes new FlashcardInfo elements to be held in the priority queues. All cards are
@@ -11,8 +11,9 @@ class LinearWithShuffle extends CardServiceAlgorithm{
 	*  @param flashcardInstance - the Flashcard for which this FlashcardInfo will be tied
 	*  @return FlashcardInfo - the new flashcardInfo instance
 	*/
-	FlashcardInfo buildNewFlashcardInfo(Flashcard flashcardInstance) {
-		return new FlashcardInfo(flashcard: flashcardInstance, viewPriority: 1.0)
+	FlashcardInfo buildNewFlashcardInfo(Flashcard flashcardInstance, double nextCardPriority) {
+		def flashcardInfoInstance = new FlashcardInfo(flashcard: flashcardInstance, viewPriority: (nextCardPriority - 0.00001)).save(flush: true)
+		return flashcardInfoInstance
 	}
 
 	/**
@@ -26,6 +27,7 @@ class LinearWithShuffle extends CardServiceAlgorithm{
     	java.util.Random rand = new java.util.Random()
     	//increment the priority by 1 and add a small bit of random noise to give a shuffling effect - note .viewPriority got bigger, so it moves back in the queue
     	fInfoInstance.viewPriority = fInfoInstance.viewPriority + 1.0 + ((rand.nextDouble() - 0.5) / 10.0) 
+    	fInfoInstance.save(flush: true)
     	return fInfoInstance
     }
 

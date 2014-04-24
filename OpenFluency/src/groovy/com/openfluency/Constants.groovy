@@ -22,4 +22,7 @@ public class Constants {
 	public static final int NOT_ANSWERED = 0
 	public static final int VIEWED = 1
 	public static final int ANSWERED = 2
+
+	// Algorithm Class Names for Dynamic Loading
+	public static final List CARD_SERVERS = ["LinearWithShuffle"]
 }
