@@ -26,4 +26,8 @@ class Answer {
     	selection nullable: true
     	status defaultValue: Constants.NOT_ANSWERED
     }
+
+    Boolean isCorrect() {
+    	return this.selection.id == this.question.flashcard.id
+    }
 }

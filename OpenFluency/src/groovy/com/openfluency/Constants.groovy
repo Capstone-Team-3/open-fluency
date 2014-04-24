@@ -25,4 +25,10 @@ public class Constants {
 
 	// Algorithm Class Names for Dynamic Loading
 	public static final List CARD_SERVERS = ["LinearWithShuffle"]
+
+	// Quiz statuses
+	public static final int NOT_STARTED = 0
+	public static final int IN_PROGRESS = 1
+	public static final int COMPLETED = 2
+
 }
