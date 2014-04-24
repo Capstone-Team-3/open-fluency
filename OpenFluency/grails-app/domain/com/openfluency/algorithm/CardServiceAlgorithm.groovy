@@ -10,7 +10,7 @@ import com.openfluency.flashcard.*
 */
 abstract class CardServiceAlgorithm {
 
-    abstract FlashcardInfo buildNewFlashcardInfo(Flashcard flashcardIntance);
+    abstract FlashcardInfo buildNewFlashcardInfo(Flashcard flashcardInstance);
 
     abstract FlashcardInfo updateFlashcardInfo(FlashcardInfo fInfoInstance, CardUsage cUsageInstance);
 

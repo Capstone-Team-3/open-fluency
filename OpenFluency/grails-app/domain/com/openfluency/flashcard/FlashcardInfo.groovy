@@ -5,6 +5,9 @@ import groovy.transform.EqualsAndHashCode
 /**
 *  This class is used inside the priority queues of UserDeckQueues.  It maps a Flashcard to a ranking
 *  called 'viewPriority' - this is used to determine the order in which Flashcards are served.
+*  The LOWER the .viewPriority, the SOONER the card will be chosen -> this is to match the natural language
+*  on spaced repetition algorithms that tend to set offsets such as 'view this card again in +X time periods'
+*
 *  This class has a 'data' parameter which is a map that can be used in whatever manner is needed
 *  by a CardServiceAlgorithm implementation.  The only requirement for proper card service is that
 *  the CardServiceAlgorithm updates the FlashcardInfo.viewPriority after a user views the corresponding
