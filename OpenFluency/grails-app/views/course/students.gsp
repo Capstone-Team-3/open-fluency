@@ -17,15 +17,36 @@
             <li><a href="#">Enrolled Students</a></li>
         </ul>
         <h1 id="main">Enrolled Students </h1>
-
-
+		<div class="row">
+            <g:form action="search" controller="Course">
+	            
+		        <div class="col-lg-4" >
+		       		<label class="control-label">Show Progress By:</label>
+                    <select id="filter-lang" class="form-control" name="filter-lang">
+	                       <option selected>Meaning  </option>
+	                       <option >Pronunciation </option>
+                    </select>
+		       </div><!-- end col-lg-4 -->  
+		       <div class="col-lg-4">
+		             <label class="control-label">For:</label>
+                    <select id="filter-lang" class="form-control" name="filter-lang">
+		                <g:each in="${courseInstance.getChapters()}">
+	                          <option value="${it.id}"> ${it.title}</option>
+                        	</g:each>
+	                </select>
+                </div><!-- end form-group-->
+                
+             </g:form>
+        </div>
+        <!-- end row -->
+		<br></br>
         <table class="table courses-table">
             <thead>
                 <tr>
                     <th>User Name</th>
                     <th>Native Language</th>
                     <th>Progress</th>
-                    <th>Test Score</th>
+                    <th>Quiz Grade</th>
                     <th></th>
                 </tr>
             </thead>

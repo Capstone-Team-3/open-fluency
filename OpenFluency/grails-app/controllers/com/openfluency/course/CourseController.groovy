@@ -48,7 +48,8 @@ class CourseController {
 			it.metaClass.progress = deckService.getDeckProgress(it.deck)
 		}
 
-		[quizesInstanceList: courseService.getLiveQuizes(courseInstance), courseInstance: courseInstance, isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id)]
+		[quizesInstanceList: courseService.getLiveQuizes(courseInstance), courseInstance: courseInstance, isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id),
+			students: Registration.findAllByCourse(courseInstance)]
 	}
 
 	@Secured(['isAuthenticated()'])

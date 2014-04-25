@@ -29,11 +29,7 @@
 					</g:if>
 				</sec:ifAllGranted>
 
-				<g:if test="${isOwner}">
-					<!-- This is only displayed for the owner of the course -->
-					<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
-					<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Test</g:link>
-				</g:if>
+				
 			</h1>
 			<p class="course-description">${courseInstance.description}</p>
 
@@ -43,6 +39,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>Chapters</h2>
+				<g:if test="${isOwner}">
+					<!-- This is only displayed for the owner of the course -->
+					<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
+				</g:if>
 				<g:each in="${courseInstance.chapters}">
 					<div class="col-lg-3">
 						<div class="panel panel-default">
@@ -60,10 +60,30 @@
 			</div>
 		</div>
 		<!-- end row -->
-
+		
+		<g:if test="${isOwner}">
+			<div class="row">
+				<div class="col-lg-12">
+					<h2>Students</h2>
+					<g:if test="${students.size()}">
+					<g:link class="view-more" action="students" controller="course" id="${it.course.id}">${Registration.findAllByCourse(courseInstance).size()} Enrolled Students <span class="glyphicon glyphicon-arrow-right"></span></g:link>
+				</g:if>
+				<g:else >
+					There are no students enrolled for this course.
+				</g:else>
+				</div>
+			</div>
+			<!-- end row -->
+		</g:if>
+		<br></br>
+		
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Tests</h2>
+				<h2>Quizzes</h2>
+				<g:if test="${isOwner}">
+					<!-- This is only displayed for the owner of the course -->
+					<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Quiz</g:link>
+				</g:if>
 				<g:each in="${quizesInstanceList}">
 					<div class="col-lg-3">
 						<div class="panel panel-default">
@@ -72,7 +92,7 @@
 								<p>${it.questions.size()} Questions</p>
 								<br>
 								<div class="center">
-									<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-info">Take Quiz</g:link>
+									<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
 								</div>
 							</div>
 						</div>
