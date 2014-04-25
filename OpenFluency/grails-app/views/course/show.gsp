@@ -35,28 +35,58 @@
 
 		</div>
 		<!-- end course-header -->
-
+<div class="dashboard">
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>Chapters</h2>
-				<g:if test="${isOwner}">
-					<!-- This is only displayed for the owner of the course -->
-					<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
-				</g:if>
-				<g:each in="${courseInstance.chapters}">
-					<div class="col-lg-3">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<h3>
-									<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
-								</h3>
-								<p>${it.deck.flashcards.size()} Flashcards</p>
-								<g:render template="/deck/progress" model="[progress: it.progress]"/>
+				<div class="container">
+					<g:if test="${isOwner}">
+						<!-- This is only displayed for the owner of the course -->
+						<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
+					</g:if>
+					<g:each in="${courseInstance.chapters}">
+						<div class="col-lg-3">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<h3>
+										<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
+									</h3>
+									<p>${it.deck.flashcards.size()} Flashcards</p>
+									<g:render template="/deck/progress" model="[progress: it.progress]"/>
+								</div>
 							</div>
 						</div>
-					</div>
-					<!-- end col-lg-3 -->
-				</g:each>
+						<!-- end col-lg-3 -->
+					</g:each>
+				</div> <!-- end container -->
+			</div>
+		</div>
+		<!-- end row -->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Quizzes</h2>
+				<div class="container">
+					<g:if test="${isOwner}">
+						<!-- This is only displayed for the owner of the course -->
+						<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Quiz</g:link>
+					</g:if>
+					<g:each in="${quizesInstanceList}">
+						<div class="col-lg-3">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<h3>${it.title}</h3>
+									<p>${it.questions.size()} Questions</p>
+									<br>
+									<div class="center">
+										<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end col-lg-3 -->
+					</g:each>
+				</div> <!-- end container -->
 			</div>
 		</div>
 		<!-- end row -->
@@ -75,33 +105,7 @@
 			</div>
 			<!-- end row -->
 		</g:if>
-		<br></br>
-		
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>Quizzes</h2>
-				<g:if test="${isOwner}">
-					<!-- This is only displayed for the owner of the course -->
-					<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Quiz</g:link>
-				</g:if>
-				<g:each in="${quizesInstanceList}">
-					<div class="col-lg-3">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<h3>${it.title}</h3>
-								<p>${it.questions.size()} Questions</p>
-								<br>
-								<div class="center">
-									<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- end col-lg-3 -->
-				</g:each>
-			</div>
-		</div>
-		<!-- end row -->
+	</div>
 	</div>
 	<!-- end container -->
 </body>
