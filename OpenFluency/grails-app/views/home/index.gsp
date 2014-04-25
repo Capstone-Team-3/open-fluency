@@ -1,3 +1,4 @@
+<%@ page import="com.openfluency.course.Registration" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,8 +133,84 @@
                         <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
                             <h2>Current Courses</h2>
                             <h2>Scheduled Courses</h2>
-                            <h2>Tests</h2>
+                             <g:if test="${myCourses.size() > 0}">
+                                <div class="container">
+                                    
+                                    <g:each in="${myCourses}">
+                                        <div class="col-lg-3">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+
+                                                    <h3><g:link action="show" controller="course" id="${it.id}">${it.title}</g:link></h3>
+                                                    
+                                                    <div class="current-chapter">
+                                                        <h4>${it.getChapters().size()} chapters</h4>
+                                                    </div>
+                                                    
+                                                    <div class="continue">
+                                                        <g:link class="btn btn-success" action="students" controller="course" id="${it.id}">${Registration.findAllByCourse(it).size()} Enrolled</g:link>
+                                                    </div>
+
+                                                </div><!-- end panel-body -->
+                                            </div><!-- end panel -->
+                                        </div><!-- end col-lg-3 -->
+                                    </g:each>
+                                
+                                </div><!-- end container -->
+
+                                <g:link class="view-more" action="list" controller="course">View More Courses <span class="glyphicon glyphicon-arrow-right"></span></g:link>
+
+                            </g:if>
+                            <g:else>
+                                <div class="container">
+                                    <p>You haven't created any courses yet! Get started:</p>
+                                    <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
+                                </div>
+                            </g:else>
+                            
+                            
+                 
                             <h2>Recently Updated Chapters</h2>
+                             <g:if test="${myCourses.size() > 0}">
+                                <div class="container">
+                                    
+                                    <g:each in="${myCourses.sort()}"><!-- should alter sort() to be by lastUpdated , implements Comparable -->
+                                        <div class="col-lg-3">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+
+                                                    <h3><g:link action="show" controller="course" id="${it.id}">${it.title}</g:link></h3>
+                                                    
+                                                    <div class="current-chapter">
+                                                        <h4>${it.getChapters().sort()[0]?.title} chapter</h4>
+                                                        <h4>Last Updated : 
+                                                        ${it.lastUpdated.month + 1} -
+                                                        ${it.lastUpdated.getAt(Calendar.DAY_OF_MONTH)} -
+                                                        ${it.lastUpdated.year + 1900}
+                                                        </h4>
+                                                    </div>
+                                                    
+                                                    <div class="continue">
+                                                        <g:link class="btn btn-success" action="students" controller="course" id="${it.id}">${Registration.findAllByCourse(it).size()} Enrolled</g:link>
+                                                    </div>
+
+                                                </div><!-- end panel-body -->
+                                            </div><!-- end panel -->
+                                        </div><!-- end col-lg-3 -->
+                                    </g:each>
+                                
+                                </div><!-- end container -->
+
+                                <g:link class="view-more" action="list" controller="course">View More Courses <span class="glyphicon glyphicon-arrow-right"></span></g:link>
+
+                            </g:if>
+                            <g:else>
+                                <div class="container">
+                                    <p>You haven't created any courses yet! Get started:</p>
+                                    <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
+                                </div>
+                            </g:else>
+                            
                         </sec:ifAllGranted>
 
                     </div><!-- end dashboard -->

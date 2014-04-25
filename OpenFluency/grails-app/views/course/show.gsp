@@ -28,8 +28,6 @@
 						<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll</g:link>
 					</g:if>
 				</sec:ifAllGranted>
-
-				
 			</h1>
 			<p class="course-description">${courseInstance.description}</p>
 
