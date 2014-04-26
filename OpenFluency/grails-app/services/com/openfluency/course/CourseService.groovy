@@ -1,5 +1,6 @@
 package com.openfluency.course
 
+import com.openfluency.Constants
 import com.openfluency.flashcard.Flashcard
 import com.openfluency.language.Language
 import com.openfluency.flashcard.Deck
@@ -15,8 +16,8 @@ class CourseService {
     /**
     * Create a new course owned by the currently logged in user
     */
-    Course createCourse(String title, String description, String languageId) {
-    	Course course = new Course(title: title, description: description, language: Language.load(languageId), owner: User.load(springSecurityService.principal.id))
+    Course createCourse(String title, String description, String languageId, Boolean visible=true, Boolean open=true) {
+    	Course course = new Course(visible: visible, open: open, title: title, description: description, language: Language.load(languageId), owner: User.load(springSecurityService.principal.id))
     	course.save()
     	return course
     }
@@ -27,6 +28,9 @@ class CourseService {
     	return chapter
     }
 
+    /**
+    * Register the logged user for the given course
+    */
     Registration createRegistration(Course courseInstance){ 
         User loggedUser = User.load(springSecurityService.principal.id)
 
@@ -39,8 +43,16 @@ class CourseService {
             registration.errors.reject('user.registered', 'You are already registered for ${courseInstance.title}!')
         }
         else {
-            // No old registration found, save it
-            log.info "User ID: ${loggedUser.id} enrolled in Course ID: ${courseInstance.id}"
+            // Check if the course is open enrollment or not
+            if(courseInstance.open) {
+                log.info "User ID: ${loggedUser.id} enrolled in Course ID: ${courseInstance.id}"
+                registration.status = Constants.APPROVED
+            }
+            else {
+                log.info "User ID: ${loggedUser.id} enrolled in Course ID: ${courseInstance.id} - pending approval"
+                registration.status = Constants.PENDING_APPROVAL
+            }
+
             registration.save()
         }
 
@@ -69,6 +81,8 @@ class CourseService {
 
         Course.withCriteria {
 
+            eq('visible', true) // only display courses that are visible
+
             // Apply language criteria
             if(languageId) {
                 language {
@@ -84,5 +98,27 @@ class CourseService {
                 }
             }
         }
+    }
+
+    Boolean approveRegistration(Registration registrationInstance) {
+        return updateRegistration(registrationInstance, Constants.APPROVED)
+    }
+
+    Boolean rejectRegistration(Registration registrationInstance) {
+        return updateRegistration(registrationInstance, Constants.REJECTED)
+    }
+
+    Boolean updateRegistration(Registration registrationInstance, Integer status) {
+        
+        // Only allow the instructor of the course to approve registrations
+        if(registrationInstance.course.owner.id != springSecurityService.principal.id) {
+            return false
+        }
+
+        // Update the status and return true
+        registrationInstance.status = status
+        registrationInstance.save(flush: true)
+
+        return true
     }
 }

@@ -18,6 +18,9 @@ class Course {
 	Date dateCreated
 	Date lastUpdated
 
+	Boolean visible 	// this defines if the course appears on search results
+	Boolean open 	// if the course is open, anyone can register. Otherwise the instructor will have to approve the registration
+
 	String getCourseNumber() {
 		return "${language.code}-${this.id}"
 	}

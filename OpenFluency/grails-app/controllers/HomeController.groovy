@@ -1,3 +1,4 @@
+import com.openfluency.Constants
 import com.openfluency.auth.User
 import com.openfluency.flashcard.Deck
 import com.openfluency.course.Course
@@ -14,6 +15,6 @@ class HomeController {
 
         [deckInstanceList: Deck.findAllByOwner(User.load(springSecurityService.principal.id)), 
             myCourses: Course.findAllByOwner(User.load(springSecurityService.principal.id)), 
-                registrations: Registration.findAllByUser(User.load(springSecurityService.principal.id))]
+                registrations: Registration.findAllByUserAndStatusNotEqual(User.load(springSecurityService.principal.id), Constants.REJECTED)]
     }
 }

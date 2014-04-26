@@ -1,5 +1,6 @@
 package com.openfluency.course
 
+import com.openfluency.Constants
 import com.openfluency.flashcard.*
 import com.openfluency.auth.User
 import grails.plugin.springsecurity.annotation.Secured
@@ -12,15 +13,14 @@ class ChapterController {
     def deckService
     def flashcardService
 
-    @Secured(['isAuthenticated()'])
-	def create(Course courseInstance) {
-		render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
-		
-	}
+    @Secured(['ROLE_INSTRUCTOR'])
+    def create(Course courseInstance) {
+        render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
+    }
 
-    @Secured(['isAuthenticated()'])
-	def save() {
-		def chapterInstance = courseService.createChapter(params.title, params.description, params.deckId, params.courseId)
+    @Secured(['ROLE_INSTRUCTOR'])
+    def save() {
+      def chapterInstance = courseService.createChapter(params.title, params.description, params.deckId, params.courseId)
 
     	// Check for errors
     	if (chapterInstance.hasErrors()) {
@@ -31,16 +31,30 @@ class ChapterController {
     	redirect action: "show", controller: "course", id: "${params.courseId}"
     }
 
+    @Secured(['isAuthenticated()'])
     def show(Chapter chapterInstance, Integer max) {
-		params.max = Math.min(max ?: 12, 100)
-		List<Flashcard> flashcards = Flashcard.findAllByDeck(chapterInstance.deck, params)
-		respond flashcards, model:[chapterInstance: chapterInstance, flashcardCount: Flashcard.countByDeck(chapterInstance.deck),isOwner: (springSecurityService.principal.id == chapterInstance.deck.owner.id),
-			userInstance: User.load(springSecurityService.principal.id)]
+        
+        // Check if the logged user can access this chapter
+        if(Registration.countByUserAndCourseAndStatus(
+            User.load(springSecurityService.principal.id), 
+            chapterInstance.course, 
+            Constants.APPROVED) == 0) {
+
+            flash.message = "You can't access this chapter"
+            redirect action: "show", controller: "course", id: chapterInstance.course.id
+            return
+        }
+
+        [
+        flashcardInstanceList: Flashcard.findAllByDeck(chapterInstance.deck, [max: Math.min(max ?: 12, 100)]),
+        chapterInstance: chapterInstance, 
+        flashcardCount: Flashcard.countByDeck(chapterInstance.deck),
+        isOwner: (springSecurityService.principal.id == chapterInstance.deck.owner.id),
+        userInstance: User.load(springSecurityService.principal.id)]
     }
 
     def practice(Chapter chapterInstance, Integer max) {
         // Add the progress to the deck
-        log.info "Deck ${chapterInstance.deck.id}"
         chapterInstance.deck.metaClass.progress = deckService.getDeckProgress(chapterInstance.deck)
         CardUsage cardUsageInstance = deckService.getNextFlashcard(chapterInstance.deck, params.cardUsageId, params.ranking as Integer, params.rankingType as Integer)
         
@@ -50,24 +64,24 @@ class ChapterController {
         String imageURL = null
         if (customizationInstance?.imageAssoc){
             imageURL = customizationInstance.imageAssoc?.url
-        } else if (cardUsageInstance.flashcard?.image){
-            imageURL = cardUsageInstance.flashcard.image.url
-        }
+            } else if (cardUsageInstance.flashcard?.image){
+                imageURL = cardUsageInstance.flashcard.image.url
+            }
         //get the right audio - take the customization if made, else the flahscard proviced audio if made, else null
         Long audioSysId = null
         if (customizationInstance?.audioAssoc){
             audioSysId = customizationInstance.audioAssoc?.id
-        } else if (cardUsageInstance.flashcard?.audio){
-            audioSysId = cardUsageInstance.flashcard.audio.id
-        }
+            } else if (cardUsageInstance.flashcard?.audio){
+                audioSysId = cardUsageInstance.flashcard.audio.id
+            }
 
-        [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
-        chapterInstance: chapterInstance, 
-        cardUsageInstance: cardUsageInstance,
-        imageURL: imageURL, 
-        audioSysId: audioSysId, 
-        rankingType: params.rankingType]
-    }
+            [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
+            chapterInstance: chapterInstance, 
+            cardUsageInstance: cardUsageInstance,
+            imageURL: imageURL, 
+            audioSysId: audioSysId, 
+            rankingType: params.rankingType]
+        }
 
         /**
     * Returns the flaskcard for a deck

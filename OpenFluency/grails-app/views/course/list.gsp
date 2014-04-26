@@ -1,3 +1,5 @@
+<%@ page import="com.openfluency.course.Registration" %>
+<%@ page import="com.openfluency.Constants" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +44,7 @@
 								<g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
 							</td>
 							<td>
-								<a href="#">5</a>
+								<a href="#">${Registration.countByCourseAndStatusNotEqual(it, Constants.REJECTED)}</a>
 							</td>
 							<td>${it.lastUpdated}</td>
 							<td>${it.startDate}</td>
