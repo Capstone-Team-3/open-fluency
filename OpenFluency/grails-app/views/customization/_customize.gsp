@@ -33,9 +33,11 @@
 					</div>
 					
 					<div id="c_results"></div>
-					<button id="c_flickr_back" class="btn btn-info hidden">Back</button>
-					<label id="c_flickr_page_number"></label>
-					<button id="c_flickr_next" class="btn btn-info hidden">Next</button>
+					<div class="pagination">
+						<button id="c_flickr_back" class="btn btn-default hidden">Back</button>
+						<label id="c_flickr_page_number"></label>
+						<button id="c_flickr_next" class="btn btn-default hidden">Next</button>
+					</div>
 				</div><!-- end flickr-search-container -->
 			
 			</div><!-- end custom-image-container -->
