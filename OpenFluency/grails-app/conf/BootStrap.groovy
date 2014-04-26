@@ -12,6 +12,8 @@ class BootStrap {
     def grailsApplication
     def quizService
     def algorithmService
+    def deckService
+    def flashcardInfoService
 
     def init = { servletContext ->
 
@@ -74,24 +76,36 @@ class BootStrap {
             languageService.loadLanguage(grailsApplication.config.kanjiDictionaryURL, kanji, latin, local)
         }
 
-        // Build a bunch of sample decks
-        Deck restaurant = new Deck(sourceLanguage: english, language: japanese, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student).save(failOnError: true)
-        Deck business = new Deck(sourceLanguage: english, language: japanese, title: "Business", description: "Words that I would use in a business context", owner: student).save(failOnError: true)
-        Deck sports = new Deck(sourceLanguage: english, language: japanese, title: "Sports", description: "Words that I would use in a sports context", owner: student).save(failOnError: true)
+        // Register some CardServiceAlgorithms
+        CardServer linearWithShuffle = new LinearWithShuffle()
+        algorithmService.addCardServer(linearWithShuffle.name, linearWithShuffle)
+        CardServer sm2SpacedRep = new SM2SpacedRepetition()
+        algorithmService.addCardServer(sm2SpacedRep.name, sm2SpacedRep)
         
+        log.info "Added the ${linearWithShuffle} algo"
+
+        // Build a bunch of sample decks
+        Deck restaurant = new Deck(sourceLanguage: english, language: japanese, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student, cardServerName: "LinearWithShuffle").save(failOnError: true)
+        Deck business = new Deck(sourceLanguage: english, language: japanese, title: "Business", description: "Words that I would use in a business context", owner: student, cardServerName: "LinearWithShuffle").save(failOnError: true)
+        Deck sports = new Deck(sourceLanguage: english, language: japanese, title: "Sports", description: "Words that I would use in a sports context", owner: student, cardServerName: "LinearWithShuffle").save(failOnError: true)
+
+        log.info "Built the 3 decks"
+
         // Build a few flashcards for the business deck
-        flashcardService.createRandomFlashcards(business, kanji)        
+        flashcardService.createRandomFlashcards(business, kanji)  
+        
+        log.info "Built the business flahscards and queues"      
 
         // Build a few decks to be used in a course and a bunch of flashcards in each
-        Deck chapterDeck1_1 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
-        Deck chapterDeck1_2 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)
-        Deck chapterDeck2_1 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor).save(failOnError: true)
-        Deck chapterDeck2_2 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor).save(failOnError: true)
+        Deck chapterDeck1_1 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor, cardServerName: "LinearWithShuffle").save(failOnError: true)
+        Deck chapterDeck1_2 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor, cardServerName: "LinearWithShuffle").save(failOnError: true)
+        Deck chapterDeck2_1 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor, cardServerName: "LinearWithShuffle").save(failOnError: true)
+        Deck chapterDeck2_2 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 2", description: "Simple phrases 2", owner: instructor, cardServerName: "LinearWithShuffle").save(failOnError: true)
         flashcardService.createRandomFlashcards(chapterDeck1_1, kanji)
         flashcardService.createRandomFlashcards(chapterDeck1_2, kanji)
         flashcardService.createRandomFlashcards(chapterDeck2_1, kanji)
         flashcardService.createRandomFlashcards(chapterDeck2_2, kanji)
-
+        
         // Create 2 courses
         Course kanji1 = new Course(language: japanese, title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
         // Create two chapters for this course
@@ -109,13 +123,7 @@ class BootStrap {
 
         // Sign up the student for course 1
         new Registration(user: student, course: kanji1).save()
-
-        // Register some CardServiceAlgorithms
-        CardServer linearWithShuffle = new LinearWithShuffle()
-        algorithmService.addCardServer(Constants.CARD_SERVERS[0], linearWithShuffle)
-        CardServiceAlgorithm wrappedLinearWithShuffle = new CardServiceAlgorithm(Constants.CARD_SERVERS[0]).save(flush: true)
-
-        log.info "Added the ${wrappedLinearWithShuffle} algo"
+        flashcardInfoService.resetCourseFlashcardInfo(student, kanji1)
 
         log.info "Booted!"
     }

@@ -3,6 +3,7 @@ package com.openfluency.course
 import com.openfluency.flashcard.Flashcard
 import com.openfluency.language.Language
 import com.openfluency.flashcard.Deck
+import com.openfluency.flashcard.FlashcardInfoService
 import com.openfluency.auth.User
 import grails.transaction.Transactional
 
@@ -11,6 +12,7 @@ class CourseService {
 
 	def springSecurityService
     def deckService
+    def flashcardInfoService
 
     /**
     * Create a new course owned by the currently logged in user
@@ -22,8 +24,12 @@ class CourseService {
     }
 
     Chapter createChapter(String title, String description, String deckId, String courseId) {
-    	Chapter chapter = new Chapter(title: title, description: description, deck: Deck.load(deckId), course: Course.load(courseId))
+    	Deck deckInstance = Deck.load(deckId)
+        Course courseInstance = Course.load(courseId)
+        Chapter chapter = new Chapter(title: title, description: description, deck: deckInstance, course: courseInstance)
     	chapter.save()
+        //make sure the chapter maker has a fresh set of flashcardInfos for the deck
+        flashcardInfoService.resetDeckFlashcardInfo(courseInstance.owner, deckInstance)
     	return chapter
     }
 
@@ -42,6 +48,8 @@ class CourseService {
             // No old registration found, save it
             log.info "User ID: ${loggedUser.id} enrolled in Course ID: ${courseInstance.id}"
             registration.save()
+            //make sure the registrant has a fresh set of FlashcardInfos for the chapters of the course
+            flashcardInfoService.resetCourseFlashcardInfo(loggedUser, courseInstance)
         }
 
         return registration

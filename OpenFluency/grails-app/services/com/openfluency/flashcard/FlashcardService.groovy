@@ -16,6 +16,8 @@ class FlashcardService {
 
 	def springSecurityService 
     def mediaService
+    def deckService
+    def flashcardInfoService
 
 	/**
 	* Creates a new flashcard - the alternative is to pass a Map as an argument 
@@ -28,6 +30,9 @@ class FlashcardService {
         Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
         Audio audioInstance = null;
         if (audioId != "") { audioInstance = Audio.load(audioId); }
+
+        //build info to add flashcard to queueing system
+        Deck deckInstance = Deck.load(deckId)
         
         def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
@@ -35,7 +40,10 @@ class FlashcardService {
             pronunciation: Pronunciation.load(pronunciationId), 
             image: imageInstance, 
             audio: audioInstance, 
-            deck: Deck.load(deckId)).save(flush: true, failOnError: true)
+            deck: deckInstance).save(flush: true, failOnError: true)
+
+        //build the flashcardInfo objs for all users following this deck
+        flashcardInfoService.addNewFlashcardInfoAllDeckUsers(deckInstance, flashcardInstance)
 
         println "Created flashcard $flashcardInstance"
         return flashcardInstance
@@ -64,7 +72,9 @@ class FlashcardService {
                 f++
             }
         }
-
+        //ensure the queues are built for the deck owner
+        flashcardInfoService.resetDeckFlashcardInfo(deck.owner, deck)
+        
         log.info "Created ${f} flashcards for deck: ${deck.title}"
     }
 }

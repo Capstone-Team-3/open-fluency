@@ -9,6 +9,11 @@ class Deck {
 	String description
 	User owner
 	
+	String cardServerName
+	static constraints = {
+    	cardServerName nullable: false
+    }
+	
 	Language language // the language the user is trying to learn
 	Language sourceLanguage // the language the user already knows
 
@@ -28,4 +33,6 @@ class Deck {
 	Integer getFlashcardCount() {
 		Flashcard.countByDeck(this)	
 	}
+
+	String toString() {return title}
 }

@@ -6,11 +6,14 @@ import com.openfluency.language.Language
 import grails.transaction.Transactional
 import com.openfluency.auth.User
 import com.openfluency.Constants
+import com.openfluency.algorithm.*
 
 @Transactional
 class DeckService {
 
 	def springSecurityService
+	def algorithmService
+	def flashcardInfoService
 
 	/**
 	* Retrieves the next flashcard that the user should view according SpacedRepetition
@@ -22,8 +25,9 @@ class DeckService {
 
 		log.info "deckInstance: ${deckInstance.id} - CardUsageID: ${cardUsageId} - Ranking: $ranking - Ranking Type: ${rankingType}"
 
+		User theUser = User.load(springSecurityService.principal.id)
 		CardUsage cardUsage = CardUsage.get(cardUsageId)
-
+			
 		if(cardUsage) {
 			// Close the current CardUsage
 			cardUsage.endTime = new Date()
@@ -40,7 +44,7 @@ class DeckService {
 
 			// Save the card ranking
 			if(!cardRanking) {
-				cardRanking = new CardRanking(flashcard: cardUsage.flashcard, user: User.load(springSecurityService.principal.id))
+				cardRanking = new CardRanking(flashcard: cardUsage.flashcard, user: theUser)
 			} 
 			
 			// Save the meaning depending on the type
@@ -54,15 +58,13 @@ class DeckService {
 			}
 			
 			cardRanking.save(failOnError: true)
+
+			//use the algo and card usage to update the flashcardInfo and Queue for the given card
+			flashcardInfoService.updateViewedFlashcardInfo(deckInstance, cardUsage)
 			
 		}
 
-		// Retrieve the next card - faking, random for now
-		java.util.Random rand = new java.util.Random()
-		int max = Flashcard.countByDeck(deckInstance) - 1
-		def params = [offset: rand.nextInt(max+1), max: 1]
-
-		Flashcard flashcardInstance = Flashcard.findByDeck(deckInstance, params)
+		Flashcard flashcardInstance = flashcardInfoService.nextFlashcardInfo(theUser, deckInstance, rankingType).flashcard
 
 		// Now create a new CardUsage for this new card and return it
 		return new CardUsage(flashcard: flashcardInstance, 
@@ -101,27 +103,39 @@ class DeckService {
     * Create a new deck owned by the currently logged in user
     */
     Deck createDeck(String title, String description, String languageId, String sourceLanguageId) {
+    	User theUser = User.load(springSecurityService.principal.id)
+    	String csAlgo = "LinearWithShuffle"
+    	
     	Deck deck = new Deck(title: title, 
     		description: description, 
-    		owner: User.load(springSecurityService.principal.id), 
+    		owner: theUser, 
     		language: Language.load(languageId),
-    		sourceLanguage: Language.load(sourceLanguageId))
+    		sourceLanguage: Language.load(sourceLanguageId),
+    		cardServerName: csAlgo)
     	deck.save()
+
+    	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
+    	
     	return deck
     }
 
-	/**
+    /**
     * Add a deck to my list of shared courses
     */
-    Share addDeck(Deck deck) {
-    	return new Share(deck: deck, receiver: User.load(springSecurityService.principal.id)).save(flush: true);
+    Share addDeck(Deck deck) { 
+    	User theUser = User.load(springSecurityService.principal.id)
+    	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
+    	return new Share(deck: deck, receiver: theUser).save(flush: true);
     }
 
     Boolean removeDeck(Deck deck) {
-    	Share share = Share.findByReceiverAndDeck(User.load(springSecurityService.principal.id), deck)
+    	User theUser = User.load(springSecurityService.principal.id)
+    		
+    	Share share = Share.findByReceiverAndDeck(theUser, deck)
     	if(share) {
     		try {
     			share.delete()
+    			flashcardInfoService.removeDeckFlashcardInfo(theUser, deck)
     			return true
     		} 
     		catch(Exception e) {

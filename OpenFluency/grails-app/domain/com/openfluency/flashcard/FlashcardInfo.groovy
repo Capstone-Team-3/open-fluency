@@ -1,6 +1,7 @@
 package com.openfluency.flashcard
 
 import groovy.transform.EqualsAndHashCode
+import com.openfluency.auth.User
 
 /**
 *  This class is used inside the priority queues of UserDeckQueues.  It maps a Flashcard to a ranking
@@ -18,16 +19,42 @@ import groovy.transform.EqualsAndHashCode
 class FlashcardInfo implements Comparable<FlashcardInfo> {
 
 	Flashcard flashcard
-	double viewPriority
-	def data = [:]
+	User user
+    Deck deck
+    String algoName
+    int queue
+
+    double viewPriority
+
+    int numberOfRepetitions
+    double easinessFactor
+    double interval
+
+	String data1
+    String data2
+    String data3
 
     static constraints = {
     	flashcard nullable: false
+        user nullable: false
+        deck nullable: false
+        algoName nullable: false
+        queue nullable: false
     	viewPriority nullable: false
+        numberOfRepetitions nullable: true
+        easinessFactor nullable: true
+        interval nullable: true
+        data1 nullable: true
+        data2 nullable: true
+        data3 nullable: true
     }
 
     @Override
     int compareTo(FlashcardInfo that){
     	return Double.compare(this.viewPriority, that.viewPriority)
+    }
+
+    String toString(){
+        return "FlashcardInfo : ${user} : ${deck} : ${queue} : ${viewPriority}"
     }
 }

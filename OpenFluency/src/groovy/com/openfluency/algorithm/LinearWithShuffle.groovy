@@ -1,8 +1,11 @@
 package com.openfluency.algorithm
 
 import com.openfluency.flashcard.*
+import com.openfluency.auth.User
 
 class LinearWithShuffle implements CardServer{
+
+	final String name = "LinearWithShuffle"
 
 	/**
 	*  This is where the algo initiailizes new FlashcardInfo elements to be held in the priority queues. All cards are
@@ -11,8 +14,14 @@ class LinearWithShuffle implements CardServer{
 	*  @param flashcardInstance - the Flashcard for which this FlashcardInfo will be tied
 	*  @return FlashcardInfo - the new flashcardInfo instance
 	*/
-	FlashcardInfo buildNewFlashcardInfo(Flashcard flashcardInstance, double nextCardPriority) {
-		def flashcardInfoInstance = new FlashcardInfo(flashcard: flashcardInstance, viewPriority: (nextCardPriority - 0.00001)).save(flush: true)
+	FlashcardInfo buildNewFlashcardInfo(User theUser, Deck deckInstance, int theQueue,
+										Flashcard flashcardInstance, double nextCardPriority) {
+		def flashcardInfoInstance = new FlashcardInfo(flashcard: flashcardInstance,
+													  user: theUser,
+													  deck: deckInstance,
+													  queue: theQueue,
+													  algoName: deckInstance.cardServerName,
+													  viewPriority: (nextCardPriority - 0.00001))
 		return flashcardInfoInstance
 	}
 
@@ -27,12 +36,11 @@ class LinearWithShuffle implements CardServer{
     	java.util.Random rand = new java.util.Random()
     	//increment the priority by 1 and add a small bit of random noise to give a shuffling effect - note .viewPriority got bigger, so it moves back in the queue
     	fInfoInstance.viewPriority = fInfoInstance.viewPriority + 1.0 + ((rand.nextDouble() - 0.5) / 10.0) 
-    	fInfoInstance.save(flush: true)
     	return fInfoInstance
     }
 
     String algoName(){
-    	return "Linear-With-Shuffle"
+    	return name
     }
 
     String toString() {

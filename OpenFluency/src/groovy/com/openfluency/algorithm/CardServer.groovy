@@ -1,6 +1,7 @@
 package com.openfluency.algorithm
 
 import com.openfluency.flashcard.*
+import com.openfluency.auth.User
 
 /**
 *  CardServer serves as an interface that all algorithm implementations must implement to fit in the CardServiceAlgorithm wrapper.
@@ -16,7 +17,8 @@ interface CardServer {
 	*  @param flashcardInstance - the Flashcard for which this FlashcardInfo will be tied
 	*  @return FlashcardInfo - the new flashcardInfo instance
 	*/
-    FlashcardInfo buildNewFlashcardInfo(Flashcard flashcardInstance, double nextCardPriority);
+    FlashcardInfo buildNewFlashcardInfo(User theUser, Deck deckInstance, int theQueue, 
+    									Flashcard flashcardInstance, double nextCardPriority);
 
     /**
 	*  This is the function that updates a FlashcardInfo instance based on the basis of your
