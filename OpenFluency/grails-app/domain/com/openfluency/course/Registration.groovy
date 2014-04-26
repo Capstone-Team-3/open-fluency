@@ -6,6 +6,7 @@ class Registration {
 
 	Course course
 	User user
+	Integer status
 
     static constraints = {
     }

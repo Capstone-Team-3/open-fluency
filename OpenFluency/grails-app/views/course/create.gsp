@@ -7,10 +7,16 @@
 <body>
 	<div class="container">
 		<ul class="breadcrumb">
-            <li><a href="${createLink(uri:'/') }">Home</a></li>
-            <li><g:link action="search" controller="course" >Courses</g:link></li>
-            <li><a href="#">Create New Course</a></li>
-        </ul>
+			<li>
+				<a href="${createLink(uri:'/') }">Home</a>
+			</li>
+			<li>
+				<g:link action="search" controller="course" >Courses</g:link>
+			</li>
+			<li>
+				<a href="#">Create New Course</a>
+			</li>
+		</ul>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
 				<h1>Create New Course</h1>
@@ -36,15 +42,39 @@
 						<textarea class="form-control" name="description" value="${courseInstance?.description}"></textarea>
 					</div>
 
-					<label for="language" class="control-label">
-						Language
-						<span class="required-indicator">*</span>
-					</label>
-					<select class="form-control" name="language.id">
-						<g:each in="${Language.list()}">
-							<option value="${it.id}">${it.name}</option>
-						</g:each>
-					</select>
+					<div class="form-group">
+						<label for="language" class="control-label">
+							Language
+							<span class="required-indicator">*</span>
+						</label>
+						<select class="form-control" name="language.id">
+							<g:each in="${Language.list()}">
+								<option value="${it.id}">${it.name}</option>
+							</g:each>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="language" class="control-label">
+							Show in search results
+							<span class="required-indicator">*</span>
+						</label>
+						<select class="form-control" name="visible">
+							<option value="${true}">Yes</option>
+							<option value="${false}">No</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="language" class="control-label">
+							Registration
+							<span class="required-indicator">*</span>
+						</label>
+						<select class="form-control" name="open">
+							<option value="${true}">Anyone can enroll</option>
+							<option value="${true}">Only invited students can enroll</option>
+						</select>
+					</div>
 
 					<br>
 					<div class="center">
