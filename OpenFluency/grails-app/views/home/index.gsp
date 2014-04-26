@@ -154,7 +154,10 @@
                                                     </div>
 
                                                     <div class="continue">
-                                                        <g:link class="btn btn-success" action="students" controller="course" id="${it.id}">${Registration.countByCourse(it)} Enrolled</g:link>
+                                                        <g:link class="view-more" action="students"  controller="course" id="${it.id}">
+						                                    ${Registration.countByCourse(it)} Enrolled
+						                                    <span class="glyphicon glyphicon-arrow-right"></span>
+						                                </g:link>
                                                     </div>
 
                                                 </div>
@@ -210,7 +213,10 @@
                                                     </div>
 
                                                     <div class="continue">
-                                                        <g:link class="btn btn-success" action="students" controller="course" id="${it.id}">${Registration.countByCourse(it)} Enrolled</g:link>
+                                                        <g:link class="view-more" action="students"  controller="course" id="${it.id}">
+						                                    ${Registration.countByCourse(it)} Enrolled
+						                                    <span class="glyphicon glyphicon-arrow-right"></span>
+						                                </g:link>
                                                     </div>
 
                                                 </div>
