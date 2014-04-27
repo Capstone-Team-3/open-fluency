@@ -1,5 +1,6 @@
 package com.openfluency.auth
 
+import com.openfluency.Constants
 import com.openfluency.auth.Role
 import com.openfluency.language.LanguageProficiency
 import com.openfluency.language.Language
@@ -10,11 +11,15 @@ import grails.transaction.Transactional
 class UserService {
 
     def mailService
+    def springSecurityService
 
-    def createUser(String username, String password, String email, String userTypeId, String nativeLanguageId, List<String> languageIds, List<String> proficiencyIds) {        
+    /**
+    * Create a user in the system
+    */
+    def createUser(String username, String password, String email, String userTypeId, String nativeLanguageId, List<String> languageIds, List<String> proficiencyIds) {
         
-        // Create the user
-    	def userInstance = new User(username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(nativeLanguageId))
+        // Create the user - the account will only be enabled if the user is a student
+    	def userInstance = new User(enabled: (userTypeId == Role.findByAuthority(Constants.ROLE_STUDENT).id), username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(nativeLanguageId))
     	userInstance.save(flush: true)
 
     	if(userInstance.hasErrors()) {
@@ -73,5 +78,10 @@ class UserService {
         }
 
         return user
+    }
+
+    def updateUser(User userInstance, Boolean enabled) {
+        userInstance.enabled = enabled
+        userInstance.save(failOnError: true, flush: true)
     }
 }

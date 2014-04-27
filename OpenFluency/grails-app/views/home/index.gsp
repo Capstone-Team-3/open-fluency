@@ -72,7 +72,7 @@
 
                             <g:if test="${registrations}">
                                 <div class="container">
-                                    <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/> 
+                                    <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/>
                                 </div>
                                 <g:link class="view-more" action="list" controller="course">
                                     View More Courses
@@ -135,16 +135,17 @@
                         <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
                             <h2>Current Courses</h2>
                             <h2>Scheduled Courses</h2>
-                            <g:if test="${myCourses.size() >0}">
+                            <g:if test="${myCourses.size() >
+                                0}">
                                 <div class="container">
 
                                     <g:each in="${myCourses}">
                                         <div class="col-lg-3">
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
-                                                		<g:if test="${it.visible}">
-														<span class="glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="left" title="This course is visible to all users"></span>
-													</g:if>
+                                                    <g:if test="${it.visible}">
+                                                        <span class="glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="left" title="This course is visible to all users"></span>
+                                                    </g:if>
                                                     <h3>
                                                         <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
                                                     </h3>
@@ -191,19 +192,18 @@
                                         <div class="col-lg-3">
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
-                                               		 <g:if test="${it.visible}">
-														<span class="glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="left" title="This course is visible to all users"></span>
-													</g:if>
-												 	<h3>
-														<g:link action="show" id="${it.getChapters().sort()[0]?.id}" controller="chapter">${it.getChapters().sort()[0]?.title}</g:link>
-													</h3>
-                                                     <h5>
+                                                    <g:if test="${it.visible}">
+                                                        <span class="glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="left" title="This course is visible to all users"></span>
+                                                    </g:if>
+                                                    <h3>
+                                                        <g:link action="show" id="${it.getChapters().sort()[0]?.id}" controller="chapter">${it.getChapters().sort()[0]?.title}</g:link>
+                                                    </h3>
+                                                    <h5>
                                                         <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
-                                                     </h5>
+                                                    </h5>
 
                                                     <div class="current-chapter">
-                                                        
-                                                        
+
                                                         <h4>
                                                             Last Updated : 
                                                         ${it.lastUpdated.month + 1} -
@@ -225,10 +225,7 @@
                                         <!-- end col-lg-3 --> </g:each>
 
                                 </div>
-                                <!-- end container -->
-
-                      
-                            </g:if>
+                                <!-- end container --> </g:if>
                             <g:else>
                                 <div class="container">
                                     <p>You haven't created any courses yet! Get started:</p>

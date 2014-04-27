@@ -78,6 +78,11 @@
 								</li>
 							</ul>
 						</li>
+						<sec:ifAllGranted roles="ROLE_ADMIN">
+							<li>
+								<g:link action="index" controller="user">Users</g:link>
+							</li>
+						</sec:ifAllGranted>
 					</li>
 				</ul>
 

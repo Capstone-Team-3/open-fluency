@@ -9,12 +9,13 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 class UserController {
-    
+
     def userService
     def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userInstanceCount: User.count()]
@@ -45,8 +46,13 @@ class UserController {
         }
 
         //log new user in
-        springSecurityService.reauthenticate userInstance.username
-        flash.message = "${userInstance.username}, welcome to OpenFluency!"
+        if(userInstance.enabled) {
+            springSecurityService.reauthenticate userInstance.username
+            flash.message = "${userInstance.username}, welcome to OpenFluency!"
+        } 
+        else {
+            flash.message = "${userInstance.username}, your account is pending approval!"
+        }
         redirect(uri: '/')
         //redirect action: 'show', id: userInstance.id
     }
@@ -107,6 +113,18 @@ class UserController {
         else {
             flash.message = "Please enter your email"
         }
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def enable(User userInstance) {
+        userService.updateUser(userInstance, true)
+        redirect action: "index"
+    }
+
+    @Secured(['ROLE_ADMIN'])
+    def disable(User userInstance) {
+        userService.updateUser(userInstance, false)
+        redirect action: "index"
     }
 
     protected void notFound() {

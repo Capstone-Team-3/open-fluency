@@ -14,6 +14,7 @@ class BootStrap {
     def algorithmService
     def deckService
     def flashcardInfoService
+    def userService
 
     def init = { servletContext ->
 
@@ -45,21 +46,16 @@ class BootStrap {
         def beginnerP = new Proficiency(proficiency: 'Beginner').save(flush: true, failOnError: true)
 
         // Build some users
-        def admin = new User(email: "admin@openfluency.com", username: 'admin', password: 'admin', userType: adminRole, nativeLanguage: english)
-        admin.save(flush: true, failOnError: true)
-        UserRole.create admin, adminRole, true
+        def admin = userService.createUser("admin", "admin", "admin@openfluency.com", adminRole.id.toString(), english.id.toString(), [], [])
+        def student = userService.createUser("student", "test", "student@openfluency.com", studentRole.id.toString(), english.id.toString(), [], [])
+        def instructor = userService.createUser("instructor", "test", "instructor@openfluency.com", instructorRole.id.toString(), english.id.toString(), [], [])
+        def researcher = userService.createUser("researcher", "test", "researcher@openfluency.com", researcherRole.id.toString(), english.id.toString(), [], [])
 
-        def student = new User(email: "student@openfluency.com", username: 'student', password: 'test', userType: studentRole, nativeLanguage: english)
-        student.save(flush: true, failOnError: true)
-        UserRole.create student, studentRole, true
-
-        def instructor = new User(email: "instructor@openfluency.com", username: 'instructor', password: 'test', userType: instructorRole, nativeLanguage: english)
-        instructor.save(flush: true, failOnError: true)
-        UserRole.create instructor, instructorRole, true
-
-        def researcher = new User(email: "researcher@openfluency.com", username: 'researcher', password: 'test', userType: researcherRole, nativeLanguage: english)
-        researcher.save(flush: true, failOnError: true)
-        UserRole.create researcher, researcherRole, true
+        // Enable all by default
+        User.list().each {
+            it.enabled = true
+            it.save()
+        }
 
         // Add language proficiency to student user
         new LanguageProficiency(user: student, proficiency: nativeP, language: japanese).save(failOnError: true)
