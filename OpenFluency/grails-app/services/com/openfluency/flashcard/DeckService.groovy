@@ -102,16 +102,15 @@ class DeckService {
 	/**
     * Create a new deck owned by the currently logged in user
     */
-    Deck createDeck(String title, String description, String languageId, String sourceLanguageId) {
+    Deck createDeck(String title, String description, String languageId, String sourceLanguageId, String cardServerName) {
     	User theUser = User.load(springSecurityService.principal.id)
-    	String csAlgo = "LinearWithShuffle"
     	
     	Deck deck = new Deck(title: title, 
     		description: description, 
     		owner: theUser, 
     		language: Language.load(languageId),
     		sourceLanguage: Language.load(sourceLanguageId),
-    		cardServerName: csAlgo)
+    		cardServerName: cardServerName)
     	deck.save()
 
     	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)

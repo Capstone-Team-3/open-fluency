@@ -66,6 +66,18 @@
 						</select>
 					</div>
 
+					<div class="form-group">
+						<label for="Repetition Algorithm" class="control-label">
+							The Repetition Algorithm you'd like to use </br>(SM2SpacedRepetion is recommended)
+							<span class="required-indicator">*</span>
+						</label>
+						<select class="form-control" name="cardServerAlgo">
+							<g:each in="${cardServerAlgos}">
+								<option value="${it}">${it}</option>
+							</g:each>
+						</select>
+					</div>
+
 					<br>
 					<div class="center">
 						<button class="btn btn-info" id="create-deck">Create Deck</button>

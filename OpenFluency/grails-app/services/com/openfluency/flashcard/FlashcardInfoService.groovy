@@ -68,7 +68,7 @@ class FlashcardInfoService {
 
     List getFlashcardInfoQueue(User theUser, Deck deckInstance, int theQueue){
     	List infos = FlashcardInfo.findAllByUserAndDeckAndQueue(theUser, deckInstance, theQueue)?.sort{it.viewPriority}
-    	return infos
+        return infos
     }
 
     boolean updateViewedFlashcardInfo(Deck deckInstance, CardUsage cardUsageInstance){

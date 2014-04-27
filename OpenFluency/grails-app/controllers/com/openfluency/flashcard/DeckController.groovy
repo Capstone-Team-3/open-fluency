@@ -4,6 +4,7 @@ import com.openfluency.auth.User
 import com.openfluency.language.Language
 import grails.plugin.springsecurity.annotation.Secured
 import com.openfluency.media.Customization
+import com.openfluency.algorithm.AlgorithmService
 
 @Secured(['isAuthenticated()'])
 class DeckController {
@@ -11,6 +12,7 @@ class DeckController {
 	def springSecurityService
     def deckService
     def flashcardService
+    def algorithmService
 
     def index() {
         redirect action: "list"
@@ -34,11 +36,11 @@ class DeckController {
     }
 
     def create() {
-        [deckInstance: new Deck(params)]
+        [deckInstance: new Deck(params), cardServerAlgos: algorithmService.cardServerNames()]
     }
 
     def save() {
-        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'])
+        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'],params.cardServerAlgo)
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {

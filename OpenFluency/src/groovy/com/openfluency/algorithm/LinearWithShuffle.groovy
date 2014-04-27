@@ -5,7 +5,7 @@ import com.openfluency.auth.User
 
 class LinearWithShuffle implements CardServer{
 
-	final String name = "LinearWithShuffle"
+	final String name = "Linear-With-Shuffle"
 
 	/**
 	*  This is where the algo initiailizes new FlashcardInfo elements to be held in the priority queues. All cards are

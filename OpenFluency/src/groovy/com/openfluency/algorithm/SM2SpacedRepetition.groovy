@@ -51,7 +51,7 @@ class SM2SpacedRepetition implements CardServer{
 	static final INIT_EF = 2.5f
 	static final FIRST_INTERVAL = 1
 	static final SECOND_INTERVAL = 6
-	final String name = "SM2SpacedRepetition"
+	final String name = "SM2-Spaced-Repetition"
 
 	/**
 	*  This is where the algo initiailizes new FlashcardInfo elements to be held in the priority queues. All cards are
@@ -64,7 +64,7 @@ class SM2SpacedRepetition implements CardServer{
 													  user: theUser,
 													  deck: deckInstance,
 													  queue: theQueue,
-													  algoName: cardServerName,
+													  algoName: this.name,
 													  viewPriority: FIRST_INTERVAL,
 													  numberOfRepetitions: 0,
 													  easinessFactor: INIT_EF,
@@ -89,8 +89,9 @@ class SM2SpacedRepetition implements CardServer{
 	 * @param quality
 	 */
 	void rankFlashcard(FlashcardInfo flashcard, int quality) {
+		flashcard.setNumberOfRepetitions(flashcard.getNumberOfRepetitions() + 1)
 		calculateEFactor(flashcard, quality)
-		calcuateInterval(flashcard, quality) 
+		calculateInterval(flashcard, quality) 
 		flashcard.setViewPriority(flashcard.getViewPriority() + flashcard.getInterval())
 	}
 	/**
@@ -99,7 +100,7 @@ class SM2SpacedRepetition implements CardServer{
 	* @param flashcard - FlashcardInfo
 	* @param quality - the ranking (0-5)
 	*/
-	void calcuateEFactor(FlashcardInfo flashcard, int quality) {
+	void calculateEFactor(FlashcardInfo flashcard, int quality) {
 	  double dQuality = (quality as double)
 	  float newFactor = flashcard.getEasinessFactor() - 0.8 + (0.28 * dQuality) - (0.02 * dQuality * dQuality)
 	  //If EF is less than MIN_EF then let EF be MIN_EF
@@ -115,18 +116,21 @@ class SM2SpacedRepetition implements CardServer{
 	 * @param flashcard - flashcardInfo
 	 * @param quality - the ranking (0-5)
 	 */
-	void calcuateInterval(FlashcardInfo flashcard, int quality ) {
+	void calculateInterval(FlashcardInfo flashcard, int quality ) {
 		
 		// if quality < 3 then start repetitions for the item from the beginning without changing the E-Factor
 		// (i.e. use intervals I(1), I(2) etc. as if the item was memorized anew)
-		if (quality < 3) {
-			flashcard.setNumberOfRepetitions(1)
-		}
+		//if (quality < 3) {
+		//	flashcard.setNumberOfRepetitions(1)
+		//}
 		// numberOfRepetitions = the number of times the flashcard was viewed
 		int numberOfRepetitions = flashcard.getNumberOfRepetitions()
 		double interval = FIRST_INTERVAL
 		
-		if (numberOfRepetitions == 2) {
+		if (quality < 2) {
+			interval = FIRST_INTERVAL
+		} 
+		else if (numberOfRepetitions == 2) {
 			interval = SECOND_INTERVAL
 		} 
 		else if (numberOfRepetitions > 2) {
