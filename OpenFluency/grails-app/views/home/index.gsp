@@ -133,54 +133,7 @@
                         </sec:ifAllGranted>
 
                         <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
-                            <h2>Current Courses</h2>
-                            <h2>Scheduled Courses</h2>
-                            <g:if test="${myCourses.size() >
-                                0}">
-                                <div class="container">
-
-                                    <g:each in="${myCourses}">
-                                        <div class="col-lg-3">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <g:if test="${it.visible}">
-                                                        <span class="glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="left" title="This course is visible to all users"></span>
-                                                    </g:if>
-                                                    <h3>
-                                                        <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
-                                                    </h3>
-
-                                                    <div class="current-chapter">
-                                                        <h4>${it.getChapters().size()} chapters</h4>
-                                                    </div>
-
-                                                    <div class="continue">
-                                                        <g:link class="view-more" action="students"  controller="course" id="${it.id}">
-						                                    ${Registration.countByCourse(it)} Enrolled
-						                                    <span class="glyphicon glyphicon-arrow-right"></span>
-						                                </g:link>
-                                                    </div>
-
-                                                </div>
-                                                <!-- end panel-body --> </div>
-                                            <!-- end panel --> </div>
-                                        <!-- end col-lg-3 --> </g:each>
-
-                                </div>
-                                <!-- end container -->
-
-                                <g:link class="view-more" action="list" controller="course">
-                                    View More Courses
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </g:link>
-
-                            </g:if>
-                            <g:else>
-                                <div class="container">
-                                    <p>You haven't created any courses yet! Get started:</p>
-                                    <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
-                                </div>
-                            </g:else>
+                         
 
                             <h2>Recently Updated Chapters</h2>
                             <g:if test="${myCourses.size() >
@@ -232,7 +185,10 @@
                                     <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
                                 </div>
                             </g:else>
-
+							<g:link class="view-more" action="list" controller="course">
+                                    View More Courses
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                            </g:link>
                         </sec:ifAllGranted>
 
                     </div>
