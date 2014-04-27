@@ -19,7 +19,7 @@ class UserService {
     def createUser(String username, String password, String email, String userTypeId, String nativeLanguageId, List<String> languageIds, List<String> proficiencyIds) {
         
         // Create the user - the account will only be enabled if the user is a student
-    	def userInstance = new User(enabled: (userTypeId == Role.findByAuthority(Constants.ROLE_STUDENT).id), username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(nativeLanguageId))
+    	def userInstance = new User(enabled: (userTypeId == Role.findByAuthority(Constants.ROLE_STUDENT).id.toString()), username: username, password: password, email: email, userType: Role.load(userTypeId), nativeLanguage: Language.load(nativeLanguageId))
     	userInstance.save(flush: true)
 
     	if(userInstance.hasErrors()) {
