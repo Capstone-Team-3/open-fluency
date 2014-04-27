@@ -92,7 +92,9 @@
                             <g:if test="${deckInstanceList.size() >
                                 0}">
                                 <div class="container">
-                                    <g:each in="${deckInstanceList}">
+                                		<g:set var="counter" value="${0}" />
+                                     <g:each in="${deckInstanceList}">
+                                    	   <g:if test="${counter < 4 }"><!-- show only the first 4 decks -->
                                         <div class="col-lg-3">
                                             <div class="panel panel-default">
                                                 <div class="panel-body">
@@ -113,6 +115,8 @@
                                                 </div>
                                                 <!-- end panel-body --> </div>
                                             <!-- end panel --> </div>
+                                            <g:set var="counter" value="${counter + 1}" />
+										</g:if>
                                         <!-- end col-lg-3 --> </g:each>
 
                                 </div>
@@ -139,8 +143,9 @@
                             <g:if test="${myCourses.size() >
                                 0}">
                                 <div class="container">
-
+								    <g:set var="counter" value="${0}" />
                                     <g:each in="${myCourses.sort()}">
+                                    		<g:if test="${counter < 4 }"><!-- show only the first 4 chapters -->
                                         <!-- should alter sort() to be by lastUpdated , implements Comparable -->
                                         <div class="col-lg-3">
                                             <div class="panel panel-default">
@@ -171,10 +176,12 @@
 						                                    <span class="glyphicon glyphicon-arrow-right"></span>
 						                                </g:link>
                                                     </div>
-
+												
                                                 </div>
                                                 <!-- end panel-body --> </div>
                                             <!-- end panel --> </div>
+                                            <g:set var="counter" value="${counter + 1}" />
+										</g:if>
                                         <!-- end col-lg-3 --> </g:each>
 
                                 </div>
