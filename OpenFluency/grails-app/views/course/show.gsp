@@ -76,9 +76,17 @@
 									<h3>${it.title}</h3>
 									<p>${it.questions.size()} Questions</p>
 									<br>
-									<div class="center">
-										<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
-									</div>
+									<g:if test="${isOwner}">
+										<g:link class="view-more" action="show" controller="quiz" id="${it.id}" >
+	                                     View Quiz
+	                                    <span class="glyphicon glyphicon-arrow-right"></span>
+	                                    </g:link>
+	                                 </g:if>
+	                                 <g:else>
+										<div class="center">
+											<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+										</div>
+                             		</g:else>
 								</div>
 							</div>
 						</div>

@@ -71,7 +71,7 @@
                             <h2>In-Progress Courses</h2>
 
                             <g:if test="${registrations}">
-                                <div class="container">
+                                <div class="container"><!-- should show only the first 4 courses -->
                                     <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/>
                                 </div>
                                 <g:link class="view-more" action="list" controller="course">
