@@ -59,7 +59,7 @@ class UserController {
 
     @Secured(['isAuthenticated()'])
     def edit() {
-        [userInstance: User.load(springSecurityService.principal.id), languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
+        [disabled: "disabled", userInstance: User.load(springSecurityService.principal.id), languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
     }
 
     @Transactional
@@ -74,7 +74,7 @@ class UserController {
             return
         }
 
-        userService.editUser(userInstance, params.list('language.id'), params.list('proficiency.id'))
+        userService.editUser(userInstance, params.list('language.id'), params.list('proficiency.id'), params.password, params.email)
         flash.message = "${userInstance.username}, your profile has been updated."
         redirect(uri:'/')
     }

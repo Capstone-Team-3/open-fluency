@@ -41,10 +41,18 @@ class UserService {
     	return userInstance
     }
 
-    def editUser(User userInstance,List<String> languageIds, List<String> proficiencyIds){
+    def editUser(User userInstance,List<String> languageIds, List<String> proficiencyIds, String password=null, String email){
+        
+        // Update email and password
+        if(password) {
+            userInstance.password = password
+        }
+        if(email) {
+            userInstance.email = email
+        }
         userInstance.save(flush: true)
 
-        //remove old proficiencies for the user
+        // Remove old proficiencies for the user
         List<LanguageProficiency> oldProficiencyList = LanguageProficiency.findAllByUser(userInstance)
         oldProficiencyList.each {oldLP -> oldLP.delete(flush: true)}
 
