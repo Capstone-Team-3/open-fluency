@@ -470,3 +470,14 @@ h4#custom-image {
 .quiz-create .list-unstyled {
     margin-bottom: 0;
 }
+
+.quiz-create .flashcard-select {
+    background-color: #efefef;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.quiz-create .flashcard-select h4 {
+    margin-bottom: 20px;
+}

@@ -68,24 +68,15 @@
 						</div><!-- end panel-body -->
 					</div><!-- end panel -->
 
-				</div>
-			</div>
-			
-			<div class="row" id="include-chapters"></div>
-
-			<div class="row">
-				<div class="col-lg-12 center">
 					<button type="submit" class="btn btn-info">Create Quiz</button>
-				</div>
+
+				</div><!-- end col-lg-6 -->
+			</div><!-- end row -->
+			
+			<div class="row" id="include-chapters">
 			</div>
-		</div>
+		</div><!-- end container -->
 	</g:form>
 	<g:javascript>initializeQuizCreator();</g:javascript>
-	<g:javascript>
-	/*	$(document).ready(function() {
-			$('select').addClass('form-control');
-		});
-	*/	
-	</g:javascript>
 </body>
 </html>

@@ -1,6 +1,6 @@
 var initializeStyledElements = function() {
 	$('.tooltiper').tooltip();
-}
+};
 
 /**
 * Searches for an Image in Flicker
@@ -13,7 +13,7 @@ var searchImage = function(query, results, urlField, resultPage) {
 	// set helpful and need variables
 	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
 	var sMethod = "flickr.photos.search";
-	var respFormat = "&format=json&jsoncallback=?"
+	var respFormat = "&format=json&jsoncallback=?";
 	var numPics = "6";
 	var src;
 
@@ -43,13 +43,13 @@ var searchImage = function(query, results, urlField, resultPage) {
 			}
 		});
 	});
-}
+};
 
 var initializePracticeCards = function() {
 	var $meaningContainer = $('.meaning');
 	var meaning = $meaningContainer.html();
 	$meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
-	$('#show-meaning').on('click', function() { 
+	$('#show-meaning').on('click', function() {
 		$meaningContainer.html(meaning);
 	});
 
@@ -58,7 +58,7 @@ var initializePracticeCards = function() {
         $("#ranking").val($(this).data('value'));
         $('.rankCardForm').submit();
     });
-}
+};
 
 /**
 * Initialize the form used to create Quizes
@@ -72,15 +72,16 @@ var initializeQuizCreator = function() {
 			})
 			.done(function(html) {
 				$("#include-chapters").append(html);
+				$("input[type='checkbox']", "#include-chapters").prop("checked", true);
 			});
 		} else {
 			var element = $("#flashcard-select-" + $(this).data('chapter'));
 			element.slideUp("slow", function() {
-				element.remove();	
-			})
+				element.remove();
+			});
 		}
 	});
-}
+};
 
 var initializeProficiencyAdder = function() {
 	$('#addproficiency').click(function(){
@@ -92,11 +93,11 @@ var initializeProficiencyAdder = function() {
 			initializeProficiencyRemovers();
 		});
 	});
-}
+};
 
 var initializeProficiencyRemovers = function() {
 	$('.remove-proficiency').unbind('click').click(function(){
 		$(this).parents('.panel').remove();
 		return false;
 	});
-}
+};
