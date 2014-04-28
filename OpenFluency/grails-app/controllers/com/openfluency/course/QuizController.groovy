@@ -83,7 +83,7 @@ class QuizController {
 		Answer firstAnswer = quizService.startQuiz(quizInstance, session.id)
 		if(firstAnswer) {
 			// Render view to answer first question
-			render view: "quiz", model: [answerInstance: firstAnswer]
+			render view: "quiz", model: [answerInstance: firstAnswer, quizInstance: quizInstance]
 		}
 		else {
 			flash.message = "Quiz cannot be started"
