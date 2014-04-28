@@ -83,7 +83,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 
-					<h2>Quizzes</h2>
+					<h2>Quizzes
 						<g:if test="${isOwner}">
 							<!-- This is only displayed for the owner of the course -->
 							<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Quiz</g:link>
