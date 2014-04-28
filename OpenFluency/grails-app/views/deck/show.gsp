@@ -26,7 +26,7 @@
 				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
-				<g:link class="btn btn-info add-flashcards" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id, 'deck-id': deckInstance.id]}">Add Flashcards</g:link>
+				<g:link class="btn btn-info add-flashcards" action="search" controller="unit" params="${['filter-alph': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>
 		<!-- end deck-header -->

@@ -22,7 +22,7 @@ class FlashcardController {
 	*/
     def create() {
         Unit unit = Unit.load(params.unit)
-        def deckId = params?.deckId
+        def deckId = params.deckId
     	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language), deckId: deckId]
     }
 
@@ -30,9 +30,6 @@ class FlashcardController {
     * Save the flashcard for the selected unit
     */
     def save() {
-
-        //Audio audioInstance = mediaService.createAudio(params.url, params.blob.getBytes(), params['pronunciation.id'])
-        //println "AudioID = " + params.audio_id 
         def flashcardInstance = flashcardService.createFlashcard(params.unit, params.unitMapping, params.pronunciation, params.imageLink, params.audio_id, params.deck)
         
     	// Check for errors

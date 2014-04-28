@@ -68,7 +68,7 @@
                         <td>
                             <g:form class="pull-right" action="create" controller="flashcard" name="createFlashcardForm">
                                 <input type="hidden" name="unit" value="${it?.id}"/>
-                                <input type="hidden" name="deckId" value="${deck_id}"/>
+                                <input type="hidden" name="deckId" value="${deckId}"/>
                                 <button class="btn btn-success" type="submit">Create Flashcard</button> 
                             </g:form>
                         </td>

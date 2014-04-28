@@ -38,7 +38,7 @@ class ChapterController {
         if(Registration.countByUserAndCourseAndStatus(
             User.load(springSecurityService.principal.id), 
             chapterInstance.course, 
-            Constants.APPROVED) == 0) {
+            Constants.APPROVED) == 0 && chapterInstance.course.owner.id != springSecurityService.principal.id) {
 
             flash.message = "You can't access this chapter"
             redirect action: "show", controller: "course", id: chapterInstance.course.id
