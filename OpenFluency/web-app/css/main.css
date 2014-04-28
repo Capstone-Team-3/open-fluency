@@ -143,7 +143,7 @@ body {
 }
 
 .flashcard-unit {
-    font-size: 60px;
+    font-size: 100px;
     margin: 0;
     padding: 20px 0 10px;
 }
@@ -167,7 +167,6 @@ body {
     float: none;
     margin: auto;
     min-width: 310px;
-    width: 25%;
 }
 
 .progress-container {
@@ -175,7 +174,13 @@ body {
 }
 
 .ranking-container {
-    width: 182px;
+    width: 300px;
+}
+
+.ranking-container button {
+    width: 100px;
+    height: 40px;
+
 }
 
 .practice-body {
@@ -303,11 +308,6 @@ h4#custom-image {
 
 .dashboard .panel h3 {
     border-bottom: 1px solid #eee;
-}
-
-.dashboard .panel .progress,
-.current-chapter {
-    margin-top: 30px;
 }
 
 .current-chapter {

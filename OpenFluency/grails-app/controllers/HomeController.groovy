@@ -8,6 +8,7 @@ import com.openfluency.course.Registration
 
 class HomeController {
 
+	def deckService
 	def springSecurityService
 
 	def index = {
@@ -25,7 +26,7 @@ class HomeController {
         }
 
         // Get decks for this user
-        List<Deck> decks = Deck.withCriteria {
+        List<Deck> deckInstanceList = Deck.withCriteria {
         	owner {
         		eq('id', springSecurityService.principal.id)
         	}
@@ -33,8 +34,13 @@ class HomeController {
         	order("lastUpdated", "desc")
         }
 
+        // Get the user's progress for the decks
+        deckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
         List<Registration> registrations = Registration.findAllByUserAndStatusNotEqual(User.load(springSecurityService.principal.id), Constants.REJECTED)
 
-        [deckInstanceList: decks, myCourses: courses, registrations: registrations]
+        [deckInstanceList: deckInstanceList, myCourses: courses, registrations: registrations]
     }
 }

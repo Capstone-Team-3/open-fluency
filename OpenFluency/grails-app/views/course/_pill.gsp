@@ -16,17 +16,16 @@
                 <div class="continue">
                     <g:link class="btn btn-success" action="show" controller="course" id="${registrationInstance.course.id}">Continue</g:link>
                 </div>
-            </g:if>
+            </div>
+        </g:if>
 
-            <g:if test="${registrationInstance.status == Constants.PENDING_APPROVAL}">
-                <div class="panel-body">
+        <g:if test="${registrationInstance.status == Constants.PENDING_APPROVAL}">
+            <div class="panel-body"></div>
+            <div class="panel-footer">
+                <div class="alert alert-warning">
+                    <p class="center">Pending approval</p>
                 </div>
-                <div class="panel-footer">
-                    <div class="alert alert-warning">
-                        <p class="center">Pending approval</p>
-                    </div>
-                </div>
-            </g:if>
-        </div>
+            </div>
+        </g:if>
     </div>
 </div>

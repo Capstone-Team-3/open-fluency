@@ -18,7 +18,7 @@
     </div><!-- end row -->
 
     <div class="practice-body row">
-        <div class="col-lg-4 col-lg-offset-4">
+        <div class="col-lg-6 col-lg-offset-3 center">
             <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
 
             <g:form id="${id}" controller="${controller}" action="practice" name="rankCardForm" class="rankCardForm form">

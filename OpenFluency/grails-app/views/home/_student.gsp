@@ -18,19 +18,27 @@
 </g:else>
 
 <h2>In-Progress Decks</h2>
-
 <g:if test="${deckInstanceList}">
     <div class="container">
         <g:each in="${deckInstanceList}">
             <div class="col-lg-3">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h3>
+                    <div class="panel-heading">
+                        <h4>
                             <g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link>
-                        </h3>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>Meaning Progress</p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">60%</div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="${it.progress[0]}" aria-valuemin="0" aria-valuemax="100" style="width:${it.progress[0]}%">${it.progress[0]}%</div>
                         </div>
+                        <p>Pronunciation Progress</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="${it.progress[1]}" aria-valuemin="0" aria-valuemax="100" style="width:${it.progress[1]}%">${it.progress}%</div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
                         <div class="continue">
                             <g:link class="btn btn-success" action="show" controller="deck" id="${it.id}">Continue</g:link>
                         </div>
