@@ -78,7 +78,6 @@
 						</select>
 					</div>
 
-					<br>
 					<div class="center">
 						<button class="btn btn-info" id="create-deck">Create Deck</button>
 					</div>

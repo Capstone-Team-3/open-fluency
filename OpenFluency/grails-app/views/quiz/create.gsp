@@ -7,59 +7,85 @@
 <body>
 	<g:form action="save" controller="quiz">
 		<input name="course.id" value="${courseInstance.id}" type="hidden">
-		<div class="container">
+		<div class="container quiz-create">
 			<div class="row">
+				
 				<div class="col-lg-12">
-					<h1>Create Quiz for ${courseInstance.title}</h1>
-					<div class="well">
-						<div class="form-group">
-							<label for="title">Title</label>
-							<g:textField name="title" value="${quizInstance?.title}" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label for="maxCardTime">
-								Maximum time per card (seconds). If 0, the test will not be timed
-							</label>
-							<g:field type="number" min="0" max="10" name="maxCardTime" value="0" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label for="maxCardTime">Element to hide on each card</label>
-							<select class="form-control" name="testElement">
-								<g:each in="${Constants.CARD_ELEMENTS}" status="i" var="element">
-									<option value="${i}">${element}</option>
-								</g:each>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="maxCardTime">Live time</label>
-							<g:datePicker name="liveTime" value="${new Date()}"
-              class="form-control"/>
-						</div>
+					<ul class="breadcrumb">
+						<li>
+							<a href="${createLink(uri:'/') }">Home</a>
+						</li>
+						<li>
+							<g:link action="list" controller="course">My Courses</g:link>
+						</li>
+						<li>
+							<g:link action="show" controller="course" id="${courseInstance.id}">${courseInstance.getCourseNumber()}: ${courseInstance.title}</g:link>
+						</li>
+						<li>
+							<g:link action="create" controller="quiz">Add Quiz</g:link>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-6 col-lg-offset-3">
+					
+					<h1 class="text-center">Create Quiz for ${courseInstance.title}</h1>
+					
+					<div class="form-group">
+						<label for="title">Title:</label>
+						<g:textField name="title" value="${quizInstance?.title}" class="form-control"/>
+					</div>
+					
+					<div class="form-group">
+						<label for="maxCardTime">
+							Maximum seconds allowed per card (if 0, the quiz will not be timed):
+						</label>
+						<g:field type="number" min="0" max="10" name="maxCardTime" value="0" class="form-control"/>
+					</div>
+					
+					<div class="form-group">
+						<label for="testElement">Test students on:</label>
+						<select class="form-control" name="testElement">
+							<g:each in="${Constants.CARD_ELEMENTS}" status="i" var="element">
+								<option value="${i}">${element}s of the words/characters</option>
+							</g:each>
+						</select>
 					</div>
 
-					<h4>Chapters to include</h4>
-					<div class="well">
-						<table class="table">
-							<g:each in="${courseInstance.chapters}">
-								<tr>
-									<td>${it.title}</td>
-									<td>
-										<input type="checkbox" data-chapter="${it.id}" class="chapter-selector"/>
-									</td>
-								</tr>
-							</g:each>
-						</table>
+					<div class="form-group live-time-group">
+						<label for="liveTime">Available starting:</label>
+						<g:datePicker name="liveTime" value="${new Date()}" class="form-control"/>
 					</div>
+
+					<label for="included-chapters">Chapters to include:</label>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<ul class="list-unstyled">
+								<g:each in="${courseInstance.chapters}">
+									<li><input type="checkbox" data-chapter="${it.id}" class="chapter-selector"/> ${it.title}</li>
+								</g:each>					
+							</ul>
+						</div><!-- end panel-body -->
+					</div><!-- end panel -->
+
 				</div>
 			</div>
+			
 			<div class="row" id="include-chapters"></div>
+
 			<div class="row">
 				<div class="col-lg-12 center">
-					<button type="submit" class="btn btn-info btn-lg">Create it!</button>
+					<button type="submit" class="btn btn-info">Create Quiz</button>
 				</div>
 			</div>
 		</div>
 	</g:form>
 	<g:javascript>initializeQuizCreator();</g:javascript>
+	<g:javascript>
+	/*	$(document).ready(function() {
+			$('select').addClass('form-control');
+		});
+	*/	
+	</g:javascript>
 </body>
 </html>
