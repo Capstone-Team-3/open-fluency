@@ -5,6 +5,9 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
+<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 	<div class="container course-show">
 		<ul class="breadcrumb">
 			<li>
@@ -33,15 +36,14 @@
 
 		</div>
 		<!-- end course-header -->
-<div class="dashboard">
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>Chapters</h2>
-				<div class="container">
+		<div class="dashboard">
+			<h2>Chapters
 					<g:if test="${isOwner}">
 						<!-- This is only displayed for the owner of the course -->
 						<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
 					</g:if>
+			</h2>
+			<div class="container">
 					<g:each in="${courseInstance.chapters}">
 						<div class="col-lg-3">
 							<div class="panel panel-default">
@@ -53,49 +55,44 @@
 									<g:render template="/deck/progress" model="[progress: it.progress]"/>
 								</div>
 							</div>
-						</div>
-						<!-- end col-lg-3 -->
+						</div><!-- end col-lg-3 -->
 					</g:each>
-				</div> <!-- end container -->
-			</div>
-		</div>
-		<!-- end row -->
-		
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>Quizzes</h2>
-				<div class="container">
+			</div> <!-- end container -->
+
+			<h2>Quizzes
 					<g:if test="${isOwner}">
 						<!-- This is only displayed for the owner of the course -->
 						<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Quiz</g:link>
 					</g:if>
-					<g:each in="${quizesInstanceList}">
-						<div class="col-lg-3">
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<h3>${it.title}</h3>
-									<p>${it.questions.size()} Questions</p>
-									<br>
-									<g:if test="${isOwner}">
-										<g:link class="view-more" action="show" controller="quiz" id="${it.id}" >
-	                                     View Quiz
-	                                    <span class="glyphicon glyphicon-arrow-right"></span>
-	                                    </g:link>
-	                                 </g:if>
-	                                 <g:else>
-										<div class="center">
+			</h2>
+			<div class="container">	
+				<g:each in="${quizesInstanceList}">
+					<div class="col-lg-3">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<h3>${it.title}</h3>
+								${it.questions.size()} Questions
+							</div>
+							
+								<div class="panel-footer">
+									<div class="continue">
+										<g:if test="${isOwner}">
+											<g:link class="view-more" action="show" controller="quiz" id="${it.id}" >
+		                                     View Quiz
+		                                    <span class="glyphicon glyphicon-arrow-right"></span>
+		                                    </g:link>
+		                                 </g:if>
+		                                 <g:else>								
 											<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
-										</div>
-                             		</g:else>
-								</div>
+	                             		</g:else>
+	                             	</div>
+                             	</div>
 							</div>
 						</div>
 						<!-- end col-lg-3 -->
 					</g:each>
 				</div> <!-- end container -->
-			</div>
-		</div>
-		<!-- end row -->
+		
 		
 		<g:if test="${isOwner}">
 			<div class="row">
@@ -114,5 +111,9 @@
 	</div>
 	</div>
 	<!-- end container -->
+	</div>
+	</div>
+	</div>
+	
 </body>
 </html>
