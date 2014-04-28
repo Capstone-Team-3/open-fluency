@@ -285,10 +285,20 @@ h4#custom-image {
     padding: 30px 15px;
 }
 
-.dashboard .panel {
-    height: 300px;
+.dashboard .panel-heading * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dashboard .panel-body {
+    height: 150px;
     margin: 0;
     position: relative;
+}
+
+.dashboard .panel-footer {
+    height: 80px;
 }
 
 .dashboard .panel h3 {
@@ -309,7 +319,7 @@ h4#custom-image {
 }
 
 .dashboard .continue {
-    margin-top: 30px;
+    margin-top: 10px;
     text-align: center;
 }
 

@@ -9,7 +9,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-
                 <sec:ifNotLoggedIn>
                     <div class="jumbotron">
                         <h1>Welcome to OpenFluency</h1>
@@ -60,147 +59,21 @@
 
                 <sec:ifLoggedIn>
                     <div class="dashboard">
-
                         <h1>
                             <sec:username />
                             's Dashboard
                         </h1>
 
                         <sec:ifAllGranted roles="ROLE_STUDENT">
-
-                            <h2>In-Progress Courses</h2>
-
-                            <g:if test="${registrations}">
-                                <div class="container"><!-- should show only the first 4 courses -->
-                                    <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/>
-                                </div>
-                                <g:link class="view-more" action="list" controller="course">
-                                    View More Courses
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </g:link>
-                            </g:if>
-
-                            <g:else>
-                                <div class="container">
-                                    <p>You haven't enrolled in any courses yet! Get started:</p>
-                                    <g:link class="btn btn-success" controller="course" action="search">Search for courses</g:link>
-                                </div>
-                            </g:else>
-
-                            <h2>In-Progress Decks</h2>
-
-                            <g:if test="${deckInstanceList.size() >
-                                0}">
-                                <div class="container">
-                                		<g:set var="counter" value="${0}" />
-                                     <g:each in="${deckInstanceList}">
-                                    	   <g:if test="${counter < 4 }"><!-- show only the first 4 decks -->
-                                        <div class="col-lg-3">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-
-                                                    <h3>
-                                                        <g:link action="show" controller="deck" id="${it.id}">${it.title}</g:link>
-                                                    </h3>
-
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:60%">60%</div>
-                                                        <!-- end progress-bar --> </div>
-                                                    <!-- end progress -->
-
-                                                    <div class="continue">
-                                                        <g:link class="btn btn-success" action="show" controller="deck" id="${it.id}">Continue</g:link>
-                                                    </div>
-
-                                                </div>
-                                                <!-- end panel-body --> </div>
-                                            <!-- end panel --> </div>
-                                            <g:set var="counter" value="${counter + 1}" />
-										</g:if>
-                                        <!-- end col-lg-3 --> </g:each>
-
-                                </div>
-                                <!-- end container -->
-                                <g:link class="view-more" action="list" controller="deck">
-                                    View More Decks
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </g:link>
-                            </g:if>
-                            <g:else>
-                                <div class="container">
-                                    <p>You haven't added any decks yet! Get started:</p>
-                                    <g:link class="btn btn-success" controller="deck" action="create">Create New Deck</g:link>
-                                    <g:link class="btn btn-success" controller="deck" action="search">Search for Decks</g:link>
-                                </div>
-                            </g:else>
-
+                            <g:render template="/home/student"/>
                         </sec:ifAllGranted>
 
                         <sec:ifAllGranted roles="ROLE_INSTRUCTOR">
-                         
-
-                            <h2>Recently Updated Chapters</h2>
-                            <g:if test="${myCourses.size() >
-                                0}">
-                                <div class="container">
-								    <g:set var="counter" value="${0}" />
-                                    <g:each in="${myCourses.sort()}">
-                                    		<g:if test="${counter < 4 }"><!-- show only the first 4 chapters -->
-                                        <!-- should alter sort() to be by lastUpdated , implements Comparable -->
-                                        <div class="col-lg-3">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <g:if test="${it.visible}">
-                                                        <span class="glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="left" title="This course is visible to all users"></span>
-                                                    </g:if>
-                                                    <h3>
-                                                        <g:link action="show" id="${it.getChapters().sort()[0]?.id}" controller="chapter">${it.getChapters().sort()[0]?.title}</g:link>
-                                                    </h3>
-                                                    <h5>
-                                                        <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
-                                                    </h5>
-
-                                                    <div class="current-chapter">
-
-                                                        <h4>
-                                                            Last Updated : 
-                                                        ${it.lastUpdated.month + 1} -
-                                                        ${it.lastUpdated.getAt(Calendar.DAY_OF_MONTH)} -
-                                                        ${it.lastUpdated.year + 1900}
-                                                        </h4>
-                                                    </div>
-
-                                                    <div class="continue">
-                                                        <g:link class="view-more" action="students"  controller="course" id="${it.id}">
-						                                    ${Registration.countByCourse(it)} Enrolled
-						                                    <span class="glyphicon glyphicon-arrow-right"></span>
-						                                </g:link>
-                                                    </div>
-												
-                                                </div>
-                                                <!-- end panel-body --> </div>
-                                            <!-- end panel --> </div>
-                                            <g:set var="counter" value="${counter + 1}" />
-										</g:if>
-                                        <!-- end col-lg-3 --> </g:each>
-
-                                </div>
-                                <!-- end container --> </g:if>
-                            <g:else>
-                                <div class="container">
-                                    <p>You haven't created any courses yet! Get started:</p>
-                                    <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
-                                </div>
-                            </g:else>
-							<g:link class="view-more" action="list" controller="course">
-                                    View More Courses
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                            </g:link>
+                            <g:render template="/home/instructor"/>
                         </sec:ifAllGranted>
 
                     </div>
-                    <!-- end dashboard --> </sec:ifLoggedIn>
-
+                </sec:ifLoggedIn>
             </div>
         </div>
     </div>

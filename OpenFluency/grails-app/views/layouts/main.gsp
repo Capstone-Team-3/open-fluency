@@ -110,11 +110,8 @@
 					</div>
 				</form>
 			</sec:ifNotLoggedIn>
-
 		</div>
-		<!-- end navbar-collapse -->
 	</div>
-	<!-- end container -->
 </nav>
 
 <g:if test="${flash.message}">
@@ -128,6 +125,9 @@
 </g:if>
 <g:layoutBody/>
 
+<g:javascript>
+	initializeStyledElements();
+</g:javascript>
 <r:layoutResources />
 </body>
 </html>
