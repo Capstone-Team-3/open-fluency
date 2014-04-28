@@ -2,6 +2,10 @@
 /* GENERAL
 /* ---------------------------------------------------------------------------*/
 
+.container h1 {
+    margin: 30px 0;
+}
+
 .center {
 	text-align: center;
 }
@@ -76,10 +80,6 @@ body {
 
 .form-group-image {
     padding-bottom: 5px;
-}
-
-.flashcard-create h1 {
-    margin-bottom: 30px;
 }
 
 .flashcard-create .audio-controls input {
@@ -332,22 +332,22 @@ h4#custom-image {
 /* COURSE, CHAPTER & DECK STYLES
 /* ---------------------------------------------------------------------------*/
 
-.course-search h1, 
-.course-list h1,
-.deck-list h1,
-.deck-search h1 {
-    margin-bottom: 30px;
-}
-
 .course-search table,
 .deck-search table {
     margin-top: 30px;
 }
 
-.course-show .course-header,
 .deck-header {
     margin-bottom: 30px;
     text-align: center;
+}
+
+.course-show h1 {
+    margin-bottom: 15px;
+}
+
+.course-show h2 {
+    margin-top: 20px;
 }
 
 .course-show .panel {
@@ -418,10 +418,6 @@ h4#custom-image {
 /* PROFILE
 /* ---------------------------------------------------------------------------*/
 
-.profile h1 {
-    margin-bottom: 30px;
-}
-
 .profile .list-group-item+b {
     float: left;
     width: 150px;
@@ -480,4 +476,13 @@ h4#custom-image {
 
 .quiz-create .flashcard-select h4 {
     margin-bottom: 20px;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 10px;
+}
+
+.quiz .unit {
+    font-size: 50px;
+    margin: 60px 0;
 }

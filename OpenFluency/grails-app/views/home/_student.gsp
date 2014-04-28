@@ -1,7 +1,7 @@
 <h2>In-Progress Courses</h2>
 
 <g:if test="${registrations}">
-    <div class="container">
+    <div class="container col-lg-12">
         <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/>
     </div>
     <g:link class="view-more" action="list" controller="course">
@@ -11,7 +11,7 @@
 </g:if>
 
 <g:else>
-    <div class="container">
+    <div class="container col-lg-12">
         <p>You haven't enrolled in any courses yet! Get started:</p>
         <g:link class="btn btn-success" controller="course" action="search">Search for courses</g:link>
     </div>
@@ -19,7 +19,7 @@
 
 <h2>In-Progress Decks</h2>
 <g:if test="${deckInstanceList}">
-    <div class="container">
+    <div class="container col-lg-12">
         <g:each in="${deckInstanceList}">
             <div class="col-lg-3">
                 <div class="panel panel-default">
@@ -53,7 +53,7 @@
     </g:link>
 </g:if>
 <g:else>
-    <div class="container">
+    <div class="container col-lg-12">
         <p>You haven't added any decks yet! Get started:</p>
         <g:link class="btn btn-success" controller="deck" action="create">Create New Deck</g:link>
         <g:link class="btn btn-success" controller="deck" action="search">Search for Decks</g:link>

@@ -92,6 +92,7 @@ class QuizController {
 	}
 
 	def nextQuestion(Answer answerInstance) {
+		Quiz quizInstance = Quiz.load(params.quiz)
 
 		// Answer current question
 		quizService.answerQuestion(answerInstance, params.option as Long, session.id)
@@ -106,7 +107,7 @@ class QuizController {
 			}
 		}
 
-		render view: "quiz", model: [answerInstance: answer]
+		render view: "quiz", model: [answerInstance: answer, quizInstance: quizInstance]
 	}
 
 	def report(Grade gradeInstance) {
