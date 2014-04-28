@@ -121,10 +121,17 @@ class DeckService {
     /**
     * Add a deck to my list of shared courses
     */
-    Share addDeck(Deck deck) { 
-    	User theUser = User.load(springSecurityService.principal.id)
-    	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
-    	return new Share(deck: deck, receiver: theUser).save(flush: true);
+    Share addDeck(Deck deckInstance) {
+    	User userInstance = User.load(springSecurityService.principal.id)
+    	
+    	// Check if the user already has this deck
+    	if(Share.findByUserAndDeck(userInstance, deckInstance)) {
+    		return null
+    	}
+
+    	// Create the Share
+    	flashcardInfoService.resetDeckFlashcardInfo(userInstance, deckInstance)
+    	return new Share(deck: deckInstance, receiver: userInstance).save(flush: true);
     }
 
     Boolean removeDeck(Deck deck) {
