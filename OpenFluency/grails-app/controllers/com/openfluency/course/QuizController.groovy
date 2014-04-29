@@ -165,6 +165,7 @@ class QuizController {
 			flash.message = "Quiz cannot be started"
 			redirect action: "show", controller: "course", id: quizInstance.course.id
 		}
+		
 	}
 
 	def nextQuestion(Answer answerInstance) {

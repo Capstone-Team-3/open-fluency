@@ -1,4 +1,6 @@
 <%@ page import="com.openfluency.course.Registration" %>
+<%@ page import="com.openfluency.course.Quiz" %>
+<%@ page import="com.openfluency.course.QuizService" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,10 +69,18 @@
 												<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
 											</h4>
 										</div>
-										<div class="panel-body">
-											<p>${it.deck.flashcards.size()} Flashcards</p>
-											<g:render template="/deck/progress" model="[progress: it.progress]"/>
-										</div>
+										<g:if test="${!isOwner}">
+											<div class="panel-body">
+												<p>${it.deck.flashcards.size()} Flashcards</p>
+												<g:render template="/deck/progress" model="[progress: it.progress]"/>
+											</div>
+										</g:if>
+										<g:else>
+											<div class="panel-body">
+												<p>${it.deck.flashcards.size()} Flashcards</p>
+												
+											</div>
+										</g:else>
 										<div class="panel-footer center">
 											<g:if test="${isOwner}">
 												<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-warning">Edit</g:link>
@@ -116,7 +126,12 @@
 													</g:if>
 												</g:if>
 												<g:else>
-													<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+													<g:if test="${gradeInstance?.id}">
+														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-info">Quiz Report</g:link>
+													</g:if>
+													<g:else>
+														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+													</g:else>
 												</g:else>
 											</div>
 										</div>
