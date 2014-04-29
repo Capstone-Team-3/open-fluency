@@ -145,8 +145,11 @@ $(document).ready(function(){
             processData: false,
             contentType: false
         }).done(function(resp) {
-            //window.location.replace(document.URL);
-            console.log('Delete Done');
+            // set url so has ranking type at end
+            var urlSplit = (window.location.href)
+                                .split(new RegExp("\\?|\\#", 'g'));
+            var url = urlSplit[0];
+            window.location.replace(url + "?rankingType=" + rankTypeVal);
         });
     }
 
@@ -180,7 +183,6 @@ $(document).ready(function(){
             var urlSplit = (window.location.href)
                                 .split(new RegExp("\\?|\\#", 'g'));
             var url = urlSplit[0];
-
             window.location.replace(url + "?rankingType=" + rankTypeVal);
         });
     }
