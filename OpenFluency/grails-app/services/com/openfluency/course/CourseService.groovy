@@ -24,6 +24,23 @@ class CourseService {
     	return course
     }
 
+    /**
+    * Updates an existing course
+    */
+    Course updateCourse(Course courseInstance, String title, String description, String languageId, Boolean visible, Boolean open) {
+        
+        // Update properties
+        courseInstance.visible = visible
+        courseInstance.open = open
+        courseInstance.title = title
+        courseInstance.description = description
+        courseInstance.language = Language.load(languageId)
+        courseInstance.owner = User.load(springSecurityService.principal.id)
+        courseInstance.save()
+
+        return courseInstance
+    }
+
     Chapter createChapter(String title, String description, String deckId, String courseId) {
     	Deck deckInstance = Deck.load(deckId)
         Course courseInstance = Course.load(courseId)
@@ -33,6 +50,29 @@ class CourseService {
         flashcardInfoService.resetDeckFlashcardInfo(courseInstance.owner, deckInstance)
     	return chapter
     }
+
+    /**
+    * Remove a chapter from a course
+    */
+    void deleteChapter(Chapter chapterInstance) {
+        chapterInstance.delete()
+    }
+
+    /**
+    * Update a given chapter with new properties
+    */
+    Chapter updateChapter(Chapter chapterInstance, String title, String description, String deckId, String courseId) {
+        
+        Deck deckInstance = Deck.load(deckId)
+        Course courseInstance = Course.load(courseId)
+        chapterInstance.title = title
+        chapterInstance.description = description
+        chapterInstance.deck = deckInstance
+        chapterInstance.course = courseInstance
+        chapterInstance.save()
+
+        return chapterInstance
+     }
 
     /**
     * Register the logged user for the given course
@@ -116,6 +156,9 @@ class CourseService {
         return updateRegistration(registrationInstance, Constants.REJECTED)
     }
 
+    /**
+    * Update a given registration to a given status
+    */
     Boolean updateRegistration(Registration registrationInstance, Integer status) {
         
         // Only allow the instructor of the course to approve registrations

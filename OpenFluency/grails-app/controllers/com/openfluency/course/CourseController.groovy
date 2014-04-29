@@ -86,6 +86,39 @@ class CourseController {
 	@Secured(['ROLE_INSTRUCTOR'])
 	def students(Course courseInstance) {
 		render view: "students", model: [courseInstance: courseInstance, enrolledStudents: Registration.findAllByCourse(courseInstance)]
-		
+	}
+
+	@Secured(['ROLE_INSTRUCTOR'])
+	def edit(Course courseInstance) {
+
+		// Only allow editing for owner
+		if(springSecurityService.principal.id != courseInstance?.owner?.id) {
+			flash.message = "You don't have permissions to edit this course"
+			redirect action: "index", controller: "home"
+		}
+
+		[courseInstance: courseInstance]
+	}
+
+	@Secured(['ROLE_INSTRUCTOR'])
+	def update(Course courseInstance) {
+
+		// Only allow editing for owner
+		if(springSecurityService.principal.id != courseInstance?.owner?.id) {
+			flash.message = "You don't have permissions to edit this course"
+			redirect action: "index", controller: "home"
+			return
+		}
+
+		// Update it
+		courseInstance = courseService.updateCourse(courseInstance, params.title, params.description, params.language.id, params.visible == "true", params.open == "true")
+
+		// Check for errors
+		if (courseInstance.hasErrors()) {
+			render(view: "edit", model: [courseInstance: courseInstance])
+			return
+		}
+
+		redirect action: "show", id: courseInstance.id
 	}
 }
