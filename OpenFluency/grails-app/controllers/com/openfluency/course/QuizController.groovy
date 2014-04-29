@@ -163,7 +163,7 @@ class QuizController {
 		}
 		else {
 			flash.message = "Quiz cannot be started"
-			redirect action: "index", controller: "home"
+			redirect action: "show", controller: "course", id: quizInstance.course.id
 		}
 	}
 
