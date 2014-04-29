@@ -486,3 +486,23 @@ h4#custom-image {
     font-size: 50px;
     margin: 60px 0;
 }
+
+.quiz-report h1 {
+    line-height: 1.5em;
+}
+
+.quiz-report h2 {
+    margin-bottom: 30px;
+}
+
+.quiz-report .warning .glyphicon-ok {
+    display: none;
+}
+
+.quiz-report .glyphicon-ok {
+    color: #5cb85c
+}
+
+.quiz-report thead {
+    background-color: #ededed;
+}
