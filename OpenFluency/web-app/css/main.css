@@ -187,10 +187,11 @@ body {
 }
 
 .deck-practice .flashcard,
-.chapter-practice .flashcard {
+.chapter-practice .flashcard,
+.practice-body .practice-flashcard {
     float: none;
     margin: auto;
-    min-width: 310px;
+    width: 310px;
 }
 
 .progress-container {
@@ -204,7 +205,6 @@ body {
 .ranking-container button {
     width: 100px;
     height: 40px;
-
 }
 
 .practice-body {
