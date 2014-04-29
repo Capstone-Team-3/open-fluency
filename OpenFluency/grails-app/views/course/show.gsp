@@ -96,32 +96,34 @@
 						</g:if>
 					</h2>
 
-					<div class="container col-lg-12">
-						<g:each in="${quizesInstanceList}">
-							<div class="col-lg-3">
-								<div class="panel panel-default">
-									<div class="panel-body">
-										<h3>${it.title}</h3>
-										${it.questions.size()} Questions
-									</div>
-
-									<div class="panel-footer">
-										<div class="continue">
-											<g:if test="${isOwner}">
-												<g:link class="view-more" action="show" controller="quiz" id="${it.id}" >
-													View Quiz
-													<span class="glyphicon glyphicon-arrow-right"></span>
-												</g:link>
-											</g:if>
-											<g:else>
-												<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
-											</g:else>
+					<div class="container">
+						<div class="row">
+							<g:each in="${quizesInstanceList}">
+								<div class="col-lg-3">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4>
+												<g:link action="show" id="${it.id}" controller="quiz">${it.title}</g:link>
+											</h4>
+										</div>
+										<div class="panel-body">${it.questions.size()} Questions</div>
+										<div class="panel-footer">
+											<div class="continue">
+												<g:if test="${isOwner}">
+													<g:if test="${isOwner}">
+														<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-warning">Edit</g:link>
+														<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-danger" onclick="return confirm('are you sure?')">Remove</g:link>
+													</g:if>
+												</g:if>
+												<g:else>
+													<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+												</g:else>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- end col-lg-3 -->
-						</g:each>
+							</g:each>
+						</div>
 					</div>
 					<!-- end container -->
 

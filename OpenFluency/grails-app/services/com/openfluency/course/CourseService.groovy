@@ -28,7 +28,7 @@ class CourseService {
     * Updates an existing course
     */
     Course updateCourse(Course courseInstance, String title, String description, String languageId, Boolean visible, Boolean open) {
-        
+
         // Update properties
         courseInstance.visible = visible
         courseInstance.open = open
@@ -45,10 +45,10 @@ class CourseService {
     	Deck deckInstance = Deck.load(deckId)
         Course courseInstance = Course.load(courseId)
         Chapter chapter = new Chapter(title: title, description: description, deck: deckInstance, course: courseInstance)
-    	chapter.save()
+        chapter.save()
         //make sure the chapter maker has a fresh set of flashcardInfos for the deck
         flashcardInfoService.resetDeckFlashcardInfo(courseInstance.owner, deckInstance)
-    	return chapter
+        return chapter
     }
 
     /**
@@ -59,10 +59,40 @@ class CourseService {
     }
 
     /**
+    * Remove a quiz from a course
+    */
+    void deleteQuiz(Quiz quizInstance) {
+        // Remove all questions before
+        Question.findAllByQuiz(quizInstance).each {
+            deleteQuestion(it)
+        }
+
+        // Remove all grades
+        Grade.findAllByQuiz(quizInstance).each {
+            it.delete()
+        }
+
+        quizInstance.delete()
+    }
+
+    /**
+    * Remove a question from a quiz
+    */
+    void deleteQuestion(Question questionInstance) {
+
+        // First delete all options
+        QuestionOption.findAllByQuestion(questionInstance).each {
+            it.delete()
+        }
+
+        questionInstance.delete()
+    }
+
+    /**
     * Update a given chapter with new properties
     */
     Chapter updateChapter(Chapter chapterInstance, String title, String description, String deckId, String courseId) {
-        
+
         Deck deckInstance = Deck.load(deckId)
         Course courseInstance = Course.load(courseId)
         chapterInstance.title = title
@@ -72,7 +102,7 @@ class CourseService {
         chapterInstance.save()
 
         return chapterInstance
-     }
+    }
 
     /**
     * Register the logged user for the given course
@@ -160,7 +190,7 @@ class CourseService {
     * Update a given registration to a given status
     */
     Boolean updateRegistration(Registration registrationInstance, Integer status) {
-        
+
         // Only allow the instructor of the course to approve registrations
         if(registrationInstance.course.owner.id != springSecurityService.principal.id) {
             return false

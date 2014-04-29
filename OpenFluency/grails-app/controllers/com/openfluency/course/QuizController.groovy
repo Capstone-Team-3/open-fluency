@@ -49,15 +49,91 @@ class QuizController {
 	def show(Quiz quizInstance) {
 		// Only the instructor that owns the course should be allowed access
 		if(springSecurityService.principal.id != quizInstance?.course?.owner?.id) {
-			flash.message = "You're not allowed to view this course"
+			flash.message = "You're not allowed to view this quiz"
 			redirect action: "index", controller: "home"
 		}
 
-		[quizInstance: quizInstance]
+		[quizInstance: quizInstance,
+		isOwner: (springSecurityService.principal.id == quizInstance.course.owner.id)
+		]
 	}
 
-	@Secured(['ROLE_STUDENT'])
-	def take(Quiz quizInstance) {
+	@Secured(['ROLE_INSTRUCTOR'])
+	def edit(Quiz quizInstance){
+		// Only the instructor that owns the course should be allowed access
+		if(springSecurityService.principal.id != quizInstance?.course?.owner?.id) {
+			flash.message = "You're not allowed to edit this quiz"
+			redirect action: "index", controller: "home"
+		}
+
+		[quizInstance: quizInstance,
+		isOwner: (springSecurityService.principal.id == quizInstance.course.owner.id)
+		]
+	}
+
+	@Secured(['ROLE_INSTRUCTOR'])
+	def update(Quiz quizInstance) {
+		// First check that it's the owner of the course who's creating it
+		if(quizInstance.course.owner.id != springSecurityService.principal.id){
+			flash.message = "You're not authorized to edit a quiz for a course you don't own!"
+			redirect action: "index", controller: "home"
+		}
+
+		// Build the quiz
+		quizService.updateQuiz(
+			quizInstance,
+			params.title, 
+			params.liveTime,
+			params.maxCardTime as Integer, 
+			params.testElement as Integer,
+			params.list('flashcardId')
+			)
+
+		if(quizInstance.hasErrors()) {
+			flash.message = "Something went wrong, please try again"
+		}
+
+		redirect action: "show", id: quizInstance.id
+	}
+
+	@Secured(['ROLE_INSTRUCTOR'])
+	def delete(Quiz quizInstance) {
+        // Only allow editing for owner
+        if(springSecurityService.principal.id != quizInstance.course?.owner?.id) {
+        	flash.message = "You don't have permissions to delete this quiz"
+        	redirect action: "index", controller: "home"
+        	return
+        }
+
+        // Get course id to redirect afterwards
+        Long courseId = quizInstance.course.id
+
+        // Delete it
+        courseService.deleteQuiz(quizInstance)
+        
+        redirect action: "show", controller: "course", id: courseId
+    }
+
+    @Secured(['ROLE_INSTRUCTOR'])
+	def deleteQuestion(Question questionInstance) {
+        // Only allow editing for owner
+        if(springSecurityService.principal.id != questionInstance.quiz.course?.owner?.id) {
+        	flash.message = "You don't have permissions to delete this question"
+        	redirect action: "index", controller: "home"
+        	return
+        }
+
+        // Get course id to redirect afterwards
+        Long quizId = questionInstance.quiz.id
+
+        // Delete it
+        courseService.deleteQuestion(questionInstance)
+        
+        redirect action: "show", controller: "quiz", id: quizId
+    }
+
+    @Secured(['ROLE_STUDENT'])
+    def take(Quiz quizInstance) {
 
 		// Check that the quiz actually exists
 		if(!quizInstance) {
