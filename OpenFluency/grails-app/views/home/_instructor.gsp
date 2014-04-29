@@ -22,7 +22,7 @@
 
                         <div class="current-chapter">
                             <h4> <b>Last Updated:</b>
-                                <br>${it.lastUpdated.format("MM/dd/YYYY")}</h4>
+                                <br>${it.lastUpdated.format("MM/dd/yyyy")}</h4>
                         </div>
                     </div>
                     <div class="panel-footer">

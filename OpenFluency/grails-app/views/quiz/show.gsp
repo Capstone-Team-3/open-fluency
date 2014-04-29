@@ -48,7 +48,7 @@
 						</li>
 						<li>
 							<strong>Quiz available starting:</strong>
-							${quizInstance.liveTime.format('MM/dd/YYYY')}
+							${quizInstance.liveTime.format('MM/dd/yyyy')}
 						</li>
 					</ul>
 				</div>
