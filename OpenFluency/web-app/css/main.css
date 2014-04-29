@@ -309,8 +309,9 @@ h4#custom-image {
     padding-bottom: 10px;
 }
 
-.dashboard .container {
+.dashboard .dashboard-container {
     background: #eee;
+    overflow: auto;
     padding: 30px 15px;
 }
 

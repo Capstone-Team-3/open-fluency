@@ -1,7 +1,7 @@
 <%@ page import="com.openfluency.course.Registration" %>
 <h2>Recently Updated Courses</h2>
 <g:if test="${myCourses}">
-    <div class="container col-lg-12">
+    <div class="dashboard-container">
         <g:each in="${myCourses}">
             <div class="col-lg-3">
                 <div class="panel panel-default">
@@ -40,16 +40,13 @@
     </div>
 </g:if>
 <g:else>
-    <div class="container col-lg-12">
+    <div class="dashboard-container">
         <p>You haven't created any courses yet! Get started:</p>
         <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
     </div>
-</g:else>
-<div class="row">
-    <div class="col-lg-12">    
-        <g:link class="view-more" action="list" controller="course">
-            View More Courses
-            <span class="glyphicon glyphicon-arrow-right"></span>
-        </g:link>
-    </div>
+</g:else>   
+    <g:link class="view-more" action="list" controller="course">
+        View More Courses
+        <span class="glyphicon glyphicon-arrow-right"></span>
+    </g:link>
 </div>

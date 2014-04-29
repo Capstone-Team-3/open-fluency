@@ -1,29 +1,27 @@
 <h2>In-Progress Courses</h2>
 
 <g:if test="${registrations}">
-    <div class="container col-lg-12">
+    <div class="dashboard-container">
         <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <g:link class="view-more" action="list" controller="course">
-                View More Courses
-                <span class="glyphicon glyphicon-arrow-right"></span>
-            </g:link>
-        </div>
-    </div>
+    <g:link class="view-more" action="list" controller="course">
+        View More Courses
+        <span class="glyphicon glyphicon-arrow-right"></span>
+    </g:link>
 </g:if>
 
 <g:else>
-    <div class="container col-lg-12">
-        <p>You haven't enrolled in any courses yet! Get started:</p>
-        <g:link class="btn btn-success" controller="course" action="search">Search for courses</g:link>
+    <div class="dashboard-container">
+        <div class="col-lg-6">
+            <p>You haven't enrolled in any courses yet! Get started:</p>
+            <g:link class="btn btn-success" controller="course" action="search">Search for courses</g:link>
+        </div>
     </div>
 </g:else>
 
 <h2>In-Progress Decks</h2>
 <g:if test="${deckInstanceList}">
-    <div class="container col-lg-12">
+    <div class="dashboard-container">
         <g:each in="${deckInstanceList}">
             <div class="col-lg-3">
                 <div class="panel panel-default">
@@ -51,19 +49,15 @@
             </div><!-- end col-lg-3 -->
         </g:each>
 
-    </div><!-- end col-lg-12 -->
+    </div><!-- dashboard-container -->
 
-    <div class="row">
-        <div class="col-lg-12">
-            <g:link class="view-more" action="list" controller="deck">
-                View More Decks
-                <span class="glyphicon glyphicon-arrow-right"></span>
-            </g:link>
-        </div>
-    </div>
+    <g:link class="view-more" action="list" controller="deck">
+        View More Decks
+        <span class="glyphicon glyphicon-arrow-right"></span>
+    </g:link>
 </g:if>
 <g:else>
-    <div class="container col-lg-12">
+    <div class="dashboard-container">
         <p>You haven't added any decks yet! Get started:</p>
         <g:link class="btn btn-success" controller="deck" action="create">Create New Deck</g:link>
         <g:link class="btn btn-success" controller="deck" action="search">Search for Decks</g:link>
