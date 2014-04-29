@@ -60,8 +60,7 @@
                 <sec:ifLoggedIn>
                     <div class="dashboard">
                         <h1>
-                            <sec:username />
-                            's Dashboard
+                            <sec:username />'s Dashboard
                         </h1>
 
                         <sec:ifAllGranted roles="ROLE_STUDENT">

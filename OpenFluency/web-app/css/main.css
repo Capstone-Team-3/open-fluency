@@ -291,6 +291,10 @@ h4#custom-image {
     padding: 30px 15px;
 }
 
+.dashboard .panel {
+    margin-bottom: 0;
+}
+
 .dashboard .panel-heading * {
     white-space: nowrap;
     overflow: hidden;

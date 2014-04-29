@@ -45,7 +45,11 @@
         <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
     </div>
 </g:else>
-<g:link class="view-more" action="list" controller="course">
-    View More Courses
-    <span class="glyphicon glyphicon-arrow-right"></span>
-</g:link>
+<div class="row">
+    <div class="col-lg-12">    
+        <g:link class="view-more" action="list" controller="course">
+            View More Courses
+            <span class="glyphicon glyphicon-arrow-right"></span>
+        </g:link>
+    </div>
+</div>

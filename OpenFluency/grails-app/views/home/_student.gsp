@@ -4,10 +4,14 @@
     <div class="container col-lg-12">
         <g:render template="/course/pill" collection="${registrations}" var="registrationInstance"/>
     </div>
-    <g:link class="view-more" action="list" controller="course">
-        View More Courses
-        <span class="glyphicon glyphicon-arrow-right"></span>
-    </g:link>
+    <div class="row">
+        <div class="col-lg-12">
+            <g:link class="view-more" action="list" controller="course">
+                View More Courses
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </g:link>
+        </div>
+    </div>
 </g:if>
 
 <g:else>
@@ -43,14 +47,20 @@
                             <g:link class="btn btn-success" action="show" controller="deck" id="${it.id}">Continue</g:link>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div><!-- end panel -->
+            </div><!-- end col-lg-3 -->
         </g:each>
+
+    </div><!-- end col-lg-12 -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <g:link class="view-more" action="list" controller="deck">
+                View More Decks
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </g:link>
+        </div>
     </div>
-    <g:link class="view-more" action="list" controller="deck">
-        View More Decks
-        <span class="glyphicon glyphicon-arrow-right"></span>
-    </g:link>
 </g:if>
 <g:else>
     <div class="container col-lg-12">
