@@ -177,10 +177,11 @@ $(document).ready(function(){
             contentType: false
         }).done(function(customizationInstance) {
             // set url so has ranking type at end
-            window.location.replace(window.location.href + "?rankingType=" + rankTypeVal);
+            var urlSplit = (window.location.href)
+                                .split(new RegExp("\\?|\\#", 'g'));
+            var url = urlSplit[0];
 
-            // force reload from server
-            window.location.reload(true);
+            window.location.replace(url + "?rankingType=" + rankTypeVal);
         });
     }
 
