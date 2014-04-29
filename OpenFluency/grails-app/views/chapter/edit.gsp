@@ -16,6 +16,16 @@
 				<g:link action="search" controller="course" >Search for Course</g:link>
 			</li>
 			<li>
+				<g:link action="show" controller="course" id="${chapterInstance.course.id}">
+					${chapterInstance.course.getCourseNumber()}: ${chapterInstance.course.title}
+				</g:link>
+			</li>
+			<li>
+				<g:link action="show" controller="chapter" id="${chapterInstance.id}">
+					${chapterInstance.title}
+				</g:link>
+			</li>
+			<li>
 				<a href="#">Edit Chapter</a>
 			</li>
 		</ul>

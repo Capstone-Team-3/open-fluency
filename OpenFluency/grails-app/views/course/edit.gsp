@@ -13,6 +13,11 @@
 				<g:link action="search" controller="course" >Courses</g:link>
 			</li>
 			<li>
+				<g:link action="show" controller="course" id="${courseInstance.id}">
+					${courseInstance.getCourseNumber()}: ${courseInstance.title}
+				</g:link>
+			</li>
+			<li>
 				<a href="#">Edit Course</a>
 			</li>
 		</ul>
