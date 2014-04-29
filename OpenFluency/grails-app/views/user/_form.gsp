@@ -18,7 +18,10 @@
 </div>
 
 <div class="form-group">
-	<label for="email" class="control-label">Email</label>
+	<label for="email" class="control-label">
+		Email
+		<span class="required-indicator">*</span>
+	</label>
 	<input class="form-control" type="email" name="email" required="" value="${userInstance?.email}"/>
 </div>
 

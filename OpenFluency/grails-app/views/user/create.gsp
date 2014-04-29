@@ -12,8 +12,7 @@
 			<h1>Sign Up</h1>
 			<p>
 				Already have an account?
-				<g:link action="auth" controller="login">Sign In</g:link>
-				.
+				<g:link action="auth" controller="login">Sign In</g:link>.
 			</p>
 
 			<g:hasErrors bean="${userInstance}">
@@ -29,9 +28,9 @@
 			<g:form url="[resource:userInstance, action:'save']" >
 				<g:render template="form"/>
 				<div class="proficiencies">
-					<label class="control-label">
-						Language Proficiencies
-						<a id="addproficiency" class="btn btn-success btn-xs">Add</a>
+					<label class="control-label add-proficiency">
+						Additional Languages
+						<a id="addproficiency" class="btn btn-success btn-xs"><strong>Add</strong></a>
 					</label>
 				</div>
 				<g:submitButton name="sign-up" class="btn btn-primary" value="Sign Up" />

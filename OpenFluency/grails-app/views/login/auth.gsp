@@ -11,7 +11,7 @@
 			<h2>Sign In</h2>
 			<p>
 				New user?
-				<g:link action='create' controller='user'>Sign Up</g:link>
+				<g:link action='create' controller='user'>Sign Up</g:link>.
 			</p>
 
 			<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
@@ -27,11 +27,6 @@
 					:
 				</label>
 				<input type='password' class='text_ form-control' name='j_password' id='password'/>
-				<div class="center">
-					<small>
-						<g:link action="reset" controller="user">Forgot password?</g:link>
-					</small>
-				</div>
 
 				<div id="remember_me_holder">
 					<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>
@@ -42,6 +37,11 @@
 			</div>
 
 			<input type="submit" name="sign-in" id="sign-in" class="btn btn-primary btn-block" value="Sign In" />
+			<div class="center">
+				<small>
+					<g:link action="reset" controller="user">Forgot password?</g:link>
+				</small>
+			</div>
 		</form>
 
 	</div>

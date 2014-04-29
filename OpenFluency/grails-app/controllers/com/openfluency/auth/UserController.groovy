@@ -110,9 +110,6 @@ class UserController {
                 flash.message = "New password sent to $params.email"   
             }
         }
-        else {
-            flash.message = "Please enter your email"
-        }
     }
 
     @Secured(['ROLE_ADMIN'])

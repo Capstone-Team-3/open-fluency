@@ -5,17 +5,25 @@
 </head>
 
 <body>
-	<div id="login" class="container signin">
+	<div id="login" class="container forgot-password">
 		<div class="row">
-			<div class="col-lg-4 col-lg-offset-4">
+			<div class="col-lg-12">
 				<form action='reset' method='POST' id='loginForm' class='cssform' autocomplete='off'>
 
-					<label for='email' class="control-label">
-						Email:
-					</label>
-					<input type='text' class='text_ form-control' name='email' id='email' placeholder="Enter your email"/>
-					<br>
-					<input type="submit" name="reset" id="sign-in" class="btn btn-primary btn-block" value="Reset Password" />
+					<h1>Forget your password?</h1>
+					<p class="instructions">Enter your email address below and we'll send you a new one!</p>
+					
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label for='email' class="control-label">
+									Email:
+								</label>
+								<input type='text' class='text_ form-control' name='email' id='email' placeholder="Enter your email"/>
+							</div>
+							<input type="submit" name="reset" id="sign-in" class="btn btn-primary" value="Reset Password" />
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>

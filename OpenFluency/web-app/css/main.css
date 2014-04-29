@@ -26,17 +26,40 @@ body {
 /* ---------------------------------------------------------------------------*/
 /* SIGN-IN AND SIGN-UP STYLES
 /* ---------------------------------------------------------------------------*/
-.signin .control-label,
-.signup .control-label {
-    padding-top: 11px; /* padding plus a border */
-}
-
 .signin .alert {
     margin-bottom: 0;
 }
 
+.signin .control-label {
+    margin-top: 10px;
+}
+
 .proficiencies .panel label:first-child {
     padding-top: 0;
+}
+
+.proficiencies .control-group:last-child label {
+    margin-top: 10px;
+}
+
+.proficiencies .panel {
+    margin-bottom: 15px;
+}
+
+.proficiencies .panel:last-child {
+    margin-bottom: 0;
+}
+
+.signup #sign-up {
+    margin-top: 15px;
+}
+
+.forgot-password h1 {
+    margin-bottom: 10px;
+}
+
+.forgot-password .instructions {
+    margin-bottom: 30px;
 }
 
 /* ---------------------------------------------------------------------------*/
