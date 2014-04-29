@@ -19,6 +19,7 @@
 }
 
 body {
+    padding-top: 70px;
     padding-bottom: 40px;
 }
 
@@ -350,8 +351,8 @@ h4#custom-image {
     margin-top: 20px;
 }
 
-.course-show .panel {
-    height: 200px;
+.course-show .panel-body {
+    height: 100px;
 }
 
 .chapter-show .chapter-header {

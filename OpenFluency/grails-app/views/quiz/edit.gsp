@@ -1,41 +1,43 @@
+<%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'quiz.label', default: 'Quiz')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#edit-quiz" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+<head>
+	<meta name="layout" content="main"></head>
+<body>
+	<div class="container quiz-show">
+		<div class="row">
+			<div class="col-lg-12">
+
+				<header class="text-center">
+					<h1>Quiz: ${quizInstance.title}</h1>
+					<h3>
+						<g:link action="show" controller="course" id="${quizInstance.course.id}">${quizInstance.course.title}</g:link>
+					</h3>
+				</header>
+				<g:form action="update" controller="quiz" id="${quizInstance.id}">
+					<input name="course.id" value="${quizInstance.course.id}" type="hidden"/>
+					<div class="col-lg-6 col-lg-offset-3">
+						<g:render template="form" model="[quizInstance: quizInstance, courseInstance: quizInstance.course]"/>
+						<button type="submit" class="btn btn-info">Update</button>
+					</div>
+					<div class="row" id="include-chapters"></div>
+				</g:form>
+			</div>
+			<!-- end col-lg-12 -->
 		</div>
-		<div id="edit-quiz" class="content scaffold-edit" role="main">
-			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<g:hasErrors bean="${quizInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${quizInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
-			<g:form url="[resource:quizInstance, action:'update']" method="PUT" >
-				<g:hiddenField name="version" value="${quizInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
-			</g:form>
+		<!-- end row -->
+		<br>
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Questions</h2>
+				<g:each in="${quizInstance.questions}">
+					<g:render template="/quiz/question" model="[questionInstance: it, isOwner: isOwner]"/>
+				</g:each>
+			</div>
 		</div>
-	</body>
+	</div>
+	<!-- end container -->
+	<g:javascript>initializeQuizCreator();</g:javascript>
+</body>
 </html>

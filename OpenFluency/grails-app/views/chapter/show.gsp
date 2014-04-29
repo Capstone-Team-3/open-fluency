@@ -28,7 +28,12 @@
 		</ul>
 
 		<div class="chapter-header">
-			<h1>${chapterInstance.title}</h1>
+			<h1>
+				${chapterInstance.title}
+				<g:if test="${isOwner}">
+					<g:link action="edit" id="${chapterInstance?.id}" class="btn btn-sm btn-warning">Edit</g:link>
+				</g:if>
+			</h1>
 			<p>${chapterInstance.description}</p>
 			<g:if test="${chapterInstance.deck.flashcardCount >
 				0 && Registration.findAllByCourseAndUser(chapterInstance.course, userInstance)}">

@@ -23,13 +23,36 @@ class QuizService {
 			enabled: true, 
 			liveTime: liveTime, 
 			maxCardTime: maxCardTime
-			).save(failOnError: true)
+			).save()
 
 		if(quizInstance.hasErrors()) {
 			return quizInstance
 		}
 
         // Now create the questions for each flashcard
+        createQuestions(quizInstance, flashcardIds)
+
+        return quizInstance
+    }
+
+    void updateQuiz(Quiz quizInstance, String title, Date liveTime, Integer maxCardTime, Integer testElement, List flashcardIds) {
+    	// Create the quiz
+    	quizInstance.title = title
+    	quizInstance.testElement = testElement
+    	quizInstance.enabled = true
+    	quizInstance.liveTime = liveTime
+    	quizInstance.maxCardTime = maxCardTime
+    	quizInstance.save()
+
+		if(quizInstance.hasErrors()) {
+			return
+		}
+
+		createQuestions(quizInstance, flashcardIds)
+    }
+
+    void createQuestions(Quiz quizInstance, List flashcardIds) {
+    	// Now create the questions for each flashcard
         Random rand = new Random() // randomize the options for the questions
         
         flashcardIds.each {
@@ -44,8 +67,6 @@ class QuizService {
             	new QuestionOption(question: question, flashcard: deckService.getRandomFlashcard(flashcardInstance)).save()
             }
         }
-
-        return quizInstance
     }
 
     /**

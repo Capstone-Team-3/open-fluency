@@ -24,11 +24,63 @@ class ChapterController {
 
     	// Check for errors
     	if (chapterInstance.hasErrors()) {
-    		render(view: "create", model: [chapterInstance: chapterInstance, courseInstance: chapterInstance.course], userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id)))
+    		render view: "create", model: [chapterInstance: chapterInstance, courseInstance: chapterInstance.course, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
     		return
     	}
 
     	redirect action: "show", controller: "course", id: "${params.courseId}"
+    }
+
+    @Secured(['ROLE_INSTRUCTOR'])
+    def edit(Chapter chapterInstance) {
+
+        // Only allow editing for owner
+        if(springSecurityService.principal.id != chapterInstance.course?.owner?.id) {
+            flash.message = "You don't have permissions to edit this chapter"
+            redirect action: "index", controller: "home"
+        }
+
+        [chapterInstance: chapterInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
+    }
+
+    @Secured(['ROLE_INSTRUCTOR'])
+    def update(Chapter chapterInstance) {
+
+        // Only allow editing for owner
+        if(springSecurityService.principal.id != chapterInstance.course?.owner?.id) {
+            flash.message = "You don't have permissions to edit this chapter"
+            redirect action: "index", controller: "home"
+            return
+        }
+
+        // Update it
+        chapterInstance = courseService.updateChapter(chapterInstance, params.title, params.description, params.deckId, params.courseId)
+
+        // Check for errors
+        if (chapterInstance.hasErrors()) {
+            render(view: "edit", model: [chapterInstance: chapterInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))])
+            return
+        }
+
+        redirect action: "show", id: chapterInstance.id
+    }
+
+    @Secured(['ROLE_INSTRUCTOR'])
+    def delete(Chapter chapterInstance) {
+        // Only allow editing for owner
+        if(springSecurityService.principal.id != chapterInstance.course?.owner?.id) {
+            flash.message = "You don't have permissions to delete this chapter"
+            redirect action: "index", controller: "home"
+            return
+        }
+
+        // Get course id to redirect afterwards
+        Long courseId = chapterInstance.course.id
+
+        // Delete it
+        courseService.deleteChapter(chapterInstance)
+        
+        redirect action: "show", controller: "course", id: courseId
     }
 
     @Secured(['isAuthenticated()'])
