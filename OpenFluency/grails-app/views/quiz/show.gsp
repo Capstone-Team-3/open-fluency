@@ -9,6 +9,25 @@
 		<div class="row">
 			<div class="col-lg-12">
 
+				<ul class="breadcrumb">
+					<li>
+						<a href="${createLink(uri:'/') }">Home</a>
+					</li>
+					<li>
+						<g:link action="list" controller="course">My Courses</g:link>
+					</li>
+					<li>
+						<g:link action="show" controller="course" id="${quizInstance.course.id}">
+							${quizInstance.course.getCourseNumber()}: ${quizInstance.course.title}
+						</g:link>
+					</li>
+					<li>
+						<g:link action="show" controller="quiz" id="${quizInstance.id}">
+							${quizInstance.title}
+						</g:link>
+					</li>
+				</ul>
+
 				<header class="text-center">
 					<h1>
 						Quiz: ${quizInstance.title}

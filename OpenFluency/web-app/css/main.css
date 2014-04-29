@@ -436,7 +436,13 @@ h4#custom-image {
     list-style-type: none;
 }
 
-/* QUIZZES */
+/* ---------------------------------------------------------------------------*/
+/* QUIZZES
+/* ---------------------------------------------------------------------------*/
+
+.quiz-show h1 {
+    margin-bottom: 10px;
+}
 
 .quiz-show .description {
     background-color: #efefef;
