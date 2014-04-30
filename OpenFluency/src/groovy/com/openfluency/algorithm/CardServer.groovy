@@ -25,10 +25,10 @@ interface CardServer {
 	*  This is where the algo initiailizes new FlashcardInfo elements to be held in the priority queues.
 	*  See FlashcardInfo to learn exactly what parameters are available to you.  FlashcardInfo does have string vars that could be used
 	*  to store arbitrarily complex data (eg in JSON format) should need be.
-	*  @param User - the user that the Flashcard info will map to the flashcard and deck
-	*  @param Deck - the deck that the Flashcard belongs to
-	*  @param int - representing the Queue the card belongs in - these map directly to the CARD_ELEMENTS constants
-	*  @param flashcardInstance - the Flashcard for which this FlashcardInfo will be tied
+	*  @param User - the user that the Flashcard info will map to the flashcard and deck***ALWAYS set FlashcardInfo.user to this
+	*  @param Deck - the deck that the Flashcard belongs to***ALWAYS set FlashcardInfo.deck to this value
+	*  @param int - representing the Queue the card belongs in - these map directly to the CARD_ELEMENTS constants***ALWAYS set FlashcardInfo.queue to this value
+	*  @param flashcardInstance - the Flashcard for which this FlashcardInfo will be tied***ALWAYS set FlashcardInfo.flashcard to this value
 	*  @param double - the .viewPriority of the top card on the queue, as it might be a useful reference for initialization
 	*  @return FlashcardInfo - the new flashcardInfo instance
 	*/

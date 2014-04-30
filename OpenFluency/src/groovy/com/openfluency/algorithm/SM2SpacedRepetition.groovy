@@ -10,8 +10,11 @@ import com.openfluency.auth.User
  * http://www.supermemo.com/english/ol/sm2.htm
  *
  * SM2 uses the student performance on a flashcard to determine the next time to schedule that flashcard
- *
- *
+ * The SM2 formula is included below.  We have adapted it to work with the OpenFluency system.  The system
+ * does not inherantly support serving cards on a schedule.  Our implementation uses SM2 to calculate
+ * offsets based on the number of days (eg view again in +6 days) and coerces that into a Flashcard.viewPriority.
+ * So, a card scheduled to be seen again in 1 day could have a .viewPriority of 1, and a card scheduled in 6 days, well 6.
+ * Since the system presents the user with the card holding the LOWEST viewPriority, this adaptation is very straight forward.
  */
 class SM2SpacedRepetition implements CardServer{
 
@@ -56,6 +59,8 @@ class SM2SpacedRepetition implements CardServer{
 	/**
 	*  This is where the algo initiailizes new FlashcardInfo elements to be held in the priority queues. All cards are
 	*  given the same priority to start.  
+	*  ****THE FlashcardInfo .flashcard, .user, .deck, .queue and .algoName SHOULD ALWAYS BE SET AS BELOW****
+	*  All other fields can be set as requrired by the algo
 	*  @return FlashcardInfo - the new flashcardInfo instance
 	*/
 	FlashcardInfo buildNewFlashcardInfo(User theUser, Deck deckInstance, int theQueue,
@@ -74,10 +79,13 @@ class SM2SpacedRepetition implements CardServer{
 
 	/**
 	*  We use the SuperMemo 2 spaced repetition algorithm to determine how to order cards in the queue
+	*  The viewPriority can be calculated anywhere, but, since it needs to be updated during this method call,
+	*  an algo implementation should SET it in this method for clarity
 	*  @return FlashcardInfo - the updated instance
 	*/
     FlashcardInfo updateFlashcardInfo(FlashcardInfo fInfoInstance, CardUsage cUsageInstance) {
-    	rankFlashcard(fInfoInstance, cUsageInstance.getRanking())
+    	def newViewPriority = rankFlashcard(fInfoInstance, cUsageInstance.getRanking())
+    	fInfoInstance.setViewPriority(newViewPriority)
     	return fInfoInstance
     }
 
@@ -88,11 +96,12 @@ class SM2SpacedRepetition implements CardServer{
 	 * @param flashcard flashcardInfo
 	 * @param quality
 	 */
-	void rankFlashcard(FlashcardInfo flashcard, int quality) {
+	def rankFlashcard(FlashcardInfo flashcard, int quality) {
 		flashcard.setNumberOfRepetitions(flashcard.getNumberOfRepetitions() + 1)
 		calculateEFactor(flashcard, quality)
 		calculateInterval(flashcard, quality) 
-		flashcard.setViewPriority(flashcard.getViewPriority() + flashcard.getInterval())
+		def newViewPriority = flashcard.getViewPriority() + flashcard.getInterval()
+		return newViewPriority
 	}
 	/**
 	* Set the new E-Factor.
