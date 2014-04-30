@@ -131,8 +131,15 @@
 													</g:if>
 												</g:if>
 												<g:else>
-													<g:if test="${gradeInstance?.id}">
-														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-info">Quiz Report</g:link>
+												<%def quizService = grailsApplication.mainContext.getBean("quizService");%>
+												<g:if test="${quizService.getGrade(it).id}">
+														<h4>Final Grade : 
+													    ${quizService.getGrade(it).correctAnswers/quizService.getAnswersByLoggedUser(quizService.getGrade(it).quiz).size()*100}%  
+														</h4>
+														<g:link class="view-more" action="take" controller="quiz" id="${it.id}">
+															View Report
+													        <span class="glyphicon glyphicon-arrow-right"></span>
+													    </g:link>
 													</g:if>
 													<g:else>
 														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>

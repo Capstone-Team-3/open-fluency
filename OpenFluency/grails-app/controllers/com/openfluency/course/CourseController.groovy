@@ -12,6 +12,7 @@ class CourseController {
 	def springSecurityService
 	def courseService
 	def deckService
+	
 
 	// Researchers will not be able to enroll or create courses
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT', 'ROLE_ADMIN'])
