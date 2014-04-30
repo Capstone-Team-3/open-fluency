@@ -19,7 +19,13 @@
 			</li>
 		</ul>
 		<div class="deck-header text-center center-block">
-			<h1 class="deck-title">${deckInstance?.title}</h1>
+			<h1 class="deck-title">
+				${deckInstance?.title}
+				<g:if test="${isOwner}">
+					<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">Edit</g:link>
+					<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">Delete</g:link>
+				</g:if>
+			</h1>
 			<p class="deck-description">${deckInstance?.description}</p>
 			<g:if test="${flashcardCount}">
 				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
@@ -34,7 +40,7 @@
 		<div class="row">
 			<g:each in="${flashcardInstanceList}">
 				<div class="col-lg-3">
-					<g:render template="/flashcard/flashcard" model="[flashcardInstance: it]"/>
+					<g:render template="/flashcard/flashcard" model="[flashcardInstance: it, isOwner: isOwner]"/>
 				</div>
 				<!-- end col-lg-3 -->
 			</g:each>

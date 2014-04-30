@@ -49,4 +49,15 @@ class FlashcardController {
     def show(Flashcard flashcardInstance) {
         [flashcardInstance: flashcardInstance]
     }
+
+    def delete(Flashcard flashcardInstance) {
+        if(springSecurityService.principal.id != flashcardInstance.deck.owner.id) {
+            flash.message = "You're not allowed to delete this flashcard"
+            redirect(uri: request.getHeader('referer'))
+            return
+        }
+
+        flashcardService.deleteFlashcard(flashcardInstance)
+        redirect(uri: request.getHeader('referer'))
+    }
 }

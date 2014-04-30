@@ -140,4 +140,18 @@ class CourseController {
 
 		redirect action: "show", id: courseInstance.id
 	}
+
+	@Secured(['ROLE_INSTRUCTOR'])
+	def delete(Course courseInstance) {
+
+		// Only allow deleting for owner
+		if(springSecurityService.principal.id != courseInstance?.owner?.id) {
+			flash.message = "You don't have permissions to delete this course"
+			redirect action: "index", controller: "home"
+		}
+
+		flash.message = "You just deleted ${courseInstance.title}"
+		courseService.deleteCourse(courseInstance)
+		redirect action: "list", controller: "course"
+	}
 }

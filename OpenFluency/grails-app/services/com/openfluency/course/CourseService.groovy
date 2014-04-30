@@ -89,6 +89,29 @@ class CourseService {
     }
 
     /**
+    * Delete an entire course
+    */
+    void deleteCourse(Course courseInstance) {
+        // First delete all quizes
+        Quiz.findAllByCourse(courseInstance).each {
+            deleteQuiz(it)
+        }
+
+        // Now delete all chapteres
+        Chapter.findAllByCourse(courseInstance).each {
+            deleteChapter(it)
+        }
+
+        // Delete all registrations
+        Registration.findAllByCourse(courseInstance).each {
+            dropRegistration(it)
+        }
+        
+        // Now delete it
+        courseInstance.delete()
+    }
+
+    /**
     * Update a given chapter with new properties
     */
     Chapter updateChapter(Chapter chapterInstance, String title, String description, String deckId, String courseId) {

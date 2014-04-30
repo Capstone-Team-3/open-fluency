@@ -39,6 +39,7 @@
 					<g:render template="form" model="[courseInstance: courseInstance]"/>
 					<div class="center">
 						<button class="btn btn-info">Save</button>
+						<g:link action="delete" controller="course" id="${courseInstance.id}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</g:link>
 					</div>
 				</g:form>
 			</div>

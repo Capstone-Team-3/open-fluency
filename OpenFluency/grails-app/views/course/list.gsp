@@ -34,6 +34,7 @@
 						<th>Last Updated</th>
 						<th>Start Date</th>
 						<th>End Date</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -49,6 +50,7 @@
 							<td>${it.lastUpdated}</td>
 							<td>${it.startDate}</td>
 							<td>${it.endDate}</td>
+							<td><g:link action="delete" id="${it.id}" controller="course" class="btn btn-danger btn-sm">Delete</g:link></td>
 						</tr>
 					</g:each>
 				</tbody>

@@ -1,7 +1,10 @@
 package com.openfluency.flashcard
 
+import com.openfluency.course.Question
+import com.openfluency.course.QuestionOption
 import com.openfluency.auth.User
 import com.openfluency.flashcard.Share
+import com.openfluency.media.Customization
 import com.openfluency.language.Language
 import com.openfluency.language.Alphabet
 import com.openfluency.language.Unit
@@ -23,7 +26,7 @@ class FlashcardService {
 	* Creates a new flashcard - the alternative is to pass a Map as an argument 
     * does not currently support audio file storage
 	*/
-    def createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioId, String deckId) {
+    Flashcard createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioId, String deckId) {
 
         Unit unitInstance = Unit.load(unitId)
 
@@ -76,5 +79,36 @@ class FlashcardService {
         flashcardInfoService.resetDeckFlashcardInfo(deck.owner, deck)
         
         log.info "Created ${f} flashcards for deck: ${deck.title}"
+    }
+
+    void deleteFlashcard(Flashcard flashcardInstance) {
+        
+        // First delete customizations
+        Customization.findAllByCard(flashcardInstance).each {
+            it.audioAssoc.delete()
+            it.imageAssoc.delete()
+            it.delete()
+        }
+
+        // Delete all the stats
+        FlashcardInfo.findAllByFlashcard(flashcardInstance).each {
+            it.delete()
+        }
+
+        // Delete all the questions and options that use this card
+        QuestionOption.findAllByFlashcard(flashcardInstance).each {
+            it.delete()
+        }
+
+        Question.findAllByFlashcard(flashcardInstance).each {
+            QuestionOption.findAllByQuestion(it).each {
+                it.delete()
+            }
+
+            it.delete()
+        }
+
+        // Now delete it
+        flashcardInstance.delete()
     }
 }

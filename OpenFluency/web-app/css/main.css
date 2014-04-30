@@ -148,8 +148,11 @@ body {
 
 .flashcard .panel {
     font-size: 20px;
-    padding-bottom: 20px;
     text-align: center;
+}
+
+.flashcard .panel-body {
+    padding: 0px 0px 20px 0px;
 }
 
 .flashcard-header {

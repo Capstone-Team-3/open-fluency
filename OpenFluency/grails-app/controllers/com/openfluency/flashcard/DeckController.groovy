@@ -40,7 +40,7 @@ class DeckController {
     }
 
     def save() {
-        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'],params.cardServerAlgo)
+        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'], params.cardServerAlgo)
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {
@@ -61,6 +61,52 @@ class DeckController {
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
 
         respond flashcards, model:[deckProgress: deckService.getDeckProgress(deckInstance), deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id)]
+    }
+
+    def edit(Deck deckInstance) {
+        
+        // Check for permissions
+        if(springSecurityService.principal.id != deckInstance.owner.id) {
+            flash.message = "You don't have permissions to edit this deck!"
+            redirect(uri: request.getHeader('referer'))
+            return
+        }
+
+        [deckInstance: deckInstance, cardServerAlgos: algorithmService.cardServerNames()]
+    }
+
+    def delete(Deck deckInstance) {
+        // Check for permissions
+        if(springSecurityService.principal.id != deckInstance.owner.id) {
+            flash.message = "You don't have permissions to edit this deck!"
+            redirect(uri: request.getHeader('referer'))
+            return
+        }
+
+        flash.message = "You succesfully deleted ${deckInstance.title}"
+        deckService.deleteDeck(deckInstance)
+        redirect action: "list"     
+    }
+
+    def update(Deck deckInstance) {
+        
+        // Check for permissions
+        if(springSecurityService.principal.id != deckInstance.owner.id) {
+            flash.message = "You don't have permissions to edit this deck!"
+            redirect(uri: request.getHeader('referer'))
+            return
+        }
+
+        // do we need to reset flashcard info?
+        deckService.updateDeck(deckInstance, params.title, params.description, params['language.id'], params['sourceLanguage.id'], params.cardServerAlgo)
+
+        // Check for errors
+        if (deckInstance.hasErrors()) {
+            render(view: "create", model: [deckInstance: deckInstance])
+            return
+        }
+
+        redirect action: "show", id: deckInstance.id
     }
 
     def practice(Deck deckInstance) {
@@ -120,6 +166,9 @@ class DeckController {
         redirect action: "list"
     }
 
+    /**
+    * Remove a shared deck from list of logged user's decks
+    */
     def remove(Deck deckInstance) {
         if(deckInstance && deckService.removeDeck(deckInstance)) {
             flash.message = "You succesfully removed ${deckInstance.title} from your decks!"

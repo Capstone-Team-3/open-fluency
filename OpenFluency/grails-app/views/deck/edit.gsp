@@ -12,13 +12,13 @@
 			</li>
 			<li>Decks</li>
 			<li>
-				<g:link action="create" controller="deck" >Create New Deck</g:link>
+				<g:link action="create" controller="deck" >Edit Deck</g:link>
 			</li>
 
 		</ul>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<h1 id="main">Create New Deck</h1>
+				<h1 id="main">Edit Deck</h1>
 
 				<g:hasErrors bean="${deckInstance}">
 					<ul class="errors" role="alert">
@@ -30,10 +30,10 @@
 					</ul>
 				</g:hasErrors>
 
-				<g:form action="save" controller="deck" name="createDeckForm">
-					<g:render template="form" model="[deckInstance: deckinstance]"/>
+				<g:form action="update" controller="deck" name="createDeckForm" id="${deckInstance.id}">
+					<g:render template="form" model="[deckInstance: deckInstance]"/>
 					<div class="center">
-						<button class="btn btn-info" id="create-deck">Create Deck</button>
+						<button class="btn btn-info" id="create-deck">Save</button>
 					</div>
 				</g:form>
 			</div>

@@ -44,6 +44,7 @@
 						</sec:ifAllGranted>
 						<g:if test="${isOwner}">
 							<g:link action="edit" id="${courseInstance?.id}" class="btn btn-sm btn-warning">Edit</g:link>
+							<g:link action="delete" id="${courseInstance?.id}" class="btn btn-sm btn-danger">Delete</g:link>
 						</g:if>
 					</h1>
 					<p class="course-description">${courseInstance.description}</p>

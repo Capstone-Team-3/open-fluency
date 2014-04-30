@@ -5,6 +5,7 @@ import com.openfluency.flashcard.Share
 import com.openfluency.language.Language
 import grails.transaction.Transactional
 import com.openfluency.auth.User
+import com.openfluency.course.Chapter
 import com.openfluency.Constants
 import com.openfluency.algorithm.*
 
@@ -12,6 +13,7 @@ import com.openfluency.algorithm.*
 class DeckService {
 
 	def springSecurityService
+	def flashcardService
 	def algorithmService
 	def flashcardInfoService
 
@@ -27,7 +29,7 @@ class DeckService {
 
 		User theUser = User.load(springSecurityService.principal.id)
 		CardUsage cardUsage = CardUsage.get(cardUsageId)
-			
+
 		if(cardUsage) {
 			// Close the current CardUsage
 			cardUsage.endTime = new Date()
@@ -118,6 +120,18 @@ class DeckService {
     	return deck
     }
 
+    /** 
+    * Update an existing deck
+    */
+    void updateDeck(Deck deckInstance, String title, String description, String languageId, String sourceLanguageId, String cardServerName) {
+    	deckInstance.title = title
+    	deckInstance.description = description
+    	deckInstance.language = Language.load(languageId)
+    	deckInstance.sourceLanguage = Language.load(sourceLanguageId)
+    	deckInstance.cardServerName = cardServerName
+    	deckInstance.save()
+    }   	
+
     /**
     * Add a deck to my list of shared courses
     */
@@ -136,7 +150,7 @@ class DeckService {
 
     Boolean removeDeck(Deck deck) {
     	User theUser = User.load(springSecurityService.principal.id)
-    		
+
     	Share share = Share.findByReceiverAndDeck(theUser, deck)
     	if(share) {
     		try {
@@ -173,6 +187,29 @@ class DeckService {
             	}
             }
         }
+    }
+
+    /**
+    * Delete deck
+    */
+    void deleteDeck(Deck deckInstance) {
+    	// First delete all flashcards
+    	Flashcard.findAllByDeck(deckInstance).each {
+    		flashcardService.deleteFlashcard(it)
+    	}
+
+    	// Delete all shares
+    	Share.findAllByDeck(deckInstance).each {
+    		it.delete()
+    	}
+
+    	// Delete all chapters associated with this deck
+    	Chapter.findAllByDeck(deckInstance).each {
+    		it.delete()
+    	}
+
+    	// Now delete it
+    	deckInstance.delete()
     }
 
     /**
