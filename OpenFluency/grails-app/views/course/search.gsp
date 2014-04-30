@@ -7,10 +7,16 @@
 <body>
 
     <div class="container course-search">
-		<ul class="breadcrumb">
-            <li><a href="${createLink(uri:'/') }">Home</a></li>
-            <li><g:link action="search" controller="course" >Courses</g:link></li>
-            <li><g:link action="search" controller="course" >Search for Course</g:link></li>
+        <ul class="breadcrumb">
+            <li>
+                <a href="${createLink(uri:'/') }">Home</a>
+            </li>
+            <li>
+                <g:link action="search" controller="course" >Courses</g:link>
+            </li>
+            <li>
+                <g:link action="search" controller="course" >Search for Course</g:link>
+            </li>
         </ul>
         <h1 id="main">Course Search</h1>
 
@@ -60,34 +66,35 @@
             </thead>
             <g:each in="${courseInstanceList}">
                 <tr class="course-result">
-                    <td>
-                        ${it.getCourseNumber()}
-                    </td>
+                    <td>${it.getCourseNumber()}</td>
                     <td>
                         <g:link action="show" controller="course" id="${it.id}">${it.title}</g:link>
-                        /${it.owner.username}<!-- should be the instructor name -->
-                    </td>
+                        /${it.owner.username}
+                        <!-- should be the instructor name --> </td>
                     <td>${it.description}</td>
                     <td>${it.getChapters().size()}</td>
                     <td>${it.startDate}</td>
                     <td>${it.endDate}</td>
                     <td>${Registration.countByCourse(it)}</td>
                     <td>
-                    		<sec:ifAllGranted roles="ROLE_STUDENT">
-	                        <g:if test="${!Registration.findAllByCourseAndUser(it, userInstance)}">
-	                            <g:link action="enroll" controller="course" id="${it.id}" class="enroll btn btn-info">Enroll</g:link>
-	                        </g:if>
+                        <sec:ifAllGranted roles="ROLE_STUDENT">
+                            <g:if test="${Registration.countByCourseAndUser(it, userInstance) == 0}">
+                                <g:link action="enroll" controller="course" id="${it.id}" class="enroll btn btn-info">Enroll</g:link>
+                            </g:if>
+                            <g:else>
+                                <g:link class="btn btn-danger" action="drop" controller="course" id="${it.id}">Drop</g:link>
+                            </g:else>
                         </sec:ifAllGranted>
                     </td>
                 </tr>
             </g:each>
         </table>
-   
+
         <div class="pagination center-block text-center">
             <g:paginate controller="course" action="search"  total="${courseInstanceList.size() ?: 0}" />
         </div>
     </div>
     <!-- end container -->
-   
+
 </body>
 </html>

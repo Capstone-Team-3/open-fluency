@@ -138,6 +138,17 @@ class CourseService {
     }
 
     /**
+    * Allows a user to drop a course
+    */
+    Registration findRegistration(Course courseInstance) {
+        return Registration.findByUserAndCourse(User.load(springSecurityService.principal.id), courseInstance)
+    }
+
+    void dropRegistration(Registration registrationInstance) {
+        registrationInstance.delete()
+    }
+
+    /**
     * Returns a list of all the courses that are enabled and have a live time that is either null or before the current date
     */
     List<Quiz> getLiveQuizes(Course courseInstance) {

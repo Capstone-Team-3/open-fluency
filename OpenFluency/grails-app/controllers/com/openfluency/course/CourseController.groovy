@@ -50,7 +50,7 @@ class CourseController {
 		}
 
 		[quizesInstanceList: courseService.getLiveQuizes(courseInstance), courseInstance: courseInstance, isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id),
-			students: Registration.findAllByCourse(courseInstance)]
+		students: Registration.findAllByCourse(courseInstance)]
 	}
 
 	@Secured(['isAuthenticated()'])
@@ -82,6 +82,25 @@ class CourseController {
 		
 		redirect action: "show", id: courseInstance.id
 	}
+
+	@Secured(['ROLE_STUDENT'])
+	def drop(Course courseInstance) {
+
+		// First find if the logged user is registered
+		Registration registrationInstance = courseService.findRegistration(courseInstance)
+
+		if(!registrationInstance) {
+			flash.message = "You're not registered for this course"
+			redirect(uri: request.getHeader('referer'))
+			return
+		}
+
+		// Now drop the registration
+		courseService.dropRegistration(registrationInstance)
+		flash.message = "You just dropped your registration for ${courseInstance.title}"
+		redirect(uri: request.getHeader('referer'))
+	}
+
 	// Only instructors can see enrolled students
 	@Secured(['ROLE_INSTRUCTOR'])
 	def students(Course courseInstance) {

@@ -34,9 +34,13 @@
 					<h1>
 						<span class="course-title">${courseInstance.title}</span>
 						<sec:ifAllGranted roles="ROLE_STUDENT">
-							<g:if test="${!Registration.findAllByCourseAndUser(courseInstance, userInstance)}">
+							<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 0}">
 								<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll</g:link>
 							</g:if>
+							<g:else>
+								<g:link class="btn btn-danger" action="drop" controller="course" id="${courseInstance.id}">Drop</g:link>
+							</g:else>
+
 						</sec:ifAllGranted>
 						<g:if test="${isOwner}">
 							<g:link action="edit" id="${courseInstance?.id}" class="btn btn-sm btn-warning">Edit</g:link>
@@ -78,7 +82,7 @@
 										<g:else>
 											<div class="panel-body">
 												<p>${it.deck.flashcards.size()} Flashcards</p>
-												
+
 											</div>
 										</g:else>
 										<div class="panel-footer center">
