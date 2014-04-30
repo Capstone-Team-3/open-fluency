@@ -31,12 +31,24 @@ class UserController {
     }
 
     def create() {
+        // If logged in we shouldn't be creating users
+        if(springSecurityService.currentUser) {
+            redirect action: "index", controller: "home"
+            return
+        }
+
         def user = new User(params)
         [userInstance: user, languages: Language.findAll(), authorities: Role.findAllByAuthorityNotEqual(Constants.ROLE_ADMIN)]
     }
 
     @Transactional
     def save() {
+        // If logged in we shouldn't be creating users
+        if(springSecurityService.currentUser) {
+            redirect action: "index", controller: "home"
+            return
+        }
+
         //create user instance via service
         User userInstance = userService.createUser(params.username, params.password, params.email, params.userType.id, params['nativeLanguage.id'], params.list('language.id'), params.list('proficiency.id'))
 
