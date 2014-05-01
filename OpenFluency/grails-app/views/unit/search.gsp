@@ -1,4 +1,4 @@
-<%@ page import="com.openfluency.language.Alphabet" %>
+<%@ page import="com.openfluency.language.Language" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,14 @@
 </head>
 <body>
     <div class="container unit-index">
-   	 	<ul class="breadcrumb">
-            <li><a href="${createLink(uri:'/') }">Home</a></li>
+        <ul class="breadcrumb">
+            <li>
+                <a href="${createLink(uri:'/') }">Home</a>
+            </li>
             <li>Decks</li>
-            <li><a href="#">Flashcard Search</a></li>
+            <li>
+                <a href="#">Flashcard Search</a>
+            </li>
         </ul>
         <h1>Flashcard Search</h1>
         <p class="instructions">
@@ -19,15 +23,18 @@
 
         <div class="row">
 
-            <g:form action="search" controller="unit" name="searchFlashcardForm">
+            <g:form action="search" controller="unit" name="searchFlashcardForm" class="searchUnitForm">
+                <input type="hidden" name="unit" value="${it?.id}"/>
+                <input type="hidden" name="deckId" value="${deckId}"/>
+
                 <div class="col-lg-4">
-                    <select id="filter-lang" class="form-control" name="filter-alph">
-                        <g:each in="${Alphabet.list()}">
-                            <g:if test="${it.id == alphabetId}">
-                                <option value="${it.id}" selected>${it.language} - ${it.name}</option>
+                    <select id="languageId" class="form-control" name="languageId">
+                        <g:each in="${Language.list()}">
+                            <g:if test="${it.id == languageId}">
+                                <option value="${it.id}" selected>${it.name}</option>
                             </g:if>
                             <g:else>
-                                <option value="${it.id}">${it.language} - ${it.name}</option>
+                                <option value="${it.id}">${it.name}</option>
                             </g:else>
                         </g:each>
                     </select>
@@ -35,7 +42,7 @@
 
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <g:textField class="form-control" name="search-text" placeholder="Type a keyword to search by meaning" id="search-text" />
+                        <g:textField class="form-control" value="${keyword}" name="keyword" placeholder="Type a keyword to search by meaning" id="keyword" />
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -43,6 +50,7 @@
                         </span>
                     </div>
                 </div>
+                <input type="hidden" name="offset" value="${offset}" id="offset"/>
             </g:form>
 
         </div>
@@ -69,14 +77,23 @@
                             <g:form class="pull-right" action="create" controller="flashcard" name="createFlashcardForm">
                                 <input type="hidden" name="unit" value="${it?.id}"/>
                                 <input type="hidden" name="deckId" value="${deckId}"/>
-                                <button class="btn btn-success" type="submit">Create Flashcard</button> 
+                                <button class="btn btn-success" type="submit">Create Flashcard</button>
                             </g:form>
                         </td>
                     </tr>
                 </g:each>
             </tbody>
         </table>
+
+        <div class="row">
+            <!-- do not remove this class -->
+            <div class="paged-search">
+                <g:paginate controller="unit" action="search" total="${unitCount}" max="2" omitNext="true" omitFirst="true" omitLast="true" omitPrev="true"/>
+            </div>
+        </div>
     </div>
     <!-- end container -->
+
+    <g:javascript>setupFlashcardSearchPagination();</g:javascript>
 </body>
 </html>

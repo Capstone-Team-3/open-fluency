@@ -71,21 +71,31 @@ class LanguageService {
 		return unit
 	}
 
-	List<Unit> searchUnits(Long alphabetId, String keyword) {
-		log.info "Searching Units with alphabetId: $alphabetId and Keywords: $keyword"
+	/**
+	* Search for units of a given language, who's matching unit contains the given keyword
+	*/
+	Map searchUnits(Long languageId, String keyword, Long offset) {
+		log.info "Searching Units with languageId: $languageId and Keywords: $keyword"
 
-		Unit.withCriteria {
+		def query = "FROM UnitMapping WHERE (unit1.alphabet.language.id = ${languageId} OR unit2.alphabet.language.id = ${languageId})"
 
-            // Apply language criteria
-            if(alphabetId) {
-                alphabet {
-                    eq('id', alphabetId)
-                }
-            }
+		if(keyword) {
+			query += " AND (unit1.literal LIKE '%${keyword}%' OR unit2.literal LIKE '%${keyword}%')"
+		}
 
-            // Search using keywords in any meaning
-            // this is going to be harder since we have to search through all the meanings
-        }
+		log.info query
+
+		offset = offset ? offset : 0
+
+		// Get all the unit mappings that map the searched params and then collect the unit for the given language
+		def unitInstanceList = UnitMapping.executeQuery(query, [max: 2, offset: offset]).collect {
+			it.unit1.alphabet.language.id == languageId ? it.unit1 : it.unit2
+		}
+
+		// Get the counts
+		Integer unitCount = UnitMapping.executeQuery("SELECT COUNT(id) $query")[0]
+
+		return [unitInstanceList: unitInstanceList, unitCount: unitCount]
 	}
 
 	/**

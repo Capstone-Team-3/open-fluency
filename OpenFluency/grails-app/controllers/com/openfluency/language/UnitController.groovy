@@ -13,8 +13,18 @@ class UnitController {
 	}
 
 	def search() {
-		Long alphabetId = params['filter-alph'] as Long
-		String keyword = params['search-text']
-		[keyword: keyword, alphabetId: alphabetId, unitInstanceList: languageService.searchUnits(alphabetId, keyword), deckId: params.deckId]
+		Long languageId = params.languageId as Long
+		String keyword = params.keyword
+		Long offset = params.offset ? params.offset as Long : 0
+
+		// Run the search
+		def result = languageService.searchUnits(languageId, keyword, offset)
+
+		[keyword: keyword, 
+		offset: offset, 
+		languageId: languageId, 
+		deckId: params.deckId, 
+		unitCount: result.unitCount, 
+		unitInstanceList: result.unitInstanceList]
 	}
 }

@@ -104,3 +104,11 @@ var initializeProficiencyRemovers = function() {
 		return false;
 	});
 };
+
+var setupFlashcardSearchPagination = function() {
+	$('.paged-search a').click(function() {
+		$("#offset").val((parseInt($(this).text())-1)*2);
+		$('.searchUnitForm').submit();
+		return false;		
+	})
+}
