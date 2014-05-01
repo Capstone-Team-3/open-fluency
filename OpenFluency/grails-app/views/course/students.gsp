@@ -30,20 +30,49 @@
             <thead>
                 <tr>
                     <th>User Name</th>
-                    <th>Native Language</th>
-                    <th>Enrollment Status</th>
+                    <th>Progress</th>
+                    <th>Grades</th>
+                    <th>Enrollment</th>
                     <th>Actions</th>
                 </tr>
             </thead>
-            <g:each in="${enrolledStudents}">
+            <g:each in="${enrolledStudents}" var="registrationInstance">
                 <tr class="course-result">
-                    <td>${it.user.username}</td>
-                    <td>${it.user.nativeLanguage}</td>
-                    <td>${Constants.REGISTRATION_STATUS[it.status]}</td>
+                    <td>${registrationInstance.user.username}</td>
                     <td>
-                        <g:if test="${it.status == Constants.PENDING_APPROVAL}">
-                            <g:link controller="registration" action="approve" id="${it.id}" class="btn btn-success">Approve</g:link>
-                            <g:link controller="registration" action="reject" id="${it.id}" class="btn btn-danger">Reject</g:link>
+                        <g:each in="${registrationInstance.chapterProgress.keySet()}" var="chapterInstance">
+                            <div class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">${chapterInstance.title}</div>
+                                    <div class="panel-body">
+                                        <small>Meaning Progress</small>
+                                        <g:render template="/deck/progress" model="[progress: registrationInstance.chapterProgress[chapterInstance][0]]"/>
+                                        <small>Pronunciation Progress</small>
+                                        <g:render template="/deck/progress" model="[progress: registrationInstance.chapterProgress[chapterInstance][1]]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </g:each>
+                    </td>
+                    <td>
+                        <g:each in="${registrationInstance.quizGrade.keySet()}" var="quizInstance">
+                            <div class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">${quizInstance.title}</div>
+                                    <div class="panel-body">
+                                        ${registrationInstance.quizGrade[quizInstance]}
+                                    </div>
+                                </div>
+                            </div>
+                        </g:each>
+                    </td>
+                    <td>
+                        ${Constants.REGISTRATION_STATUS[registrationInstance.status]}
+                    </td>
+                    <td>
+                        <g:if test="${registrationInstance.status == Constants.PENDING_APPROVAL}">
+                            <g:link controller="registration" action="approve" id="${registrationInstance.id}" class="btn btn-success">Approve</g:link>
+                            <g:link controller="registration" action="reject" id="${registrationInstance.id}" class="btn btn-danger">Reject</g:link>
                         </g:if>
                     </td>
                 </tr>

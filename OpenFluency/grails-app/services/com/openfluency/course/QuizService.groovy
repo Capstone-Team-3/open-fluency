@@ -44,14 +44,14 @@ class QuizService {
     	quizInstance.maxCardTime = maxCardTime
     	quizInstance.save()
 
-		if(quizInstance.hasErrors()) {
-			return
-		}
+      if(quizInstance.hasErrors()) {
+         return
+     }
 
-		createQuestions(quizInstance, flashcardIds)
-    }
+     createQuestions(quizInstance, flashcardIds)
+ }
 
-    void createQuestions(Quiz quizInstance, List flashcardIds) {
+ void createQuestions(Quiz quizInstance, List flashcardIds) {
     	// Now create the questions for each flashcard
         Random rand = new Random() // randomize the options for the questions
         
@@ -144,20 +144,22 @@ class QuizService {
 	* Get answers by logged student
 	*/
 	List<Answer> getAnswersByLoggedUser(Quiz quizInstance) {
-		return getAnswers(quizInstance, User.load(springSecurityService.principal.id))
+		return getAnswers(quizInstance, springSecurityService.principal.id)
 	}
 
 	/**
 	* Return all the answers by a given student
 	*/
-	List<Answer> getAnswers(Quiz quizInstance, User userInstance) {
+	List<Answer> getAnswers(Quiz quizInstance, Long userId) {
 		return Answer.withCriteria {
-			eq('user', userInstance)
-			question {
-				eq('quiz', quizInstance)
-			}
-		}
-	}
+			user {
+                eq('id', userId)
+            }
+            question {
+                eq('quiz', quizInstance)
+            }
+        }
+    }
 
 	/**
 	* Finalize the course and create a grade for the student, only if the student has viewed all the questions
@@ -185,11 +187,40 @@ class QuizService {
 		return null
 	}
 
-	Grade getGrade(Quiz quizInstance) {
-		return Grade.findByUserAndQuiz(User.load(springSecurityService.principal.id), quizInstance)
-	}
+    /**
+    * Return the number of correct answers for a quiz for a given user
+    */
+    Grade getGrade(Quiz quizInstance, Long userId) {
+      return Grade.findByUserAndQuiz(User.load(userId), quizInstance)
+  }
 
+    /**
+    * Return the number of correct answers for a quiz for the logged user
+    */
+    Grade getGrade(Quiz quizInstance) {
+        return getGrade(quizInstance, springSecurityService.principal.id)
+    }
+
+    /**
+    * Return the percentage grade for a quiz for the logged user
+    */
+    String getPercentageGrade(Quiz quizInstance, Long userId) {
+
+        Grade gradeInstance = getGrade(quizInstance, userId)
+
+        // Check if the student has a grade for the quiz
+        if(!gradeInstance) {
+            return null
+        }
+
+        return "${gradeInstance.correctAnswers/getAnswers(quizInstance, userId).size()*100}"
+    }
+
+    /**
+    * Return the percentage grade for a quiz for the logged user
+    */
     String getPercentageGrade(Quiz quizInstance) {
+
         Grade gradeInstance = getGrade(quizInstance)
 
         // Check if the student has a grade for the quiz

@@ -38,6 +38,7 @@ class ChapterController {
         if(springSecurityService.principal.id != chapterInstance.course?.owner?.id) {
             flash.message = "You don't have permissions to edit this chapter"
             redirect action: "index", controller: "home"
+            return
         }
 
         [chapterInstance: chapterInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
@@ -85,7 +86,7 @@ class ChapterController {
 
     @Secured(['isAuthenticated()'])
     def show(Chapter chapterInstance, Integer max) {
-        
+
         // Check if the logged user can access this chapter
         if(Registration.countByUserAndCourseAndStatus(
             User.load(springSecurityService.principal.id), 
@@ -116,26 +117,29 @@ class ChapterController {
         String imageURL = null
         if (customizationInstance?.imageAssoc){
             imageURL = customizationInstance.imageAssoc?.url
-            } else if (cardUsageInstance.flashcard?.image){
-                imageURL = cardUsageInstance.flashcard.image.url
-            }
+        } 
+        else if (cardUsageInstance.flashcard?.image){
+            imageURL = cardUsageInstance.flashcard.image.url
+        }
+
         //get the right audio - take the customization if made, else the flahscard proviced audio if made, else null
         Long audioSysId = null
         if (customizationInstance?.audioAssoc){
             audioSysId = customizationInstance.audioAssoc?.id
-            } else if (cardUsageInstance.flashcard?.audio){
-                audioSysId = cardUsageInstance.flashcard.audio.id
-            }
-
-            [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
-            chapterInstance: chapterInstance, 
-            cardUsageInstance: cardUsageInstance,
-            imageURL: imageURL, 
-            audioSysId: audioSysId, 
-            rankingType: params.rankingType]
+        } 
+        else if (cardUsageInstance.flashcard?.audio){
+            audioSysId = cardUsageInstance.flashcard.audio.id
         }
 
-        /**
+        [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
+        chapterInstance: chapterInstance, 
+        cardUsageInstance: cardUsageInstance,
+        imageURL: imageURL, 
+        audioSysId: audioSysId, 
+        rankingType: params.rankingType]
+    }
+
+    /**
     * Returns the flaskcard for a deck
     */
     def flashcardSelect(Chapter chapterInstance) {

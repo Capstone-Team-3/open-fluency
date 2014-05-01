@@ -21,6 +21,7 @@ class QuizController {
 		if(courseInstance.owner.id != springSecurityService.principal.id){
 			flash.message = "You're not authorized to create a quiz for a course you don't own!"
 			redirect action: "index", controller: "home"
+			return
 		}
 
 		// Build the quiz
@@ -51,6 +52,7 @@ class QuizController {
 		if(springSecurityService.principal.id != quizInstance?.course?.owner?.id) {
 			flash.message = "You're not allowed to view this quiz"
 			redirect action: "index", controller: "home"
+			return
 		}
 
 		[quizInstance: quizInstance,
@@ -64,6 +66,7 @@ class QuizController {
 		if(springSecurityService.principal.id != quizInstance?.course?.owner?.id) {
 			flash.message = "You're not allowed to edit this quiz"
 			redirect action: "index", controller: "home"
+			return
 		}
 
 		[quizInstance: quizInstance,
@@ -77,6 +80,7 @@ class QuizController {
 		if(quizInstance.course.owner.id != springSecurityService.principal.id){
 			flash.message = "You're not authorized to edit a quiz for a course you don't own!"
 			redirect action: "index", controller: "home"
+			return
 		}
 
 		// Build the quiz
@@ -164,6 +168,7 @@ class QuizController {
 		else {
 			flash.message = "Quiz cannot be started"
 			redirect action: "show", controller: "course", id: quizInstance.course.id
+			return
 		}
 		
 	}
@@ -181,6 +186,7 @@ class QuizController {
 			Grade gradeInstance = quizService.finalizeQuiz(answerInstance.question.quiz)
 			if(gradeInstance) {
 				redirect action: "report", id: gradeInstance.id
+				return
 			}
 		}
 

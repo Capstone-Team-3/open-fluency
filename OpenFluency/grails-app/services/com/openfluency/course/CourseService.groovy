@@ -13,6 +13,7 @@ class CourseService {
 
 	def springSecurityService
     def deckService
+    def quizService
     def flashcardInfoService
 
     /**
@@ -235,5 +236,31 @@ class CourseService {
         registrationInstance.save(flush: true)
 
         return true
+    }
+
+    /**
+    * Returns the progress and the grades for all the students in a course
+    */
+    List<Registration> getStudentStats(Course courseInstance) {
+        // Get registrations first
+        List<Registration> registrationInstanceList = Registration.findAllByCourse(courseInstance)
+
+        registrationInstanceList.each { registrationInstance ->
+
+            registrationInstance.metaClass.chapterProgress = [:]
+            registrationInstance.metaClass.quizGrade = [:]
+
+            // Find the progress of each chapter for this student
+            courseInstance.chapters.each {
+                registrationInstance.chapterProgress[it] = deckService.getDeckProgress(it.deck, registrationInstance.user.id)
+            }
+
+            // Find the grades for each quiz for this student
+            Quiz.findAllByCourse(courseInstance).each {
+                registrationInstance.quizGrade[it] = quizService.getPercentageGrade(it, registrationInstance.user.id)
+            }
+        }
+
+        return registrationInstanceList
     }
 }

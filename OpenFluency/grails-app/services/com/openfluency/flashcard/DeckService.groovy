@@ -80,7 +80,7 @@ class DeckService {
 	* @return 	Map that contains as keys the types of rankings that a user can give (Meaning, Pronunciation, etc)
 	*			and as values the progress for each
 	*/
-	List getDeckProgress(Deck deckInstance) {
+	List getDeckProgress(Deck deckInstance, Long userId) {
 		// Progress calculation:
 		// - When a user ranks a card, it gives him a certain number of points
 		// 		- easy  	--> 3 points
@@ -93,13 +93,20 @@ class DeckService {
 			SELECT sum(meaningRanking), sum(pronunciationRanking) FROM CardRanking 
 			WHERE user.id = ?
 			AND flashcard.id in (SELECT id FROM Flashcard WHERE deck.id = ?))
-		""", [springSecurityService.principal.id, deckInstance.id])[0]
+		""", [userId, deckInstance.id])[0]
 		
 		Double meaningProgress = totalPoints[Constants.MEANING] ? totalPoints[Constants.MEANING]*100 / (flashcardCount*Constants.EASY) : 0
 		Double pronunciationProgress = totalPoints[Constants.PRONUNCIATION] ? totalPoints[Constants.PRONUNCIATION]*100 / (flashcardCount*Constants.EASY) : 0
 
 		return [meaningProgress.round(2), pronunciationProgress.round(2)]
 	}
+
+    /**
+    * Get the deck progress for the logged user
+    */
+    List getDeckProgress(Deck deckInstance){
+        return getDeckProgress(deckInstance, springSecurityService.principal.id)
+    }
 
 	/**
     * Create a new deck owned by the currently logged in user

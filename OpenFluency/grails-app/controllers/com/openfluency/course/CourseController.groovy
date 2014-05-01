@@ -116,7 +116,18 @@ class CourseController {
 	// Only instructors can see enrolled students
 	@Secured(['ROLE_INSTRUCTOR'])
 	def students(Course courseInstance) {
-		render view: "students", model: [courseInstance: courseInstance, enrolledStudents: Registration.findAllByCourse(courseInstance)]
+		
+		// Only allow editing for owner
+		if(springSecurityService.principal.id != courseInstance?.owner?.id) {
+			flash.message = "You don't have permissions to view this page"
+			redirect action: "index", controller: "home"
+			return
+		}
+
+		// Now need to get the stats for each student
+		List<Registration> studentStats = courseService.getStudentStats(courseInstance)
+
+		render view: "students", model: [courseInstance: courseInstance, enrolledStudents: studentStats]
 	}
 
 	@Secured(['ROLE_INSTRUCTOR'])
@@ -126,6 +137,7 @@ class CourseController {
 		if(springSecurityService.principal.id != courseInstance?.owner?.id) {
 			flash.message = "You don't have permissions to edit this course"
 			redirect action: "index", controller: "home"
+			return
 		}
 
 		[courseInstance: courseInstance]
@@ -160,6 +172,7 @@ class CourseController {
 		if(springSecurityService.principal.id != courseInstance?.owner?.id) {
 			flash.message = "You don't have permissions to delete this course"
 			redirect action: "index", controller: "home"
+			return
 		}
 
 		flash.message = "You just deleted ${courseInstance.title}"
