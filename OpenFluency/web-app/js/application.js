@@ -54,6 +54,9 @@ var initializePracticeCards = function() {
 	});
 
 	$(".ranker").click(function() {
+        // Do some fancy UI transitions
+    	$(".flashcard").removeClass("slideInDown").addClass("slideOutLeft").delay(1000);
+
         // Set the ranking value in the form and submit it
         $("#ranking").val($(this).data('value'));
         $('.rankCardForm').submit();
