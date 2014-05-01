@@ -8,7 +8,7 @@
 	<label for="maxCardTime">
 		Maximum seconds allowed per card (if 0, the quiz will not be timed):
 	</label>
-	<g:field type="number" min="0" max="60" name="maxCardTime" value="${quizInstance.maxCardTime}" class="form-control"/>
+	<g:field type="number" min="0" max="60" name="maxCardTime" value="${quizInstance?.maxCardTime}" class="form-control"/>
 </div>
 
 <div class="form-group">
