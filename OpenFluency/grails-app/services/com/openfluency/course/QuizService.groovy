@@ -188,4 +188,15 @@ class QuizService {
 	Grade getGrade(Quiz quizInstance) {
 		return Grade.findByUserAndQuiz(User.load(springSecurityService.principal.id), quizInstance)
 	}
+
+    String getPercentageGrade(Quiz quizInstance) {
+        Grade gradeInstance = getGrade(quizInstance)
+
+        // Check if the student has a grade for the quiz
+        if(!gradeInstance) {
+            return null
+        }
+
+        return "${gradeInstance.correctAnswers/getAnswersByLoggedUser(quizInstance).size()*100}"
+    }
 }

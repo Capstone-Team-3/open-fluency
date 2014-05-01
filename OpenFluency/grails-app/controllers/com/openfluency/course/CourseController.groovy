@@ -12,7 +12,7 @@ class CourseController {
 	def springSecurityService
 	def courseService
 	def deckService
-	
+	def quizService	
 
 	// Researchers will not be able to enroll or create courses
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT', 'ROLE_ADMIN'])
@@ -50,7 +50,18 @@ class CourseController {
 			it.metaClass.progress = deckService.getDeckProgress(it.deck)
 		}
 
-		[quizesInstanceList: courseService.getLiveQuizes(courseInstance), courseInstance: courseInstance, isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, userInstance: User.load(springSecurityService.principal.id),
+		// Get quizes
+		List<Quiz> quizesInstanceList = courseService.getLiveQuizes(courseInstance)
+
+		// Get student grades for each quiz
+		quizesInstanceList.each {
+			it.metaClass.finalGrade = quizService.getPercentageGrade(it)
+		}
+
+		[quizesInstanceList: quizesInstanceList, 
+		courseInstance: courseInstance, 
+		isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, 
+		userInstance: User.load(springSecurityService.principal.id),
 		students: Registration.findAllByCourse(courseInstance)]
 	}
 

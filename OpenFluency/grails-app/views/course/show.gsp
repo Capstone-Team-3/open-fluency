@@ -59,7 +59,6 @@
 					<h2>
 						Chapters
 						<g:if test="${isOwner}">
-							<!-- This is only displayed for the owner of the course -->
 							<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}">Add Chapters</g:link>
 						</g:if>
 					</h2>
@@ -125,21 +124,19 @@
 										<div class="panel-footer">
 											<div class="continue">
 												<g:if test="${isOwner}">
-													<g:if test="${isOwner}">
-														<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-warning">Edit</g:link>
-														<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-danger" onclick="return confirm('are you sure?')">Remove</g:link>
-													</g:if>
+													<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-warning">Edit</g:link>
+													<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-danger" onclick="return confirm('are you sure?')">Remove</g:link>
 												</g:if>
 												<g:else>
-												<%def quizService = grailsApplication.mainContext.getBean("quizService");%>
-												<g:if test="${quizService.getGrade(it).id}">
-														<h4>Final Grade : 
-													    ${quizService.getGrade(it).correctAnswers/quizService.getAnswersByLoggedUser(quizService.getGrade(it).quiz).size()*100}%  
+													<g:if test="${it.finalGrade}">
+														<h4>
+															Current Grade : 
+													    ${it.finalGrade}
 														</h4>
 														<g:link class="view-more" action="take" controller="quiz" id="${it.id}">
 															View Report
-													        <span class="glyphicon glyphicon-arrow-right"></span>
-													    </g:link>
+															<span class="glyphicon glyphicon-arrow-right"></span>
+														</g:link>
 													</g:if>
 													<g:else>
 														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
@@ -152,7 +149,6 @@
 							</g:each>
 						</div>
 					</div>
-					<!-- end container -->
 
 					<g:if test="${isOwner}">
 						<div class="row">
@@ -166,20 +162,11 @@
 								</g:if>
 								<g:else >There are no students enrolled for this course.</g:else>
 							</div>
-							<!-- end col-lg-12 -->
 						</div>
-						<!-- end row -->
 					</g:if>
-
 				</div>
-				<!-- end col-lg-12 -->
 			</div>
-			<!-- end row -->
 		</div>
-		<!-- end dashboard -->
-
 	</div>
-	<!-- end container -->
-
 </body>
 </html>
