@@ -134,13 +134,13 @@
 													    ${it.finalGrade}
 														</h4>
 														<g:link class="view-more" action="take" controller="quiz" id="${it.id}">
-															View Report
+															View Report 
 															<span class="glyphicon glyphicon-arrow-right"></span>
 														</g:link>
 													</g:if>
-													<g:else>
+													<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
 														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
-													</g:else>
+													</g:elseif>
 												</g:else>
 											</div>
 										</div>
