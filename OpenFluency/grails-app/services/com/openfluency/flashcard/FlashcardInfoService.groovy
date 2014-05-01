@@ -115,11 +115,23 @@ class FlashcardInfoService {
     	return (infos?.size() > 0) ? infos[0] : null
     }
 
+    /**
+    *  This function is used to get a specific queue for a deck for a user - it sorts it by FlashcarInfo.viewPriority
+    *  @Param User - the relevant user
+    *  @Param Deck - the relevant deck
+    *  @Param int - the int corresponding to the relevant queue
+    */
     List getFlashcardInfoQueue(User theUser, Deck deckInstance, int theQueue){
     	List infos = FlashcardInfo.findAllByUserAndDeckAndQueue(theUser, deckInstance, theQueue)?.sort{it.viewPriority}
         return infos
     }
 
+    /**
+    *  This function is very important - it is used to invoke the CardServer.updateFlashcardInfo for the most recently used
+    *  flashcard - this is how FlashcardInfo.viewPriority gets updated so cards move in the queues.
+    *  @Param Deck - the relevant deck
+    *  @Param CardUsage - the card usage information just gained from a user interacting with a flashcard in a deck while practicing
+    */
     boolean updateViewedFlashcardInfo(Deck deckInstance, CardUsage cardUsageInstance){
     	def theInfo = nextFlashcardInfo(cardUsageInstance.user, deckInstance, cardUsageInstance.rankingType)
     	if (theInfo) {
