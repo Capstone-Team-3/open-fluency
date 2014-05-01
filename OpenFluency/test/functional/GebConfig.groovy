@@ -15,7 +15,9 @@ environments {
 	chrome {
 		driver = { 
 			// Required for Chrome. Will need to be defined in the configuration for CI
-			System.setProperty("webdriver.chrome.driver", "/Applications/ChromeDriver/chromedriver");
+			// System.setProperty("webdriver.chrome.driver", "/Applications/ChromeDriver/chromedriver");
+			// Windows:
+			System.setProperty("webdriver.chrome.driver", "C:/chromedriver/chromedriver.exe");
 			def driverInstance = new ChromeDriver() 
 			driverInstance.manage().window().maximize() 
 			driverInstance
