@@ -54,11 +54,13 @@ class StudentSpec extends GebReportingSpec {
 		deckTitle = "Test Deck"
 		deckDescription = "This is a test deck!"
 		sourceLanguageSelect.value('2')
+		languageSelect.value('1')
+		cardServerAlgoSelect.value('SM2-Spaced-Repetition')
 		createDeckButton.click()
 		then:
 		at ShowDeckPage
 		flashMessage.text() == "Well done! You succesfully created a new deck!"
-		deckTitle.text() == "Test Deck"
+		deckTitle.text() == "Test Deck Edit Delete"
 		deckDescription.text() == "This is a test deck!"
 	}
 
