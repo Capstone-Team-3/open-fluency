@@ -5,7 +5,7 @@
 			<th>Source Language</th>
 			<th>Learning</th>
 			<th>Flashcards</th>
-			<th>Progress</th>
+			<th class="tooltiper"  data-toggle="tooltip"  data-placement="top" title="How well you know the characters/words in a deck, according to your ranking" >Progress</th>
 			<th></th>
 		</tr>
 	</thead>

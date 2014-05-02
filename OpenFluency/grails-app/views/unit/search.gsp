@@ -60,7 +60,7 @@
             <thead>
                 <tr>
                     <th>Character, Word or Phrase</th>
-                    <th>Meaning(s)</th>
+                    <th class="tooltiper"  data-toggle="tooltip"  data-placement="left" title="The translation of the character/word/phrase">Meaning(s)</th>
                     <th></th>
                 </tr>
             </thead>

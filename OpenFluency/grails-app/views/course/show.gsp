@@ -139,7 +139,9 @@
 														</g:link>
 													</g:if>
 													<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
-														<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+														<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
+															<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
+														</g:if>
 													</g:elseif>
 												</g:else>
 											</div>

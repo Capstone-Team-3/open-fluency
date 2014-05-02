@@ -28,10 +28,14 @@
 			</h1>
 			<p class="deck-description">${deckInstance?.description}</p>
 			<g:if test="${flashcardCount}">
-				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
-				<g:link class="btn btn-success" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
+				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" 
+				 action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
+				&nbsp
+				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" 
+				 action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
+				&nbsp
 				<g:link class="btn btn-info add-flashcards" action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>

@@ -34,8 +34,8 @@
 					<input type="hidden" name="unit" value="${unitInstance.id}"/>
 					<div class="form-group">
 						
-						<label class="control-label">
-							<span style="cursor:help;" title="Which meaning of this character/word do you want to use?">Meaning</span>
+						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Which meaning of this character/word do you want to use?">
+							Meaning
 							<span class="required-indicator">*</span>
 						</label>
 
@@ -51,8 +51,8 @@
 
 					<div class="form-group">
 
-						<label class="control-label">
-							<span style="cursor:help;" title="What pronunciation of the character/word do you want to use?">Pronunciation</span>
+						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What pronunciation of the character/word do you want to use?">
+							Pronunciation
 							<span class="required-indicator">*</span>
 						</label>
 						
@@ -62,8 +62,8 @@
 
 					<div class="form-group">
 
-						<label class="control-label">
-							<span style="cursor:help;" title="What deck should this card go into?">Choose a Deck</span>
+						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What deck should this card go into?">
+							Choose a Deck
 							<span class="required-indicator">*</span>
 						</label>
 						
@@ -97,8 +97,8 @@
 					<g:if test="${flashcardInstance?.audio}">
 						<div class="form-group">
 							
-							<label class="control-label">
-								<span style="cursor:help;" title="What audio clip provides pronunciation for this card?">Audio</span>
+							<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What audio clip provides pronunciation for this card?">
+								Audio
 							</label>
 							
 							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
@@ -110,8 +110,8 @@
 
 					<div class="form-group-audio">
 
-						<label class="control-label">
-							<span style="cursor:help;" title="Record a pronunciation">Record an audio pronunciation file:</span>
+						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Record a pronunciation" >
+							Record an audio pronunciation file:
 						</label>
 						
 						<small class="clearfix"><strong>Note:</strong> A browser pop-up may appear asking you to 'Allow' microphone use!</small>
