@@ -10,4 +10,8 @@ class LanguageProficiency {
 
     static constraints = {
     }
+
+    String toString(){
+    	return "${language}:${proficiency}"
+    }
 }

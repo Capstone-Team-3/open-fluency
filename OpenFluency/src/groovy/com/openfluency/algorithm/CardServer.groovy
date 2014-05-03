@@ -4,7 +4,7 @@ import com.openfluency.flashcard.*
 import com.openfluency.auth.User
 
 /**
-*  CardServer is the interface that all spaced repetition, or any other type, of card service ans ordering algorithms must implement.
+*  CardServer is the interface that all spaced repetition, or any other type of card service and ordering algorithms, must implement.
 *  The most important thing to understand is the role of FlashcardInfo.viewPriority.  The system treats FlashcardInfo objects
 *  which are tied to a user and a deck, as the components of a Priority Queue, where the Flashcard linked to the FlashcardInfo
 *  with the LOWEST .viewPriority is viewed / served next to the user.  Lower FlashcardInfo.viewPriority -> viewed sooner.
