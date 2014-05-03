@@ -15,7 +15,7 @@ class RegisterPage extends MainLayoutPage {
 		email(wait: true) { $("input", name: 'email') }
 		username(wait: true) { $("input", name: 'username') }
 		password(wait: true) { $("input", name: 'password') }
-		userType(wait: true) { $("input", name: 'userType.id') }
+		userType(wait: true) { $("select", name: 'userType.id') }
 		nativeLanguage(wait: true) { $("input", name: 'nativeLanguage.id') }
 		registerButton(wait: true) { $("input", name: 'sign-up') }
 	}
