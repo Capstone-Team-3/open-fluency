@@ -3,9 +3,11 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="flashcard-header">
-				<a href="#" id="customizationBtn">
-					<span class="glyphicon glyphicon-pencil"></span>
-				</a>
+				<g:if test="${practicing}">
+					<a href="#" id="customizationBtn">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</g:if>
 				<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
 				<div class="pronunciation">pronounced '${flashcardInstance?.pronunciation.literal}'</div>
 			</div>
