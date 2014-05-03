@@ -15,4 +15,8 @@ class Pronunciation {
     String toString(){
     	literal
     }
+
+    String getPrint() {
+        return alphabet.encodeEntities ? "&#x${literal};".decodeHTML() : literal
+    }
 }

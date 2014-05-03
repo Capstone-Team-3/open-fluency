@@ -17,25 +17,41 @@
 			<div class="data-access">
 				<h3>User Biographical Data</h3>
 				<export:formats id="bio-data" formats="['csv']" action="exportBioData" />
-				</br>
 			</div>
 
 			<div class="data-access">
 				<h3>Flashcard Practice Usage Data</h3>
-				<export:formats id="practice-data" formats="['csv']"/>
-				</br>
+				<export:formats id="practice-data" formats="['csv']" action="exportPracticeData"/>
+			</div>
+
+			<div class="data-access">
+				<h3>Flashcard Customization Data</h3>
+				<export:formats id="customization-data" formats="['csv']" action="exportCustomizationData"/>
 			</div>
 
 			<div class="data-access">
 				<h3>Flashcard Quiz Data</h3>
 				<export:formats id="quiz-data" formats="['csv']"/>
-				</br>
 			</div>
 
 			<div class="data-access">
-				<h3>Course Specific Data</h3>
-				<export:formats id="course-data" formats="['csv']"/>
-				</br>
+				<h3>Flashcard Data</h3>
+				<export:formats id="flashcard-data" formats="['csv']" action="exportFlashcardData"/>
+			</div>
+
+			<div class="data-access">
+				<h3>Deck Data</h3>
+				<export:formats id="deck-data" formats="['csv']" action="exportDeckData"/>
+			</div>
+
+			<div class="data-access">
+				<h3>Course Data</h3>
+				<export:formats id="course-data" formats="['csv']" action="exportCourseData"/>
+			</div>
+
+			<div class="data-access">
+				<h3>Data On a Specified Course</h3>
+				<export:formats id="class-data" formats="['csv']"/>
 			</div>
 
 		</div>

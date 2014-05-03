@@ -46,7 +46,8 @@ class LinearWithShuffle implements CardServer{
     FlashcardInfo updateFlashcardInfo(FlashcardInfo fInfoInstance, CardUsage cUsageInstance) {
     	java.util.Random rand = new java.util.Random()
     	//increment the priority by 1 and add a small bit of random noise to give a shuffling effect - note .viewPriority got bigger, so it moves back in the queue
-    	fInfoInstance.viewPriority = fInfoInstance.viewPriority + 1.0 + ((rand.nextDouble() - 0.5) / 10.0) 
+    	fInfoInstance.viewPriority = fInfoInstance.viewPriority + 1.0 + ((rand.nextDouble() - 0.5) / 10.0)
+    	fInfoInstance.numberOfRepetitions++ 
     	return fInfoInstance
     }
 
