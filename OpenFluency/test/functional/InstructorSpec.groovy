@@ -73,6 +73,23 @@ class InstructorSpec extends GebReportingSpec {
 		courseTitle.text() == "Test course"
 		courseDescription.text() == "This is a test course!"
 	}
+	def "Instructor adds chapter to course"() {
+		when:
+		addChapterButton.click()
+		then:
+		at CreateChapterPage
+	}
+	def "Instructor creates a new Chapter"() {
+		when:
+		chapterTitle = "Test chapter"
+		chapterDescription = "This is a test chapter!"
+		deckSelect.value('4')
+		createChapterButton.click()
+		then:
+		at ShowChapterPage
+		chapterTitle.text() == "Test chapter Edit"
+		chapterDescription.text() == "This is a test chapter!"
+	}
 
 
 

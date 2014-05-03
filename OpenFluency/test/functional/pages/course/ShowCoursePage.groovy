@@ -13,5 +13,6 @@ class ShowCoursePage extends MainLayoutPage {
 	static content = {
 		courseTitle(wait: true) { $(".course-title") }
 		courseDescription(wait: true) { $(".course-description") }
+		addChapterButton(wait: true) { $("#create-chapter") }
 	}
 }
