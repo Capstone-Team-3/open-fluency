@@ -83,6 +83,8 @@ var initializePracticeByPronunciation = function() {
 	$('#show-pronunciation').on('click', function() {
 		$pronContainer.html(pron);
 	});
+
+	initializePracticeRanking();
 };
 
 var initializePracticeRanking = function() {
