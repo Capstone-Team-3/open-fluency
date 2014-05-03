@@ -109,7 +109,7 @@ class CourseController {
 
 		// Now drop the registration
 		courseService.dropRegistration(registrationInstance)
-		flash.message = "You just dropped your registration for ${courseInstance.title}"
+		flash.message = "You just dropped the course ${courseInstance.title}."
 		redirect(uri: request.getHeader('referer'))
 	}
 

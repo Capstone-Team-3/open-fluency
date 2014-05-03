@@ -38,7 +38,7 @@
 								<g:link class="btn btn-info" action="enroll" controller="course" id="${courseInstance.id}">Enroll</g:link>
 							</g:if>
 							<g:else>
-								<g:link class="btn btn-danger" action="drop" controller="course" id="${courseInstance.id}" onclick="return confirm('are you sure?')">Drop</g:link>
+								<g:link class="btn btn-danger" action="drop" controller="course" id="${courseInstance.id}" onclick="return confirm('Are you sure you want to drop this course?')">Drop Course</g:link>
 							</g:else>
 
 						</sec:ifAllGranted>
