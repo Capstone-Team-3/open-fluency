@@ -4,6 +4,7 @@ import spock.lang.*
 
 import com.openfluency.auth.User
 import pages.user.RegisterPage
+import pages.user.AuthPage
 import pages.*
 import pages.deck.*
 import pages.course.*
@@ -32,6 +33,25 @@ class InstructorSpec extends GebReportingSpec {
 		flashMessage.text() == "testInstructor, your account is pending approval!"
 		
 	}
+	def "Navigate to AuthPage"() {
+		when:
+		to AuthPage
+		then:
+		at AuthPage
+	}
+	
+	def "Instructor sign-in with known username and password"() {
+		when:
+		// sign-in as an instructor username
+		username = "instructor"
+		password = "test"
+		signinButton.click()
+		then:
+		at DashboardPage
+		$(".dashboard > h1").text() == "instructor's Dashboard"
+		
+	}
+
 
 	
 }
