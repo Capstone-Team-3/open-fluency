@@ -64,6 +64,13 @@ var initializePracticeByMeaning = function() {
 		$meaningContainer.html(meaning);
 	});
 
+	var $imageContainer = $('#image-container');
+	var image = $imageContainer.html();
+	$imageContainer.html('<button class="btn" id="show-image">Show Image</button>');
+	$('#show-image').on('click', function() {
+		$imageContainer.html(image);
+	});
+
 	initializePracticeRanking();
 };
 
