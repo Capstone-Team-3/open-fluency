@@ -2,14 +2,22 @@
 <div class="col-lg-3">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>${registrationInstance.course.title}</h4>
+            <h4>
+                <g:link action="show" controller="course" id="${registrationInstance.course.id}">
+                    ${registrationInstance.course.title}
+                </g:link>
+            </h4>
         </div>
 
         <g:if test="${registrationInstance.status == Constants.APPROVED}">
             <div class="panel-body">
                 <div class="current-chapter">
-                    <h4>Current chapter</h4>
-                    <a href="#">Chapter 1: The Basics</a>
+                    <g:if test="${registrationInstance.course.getChapters().size() > 1}">
+                        <h4>${registrationInstance.course.getChapters().size()} chapters</h4>
+                    </g:if>
+                    <g:else>
+                        <h4>${registrationInstance.course.getChapters().size()} chapter</h4>
+                    </g:else>
                 </div>
             </div>
             <div class="panel-footer">

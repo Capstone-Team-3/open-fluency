@@ -3,7 +3,7 @@
     <div class="row">
             <div class="deck-header text-center">
                 <h3 data-rank-type="${rankingType as Integer}">
-                    Practice by ${Constants.CARD_ELEMENTS[rankingType as Integer]}
+                    Practice ${Constants.CARD_ELEMENTS[rankingType as Integer]}s
                 </h3>
                 <g:if test="${chapterInstance}">                    
                     <h1>${chapterInstance?.title}</h1>
@@ -41,11 +41,11 @@
             <h4>Progress:</h4>
         </div>
         <div class="col-lg-5">
-            <strong>Practice by Meaning</strong>
+            <strong>Practice Meanings</strong>
             <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.MEANING]]"/>
         </div>
         <div class="col-lg-5">
-            <strong>Practice by Pronunciation</strong>
+            <strong>Practice Pronunciations</strong>
             <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.PRONUNCIATION]]"/>
         </div>
     </div>

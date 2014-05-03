@@ -58,8 +58,10 @@
 </g:if>
 <g:else>
     <div class="dashboard-container">
-        <p>You haven't added any decks yet! Get started:</p>
-        <g:link class="btn btn-success" controller="deck" action="create">Create New Deck</g:link>
-        <g:link class="btn btn-success" controller="deck" action="search">Search for Decks</g:link>
+        <div class="col-lg-6">
+            <p>You haven't added any decks yet! Get started:</p>
+            <g:link class="btn btn-success" controller="deck" action="create">Create New Deck</g:link>
+            <g:link class="btn btn-success" controller="deck" action="search">Search for Decks</g:link>
+        </div>
     </div>
 </g:else>
