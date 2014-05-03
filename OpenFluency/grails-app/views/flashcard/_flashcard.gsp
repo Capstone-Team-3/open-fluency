@@ -22,7 +22,6 @@
 
 			<!-- 'practicing' needs to be set to true in the model passed to this page for audio to show - practiceCards does this -->
 			<g:if test="${practicing}">
-				<!--g:if test="${flashcardInstance.audio?.audioWAV}"-->
 				<g:if test="${audioSysId}">
 					<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
 					<g:set var="audioId" value="${audioSysId}"/>

@@ -46,6 +46,17 @@ var searchImage = function(query, results, urlField, resultPage) {
 };
 
 var initializePracticeCards = function() {
+	var type = $('#practice-container').data("rank-type").toLowerCase();
+	console.log(type);
+
+	if (type === 'meaning'){
+		initializePracticeByMeaning();
+	} else if (type === 'pronunciation'){
+		initializePracticeByPronunciation();
+	}
+};
+
+var initializePracticeByMeaning = function() {
 	var $meaningContainer = $('.meaning');
 	var meaning = $meaningContainer.html();
 	$meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
@@ -53,13 +64,28 @@ var initializePracticeCards = function() {
 		$meaningContainer.html(meaning);
 	});
 
+	initializePracticeRanking();
+};
+
+var initializePracticeByPronunciation = function() {
+	var $pronContainer = $('.pronunciation');
+	var pron = $pronContainer.html();
+	console.log($pronContainer);
+
+	$pronContainer.html('<button class="btn" id="show-pronunciation">Show Pronunciation</button>');
+	$('#show-pronunciation').on('click', function() {
+		$pronContainer.html(pron);
+	});
+};
+
+var initializePracticeRanking = function() {
 	$(".ranker").click(function() {
         // Do some fancy UI transitions
-    	$(".flashcard").removeClass("slideInDown").addClass("slideOutLeft").delay(1000);
+		$(".flashcard").removeClass("slideInDown").addClass("slideOutLeft").delay(1000);
 
         // Set the ranking value in the form and submit it
-        $("#ranking").val($(this).data('value'));
-        $('.rankCardForm').submit();
+		$("#ranking").val($(this).data('value'));
+		$('.rankCardForm').submit();
     });
 };
 

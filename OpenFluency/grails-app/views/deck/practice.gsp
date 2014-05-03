@@ -6,7 +6,7 @@
     <title>OpenFluency</title>
 </head>
 <body>
-    <div class="container deck-practice">
+    <div class="container deck-practice" id="practice-container" data-rank-type="${Constants.CARD_ELEMENTS[rankingType as Integer]}">
         <div class="row">
             <ul class="breadcrumb">
                 <li>

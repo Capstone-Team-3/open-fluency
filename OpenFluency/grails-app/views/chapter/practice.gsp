@@ -6,7 +6,7 @@
     <title>OpenFluency</title>
 </head>
 <body>
-    <div class="container chapter-practice">
+    <div class="container chapter-practice" id="practice-container" data-rank-type="${Constants.CARD_ELEMENTS[rankingType as Integer]}">
         <div class="row">
             <ul class="breadcrumb">
                 <li>
@@ -36,5 +36,6 @@
     
     <!-- end container -->
     <g:javascript>initializePracticeCards();</g:javascript>
+
 </body>
 </html>
