@@ -42,7 +42,7 @@ class InstructorSpec extends GebReportingSpec {
 	
 	def "Instructor sign-in with known username and password"() {
 		when:
-		// sign-in as an instructor username
+		// sign-in with instructor username
 		username = "instructor"
 		password = "test"
 		signinButton.click()
@@ -51,6 +51,29 @@ class InstructorSpec extends GebReportingSpec {
 		$(".dashboard > h1").text() == "instructor's Dashboard"
 		
 	}
+	def "Instructor navigates to course creation"() {
+		when:
+		coursesNav.click()
+		waitFor {
+			courseNavList.present
+		}
+		createCourse.click()
+		then:
+		at CreateCoursePage
+	}
+	def "Instructor creates a new Course"() {
+		when:
+		courseTitle = "Test course"
+		courseDescription = "This is a test course!"
+		languageSelect.value('1')
+		visible.value('true')
+		createCourseButton.click()
+		then:
+		at ShowCoursePage
+		courseTitle.text() == "Test course"
+		courseDescription.text() == "This is a test course!"
+	}
+
 
 
 	

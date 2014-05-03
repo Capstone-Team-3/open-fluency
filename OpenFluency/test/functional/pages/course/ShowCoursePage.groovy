@@ -12,6 +12,6 @@ class ShowCoursePage extends MainLayoutPage {
 
 	static content = {
 		courseTitle(wait: true) { $(".course-title") }
-		courseDescription(wait: true) { $(".deck-description") }
+		courseDescription(wait: true) { $(".course-description") }
 	}
 }

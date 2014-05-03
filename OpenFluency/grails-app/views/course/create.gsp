@@ -18,7 +18,7 @@
 		</ul>
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<h1>Create New Course</h1>
+				<h1 id="main">Create New Course</h1>
 
 				<g:hasErrors bean="${courseInstance}">
 					<ul class="errors" role="alert">
@@ -33,7 +33,7 @@
 				<g:form action="save" controller="course" name="createCourseForm">	
 					<g:render template="form" model="[courseInstance: courseInstance]"/>
 					<div class="center">
-						<button class="btn btn-info">Create Course</button>
+						<button class="btn btn-info" id="create-course">Create Course</button>
 					</div>
 				</g:form>
 			</div>
