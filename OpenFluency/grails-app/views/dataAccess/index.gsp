@@ -31,7 +31,7 @@
 
 			<div class="data-access">
 				<h3>Flashcard Quiz Data</h3>
-				<export:formats id="quiz-data" formats="['csv']"/>
+				<export:formats id="quiz-data" formats="['csv']" action="exportQuizData"/>
 			</div>
 
 			<div class="data-access">
@@ -47,6 +47,11 @@
 			<div class="data-access">
 				<h3>Course Data</h3>
 				<export:formats id="course-data" formats="['csv']" action="exportCourseData"/>
+			</div>
+
+			<div class="data-access">
+				<h3>Languages and Alphabets</h3>
+				<export:formats id="language-data" formats="['csv']" action="exportLanguageData"/>
 			</div>
 
 			<div class="data-access">

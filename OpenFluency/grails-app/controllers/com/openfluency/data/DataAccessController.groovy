@@ -6,6 +6,7 @@ import com.openfluency.Constants
 import com.openfluency.flashcard.*
 import com.openfluency.media.*
 import com.openfluency.course.*
+import com.openfluency.language.*
 
 class DataAccessController {
 
@@ -31,23 +32,23 @@ class DataAccessController {
 
     		List fields = ["userId", 
                            "userType", 
-                           "nativeLanguage", 
                            "languageProficiencies", 
                            "decks", 
                            "courses"]
 
     		Map labels = ["userId": "UserID", 
                           "userType": "UserType", 
-                          "nativeLanguage": "NativeLanguage", 
-                          "languageProficiencies": "OtherLanguages",
+                          "languageProficiencies": "LanguageIDsAndProficiencies",
                           "decks": "Decks",
                           "courses": "Courses"]
 
             //custom formatter
-    		def lpify = {domain, value -> domain?.getLanguageProficiencies().collect{it.toString()}.toString() }
+    		def lpify = {domain, value -> def lps = domain.getLanguageProficiencies().collect{it.getLanguageProficiencyMap()};
+                                                    lps.add("${domain.nativeLanguage.id}:Native");
+                                                    lps.toString()}
             def deckify = {domain, value -> domain.getDecks().collect{it.id}}
             def coursify = {domain, value -> domain.getCourses().collect{it.id}}
-            Map formatters = ["userId": idify ,
+            Map formatters = ["userId": idify,
                               "languageProficiencies": lpify,
                               "decks": deckify,
                               "courses": coursify]
@@ -122,7 +123,39 @@ class DataAccessController {
         
         [customizationInstanceList: Customization.list(params)]
     }
+    /**uses the exporter plugin to export anonymous data on quizzes
+    */
+    def exportQuizData(){
+        if (params?.extension && params?.extension == "csv"){           
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=QuizData.${params.extension}")
+            //set fields
+            List fields = ["owner", "card", "audioAssoc", "imageAssoc", "imageURI"]
+            //map headings
+            Map labels = ["owner": "UserID", 
+                          "card": "FlashcardID", 
+                          "audioAssoc": "Audio", 
+                          "imageAssoc": "Image",
+                          "imageURI": "ImageURI"]
+            //custom formatters (general formatters defined at class level)
+            def imageURIify = {domain, value -> (domain?.imageAssoc?.url) ?: ""}
+            //map field data formatters
+            Map formatters = ["owner": valIdify, 
+                              "card": valIdify, 
+                              "audioAssoc": binify, 
+                              "imageAssoc": binify,
+                              "imageURI": imageURIify]
+            //map additional parameters
+            Map parameters = ["separator": "\t"]
+            
+            exportService.export("csv", response.outputStream, Quiz.list(params), fields, labels, formatters, parameters)
+        }
+        
+        [quizInstanceList: Quiz.list(params)]
+    }
 
+    /**uses the exporter plugin to export anonymous data on flashcards
+    */
     def exportFlashcardData(){
         if (params?.extension && params?.extension == "csv"){           
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
@@ -142,21 +175,21 @@ class DataAccessController {
             //map headings
             Map labels = ["flashcard": "FlashcardID",
                            "deck": "DeckID",
-                           "primaryAlphabet": "FocalAlphabet",
+                           "primaryAlphabet": "FocalAlphabetID",
                            "primaryElement": "FocalPhrase", 
-                           "unitMapping": "BaseAlphabet",
+                           "unitMapping": "BaseAlphabetID",
                            "secondaryElement": "BasePhrase",
-                           "pronunciationAlphabet": "PronunciationAlphabet",
+                           "pronunciationAlphabet": "PronunciationAlphabetID",
                            "pronunciation": "Pronunciation",
                            "image": "Image",
                            "imageURI": "ImageURI",
                            "audio": "Audio"]
             //custom formatters (general formatters defined at class level)
-            def primeAlpha = {domain, value -> domain.getPrimaryUnit().alphabet.toString()}
+            def primeAlpha = {domain, value -> domain.getPrimaryUnit().alphabet.id}
             def primeEle = {domain, value -> domain.getPrimaryUnit().getPrint()}
-            def secAlpha = {domain, value -> domain.getSecondaryUnit().alphabet.toString()}
+            def secAlpha = {domain, value -> domain.getSecondaryUnit().alphabet.id}
             def secEle = {domain, value -> domain.getSecondaryUnit().getPrint()}
-            def proAlpha = {domain, value -> domain?.pronunciation.alphabet.toString()}
+            def proAlpha = {domain, value -> domain?.pronunciation.alphabet.id}
             def proEle = {domain, value -> domain?.pronunciation.getPrint()}
             def imageURIify = {domain, value -> (domain?.image?.url) ?: ""}
             //map field data formatters
@@ -179,7 +212,8 @@ class DataAccessController {
         
         [flashcardInstanceList: Flashcard.list(params)]    
     }
-
+    /**uses the exporter plugin to export anonymous data on decks
+    */
     def exportDeckData(){
         if (params?.extension && params?.extension == "csv"){           
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
@@ -198,12 +232,12 @@ class DataAccessController {
                           "title": "Title",
                           "description": "Description",
                           "cardServerName": "Algorithm",
-                          "language": "FocalLanguage",
+                          "language": "FocalLanguageID",
                           "sourceLanguage": "BaseLanguage"]
             //map field data formatters
             Map formatters = ["deck": idify, 
                               "owner": valIdify,
-                              "language": stringify,
+                              "language": valIdify,
                               "sourceLanguage": stringify]
             //map additional parameters
             Map parameters = ["separator": "\t"]
@@ -213,39 +247,76 @@ class DataAccessController {
         
         [deckInstanceList: Deck.list(params)]   
     }
-
+    /**uses the exporter plugin to export anonymous data on courses
+    */
     def exportCourseData(){
-        /*if (params?.extension && params?.extension == "csv"){           
+        if (params?.extension && params?.extension == "csv"){           
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
             response.setHeader("Content-disposition", "attachment; filename=CourseData.${params.extension}")
             //set fields
-            List fields = ["deck", 
+            List fields = ["course", 
                            "owner",
                            "title",
                            "description",
-                           "cardServerName",
                            "language",
-                           "sourceLanguage"]
+                           "startDate",
+                           "endDate",
+                           "courseNumber",
+                           "chapters",
+                           "quizzes"]
             //map headings
-            Map labels = ["deck": "DeckID", 
+            Map labels = ["course": "CourseID", 
                           "owner": "UserID",
                           "title": "Title",
                           "description": "Description",
-                          "cardServerName": "Algorithm",
-                          "language": "FocalLanguage",
-                          "sourceLanguage": "BaseLanguage"]
+                          "language": "FocalLanguageID",
+                          "startDate": "StartDate",
+                          "endDate": "EndDate",
+                          "courseNumber": "CourseNumber",
+                          "chapters": "ChapterDeckIDs",
+                          "quizzes": "QuizIDs"]
             //map field data formatters
-            Map formatters = ["deck": idify, 
+            Map formatters = ["course": idify, 
                               "owner": valIdify,
-                              "language": stringify,
-                              "sourceLanguage": stringify]
+                              "language": valIdify,
+                              "startDate": stringify,
+                              "endDate": stringify,
+                              "chapters": {domain, value -> domain.getChapters().collect{it.deck.id}.toString()},
+                              "quizzes": {domain, value -> Quiz.findAllByCourse(domain).collect{it.id}.toString()}]
             //map additional parameters
             Map parameters = ["separator": "\t"]
             
             exportService.export("csv", response.outputStream, Course.list(params), fields, labels, formatters, parameters)
         }
         
-        [courseInstanceList: Course.list(params)]
-        */   
+        [courseInstanceList: Course.list(params)]   
+    }
+    /**uses the exporter plugin to export anonymous data on Language and Alphabets in the system
+    */
+    def exportLanguageData(){
+        if (params?.extension && params?.extension == "csv"){           
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=LanguageData.${params.extension}")
+            //set fields
+            List fields = ["languageId",
+                           "language", 
+                           "alphabetId",
+                           "name"]
+            //map headings
+            Map labels = ["languageId": "LanguageID",
+                          "language": "Language",
+                          "alphabetId": "AlphabetID",
+                          "name": "Alphabet"]
+            //map field data formatters
+            Map formatters = ["languageId": {domain, value -> domain.language.id},
+                              "language": {domain, value -> value.name},
+                              "alphabetId": {domain, value -> domain.id}]
+            //map additional parameters
+            Map parameters = ["separator": "\t"]
+            
+            exportService.export("csv", response.outputStream, Alphabet.list(params), fields, labels, formatters, parameters)
+        }
+        
+        [alphabetInstanceList: Alphabet.list(params)]
     }
 }

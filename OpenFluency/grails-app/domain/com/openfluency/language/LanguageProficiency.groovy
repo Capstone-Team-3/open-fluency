@@ -14,4 +14,8 @@ class LanguageProficiency {
     String toString(){
     	return "${language}:${proficiency}"
     }
+
+    String getLanguageProficiencyMap(){
+    	return "${language.id}:${proficiency}"
+    }
 }
