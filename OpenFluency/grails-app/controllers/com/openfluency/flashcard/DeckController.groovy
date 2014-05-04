@@ -113,7 +113,7 @@ class DeckController {
     def practice(Deck deckInstance) {
         User userInstance = User.load(springSecurityService.principal.id)
         
-        //make sure user is registered
+        //make sure user is registered - add deck if not
         if(!flashcardInfoService.hasFlashcardInfos(userInstance, deckInstance)) {
             deckService.addDeck(deckInstance)
         }
