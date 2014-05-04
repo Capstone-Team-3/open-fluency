@@ -26,18 +26,19 @@
 
         <h1 id="main">Enrolled Students</h1>
 
-        <table class="table courses-table">
+        <table class="table table-bordered courses-table">
             <thead>
-                <tr>
+                <tr class="active">
                     <th rowspan="2">Name</th>
                     <g:each in="${courseInstance.getChapters()}">
-                        <th colspan="3">${it.title} Practice</th>
+                        <th class="center" colspan="3">Practice ${it.title}</th>
                     </g:each>
-                    <th colspan="${enrolledStudents[0].quizGrade.keySet().size()}">Quiz Grades</th>
+                    <g:if test="${enrolledStudents[0].quizGrade}">
+                        <th class="center" colspan="${enrolledStudents[0].quizGrade.keySet().size()}">Quiz Grades</th>
+                    </g:if>
                     <th rowspan="2">Enrollment</th>
-                    <th rowspan="2">Actions</th>
                 </tr>
-                <tr>
+                <tr class="active">
                     <g:each in="${courseInstance.getChapters()}">
                         <th>Meanings</th>
                         <th>Pronunciations</th>
@@ -53,21 +54,26 @@
                 <tr class="course-result">
                     <td>${registrationInstance.user.username}</td>
                     <g:each in="${registrationInstance.chapterProgress.keySet()}" var="chapterInstance">
-                        <td>${registrationInstance.chapterProgress[chapterInstance][0]}</td>
-                        <td>${registrationInstance.chapterProgress[chapterInstance][1]}</td>
+                        <td>${registrationInstance.chapterProgress[chapterInstance][0]}%</td>
+                        <td>${registrationInstance.chapterProgress[chapterInstance][1]}%</td>
                         <td></td>
                     </g:each>
                     <g:each in="${registrationInstance.quizGrade.keySet()}" var="quizInstance">
-                        <td>${registrationInstance.quizGrade[quizInstance]}</td>
+                        <g:if test="${registrationInstance.quizGrade[quizInstance] != null}">
+                            <td>${registrationInstance.quizGrade[quizInstance]}%</td>
+                        </g:if>
+                        <g:else>
+                            <td>--</td>
+                        </g:else>
                     </g:each>
                     <td>
                         ${Constants.REGISTRATION_STATUS[registrationInstance.status]}
-                    </td>
-                    <td>
+                        <div class="pull-right">
                         <g:if test="${registrationInstance.status == Constants.PENDING_APPROVAL}">
-                            <g:link controller="registration" action="approve" id="${registrationInstance.id}" class="btn btn-success">Approve</g:link>
-                            <g:link controller="registration" action="reject" id="${registrationInstance.id}" class="btn btn-danger">Reject</g:link>
+                            <g:link controller="registration" action="approve" id="${registrationInstance.id}" class="btn btn-success btn-xs">Approve</g:link>
+                            <g:link controller="registration" action="reject" id="${registrationInstance.id}" class="btn btn-danger btn-xs">Reject</g:link>
                         </g:if>
+                    </div>
                     </td>
                 </tr>
             </g:each>
