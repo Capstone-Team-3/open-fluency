@@ -104,7 +104,7 @@ class StudentSpec extends GebReportingSpec {
 		$(".deck-result").size() == 8
 	}
 
-	/*def "Student adds a deck to his/her own collection"() {
+	def "Student adds a deck to his/her own collection"() {
 		when:
 		$('.add-deck-4').click()
 		then: 
@@ -121,7 +121,7 @@ class StudentSpec extends GebReportingSpec {
 		at ListDeckPage
 		flashMessage.text() == "You succesfully removed Kanji for Dummies 1 from your decks!"
 		$('.other-decks tbody tr').size() == 0	
-	}*/
+	}
 
 	def "Student navigates to enrolled courses - no registrations should exist"() {
 		when:
