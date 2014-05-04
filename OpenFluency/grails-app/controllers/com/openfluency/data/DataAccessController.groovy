@@ -154,6 +154,10 @@ class DataAccessController {
         [quizInstanceList: Quiz.list(params)]
     }
 
+    def exportGradeData(){
+        
+    }
+
     /**uses the exporter plugin to export anonymous data on flashcards
     */
     def exportFlashcardData(){

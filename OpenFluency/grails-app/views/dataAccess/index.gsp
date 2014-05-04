@@ -35,6 +35,16 @@
 			</div>
 
 			<div class="data-access">
+				<h3>Course Performance Data</h3>
+				<export:formats id="grades-data" formats="['csv']" action="exportGradeData"/>
+			</div>
+			
+			<div class="data-access">
+				<h3>Course Data</h3>
+				<export:formats id="course-data" formats="['csv']" action="exportCourseData"/>
+			</div>
+
+			<div class="data-access">
 				<h3>Flashcard Data</h3>
 				<export:formats id="flashcard-data" formats="['csv']" action="exportFlashcardData"/>
 			</div>
@@ -45,18 +55,8 @@
 			</div>
 
 			<div class="data-access">
-				<h3>Course Data</h3>
-				<export:formats id="course-data" formats="['csv']" action="exportCourseData"/>
-			</div>
-
-			<div class="data-access">
 				<h3>Languages and Alphabets</h3>
 				<export:formats id="language-data" formats="['csv']" action="exportLanguageData"/>
-			</div>
-
-			<div class="data-access">
-				<h3>Data On a Specified Course</h3>
-				<export:formats id="class-data" formats="['csv']"/>
 			</div>
 
 		</div>
