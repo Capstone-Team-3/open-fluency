@@ -23,7 +23,7 @@
 <g:if test="${deckInstanceList}">
     <div class="dashboard-container">
         <g:each in="${deckInstanceList}">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4>
@@ -31,13 +31,14 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-                        <p>Meaning Progress</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="${it.progress[0]}" aria-valuemin="0" aria-valuemax="100" style="width:${it.progress[0]}%">${it.progress[0]}%</div>
-                        </div>
-                        <p>Pronunciation Progress</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="${it.progress[1]}" aria-valuemin="0" aria-valuemax="100" style="width:${it.progress[1]}%">${it.progress}%</div>
+                        <div class="donut-container">
+                            <div class="col-lg-4 progress-donut center" data-progress="${it.progress[0]}" id="meaning-progress-${it.id}">
+                                <p>Meaning</p>
+                            </div>
+
+                            <div class="col-lg-4 progress-donut center" data-progress="${it.progress[1]}" id="pronunciation-progress-${it.id}">
+                                <p>Pronunciation</p>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-footer">
@@ -45,11 +46,12 @@
                             <g:link class="btn btn-success" action="show" controller="deck" id="${it.id}">Continue</g:link>
                         </div>
                     </div>
-                </div><!-- end panel -->
-            </div><!-- end col-lg-3 -->
-        </g:each>
+                </div>
+                <!-- end panel --> </div>
+            <!-- end col-lg-3 --> </g:each>
 
-    </div><!-- dashboard-container -->
+    </div>
+    <!-- dashboard-container -->
 
     <g:link class="view-more" action="list" controller="deck">
         View More Decks
@@ -65,3 +67,5 @@
         </div>
     </div>
 </g:else>
+
+<g:javascript>initializeDonuts();</g:javascript>

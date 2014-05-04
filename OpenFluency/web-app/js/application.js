@@ -90,11 +90,11 @@ var initializePracticeByPronunciation = function() {
 var initializePracticeRanking = function() {
 	$(".ranker").click(function() {
         // Do some fancy UI transitions
-		$(".flashcard").removeClass("slideInDown").addClass("slideOutLeft").delay(1000);
+        $(".flashcard").removeClass("slideInDown").addClass("slideOutLeft").delay(1000);
 
         // Set the ranking value in the form and submit it
-		$("#ranking").val($(this).data('value'));
-		$('.rankCardForm').submit();
+        $("#ranking").val($(this).data('value'));
+        $('.rankCardForm').submit();
     });
 };
 
@@ -146,4 +146,43 @@ var setupFlashcardSearchPagination = function() {
 		$('.searchUnitForm').submit();
 		return false;		
 	})
+}
+
+var initializeDonuts = function() {
+	$('.progress-donut').each(function() {
+		drawDonut($(this).data('progress'), "#" + $(this).attr('id'));
+	});
+}
+
+var drawDonut = function(value, selector) {
+	var	percentages = [value, (100 - value)];
+	
+	var width = $(selector).width();
+
+	var height = width, radius = Math.min(width, height) / 2;
+
+	var color = d3.scale.category20();
+
+	var pie = d3.layout.pie()
+	.sort(null);
+
+	var arc = d3.svg.arc().innerRadius(radius - 15).outerRadius(radius);
+
+	var svg = d3.select(selector).append("svg")
+	.attr("width", width)
+	.attr("height", height)
+	.append("g")
+	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+	svg.append("text")
+	.text(value + "%")
+	.style("text-anchor", "middle")
+	.attr("transform", "translate(" + 0 + "," + 4 + ")");
+
+	var path = svg.selectAll("path")
+	.data(pie(percentages))
+	.enter().append("path")
+	.attr("fill", function(d, i) { return color(i); })
+	.attr("d", arc);
+
 }

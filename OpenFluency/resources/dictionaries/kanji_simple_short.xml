@@ -1,0 +1,3096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kanjidic2>
+	<ch>
+		<uc cp_type="ucs">4e9c</uc>
+		<gr>8</gr>
+		<sc>7</sc>
+		<freq>1509</freq>
+		<rd r_type="pinyin">ya4</rd>
+		<rd r_type="ja_on">ア</rd>
+		<rd r_type="ja_kun">つ.ぐ</rd>
+		<mn>Asia</mn>
+		<mn>rank next</mn>
+		<mn>come after</mn>
+		<mn>-ous</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5516</uc>
+		<sc>10</sc>
+		<rd r_type="pinyin">ya1</rd>
+		<rd r_type="ja_on">ア</rd>
+		<rd r_type="ja_on">アク</rd>
+		<rd r_type="ja_kun">おし</rd>
+		<mn>mute</mn>
+		<mn>dumb</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5a03</uc>
+		<gr>9</gr>
+		<sc>9</sc>
+		<rd r_type="pinyin">wa2</rd>
+		<rd r_type="ja_on">ア</rd>
+		<rd r_type="ja_on">アイ</rd>
+		<rd r_type="ja_on">ワ</rd>
+		<rd r_type="ja_kun">うつく.しい</rd>
+		<mn>beautiful</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">963f</uc>
+		<gr>9</gr>
+		<sc>8</sc>
+		<freq>1126</freq>
+		<rd r_type="pinyin">a1</rd>
+		<rd r_type="pinyin">e1</rd>
+		<rd r_type="pinyin">a5</rd>
+		<rd r_type="pinyin">a2</rd>
+		<rd r_type="pinyin">a4</rd>
+		<rd r_type="ja_on">ア</rd>
+		<rd r_type="ja_on">オ</rd>
+		<rd r_type="ja_kun">おもね.る</rd>
+		<rd r_type="ja_kun">くま</rd>
+		<mn>Africa</mn>
+		<mn>flatter</mn>
+		<mn>fawn upon</mn>
+		<mn>corner</mn>
+		<mn>nook</mn>
+		<mn>recess</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">54c0</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>1715</freq>
+		<rd r_type="pinyin">ai1</rd>
+		<rd r_type="ja_on">アイ</rd>
+		<rd r_type="ja_kun">あわ.れ</rd>
+		<rd r_type="ja_kun">あわ.れむ</rd>
+		<rd r_type="ja_kun">かな.しい</rd>
+		<mn>pathetic</mn>
+		<mn>grief</mn>
+		<mn>sorrow</mn>
+		<mn>pathos</mn>
+		<mn>pity</mn>
+		<mn>sympathize</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">611b</uc>
+		<gr>4</gr>
+		<sc>13</sc>
+		<freq>640</freq>
+		<rd r_type="pinyin">ai4</rd>
+		<rd r_type="ja_on">アイ</rd>
+		<rd r_type="ja_kun">いと.しい</rd>
+		<rd r_type="ja_kun">かな.しい</rd>
+		<rd r_type="ja_kun">め.でる</rd>
+		<rd r_type="ja_kun">お.しむ</rd>
+		<rd r_type="ja_kun">まな</rd>
+		<mn>love</mn>
+		<mn>affection</mn>
+		<mn>favourite</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6328</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>2258</freq>
+		<rd r_type="pinyin">ai1</rd>
+		<rd r_type="pinyin">ai2</rd>
+		<rd r_type="ja_on">アイ</rd>
+		<rd r_type="ja_kun">ひら.く</rd>
+		<mn>approach</mn>
+		<mn>draw near</mn>
+		<mn>push open</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">59f6</uc>
+		<sc>9</sc>
+		<rd r_type="pinyin">yan3</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_on">アイ</rd>
+		<rd r_type="ja_kun">あい</rd>
+		<mn>good-looking</mn>
+		<mn>quiet</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9022</uc>
+		<gr>9</gr>
+		<sc>10</sc>
+		<sc>9</sc>
+		<freq>2116</freq>
+		<rd r_type="pinyin">feng2</rd>
+		<rd r_type="ja_on">ホウ</rd>
+		<rd r_type="ja_kun">あ.う</rd>
+		<rd r_type="ja_kun">むか.える</rd>
+		<mn>meeting</mn>
+		<mn>tryst</mn>
+		<mn>date</mn>
+		<mn>rendezvous</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8475</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<freq>2122</freq>
+		<rd r_type="pinyin">kui2</rd>
+		<rd r_type="ja_on">キ</rd>
+		<rd r_type="ja_kun">あおい</rd>
+		<mn>hollyhock</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">831c</uc>
+		<gr>9</gr>
+		<sc>9</sc>
+		<freq>2422</freq>
+		<rd r_type="pinyin">qian4</rd>
+		<rd r_type="pinyin">xi1</rd>
+		<rd r_type="ja_on">セン</rd>
+		<rd r_type="ja_kun">あかね</rd>
+		<mn>madder</mn>
+		<mn>red dye</mn>
+		<mn>Turkey red</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7a50</uc>
+		<sc>16</sc>
+		<rd r_type="pinyin">qiu1</rd>
+		<rd r_type="ja_on">シュウ</rd>
+		<rd r_type="ja_kun">あき</rd>
+		<rd r_type="ja_kun">とき</rd>
+		<mn>autumn</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">60aa</uc>
+		<gr>3</gr>
+		<sc>11</sc>
+		<freq>530</freq>
+		<rd r_type="pinyin">e4</rd>
+		<rd r_type="pinyin">e3</rd>
+		<rd r_type="pinyin">wu4</rd>
+		<rd r_type="ja_on">アク</rd>
+		<rd r_type="ja_on">オ</rd>
+		<rd r_type="ja_kun">わる.い</rd>
+		<rd r_type="ja_kun">わる-</rd>
+		<rd r_type="ja_kun">あ.し</rd>
+		<rd r_type="ja_kun">にく.い</rd>
+		<rd r_type="ja_kun">-にく.い</rd>
+		<rd r_type="ja_kun">ああ</rd>
+		<rd r_type="ja_kun">いずくに</rd>
+		<rd r_type="ja_kun">いずくんぞ</rd>
+		<rd r_type="ja_kun">にく.む</rd>
+		<mn>bad</mn>
+		<mn>vice</mn>
+		<mn>rascal</mn>
+		<mn>false</mn>
+		<mn>evil</mn>
+		<mn>wrong</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">63e1</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>1003</freq>
+		<rd r_type="pinyin">wo4</rd>
+		<rd r_type="ja_on">アク</rd>
+		<rd r_type="ja_kun">にぎ.る</rd>
+		<mn>grip</mn>
+		<mn>hold</mn>
+		<mn>mould sushi</mn>
+		<mn>bribe</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6e25</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<freq>2257</freq>
+		<rd r_type="pinyin">wo4</rd>
+		<rd r_type="ja_on">アク</rd>
+		<rd r_type="ja_kun">あつ.い</rd>
+		<rd r_type="ja_kun">うるお.う</rd>
+		<mn>kindness</mn>
+		<mn>moisten</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">65ed</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<freq>1417</freq>
+		<rd r_type="pinyin">xu4</rd>
+		<rd r_type="ja_on">キョク</rd>
+		<rd r_type="ja_kun">あさひ</rd>
+		<mn>rising sun</mn>
+		<mn>morning sun</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8466</uc>
+		<gr>9</gr>
+		<sc>13</sc>
+		<freq>2343</freq>
+		<rd r_type="pinyin">wei3</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">しお.れる</rd>
+		<rd r_type="ja_kun">しな.びる</rd>
+		<rd r_type="ja_kun">しぼ.む</rd>
+		<rd r_type="ja_kun">な.える</rd>
+		<mn>reed</mn>
+		<mn>bullrush</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">82a6</uc>
+		<gr>9</gr>
+		<sc>7</sc>
+		<freq>1733</freq>
+		<rd r_type="pinyin">lu2</rd>
+		<rd r_type="pinyin">lu3</rd>
+		<rd r_type="ja_on">ロ</rd>
+		<rd r_type="ja_kun">あし</rd>
+		<rd r_type="ja_kun">よし</rd>
+		<mn>reed</mn>
+		<mn>bullrush</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9bf5</uc>
+		<sc>19</sc>
+		<rd r_type="pinyin">sao1</rd>
+		<rd r_type="ja_on">ソウ</rd>
+		<rd r_type="ja_kun">あじ</rd>
+		<mn>horse mackerel</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6893</uc>
+		<gr>9</gr>
+		<sc>11</sc>
+		<freq>2301</freq>
+		<rd r_type="pinyin">zi3</rd>
+		<rd r_type="ja_on">シ</rd>
+		<rd r_type="ja_kun">あずさ</rd>
+		<mn>catalpa tree</mn>
+		<mn>woodblock printing</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5727</uc>
+		<gr>5</gr>
+		<sc>5</sc>
+		<freq>718</freq>
+		<rd r_type="pinyin">ya1</rd>
+		<rd r_type="pinyin">ya4</rd>
+		<rd r_type="ja_on">アツ</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">お.す</rd>
+		<rd r_type="ja_kun">へ.す</rd>
+		<rd r_type="ja_kun">おさ.える</rd>
+		<rd r_type="ja_kun">お.さえる</rd>
+		<mn>pressure</mn>
+		<mn>push</mn>
+		<mn>overwhelm</mn>
+		<mn>oppress</mn>
+		<mn>dominate</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">65a1</uc>
+		<gr>9</gr>
+		<sc>14</sc>
+		<rd r_type="pinyin">wo4</rd>
+		<rd r_type="ja_on">アツ</rd>
+		<rd r_type="ja_on">カン</rd>
+		<rd r_type="ja_on">ワツ</rd>
+		<rd r_type="ja_kun">めぐ.る</rd>
+		<rd r_type="ja_kun">めぐ.らす</rd>
+		<mn>go around</mn>
+		<mn>rule</mn>
+		<mn>administer</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6271</uc>
+		<gr>8</gr>
+		<sc>6</sc>
+		<freq>1057</freq>
+		<rd r_type="pinyin">xi1</rd>
+		<rd r_type="ja_on">ソウ</rd>
+		<rd r_type="ja_on">キュウ</rd>
+		<rd r_type="ja_kun">あつか.い</rd>
+		<rd r_type="ja_kun">あつか.う</rd>
+		<rd r_type="ja_kun">あつか.る</rd>
+		<rd r_type="ja_kun">こ.く</rd>
+		<mn>handle</mn>
+		<mn>entertain</mn>
+		<mn>thresh</mn>
+		<mn>strip</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5b9b</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<rd r_type="pinyin">wan3</rd>
+		<rd r_type="pinyin">yuan1</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">あ.てる</rd>
+		<rd r_type="ja_kun">-あて</rd>
+		<rd r_type="ja_kun">-づつ</rd>
+		<rd r_type="ja_kun">あたか.も</rd>
+		<mn>address</mn>
+		<mn>just like</mn>
+		<mn>fortunately</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">59d0</uc>
+		<sc>8</sc>
+		<rd r_type="pinyin">jie3</rd>
+		<rd r_type="ja_on">ソ</rd>
+		<rd r_type="ja_on">シャ</rd>
+		<rd r_type="ja_kun">あね</rd>
+		<rd r_type="ja_kun">ねえさん</rd>
+		<mn>elder sister</mn>
+		<mn>maidservant</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">867b</uc>
+		<sc>9</sc>
+		<rd r_type="pinyin">meng2</rd>
+		<rd r_type="ja_on">ボウ</rd>
+		<rd r_type="ja_kun">あぶ</rd>
+		<mn>gadfly</mn>
+		<mn>horsefly</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">98f4</uc>
+		<sc>13</sc>
+		<rd r_type="pinyin">yi2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_on">シ</rd>
+		<rd r_type="ja_kun">あめ</rd>
+		<rd r_type="ja_kun">やしな.う</rd>
+		<mn>rice jelly</mn>
+		<mn>candy</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7d62</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<freq>2315</freq>
+		<rd r_type="pinyin">xuan4</rd>
+		<rd r_type="ja_on">ケン</rd>
+		<mn>brilliant fabric design</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7dbe</uc>
+		<gr>9</gr>
+		<sc>14</sc>
+		<freq>1759</freq>
+		<rd r_type="pinyin">ling2</rd>
+		<rd r_type="ja_on">リン</rd>
+		<rd r_type="ja_kun">あや</rd>
+		<mn>design</mn>
+		<mn>figured cloth</mn>
+		<mn>twill</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9b8e</uc>
+		<gr>9</gr>
+		<sc>16</sc>
+		<freq>2201</freq>
+		<rd r_type="pinyin">nian2</rd>
+		<rd r_type="ja_on">デン</rd>
+		<rd r_type="ja_on">ネン</rd>
+		<rd r_type="ja_kun">あゆ</rd>
+		<rd r_type="ja_kun">なまず</rd>
+		<mn>freshwater trout</mn>
+		<mn>smelt</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6216</uc>
+		<gr>9</gr>
+		<sc>8</sc>
+		<freq>2378</freq>
+		<rd r_type="pinyin">huo4</rd>
+		<rd r_type="ja_on">ワク</rd>
+		<rd r_type="ja_on">コク</rd>
+		<rd r_type="ja_on">イキ</rd>
+		<rd r_type="ja_kun">あ.る</rd>
+		<rd r_type="ja_kun">あるい</rd>
+		<rd r_type="ja_kun">あるいは</rd>
+		<mn>some</mn>
+		<mn>one</mn>
+		<mn>or</mn>
+		<mn>possibly</mn>
+		<mn>a certain</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7c9f</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<freq>2146</freq>
+		<rd r_type="pinyin">su4</rd>
+		<rd r_type="ja_on">ゾク</rd>
+		<rd r_type="ja_on">ショク</rd>
+		<rd r_type="ja_on">ソク</rd>
+		<rd r_type="ja_kun">あわ</rd>
+		<rd r_type="ja_kun">もみ</rd>
+		<mn>millet</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">88b7</uc>
+		<sc>11</sc>
+		<rd r_type="pinyin">jia2</rd>
+		<rd r_type="pinyin">qia1</rd>
+		<rd r_type="ja_on">コウ</rd>
+		<rd r_type="ja_on">キョウ</rd>
+		<rd r_type="ja_kun">あわせ</rd>
+		<mn>lined (kimono)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5b89</uc>
+		<gr>3</gr>
+		<sc>6</sc>
+		<freq>144</freq>
+		<rd r_type="pinyin">an1</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_kun">やす.い</rd>
+		<rd r_type="ja_kun">やす.まる</rd>
+		<rd r_type="ja_kun">やす</rd>
+		<rd r_type="ja_kun">やす.らか</rd>
+		<mn>relax</mn>
+		<mn>cheap</mn>
+		<mn>low</mn>
+		<mn>quiet</mn>
+		<mn>rested</mn>
+		<mn>contented</mn>
+		<mn>peaceful</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5eb5</uc>
+		<gr>9</gr>
+		<sc>11</sc>
+		<freq>2119</freq>
+		<rd r_type="pinyin">an1</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_kun">いおり</rd>
+		<rd r_type="ja_kun">いお</rd>
+		<mn>hermitage</mn>
+		<mn>retreat</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6309</uc>
+		<gr>9</gr>
+		<sc>9</sc>
+		<rd r_type="pinyin">an4</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_kun">おさ.える</rd>
+		<rd r_type="ja_kun">しら.べる</rd>
+		<mn>hold</mn>
+		<mn>consider</mn>
+		<mn>investigate</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6697</uc>
+		<gr>3</gr>
+		<sc>13</sc>
+		<freq>1040</freq>
+		<rd r_type="pinyin">an4</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_kun">くら.い</rd>
+		<rd r_type="ja_kun">くら.む</rd>
+		<rd r_type="ja_kun">くれ.る</rd>
+		<mn>darkness</mn>
+		<mn>disappear</mn>
+		<mn>shade</mn>
+		<mn>informal</mn>
+		<mn>grow dark</mn>
+		<mn>be blinded</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6848</uc>
+		<gr>4</gr>
+		<sc>10</sc>
+		<freq>206</freq>
+		<rd r_type="pinyin">an4</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_kun">つくえ</rd>
+		<mn>plan</mn>
+		<mn>suggestion</mn>
+		<mn>draft</mn>
+		<mn>ponder</mn>
+		<mn>fear</mn>
+		<mn>proposition</mn>
+		<mn>idea</mn>
+		<mn>expectation</mn>
+		<mn>worry</mn>
+		<mn>table</mn>
+		<mn>bench</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">95c7</uc>
+		<gr>8</gr>
+		<sc>17</sc>
+		<freq>1969</freq>
+		<rd r_type="pinyin">an4</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">やみ</rd>
+		<rd r_type="ja_kun">くら.い</rd>
+		<mn>get dark</mn>
+		<mn>gloom</mn>
+		<mn>disorder</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">978d</uc>
+		<gr>9</gr>
+		<sc>15</sc>
+		<freq>2214</freq>
+		<rd r_type="pinyin">an1</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_kun">くら</rd>
+		<mn>saddle</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">674f</uc>
+		<gr>9</gr>
+		<sc>7</sc>
+		<freq>2159</freq>
+		<rd r_type="pinyin">xing4</rd>
+		<rd r_type="ja_on">キョウ</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_on">コウ</rd>
+		<rd r_type="ja_kun">あんず</rd>
+		<mn>apricot</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4ee5</uc>
+		<gr>4</gr>
+		<sc>5</sc>
+		<freq>126</freq>
+		<rd r_type="pinyin">yi3</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">もっ.て</rd>
+		<mn>by means of</mn>
+		<mn>because</mn>
+		<mn>in view of</mn>
+		<mn>compared with</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4f0a</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<freq>703</freq>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">かれ</rd>
+		<mn>Italy</mn>
+		<mn>that one</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4f4d</uc>
+		<gr>4</gr>
+		<sc>7</sc>
+		<freq>276</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">くらい</rd>
+		<rd r_type="ja_kun">ぐらい</rd>
+		<mn>rank</mn>
+		<mn>grade</mn>
+		<mn>throne</mn>
+		<mn>crown</mn>
+		<mn>about</mn>
+		<mn>some</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4f9d</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>906</freq>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_on">エ</rd>
+		<rd r_type="ja_kun">よ.る</rd>
+		<mn>reliant</mn>
+		<mn>depend on</mn>
+		<mn>consequently</mn>
+		<mn>therefore</mn>
+		<mn>due to</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5049</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>1639</freq>
+		<rd r_type="pinyin">wei3</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">えら.い</rd>
+		<mn>admirable</mn>
+		<mn>greatness</mn>
+		<mn>remarkable</mn>
+		<mn>conceited</mn>
+		<mn>famous</mn>
+		<mn>excellent</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">56f2</uc>
+		<gr>4</gr>
+		<sc>7</sc>
+		<freq>771</freq>
+		<rd r_type="pinyin">wei2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">かこ.む</rd>
+		<rd r_type="ja_kun">かこ.う</rd>
+		<rd r_type="ja_kun">かこ.い</rd>
+		<mn>surround</mn>
+		<mn>besiege</mn>
+		<mn>store</mn>
+		<mn>paling</mn>
+		<mn>enclosure</mn>
+		<mn>encircle</mn>
+		<mn>preserve</mn>
+		<mn>keep</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5937</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<freq>2324</freq>
+		<rd r_type="pinyin">yi2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">えびす</rd>
+		<rd r_type="ja_kun">えみし</rd>
+		<rd r_type="ja_kun">ころ.す</rd>
+		<rd r_type="ja_kun">たい.らげる</rd>
+		<mn>barbarian</mn>
+		<mn>savage</mn>
+		<mn>Ainu</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">59d4</uc>
+		<gr>3</gr>
+		<sc>8</sc>
+		<freq>187</freq>
+		<rd r_type="pinyin">wei3</rd>
+		<rd r_type="pinyin">wei1</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">ゆだ.ねる</rd>
+		<mn>committee</mn>
+		<mn>entrust to</mn>
+		<mn>leave to</mn>
+		<mn>devote</mn>
+		<mn>discard</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5a01</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>1103</freq>
+		<rd r_type="pinyin">wei1</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">おど.す</rd>
+		<rd r_type="ja_kun">おど.し</rd>
+		<rd r_type="ja_kun">おど.かす</rd>
+		<mn>intimidate</mn>
+		<mn>dignity</mn>
+		<mn>majesty</mn>
+		<mn>menace</mn>
+		<mn>threaten</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5c09</uc>
+		<gr>8</gr>
+		<sc>11</sc>
+		<freq>2007</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_on">ジョウ</rd>
+		<mn>military officer</mn>
+		<mn>jailer</mn>
+		<mn>old man</mn>
+		<mn>rank</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">60df</uc>
+		<gr>9</gr>
+		<sc>11</sc>
+		<freq>2246</freq>
+		<rd r_type="pinyin">wei2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_on">ユイ</rd>
+		<rd r_type="ja_kun">おも.んみる</rd>
+		<rd r_type="ja_kun">これ</rd>
+		<rd r_type="ja_kun">おも.うに</rd>
+		<mn>consider</mn>
+		<mn>reflect</mn>
+		<mn>think</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">610f</uc>
+		<gr>3</gr>
+		<sc>13</sc>
+		<freq>99</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<mn>idea</mn>
+		<mn>mind</mn>
+		<mn>heart</mn>
+		<mn>taste</mn>
+		<mn>thought</mn>
+		<mn>desire</mn>
+		<mn>care</mn>
+		<mn>liking</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6170</uc>
+		<gr>8</gr>
+		<sc>15</sc>
+		<freq>1158</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">なぐさ.める</rd>
+		<rd r_type="ja_kun">なぐさ.む</rd>
+		<mn>consolation</mn>
+		<mn>amusement</mn>
+		<mn>seduce</mn>
+		<mn>cheer</mn>
+		<mn>make sport of</mn>
+		<mn>comfort</mn>
+		<mn>console</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6613</uc>
+		<gr>5</gr>
+		<sc>8</sc>
+		<freq>571</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">エキ</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">やさ.しい</rd>
+		<rd r_type="ja_kun">やす.い</rd>
+		<mn>easy</mn>
+		<mn>ready to</mn>
+		<mn>simple</mn>
+		<mn>fortune-telling</mn>
+		<mn>divination</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6905</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>2245</freq>
+		<rd r_type="pinyin">yi3</rd>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="ja_on">イ</rd>
+		<mn>chair</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">70ba</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>831</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="pinyin">wei2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">ため</rd>
+		<rd r_type="ja_kun">な.る</rd>
+		<rd r_type="ja_kun">な.す</rd>
+		<rd r_type="ja_kun">す.る</rd>
+		<rd r_type="ja_kun">たり</rd>
+		<rd r_type="ja_kun">つく.る</rd>
+		<rd r_type="ja_kun">なり</rd>
+		<mn>do</mn>
+		<mn>change</mn>
+		<mn>make</mn>
+		<mn>benefit</mn>
+		<mn>welfare</mn>
+		<mn>be of use</mn>
+		<mn>reach to</mn>
+		<mn>try</mn>
+		<mn>practice</mn>
+		<mn>cost</mn>
+		<mn>serve as</mn>
+		<mn>good</mn>
+		<mn>advantage</mn>
+		<mn>as a result of</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">754f</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>2389</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">おそ.れる</rd>
+		<rd r_type="ja_kun">かしこま.る</rd>
+		<rd r_type="ja_kun">かしこ</rd>
+		<rd r_type="ja_kun">かしこ.し</rd>
+		<mn>fear</mn>
+		<mn>majestic</mn>
+		<mn>graciously</mn>
+		<mn>be apprehensive</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7570</uc>
+		<gr>6</gr>
+		<sc>11</sc>
+		<freq>631</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">こと</rd>
+		<rd r_type="ja_kun">こと.なる</rd>
+		<rd r_type="ja_kun">け</rd>
+		<mn>uncommon</mn>
+		<mn>different</mn>
+		<mn>queerness</mn>
+		<mn>strangeness</mn>
+		<mn>wonderful</mn>
+		<mn>curious</mn>
+		<mn>unusual</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">79fb</uc>
+		<gr>5</gr>
+		<sc>11</sc>
+		<freq>448</freq>
+		<rd r_type="pinyin">yi2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">うつ.る</rd>
+		<rd r_type="ja_kun">うつ.す</rd>
+		<mn>shift</mn>
+		<mn>move</mn>
+		<mn>change</mn>
+		<mn>drift</mn>
+		<mn>catch (cold, fire)</mn>
+		<mn>pass into</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7dad</uc>
+		<gr>8</gr>
+		<sc>14</sc>
+		<freq>643</freq>
+		<rd r_type="pinyin">wei2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<mn>fiber</mn>
+		<mn>tie</mn>
+		<mn>rope</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7def</uc>
+		<gr>8</gr>
+		<sc>16</sc>
+		<freq>1430</freq>
+		<rd r_type="pinyin">wei3</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">よこいと</rd>
+		<rd r_type="ja_kun">ぬき</rd>
+		<mn>horizontal</mn>
+		<mn>woof</mn>
+		<mn>left &amp; right</mn>
+		<mn>(parallels of) latitude</mn>
+		<mn>prediction</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">80c3</uc>
+		<gr>4</gr>
+		<sc>9</sc>
+		<freq>1647</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<mn>stomach</mn>
+		<mn>paunch</mn>
+		<mn>crop</mn>
+		<mn>craw</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">840e</uc>
+		<gr>8</gr>
+		<sc>11</sc>
+		<rd r_type="pinyin">wei1</rd>
+		<rd r_type="pinyin">wei3</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">な</rd>
+		<rd r_type="ja_kun">しお.れる</rd>
+		<rd r_type="ja_kun">しな.びる</rd>
+		<rd r_type="ja_kun">しぼ.む</rd>
+		<rd r_type="ja_kun">な.える</rd>
+		<mn>wither</mn>
+		<mn>droop</mn>
+		<mn>lame</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8863</uc>
+		<gr>4</gr>
+		<sc>6</sc>
+		<freq>1214</freq>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_on">エ</rd>
+		<rd r_type="ja_kun">ころも</rd>
+		<rd r_type="ja_kun">きぬ</rd>
+		<rd r_type="ja_kun">-ぎ</rd>
+		<mn>garment</mn>
+		<mn>clothes</mn>
+		<mn>dressing</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8b02</uc>
+		<gr>9</gr>
+		<sc>16</sc>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">い.う</rd>
+		<rd r_type="ja_kun">いい</rd>
+		<rd r_type="ja_kun">おも.う</rd>
+		<rd r_type="ja_kun">いわゆる</rd>
+		<mn>reason</mn>
+		<mn>origin</mn>
+		<mn>history</mn>
+		<mn>oral tradition</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9055</uc>
+		<gr>8</gr>
+		<sc>13</sc>
+		<sc>12</sc>
+		<freq>344</freq>
+		<rd r_type="pinyin">wei2</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">ちが.う</rd>
+		<rd r_type="ja_kun">ちが.い</rd>
+		<rd r_type="ja_kun">ちが.える</rd>
+		<rd r_type="ja_kun">-ちが.える</rd>
+		<rd r_type="ja_kun">たが.う</rd>
+		<rd r_type="ja_kun">たが.える</rd>
+		<mn>difference</mn>
+		<mn>differ</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">907a</uc>
+		<gr>6</gr>
+		<sc>15</sc>
+		<sc>14</sc>
+		<freq>647</freq>
+		<rd r_type="pinyin">yi2</rd>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_on">ユイ</rd>
+		<rd r_type="ja_kun">のこ.す</rd>
+		<mn>bequeath</mn>
+		<mn>leave behind</mn>
+		<mn>reserve</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">533b</uc>
+		<gr>3</gr>
+		<sc>7</sc>
+		<freq>437</freq>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">い.やす</rd>
+		<rd r_type="ja_kun">い.する</rd>
+		<rd r_type="ja_kun">くすし</rd>
+		<mn>doctor</mn>
+		<mn>medicine</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4e95</uc>
+		<gr>8</gr>
+		<sc>4</sc>
+		<freq>339</freq>
+		<rd r_type="pinyin">jing3</rd>
+		<rd r_type="ja_on">セイ</rd>
+		<rd r_type="ja_on">ショウ</rd>
+		<rd r_type="ja_kun">い</rd>
+		<mn>well</mn>
+		<mn>well crib</mn>
+		<mn>town</mn>
+		<mn>community</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4ea5</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<rd r_type="pinyin">hai4</rd>
+		<rd r_type="ja_on">ガイ</rd>
+		<rd r_type="ja_on">カイ</rd>
+		<rd r_type="ja_kun">い</rd>
+		<mn>sign of the hog</mn>
+		<mn>9-11PM</mn>
+		<mn>twelfth sign of the Chinese zodiac</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">57df</uc>
+		<gr>6</gr>
+		<sc>11</sc>
+		<freq>396</freq>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">イキ</rd>
+		<mn>range</mn>
+		<mn>region</mn>
+		<mn>limits</mn>
+		<mn>stage</mn>
+		<mn>level</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">80b2</uc>
+		<gr>3</gr>
+		<sc>8</sc>
+		<freq>369</freq>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">イク</rd>
+		<rd r_type="ja_kun">そだ.つ</rd>
+		<rd r_type="ja_kun">そだ.ち</rd>
+		<rd r_type="ja_kun">そだ.てる</rd>
+		<rd r_type="ja_kun">はぐく.む</rd>
+		<mn>bring up</mn>
+		<mn>grow up</mn>
+		<mn>raise</mn>
+		<mn>rear</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">90c1</uc>
+		<gr>9</gr>
+		<sc>9</sc>
+		<sc>8</sc>
+		<freq>1920</freq>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">イク</rd>
+		<mn>cultural progress</mn>
+		<mn>perfume</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">78ef</uc>
+		<gr>9</gr>
+		<sc>17</sc>
+		<freq>1444</freq>
+		<rd r_type="pinyin">ji1</rd>
+		<rd r_type="ja_on">キ</rd>
+		<rd r_type="ja_kun">いそ</rd>
+		<mn>seashore</mn>
+		<mn>beach</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4e00</uc>
+		<gr>1</gr>
+		<sc>1</sc>
+		<freq>2</freq>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="ja_on">イチ</rd>
+		<rd r_type="ja_on">イツ</rd>
+		<rd r_type="ja_kun">ひと-</rd>
+		<rd r_type="ja_kun">ひと.つ</rd>
+		<mn>one</mn>
+		<mn>one radical (no.1)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">58f1</uc>
+		<gr>8</gr>
+		<sc>7</sc>
+		<freq>2351</freq>
+		<rd r_type="pinyin">yi1</rd>
+		<rd r_type="ja_on">イチ</rd>
+		<rd r_type="ja_on">イツ</rd>
+		<rd r_type="ja_kun">ひとつ</rd>
+		<mn>one (in documents)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6ea2</uc>
+		<gr>9</gr>
+		<sc>13</sc>
+		<freq>2405</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">イツ</rd>
+		<rd r_type="ja_kun">こぼ.れる</rd>
+		<rd r_type="ja_kun">あふ.れる</rd>
+		<rd r_type="ja_kun">み.ちる</rd>
+		<mn>overflow</mn>
+		<mn>inundate</mn>
+		<mn>spill</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9038</uc>
+		<gr>8</gr>
+		<sc>11</sc>
+		<sc>10</sc>
+		<freq>1524</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">イツ</rd>
+		<rd r_type="ja_kun">そ.れる</rd>
+		<rd r_type="ja_kun">そ.らす</rd>
+		<rd r_type="ja_kun">はぐ.れる</rd>
+		<mn>deviate</mn>
+		<mn>idleness</mn>
+		<mn>leisure</mn>
+		<mn>miss the mark</mn>
+		<mn>evade</mn>
+		<mn>elude</mn>
+		<mn>parry</mn>
+		<mn>diverge</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7a32</uc>
+		<gr>8</gr>
+		<sc>14</sc>
+		<freq>1038</freq>
+		<rd r_type="pinyin">dao4</rd>
+		<rd r_type="ja_on">トウ</rd>
+		<rd r_type="ja_on">テ</rd>
+		<rd r_type="ja_kun">いね</rd>
+		<rd r_type="ja_kun">いな-</rd>
+		<mn>rice plant</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8328</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>1203</freq>
+		<rd r_type="pinyin">ci2</rd>
+		<rd r_type="ja_on">シ</rd>
+		<rd r_type="ja_on">ジ</rd>
+		<rd r_type="ja_kun">いばら</rd>
+		<rd r_type="ja_kun">かや</rd>
+		<rd r_type="ja_kun">くさぶき</rd>
+		<mn>briar</mn>
+		<mn>thorn</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">828b</uc>
+		<gr>8</gr>
+		<sc>6</sc>
+		<freq>2418</freq>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<rd r_type="ja_kun">いも</rd>
+		<mn>potato</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9c2f</uc>
+		<gr>9</gr>
+		<sc>21</sc>
+		<rd r_type="pinyin">ruo4</rd>
+		<rd r_type="ja_kun">いわし</rd>
+		<mn>sardine</mn>
+		<mn>(kokuji)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5141</uc>
+		<gr>9</gr>
+		<sc>4</sc>
+		<freq>2358</freq>
+		<rd r_type="pinyin">yun3</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">じょう</rd>
+		<rd r_type="ja_kun">まこと.に</rd>
+		<rd r_type="ja_kun">ゆるす</rd>
+		<mn>license</mn>
+		<mn>sincerity</mn>
+		<mn>permit</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5370</uc>
+		<gr>4</gr>
+		<sc>6</sc>
+		<freq>682</freq>
+		<rd r_type="pinyin">yin4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">しるし</rd>
+		<rd r_type="ja_kun">-じるし</rd>
+		<rd r_type="ja_kun">しる.す</rd>
+		<mn>stamp</mn>
+		<mn>seal</mn>
+		<mn>mark</mn>
+		<mn>imprint</mn>
+		<mn>symbol</mn>
+		<mn>emblem</mn>
+		<mn>trademark</mn>
+		<mn>evidence</mn>
+		<mn>souvenir</mn>
+		<mn>India</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">54bd</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<rd r_type="pinyin">yan1</rd>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="pinyin">ye4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">エツ</rd>
+		<rd r_type="ja_kun">むせ.ぶ</rd>
+		<rd r_type="ja_kun">むせ.る</rd>
+		<rd r_type="ja_kun">のど</rd>
+		<rd r_type="ja_kun">の.む</rd>
+		<mn>choked</mn>
+		<mn>smothered</mn>
+		<mn>stuffy</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">54e1</uc>
+		<gr>3</gr>
+		<sc>10</sc>
+		<freq>54</freq>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="pinyin">yun2</rd>
+		<rd r_type="pinyin">yun4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<mn>employee</mn>
+		<mn>member</mn>
+		<mn>number</mn>
+		<mn>the one in charge</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">56e0</uc>
+		<gr>5</gr>
+		<sc>6</sc>
+		<freq>636</freq>
+		<rd r_type="pinyin">yin1</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">よ.る</rd>
+		<rd r_type="ja_kun">ちな.む</rd>
+		<mn>cause</mn>
+		<mn>factor</mn>
+		<mn>be associated with</mn>
+		<mn>depend on</mn>
+		<mn>be limited to</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">59fb</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>1985</freq>
+		<rd r_type="pinyin">yin1</rd>
+		<rd r_type="ja_on">イン</rd>
+		<mn>matrimony</mn>
+		<mn>marry</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5f15</uc>
+		<gr>2</gr>
+		<sc>4</sc>
+		<freq>218</freq>
+		<rd r_type="pinyin">yin3</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">ひ.く</rd>
+		<rd r_type="ja_kun">ひ.き</rd>
+		<rd r_type="ja_kun">ひ.き-</rd>
+		<rd r_type="ja_kun">-び.き</rd>
+		<rd r_type="ja_kun">ひ.ける</rd>
+		<mn>pull</mn>
+		<mn>tug</mn>
+		<mn>jerk</mn>
+		<mn>admit</mn>
+		<mn>install</mn>
+		<mn>quote</mn>
+		<mn>refer to</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">98f2</uc>
+		<gr>3</gr>
+		<sc>12</sc>
+		<freq>969</freq>
+		<rd r_type="pinyin">yin3</rd>
+		<rd r_type="pinyin">yin4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">の.む</rd>
+		<rd r_type="ja_kun">-の.み</rd>
+		<mn>drink</mn>
+		<mn>smoke</mn>
+		<mn>take</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6deb</uc>
+		<gr>8</gr>
+		<sc>11</sc>
+		<rd r_type="pinyin">yin2</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">ひた.す</rd>
+		<rd r_type="ja_kun">ほしいまま</rd>
+		<rd r_type="ja_kun">みだ.ら</rd>
+		<rd r_type="ja_kun">みだ.れる</rd>
+		<rd r_type="ja_kun">みだり</rd>
+		<mn>lewdness</mn>
+		<mn>licentiousness</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">80e4</uc>
+		<gr>9</gr>
+		<sc>9</sc>
+		<rd r_type="pinyin">yin4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">たね</rd>
+		<mn>descendent</mn>
+		<mn>issue</mn>
+		<mn>offspring</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">852d</uc>
+		<gr>9</gr>
+		<sc>14</sc>
+		<sc>15</sc>
+		<sc>13</sc>
+		<freq>2166</freq>
+		<rd r_type="pinyin">yin4</rd>
+		<rd r_type="pinyin">yin1</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">かげ</rd>
+		<mn>shade</mn>
+		<mn>shadow</mn>
+		<mn>backing assistance</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9662</uc>
+		<gr>3</gr>
+		<sc>10</sc>
+		<freq>150</freq>
+		<rd r_type="pinyin">yuan4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<mn>Inst.</mn>
+		<mn>institution</mn>
+		<mn>temple</mn>
+		<mn>mansion</mn>
+		<mn>school</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9670</uc>
+		<gr>8</gr>
+		<sc>11</sc>
+		<freq>1393</freq>
+		<rd r_type="pinyin">yin1</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_kun">かげ</rd>
+		<rd r_type="ja_kun">かげ.る</rd>
+		<mn>shade</mn>
+		<mn>yin</mn>
+		<mn>negative</mn>
+		<mn>sex organs</mn>
+		<mn>secret</mn>
+		<mn>shadow</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">96a0</uc>
+		<gr>8</gr>
+		<sc>14</sc>
+		<freq>1089</freq>
+		<rd r_type="pinyin">yin3</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">かく.す</rd>
+		<rd r_type="ja_kun">かく.し</rd>
+		<rd r_type="ja_kun">かく.れる</rd>
+		<rd r_type="ja_kun">かか.す</rd>
+		<rd r_type="ja_kun">よ.る</rd>
+		<mn>conceal</mn>
+		<mn>hide</mn>
+		<mn>cover</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">97fb</uc>
+		<gr>8</gr>
+		<sc>19</sc>
+		<freq>2148</freq>
+		<rd r_type="pinyin">yun4</rd>
+		<rd r_type="ja_on">イン</rd>
+		<mn>rhyme</mn>
+		<mn>elegance</mn>
+		<mn>tone</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">540b</uc>
+		<sc>6</sc>
+		<rd r_type="pinyin">cun4</rd>
+		<rd r_type="ja_on">トウ</rd>
+		<rd r_type="ja_on">ドウ</rd>
+		<rd r_type="ja_on">スン</rd>
+		<rd r_type="ja_kun">インチ</rd>
+		<mn>inch</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">53f3</uc>
+		<gr>1</gr>
+		<sc>5</sc>
+		<freq>602</freq>
+		<rd r_type="pinyin">you4</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<rd r_type="ja_on">ユウ</rd>
+		<rd r_type="ja_kun">みぎ</rd>
+		<mn>right</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5b87</uc>
+		<gr>6</gr>
+		<sc>6</sc>
+		<freq>883</freq>
+		<rd r_type="pinyin">yu3</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<mn>eaves</mn>
+		<mn>roof</mn>
+		<mn>house</mn>
+		<mn>heaven</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">70cf</uc>
+		<gr>9</gr>
+		<sc>10</sc>
+		<freq>2042</freq>
+		<rd r_type="pinyin">wu1</rd>
+		<rd r_type="pinyin">wu4</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<rd r_type="ja_on">オ</rd>
+		<rd r_type="ja_kun">からす</rd>
+		<rd r_type="ja_kun">いずくんぞ</rd>
+		<rd r_type="ja_kun">なんぞ</rd>
+		<mn>crow</mn>
+		<mn>raven</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7fbd</uc>
+		<gr>2</gr>
+		<sc>6</sc>
+		<freq>748</freq>
+		<rd r_type="pinyin">yu3</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<rd r_type="ja_kun">は</rd>
+		<rd r_type="ja_kun">わ</rd>
+		<rd r_type="ja_kun">はね</rd>
+		<mn>feathers</mn>
+		<mn>counter for birds, rabbits</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8fc2</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<sc>5</sc>
+		<rd r_type="pinyin">yu1</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<mn>roundabout way</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">96e8</uc>
+		<gr>1</gr>
+		<sc>8</sc>
+		<freq>950</freq>
+		<rd r_type="pinyin">yu3</rd>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">ウ</rd>
+		<rd r_type="ja_kun">あめ</rd>
+		<rd r_type="ja_kun">あま-</rd>
+		<rd r_type="ja_kun">-さめ</rd>
+		<mn>rain</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">536f</uc>
+		<gr>9</gr>
+		<sc>5</sc>
+		<freq>2400</freq>
+		<rd r_type="pinyin">mao3</rd>
+		<rd r_type="ja_on">ボウ</rd>
+		<rd r_type="ja_on">モウ</rd>
+		<rd r_type="ja_kun">う</rd>
+		<mn>sign of the hare or rabbit</mn>
+		<mn>5-7AM</mn>
+		<mn>fourth sign of Chinese zodiac</mn>
+		<mn>east</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9d5c</uc>
+		<gr>9</gr>
+		<sc>18</sc>
+		<freq>2118</freq>
+		<rd r_type="pinyin">ti2</rd>
+		<rd r_type="pinyin">ti4</rd>
+		<rd r_type="ja_on">テイ</rd>
+		<rd r_type="ja_on">ダイ</rd>
+		<rd r_type="ja_kun">う</rd>
+		<mn>cormorant</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7aba</uc>
+		<gr>9</gr>
+		<sc>16</sc>
+		<rd r_type="pinyin">kui1</rd>
+		<rd r_type="ja_on">キ</rd>
+		<rd r_type="ja_kun">うかが.う</rd>
+		<rd r_type="ja_kun">のぞく</rd>
+		<mn>lie in wait</mn>
+		<mn>spy on</mn>
+		<mn>reconnoiter</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4e11</uc>
+		<gr>9</gr>
+		<sc>4</sc>
+		<freq>2305</freq>
+		<rd r_type="pinyin">chou3</rd>
+		<rd r_type="ja_on">チュウ</rd>
+		<rd r_type="ja_kun">うし</rd>
+		<mn>sign of the ox or cow</mn>
+		<mn>1-3AM</mn>
+		<mn>second sign of Chinese zodiac</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7893</uc>
+		<gr>9</gr>
+		<sc>13</sc>
+		<freq>2364</freq>
+		<rd r_type="pinyin">dui4</rd>
+		<rd r_type="ja_on">カク</rd>
+		<rd r_type="ja_on">タイ</rd>
+		<rd r_type="ja_kun">たし.か</rd>
+		<rd r_type="ja_kun">かく.たる</rd>
+		<mn>pestle</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">81fc</uc>
+		<gr>8</gr>
+		<sc>6</sc>
+		<freq>2048</freq>
+		<rd r_type="pinyin">jiu4</rd>
+		<rd r_type="ja_on">キュウ</rd>
+		<rd r_type="ja_on">グ</rd>
+		<rd r_type="ja_kun">うす</rd>
+		<rd r_type="ja_kun">うすづ.く</rd>
+		<mn>mortar</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6e26</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>1789</freq>
+		<rd r_type="pinyin">wo1</rd>
+		<rd r_type="pinyin">guo1</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_kun">うず</rd>
+		<mn>whirlpool</mn>
+		<mn>eddy</mn>
+		<mn>vortex</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5618</uc>
+		<sc>14</sc>
+		<freq>2235</freq>
+		<rd r_type="pinyin">xu1</rd>
+		<rd r_type="pinyin">shi1</rd>
+		<rd r_type="ja_on">キョ</rd>
+		<rd r_type="ja_on">コ</rd>
+		<rd r_type="ja_kun">うそ</rd>
+		<rd r_type="ja_kun">ふ.く</rd>
+		<mn>lie</mn>
+		<mn>falsehood</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5504</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>2051</freq>
+		<rd r_type="pinyin">bai4</rd>
+		<rd r_type="pinyin">bei5</rd>
+		<rd r_type="ja_on">バイ</rd>
+		<rd r_type="ja_kun">うた</rd>
+		<rd r_type="ja_kun">うた.う</rd>
+		<mn>songs with samisen</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6b1d</uc>
+		<sc>26</sc>
+		<sc>25</sc>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="ja_on">ウツ</rd>
+		<rd r_type="ja_on">ウン</rd>
+		<rd r_type="ja_kun">うっ.する</rd>
+		<rd r_type="ja_kun">ふさ.ぐ</rd>
+		<rd r_type="ja_kun">しげ.る</rd>
+		<mn>gloom</mn>
+		<mn>depression</mn>
+		<mn>melancholy</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">851a</uc>
+		<sc>14</sc>
+		<rd r_type="pinyin">yu4</rd>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">ウツ</rd>
+		<rd r_type="ja_on">イ</rd>
+		<rd r_type="ja_kun">うち</rd>
+		<rd r_type="ja_kun">おとこよもぎ</rd>
+		<mn>dense growth</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9c3b</uc>
+		<sc>22</sc>
+		<rd r_type="pinyin">man2</rd>
+		<rd r_type="ja_on">マン</rd>
+		<rd r_type="ja_on">バン</rd>
+		<rd r_type="ja_kun">うなぎ</rd>
+		<mn>eel</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">59e5</uc>
+		<gr>9</gr>
+		<sc>9</sc>
+		<rd r_type="pinyin">mu3</rd>
+		<rd r_type="pinyin">lao3</rd>
+		<rd r_type="ja_on">ボ</rd>
+		<rd r_type="ja_on">モ</rd>
+		<rd r_type="ja_kun">うば</rd>
+		<mn>old woman</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">53a9</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<sc>14</sc>
+		<sc>13</sc>
+		<rd r_type="pinyin">jiu4</rd>
+		<rd r_type="ja_on">キュウ</rd>
+		<rd r_type="ja_kun">うまや</rd>
+		<mn>barn</mn>
+		<mn>stable</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6d66</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>977</freq>
+		<rd r_type="pinyin">pu3</rd>
+		<rd r_type="ja_on">ホ</rd>
+		<rd r_type="ja_kun">うら</rd>
+		<mn>bay</mn>
+		<mn>creek</mn>
+		<mn>inlet</mn>
+		<mn>gulf</mn>
+		<mn>beach</mn>
+		<mn>seacoast</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">74dc</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<sc>5</sc>
+		<freq>2459</freq>
+		<rd r_type="pinyin">gua1</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">ケ</rd>
+		<rd r_type="ja_kun">うり</rd>
+		<mn>melon</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">958f</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<rd r_type="pinyin">run4</rd>
+		<rd r_type="ja_on">ジュン</rd>
+		<rd r_type="ja_kun">うるう</rd>
+		<mn>intercalation</mn>
+		<mn>illegitimate throne</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5642</uc>
+		<gr>9</gr>
+		<sc>15</sc>
+		<freq>2298</freq>
+		<rd r_type="pinyin">zun3</rd>
+		<rd r_type="ja_on">ソン</rd>
+		<rd r_type="ja_kun">うわさ</rd>
+		<mn>rumor</mn>
+		<mn>gossip</mn>
+		<mn>hearsay</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4e91</uc>
+		<gr>9</gr>
+		<sc>4</sc>
+		<rd r_type="pinyin">yun2</rd>
+		<rd r_type="ja_on">ウン</rd>
+		<rd r_type="ja_kun">い.う</rd>
+		<rd r_type="ja_kun">ここに</rd>
+		<mn>say</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">904b</uc>
+		<gr>3</gr>
+		<sc>12</sc>
+		<sc>11</sc>
+		<freq>255</freq>
+		<rd r_type="pinyin">yun4</rd>
+		<rd r_type="ja_on">ウン</rd>
+		<rd r_type="ja_kun">はこ.ぶ</rd>
+		<mn>carry</mn>
+		<mn>luck</mn>
+		<mn>destiny</mn>
+		<mn>fate</mn>
+		<mn>lot</mn>
+		<mn>transport</mn>
+		<mn>progress</mn>
+		<mn>advance</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">96f2</uc>
+		<gr>2</gr>
+		<sc>12</sc>
+		<freq>1256</freq>
+		<rd r_type="pinyin">yun2</rd>
+		<rd r_type="ja_on">ウン</rd>
+		<rd r_type="ja_kun">くも</rd>
+		<rd r_type="ja_kun">-ぐも</rd>
+		<mn>cloud</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">834f</uc>
+		<sc>9</sc>
+		<freq>2096</freq>
+		<rd r_type="pinyin">ren3</rd>
+		<rd r_type="ja_on">ジン</rd>
+		<rd r_type="ja_on">ニン</rd>
+		<mn>bean</mn>
+		<mn>perilla</mn>
+		<mn>herb</mn>
+		<mn>soft</mn>
+		<mn>pliable</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">990c</uc>
+		<gr>8</gr>
+		<sc>14</sc>
+		<freq>2277</freq>
+		<rd r_type="pinyin">er3</rd>
+		<rd r_type="ja_on">ジ</rd>
+		<rd r_type="ja_on">ニ</rd>
+		<rd r_type="ja_kun">え</rd>
+		<rd r_type="ja_kun">えば</rd>
+		<rd r_type="ja_kun">えさ</rd>
+		<rd r_type="ja_kun">もち</rd>
+		<mn>food</mn>
+		<mn>bait</mn>
+		<mn>prey</mn>
+		<mn>tempting profit</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">53e1</uc>
+		<gr>9</gr>
+		<sc>16</sc>
+		<rd r_type="pinyin">rui4</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">あき.らか</rd>
+		<mn>intelligence</mn>
+		<mn>imperial</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">55b6</uc>
+		<gr>5</gr>
+		<sc>12</sc>
+		<freq>303</freq>
+		<rd r_type="pinyin">ying2</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">いとな.む</rd>
+		<rd r_type="ja_kun">いとな.み</rd>
+		<mn>occupation</mn>
+		<mn>camp</mn>
+		<mn>perform</mn>
+		<mn>build</mn>
+		<mn>conduct (business)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5b30</uc>
+		<sc>17</sc>
+		<rd r_type="pinyin">ying1</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">ふ.れる</rd>
+		<rd r_type="ja_kun">みどりご</rd>
+		<rd r_type="ja_kun">あかご</rd>
+		<mn>sharp (music)</mn>
+		<mn>baby</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5f71</uc>
+		<gr>8</gr>
+		<sc>15</sc>
+		<freq>464</freq>
+		<rd r_type="pinyin">ying3</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">かげ</rd>
+		<mn>shadow</mn>
+		<mn>silhouette</mn>
+		<mn>phantom</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6620</uc>
+		<gr>6</gr>
+		<sc>9</sc>
+		<freq>404</freq>
+		<rd r_type="pinyin">ying4</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">うつ.る</rd>
+		<rd r_type="ja_kun">うつ.す</rd>
+		<rd r_type="ja_kun">は.える</rd>
+		<rd r_type="ja_kun">-ば.え</rd>
+		<mn>reflect</mn>
+		<mn>reflection</mn>
+		<mn>projection</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">66f3</uc>
+		<gr>9</gr>
+		<sc>6</sc>
+		<sc>7</sc>
+		<rd r_type="pinyin">zhuai4</rd>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">ひ.く</rd>
+		<mn>pull</mn>
+		<mn>tug</mn>
+		<mn>jerk</mn>
+		<mn>admit</mn>
+		<mn>install</mn>
+		<mn>quote</mn>
+		<mn>refer to</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6804</uc>
+		<gr>4</gr>
+		<sc>9</sc>
+		<freq>920</freq>
+		<rd r_type="pinyin">rong2</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_on">ヨウ</rd>
+		<rd r_type="ja_kun">さか.える</rd>
+		<rd r_type="ja_kun">は.え</rd>
+		<rd r_type="ja_kun">-ば.え</rd>
+		<rd r_type="ja_kun">は.える</rd>
+		<rd r_type="ja_kun">え</rd>
+		<mn>flourish</mn>
+		<mn>prosperity</mn>
+		<mn>honor</mn>
+		<mn>glory</mn>
+		<mn>splendor</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6c38</uc>
+		<gr>5</gr>
+		<sc>5</sc>
+		<freq>846</freq>
+		<rd r_type="pinyin">yong3</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">なが.い</rd>
+		<mn>eternity</mn>
+		<mn>long</mn>
+		<mn>lengthy</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6cf3</uc>
+		<gr>3</gr>
+		<sc>8</sc>
+		<freq>1223</freq>
+		<rd r_type="pinyin">yong3</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">およ.ぐ</rd>
+		<mn>swim</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6d29</uc>
+		<sc>9</sc>
+		<rd r_type="pinyin">xie4</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_on">セツ</rd>
+		<rd r_type="ja_kun">も.らす</rd>
+		<rd r_type="ja_kun">の.びる</rd>
+		<rd r_type="ja_kun">も.れる</rd>
+		<mn>leak</mn>
+		<mn>escape</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">745b</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<freq>2393</freq>
+		<rd r_type="pinyin">ying1</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<mn>sparkle of jewelry</mn>
+		<mn>crystal</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">76c8</uc>
+		<sc>9</sc>
+		<rd r_type="pinyin">ying2</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">み.たす</rd>
+		<rd r_type="ja_kun">み.ちる</rd>
+		<mn>fullness</mn>
+		<mn>enough</mn>
+		<mn>pride</mn>
+		<mn>satisfy</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7a4e</uc>
+		<sc>16</sc>
+		<rd r_type="pinyin">ying3</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">ほさき</rd>
+		<rd r_type="ja_kun">のぎ</rd>
+		<mn>heads of grain</mn>
+		<mn>cleverness</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9834</uc>
+		<sc>16</sc>
+		<rd r_type="pinyin">ying3</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">ほさき</rd>
+		<rd r_type="ja_kun">のぎ</rd>
+		<mn>heads of grain</mn>
+		<mn>cleverness</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">82f1</uc>
+		<gr>4</gr>
+		<sc>8</sc>
+		<freq>430</freq>
+		<rd r_type="pinyin">ying1</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">はなぶさ</rd>
+		<mn>England</mn>
+		<mn>English</mn>
+		<mn>hero</mn>
+		<mn>outstanding</mn>
+		<mn>calyx</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">885b</uc>
+		<gr>5</gr>
+		<sc>16</sc>
+		<freq>400</freq>
+		<rd r_type="pinyin">wei4</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_on">エ</rd>
+		<mn>defense</mn>
+		<mn>protection</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8a60</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>2000</freq>
+		<rd r_type="pinyin">yong3</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">よ.む</rd>
+		<rd r_type="ja_kun">うた.う</rd>
+		<mn>recitation</mn>
+		<mn>poem</mn>
+		<mn>song</mn>
+		<mn>composing</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">92ed</uc>
+		<gr>8</gr>
+		<sc>15</sc>
+		<freq>1395</freq>
+		<rd r_type="pinyin">rui4</rd>
+		<rd r_type="ja_on">エイ</rd>
+		<rd r_type="ja_kun">するど.い</rd>
+		<mn>pointed</mn>
+		<mn>sharpness</mn>
+		<mn>edge</mn>
+		<mn>weapon</mn>
+		<mn>sharp</mn>
+		<mn>violent</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6db2</uc>
+		<gr>5</gr>
+		<sc>11</sc>
+		<freq>1210</freq>
+		<rd r_type="pinyin">ye4</rd>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">エキ</rd>
+		<mn>fluid</mn>
+		<mn>liquid</mn>
+		<mn>juice</mn>
+		<mn>sap</mn>
+		<mn>secretion</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">75ab</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>1661</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">エキ</rd>
+		<rd r_type="ja_on">ヤク</rd>
+		<mn>epidemic</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">76ca</uc>
+		<gr>5</gr>
+		<sc>10</sc>
+		<freq>674</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">エキ</rd>
+		<rd r_type="ja_on">ヤク</rd>
+		<rd r_type="ja_kun">ま.す</rd>
+		<mn>benefit</mn>
+		<mn>gain</mn>
+		<mn>profit</mn>
+		<mn>advantage</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">99c5</uc>
+		<gr>3</gr>
+		<sc>14</sc>
+		<freq>724</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">エキ</rd>
+		<mn>station</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">60a6</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>1762</freq>
+		<rd r_type="pinyin">yue4</rd>
+		<rd r_type="ja_on">エツ</rd>
+		<rd r_type="ja_kun">よろこ.ぶ</rd>
+		<rd r_type="ja_kun">よろこ.ばす</rd>
+		<mn>ecstasy</mn>
+		<mn>joy</mn>
+		<mn>rapture</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8b01</uc>
+		<gr>8</gr>
+		<sc>15</sc>
+		<rd r_type="pinyin">ye4</rd>
+		<rd r_type="ja_on">エツ</rd>
+		<mn>audience</mn>
+		<mn>audience (with king)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8d8a</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>897</freq>
+		<rd r_type="pinyin">yue4</rd>
+		<rd r_type="ja_on">エツ</rd>
+		<rd r_type="ja_on">オツ</rd>
+		<rd r_type="ja_kun">こ.す</rd>
+		<rd r_type="ja_kun">-こ.す</rd>
+		<rd r_type="ja_kun">-ご.し</rd>
+		<rd r_type="ja_kun">こ.える</rd>
+		<rd r_type="ja_kun">-ご.え</rd>
+		<mn>surpass</mn>
+		<mn>cross over</mn>
+		<mn>move to</mn>
+		<mn>exceed</mn>
+		<mn>Vietnam</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">95b2</uc>
+		<gr>8</gr>
+		<sc>15</sc>
+		<freq>1855</freq>
+		<rd r_type="pinyin">yue4</rd>
+		<rd r_type="ja_on">エツ</rd>
+		<rd r_type="ja_kun">けみ.する</rd>
+		<mn>review</mn>
+		<mn>inspection</mn>
+		<mn>revision</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">698e</uc>
+		<gr>9</gr>
+		<sc>14</sc>
+		<freq>1945</freq>
+		<rd r_type="pinyin">jia3</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_kun">えのき</rd>
+		<mn>lotus tree</mn>
+		<mn>nettle tree</mn>
+		<mn>hackberry</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">53ad</uc>
+		<sc>14</sc>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="pinyin">yan1</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_on">アン</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_on">ユウ</rd>
+		<rd r_type="ja_on">ヨウ</rd>
+		<rd r_type="ja_kun">いや</rd>
+		<rd r_type="ja_kun">あ.きる</rd>
+		<rd r_type="ja_kun">いと.う</rd>
+		<rd r_type="ja_kun">おさ.える</rd>
+		<mn>get tired of</mn>
+		<mn>satiate</mn>
+		<mn>bore</mn>
+		<mn>dislike</mn>
+		<mn>disagreeable</mn>
+		<mn>unwelcome</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5186</uc>
+		<gr>1</gr>
+		<sc>4</sc>
+		<freq>69</freq>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">まる.い</rd>
+		<rd r_type="ja_kun">まる</rd>
+		<rd r_type="ja_kun">まど</rd>
+		<rd r_type="ja_kun">まど.か</rd>
+		<rd r_type="ja_kun">まろ.やか</rd>
+		<mn>circle</mn>
+		<mn>yen</mn>
+		<mn>round</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5712</uc>
+		<gr>2</gr>
+		<sc>13</sc>
+		<freq>628</freq>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">その</rd>
+		<mn>park</mn>
+		<mn>garden</mn>
+		<mn>yard</mn>
+		<mn>farm</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5830</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<freq>1913</freq>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">せき</rd>
+		<rd r_type="ja_kun">せ.く</rd>
+		<mn>dam</mn>
+		<mn>prevent</mn>
+		<mn>stop up</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5944</uc>
+		<gr>9</gr>
+		<sc>8</sc>
+		<freq>2047</freq>
+		<rd r_type="pinyin">yan3</rd>
+		<rd r_type="pinyin">yan1</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">おお.う</rd>
+		<rd r_type="ja_kun">たちまち</rd>
+		<mn>cover</mn>
+		<mn>suffocate</mn>
+		<mn>obstruct</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5bb4</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>1675</freq>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">うたげ</rd>
+		<mn>banquet</mn>
+		<mn>feast</mn>
+		<mn>party</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5ef6</uc>
+		<gr>6</gr>
+		<sc>8</sc>
+		<sc>7</sc>
+		<freq>747</freq>
+		<rd r_type="pinyin">yan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">の.びる</rd>
+		<rd r_type="ja_kun">の.べる</rd>
+		<rd r_type="ja_kun">の.べ</rd>
+		<rd r_type="ja_kun">の.ばす</rd>
+		<mn>prolong</mn>
+		<mn>stretching</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6028</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>2137</freq>
+		<rd r_type="pinyin">yuan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_on">ウン</rd>
+		<rd r_type="ja_kun">うら.む</rd>
+		<rd r_type="ja_kun">うらみ</rd>
+		<rd r_type="ja_kun">うら.めしい</rd>
+		<mn>grudge</mn>
+		<mn>show resentment</mn>
+		<mn>be jealous</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">63a9</uc>
+		<sc>11</sc>
+		<rd r_type="pinyin">yan3</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">おお.う</rd>
+		<mn>cover</mn>
+		<mn>conceal</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">63f4</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>312</freq>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<mn>abet</mn>
+		<mn>help</mn>
+		<mn>save</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6cbf</uc>
+		<gr>6</gr>
+		<sc>8</sc>
+		<freq>1121</freq>
+		<rd r_type="pinyin">yan2</rd>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">そ.う</rd>
+		<rd r_type="ja_kun">-ぞ.い</rd>
+		<mn>run alongside</mn>
+		<mn>follow along</mn>
+		<mn>run along</mn>
+		<mn>lie along</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6f14</uc>
+		<gr>5</gr>
+		<sc>14</sc>
+		<freq>267</freq>
+		<rd r_type="pinyin">yan3</rd>
+		<rd r_type="ja_on">エン</rd>
+		<mn>performance</mn>
+		<mn>act</mn>
+		<mn>play</mn>
+		<mn>render</mn>
+		<mn>stage</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">708e</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>1242</freq>
+		<rd r_type="pinyin">yan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">ほのお</rd>
+		<mn>inflammation</mn>
+		<mn>flame</mn>
+		<mn>blaze</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7114</uc>
+		<sc>11</sc>
+		<sc>12</sc>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">ほのお</rd>
+		<mn>flame</mn>
+		<mn>blaze</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7159</uc>
+		<gr>8</gr>
+		<sc>13</sc>
+		<freq>1290</freq>
+		<rd r_type="pinyin">yan1</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">けむ.る</rd>
+		<rd r_type="ja_kun">けむり</rd>
+		<rd r_type="ja_kun">けむ.い</rd>
+		<mn>smoke</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">71d5</uc>
+		<gr>9</gr>
+		<sc>16</sc>
+		<freq>2147</freq>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="pinyin">yan1</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">つばめ</rd>
+		<rd r_type="ja_kun">つばくら</rd>
+		<rd r_type="ja_kun">つばくろ</rd>
+		<mn>swallow (bird)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">733f</uc>
+		<gr>8</gr>
+		<sc>13</sc>
+		<freq>1772</freq>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">さる</rd>
+		<mn>monkey</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7e01</uc>
+		<gr>8</gr>
+		<sc>15</sc>
+		<freq>1291</freq>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">-ネン</rd>
+		<rd r_type="ja_kun">ふち</rd>
+		<rd r_type="ja_kun">ふちど.る</rd>
+		<rd r_type="ja_kun">ゆかり</rd>
+		<rd r_type="ja_kun">よすが</rd>
+		<rd r_type="ja_kun">へり</rd>
+		<rd r_type="ja_kun">えにし</rd>
+		<mn>affinity</mn>
+		<mn>relation</mn>
+		<mn>connection</mn>
+		<mn>edge</mn>
+		<mn>border</mn>
+		<mn>verge</mn>
+		<mn>brink</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8276</uc>
+		<gr>8</gr>
+		<sc>19</sc>
+		<freq>2207</freq>
+		<rd r_type="pinyin">yan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">つや</rd>
+		<rd r_type="ja_kun">なま.めかしい</rd>
+		<rd r_type="ja_kun">あで.やか</rd>
+		<rd r_type="ja_kun">つや.めく</rd>
+		<rd r_type="ja_kun">なま.めく</rd>
+		<mn>glossy</mn>
+		<mn>luster</mn>
+		<mn>glaze</mn>
+		<mn>polish</mn>
+		<mn>charm</mn>
+		<mn>colorful</mn>
+		<mn>captivating</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">82d1</uc>
+		<gr>9</gr>
+		<sc>8</sc>
+		<freq>2060</freq>
+		<rd r_type="pinyin">yuan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">その</rd>
+		<rd r_type="ja_kun">う.つ</rd>
+		<mn>garden</mn>
+		<mn>farm</mn>
+		<mn>park</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8597</uc>
+		<gr>10</gr>
+		<sc>16</sc>
+		<rd r_type="pinyin">yuan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<mn>garden</mn>
+		<mn>yard</mn>
+		<mn>farm</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9060</uc>
+		<gr>2</gr>
+		<sc>13</sc>
+		<sc>12</sc>
+		<freq>887</freq>
+		<rd r_type="pinyin">yuan3</rd>
+		<rd r_type="pinyin">yuan4</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">とお.い</rd>
+		<mn>distant</mn>
+		<mn>far</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">925b</uc>
+		<gr>8</gr>
+		<sc>13</sc>
+		<freq>1710</freq>
+		<rd r_type="pinyin">qian1</rd>
+		<rd r_type="pinyin">yan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">なまり</rd>
+		<mn>lead</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9d1b</uc>
+		<sc>16</sc>
+		<rd r_type="pinyin">yuan1</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">おし</rd>
+		<rd r_type="ja_kun">おしどり</rd>
+		<mn>male mandarin duck</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5869</uc>
+		<gr>4</gr>
+		<sc>13</sc>
+		<freq>1148</freq>
+		<rd r_type="pinyin">yan2</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">しお</rd>
+		<mn>salt</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">65bc</uc>
+		<gr>9</gr>
+		<sc>8</sc>
+		<freq>2113</freq>
+		<rd r_type="pinyin">yu2</rd>
+		<rd r_type="pinyin">wu1</rd>
+		<rd r_type="pinyin">yu1</rd>
+		<rd r_type="ja_on">オ</rd>
+		<rd r_type="ja_on">ヨ</rd>
+		<rd r_type="ja_kun">おい.て</rd>
+		<rd r_type="ja_kun">お.ける</rd>
+		<rd r_type="ja_kun">ああ</rd>
+		<rd r_type="ja_kun">より</rd>
+		<mn>at</mn>
+		<mn>in</mn>
+		<mn>on</mn>
+		<mn>as for</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6c5a</uc>
+		<gr>8</gr>
+		<sc>6</sc>
+		<freq>908</freq>
+		<rd r_type="pinyin">wu1</rd>
+		<rd r_type="ja_on">オ</rd>
+		<rd r_type="ja_kun">けが.す</rd>
+		<rd r_type="ja_kun">けが.れる</rd>
+		<rd r_type="ja_kun">けが.らわしい</rd>
+		<rd r_type="ja_kun">よご.す</rd>
+		<rd r_type="ja_kun">よご.れる</rd>
+		<rd r_type="ja_kun">きたな.い</rd>
+		<mn>dirty</mn>
+		<mn>pollute</mn>
+		<mn>disgrace</mn>
+		<mn>rape</mn>
+		<mn>defile</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7525</uc>
+		<gr>9</gr>
+		<sc>12</sc>
+		<sc>13</sc>
+		<rd r_type="pinyin">sheng1</rd>
+		<rd r_type="ja_on">セイ</rd>
+		<rd r_type="ja_on">ソウ</rd>
+		<rd r_type="ja_on">ショウ</rd>
+		<rd r_type="ja_kun">おい</rd>
+		<rd r_type="ja_kun">むこ</rd>
+		<mn>nephew</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">51f9</uc>
+		<gr>8</gr>
+		<sc>5</sc>
+		<freq>2206</freq>
+		<rd r_type="pinyin">ao1</rd>
+		<rd r_type="pinyin">wa1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">くぼ.む</rd>
+		<rd r_type="ja_kun">へこ.む</rd>
+		<rd r_type="ja_kun">ぼこ</rd>
+		<mn>concave</mn>
+		<mn>hollow</mn>
+		<mn>sunken</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">592e</uc>
+		<gr>3</gr>
+		<sc>5</sc>
+		<freq>582</freq>
+		<rd r_type="pinyin">yang1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<mn>center</mn>
+		<mn>middle</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5965</uc>
+		<gr>8</gr>
+		<sc>12</sc>
+		<freq>1018</freq>
+		<rd r_type="pinyin">ao4</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">おく</rd>
+		<rd r_type="ja_kun">おく.まる</rd>
+		<rd r_type="ja_kun">くま</rd>
+		<mn>heart</mn>
+		<mn>interior</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5f80</uc>
+		<gr>5</gr>
+		<sc>8</sc>
+		<freq>1421</freq>
+		<rd r_type="pinyin">wang3</rd>
+		<rd r_type="pinyin">wang4</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">い.く</rd>
+		<rd r_type="ja_kun">いにしえ</rd>
+		<rd r_type="ja_kun">さき.に</rd>
+		<rd r_type="ja_kun">ゆ.く</rd>
+		<mn>journey</mn>
+		<mn>travel</mn>
+		<mn>chase away</mn>
+		<mn>let go</mn>
+		<mn>going</mn>
+		<mn>before</mn>
+		<mn>formerly</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5fdc</uc>
+		<gr>5</gr>
+		<sc>7</sc>
+		<freq>266</freq>
+		<rd r_type="pinyin">ying1</rd>
+		<rd r_type="pinyin">ying4</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_on">ヨウ</rd>
+		<rd r_type="ja_on">-ノウ</rd>
+		<rd r_type="ja_kun">あた.る</rd>
+		<rd r_type="ja_kun">まさに</rd>
+		<rd r_type="ja_kun">こた.える</rd>
+		<mn>apply</mn>
+		<mn>answer</mn>
+		<mn>yes</mn>
+		<mn>OK</mn>
+		<mn>reply</mn>
+		<mn>accept</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">62bc</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>789</freq>
+		<rd r_type="pinyin">ya1</rd>
+		<rd r_type="pinyin">ya2</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">お.す</rd>
+		<rd r_type="ja_kun">お.し-</rd>
+		<rd r_type="ja_kun">お.っ-</rd>
+		<rd r_type="ja_kun">お.さえる</rd>
+		<rd r_type="ja_kun">おさ.える</rd>
+		<mn>push</mn>
+		<mn>stop</mn>
+		<mn>check</mn>
+		<mn>subdue</mn>
+		<mn>attach</mn>
+		<mn>seize</mn>
+		<mn>weight</mn>
+		<mn>shove</mn>
+		<mn>press</mn>
+		<mn>seal</mn>
+		<mn>do in spite of</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">65fa</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>2342</freq>
+		<rd r_type="pinyin">wang4</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_on">キョウ</rd>
+		<rd r_type="ja_on">ゴウ</rd>
+		<rd r_type="ja_kun">かがや.き</rd>
+		<rd r_type="ja_kun">うつくし.い</rd>
+		<rd r_type="ja_kun">さかん</rd>
+		<mn>flourishing</mn>
+		<mn>successful</mn>
+		<mn>beautiful</mn>
+		<mn>vigorous</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6a2a</uc>
+		<gr>3</gr>
+		<sc>15</sc>
+		<freq>480</freq>
+		<rd r_type="pinyin">heng2</rd>
+		<rd r_type="pinyin">heng4</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">よこ</rd>
+		<mn>sideways</mn>
+		<mn>side</mn>
+		<mn>horizontal</mn>
+		<mn>width</mn>
+		<mn>woof</mn>
+		<mn>unreasonable</mn>
+		<mn>perverse</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6b27</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>421</freq>
+		<rd r_type="pinyin">ou1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">うた.う</rd>
+		<rd r_type="ja_kun">は.く</rd>
+		<mn>Europe</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6bb4</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>1622</freq>
+		<rd r_type="pinyin">ou1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">なぐ.る</rd>
+		<mn>assault</mn>
+		<mn>hit</mn>
+		<mn>beat</mn>
+		<mn>thrash</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">738b</uc>
+		<gr>1</gr>
+		<sc>4</sc>
+		<freq>684</freq>
+		<rd r_type="pinyin">wang2</rd>
+		<rd r_type="pinyin">wang4</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_on">-ノウ</rd>
+		<mn>king</mn>
+		<mn>rule</mn>
+		<mn>magnate</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7fc1</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>2064</freq>
+		<rd r_type="pinyin">weng1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">おきな</rd>
+		<mn>venerable old man</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">8956</uc>
+		<gr>9</gr>
+		<sc>17</sc>
+		<sc>18</sc>
+		<rd r_type="pinyin">ao3</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">ふすま</rd>
+		<rd r_type="ja_kun">あお</rd>
+		<mn>opaque sliding door</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9d2c</uc>
+		<sc>16</sc>
+		<rd r_type="pinyin">ying1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">うぐいす</rd>
+		<mn>nightingale</mn>
+		<mn>bush warbler</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9d0e</uc>
+		<sc>15</sc>
+		<sc>14</sc>
+		<freq>2187</freq>
+		<rd r_type="pinyin">ou1</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">かもめ</rd>
+		<mn>seagull</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">9ec4</uc>
+		<gr>2</gr>
+		<sc>11</sc>
+		<freq>1240</freq>
+		<rd r_type="pinyin">huang2</rd>
+		<rd r_type="ja_on">コウ</rd>
+		<rd r_type="ja_on">オウ</rd>
+		<rd r_type="ja_kun">き</rd>
+		<rd r_type="ja_kun">こ-</rd>
+		<mn>yellow</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5ca1</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>463</freq>
+		<rd r_type="pinyin">gang1</rd>
+		<rd r_type="ja_on">コウ</rd>
+		<rd r_type="ja_kun">おか</rd>
+		<mn>mount</mn>
+		<mn>hill</mn>
+		<mn>knoll</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6c96</uc>
+		<gr>8</gr>
+		<sc>7</sc>
+		<freq>929</freq>
+		<rd r_type="pinyin">chong1</rd>
+		<rd r_type="ja_on">チュウ</rd>
+		<rd r_type="ja_kun">おき</rd>
+		<rd r_type="ja_kun">おきつ</rd>
+		<rd r_type="ja_kun">ちゅう.する</rd>
+		<rd r_type="ja_kun">わく</rd>
+		<mn>open sea</mn>
+		<mn>offing</mn>
+		<mn>rise high into sky</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">837b</uc>
+		<gr>9</gr>
+		<sc>10</sc>
+		<freq>1630</freq>
+		<rd r_type="pinyin">di2</rd>
+		<rd r_type="ja_on">テキ</rd>
+		<rd r_type="ja_kun">おぎ</rd>
+		<mn>reed</mn>
+		<mn>rush</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5104</uc>
+		<gr>4</gr>
+		<sc>15</sc>
+		<freq>716</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">オク</rd>
+		<mn>hundred million</mn>
+		<mn>10**8</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5c4b</uc>
+		<gr>3</gr>
+		<sc>9</sc>
+		<freq>616</freq>
+		<rd r_type="pinyin">wu1</rd>
+		<rd r_type="ja_on">オク</rd>
+		<rd r_type="ja_kun">や</rd>
+		<mn>roof</mn>
+		<mn>house</mn>
+		<mn>shop</mn>
+		<mn>dealer</mn>
+		<mn>seller</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">61b6</uc>
+		<gr>8</gr>
+		<sc>16</sc>
+		<freq>1324</freq>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">オク</rd>
+		<mn>recollection</mn>
+		<mn>think</mn>
+		<mn>remember</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">81c6</uc>
+		<gr>8</gr>
+		<sc>17</sc>
+		<rd r_type="pinyin">yi4</rd>
+		<rd r_type="ja_on">オク</rd>
+		<rd r_type="ja_on">ヨク</rd>
+		<rd r_type="ja_kun">むね</rd>
+		<rd r_type="ja_kun">おくする</rd>
+		<mn>timidity</mn>
+		<mn>heart</mn>
+		<mn>mind</mn>
+		<mn>fear</mn>
+		<mn>cowardly</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6876</uc>
+		<gr>9</gr>
+		<sc>11</sc>
+		<freq>2210</freq>
+		<rd r_type="pinyin">tong3</rd>
+		<rd r_type="ja_on">ヨウ</rd>
+		<rd r_type="ja_on">トウ</rd>
+		<rd r_type="ja_kun">おけ</rd>
+		<mn>tub</mn>
+		<mn>bucket</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7261</uc>
+		<gr>9</gr>
+		<sc>7</sc>
+		<freq>2155</freq>
+		<rd r_type="pinyin">mu3</rd>
+		<rd r_type="ja_on">ボ</rd>
+		<rd r_type="ja_on">ボウ</rd>
+		<rd r_type="ja_kun">おす</rd>
+		<rd r_type="ja_kun">お-</rd>
+		<rd r_type="ja_kun">おん-</rd>
+		<mn>male</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4e59</uc>
+		<gr>8</gr>
+		<sc>1</sc>
+		<freq>1841</freq>
+		<rd r_type="pinyin">yi3</rd>
+		<rd r_type="ja_on">オツ</rd>
+		<rd r_type="ja_on">イツ</rd>
+		<rd r_type="ja_kun">おと-</rd>
+		<rd r_type="ja_kun">きのと</rd>
+		<mn>the latter</mn>
+		<mn>duplicate</mn>
+		<mn>strange</mn>
+		<mn>witty</mn>
+		<mn>fishhook radical (no. 5)</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4ffa</uc>
+		<gr>8</gr>
+		<sc>10</sc>
+		<freq>1946</freq>
+		<rd r_type="pinyin">an3</rd>
+		<rd r_type="ja_on">エン</rd>
+		<rd r_type="ja_kun">おれ</rd>
+		<rd r_type="ja_kun">われ</rd>
+		<mn>I</mn>
+		<mn>myself</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5378</uc>
+		<gr>8</gr>
+		<sc>9</sc>
+		<freq>1520</freq>
+		<rd r_type="pinyin">xie4</rd>
+		<rd r_type="ja_on">シャ</rd>
+		<rd r_type="ja_kun">おろ.す</rd>
+		<rd r_type="ja_kun">おろし</rd>
+		<rd r_type="ja_kun">おろ.し</rd>
+		<mn>wholesale</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6069</uc>
+		<gr>5</gr>
+		<sc>10</sc>
+		<freq>1418</freq>
+		<rd r_type="pinyin">en1</rd>
+		<rd r_type="ja_on">オン</rd>
+		<mn>grace</mn>
+		<mn>kindness</mn>
+		<mn>goodness</mn>
+		<mn>favor</mn>
+		<mn>mercy</mn>
+		<mn>blessing</mn>
+		<mn>benefit</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">6e29</uc>
+		<gr>3</gr>
+		<sc>12</sc>
+		<freq>838</freq>
+		<rd r_type="pinyin">wen1</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">あたた.か</rd>
+		<rd r_type="ja_kun">あたた.かい</rd>
+		<rd r_type="ja_kun">あたた.まる</rd>
+		<rd r_type="ja_kun">あたた.める</rd>
+		<rd r_type="ja_kun">ぬく</rd>
+		<mn>warm</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">7a4f</uc>
+		<gr>8</gr>
+		<sc>16</sc>
+		<freq>1535</freq>
+		<rd r_type="pinyin">wen3</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_kun">おだ.やか</rd>
+		<mn>calm</mn>
+		<mn>quiet</mn>
+		<mn>moderation</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">97f3</uc>
+		<gr>1</gr>
+		<sc>9</sc>
+		<freq>491</freq>
+		<rd r_type="pinyin">yin1</rd>
+		<rd r_type="ja_on">オン</rd>
+		<rd r_type="ja_on">イン</rd>
+		<rd r_type="ja_on">-ノン</rd>
+		<rd r_type="ja_kun">おと</rd>
+		<rd r_type="ja_kun">ね</rd>
+		<mn>sound</mn>
+		<mn>noise</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4e0b</uc>
+		<gr>1</gr>
+		<sc>3</sc>
+		<freq>97</freq>
+		<rd r_type="pinyin">xia4</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">ゲ</rd>
+		<rd r_type="ja_kun">した</rd>
+		<rd r_type="ja_kun">しも</rd>
+		<rd r_type="ja_kun">もと</rd>
+		<rd r_type="ja_kun">さ.げる</rd>
+		<rd r_type="ja_kun">さ.がる</rd>
+		<rd r_type="ja_kun">くだ.る</rd>
+		<rd r_type="ja_kun">くだ.り</rd>
+		<rd r_type="ja_kun">くだ.す</rd>
+		<rd r_type="ja_kun">-くだ.す</rd>
+		<rd r_type="ja_kun">くだ.さる</rd>
+		<rd r_type="ja_kun">お.ろす</rd>
+		<rd r_type="ja_kun">お.りる</rd>
+		<mn>below</mn>
+		<mn>down</mn>
+		<mn>descend</mn>
+		<mn>give</mn>
+		<mn>low</mn>
+		<mn>inferior</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5316</uc>
+		<gr>3</gr>
+		<sc>4</sc>
+		<freq>89</freq>
+		<rd r_type="pinyin">hua4</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">ケ</rd>
+		<rd r_type="ja_kun">ば.ける</rd>
+		<rd r_type="ja_kun">ば.かす</rd>
+		<rd r_type="ja_kun">ふ.ける</rd>
+		<rd r_type="ja_kun">け.する</rd>
+		<mn>change</mn>
+		<mn>take the form of</mn>
+		<mn>influence</mn>
+		<mn>enchant</mn>
+		<mn>delude</mn>
+		<mn>-ization</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4eee</uc>
+		<gr>5</gr>
+		<sc>6</sc>
+		<freq>1039</freq>
+		<rd r_type="pinyin">jia3</rd>
+		<rd r_type="pinyin">jia4</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">ケ</rd>
+		<rd r_type="ja_kun">かり</rd>
+		<rd r_type="ja_kun">かり-</rd>
+		<mn>sham</mn>
+		<mn>temporary</mn>
+		<mn>interim</mn>
+		<mn>assumed (name)</mn>
+		<mn>informal</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4f55</uc>
+		<gr>2</gr>
+		<sc>7</sc>
+		<freq>340</freq>
+		<rd r_type="pinyin">he2</rd>
+		<rd r_type="pinyin">he4</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_kun">なに</rd>
+		<rd r_type="ja_kun">なん</rd>
+		<rd r_type="ja_kun">なに-</rd>
+		<rd r_type="ja_kun">なん-</rd>
+		<mn>what</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4f3d</uc>
+		<gr>9</gr>
+		<sc>7</sc>
+		<freq>2323</freq>
+		<rd r_type="pinyin">jia1</rd>
+		<rd r_type="pinyin">qie2</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">ガ</rd>
+		<rd r_type="ja_on">キャ</rd>
+		<rd r_type="ja_on">ギャ</rd>
+		<rd r_type="ja_kun">とぎ</rd>
+		<mn>nursing</mn>
+		<mn>attending</mn>
+		<mn>entertainer</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4fa1</uc>
+		<gr>5</gr>
+		<sc>8</sc>
+		<freq>250</freq>
+		<rd r_type="pinyin">jia4</rd>
+		<rd r_type="pinyin">jie4</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">ケ</rd>
+		<rd r_type="ja_kun">あたい</rd>
+		<mn>value</mn>
+		<mn>price</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">4f73</uc>
+		<gr>8</gr>
+		<sc>8</sc>
+		<freq>1643</freq>
+		<rd r_type="pinyin">jia1</rd>
+		<rd r_type="ja_on">カ</rd>
+		<mn>excellent</mn>
+		<mn>beautiful</mn>
+		<mn>good</mn>
+		<mn>pleasing</mn>
+		<mn>skilled</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">52a0</uc>
+		<gr>4</gr>
+		<sc>5</sc>
+		<freq>130</freq>
+		<rd r_type="pinyin">jia1</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_kun">くわ.える</rd>
+		<rd r_type="ja_kun">くわ.わる</rd>
+		<mn>add</mn>
+		<mn>addition</mn>
+		<mn>increase</mn>
+		<mn>join</mn>
+		<mn>include</mn>
+		<mn>Canada</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">53ef</uc>
+		<gr>5</gr>
+		<sc>5</sc>
+		<freq>314</freq>
+		<rd r_type="pinyin">ke3</rd>
+		<rd r_type="pinyin">ke4</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_on">コク</rd>
+		<rd r_type="ja_kun">-べ.き</rd>
+		<rd r_type="ja_kun">-べ.し</rd>
+		<mn>can</mn>
+		<mn>passable</mn>
+		<mn>mustn't</mn>
+		<mn>should not</mn>
+		<mn>do not</mn>
+	</ch>
+	<ch>
+		<uc cp_type="ucs">5609</uc>
+		<gr>9</gr>
+		<sc>14</sc>
+		<freq>1553</freq>
+		<rd r_type="pinyin">jia1</rd>
+		<rd r_type="ja_on">カ</rd>
+		<rd r_type="ja_kun">よみ.する</rd>
+		<rd r_type="ja_kun">よい</rd>
+		<mn>applaud</mn>
+		<mn>praise</mn>
+		<mn>esteem</mn>
+		<mn>happy</mn>
+		<mn>auspicious</mn>
+	</ch>
+</kanjidic2>

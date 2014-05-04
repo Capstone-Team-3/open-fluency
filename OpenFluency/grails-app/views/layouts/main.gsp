@@ -14,6 +14,7 @@
 
 	<!-- JS libraries -->
 	<g:javascript src="jquery.min.js"/>
+	 <g:javascript src="d3.v3.min.js"/>
 	<r:require modules="bootstrap"/>
 	<g:javascript library="application"/>
 
@@ -31,7 +32,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${createLink(uri: '/')}">OpenFluency</a>
+				<a class="navbar-brand" href="${createLink(uri: '/')}"><g:img uri="/images/logo-small.png"/></a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="navbar-collapse-1">

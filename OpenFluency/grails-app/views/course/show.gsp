@@ -66,7 +66,7 @@
 					<div class="container">
 						<div class="row">
 							<g:each in="${courseInstance.chapters}">
-								<div class="col-lg-3">
+								<div class="col-lg-4">
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4>
@@ -74,15 +74,21 @@
 											</h4>
 										</div>
 										<g:if test="${!isOwner}">
-											<div class="panel-body">
-												<p>${it.deck.flashcards.size()} Flashcards</p>
-												<g:render template="/deck/progress" model="[progress: it.progress]"/>
+											<div class="donut-container">
+												<div class="panel-body">
+													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[0]}" id="meaning-progress-${it.id}">
+														<p>Meaning</p>
+													</div>
+
+													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[1]}" id="pronunciation-progress-${it.id}">
+														<p>Pronunciation</p>
+													</div>
+												</div>
 											</div>
 										</g:if>
 										<g:else>
 											<div class="panel-body">
-												<p>${it.deck.flashcards.size()} Flashcards</p>
-
+												<p></p>
 											</div>
 										</g:else>
 										<div class="panel-footer center">
@@ -134,7 +140,7 @@
 													    ${it.finalGrade}
 														</h4>
 														<g:link class="view-more" action="take" controller="quiz" id="${it.id}">
-															View Report 
+															View Report
 															<span class="glyphicon glyphicon-arrow-right"></span>
 														</g:link>
 													</g:if>
@@ -170,5 +176,6 @@
 			</div>
 		</div>
 	</div>
+	<g:javascript>initializeDonuts();</g:javascript>
 </body>
 </html>
