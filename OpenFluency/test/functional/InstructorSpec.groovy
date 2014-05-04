@@ -32,8 +32,8 @@ class InstructorSpec extends GebReportingSpec {
 		then: "Register"
 		at IndexPage
 		flashMessage.text() == "testInstructor, your account is pending approval!"
-		
 	}
+
 	def "Navigate to AuthPage"() {
 		when:
 		to AuthPage
@@ -50,8 +50,8 @@ class InstructorSpec extends GebReportingSpec {
 		then:
 		at DashboardPage
 		$(".dashboard > h1").text() == "instructor's Dashboard"
-		
 	}
+
 	def "Instructor navigates to course creation"() {
 		when:
 		coursesNav.click()
@@ -62,6 +62,7 @@ class InstructorSpec extends GebReportingSpec {
 		then:
 		at CreateCoursePage
 	}
+
 	def "Instructor creates a new Course"() {
 		when:
 		courseTitle = "Test course"
@@ -74,12 +75,14 @@ class InstructorSpec extends GebReportingSpec {
 		courseTitle.text() == "Test course"
 		courseDescription.text() == "This is a test course!"
 	}
+
 	def "Instructor adds chapter to course"() {
 		when:
-		$('.btn btn-info add-chapter').click()
+		$('.add-chapter').click()
 		then:
 		at CreateChapterPage
 	}
+	
 	def "Instructor creates a new Chapter"() {
 		when:
 		chapterTitle = "Test chapter"

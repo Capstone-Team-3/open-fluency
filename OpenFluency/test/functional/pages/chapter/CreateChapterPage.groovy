@@ -7,7 +7,7 @@ class CreateChapterPage extends MainLayoutPage {
 	static url = "chapter/create"
 
 	static at = {
-		$("#main").text() == "New Chapter for Test course"
+		$(".create-chapter").size() > 0
 	}
 
 	static content = {

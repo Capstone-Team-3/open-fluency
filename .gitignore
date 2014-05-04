@@ -5,3 +5,5 @@
 target/
 OpenFluency/grails-app/conf/open-fluency-config.properties
 OpenFluency/grails-app/conf/open-fluency-config.properties
+
+OpenFluency/test/functional/GebConfig.groovy
