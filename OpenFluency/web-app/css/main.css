@@ -430,6 +430,16 @@ h4#custom-image {
     font-weight: bold;
 }
 
+.donut-container {
+    height: 160px;
+}
+
+.progress-donut {
+    height: 100px;
+    padding: 0px 10px !important;
+    font-weight: bold;
+}
+
 /* ---------------------------------------------------------------------------*/
 /* IMAGES
 /* ---------------------------------------------------------------------------*/

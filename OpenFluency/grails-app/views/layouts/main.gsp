@@ -14,6 +14,7 @@
 
 	<!-- JS libraries -->
 	<g:javascript src="jquery.min.js"/>
+	 <g:javascript src="d3.v3.min.js"/>
 	<r:require modules="bootstrap"/>
 	<g:javascript library="application"/>
 
