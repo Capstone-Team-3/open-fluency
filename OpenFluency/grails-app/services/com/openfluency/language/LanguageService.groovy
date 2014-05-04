@@ -110,4 +110,78 @@ class LanguageService {
 	Integer toInt(String stringVal) {
 		return (stringVal && stringVal.isNumber()) ? (stringVal as Integer) : null
 	}
+
+	/**
+    * Find an existing unit with the given literal in the given language or create one
+    */
+    Unit getUnit(String literal, Language language) {
+        
+        Unit unit
+        
+        // First check if there's an existing unit for the symbol
+        def existingSymbols = Unit.withCriteria {
+            eq('literal', literal)
+            alphabet {
+                eq('language', language)
+            }
+        }
+
+        if(existingSymbols) {
+            unit = existingSymbols[0]
+        }
+        else {
+            unit = new Unit(literal: literal, alphabet: Alphabet.findByLanguage(language)).save()
+        }
+
+        return unit
+    }
+
+    /**
+    * Find an existing pronunciation by literal and by unit
+    */
+    Pronunciation getPronunciation(String literal, Unit unit, Language language) {
+       
+        Pronunciation pronunciation
+
+        // Check if there is a pronunciation for this literal
+        def existingPronunciations = Pronunciation.withCriteria {
+            eq('literal', literal)
+            eq('unit', unit)
+            alphabet {
+                eq('language', language)
+            }
+        }
+
+        if(existingPronunciations) {
+            pronunciation = existingPronunciations[0]
+        }
+        else {
+            pronunciation = new Pronunciation(literal: literal, alphabet: Alphabet.findByLanguage(language), unit: unit).save()
+        }
+
+        return pronunciation
+    }
+
+    /**
+    * Find a unit mapping between the two given units or create it
+    */
+    UnitMapping getUnitMapping(Unit unit1, Unit unit2) {
+    	
+    	def unitMapping
+
+    	// Check direction 1
+    	unitMapping = UnitMapping.findByUnit1AndUnit2(unit1, unit2)
+
+    	// Check direction 2
+    	if(!unitMapping) {
+    		unitMapping = UnitMapping.findByUnit1AndUnit2(unit2, unit1)
+
+    		// Not found, create it
+    		if(!unitMapping) {
+    			unitMapping = new UnitMapping(unit1: unit1, unit2: unit2).save()
+    		}
+    	}
+
+    	return unitMapping
+    }
 }

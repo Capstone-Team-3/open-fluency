@@ -33,4 +33,7 @@ public class Constants {
 	public static final int APPROVED = 1
 	public static final int REJECTED = 2
 	public static List REGISTRATION_STATUS = ["Pending Approval", "Approved", "Rejected"]
+
+	// CSV file validation
+	public static final String VALIDATION_OK = "Validation OK"
 }

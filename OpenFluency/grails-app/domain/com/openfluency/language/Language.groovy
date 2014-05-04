@@ -9,6 +9,10 @@ class Language {
 		name 
 	}
 
+	List<Alphabet> getAlphabets() {
+		return Alphabet.findAllByLanguage(this)
+	}
+
 	static constraints = {
 	}
 }

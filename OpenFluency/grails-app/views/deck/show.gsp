@@ -27,20 +27,17 @@
 				</g:if>
 			</h1>
 			<p class="deck-description">${deckInstance?.description}</p>
-			<g:if test="${flashcardCount}">
-				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" 
-				 action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
-				&nbsp
-				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" 
-				 action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
-				&nbsp
-				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" 
-				 action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice Symbol</g:link>
-			</g:if>
-			<g:if test="${isOwner}">
-				&nbsp
-				<g:link class="btn btn-info add-flashcards" action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link>
-			</g:if>
+			<div class="deck-actions">
+				<g:if test="${flashcardCount}">
+					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
+					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
+					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice Symbol</g:link>
+				</g:if>
+				<g:if test="${isOwner}">
+					<g:link class="btn btn-info add-flashcards" action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link>
+					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Load from CSV</button>
+				</g:if>
+			</div>
 		</div>
 		<!-- end deck-header -->
 
@@ -59,7 +56,30 @@
 			<g:paginate controller="deck" action="show" id="${deckInstance.id}" total="${flashcardCount ?: 0}" />
 		</div>
 
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog">
+				<g:form action="loadFlashcardsFromCSV" id="${deckInstance.id}" enctype="multipart/form-data">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title">Load flashcards from CSV</h4>
+						</div>
+						<div class="modal-body">
+							<p>
+								Upload a CSV with your flashcard definitions. Download a sample CSV to see how the file is structured
+								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>
+							</p>
+							<h4>Upload</h4>
+							<input name="csvData" type="file" name="csvData"/>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</g:form>
+			</div>
+		</div>
 	</div>
-	<!-- end container -->
 </body>
 </html>

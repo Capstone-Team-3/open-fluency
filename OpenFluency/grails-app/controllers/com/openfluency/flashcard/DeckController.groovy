@@ -177,4 +177,23 @@ class DeckController {
 
         redirect action: "list"
     }
+
+    /**
+    * Upload flashcards from a CSV file in the format
+    *   Symbol,Meaning,Pronunciation,ImageURL
+    */
+    def loadFlashcardsFromCSV(Deck deckInstance){
+        
+        request.getMultiFileMap().csvData.eachWithIndex { f, i ->
+            List result = deckService.loadFlashcardsFromCSV(deckInstance, f)
+            if(result.isEmpty()) {
+                flash.message = "You succesfully uploaded your CSV!"
+            }
+            else {
+                flash.message = result.join(",\n")
+            }
+        }
+
+        redirect(action: "show", id: deckInstance.id)
+    }
 }

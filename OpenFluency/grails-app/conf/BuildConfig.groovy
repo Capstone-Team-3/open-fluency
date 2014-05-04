@@ -96,5 +96,6 @@ grails.project.dependency.resolution = {
         compile ":remote-control:1.4"
         compile ":mail:1.0.4"
         compile ":export:1.5"
+        compile ":csv:0.3.1"
     }
 }

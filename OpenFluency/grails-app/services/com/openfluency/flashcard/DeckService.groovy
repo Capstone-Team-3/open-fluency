@@ -1,5 +1,9 @@
 package com.openfluency.flashcard
 
+import com.openfluency.language.Unit
+import com.openfluency.language.UnitMapping
+import com.openfluency.language.Pronunciation
+import com.openfluency.media.Image
 import com.openfluency.auth.User
 import com.openfluency.flashcard.Share
 import com.openfluency.language.Language
@@ -16,6 +20,7 @@ class DeckService {
 	def flashcardService
 	def algorithmService
 	def flashcardInfoService
+    def languageService
 
 	/**
 	* Retrieves the next flashcard that the user should view according SpacedRepetition
@@ -52,8 +57,8 @@ class DeckService {
                 log.info "Saving symbolRanking ${ranking}"
                 cardRanking.symbolRanking = ranking
             }
-			
-			cardRanking.save(failOnError: true)
+
+            cardRanking.save(failOnError: true)
 
 			//use the algo and card usage to update the flashcardInfo and Queue for the given card
 			flashcardInfoService.updateViewedFlashcardInfo(deckInstance, cardUsage)
@@ -93,8 +98,8 @@ class DeckService {
 		Double pronunciationProgress = totalPoints[Constants.PRONUNCIATION] ? totalPoints[Constants.PRONUNCIATION]*100 / (flashcardCount*Constants.EASY) : 0
         Double symbolProgress = totalPoints[Constants.SYMBOL] ? totalPoints[Constants.SYMBOL]*100 / (flashcardCount*Constants.EASY) : 0
 
-		return [meaningProgress.round(2), pronunciationProgress.round(2), symbolProgress.round(2)]
-	}
+        return [meaningProgress.round(2), pronunciationProgress.round(2), symbolProgress.round(2)]
+    }
 
     /**
     * Get the deck progress for the logged user
@@ -219,5 +224,78 @@ class DeckService {
     */
     Flashcard getRandomFlashcard(Flashcard flashcardInstance) {
     	Flashcard.executeQuery('FROM Flashcard WHERE deck = ? AND id <> ? ORDER BY rand()', [flashcardInstance.deck, flashcardInstance.id], [max: 1])[0]
+    }
+
+    /**
+    * Load a deck from a CSV - returns a list with any errors that might have happened during upload
+    */
+    List loadFlashcardsFromCSV(Deck deckInstance, def f) {
+        List result
+
+        if(f.fileItem){
+            // Create a temporary file with the uploaded contents
+            def extension = f.fileItem.name.lastIndexOf('.').with {it != -1 ? f.fileItem.name.substring(it + 1) : f.fileItem.name}
+            def outputFile = new File("${new Date().time}.${extension}")
+            f.transferTo(outputFile)
+
+            // Validate the file first
+            result = validateCSV(outputFile.path)
+            if(!result.isEmpty()) {
+                return result
+            }
+            
+            // Everything looks ok, lets save
+            new File(outputFile.path).toCsvReader(['skipLines':1]).eachLine { tokens ->
+                String symbolString = tokens[0]
+                String meaningString = tokens[1]
+                String pronunciationString = tokens[2]
+                String imageURL = tokens[3]
+
+                // Objects to build flashcard
+                Unit symbol = languageService.getUnit(symbolString, deckInstance.language)
+                Unit meaning = languageService.getUnit(meaningString, deckInstance.sourceLanguage)
+                Pronunciation pronunciation = languageService.getPronunciation(pronunciationString, symbol, deckInstance.language)
+                UnitMapping unitMapping = languageService.getUnitMapping(symbol, meaning)
+                
+                // Now build the card
+                flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciation.id.toString(), imageURL, null, deckInstance.id.toString())
+            }
+
+            // Cleanup
+            outputFile.delete()
+        } 
+        else {
+            result << "File not found"
+        }
+
+        return result
+    }
+
+    /**
+    * Check that each row has a unit, a meaning and a pronunciation
+    * Returns a list with any errors
+    */
+    List validateCSV(String filePath) {
+        List result = []
+        int i = 0
+        new File(filePath).toCsvReader(['skipLines':1]).eachLine { tokens ->
+
+            // Check that there's a meaning a pronunciation and a symbol
+            if(!tokens[0]) {
+                result << "Row ${i} is missing a symbol"
+            }
+
+            if(!tokens[1]) {
+                result << "Row ${i} is missing a meaning"   
+            }
+            
+            if(!tokens[2]) {
+                result << "Row ${i} is missing a pronunciation"
+            }
+
+            i++
+        }
+
+        return result
     }
 }
