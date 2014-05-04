@@ -124,7 +124,7 @@ class DeckController {
         } else if (cardUsageInstance.flashcard?.image){
             imageURL = cardUsageInstance.flashcard.image.url
         }
-        //get the right audio - take the customization if made, else the flahscard proviced audio if made, else null
+        //get the right audio - take the customization if made, else the flahscard provided audio if made, else null
         Long audioSysId = null
         if (customizationInstance?.audioAssoc){
             audioSysId = customizationInstance.audioAssoc?.id
@@ -132,8 +132,6 @@ class DeckController {
             audioSysId = cardUsageInstance.flashcard.audio.id
         }
 
-        println "Customization = ${customizationInstance?.id}, image = ${imageURL}, audio = ${audioSysId}"
-        
         [cardRankingInstance: flashcardService.getLastRanking(cardUsageInstance.flashcard.id), 
         deckInstance: deckInstance, 
         cardUsageInstance: cardUsageInstance, 

@@ -19,7 +19,9 @@
 				<td>${it.language.name}</td>
 				<td>${it.flashcardCount}</td>
 				<td>
-					<g:render template="/deck/progress" model="[progress: it.progress]"/>
+					<div class="list-progress">
+						<g:render template="/deck/allProgress" model="[progress: it.progress, id: it.id]"/>
+					</div>
 				</td>
 				<td class="right">
 					<g:if test="${it.flashcardCount}">

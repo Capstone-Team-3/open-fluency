@@ -50,42 +50,29 @@ var initializePracticeCards = function() {
 	console.log(type);
 
 	if (type === 'meaning'){
-		initializePracticeByMeaning();
+		hideElement("Meaning", ".meaning", "show-meaning");
+		hideElement("Image", "image-container", "show-image");
 	} else if (type === 'pronunciation'){
-		initializePracticeByPronunciation();
+		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
+	} else if (type === 'symbol'){
+		hideElement("Symbol", ".flashcard-unit", "show-flashcard-unit");
 	}
-};
-
-var initializePracticeByMeaning = function() {
-	var $meaningContainer = $('.meaning');
-	var meaning = $meaningContainer.html();
-	$meaningContainer.html('<button class="btn" id="show-meaning">Show Meaning</button>');
-	$('#show-meaning').on('click', function() {
-		$meaningContainer.html(meaning);
-	});
-
-	var $imageContainer = $('#image-container');
-	var image = $imageContainer.html();
-	$imageContainer.html('<button class="btn" id="show-image">Show Image</button>');
-	$('#show-image').on('click', function() {
-		$imageContainer.html(image);
-	});
 
 	initializePracticeRanking();
 };
 
-var initializePracticeByPronunciation = function() {
-	var $pronContainer = $('.pronunciation');
-	var pron = $pronContainer.html();
-	console.log($pronContainer);
-
-	$pronContainer.html('<button class="btn" id="show-pronunciation">Show Pronunciation</button>');
-	$('#show-pronunciation').on('click', function() {
-		$pronContainer.html(pron);
+/**
+* Hide an element and replace it with a button with a given title and an id. When the button is clicked the element is displayed
+*/
+var hideElement = function(title, selector, id) {
+	var $elementContainer = $(selector);
+	var pron = $elementContainer.html();
+	
+	$elementContainer.html('<button class="btn" id="' + id + '">Show ' + title + '</button>');
+	$('#' + id).on('click', function() {
+		$elementContainer.html(pron);
 	});
-
-	initializePracticeRanking();
-};
+}
 
 var initializePracticeRanking = function() {
 	$(".ranker").click(function() {
@@ -142,7 +129,7 @@ var initializeProficiencyRemovers = function() {
 
 var setupFlashcardSearchPagination = function() {
 	$('.paged-search a').click(function() {
-		$("#offset").val((parseInt($(this).text())-1)*2);
+		$("#offset").val((parseInt($(this).text())-1)*10);
 		$('.searchUnitForm').submit();
 		return false;		
 	})
@@ -175,7 +162,7 @@ var drawDonut = function(value, selector) {
 	.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 	svg.append("text")
-	.text(value + "%")
+	.text(Math.ceil(value) + "%")
 	.style("text-anchor", "middle")
 	.attr("transform", "translate(" + 0 + "," + 4 + ")");
 

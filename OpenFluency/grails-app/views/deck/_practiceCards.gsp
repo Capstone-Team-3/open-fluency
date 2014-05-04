@@ -1,51 +1,56 @@
 <%@ page import="com.openfluency.Constants" %>
 
-    <div class="row">
-            <div class="deck-header text-center">
-                <h3 data-rank-type="${rankingType as Integer}">
-                    Practice ${Constants.CARD_ELEMENTS[rankingType as Integer]}s
-                </h3>
-                <g:if test="${chapterInstance}">                    
-                    <h1>${chapterInstance?.title}</h1>
-                </g:if>
-                <g:else>
-                    <h1>${practiceDeckInstance.title}</h1>
-                </g:else>
+<div class="row">
+    <div class="deck-header text-center">
+        <h3 data-rank-type="${rankingType as Integer}">Practice ${Constants.CARD_ELEMENTS[rankingType as Integer]}s</h3>
+        <g:if test="${chapterInstance}">
+            <h1>${chapterInstance?.title}</h1>
+        </g:if>
+        <g:else>
+            <h1>${practiceDeckInstance.title}</h1>
+        </g:else>
 
-            </div><!-- end deck-heaer -->
-
-            <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
-    </div><!-- end row -->
-
-    <div class="practice-body row">
-        <div class="practice-flashcard center-block">
-            <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
-
-            <g:form id="${id}" controller="${controller}" action="practice" name="rankCardForm" class="rankCardForm form">
-                <input type="hidden" name="cardUsageId" value="${cardUsageInstance?.id}"/>
-                <input type="hidden" id="ranking" name="ranking" value="1"/>
-                <input type="hidden" name="rankingType" value="${rankingType}"/>
-            </g:form>
-
-            <div class="ranking-container btn-group center-block">
-                <button id="easy" class="btn btn-success ranker" data-value="${Constants.EASY}">Easy</button>
-                <button id="medium" class="btn btn-warning ranker" data-value="${Constants.MEDIUM}">Medium</button>
-                <button id="hard" class="btn btn-danger ranker" data-value="${Constants.HARD}">Hard</button>
-            </div>
-
-        </div><!-- end col-lg-4 -->
-    </div><!-- end row -->
-
-    <div class="progress-container row">
-        <div class="col-lg-2">
-            <h4>Progress:</h4>
-        </div>
-        <div class="col-lg-5">
-            <strong>Practice Meanings</strong>
-            <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.MEANING]]"/>
-        </div>
-        <div class="col-lg-5">
-            <strong>Practice Pronunciations</strong>
-            <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.PRONUNCIATION]]"/>
-        </div>
     </div>
+    <!-- end deck-heaer -->
+
+    <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
+</div>
+<!-- end row -->
+
+<div class="practice-body row">
+    <div class="practice-flashcard center-block">
+        <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
+
+        <g:form id="${id}" controller="${controller}" action="practice" name="rankCardForm" class="rankCardForm form">
+            <input type="hidden" name="cardUsageId" value="${cardUsageInstance?.id}"/>
+            <input type="hidden" id="ranking" name="ranking" value="1"/>
+            <input type="hidden" name="rankingType" value="${rankingType}"/>
+        </g:form>
+
+        <div class="ranking-container btn-group center-block">
+            <button id="easy" class="btn btn-success ranker" data-value="${Constants.EASY}">Easy</button>
+            <button id="medium" class="btn btn-warning ranker" data-value="${Constants.MEDIUM}">Medium</button>
+            <button id="hard" class="btn btn-danger ranker" data-value="${Constants.HARD}">Hard</button>
+        </div>
+
+    </div>
+    <!-- end col-lg-4 -->
+</div>
+<!-- end row -->
+
+<div class="progress-container row">
+    <div class="col-lg-12">
+        <g:if test="${rankingType == Constants.MEANING.toString()}">
+            <h2>Meaning Progress:</h2>
+            <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.MEANING]]"/>
+        </g:if>
+        <g:elseif test="${rankingType == Constants.PRONUNCIATION.toString()}">
+            <h2>Pronunciation Progress:</h2>
+            <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.PRONUNCIATION]]"/>
+        </g:elseif>
+        <g:elseif test="${rankingType == Constants.SYMBOL.toString()}">
+            <h2>Symbol Progress:</h2>
+            <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.SYMBOL]]"/>
+        </g:elseif>
+    </div>
+</div>

@@ -20,5 +20,6 @@
 			<g:render template="table" model="[deckInstanceList: othersDeckInstanceList, userInstance: userInstance]"/>
 		</div>
 	</div>
+	<g:javascript>initializeDonuts();</g:javascript>
 </body>
 </html>

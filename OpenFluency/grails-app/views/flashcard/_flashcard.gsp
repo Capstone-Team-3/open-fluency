@@ -12,7 +12,6 @@
 				<div class="pronunciation">pronounced '${flashcardInstance?.pronunciation.literal}'</div>
 			</div>
 
-			
 			<g:set var="imageSource" value="${flashcardInstance?.image?.url}"/>
 			<g:if test="${imageURL}">
 				<g:set var="imageSource" value="${imageURL}"/>

@@ -31,15 +31,7 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-                        <div class="donut-container">
-                            <div class="col-lg-4 progress-donut center" data-progress="${it.progress[0]}" id="meaning-progress-${it.id}">
-                                <p>Meaning</p>
-                            </div>
-
-                            <div class="col-lg-4 progress-donut center" data-progress="${it.progress[1]}" id="pronunciation-progress-${it.id}">
-                                <p>Pronunciation</p>
-                            </div>
-                        </div>
+                        <g:render template="/deck/allProgress" model="[progress: it.progress, id: it.id]"/>
                     </div>
                     <div class="panel-footer">
                         <div class="continue">

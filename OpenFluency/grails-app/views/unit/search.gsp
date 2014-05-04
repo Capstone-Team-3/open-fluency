@@ -88,7 +88,7 @@
         <div class="row">
             <!-- do not remove this class -->
             <div class="paged-search">
-                <g:paginate controller="unit" action="search" total="${unitCount}" max="2" omitNext="true" omitFirst="true" omitLast="true" omitPrev="true"/>
+                <g:paginate controller="unit" action="search" total="${unitCount}" max="10" omitNext="true" omitFirst="true" omitLast="true" omitPrev="true"/>
             </div>
         </div>
     </div>

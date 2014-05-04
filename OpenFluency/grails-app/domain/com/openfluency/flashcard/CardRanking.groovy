@@ -13,6 +13,7 @@ class CardRanking {
 	Flashcard flashcard
 	User user
 
+    Integer symbolRanking           // the difficulty level the user assigned to the symbol on the flashcard
 	Integer meaningRanking 			// the difficulty level the user assigned to the meaning of a flaschard 
 	Integer pronunciationRanking 	// the difficulty level the user assigned to the pronunciation of a flaschard 
 
@@ -22,6 +23,7 @@ class CardRanking {
     static constraints = {
     	meaningRanking nullable: true
     	pronunciationRanking nullable: true
+        symbolRanking nullable: true
     }
 
     static mapping = {

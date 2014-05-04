@@ -88,7 +88,7 @@ class LanguageService {
 		offset = offset ? offset : 0
 
 		// Get all the unit mappings that map the searched params and then collect the unit for the given language
-		def unitInstanceList = UnitMapping.executeQuery(query, [max: 2, offset: offset]).collect {
+		def unitInstanceList = UnitMapping.executeQuery(query, [max: 10, offset: offset]).collect {
 			it.unit1.alphabet.language.id == languageId ? it.unit1 : it.unit2
 		}
 

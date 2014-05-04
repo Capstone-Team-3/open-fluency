@@ -1,5 +1,6 @@
 <%@ page import="com.openfluency.course.Registration" %>
 <%@ page import="com.openfluency.course.Quiz" %>
+<%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.QuizService" %>
 <!DOCTYPE html>
 <html>
@@ -76,11 +77,11 @@
 										<g:if test="${!isOwner}">
 											<div class="donut-container">
 												<div class="panel-body">
-													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[0]}" id="meaning-progress-${it.id}">
+													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
 														<p>Meaning</p>
 													</div>
 
-													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[1]}" id="pronunciation-progress-${it.id}">
+													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
 														<p>Pronunciation</p>
 													</div>
 												</div>

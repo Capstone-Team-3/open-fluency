@@ -1,5 +1,4 @@
 <%@ page import="grails.plugin.springsecurity.SpringSecurityUtils" %>
-
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>

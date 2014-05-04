@@ -37,18 +37,8 @@ class DeckService {
 			cardUsage.save(failOnError: true)
 
 			// Create the CardRanking for the card (or update it)
-			CardRanking cardRanking = CardRanking.withCriteria {
-				user {
-					eq('id', springSecurityService.principal.id)
-				}
-				eq('flashcard', cardUsage.flashcard)
-				}[0]
+			CardRanking cardRanking = CardRanking.findOrCreateByUserAndFlashcard(User.load(springSecurityService.principal.id), cardUsage.flashcard)
 
-			// Save the card ranking
-			if(!cardRanking) {
-				cardRanking = new CardRanking(flashcard: cardUsage.flashcard, user: theUser)
-			} 
-			
 			// Save the meaning depending on the type
 			if(rankingType == Constants.MEANING) {
 				log.info "Saving meaningRanking ${ranking}"
@@ -58,6 +48,10 @@ class DeckService {
 				log.info "Saving pronunciationRanking ${ranking}"
 				cardRanking.pronunciationRanking = ranking
 			}
+            else if(rankingType == Constants.SYMBOL) {
+                log.info "Saving symbolRanking ${ranking}"
+                cardRanking.symbolRanking = ranking
+            }
 			
 			cardRanking.save(failOnError: true)
 
@@ -90,15 +84,16 @@ class DeckService {
 		// Then the progress is the total points for the user / max points
 		Integer flashcardCount = deckInstance.flashcardCount
 		List totalPoints = Flashcard.executeQuery("""
-			SELECT sum(meaningRanking), sum(pronunciationRanking) FROM CardRanking 
+			SELECT sum(meaningRanking), sum(pronunciationRanking), sum(symbolRanking) FROM CardRanking 
 			WHERE user.id = ?
 			AND flashcard.id in (SELECT id FROM Flashcard WHERE deck.id = ?))
 		""", [userId, deckInstance.id])[0]
 		
 		Double meaningProgress = totalPoints[Constants.MEANING] ? totalPoints[Constants.MEANING]*100 / (flashcardCount*Constants.EASY) : 0
 		Double pronunciationProgress = totalPoints[Constants.PRONUNCIATION] ? totalPoints[Constants.PRONUNCIATION]*100 / (flashcardCount*Constants.EASY) : 0
+        Double symbolProgress = totalPoints[Constants.SYMBOL] ? totalPoints[Constants.SYMBOL]*100 / (flashcardCount*Constants.EASY) : 0
 
-		return [meaningProgress.round(2), pronunciationProgress.round(2)]
+		return [meaningProgress.round(2), pronunciationProgress.round(2), symbolProgress.round(2)]
 	}
 
     /**
@@ -146,7 +141,7 @@ class DeckService {
     	User userInstance = User.load(springSecurityService.principal.id)
     	
     	// Check if the user already has this deck
-    	if(Share.findByUserAndDeck(userInstance, deckInstance)) {
+    	if(Share.findByReceiverAndDeck(userInstance, deckInstance)) {
     		return null
     	}
 
