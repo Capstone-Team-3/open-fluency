@@ -429,6 +429,14 @@ h4#custom-image {
     font-weight: bold;
 }
 
+.paged-search {
+    text-align: center;
+}
+
+.paged-search a, .currentStep {
+    padding: 0px 10px;
+}
+
 .donut-container {
     height: 160px;
 }

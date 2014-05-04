@@ -171,5 +171,4 @@ var drawDonut = function(value, selector) {
 	.enter().append("path")
 	.attr("fill", function(d, i) { return color(i); })
 	.attr("d", arc);
-
 }
