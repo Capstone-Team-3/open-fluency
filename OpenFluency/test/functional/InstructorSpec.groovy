@@ -90,9 +90,9 @@ class InstructorSpec extends GebReportingSpec {
 		deckSelect.value('4')
 		createChapterButton.click()
 		then:
-		at ShowChapterPage
-		chapterTitle.text() == "Test chapter Edit"
-		chapterDescription.text() == "This is a test chapter!"
+		at ShowCoursePage
+		courseTitle.text() == "Test course"
+		courseDescription.text() == "This is a test course!"
 	}
 
 
