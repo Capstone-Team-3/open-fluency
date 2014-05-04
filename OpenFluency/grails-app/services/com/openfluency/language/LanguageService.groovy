@@ -48,7 +48,12 @@ class LanguageService {
 
 			// For every reading in this character, create a pronunciation
 			ch.rd.each {
-				new Pronunciation(unit: unit, alphabet: Alphabet.findByCode(it.@r_type), literal: it.toString()).save()
+				def literal = it.toString()
+				// If it ends with a number, remove the number
+				if(literal.matches("^.+?\\d\$")) {
+					literal = literal.substring(0, literal.length() - 1)
+				}
+				new Pronunciation(unit: unit, alphabet: Alphabet.findByCode(it.@r_type), literal: literal).save()
 			}
 
 			log.info "Loaded ${i++}: ${ch.uc}"
