@@ -130,21 +130,27 @@ class DataAccessController {
             response.contentType = grailsApplication.config.grails.mime.types[params.format]
             response.setHeader("Content-disposition", "attachment; filename=QuizData.${params.extension}")
             //set fields
-            List fields = ["owner", "card", "audioAssoc", "imageAssoc", "imageURI"]
+            List fields = ["quiz", 
+                           "course", 
+                           "testElement",
+                           "maxCardTime", 
+                           "numQuestions",
+                           "questions",
+                           "grades"]
             //map headings
-            Map labels = ["owner": "UserID", 
-                          "card": "FlashcardID", 
-                          "audioAssoc": "Audio", 
-                          "imageAssoc": "Image",
-                          "imageURI": "ImageURI"]
-            //custom formatters (general formatters defined at class level)
-            def imageURIify = {domain, value -> (domain?.imageAssoc?.url) ?: ""}
+            Map labels = ["quiz": "QuizID", 
+                          "course": "CourseID", 
+                          "testElement": "TestedElement",
+                          "maxCardTime": "QuestionTimeLimit",
+                          "numQuestions": "NumberOfQuestions",
+                          "questions": "QuestionToFlashcardIDs",
+                          "grades": "UserGrades"]
             //map field data formatters
-            Map formatters = ["owner": valIdify, 
-                              "card": valIdify, 
-                              "audioAssoc": binify, 
-                              "imageAssoc": binify,
-                              "imageURI": imageURIify]
+            Map formatters = ["quiz": idify, 
+                              "course": valIdify,
+                              "numQuestions": {domain, value -> domain.countQuestions()}, 
+                              "questions": {domain, value -> domain.getQuestions().collect{"${it.id}:${it.flashcard.id}"}.toString()},
+                              "grades": {domain, value -> Grade.findAllByQuiz(domain).collect{"${it.user.id}:${it.correctAnswers}"}.toString()}]
             //map additional parameters
             Map parameters = ["separator": "\t"]
             
@@ -154,8 +160,51 @@ class DataAccessController {
         [quizInstanceList: Quiz.list(params)]
     }
 
-    def exportGradeData(){
+    /**uses the exporter plugin to export anonymous data on answers to quiz questions
+    */
+    def exportAnswerData(){
+        if (params?.extension && params?.extension == "csv"){           
+            response.contentType = grailsApplication.config.grails.mime.types[params.format]
+            response.setHeader("Content-disposition", "attachment; filename=AnswerData.${params.extension}")
+            //set fields
+            List fields = ["answer", 
+                           "user",
+                           "course",
+                           "quiz",
+                           "question",
+                           "testElement", 
+                           "selection",
+                           "correctAnswer", 
+                           "correct",
+                           "status"]
+            //map headings
+            Map labels = ["answer": "AnswerID", 
+                          "user": "UserID",
+                          "course": "CourseID",
+                          "quiz": "QuizID",
+                          "question": "QuestionID",
+                          "testElement": "TestedElement", 
+                          "selection": "UserAnswerID",
+                          "correctAnswer": "CorrectAnswerID", 
+                          "correct": "AnsweredCorrectly",
+                          "status": "AnswerStatus"]
+            //map field data formatters
+            Map formatters = ["answer": idify, 
+                              "user": valIdify,
+                              "course": {domain, value -> domain.question.quiz.course.id},
+                              "quiz": {domain, value -> domain.question.quiz.id},
+                              "question": valIdify,
+                              "testElement": {domain, value -> domain.question.quiz.testElement}, 
+                              "selection": valIdify,
+                              "correctAnswer": {domain, value -> domain.question.flashcard.id}, 
+                              "correct": {domain, value -> (value) ? 1 : 0}]
+            //map additional parameters
+            Map parameters = ["separator": "\t"]
+            
+            exportService.export("csv", response.outputStream, Answer.list(params), fields, labels, formatters, parameters)
+        }
         
+        [answerInstanceList: Answer.list(params)]
     }
 
     /**uses the exporter plugin to export anonymous data on flashcards

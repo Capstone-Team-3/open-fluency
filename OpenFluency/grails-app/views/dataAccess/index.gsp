@@ -28,17 +28,17 @@
 				<h3>Flashcard Customization Data</h3>
 				<export:formats id="customization-data" formats="['csv']" action="exportCustomizationData"/>
 			</div>
-
+			
 			<div class="data-access">
-				<h3>Flashcard Quiz Data</h3>
+				<h3>Performance Data</h3>
+				<export:formats id="grades-data" formats="['csv']" action="exportAnswerData"/>
+			</div>
+			
+			<div class="data-access">
+				<h3>Quiz Data</h3>
 				<export:formats id="quiz-data" formats="['csv']" action="exportQuizData"/>
 			</div>
 
-			<div class="data-access">
-				<h3>Course Performance Data</h3>
-				<export:formats id="grades-data" formats="['csv']" action="exportGradeData"/>
-			</div>
-			
 			<div class="data-access">
 				<h3>Course Data</h3>
 				<export:formats id="course-data" formats="['csv']" action="exportCourseData"/>
