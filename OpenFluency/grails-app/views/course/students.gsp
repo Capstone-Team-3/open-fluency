@@ -23,49 +23,43 @@
                 <a href="#">Enrolled Students</a>
             </li>
         </ul>
+
         <h1 id="main">Enrolled Students</h1>
-        <br/>
-        <br/>
+
         <table class="table courses-table">
             <thead>
                 <tr>
-                    <th>User Name</th>
-                    <th>Progress</th>
-                    <th>Grades</th>
-                    <th>Enrollment</th>
-                    <th>Actions</th>
+                    <th rowspan="2">Name</th>
+                    <g:each in="${courseInstance.getChapters()}">
+                        <th colspan="3">${it.title} Practice</th>
+                    </g:each>
+                    <th colspan="${enrolledStudents[0].quizGrade.keySet().size()}">Quiz Grades</th>
+                    <th rowspan="2">Enrollment</th>
+                    <th rowspan="2">Actions</th>
+                </tr>
+                <tr>
+                    <g:each in="${courseInstance.getChapters()}">
+                        <th>Meanings</th>
+                        <th>Pronunciations</th>
+                        <th>Symbols</th>
+                    </g:each>
+                    <g:each in="${enrolledStudents[0].quizGrade.keySet()}">
+                        <th>${it.title}</th>
+                    </g:each>
                 </tr>
             </thead>
+
             <g:each in="${enrolledStudents}" var="registrationInstance">
                 <tr class="course-result">
                     <td>${registrationInstance.user.username}</td>
-                    <td>
-                        <g:each in="${registrationInstance.chapterProgress.keySet()}" var="chapterInstance">
-                            <div class="col-lg-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">${chapterInstance.title}</div>
-                                    <div class="panel-body">
-                                        <small>Meaning Progress</small>
-                                        <g:render template="/deck/progress" model="[progress: registrationInstance.chapterProgress[chapterInstance][0]]"/>
-                                        <small>Pronunciation Progress</small>
-                                        <g:render template="/deck/progress" model="[progress: registrationInstance.chapterProgress[chapterInstance][1]]"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </g:each>
-                    </td>
-                    <td>
-                        <g:each in="${registrationInstance.quizGrade.keySet()}" var="quizInstance">
-                            <div class="col-lg-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">${quizInstance.title}</div>
-                                    <div class="panel-body">
-                                        ${registrationInstance.quizGrade[quizInstance]}
-                                    </div>
-                                </div>
-                            </div>
-                        </g:each>
-                    </td>
+                    <g:each in="${registrationInstance.chapterProgress.keySet()}" var="chapterInstance">
+                        <td>${registrationInstance.chapterProgress[chapterInstance][0]}</td>
+                        <td>${registrationInstance.chapterProgress[chapterInstance][1]}</td>
+                        <td></td>
+                    </g:each>
+                    <g:each in="${registrationInstance.quizGrade.keySet()}" var="quizInstance">
+                        <td>${registrationInstance.quizGrade[quizInstance]}</td>
+                    </g:each>
                     <td>
                         ${Constants.REGISTRATION_STATUS[registrationInstance.status]}
                     </td>
