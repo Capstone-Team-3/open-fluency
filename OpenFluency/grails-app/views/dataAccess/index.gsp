@@ -30,7 +30,7 @@
 			</div>
 			
 			<div class="data-access">
-				<h3>Performance Data</h3>
+				<h3>Detailed Quiz Answer Data</h3>
 				<export:formats id="grades-data" formats="['csv']" action="exportAnswerData"/>
 			</div>
 			
