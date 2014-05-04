@@ -60,7 +60,7 @@
 					<h2>
 						Chapters
 						<g:if test="${isOwner}">
-							<g:link class="btn btn-info" action="create" controller="chapter" id="${courseInstance.id}" name="create-chapter">Add Chapters</g:link>
+							<g:link class="btn btn-info add-chapter"  action="create" controller="chapter" id="${courseInstance.id}" >Add Chapters</g:link>
 						</g:if>
 					</h2>
 

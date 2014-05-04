@@ -8,6 +8,7 @@ import pages.user.AuthPage
 import pages.*
 import pages.deck.*
 import pages.course.*
+import pages.chapter.*
 
 
 @Stepwise
@@ -75,7 +76,7 @@ class InstructorSpec extends GebReportingSpec {
 	}
 	def "Instructor adds chapter to course"() {
 		when:
-		addChapterButton.click()
+		$('.btn btn-info add-chapter').click()
 		then:
 		at CreateChapterPage
 	}
