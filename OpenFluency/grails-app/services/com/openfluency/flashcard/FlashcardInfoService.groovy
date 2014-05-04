@@ -127,6 +127,17 @@ class FlashcardInfoService {
     }
 
     /**
+    *    This function is a simple check to see if any FlashcardInfo has been created for the user and deck
+    *   @Param theUser - User of interest
+    *   @Param deckInstance - Deck of interest
+    *   @Return boolean success
+    */
+    boolean hasFlashcardInfos(User theUser, Deck deckInstance){
+        def infos = FlashcardInfo.findByUserAndDeck(theUser, deckInstance)
+        return (infos != null) ? true : false
+    }
+
+    /**
     *  This function is very important - it is used to invoke the CardServer.updateFlashcardInfo for the most recently used
     *  flashcard - this is how FlashcardInfo.viewPriority gets updated so cards move in the queues.
     *  @Param Deck - the relevant deck
