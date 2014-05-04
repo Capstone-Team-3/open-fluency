@@ -62,15 +62,7 @@ class BootStrap {
 
     	// Load sample language - the configuration is now externalized. 
         // The settings are in: conf/open-fluency-config.properties
-        boolean local = grailsApplication.config.localDictionary == 'true'
-        if(local) {
-            log.info "Loading local dictionary from ${grailsApplication.config.kanjiDictinoaryLocal}"
-            languageService.loadLanguage(grailsApplication.config.kanjiDictinoaryLocal, kanji, latin, local)
-        } 
-        else {
-            log.info "Loading remote dictionary from ${grailsApplication.config.kanjiDictionaryURL}"
-            languageService.loadLanguage(grailsApplication.config.kanjiDictionaryURL, kanji, latin, local)
-        }
+        languageService.loadLanguage(grailsApplication.config.kanjiDictionaryURL, kanji, latin)
 
         // Register some CardServiceAlgorithms
         CardServer linearWithShuffle = new LinearWithShuffle()

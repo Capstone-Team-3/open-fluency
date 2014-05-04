@@ -10,8 +10,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <sec:ifNotLoggedIn>
-                    <div class="jumbotron">
-                        <h1>Welcome to OpenFluency</h1>
+                    <div class="jumbotron center">
+                        <img class="animated fadeInUp" src="images/logo-large.png"/>
                         <p>A flash card application for foreign language study.</p>
                         <g:link class="btn btn-primary" action="create" controller="user">Create your account</g:link>
                     </div>
