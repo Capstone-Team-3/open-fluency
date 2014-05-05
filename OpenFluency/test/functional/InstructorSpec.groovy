@@ -9,6 +9,7 @@ import pages.*
 import pages.deck.*
 import pages.course.*
 import pages.chapter.*
+import pages.unit.*
 
 
 @Stepwise
@@ -94,8 +95,60 @@ class InstructorSpec extends GebReportingSpec {
 		courseTitle.text() == "Test course"
 		courseDescription.text() == "This is a test course!"
 	}
+	def "Instructor navigates to chapter"() {
+		when:
+		$('.chapter-show').click()
+		then:
+		at ShowChapterPage
+		$(".flashcard-result").size() == 5
+	}
+	def "Instructor navigates to flashcard search"() {
+		when:
+		$('.add-flashcard').click()
+		then:
+		at SearchUnitPage
+		$('.search-button').click()
+		$('.id-1').click()
+		
+	}
+	def "Instructor creates a new Flashcard"() {
+		when:
+		$('#goCreate').click()
+		then:
+		at ShowDeckPage
+		flashcardResult.size() == 6
+	}
+	def "Instructor deletes a Flashcard from a deck"() {
+		when:
+		$('.flashcard-delete-6').click()
+		waitFor {
+			flashcardResult.present
+		}
+		then:
+		at ShowDeckPage
+		flashcardResult.size() == 5
+	}
+/*	
+	def "Instructor navigates to Edit Deck"() {
+		when:
+		editDeckButton.click()
+		then:
+		at ShowDeckPage
+	}
 
-
-
+	def "Instractur edits a deck"() {
+		when:
+		deckTitle = "Test Deck - Edit"
+		deckDescription = "This is a test deck!"
+		sourceLanguageSelect.value('2')
+		languageSelect.value('1')
+		cardServerAlgoSelect.value('SM2-Spaced-Repetition')
+		saveDeckButton.click()
+		then:
+		at ShowDeckPage
+		flashMessage.text() == "Well done! You succesfully created a new deck!"
+		deckTitle.text() == "Test Deck - Edit"
+		deckDescription.text() == "This is a test deck!"
+	}*/
 	
 }
