@@ -74,7 +74,7 @@
                             </g:each>
                         </td>
                         <td>
-                            <g:form class="pull-right" action="create" controller="flashcard" name="createFlashcardForm">
+                            <g:form class="pull-right id-${it?.id}" action="create" controller="flashcard" name="createFlashcardForm">
                                 <input type="hidden" name="unit" value="${it?.id}"/>
                                 <input type="hidden" name="deckId" value="${deckId}"/>
                                 <button class="btn btn-success" type="submit">Create Flashcard</button>

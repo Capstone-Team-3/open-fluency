@@ -108,9 +108,44 @@ class InstructorSpec extends GebReportingSpec {
 		then:
 		at SearchUnitPage
 		$('.search-button').click()
+		$('.id-1').click()
 		
 	}
+	def "Instructor creates a new Flashcard"() {
+		when:
+		$('#goCreate').click()
+		then:
+		at ShowDeckPage
+		$(".flashcard-result").size() == 6
+	}
+	def "Instructor tries to delete the Flashcard from the deck - not the owner of the Deck"() {
+		when:
+		$('.flashcard-delete-3').click()
+		then:
+		at ShowDeckPage
+		flashcardResult.size() == 6
+	}
+	
+/*	def "Instructor navigates to Edit Deck - should not be able to, not owenr of the Deck"() {
+		when:
+		editDeckButton.click()
+		then:
+		at ShowDeckPage
+	}
 
-
+	def "Instractur edits a deck"() {
+		when:
+		deckTitle = "Test Deck - Edit"
+		deckDescription = "This is a test deck!"
+		sourceLanguageSelect.value('2')
+		languageSelect.value('1')
+		cardServerAlgoSelect.value('SM2-Spaced-Repetition')
+		saveDeckButton.click()
+		then:
+		at ShowDeckPage
+		flashMessage.text() == "Well done! You succesfully created a new deck!"
+		deckTitle.text() == "Test Deck - Edit"
+		deckDescription.text() == "This is a test deck!"
+	}*/
 	
 }
