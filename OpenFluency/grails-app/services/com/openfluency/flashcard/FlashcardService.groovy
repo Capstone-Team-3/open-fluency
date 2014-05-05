@@ -108,6 +108,15 @@ class FlashcardService {
             it.delete()
         }
 
+        // Delete all card usages and rankings for this card
+        CardUsage.findAllByFlashcard(flashcardInstance).each {
+            it.delete()
+        }
+
+        CardRanking.findAllByFlashcard(flashcardInstance).each {
+            it.delete()
+        }
+
         // Now delete it
         flashcardInstance.delete()
     }
