@@ -39,9 +39,9 @@
 				0 && Registration.findAllByCourseAndUser(chapterInstance.course, userInstance)}">
 				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" action="practice" 
 				id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
-				&nbsp
 				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" 
 				action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
+				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.SYMBOL]">Practice Symbols</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
 				<g:link class="btn btn-info" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
