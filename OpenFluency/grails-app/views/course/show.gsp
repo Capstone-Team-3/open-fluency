@@ -71,7 +71,7 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4>
-												<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
+												<g:link class="chapter-show" action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
 											</h4>
 										</div>
 										<g:if test="${!isOwner}">

@@ -9,6 +9,7 @@ import pages.*
 import pages.deck.*
 import pages.course.*
 import pages.chapter.*
+import pages.unit.*
 
 
 @Stepwise
@@ -94,7 +95,21 @@ class InstructorSpec extends GebReportingSpec {
 		courseTitle.text() == "Test course"
 		courseDescription.text() == "This is a test course!"
 	}
-
+	def "Instructor navigates to chapter"() {
+		when:
+		$('.chapter-show').click()
+		then:
+		at ShowChapterPage
+		$(".flashcard-result").size() == 5
+	}
+	def "Instructor navigates to flashcard search"() {
+		when:
+		$('.add-flashcard').click()
+		then:
+		at SearchUnitPage
+		$('.search-button').click()
+		
+	}
 
 
 	
