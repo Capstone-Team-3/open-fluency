@@ -123,7 +123,7 @@ class DeckService {
     	deck.save()
 
     	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
-    	
+        
     	return deck
     }
 

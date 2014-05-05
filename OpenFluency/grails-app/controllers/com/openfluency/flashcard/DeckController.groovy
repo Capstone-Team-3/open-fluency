@@ -13,6 +13,7 @@ class DeckController {
     def deckService
     def flashcardService
     def algorithmService
+    def flashcardInfoService
 
     def index() {
         redirect action: "list"
@@ -110,11 +111,16 @@ class DeckController {
     }
 
     def practice(Deck deckInstance) {
+        User userInstance = User.load(springSecurityService.principal.id)
+        
+        //make sure user is registered - add deck if not
+        if(!flashcardInfoService.hasFlashcardInfos(userInstance, deckInstance)) {
+            deckService.addDeck(deckInstance)
+        }
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
         CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer, params.rankingType as Integer)
         
-        User userInstance = User.load(springSecurityService.principal.id)
         Customization customizationInstance = Customization?.findByOwnerAndCard(userInstance, cardUsageInstance.flashcard)
         
         //get the right image - take the customization if made, else the flashcard provided image if made, else null

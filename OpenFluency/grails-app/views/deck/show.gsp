@@ -22,8 +22,16 @@
 			<h1 class="deck-title">
 				${deckInstance?.title}
 				<g:if test="${isOwner}">
-					<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">Edit</g:link>
-					<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">Delete</g:link>
+					<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+					<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></g:link>
+
+					<div class="btn-group">
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></button>
+						<ul class="text-left dropdown-menu" role="menu">
+							<li><g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link></li>
+							<li><a data-toggle="modal" data-target="#myModal">Load from CSV file</a></li>
+						</ul>
+					</div>
 				</g:if>
 			</h1>
 			<p class="deck-description">${deckInstance?.description}</p>
@@ -32,10 +40,6 @@
 					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
 					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
 					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice Symbol</g:link>
-				</g:if>
-				<g:if test="${isOwner}">
-					<g:link class="btn btn-info add-flashcards" action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link>
-					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Load from CSV</button>
 				</g:if>
 			</div>
 		</div>

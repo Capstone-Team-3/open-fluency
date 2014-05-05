@@ -5,7 +5,7 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
-	<div class="container">
+	<div class="container deck-create">
 		<ul class="breadcrumb">
 			<li>
 				<a href="${createLink(uri:'/') }">Home</a>
