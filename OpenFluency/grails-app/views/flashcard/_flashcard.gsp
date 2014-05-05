@@ -14,7 +14,22 @@
 					</g:if>
 				</div>
 				<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
-				<div class="pronunciation">pronounced '${flashcardInstance?.pronunciation.literal}'</div>
+				<div class="pronunciation">
+					pronounced "${flashcardInstance?.pronunciation.literal}"
+					 %{-- 'practicing' needs to be set to true in the model passed to this page for audio to show - practiceCards does this --}%
+					<g:if test="${practicing}">
+						<g:if test="${audioSysId}">
+							<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
+							<g:set var="audioId" value="${audioSysId}"/>
+							<div class="fieldcontain">
+								%{-- <a href="#"><span id="play-audio" class="glyphicon glyphicon-volume-up"></span></a> --}%
+								<div class="audio-practice">
+									<audio id="flashcard-audio" src="${audioSource + audioId}" controls play></audio>
+								</div>
+							</div>
+						</g:if>
+					</g:if>
+				</div>
 			</div>
 
 			<g:set var="imageSource" value="${flashcardInstance?.image?.url}"/>
@@ -28,19 +43,6 @@
 			</g:if>
 
 			<div class="meaning">${flashcardInstance?.secondaryUnit.print}</div>
-
-			<!-- 'practicing' needs to be set to true in the model passed to this page for audio to show - practiceCards does this -->
-			<g:if test="${practicing}">
-				<g:if test="${audioSysId}">
-					<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
-					<g:set var="audioId" value="${audioSysId}"/>
-					<li class="fieldcontain">
-						<div class="audio-practice">
-							<audio id="flashcard-audio" src="${audioSource + audioId}" controls play></audio>
-						</div>
-					</li>
-				</g:if>
-			</g:if>
 		</div>
 	</div>
 </div>

@@ -47,22 +47,22 @@ var searchImage = function(query, results, urlField, resultPage) {
 
 var initializePracticeCards = function() {
 	var type = $('#practice-container').data("rank-type").toLowerCase();
-	console.log(type);
 
-	if (type === 'meaning'){
+	if (type === 'meaning' || type === 'pronunciation'){
 		hideElement("Meaning", ".meaning", "show-meaning");
 		hideElement("Image", "image-container", "show-image");
-	} else if (type === 'pronunciation'){
 		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	} else if (type === 'symbol'){
 		hideElement("Symbol", ".flashcard-unit", "show-flashcard-unit");
+		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	}
 
 	initializePracticeRanking();
 };
 
 /**
-* Hide an element and replace it with a button with a given title and an id. When the button is clicked the element is displayed
+* Hide an element and replace it with a button with a given title and an id. 
+* When the button is clicked the element is displayed
 */
 var hideElement = function(title, selector, id) {
 	var $elementContainer = $(selector);
@@ -71,8 +71,11 @@ var hideElement = function(title, selector, id) {
 	$elementContainer.html('<button class="btn" id="' + id + '">Show ' + title + '</button>');
 	$('#' + id).on('click', function() {
 		$elementContainer.html(pron);
+		/*if (title === "Pronunciation"){
+			initializePracticeAudio();
+		}*/
 	});
-}
+};
 
 var initializePracticeRanking = function() {
 	$(".ranker").click(function() {
@@ -84,6 +87,12 @@ var initializePracticeRanking = function() {
         $('.rankCardForm').submit();
     });
 };
+
+/*var initializePracticeAudio = function() {
+	$("#play-audio").click(function() {
+		$("#flashcard-audio").load();
+	});
+};*/
 
 /**
 * Initialize the form used to create Quizes
@@ -131,15 +140,15 @@ var setupFlashcardSearchPagination = function() {
 	$('.paged-search a').click(function() {
 		$("#offset").val((parseInt($(this).text())-1)*10);
 		$('.searchUnitForm').submit();
-		return false;		
-	})
-}
+		return false;
+	});
+};
 
 var initializeDonuts = function() {
 	$('.progress-donut').each(function() {
 		drawDonut($(this).data('progress'), "#" + $(this).attr('id'));
 	});
-}
+};
 
 var drawDonut = function(value, selector) {
 	var	percentages = [value, (100 - value)];
@@ -171,4 +180,4 @@ var drawDonut = function(value, selector) {
 	.enter().append("path")
 	.attr("fill", function(d, i) { return color(i); })
 	.attr("d", arc);
-}
+};
