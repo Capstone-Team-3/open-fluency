@@ -8,7 +8,7 @@
 				</div>
 			</g:if>
 			<g:if test="${Constants.CARD_ELEMENTS[questionInstance.quiz.testElement] == "Symbol"}">
-				<h1>${it.flashcard.secondaryUnit.print}</h1>
+				<h1>${questionInstance.flashcard.secondaryUnit.print}</h1>
 			</g:if>
 			<g:else>
 				<h1>${questionInstance.flashcard.primaryUnit.print}</h1>
