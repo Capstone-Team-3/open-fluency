@@ -16,10 +16,10 @@
 						<a href="${createLink(uri:'/') }">Home</a>
 					</li>
 					<li>
-						<g:link action="search" controller="course" >Courses</g:link>
+						<g:link action="search" controller="course">Courses</g:link>
 					</li>
 					<li>
-						<g:link action="search" controller="course" >Search for Course</g:link>
+						<g:link action="search" controller="course">Search for Course</g:link>
 					</li>
 					<li>
 						<a href="#">${courseInstance.getCourseNumber()}: ${courseInstance.title}</a>

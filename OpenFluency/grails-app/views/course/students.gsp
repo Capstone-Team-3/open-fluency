@@ -40,9 +40,9 @@
                 </tr>
                 <tr class="active">
                     <g:each in="${courseInstance.getChapters()}">
-                        <th>Meanings</th>
-                        <th>Pronunciations</th>
-                        <th>Symbols</th>
+                        <th>Meanings (${courseInstance.chapters[0].deck.language} to ${courseInstance.chapters[0].deck.sourceLanguage})</th>
+                        <th>Meanings (${courseInstance.chapters[0].deck.sourceLanguage} to ${courseInstance.chapters[0].deck.language})</th>
+                        <th>Pronunciations in ${courseInstance.chapters[0].deck.language}</th>
                     </g:each>
                     <g:each in="${enrolledStudents[0].quizGrade.keySet()}">
                         <th>${it.title}</th>
@@ -55,8 +55,8 @@
                     <td>${registrationInstance.user.username}</td>
                     <g:each in="${registrationInstance.chapterProgress.keySet()}" var="chapterInstance">
                         <td>${registrationInstance.chapterProgress[chapterInstance][0]}%</td>
+                        <td>${registrationInstance.chapterProgress[chapterInstance][2]}%</td>
                         <td>${registrationInstance.chapterProgress[chapterInstance][1]}%</td>
-                        <td></td>
                     </g:each>
                     <g:each in="${registrationInstance.quizGrade.keySet()}" var="quizInstance">
                         <g:if test="${registrationInstance.quizGrade[quizInstance] != null}">
