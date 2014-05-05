@@ -51,21 +51,26 @@
 							<g:else>
 							<tr class="warning">
 							</g:else>
-								<td>${it.question.flashcard.primaryUnit.print}</td>
+								<g:if test="${it.question.quiz.testElement == Constants.SYMBOL}">
+									<td>${it.question.flashcard.secondaryUnit.print}</td>
+								</g:if>
+								<g:else>
+									<td>${it.question.flashcard.primaryUnit.print}</td>
+								</g:else>
 								
 								<g:if test="${it.question.quiz.testElement == Constants.MEANING}">
-								<td>${it.selection?.secondaryUnit?.print}</td>
-								<td>${it.question.flashcard.secondaryUnit.print} <span class="glyphicon glyphicon-ok pull-right"></span></td>
+									<td>${it.selection?.secondaryUnit?.print}</td>
+									<td>${it.question.flashcard.secondaryUnit.print} <span class="glyphicon glyphicon-ok pull-right"></span></td>
 								</g:if>
 								
 								<g:elseif test="${it.question.quiz.testElement == Constants.PRONUNCIATION}">
-								<td>${it.selection?.pronunciation}</td>
-								<td>${it.question.flashcard.pronunciation} <span class="glyphicon glyphicon-ok pull-right"></span></td>
+									<td>${it.selection?.pronunciation}</td>
+									<td>${it.question.flashcard.pronunciation} <span class="glyphicon glyphicon-ok pull-right"></span></td>
 								</g:elseif>
 
 								<g:else><!-- symbol quiz -->
-								<td>${it.selection?.id}</td>
-								<td>${it.question.flashcard.id} <span class="glyphicon glyphicon-ok pull-right"></span></td>
+									<td>${it.selection?.primaryUnit?.print}</td>
+									<td>${it.question.flashcard.primaryUnit?.print} <span class="glyphicon glyphicon-ok pull-right"></span></td>
 								</g:else>
 							</tr>
 						</g:each>

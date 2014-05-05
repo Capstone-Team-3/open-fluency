@@ -71,6 +71,10 @@
                             <g:render template="/home/instructor"/>
                         </sec:ifAllGranted>
 
+                        <sec:ifAllGranted roles="ROLE_RESEARCHER">
+                            <g:render template="/dataAccess/researcher" model="[controller: "dataAccess"]"/>
+                        </sec:ifAllGranted>
+
                     </div>
                 </sec:ifLoggedIn>
             </div>

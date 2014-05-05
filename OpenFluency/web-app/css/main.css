@@ -344,6 +344,11 @@ h4#custom-image {
     position: relative;
 }
 
+.dashboard .panel-default > .panel-heading,
+.dashboard .panel-footer {
+    background-color: #fafafa;
+}
+
 .dashboard-decks .panel-body {
     height: 160px;
 }
@@ -361,7 +366,6 @@ h4#custom-image {
 }
 
 .dashboard .continue {
-    margin-top: 10px;
     text-align: center;
 }
 
