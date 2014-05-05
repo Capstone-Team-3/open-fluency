@@ -37,9 +37,17 @@
 			<p class="deck-description">${deckInstance?.description}</p>
 			<div class="deck-actions">
 				<g:if test="${flashcardCount}">
-					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
-					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
-					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice Symbol</g:link>
+					<div class="btn-group text-left">
+						<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+							Practice Flashcards <span class="caret"></span>
+						</button>
+
+						<ul class="dropdown-menu" role="menu">
+							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice ${deckInstance?.language} to ${deckInstance?.sourceLanguage}</g:link></li>
+							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice ${deckInstance?.sourceLanguage} to ${deckInstance?.language}</g:link></li>
+							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice pronunciations of ${deckInstance?.language} words/characters</g:link></li>
+						</ul>
+					</div><!-- end btn-group -->
 				</g:if>
 			</div>
 		</div>

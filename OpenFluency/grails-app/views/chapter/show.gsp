@@ -37,11 +37,17 @@
 			<p class="chapter-description">${chapterInstance.description}</p>
 			<g:if test="${chapterInstance.deck.flashcardCount >
 				0 && Registration.findAllByCourseAndUser(chapterInstance.course, userInstance)}">
-				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" action="practice" 
-				id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
-				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" 
-				action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
-				<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.SYMBOL]">Practice Symbols</g:link>
+				<div class="btn-group text-left">
+					<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						Practice Flashcards <span class="caret"></span>
+					</button>
+
+					<ul class="dropdown-menu" role="menu">
+						<li><g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.MEANING]">Practice ${chapterInstance.deck.language} to ${chapterInstance.deck.sourceLanguage}</g:link></li>
+						<li><g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.SYMBOL]">Practice ${chapterInstance.deck.sourceLanguage} to ${chapterInstance.deck.language}</g:link></li>
+						<li><g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.PRONUNCIATION]">Practice pronunciations of ${chapterInstance.deck.language} words/characters</g:link></li>
+					</ul>
+				</div><!-- end btn-group -->
 			</g:if>
 			<g:if test="${isOwner}">
 				<g:link class="btn btn-info" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>

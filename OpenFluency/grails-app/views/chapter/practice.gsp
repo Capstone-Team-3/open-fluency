@@ -27,7 +27,15 @@
                     <g:link action="show" controller="chapter" id="${chapterInstance.id}">${chapterInstance.title}</g:link>
                 </li>
                 <li>
-                    <a href="#">Practice ${Constants.CARD_ELEMENTS[rankingType as Integer]}s</a>
+                    <g:if test="${Constants.CARD_ELEMENTS[rankingType as Integer] == "Meaning"}">
+                        <a href="#">Practice ${chapterInstance?.deck?.language} to ${chapterInstance?.deck?.sourceLanguage}</a>
+                    </g:if>
+                    <g:elseif test="${Constants.CARD_ELEMENTS[rankingType as Integer] == "Symbol"}">
+                        <a href="#">Practice ${chapterInstance?.deck?.sourceLanguage} to ${chapterInstance?.deck?.language}</a>
+                    </g:elseif>
+                    <g:else>
+                        <a href="#">Practice ${chapterInstance?.deck?.language} Pronunciation</a>
+                    </g:else>
                 </li>
             </ul>
         </div>
