@@ -43,10 +43,11 @@
 						<li> <strong>Tests:</strong>
 							<g:set var="lang" value="${quizInstance.course.chapters[0].deck.language}" />
 							<g:set var="sourceLang" value="${quizInstance.course.chapters[0].deck.sourceLanguage}" />
+							
 							<g:if test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}"> 
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
 							</g:if>
-							<g:elseif test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}">
+							<g:elseif test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Symbol"}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
 							</g:elseif>
 							<g:else>
@@ -54,7 +55,12 @@
 							</g:else>
 						</li>
 						<li> <strong>Maximum time allowed per card:</strong>
-							${quizInstance.maxCardTime} seconds
+							<g:if test="${quizInstance.maxCardTime > 0}">
+								${quizInstance.maxCardTime} seconds
+							</g:if>
+							<g:else>
+								N/A
+							</g:else>
 						</li>
 						<li>
 							<strong>Quiz available starting:</strong>
