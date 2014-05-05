@@ -40,23 +40,7 @@ class UserServiceSpec extends Specification {
     	then: "we should get errors"
     		newUser.hasErrors() == true
     }
-    //can't test it - got to learn how to test things that are saving to db behind the scenes.
-    /*void "editUser should change provided parameters"(){
-    	given:
-    		def studentRole = Role.load(0L)
-    		def japanese = Language.load(0L)
-    		def advancedP = new Proficiency(proficiency: 'Advanced').save(flush: true, failOnError: true)
-    		User student = new User(username: "Student", password: "test", email: "stu@test.com", userType: studentRole, nativeLanguage: japanese)
-    		def prof = student.getLanguageProficiencies()
-    		def eml = student.email
-    	when: "we edit the user's language proficiency, email but not password"
-    		def testUser = service.editUser(student,[japanese.id.toString()],[advancedP.id.toString()],null,"aNewEmail@c.om")
-    	then:
-    		testUser.getLanguageProficiencies() != prof
-    		testUser.password != null
-    		testUser.email != eml
-    		testUser.email == "aNewEmail@c.om"
-    }*/
+    
 
     void "resetUserPassword behavior"(){
     	when: "we provide emails but no student to match"
