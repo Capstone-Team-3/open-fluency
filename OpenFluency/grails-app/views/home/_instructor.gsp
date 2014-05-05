@@ -11,28 +11,28 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-                        <p>
+                        <div class="pull-right">
                             <g:if test="${it.visible}">
-                                <span class="tooltiper glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="top" title="This course is visible to all users"></span>
+                                <span class="tooltiper glyphicon glyphicon-globe" data-toggle="tooltip"  data-placement="top" title="This course is visible to all users."></span>
                             </g:if>
                             <g:if test="${it.open}">
-                                <span class="tooltiper glyphicon glyphicon-lock" data-toggle="tooltip"  data-placement="top" title="Approval is required to register for this course"></span>
+                                <span class="tooltiper glyphicon glyphicon-lock" data-toggle="tooltip"  data-placement="top" title="Approval is required to register for this course."></span>
                             </g:if>
-                        </p>
+                        </div>
 
-                        <div class="current-chapter">
-                            <h4> <b>Last Updated:</b>
-                                <br>${it.lastUpdated.format("MM/dd/yyyy")}</h4>
-                        </div>
+                        <ul class="list-unstyled">
+                            <li><strong>Last Updated:</strong> ${it.lastUpdated.format("MM/dd/yyyy")}</li>
+                            <li>
+                                <g:link class="view-more" action="students" controller="course" id="${it.id}">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    ${Registration.countByCourse(it)} Student Enrolled
+                                </g:link>
+                            </li>
+                        </ul>
+                    
                     </div>
-                    <div class="panel-footer">
-                        <div class="continue">
-                            <g:link class="view-more" action="students" controller="course" id="${it.id}">
-                                <span class="glyphicon glyphicon-user"></span>
-                                ${Registration.countByCourse(it)} Enrolled
-                                <span class="glyphicon glyphicon-arrow-right"></span>
-                            </g:link>
-                        </div>
+                    <div class="panel-footer center">
+                        <g:link class="btn btn-info" controller="course" action="show" id="${it.id}">View Course</g:link>
                     </div>
                 </div>
             </div>
@@ -45,8 +45,7 @@
         <g:link class="btn btn-success" controller="course" action="create">Create a Course</g:link>
     </div>
 </g:else>   
-    <g:link class="view-more" action="list" controller="course">
-        View More Courses
-        <span class="glyphicon glyphicon-arrow-right"></span>
-    </g:link>
-</div>
+<g:link class="view-more" action="list" controller="course">
+    View More Courses
+    <span class="glyphicon glyphicon-arrow-right"></span>
+</g:link>
