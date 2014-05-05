@@ -53,8 +53,6 @@ class QuizService {
 
     void createQuestions(Quiz quizInstance, List flashcardIds) {
     	// Now create the questions for each flashcard
-        Random rand = new Random() // randomize the options for the questions
-        
         flashcardIds.each {
         	Flashcard flashcardInstance = Flashcard.get(it)
 
@@ -130,6 +128,11 @@ class QuizService {
     		answer.status = Constants.VIEWED
     		answer.save()
     	} 
+
+        // Have to finalize the quiz since no more answers can be submitted by the student
+        else {
+            finalizeQuiz(quizInstance)
+        }
 
     	return answer
     }

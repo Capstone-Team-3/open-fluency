@@ -24,6 +24,8 @@ class QuizController {
 			return
 		}
 
+		println "TEST ELEMENT ${params.testElement}"
+
 		// Build the quiz
 		Quiz quizInstance = quizService.createQuiz(
 			params.title, 

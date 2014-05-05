@@ -30,14 +30,14 @@
 					<h1 class="unit text-center">${answerInstance.question.flashcard.primaryUnit.print}</h1>
 					
 					<div class="col-lg-6 col-lg-offset-3">
-						<p><strong>Select the matching ${Constants.CARD_ELEMENTS[answerInstance.question.quiz.testElement].toLowerCase()}:</strong></p>
+						<p><strong>Select the matching ${Constants.CARD_ELEMENTS[answerInstance.question.quiz.effectiveTestElement].toLowerCase()}:</strong></p>
 						<ul class="list-group">
 							<g:each in="${answerInstance.question.selections}">
 								<li class="list-group-item">
 									<label>
 										<input type="radio" name="option" id="option" value="${it.id}" checked>
-										<g:if test="${answerInstance.question.quiz.testElement == Constants.MEANING}">${it.secondaryUnit.print}</g:if>
-										<g:elseif test="${answerInstance.question.quiz.testElement == Constants.PRONUNCIATION}">${it.pronunciation}</g:elseif>
+										<g:if test="${answerInstance.question.quiz.effectiveTestElement == Constants.MEANING}">${it.secondaryUnit.print}</g:if>
+										<g:elseif test="${answerInstance.question.quiz.effectiveTestElement == Constants.PRONUNCIATION}">${it.pronunciation}</g:elseif>
 									</label>
 								</li>
 							</g:each>

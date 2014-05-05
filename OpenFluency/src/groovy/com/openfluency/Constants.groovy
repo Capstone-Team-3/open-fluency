@@ -16,7 +16,8 @@ public class Constants {
 	public static final int MEANING = 0
 	public static final int PRONUNCIATION = 1
 	public static final int SYMBOL = 2
-	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol"]
+	public static final int RANDOM = 3
+	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol", "Random"]
 
 	// Answer statuses
 	public static final int NOT_ANSWERED = 0

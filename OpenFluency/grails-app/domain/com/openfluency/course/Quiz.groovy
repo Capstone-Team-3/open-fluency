@@ -22,6 +22,20 @@ class Quiz {
 		Question.countByQuiz(this)
 	}
 
+	/**
+	* Returns the test element to use during the test. If the test element is random, then a random test element is returned
+	*/
+	Integer getEffectiveTestElement() {
+		if(testElement == Constants.RANDOM) {
+			Random rand = new Random()
+			int max = Constants.CARD_ELEMENTS.size()
+			return rand.nextInt(max-1)
+		} 
+		else {
+			return testElement
+		}
+	}
+
     static constraints = {
     	liveTime nullable: true
     }

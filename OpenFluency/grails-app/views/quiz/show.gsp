@@ -22,9 +22,7 @@
 						</g:link>
 					</li>
 					<li>
-						<g:link action="show" controller="quiz" id="${quizInstance.id}">
-							${quizInstance.title}
-						</g:link>
+						<g:link action="show" controller="quiz" id="${quizInstance.id}">${quizInstance.title}</g:link>
 					</li>
 				</ul>
 
@@ -32,7 +30,9 @@
 					<h1>
 						Quiz: ${quizInstance.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${quizInstance.id}" controller="quiz" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+							<g:link action="edit" id="${quizInstance.id}" controller="quiz" class="btn btn-warning">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</g:link>
 						</g:if>
 					</h1>
 					<h3>${quizInstance.course.title}</h3>
@@ -43,12 +43,13 @@
 						<li> <strong>Tests:</strong>
 							<g:set var="lang" value="${quizInstance.course.chapters[0].deck.language}" />
 							<g:set var="sourceLang" value="${quizInstance.course.chapters[0].deck.sourceLanguage}" />
-							<g:if test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}"> 
+							<g:if test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
 							</g:if>
 							<g:elseif test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
 							</g:elseif>
+							<g:elseif test="${Constants.RANDOM == quizInstance.testElement}">Randomly selects an element to test</g:elseif>
 							<g:else>
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of ${lang} words/characters
 							</g:else>
