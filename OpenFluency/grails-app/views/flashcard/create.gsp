@@ -14,7 +14,7 @@
             <li><a href="#">Create Flashcard </a></li>
         </ul>
 		
-        <h1 id=main>Create Flashcard for ${unitInstance?.print}</h1>
+        <h1>Create Flashcard for ${unitInstance?.print}</h1>
 
 		<div class="row">
 			<div class="col-lg-5 flashcard-create-form">

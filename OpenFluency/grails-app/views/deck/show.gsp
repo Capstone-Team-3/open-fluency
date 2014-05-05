@@ -47,7 +47,7 @@
 
 		<div class="row">
 			<g:each in="${flashcardInstanceList}">
-				<div class="col-lg-3 flashcard-result">
+				<div class="col-lg-3">
 					<g:render template="/flashcard/flashcard" model="[flashcardInstance: it, isOwner: isOwner]"/>
 				</div>
 				<!-- end col-lg-3 -->

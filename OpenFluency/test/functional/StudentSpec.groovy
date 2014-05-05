@@ -60,7 +60,7 @@ class StudentSpec extends GebReportingSpec {
 		then:
 		at ShowDeckPage
 		flashMessage.text() == "Well done! You succesfully created a new deck!"
-		deckTitle.text() == "Test Deck"
+		deckTitle.text() == "Test Deck Edit Delete"
 		deckDescription.text() == "This is a test deck!"
 	}
 

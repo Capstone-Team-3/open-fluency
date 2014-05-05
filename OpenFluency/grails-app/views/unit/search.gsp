@@ -16,7 +16,7 @@
                 <a href="#">Flashcard Search</a>
             </li>
         </ul>
-        <h1 id="main">Flashcard Search</h1>
+        <h1>Flashcard Search</h1>
         <p class="instructions">
             Choose a character, word, or phrase for which you'd like to create a flashcard.
         </p>
@@ -44,7 +44,7 @@
                     <div class="input-group">
                         <g:textField class="form-control" value="${keyword}" name="keyword" placeholder="Type a keyword to search by meaning" id="keyword" />
                         <span class="input-group-btn">
-                            <button class="btn btn-default search-button" type="submit">
+                            <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
@@ -74,7 +74,7 @@
                             </g:each>
                         </td>
                         <td>
-                            <g:form class="pull-right id-${it?.id}" action="create" controller="flashcard" name="createFlashcardForm">
+                            <g:form class="pull-right" action="create" controller="flashcard" name="createFlashcardForm">
                                 <input type="hidden" name="unit" value="${it?.id}"/>
                                 <input type="hidden" name="deckId" value="${deckId}"/>
                                 <button class="btn btn-success" type="submit">Create Flashcard</button>
