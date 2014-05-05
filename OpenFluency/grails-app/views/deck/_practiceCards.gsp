@@ -2,7 +2,6 @@
 
 <div class="row">
     <div class="deck-header text-center">
-        <h3 data-rank-type="${rankingType as Integer}">Practice ${Constants.CARD_ELEMENTS[rankingType as Integer]}s</h3>
         <g:if test="${chapterInstance}">
             <h1>${chapterInstance?.title}</h1>
         </g:if>
@@ -10,6 +9,15 @@
             <h1>${practiceDeckInstance.title}</h1>
         </g:else>
 
+        <g:if test="${Constants.CARD_ELEMENTS[rankingType as Integer] == "Meaning"}">
+            <h2 class="h4" data-rank-type="${rankingType as Integer}">Practice ${practiceDeckInstance?.language} to ${practiceDeckInstance?.sourceLanguage}</h2>
+        </g:if>
+        <g:elseif test="${Constants.CARD_ELEMENTS[rankingType as Integer] == "Symbol"}">
+            <h2 class="h4" data-rank-type="${rankingType as Integer}">Practice ${practiceDeckInstance?.language} to ${practiceDeckInstance?.sourceLanguage}</h2>
+        </g:elseif>
+        <g:else>
+            <h2 class="h4" data-rank-type="${rankingType as Integer}">Practice ${practiceDeckInstance?.language} Pronunciation</h2>
+        </g:else>
     </div>
     <!-- end deck-heaer -->
 
