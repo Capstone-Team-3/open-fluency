@@ -17,7 +17,7 @@ class BootStrap {
     def userService
 
     def init = { servletContext ->
-/*
+
     	// Create languages
     	Language japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
     	Language english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
@@ -63,15 +63,15 @@ class BootStrap {
     	// Load sample language - the configuration is now externalized. 
         // The settings are in: conf/open-fluency-config.properties
         languageService.loadLanguage(grailsApplication.config.kanjiDictionaryURL, kanji, latin)
-*/
+
         // Register some CardServiceAlgorithms
         CardServer linearWithShuffle = new LinearWithShuffle()
         algorithmService.addCardServer(linearWithShuffle.name, linearWithShuffle)
         CardServer sm2SpacedRep = new SM2SpacedRepetition()
         algorithmService.addCardServer(sm2SpacedRep.name, sm2SpacedRep)
-       
+        
         log.info "Added the ${linearWithShuffle} algo"
-/*
+
         // Build a bunch of sample decks
         Deck restaurant = new Deck(sourceLanguage: english, language: japanese, title: "Restaurant", description: "Words that I would use in a restaurant context", owner: student, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
         Deck business = new Deck(sourceLanguage: english, language: japanese, title: "Business", description: "Words that I would use in a business context", owner: student, cardServerName: "SM2-Spaced-Repetition").save(failOnError: true)
@@ -112,7 +112,7 @@ class BootStrap {
         // Sign up the student for course 1
         new Registration(user: student, course: kanji1).save()
         flashcardInfoService.resetCourseFlashcardInfo(student, kanji1)
-*/
+
         log.info "Booted!"
     }
     def destroy = {
