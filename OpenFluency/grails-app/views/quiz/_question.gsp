@@ -1,4 +1,5 @@
 <%@ page import="com.openfluency.Constants" %>
+<g:set var="testElement" value="${questionInstance.quiz.effectiveTestElement}"/>
 <div class="col-lg-3">
 	<div class="panel panel-default question-panel">
 		<div class="panel-heading center">
@@ -7,7 +8,7 @@
 					<g:link action="deleteQuestion" id="${questionInstance.id}" controller="quiz" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 				</div>
 			</g:if>
-			<g:if test="${Constants.CARD_ELEMENTS[questionInstance.quiz.testElement] == "Symbol"}">
+			<g:if test="${testElement == Constants.SYMBOL}">
 				<h1>${questionInstance.flashcard.secondaryUnit.print}</h1>
 			</g:if>
 			<g:else>
@@ -17,12 +18,13 @@
 		<div class="panel-body text-center">
 			<h4>Multiple choice options:</h4>
 			<table class="table">
+				
 				<g:each in="${questionInstance.options}">
 					<tr>
-						<g:if test="${Constants.CARD_ELEMENTS[questionInstance.quiz.testElement] == "Meaning"}">
+						<g:if test="${testElement == Constants.MEANING}">
 							<td>${it.flashcard.secondaryUnit.print}</td>
 						</g:if>
-						<g:elseif test="${Constants.CARD_ELEMENTS[questionInstance.quiz.testElement] == "Symbol"}">
+						<g:elseif test="${testElement == Constants.SYMBOL}">
 							<td>${it.flashcard.primaryUnit.print}</td>
 						</g:elseif>
 						<g:else>

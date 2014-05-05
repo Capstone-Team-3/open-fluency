@@ -1,4 +1,5 @@
 <%@ page import="com.openfluency.Constants" %>
+<g:set var="testElement" value="${answerInstance.question.quiz.effectiveTestElement}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,17 +28,24 @@
 				<g:form action="nextQuestion" controller="quiz" id="${answerInstance.id}">
 					<input type="hidden" name="quiz" value="${quizInstance.id}" />
 
-					<h1 class="unit text-center">${answerInstance.question.flashcard.primaryUnit.print}</h1>
-					
+					<g:if test="${testElement == Constants.SYMBOL}">
+						<h1 class="unit text-center">${answerInstance.question.flashcard.secondaryUnit.print}</h1>
+					</g:if>
+					<g:else>
+						<h1 class="unit text-center">${answerInstance.question.flashcard.primaryUnit.print}</h1>
+					</g:else>
+
 					<div class="col-lg-6 col-lg-offset-3">
-						<p><strong>Select the matching ${Constants.CARD_ELEMENTS[answerInstance.question.quiz.effectiveTestElement].toLowerCase()}:</strong></p>
+						<p> <strong>Select the matching ${Constants.CARD_ELEMENTS[testElement].toLowerCase()}:</strong> 
+						</p>
 						<ul class="list-group">
 							<g:each in="${answerInstance.question.selections}">
 								<li class="list-group-item">
 									<label>
 										<input type="radio" name="option" id="option" value="${it.id}" checked>
-										<g:if test="${answerInstance.question.quiz.effectiveTestElement == Constants.MEANING}">${it.secondaryUnit.print}</g:if>
-										<g:elseif test="${answerInstance.question.quiz.effectiveTestElement == Constants.PRONUNCIATION}">${it.pronunciation}</g:elseif>
+										<g:if test="${testElement == Constants.MEANING}">${it.secondaryUnit.print}</g:if>
+										<g:elseif test="${testElement == Constants.PRONUNCIATION}">${it.pronunciation}</g:elseif>
+										<g:elseif test="${testElement == Constants.SYMBOL}">${it.primaryUnit.print}</g:elseif>
 									</label>
 								</li>
 							</g:each>
