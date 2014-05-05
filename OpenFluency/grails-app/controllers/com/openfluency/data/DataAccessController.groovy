@@ -13,7 +13,7 @@ class DataAccessController {
 	def exportService
 	def grailsApplication
 
-    def index() {}
+    //def index() {}
 
     //common usage formatting closures
     def idify = {domain, value -> domain.id}

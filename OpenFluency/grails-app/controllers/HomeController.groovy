@@ -10,6 +10,7 @@ class HomeController {
 
 	def deckService
 	def springSecurityService
+    def exportService
 
 	def index = {
 		if (!springSecurityService.currentUser){
