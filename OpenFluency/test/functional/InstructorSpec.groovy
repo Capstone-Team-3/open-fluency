@@ -116,17 +116,20 @@ class InstructorSpec extends GebReportingSpec {
 		$('#goCreate').click()
 		then:
 		at ShowDeckPage
-		$(".flashcard-result").size() == 6
-	}
-	def "Instructor tries to delete the Flashcard from the deck - not the owner of the Deck"() {
-		when:
-		$('.flashcard-delete-3').click()
-		then:
-		at ShowDeckPage
 		flashcardResult.size() == 6
 	}
-	
-/*	def "Instructor navigates to Edit Deck - should not be able to, not owenr of the Deck"() {
+	def "Instructor deletes a Flashcard from a deck"() {
+		when:
+		$('.flashcard-delete-6').click()
+		waitFor {
+			flashcardResult.present
+		}
+		then:
+		at ShowDeckPage
+		flashcardResult.size() == 5
+	}
+/*	
+	def "Instructor navigates to Edit Deck"() {
 		when:
 		editDeckButton.click()
 		then:
