@@ -27,7 +27,12 @@
 				<g:form action="nextQuestion" controller="quiz" id="${answerInstance.id}">
 					<input type="hidden" name="quiz" value="${quizInstance.id}" />
 
-					<h1 class="unit text-center">${answerInstance.question.flashcard.primaryUnit.print}</h1>
+					<g:if test="${answerInstance.question.quiz.testElement == Constants.SYMBOL}">
+						<h1 class="text-center unit">${answerInstance.question.flashcard.secondaryUnit.print}</h1>
+					</g:if>
+					<g:else>
+						<h1 class="text-center unit">${answerInstance.question.flashcard.primaryUnit.print}</h1>
+					</g:else>
 					
 					<div class="col-lg-6 col-lg-offset-3">
 						<p><strong>Select the matching ${Constants.CARD_ELEMENTS[answerInstance.question.quiz.testElement].toLowerCase()}:</strong></p>
@@ -38,6 +43,7 @@
 										<input type="radio" name="option" id="option" value="${it.id}" checked>
 										<g:if test="${answerInstance.question.quiz.testElement == Constants.MEANING}">${it.secondaryUnit.print}</g:if>
 										<g:elseif test="${answerInstance.question.quiz.testElement == Constants.PRONUNCIATION}">${it.pronunciation}</g:elseif>
+										<g:else>${it.primaryUnit.print}</g:else>
 									</label>
 								</li>
 							</g:each>
