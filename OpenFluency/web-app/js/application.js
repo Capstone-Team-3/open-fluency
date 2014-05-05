@@ -53,7 +53,7 @@ var initializePracticeCards = function() {
 		hideElement("Image", "image-container", "show-image");
 		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	} else if (type === 'symbol'){
-		hideElement("Symbol", ".flashcard-unit", "show-flashcard-unit");
+		hideElement("Word/Character", ".flashcard-unit", "show-flashcard-unit");
 		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	}
 

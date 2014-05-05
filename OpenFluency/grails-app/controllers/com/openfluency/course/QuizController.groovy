@@ -28,7 +28,7 @@ class QuizController {
 		Quiz quizInstance = quizService.createQuiz(
 			params.title, 
 			params.liveTime,
-			params.maxCardTime as Integer, 
+			params.maxCardTime ? params.maxCardTime as Integer : 0, 
 			params.testElement as Integer,
 			params.list('flashcardId'),
 			courseInstance

@@ -344,8 +344,8 @@ h4#custom-image {
     position: relative;
 }
 
-.dashboard .panel-footer {
-    height: 80px;
+.dashboard-decks .panel-body {
+    height: 160px;
 }
 
 .dashboard .panel h3 {
@@ -365,6 +365,10 @@ h4#custom-image {
     text-align: center;
 }
 
+.dashboard-decks .continue {
+    margin-top: 0;
+}
+
 .dashboard .view-more {
     display: block;
     margin-top: 10px;
@@ -379,7 +383,8 @@ h4#custom-image {
 .deck-list h1,
 .deck-create h1,
 .course-list h1,
-.course-enrolled h1 {
+.course-enrolled h1,
+.quiz-create h1 {
     margin: 30px 0;
 }
 
@@ -424,8 +429,8 @@ h4#custom-image {
     margin-bottom: 5px;
 }
 
-.take-quiz-btn {
-    margin-top: 50px;
+.take-quiz {
+    margin-top: 20px;
 }
 
 .quiz-complete {
@@ -479,6 +484,10 @@ h4#custom-image {
     height: 160px;
 }
 
+.course-show .donut-container {
+    height: 165px;
+}
+
 .progress-donut {
     height: 100px;
     padding: 0px 10px !important;
@@ -486,8 +495,8 @@ h4#custom-image {
 }
 
 .list-progress {
-    width: 300px;
-    height: 130px;
+    width: 320px;
+    height: 150px;
 }
 
 /* ---------------------------------------------------------------------------*/
@@ -533,12 +542,17 @@ h4#custom-image {
 
 .quiz-show h1 {
     margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .quiz-show .description {
     background-color: #efefef;
     margin: 30px 0 20px;
     padding: 20px 20px 10px;
+}
+
+.question-panel {
+    position: relative;
 }
 
 .question-panel h1 {

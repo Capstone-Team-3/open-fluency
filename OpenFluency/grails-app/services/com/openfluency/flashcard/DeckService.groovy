@@ -123,7 +123,7 @@ class DeckService {
     	deck.save()
 
     	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
-        
+
     	return deck
     }
 
@@ -224,6 +224,14 @@ class DeckService {
     */
     Flashcard getRandomFlashcard(Flashcard flashcardInstance) {
     	Flashcard.executeQuery('FROM Flashcard WHERE deck = ? AND id <> ? ORDER BY rand()', [flashcardInstance.deck, flashcardInstance.id], [max: 1])[0]
+    }
+
+    /**
+    * Get a random flashcard from a deck where the given flashcard lives but is not any of the given flashcards
+    */
+    Flashcard getRandomFlashcard(Flashcard flashcardInstance, List<Long> flashcardIds) {
+        def query = "FROM Flashcard WHERE deck.id = " + flashcardInstance.deck.id + " AND id NOT IN (" + flashcardIds.join(",") + ") ORDER BY rand()"
+        Flashcard.executeQuery(query, [max: 1])[0]
     }
 
     /**

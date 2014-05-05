@@ -18,9 +18,9 @@
 				<td>${it.sourceLanguage.name}</td>
 				<td>${it.language.name}</td>
 				<td>${it.flashcardCount}</td>
-				<td>
+				<td class="list-progress">
 					<div class="list-progress">
-						<g:render template="/deck/allProgress" model="[progress: it.progress, id: it.id]"/>
+						<g:render template="/deck/allProgress" model="[deckInstance: it, progress: it.progress, id: it.id]"/>
 					</div>
 				</td>
 				<td class="right">

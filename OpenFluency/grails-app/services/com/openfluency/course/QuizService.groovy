@@ -44,14 +44,14 @@ class QuizService {
     	quizInstance.maxCardTime = maxCardTime
     	quizInstance.save()
 
-      if(quizInstance.hasErrors()) {
-         return
-     }
+        if(quizInstance.hasErrors()) {
+            return
+        }
 
-     createQuestions(quizInstance, flashcardIds)
- }
+        createQuestions(quizInstance, flashcardIds)
+    }
 
- void createQuestions(Quiz quizInstance, List flashcardIds) {
+    void createQuestions(Quiz quizInstance, List flashcardIds) {
     	// Now create the questions for each flashcard
         Random rand = new Random() // randomize the options for the questions
         
@@ -63,9 +63,19 @@ class QuizService {
             
             // Now create a number of options - right now it's hard coded to 3 but it can be easily user defined
             int maxOptions = 3
-            (1..maxOptions).each {
-            	new QuestionOption(question: question, flashcard: deckService.getRandomFlashcard(flashcardInstance)).save()
+
+            if(flashcardInstance.deck.flashcardCount < maxOptions + 1) { // need at least 4 cards in the deck
+                log.info "Cannot create a quiz for a deck that has less cards than the required options"                
             }
+
+            // Create 3 options that are different
+            Flashcard flashcard1 = deckService.getRandomFlashcard(flashcardInstance)
+            Flashcard flashcard2 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id])
+            Flashcard flashcard3 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id, flashcard2.id])
+
+            new QuestionOption(question: question, flashcard: flashcard1).save(failOnError: true)
+            new QuestionOption(question: question, flashcard: flashcard2).save(failOnError: true)
+            new QuestionOption(question: question, flashcard: flashcard3).save(failOnError: true)
         }
     }
 

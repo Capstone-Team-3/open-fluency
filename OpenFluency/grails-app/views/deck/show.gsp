@@ -24,22 +24,31 @@
 				<g:if test="${isOwner}">
 					<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 					<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></g:link>
-
-					<div class="btn-group">
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-plus"></span></button>
-						<ul class="text-left dropdown-menu" role="menu">
-							<li><g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Add Flashcards</g:link></li>
-							<li><a data-toggle="modal" data-target="#myModal">Load from CSV file</a></li>
-						</ul>
-					</div>
 				</g:if>
 			</h1>
 			<p class="deck-description">${deckInstance?.description}</p>
 			<div class="deck-actions">
 				<g:if test="${flashcardCount}">
-					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The translation of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice Meanings</g:link>
-					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The pronunciations of the character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
-					<g:link class="tooltiper btn btn-success"  data-toggle="tooltip"  data-placement="top" title="The character/word is hidden" action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice Symbol</g:link>
+					<div class="btn-group text-left">
+						<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+							Practice Flashcards <span class="caret"></span>
+						</button>
+
+						<ul class="dropdown-menu" role="menu">
+							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice ${deckInstance?.language} to ${deckInstance?.sourceLanguage}</g:link></li>
+							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice ${deckInstance?.sourceLanguage} to ${deckInstance?.language}</g:link></li>
+							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice pronunciations of ${deckInstance?.language} words/characters</g:link></li>
+						</ul>
+					</div><!-- end btn-group -->
+					<div class="btn-group text-left">
+						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+							Add Flashcards <span class="caret"></span>
+						</button>
+						<ul class="text-left dropdown-menu" role="menu">
+							<li><g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link></li>
+							<li><a data-toggle="modal" data-target="#myModal">Load from CSV file</a></li>
+						</ul>
+					</div>
 				</g:if>
 			</div>
 		</div>

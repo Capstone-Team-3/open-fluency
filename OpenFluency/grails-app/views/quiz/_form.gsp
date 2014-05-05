@@ -14,9 +14,9 @@
 <div class="form-group">
 	<label for="testElement">Test students on:</label>
 	<select class="form-control" name="testElement">
-		<g:each in="${Constants.CARD_ELEMENTS}" status="i" var="element">
-			<option value="${i}">${element}s of the words/characters</option>
-		</g:each>
+		<option value="${Constants.SYMBOL}">Meanings of words/characters (${courseInstance.chapters[0].deck.language} to ${courseInstance.chapters[0].deck.sourceLanguage})</option>
+		<option value="${Constants.MEANING}">Meanings of words/characters (${courseInstance.chapters[0].deck.sourceLanguage} to ${courseInstance.chapters[0].deck.language})</option>
+		<option value="${Constants.PRONUNCIATION}">Pronunciations of ${courseInstance.chapters[0].deck.language} words/characters</option>
 	</select>
 </div>
 

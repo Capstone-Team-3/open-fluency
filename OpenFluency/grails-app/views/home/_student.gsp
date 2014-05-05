@@ -21,7 +21,7 @@
 
 <h2>In-Progress Decks</h2>
 <g:if test="${deckInstanceList}">
-    <div class="dashboard-container">
+    <div class="dashboard-container dashboard-decks">
         <g:each in="${deckInstanceList}">
             <div class="col-lg-4">
                 <div class="panel panel-default">
@@ -31,7 +31,7 @@
                         </h4>
                     </div>
                     <div class="panel-body">
-                        <g:render template="/deck/allProgress" model="[progress: it.progress, id: it.id]"/>
+                        <g:render template="/deck/allProgress" model="[deckInstance: it, progress: it.progress, id: it.id]"/>
                     </div>
                     <div class="panel-footer">
                         <div class="continue">

@@ -16,10 +16,10 @@
 						<a href="${createLink(uri:'/') }">Home</a>
 					</li>
 					<li>
-						<g:link action="search" controller="course" >Courses</g:link>
+						<g:link action="search" controller="course">Courses</g:link>
 					</li>
 					<li>
-						<g:link action="search" controller="course" >Search for Course</g:link>
+						<g:link action="search" controller="course">Search for Course</g:link>
 					</li>
 					<li>
 						<a href="#">${courseInstance.getCourseNumber()}: ${courseInstance.title}</a>
@@ -80,8 +80,8 @@
 								<div class="panel-heading">
 									<div class="card-actions">
 										<g:if test="${isOwner}">
-											<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
-											<g:link action="delete" controller="chapter" id="${it.id}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
+											<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:link action="delete" controller="chapter" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</g:if>
 									</div>
 									<h4>
@@ -93,11 +93,15 @@
 									<div class="donut-container">
 										<div class="panel-body">
 											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
-												<p>Meaning</p>
+												<p>${it.deck.language} to ${it.deck.sourceLanguage}</p>
+											</div>
+
+											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.SYMBOL]}" id="symbol-progress-${it.id}">
+												<p>${it.deck.sourceLanguage} to ${it.deck.language}</p>
 											</div>
 
 											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
-												<p>Pronunciation</p>
+												<p>Pronunciations in ${it.deck.language}</p>
 											</div>
 										</div>
 									</div>
@@ -132,8 +136,8 @@
 								<div class="panel-heading">
 									<g:if test="${isOwner}">
 										<div class="card-actions">
-											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
-											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
+											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>
 									<h4>
@@ -145,19 +149,32 @@
 									<g:if test="${!isOwner}">
 										<g:if test="${it.finalGrade}">
 											<div class="quiz-complete bg-success">
-												<p class="h5"><strong>Completed - Grade: ${it.finalGrade}%</strong></p>
+												<p><strong>Completed - Grade: ${it.finalGrade}%</strong></p>
 												<g:link class="btn btn-info" action="take" controller="quiz" id="${it.id}">View Report</g:link>
 											</div>
 										</g:if>
 										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
 											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
-												<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Take Quiz</g:link>
+												<div class="take-quiz">
+													<p>Ready to take the quiz?</p>
+													<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
+												</div>
 											</g:if>
 										</g:elseif>
 									</g:if>
 									<g:else>
 										<ul class="list-unstyled text-left">
-											<li><strong>Test type:</strong> ${Constants.CARD_ELEMENTS[it.testElement].toLowerCase()}s</li>
+										<li><strong>Tests:</strong> 
+											<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
+												Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
+											</g:if>
+											<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
+												Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
+											</g:elseif>
+											<g:else>
+												Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
+											</g:else>
+										</li>
 											<li><strong>Available:</strong> ${it.liveTime}</li>
 										</ul>
 									</g:else>
