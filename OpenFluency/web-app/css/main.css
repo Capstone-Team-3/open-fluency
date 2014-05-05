@@ -344,8 +344,8 @@ h4#custom-image {
     position: relative;
 }
 
-.dashboard .panel-footer {
-    height: 80px;
+.dashboard-decks .panel-body {
+    height: 160px;
 }
 
 .dashboard .panel h3 {
@@ -363,6 +363,10 @@ h4#custom-image {
 .dashboard .continue {
     margin-top: 10px;
     text-align: center;
+}
+
+.dashboard-decks .continue {
+    margin-top: 0;
 }
 
 .dashboard .view-more {
@@ -425,8 +429,8 @@ h4#custom-image {
     margin-bottom: 5px;
 }
 
-.take-quiz-btn {
-    margin-top: 50px;
+.take-quiz {
+    margin-top: 20px;
 }
 
 .quiz-complete {
@@ -478,6 +482,10 @@ h4#custom-image {
 
 .donut-container {
     height: 160px;
+}
+
+.course-show .donut-container {
+    height: 165px;
 }
 
 .progress-donut {

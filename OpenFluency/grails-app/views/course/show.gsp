@@ -93,11 +93,15 @@
 									<div class="donut-container">
 										<div class="panel-body">
 											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
-												<p>Meaning</p>
+												<p>${it.deck.language} to ${it.deck.sourceLanguage}</p>
+											</div>
+
+											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.SYMBOL]}" id="symbol-progress-${it.id}">
+												<p>${it.deck.sourceLanguage} to ${it.deck.language}</p>
 											</div>
 
 											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
-												<p>Pronunciation</p>
+												<p>Pronunciations in ${it.deck.language}</p>
 											</div>
 										</div>
 									</div>
@@ -145,13 +149,16 @@
 									<g:if test="${!isOwner}">
 										<g:if test="${it.finalGrade}">
 											<div class="quiz-complete bg-success">
-												<p class="h5"><strong>Completed - Grade: ${it.finalGrade}%</strong></p>
+												<p><strong>Completed - Grade: ${it.finalGrade}%</strong></p>
 												<g:link class="btn btn-info" action="take" controller="quiz" id="${it.id}">View Report</g:link>
 											</div>
 										</g:if>
 										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
 											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
-												<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Take Quiz</g:link>
+												<div class="take-quiz">
+													<p>Ready to take the quiz?</p>
+													<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
+												</div>
 											</g:if>
 										</g:elseif>
 									</g:if>
