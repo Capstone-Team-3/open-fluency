@@ -1,4 +1,4 @@
-<%@ page import="com.openfluency.course.Registration" %>
+-<%@ page import="com.openfluency.course.Registration" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.QuizService" %>
@@ -44,139 +44,132 @@
 
 						</sec:ifAllGranted>
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${courseInstance?.id}" class="btn btn-sm btn-warning">Edit</g:link>
-							<g:link action="delete" id="${courseInstance?.id}" class="btn btn-sm btn-danger">Delete</g:link>
+							<g:link action="edit" id="${courseInstance?.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+							<g:link action="delete" id="${courseInstance?.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></g:link>
 						</g:if>
 					</h1>
 					<p class="course-description">${courseInstance.description}</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="dashboard">
-			<div class="row">
-				<div class="col-lg-12">
-
-					<h2>
-						Chapters
-						<g:if test="${isOwner}">
-							<g:link class="btn btn-info add-chapter"  action="create" controller="chapter" id="${courseInstance.id}" >Add Chapters</g:link>
-						</g:if>
-					</h2>
-
-					<div class="container">
-						<div class="row">
-							<g:each in="${courseInstance.chapters}">
-								<div class="col-lg-4">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4>
-												<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
-											</h4>
-										</div>
-										<g:if test="${!isOwner}">
-											<div class="donut-container">
-												<div class="panel-body">
-													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
-														<p>Meaning</p>
-													</div>
-
-													<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
-														<p>Pronunciation</p>
-													</div>
-												</div>
-											</div>
-										</g:if>
-										<g:else>
-											<div class="panel-body">
-												<p></p>
-											</div>
-										</g:else>
-										<div class="panel-footer center">
-											<g:if test="${isOwner}">
-												<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-warning">Edit</g:link>
-												<g:link action="delete" controller="chapter" id="${it.id}" class="btn btn-danger" onclick="return confirm('are you sure?')">Remove</g:link>
-											</g:if>
-										</div>
-									</div>
-								</div>
-							</g:each>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-12">
-
-					<h2>
-						Quizzes
-						<g:if test="${isOwner}">
-							<!-- This is only displayed for the owner of the course -->
-							<g:link class="btn btn-info" action="create" controller="quiz" id="${courseInstance.id}">Add Quiz</g:link>
-						</g:if>
-					</h2>
-
-					<div class="container">
-						<div class="row">
-							<g:each in="${quizesInstanceList}">
-								<div class="col-lg-3">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4>
-												<g:link action="show" id="${it.id}" controller="quiz">${it.title}</g:link>
-											</h4>
-										</div>
-										<div class="panel-body">${it.questions.size()} Questions</div>
-										<div class="panel-footer">
-											<div class="continue">
-												<g:if test="${isOwner}">
-													<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-warning">Edit</g:link>
-													<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-danger" onclick="return confirm('are you sure?')">Remove</g:link>
-												</g:if>
-												<g:else>
-													<g:if test="${it.finalGrade}">
-														<h4>
-															Current Grade : 
-													    ${it.finalGrade}
-														</h4>
-														<g:link class="view-more" action="take" controller="quiz" id="${it.id}">
-															View Report
-															<span class="glyphicon glyphicon-arrow-right"></span>
-														</g:link>
-													</g:if>
-													<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
-														<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
-															<g:link action="take" controller="quiz" id="${it.id}" class="btn btn-success">Take Quiz</g:link>
-														</g:if>
-													</g:elseif>
-												</g:else>
-											</div>
-										</div>
-									</div>
-								</div>
-							</g:each>
-						</div>
-					</div>
 
 					<g:if test="${isOwner}">
-						<div class="row">
-							<div class="col-lg-12">
-								<h2>Students</h2>
-								<g:if test="${students.size()}">
-									<g:link class="view-more" action="students" controller="course" id="${it.course.id}">
-										${Registration.findAllByCourse(courseInstance).size()} Enrolled Students
-										<span class="glyphicon glyphicon-arrow-right"></span>
-									</g:link>
-								</g:if>
-								<g:else >There are no students enrolled for this course.</g:else>
-							</div>
-						</div>
+						<g:if test="${students.size()}">
+							<g:link class="btn btn-success" action="students" controller="course" id="${courseInstance.id}">
+								View Students (${Registration.findAllByCourse(courseInstance).size()})
+							</g:link>
+						</g:if>
+						<g:else>There are no students enrolled for this course.</g:else>
 					</g:if>
+
 				</div>
 			</div>
 		</div>
-	</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+
+				<h2 class="sub-heading">
+					Chapters
+					<g:if test="${isOwner}">
+						<g:link class="btn btn-xs btn-info add-chapter"  action="create" controller="chapter" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
+					</g:if>
+				</h2>
+
+				<div class="row course-row">
+					<g:each in="${courseInstance.chapters}">
+						<div class="col-lg-4">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="card-actions">
+										<g:if test="${isOwner}">
+											<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:link action="delete" controller="chapter" id="${it.id}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
+										</g:if>
+									</div>
+									<h4>
+										<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
+									</h4>
+									<p>${it.deck.getFlashcardCount()} Flashcards</p>
+								</div>
+								<g:if test="${!isOwner}">
+									<div class="donut-container">
+										<div class="panel-body">
+											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
+												<p>Meaning</p>
+											</div>
+
+											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
+												<p>Pronunciation</p>
+											</div>
+										</div>
+									</div>
+								</g:if>
+								<g:else>
+									<div class="panel-body">
+										<p>${it.description}</p>
+									</div>
+								</g:else>
+							</div><!-- end panel -->
+						</div><!-- end col-lg-4 -->
+					</g:each>
+				</div><!-- end row -->
+			</div><!-- end col-lg-12 -->
+		</div><!-- end row -->
+
+		<div class="row">
+			<div class="col-lg-12">
+
+				<h2 class="sub-heading">
+					Quizzes
+					<g:if test="${isOwner}">
+						<!-- This is only displayed for the owner of the course -->
+						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
+					</g:if>
+				</h2>
+
+				<div class="row quiz-row">
+					<g:each in="${quizesInstanceList}">
+						<div class="col-lg-3">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<g:if test="${isOwner}">
+										<div class="card-actions">
+											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
+										</div>
+									</g:if>
+									<h4>
+										<g:link action="show" id="${it.id}" controller="quiz">${it.title}</g:link>
+									</h4>
+									<p>${it.questions.size()} questions</p>
+								</div>
+								<div class="panel-body text-center">
+									<g:if test="${!isOwner}">
+										<g:if test="${it.finalGrade}">
+											<div class="quiz-complete bg-success">
+												<p class="h5"><strong>Completed - Grade: ${it.finalGrade}%</strong></p>
+												<g:link class="btn btn-info" action="take" controller="quiz" id="${it.id}">View Report</g:link>
+											</div>
+										</g:if>
+										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
+											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
+												<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Take Quiz</g:link>
+											</g:if>
+										</g:elseif>
+									</g:if>
+									<g:else>
+										<ul class="list-unstyled text-left">
+											<li><strong>Test type:</strong> ${Constants.CARD_ELEMENTS[it.testElement].toLowerCase()}s</li>
+											<li><strong>Available:</strong> ${it.liveTime}</li>
+										</ul>
+									</g:else>
+								</div><!-- end panel-body -->
+							</div><!-- end panel -->
+						</div><!-- end col-lg-3 -->
+					</g:each>
+				</div><!-- end row -->
+			</div><!-- end col-lg-12 -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+
 	<g:javascript>initializeDonuts();</g:javascript>
 </body>
 </html>

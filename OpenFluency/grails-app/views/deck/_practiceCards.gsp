@@ -38,19 +38,18 @@
 </div>
 <!-- end row -->
 
+
 <div class="progress-container row">
     <div class="col-lg-12">
+        <p class="col-lg-1"><strong>Progress:</strong></p>
         <g:if test="${rankingType == Constants.MEANING.toString()}">
-            <h2>Meaning Progress:</h2>
-            <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.MEANING]]"/>
+            <g:render class="col-lg-11" template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.MEANING]]"/>
         </g:if>
         <g:elseif test="${rankingType == Constants.PRONUNCIATION.toString()}">
-            <h2>Pronunciation Progress:</h2>
             <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.PRONUNCIATION]]"/>
         </g:elseif>
         <g:elseif test="${rankingType == Constants.SYMBOL.toString()}">
-            <h2>Symbol Progress:</h2>
             <g:render template="/deck/progress" model="[progress: practiceDeckInstance.progress[Constants.SYMBOL]]"/>
         </g:elseif>
     </div>
-</div>
+</div> 

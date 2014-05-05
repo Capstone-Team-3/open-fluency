@@ -3,11 +3,16 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="flashcard-header">
-				<g:if test="${practicing}">
-					<a href="#" id="customizationBtn">
-						<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-				</g:if>
+				<div class="card-actions">
+					<g:if test="${isOwner}">
+						<g:link action="delete" controller="flashcard" id="${flashcardInstance.id}" class="flashcard-delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></g:link>
+					</g:if>
+					<g:if test="${practicing}">
+						<a href="#" id="customizationBtn">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</a>
+					</g:if>
+				</div>
 				<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
 				<div class="pronunciation">pronounced '${flashcardInstance?.pronunciation.literal}'</div>
 			</div>
@@ -35,11 +40,6 @@
 						</div>
 					</li>
 				</g:if>
-			</g:if>
-		</div>
-		<div class="panel-footer">
-			<g:if test="${isOwner}">
-				<g:link action="delete" controller="flashcard" id="${flashcardInstance.id}" class="btn btn-danger btn-xs">Delete</g:link>
 			</g:if>
 		</div>
 	</div>

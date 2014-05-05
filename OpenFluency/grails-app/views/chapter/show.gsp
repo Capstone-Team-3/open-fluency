@@ -31,7 +31,7 @@
 			<h1 class="chapter-title">
 				${chapterInstance.title}
 				<g:if test="${isOwner}">
-					<g:link action="edit" id="${chapterInstance?.id}" class="btn btn-sm btn-warning">Edit</g:link>
+					<g:link action="edit" id="${chapterInstance?.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 				</g:if>
 			</h1>
 			<p class="chapter-description">${chapterInstance.description}</p>
@@ -44,7 +44,7 @@
 				action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.PRONUNCIATION]">Practice Pronunciations</g:link>
 			</g:if>
 			<g:if test="${isOwner}">
-				<g:link class="btn" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
+				<g:link class="btn btn-info" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>
 		<!-- end chapter-header -->

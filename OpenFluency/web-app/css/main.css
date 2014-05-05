@@ -6,10 +6,6 @@
     margin-top: -10px !important;
 }
 
-.container h1 {
-    margin: 30px 0;
-}
-
 .center {
 	text-align: center;
 }
@@ -25,6 +21,13 @@
 body {
     padding-top: 70px;
     padding-bottom: 40px;
+}
+
+h2.sub-heading {
+    border-bottom: 1px solid #eee;
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding: 10px 0;
 }
 
 /* ---------------------------------------------------------------------------*/
@@ -166,11 +169,14 @@ body {
     position: relative;
 }
 
-.flashcard #customizationBtn {
-    cursor: pointer;
+.card-actions {
     position: absolute;
     right: 8px;
     top: 8px;
+}
+
+.flashcard #customizationBtn {
+    cursor: pointer;
 }
 
 .flashcard-unit {
@@ -201,7 +207,7 @@ body {
 }
 
 .progress-container {
-    margin-top: 30px;
+    padding-top: 20px;
 }
 
 .ranking-container {
@@ -325,7 +331,8 @@ h4#custom-image {
     margin-bottom: 0;
 }
 
-.dashboard .panel-heading * {
+.dashboard .panel-heading *,
+.course-show .panel-heading * {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -367,14 +374,29 @@ h4#custom-image {
 /* COURSE, CHAPTER & DECK STYLES
 /* ---------------------------------------------------------------------------*/
 
+.course-search h1,
+.deck-search h1,
+.deck-list h1,
+.deck-create h1,
+.course-list h1,
+.course-enrolled h1 {
+    margin: 30px 0;
+}
+
 .course-search table,
 .deck-search table {
     margin-top: 30px;
 }
 
-.deck-header {
-    margin-bottom: 30px;
+.deck-header,
+.chapter-show .chapter-header {
+    margin: 30px 0;
     text-align: center;
+}
+
+.deck-description,
+.chapter-description {
+    margin-bottom: 20px;
 }
 
 .deck-actions a {
@@ -390,12 +412,24 @@ h4#custom-image {
 }
 
 .course-show .panel-body {
-    height: 100px;
+    height: 136px;
 }
 
-.chapter-show .chapter-header {
-    margin-bottom: 30px;
-    text-align: center;
+.course-show .panel {
+    position: relative;
+}
+
+.quiz-row h4,
+.course-row h4 {
+    margin-bottom: 5px;
+}
+
+.take-quiz-btn {
+    margin-top: 50px;
+}
+
+.quiz-complete {
+    padding: 20px 0;
 }
 
 .pagination .prevLink,
@@ -557,6 +591,7 @@ h4#custom-image {
 
 .quiz-report h1 {
     line-height: 1.5em;
+    margin-bottom: 30px;
 }
 
 .quiz-report h2 {
