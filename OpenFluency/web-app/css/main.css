@@ -379,7 +379,8 @@ h4#custom-image {
 .deck-list h1,
 .deck-create h1,
 .course-list h1,
-.course-enrolled h1 {
+.course-enrolled h1,
+.quiz-create h1 {
     margin: 30px 0;
 }
 
@@ -533,12 +534,17 @@ h4#custom-image {
 
 .quiz-show h1 {
     margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 .quiz-show .description {
     background-color: #efefef;
     margin: 30px 0 20px;
     padding: 20px 20px 10px;
+}
+
+.question-panel {
+    position: relative;
 }
 
 .question-panel h1 {

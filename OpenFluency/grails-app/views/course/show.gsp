@@ -80,8 +80,8 @@
 								<div class="panel-heading">
 									<div class="card-actions">
 										<g:if test="${isOwner}">
-											<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
-											<g:link action="delete" controller="chapter" id="${it.id}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
+											<g:link action="edit" controller="chapter" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:link action="delete" controller="chapter" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</g:if>
 									</div>
 									<h4>
@@ -132,8 +132,8 @@
 								<div class="panel-heading">
 									<g:if test="${isOwner}">
 										<div class="card-actions">
-											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
-											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
+											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>
 									<h4>
@@ -157,7 +157,17 @@
 									</g:if>
 									<g:else>
 										<ul class="list-unstyled text-left">
-											<li><strong>Test type:</strong> ${Constants.CARD_ELEMENTS[it.testElement].toLowerCase()}s</li>
+										<li><strong>Tests:</strong> 
+											<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
+												Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
+											</g:if>
+											<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
+												Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
+											</g:elseif>
+											<g:else>
+												Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
+											</g:else>
+										</li>
 											<li><strong>Available:</strong> ${it.liveTime}</li>
 										</ul>
 									</g:else>

@@ -32,7 +32,7 @@
 					<h1>
 						Quiz: ${quizInstance.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${quizInstance.id}" controller="quiz" class="btn btn-sm btn-warning">Edit</g:link>
+							<g:link action="edit" id="${quizInstance.id}" controller="quiz" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 						</g:if>
 					</h1>
 					<h3>${quizInstance.course.title}</h3>
@@ -41,10 +41,20 @@
 				<div class="description">
 					<ul class="list-unstyled">
 						<li> <strong>Tests:</strong>
-							${Constants.CARD_ELEMENTS[quizInstance.testElement]}
+							<g:set var="lang" value="${quizInstance.course.chapters[0].deck.language}" />
+							<g:set var="sourceLang" value="${quizInstance.course.chapters[0].deck.sourceLanguage}" />
+							<g:if test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}"> 
+								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
+							</g:if>
+							<g:elseif test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}">
+								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
+							</g:elseif>
+							<g:else>
+								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of ${lang} words/characters
+							</g:else>
 						</li>
-						<li> <strong>Maximum time allowed per card</strong>
-							: ${quizInstance.maxCardTime} seconds
+						<li> <strong>Maximum time allowed per card:</strong>
+							${quizInstance.maxCardTime} seconds
 						</li>
 						<li>
 							<strong>Quiz available starting:</strong>
