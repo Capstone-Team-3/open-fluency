@@ -5,7 +5,7 @@
 			<div class="flashcard-header">
 				<div class="card-actions">
 					<g:if test="${isOwner}">
-						<g:link action="delete" controller="flashcard" id="${flashcardInstance.id}" class="flashcard-delete btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></g:link>
+						<g:link action="delete" controller="flashcard" id="${flashcardInstance.id}" class="btn btn-danger btn-xs flashcard-delete-${flashcardInstance.id}"><span class="glyphicon glyphicon-remove"></span></g:link>
 					</g:if>
 					<g:if test="${practicing}">
 						<a href="#" id="customizationBtn">
