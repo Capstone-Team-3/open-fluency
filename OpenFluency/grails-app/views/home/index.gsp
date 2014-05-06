@@ -84,7 +84,7 @@
                             <g:render template="/dataAccess/researcher" model="[controller: "dataAccess"]"/>
                         </sec:ifAllGranted>
 
-                    </div>f
+                    </div>
                 </sec:ifLoggedIn>
             </div>
         </div>
