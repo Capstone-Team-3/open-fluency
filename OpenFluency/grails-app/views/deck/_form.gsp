@@ -11,7 +11,7 @@
 
 <div class="form-group">
 	<label for="alphabet" class="tooltiper control-label"  data-toggle="tooltip"  data-placement="left" title="The language you already know" >
-		Source Language 
+		Known Language 
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select from="${Language.list()}" optionValue="name" optionKey="id" value="${deckInstance?.sourceLanguage?.id}" class="form-control" name="sourceLanguage.id"/>
@@ -19,7 +19,7 @@
 
 <div class="form-group">
 	<label for="alphabet" class="tooltiper control-label"  data-toggle="tooltip"  data-placement="left" title="The language you're learning">
-		Language 
+		Learning Language 
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select from="${Language.list()}" optionValue="name" optionKey="id" value="${deckInstance?.language?.id}" class="form-control" name="language.id"/>
