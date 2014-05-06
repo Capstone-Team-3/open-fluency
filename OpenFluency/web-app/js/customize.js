@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var rankTypeVal = $('h3').data('rank-type');
+    var rankTypeVal = $('input[name=rankingType]').val();
 
 /*----------------------------------------------------------------------------*/
 /* Show/hide customization panel
