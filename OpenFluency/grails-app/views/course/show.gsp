@@ -175,7 +175,7 @@
 												Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
 											</g:else>
 										</li>
-											<li><strong>Available:</strong> ${it.liveTime}</li>
+											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
 										</ul>
 									</g:else>
 								</div><!-- end panel-body -->
