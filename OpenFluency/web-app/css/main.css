@@ -378,6 +378,14 @@ h4#custom-image {
     margin-top: 10px;
 }
 
+.researcher-dashboard .list-group-item-text {
+    clear: both;
+}
+
+.researcher-dashboard .glyphicon-download {
+    margin-right: 5px;
+}
+
 /* ---------------------------------------------------------------------------*/
 /* COURSE, CHAPTER & DECK STYLES
 /* ---------------------------------------------------------------------------*/
