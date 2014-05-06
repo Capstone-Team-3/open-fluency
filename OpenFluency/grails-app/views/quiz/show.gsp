@@ -43,19 +43,28 @@
 						<li> <strong>Tests:</strong>
 							<g:set var="lang" value="${quizInstance.course.chapters[0].deck.language}" />
 							<g:set var="sourceLang" value="${quizInstance.course.chapters[0].deck.sourceLanguage}" />
-							<g:if test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}">
+
+							<g:if test="${Constants.MEANING == quizInstance.testElement}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
 							</g:if>
-							<g:elseif test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Symbol"}">
+							<g:elseif test="${Constants.SYMBOL == quizInstance.testElement}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
 							</g:elseif>
-							<g:elseif test="${Constants.RANDOM == quizInstance.testElement}">Randomly selects an element to test</g:elseif>
-							<g:else>
+							<g:elseif test="${Constants.PRONUNCIATION == quizInstance.testElement}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of ${lang} words/characters
+							</g:elseif>
+							<g:else>
+								Random mix of pronunciations, ${sourceLang} to ${lang}, and ${lang} to ${sourceLang}. <strong>The quiz changes for every student.</strong>
 							</g:else>
 						</li>
-						<li> <strong>Maximum time allowed per card:</strong>
-							${quizInstance.maxCardTime} seconds
+						<li> 
+							<strong>Maximum time allowed per card:</strong>
+							<g:if test="${quizInstance.maxCardTime > 0}">
+								${quizInstance.maxCardTime} seconds
+							</g:if>
+							<g:else>
+								None specified.
+							</g:else>
 						</li>
 						<li>
 							<strong>Quiz available starting:</strong>
