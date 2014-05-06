@@ -40,16 +40,18 @@
 							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice pronunciations of ${deckInstance?.language} words/characters</g:link></li>
 						</ul>
 					</div><!-- end btn-group -->
-					<div class="btn-group text-left">
+				</g:if>
+				<div class="btn-group text-left">
+					<g:if test="${isOwner}">
 						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 							Add Flashcards <span class="caret"></span>
 						</button>
-						<ul class="text-left dropdown-menu" role="menu">
-							<li><g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link></li>
-							<li><a data-toggle="modal" data-target="#myModal">Load from CSV file</a></li>
-						</ul>
-					</div>
-				</g:if>
+					</g:if>
+					<ul class="text-left dropdown-menu" role="menu">
+						<li><g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link></li>
+						<li><a data-toggle="modal" data-target="#myModal">Load from CSV file</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<!-- end deck-header -->
