@@ -44,14 +44,17 @@
 							<g:set var="lang" value="${quizInstance.course.chapters[0].deck.language}" />
 							<g:set var="sourceLang" value="${quizInstance.course.chapters[0].deck.sourceLanguage}" />
 							
-							<g:if test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Meaning"}"> 
+							<g:if test="${Constants.MEANING == quizInstance.testElement}"> 
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
 							</g:if>
-							<g:elseif test="${Constants.CARD_ELEMENTS[quizInstance.testElement] == "Symbol"}">
+							<g:elseif test="${Constants.SYMBOL == quizInstance.testElement}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
 							</g:elseif>
-							<g:else>
+							<g:elseif test="${Constants.PRONUNCIATION == quizInstance.testElement}">
 								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of ${lang} words/characters
+							</g:elseif>
+							<g:else>
+								Random selection of pronunciations, meanings and symbols are tested. The test below changes for every student.
 							</g:else>
 						</li>
 						<li> <strong>Maximum time allowed per card:</strong>
