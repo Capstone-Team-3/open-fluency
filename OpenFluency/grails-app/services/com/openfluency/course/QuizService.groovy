@@ -226,7 +226,7 @@ class QuizService {
             return null
         }
 
-        return "${gradeInstance.correctAnswers/getAnswers(quizInstance, userId).size()*100}"
+        return "${Math.ceil(gradeInstance.correctAnswers/getAnswers(quizInstance, userId).size()*100)}"
     }
 
     /**
