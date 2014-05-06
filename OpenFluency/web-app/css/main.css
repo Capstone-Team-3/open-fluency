@@ -310,6 +310,43 @@ h4#custom-image {
 }
 
 /* ---------------------------------------------------------------------------*/
+/* LANDING PAGE STYLES
+/* ---------------------------------------------------------------------------*/
+.container .landing-page .jumbotron {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    border-radius: 0;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+.landing-page section {
+    background-color: #1084AC;
+    border-radius: 0.5em;
+    color: #fff;
+    padding: 20px;
+}
+
+.landing-page section h2 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bcbcbc;
+}
+
+.landing-page h4.well {
+    background-color: #dff0d8;
+    margin-top: 30px;
+}
+
+.landing-page ul {
+    padding-left: 20px;
+}
+
+.landing-page .role {
+    margin-bottom: 15px;
+}
+
+/* ---------------------------------------------------------------------------*/
 /* DASHBOARD STYLES
 /* ---------------------------------------------------------------------------*/
 

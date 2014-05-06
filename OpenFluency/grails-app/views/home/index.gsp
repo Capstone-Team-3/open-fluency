@@ -10,51 +10,60 @@
         <div class="row">
             <div class="col-lg-12">
                 <sec:ifNotLoggedIn>
-                    <div class="jumbotron center">
-                        <img class="animated fadeInUp" src="images/logo-large.png"/>
-                        <p>A flash card application for foreign language study.</p>
-                        <g:link class="btn btn-primary" action="create" controller="user">Create your account</g:link>
-                    </div>
+                    <div class="landing-page">
+                        <div class="jumbotron center">
+                            <img class="animated fadeInUp" src="images/logo-large.png"/>
+                            <p>A flashcard application for foreign language study</p>
+                            <g:link class="btn btn-success btn-lg" action="create" controller="user">Create your account</g:link>
+                        </div>
+                        
+                        <div class="landing-content">
+                            <div class="col-lg-4">
+                                <section>
+                                    <h2 class="text-center">Learn languages</h2>
+                                    <p class="text-center role h4">Sign up as a <strong>Student</strong> to:</p>
+                                    <ul>
+                                        <li>Create decks of flashcards for foreign language learning.</li>
+                                        <li>Customize flashcards with audio and images to help you learn.</li>
+                                        <li>Share your decks with the world.</li>
+                                        <li>Join language courses.</li>
+                                    </ul>
+                                </section>
+                            </div>
 
-                    <h2>Learn languages</h2>
-                    <ul>
-                        <li>Create decks of flash cards for any foreign language.</li>
-                        <li>
-                            Customize flash cards with audio and images to help you learn.
-                        </li>
-                        <li>
-                            Share your decks with the world or a small group of classmates or friends.
-                        </li>
-                        <li>Join language courses.</li>
-                    </ul>
+                            <div class="col-lg-4">
+                                <section>
+                                    <h2 class="text-center">Build classes</h2>
+                                    <p class="text-center role h4">Sign up as an <strong>Instructor</strong> to:</p>
+                                    <ul>
+                                        <li>Create private or public courses with all the flashcard decks needed for your classes.</li>
+                                        <li>Create timed or untimed quizzes, which are automatically graded on completion.</li>
+                                        <li>Track student grades and progress through your flashcard decks.</li>
+                                        <li>Identify the characters, words, and phrases your students find most difficult.</li>
+                                    </ul>
+                                </section>
+                            </div>
 
-                    <h2>Build classes</h2>
-                    <ul>
-                        <li>
-                            Create a private or public course including all the flash card decks needed for your class.
-                        </li>
-                        <li>
-                            Create timed or untimed tests and exams, which are automatically graded on completion.
-                        </li>
-                        <li>Track student grades and progress through your decks.</li>
-                        <li>
-                            Identify the characters, words, and phrases your students find most difficult.
-                        </li>
-                    </ul>
+                            <div class="col-lg-4">
+                                <section>
+                                    <h2 class="text-center">Research acquisition</h2>
+                                    <p class="text-center role h4">Sign up as a <strong>Researcher</strong> to:</p>
+                                    <ul>
+                                        <li>Access anonymous flashcard deck usage statistics and student performance metrics.</li>
+                                        <li>View anonymous biographical user data.</li>
+                                        <li>Create flashcard decks to research language acquisition.</li>
+                                    </ul>
+                                </section>
+                            </div>
 
-                    <h2>Research foreign language acquisition</h2>
-                    <ul>
-                        <li>Create courses for research.</li>
-                        <li>
-                            Access anonymous flash card deck usage statistics and student performance metrics for your courses.
-                        </li>
-                        <li>View anonymous biographical user data.</li>
-                    </ul>
-
-                    <h3>
-                        Ready to get started?
-                        <g:link class="btn btn-primary" action="create" controller="user">Sign Up</g:link>
-                    </h3>
+                            <div class="col-lg-12">
+                                <h4 class="well text-center">
+                                    Ready to get started?
+                                    <g:link class="btn btn-success" action="create" controller="user">Sign Up</g:link>
+                                </h4>
+                            </div>
+                        </div>
+                    </div><!-- end landing-page -->
                 </sec:ifNotLoggedIn>
 
                 <sec:ifLoggedIn>
@@ -75,7 +84,7 @@
                             <g:render template="/dataAccess/researcher" model="[controller: "dataAccess"]"/>
                         </sec:ifAllGranted>
 
-                    </div>
+                    </div>f
                 </sec:ifLoggedIn>
             </div>
         </div>
