@@ -50,14 +50,14 @@
 				</div><!-- end btn-group -->
 			</g:if>
 			<g:if test="${isOwner}">
-				<g:link class="btn btn-info" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
+				<g:link class="btn btn-info add-flashcard" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
 			</g:if>
 		</div>
 		<!-- end chapter-header -->
 
 		<div class="row">
 			<g:each in="${flashcardInstanceList}">
-				<div class="col-lg-3">
+				<div class="col-lg-3 flashcard-result">
 					<g:render template="/flashcard/flashcard" model="[flashcardInstance: it]"/>
 				</div>
 				<!-- end col-lg-3 -->

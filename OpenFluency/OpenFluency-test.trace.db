@@ -1,0 +1,2475 @@
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 20:28:33 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 20:37:13 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 20:41:55 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 20:46:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 20:52:52 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 20:58:06 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:00:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:13:12 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:16:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:19:23 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:23:18 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:27:24 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:33:01 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:38:39 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ALPHABET" not found; SQL statement:
+alter table alphabet drop constraint FK7278E6731AD993D9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBEB1847309 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBE106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "ANSWER" not found; SQL statement:
+alter table answer drop constraint FKABCA3FBED55635F6 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD627C00FDB [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "AUDIO" not found; SQL statement:
+alter table audio drop constraint FK58D9BD67C47D6C1 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE0772F10D15 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_RANKING" not found; SQL statement:
+alter table card_ranking drop constraint FKDEA6DE07106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB272F10D15 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CARD_USAGE" not found; SQL statement:
+alter table card_usage drop constraint FK3B4CCFB2106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D3C155CDF [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CHAPTER" not found; SQL statement:
+alter table chapter drop constraint FK2C0C7C4D52411CD6 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B7C47D6C1 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "COURSE" not found; SQL statement:
+alter table course drop constraint FKAF42E01B1AD993D9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3C6E72E3 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D3DBF4D883 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D333A1CB05 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "CUSTOMIZATION" not found; SQL statement:
+alter table customization drop constraint FK6196A7D37C47D6C1 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA9CACC09B5 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA97C47D6C1 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "DECK" not found; SQL statement:
+alter table deck drop constraint FK2EFCA91AD993D9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30053FDEF19 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3007B2370F2 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30027C00FDB [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F3003C155CDF [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F300C0F89939 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD" not found; SQL statement:
+alter table flashcard drop constraint FKBBA4F30052EB733C [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D72F10D15 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLASHCARD_INFO" not found; SQL statement:
+alter table flashcard_info drop constraint FK99E70A8D3C155CDF [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7FC694996 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "GRADE" not found; SQL statement:
+alter table grade drop constraint FK5E0BFD7106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7B2370F2 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "IMAGE" not found; SQL statement:
+alter table image drop constraint FK5FAA95B7C47D6C1 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E3E70181B [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "LANGUAGE_PROFICIENCY" not found; SQL statement:
+alter table language_proficiency drop constraint FK85008E0E1AD993D9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B5576E0F9F9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "PRONUNCIATION" not found; SQL statement:
+alter table pronunciation drop constraint FKE0F19B55D5F33BD9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE672F10D15 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION" not found; SQL statement:
+alter table question drop constraint FKBA823BE6FC694996 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEE72F10D15 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUESTION_OPTION" not found; SQL statement:
+alter table question_option drop constraint FK6E1E3AEED55635F6 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUIZ" not found; SQL statement:
+alter table quiz drop constraint FK35225552411CD6 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B9106126A9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "REGISTRATION" not found; SQL statement:
+alter table registration drop constraint FKAF83E8B952411CD6 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF9BD3C605 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "SHARE" not found; SQL statement:
+alter table share drop constraint FK6854FDF3C155CDF [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT" not found; SQL statement:
+alter table unit drop constraint FK36D98476E0F9F9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D585E5EF [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "UNIT_MAPPING" not found; SQL statement:
+alter table unit_mapping drop constraint FK9E12D513D5857190 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB413B4511 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK36EBCB43D5D7B1 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A6B3662C9 [42102-173]
+05-06 21:41:17 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_ROLE" not found; SQL statement:
+alter table user_role drop constraint FK143BF46A106126A9 [42102-173]

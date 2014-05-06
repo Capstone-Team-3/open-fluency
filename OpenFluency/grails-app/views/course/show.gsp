@@ -85,7 +85,7 @@
 										</g:if>
 									</div>
 									<h4>
-										<g:link action="show" id="${it.id}" controller="chapter">${it.title}</g:link>
+										<g:link action="show" id="${it.id}" controller="chapter" class="chapter-show">${it.title}</g:link>
 									</h4>
 									<p>${it.deck.getFlashcardCount()} Flashcards</p>
 								</div>

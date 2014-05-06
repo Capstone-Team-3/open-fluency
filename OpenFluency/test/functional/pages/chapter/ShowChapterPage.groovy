@@ -7,7 +7,7 @@ class ShowChapterPage extends MainLayoutPage {
 	static url = "chapter/show"
 
 	static at = {
-		$(".chapter-header").size() > 0
+		$(".chapter-title").size() > 0
 	}
 
 	static content = {
