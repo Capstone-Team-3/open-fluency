@@ -6,6 +6,7 @@
 </head>
 <body>
 	<div class="container deck-show">
+
 		<ul class="breadcrumb">
 			<li>
 				<a href="${createLink(uri:'/') }">Home</a>
@@ -18,42 +19,77 @@
 				<a href="#">${deckInstance?.title}</a>
 			</li>
 		</ul>
-		<div class="deck-header text-center center-block">
-			<h1 class="deck-title">
-				${deckInstance?.title}
-				<g:if test="${isOwner}">
-					<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
-					<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></g:link>
-				</g:if>
-			</h1>
-			<p class="deck-description">${deckInstance?.description}</p>
-			<div class="deck-actions">
-				<g:if test="${flashcardCount}">
-					<div class="btn-group text-left">
-						<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-							Practice Flashcards <span class="caret"></span>
-						</button>
 
-						<ul class="dropdown-menu" role="menu">
-							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">Practice ${deckInstance?.language} to ${deckInstance?.sourceLanguage}</g:link></li>
-							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">Practice ${deckInstance?.sourceLanguage} to ${deckInstance?.language}</g:link></li>
-							<li><g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">Practice pronunciations of ${deckInstance?.language} words/characters</g:link></li>
-						</ul>
-					</div><!-- end btn-group -->
-				</g:if>
-				<div class="btn-group text-left">
-					<g:if test="${isOwner}">
-						<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-							Add Flashcards <span class="caret"></span>
-						</button>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="deck-header text-center center-block">
+					<h1 class="deck-title">
+						${deckInstance?.title}
+						<g:if test="${isOwner}">
+							<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</g:link>
+							<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">
+								<span class="glyphicon glyphicon-trash"></span>
+							</g:link>
+						</g:if>
+					</h1>
+					<p class="deck-description">${deckInstance?.description}</p>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-lg-offset-4">
+				<g:render template="/deck/allProgress" model="[deckInstance: deckInstance, progress: deckInstance.progress, id: deckInstance.id]"/>
+				<br/>
+				<div class="deck-actions center">
+					<g:if test="${flashcardCount}">
+						<div class="btn-group text-left">
+							<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+								Practice Flashcards
+								<span class="caret"></span>
+							</button>
+
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.MEANING]">
+										Practice ${deckInstance?.language} to ${deckInstance?.sourceLanguage}
+									</g:link>
+								</li>
+								<li>
+									<g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.SYMBOL]">
+										Practice ${deckInstance?.sourceLanguage} to ${deckInstance?.language}
+									</g:link>
+								</li>
+								<li>
+									<g:link action="practice" id="${deckInstance.id}" controller="deck" params="[rankingType: Constants.PRONUNCIATION]">
+										Practice pronunciations of ${deckInstance?.language} words/characters
+									</g:link>
+								</li>
+							</ul>
+						</div>
+						<!-- end btn-group -->
 					</g:if>
-					<ul class="text-left dropdown-menu" role="menu">
-						<li><g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link></li>
-						<li><a data-toggle="modal" data-target="#myModal">Load from CSV file</a></li>
-					</ul>
+					<div class="btn-group text-left">
+						<g:if test="${isOwner}">
+							<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+								Add Flashcards
+								<span class="caret"></span>
+							</button>
+						</g:if>
+						<ul class="text-left dropdown-menu" role="menu">
+							<li>
+								<g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link>
+							</li>
+							<li>
+								<a data-toggle="modal" data-target="#myModal">Load from CSV file</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
+
+		<br/>
 		<!-- end deck-header -->
 
 		<div class="row">
@@ -82,7 +118,8 @@
 						<div class="modal-body">
 							<p>
 								Upload a CSV file with your flashcard definitions. (You can download a sample CSV to see how the file is structured
-								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>.)
+								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>
+								.)
 							</p>
 							<input name="csvData" type="file" name="csvData"/>
 						</div>
@@ -95,6 +132,6 @@
 			</div>
 		</div>
 	</div>
-	<g:javascript>initializeAudio();</g:javascript>
+	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
 </body>
 </html>
