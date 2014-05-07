@@ -90,7 +90,7 @@ class QuizService {
 
     	// This will continue the test where they left off. We have to check if this is allowed
     	if(answeredQuestions > 0) {
-    		return nextQuestion(quizInstance)
+    		return nextQuestion(quizInstance, sessionId)
     	}
 
     	// This is the first time this user starts a test so create all the answers
@@ -110,7 +110,7 @@ class QuizService {
     /**
 	* Get the next question in the queue that has not been answered already
 	*/
-	Answer nextQuestion(Quiz quizInstance) {
+	Answer nextQuestion(Quiz quizInstance, String sessionId=null) {
     	// Find the next answer in the quiz that has not yet been answered
     	Answer answer = Answer.createCriteria().list(max: 1) {
     		user { 
@@ -120,10 +120,10 @@ class QuizService {
     			eq('quiz', quizInstance) 
     		}
     		eq('status', Constants.NOT_ANSWERED) 
-    		}[0]
+           }[0]
 
-    	// Change the status of this answer to viewed
-    	if(answer) {
+        // Change the status of this answer to viewed
+    	if(answer && ((sessionId == null) || (answer.sessionId == sessionId))) {
     		// Here it might be a good idea to change the session so that the user can continue the test
     		answer.status = Constants.VIEWED
     		answer.save()
@@ -131,10 +131,11 @@ class QuizService {
 
         // Have to finalize the quiz since no more answers can be submitted by the student
         else {
-            finalizeQuiz(quizInstance)
+            finalizeQuiz(quizInstance, true)
+            return null
         }
 
-    	return answer
+        return answer
     }
 
     /**
@@ -149,9 +150,13 @@ class QuizService {
 			answer.save()
 			return true
 		}
+        else {
+            // The use is trying to answer the questions with a different session, shut the quiz down
+            finalizeQuiz(answer.question.quiz, true)
+        }
 
-		return false
-	}
+        return false
+    }
 
 	/**
 	* Get answers by logged student
@@ -177,7 +182,7 @@ class QuizService {
 	/**
 	* Finalize the course and create a grade for the student, only if the student has viewed all the questions
 	*/
-	Grade finalizeQuiz(Quiz quizInstance) {
+	Grade finalizeQuiz(Quiz quizInstance, boolean force=false) {
 		// Check if the number of answers that a user viewed or answered is the same as the number of questions in the quiz
 		Integer completedQuestions = Answer.executeQuery("""
 			SELECT count(id) 
@@ -186,15 +191,16 @@ class QuizService {
 			""",
 			[Constants.VIEWED, Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
 
-		if(quizInstance.countQuestions() == completedQuestions) {
-			Integer correctAnswers = Answer.executeQuery("""
-				SELECT count(id) 
-				FROM Answer 
-				WHERE status = ? AND question.quiz.id = ? AND user.id = ? AND selection.id = question.flashcard.id
-				""", [Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
+        // only finalize it if the if the user has completed all questions or if the quiz is forced to finalize
+        if((quizInstance.countQuestions() == completedQuestions) || force)  {
+           Integer correctAnswers = Answer.executeQuery("""
+            SELECT count(id) 
+            FROM Answer 
+            WHERE status = ? AND question.quiz.id = ? AND user.id = ? AND selection.id = question.flashcard.id
+            """, [Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
 
-			return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
-		}
+           return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
+       }
 
 		// The user has not completed the course yet
 		return null
