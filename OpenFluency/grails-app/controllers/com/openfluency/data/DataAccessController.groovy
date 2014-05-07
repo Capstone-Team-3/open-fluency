@@ -78,8 +78,8 @@ class DataAccessController {
             //custom formatters (others are in the class level formatters section)
             def userIdify = {domain, value -> domain.user.id}
             //map field data formatters
-            Map formatters = ["userId": valIdify, 
-                              "flashcard": idify, 
+            Map formatters = ["userId": userIdify,
+                              "flashcard": valIdify,  
                               "rankingType": elementify, 
                               "ranking": rankify,
                               "dateCreated": stringify,
