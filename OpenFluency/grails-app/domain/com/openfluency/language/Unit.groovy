@@ -1,15 +1,23 @@
 package com.openfluency.language
 
+/**
+ *  Unit objects are key in our domain model (see uml and user guides).  Units can repesent any element or composition
+ *  of elements in a language (letter, word, phrase)
+ */
 class Unit {
-
-	Alphabet alphabet 	// Kanji, Katakana, etc
-	
-	String literal 		// This is the literal character, word or phrase in the alphabet. For alphabets that require 
-                        // unicode encoding, this will be the unicodes (4e9c, 5516, etc)
-
-	Integer grade 		// What grade this unit is taught in
-	Integer strokeCount // Number of strokes required to write this Unit
-	Integer frequency 	// How frequently this Unit is used
+    /** the alphabet in which the unit is defined - eg Kanji, Katakana, etc */
+	Alphabet alphabet 	
+	/** 
+     *  This is the literal character, word or phrase in the alphabet. For alphabets that require 
+     *  unicode encoding, this will be the unicodes (4e9c, 5516, etc)
+     */
+	String literal 		
+    /** What grade this unit is typically taught in */
+	Integer grade 		
+    /** Number of strokes required to write this Unit */
+	Integer strokeCount 
+	/** How frequently this Unit is used */
+    Integer frequency 	
 
     static constraints = {
         literal unique: true
@@ -20,6 +28,7 @@ class Unit {
 
     /**
 	* This allows getting the language quicker -> unit.language
+    *  @Return the Language
     */
     Language getLanguage() {
     	return this.alphabet.language
@@ -43,10 +52,15 @@ class Unit {
         }
     }
 
+    /** @Return a list of all the pronunciations tied to this unit in the system */ 
     List<Pronunciation> getPronunciations() {
         return Pronunciation.findAllByUnit(this)
     }
 
+    /**
+     *  This function conviniently detects whether decoding is needed for the unit and provides a useable text String
+     *  @Return a string of the Unit
+     */
     String getPrint() {
         return alphabet.encodeEntities ? "&#x${literal};".decodeHTML() : literal
     }

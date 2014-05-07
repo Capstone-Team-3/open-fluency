@@ -4,10 +4,12 @@ package com.openfluency.language
 * A Pronunciation specifies how a Unit in one Alphabet is pronounced in another Alphabet
 */
 class Pronunciation {
-
+    /** the language unit this pronunciation is being created for */
 	Unit unit
-	Alphabet alphabet 	// The Alphabet to which this pronunciation belongs to
-	String literal 		// How it's pronounced
+    /** The Alphabet this pronunciation is written in */
+	Alphabet alphabet 	
+    /** the literal pronunciation as spelled out in the Alphabet defined */
+	String literal
 
     static constraints = {
     }
@@ -15,7 +17,10 @@ class Pronunciation {
     String toString(){
     	literal
     }
-
+    /**
+     *  This important convinience method looks up whether the specific alphabet needs decoding
+     *  @Return a usable string of the pronunciation
+     */
     String getPrint() {
         return alphabet.encodeEntities ? "&#x${literal};".decodeHTML() : literal
     }
