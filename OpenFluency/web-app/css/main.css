@@ -19,6 +19,8 @@
 }
 
 body {
+    background-image: url("../images/linedpaper.png"); 
+    background-repeat: repeat;
     padding-top: 70px;
     padding-bottom: 40px;
 }
@@ -339,7 +341,7 @@ h4#custom-image {
 }
 
 .landing-page .jumbotron {
-    background-color: #fff;
+    background: none;
     border-radius: 0;
     margin-top: 10px;
     padding-bottom: 20px;
