@@ -155,30 +155,35 @@ function countdown(element, minutes, seconds) {
 	var time = minutes*60 + seconds;
 	
 	var interval = setInterval(function() {
-		var el = document.getElementById(element);
-		if(time == 0) {
-			el.innerHTML = "Time's up!";    
+		var el = $('#' + element);
+		if (time === 0){
+			$('.seconds').html('00');
+			$('.seconds, .minutes').css('color', 'red');
 			clearInterval(interval);
+			$("input:radio").attr("disabled", true);
 			return;
 		}
 		var minutes = Math.floor( time / 60 );
 		if (minutes < 10) minutes = "0" + minutes;
 		var seconds = time % 60;
-		if (seconds < 10) seconds = "0" + seconds; 
-		var text = minutes + ':' + seconds;
-		el.innerHTML = text;
+		if (seconds < 10){
+			seconds = "0" + seconds;
+		}
+		var html = '<span class="minutes bg-info">' + minutes + '</span> : ' +
+				   '<span class="seconds bg-info">' + seconds + '</span>';
+		el.html(html);
 		time--;
 	}, 1000);
 }
 
 var initCountdown = function() {
 	var time = $('#maxCardTime').val();
-	if(time != 0) {
+	if (time !== 0){
 		var minutes = Math.floor(time/60);
 		var seconds = time - minutes*60;
 		countdown('clock', minutes, seconds);
 	}
-}
+};
 
 var drawDonut = function(value, selector) {
 	var	percentages = [value, (100 - value)];

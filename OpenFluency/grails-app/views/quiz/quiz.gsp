@@ -29,7 +29,8 @@
 					<input type="hidden" name="maxCardTime" id="maxCardTime" value="${quizInstance.maxCardTime}" />
 					<input type="hidden" name="quiz" value="${quizInstance.id}" />
 
-					<div class="alert alert-warning center">
+					<div class="center">
+						<strong><span class="glyphicon glyphicon-time"></span> Time Remaining</strong>
 						<div id="clock" class="clock"></div>
 					</div>
 					<g:if test="${testElement == Constants.SYMBOL}">
