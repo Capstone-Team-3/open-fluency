@@ -20,7 +20,7 @@
 
 body {
     padding-top: 70px;
-    padding-bottom: 40px;
+    padding-bottom: 0;
 }
 
 h2.sub-heading {
@@ -321,30 +321,44 @@ h4#custom-image {
 /* ---------------------------------------------------------------------------*/
 /* LANDING PAGE STYLES
 /* ---------------------------------------------------------------------------*/
-.container .landing-page .jumbotron {
+.landing-page .container-fluid {
+    background-color: #1084AC;
+    border-top: 1px solid #333;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.landing-content {
+    max-width: 970px;
+    margin: auto;
+}
+
+.landing-page .jumbotron {
     background-color: #fff;
-    border-bottom: 1px solid #eee;
     border-radius: 0;
-    padding-bottom: 40px;
+    margin-top: 10px;
+    padding-bottom: 20px;
     padding-top: 40px;
 }
 
+.landing-page .jumbotron img {
+    max-width: 100%;
+}
+
 .landing-page section {
-    background-color: #1084AC;
-    border-radius: 0.5em;
     color: #fff;
     padding: 20px;
 }
 
 .landing-page section h2 {
+    font-size: 27px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #bcbcbc;
 }
 
-.landing-page h4.well {
-    background-color: #dff0d8;
-    margin-top: 30px;
+.landing-page .get-started {
+    background-color: #eee;
+    padding: 20px;
 }
 
 .landing-page ul {
@@ -353,6 +367,7 @@ h4#custom-image {
 
 .landing-page .role {
     margin-bottom: 15px;
+    padding-left: 10px;
 }
 
 /* ---------------------------------------------------------------------------*/
