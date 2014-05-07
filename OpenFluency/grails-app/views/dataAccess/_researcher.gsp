@@ -19,14 +19,14 @@
 						<h4 class="pull-left">Flashcard Practice Usage Data</h4>
 						<div class="pull-right h4"><span class="glyphicon glyphicon-download"></span><export:formats class="pull-right" id="practice-data" formats="['csv']" action="exportPracticeData" controller="${controller}"/></div>
 					</div>
-					<p class="list-group-item-text">Includes data on... </p>
+					<p class="list-group-item-text">Detailed data on each flashcard usage during deck practice sessions.  The data includes the time taken on the card, and the user selected difficulty ranking, from each interaction.  ID fields are provided, allowing the researcher to link to other tables.</p>
 				</li>	
 				<li class="list-group-item">
 					<div class="list-group-item-heading">
 						<h4 class="pull-left">Flashcard Customization Data</h4>
 						<div class="pull-right h4"><span class="glyphicon glyphicon-download"></span><export:formats class="pull-right" id="customization-data" formats="['csv']" action="exportCustomizationData" controller="${controller}"/></div>
 					</div>
-					<p class="list-group-item-text">Data on the images and audio files added by users to specific flashcards. A '0' or '1' in the 'Audio' or 'Image' columns specify that a customized image/audio file was ('0') or was not added ('1') to a flashcard, respectively.</p>
+					<p class="list-group-item-text">Data on the images and audio files added by users to specific flashcards. A '0' or '1' in the 'Audio' or 'Image' columns specify that a customized image/audio file was ('1') or was not added ('0') to a flashcard, respectively.</p>
 				</li>
 				<li class="list-group-item">
 					<div class="list-group-item-heading">
