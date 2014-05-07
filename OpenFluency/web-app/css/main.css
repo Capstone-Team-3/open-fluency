@@ -689,6 +689,21 @@ h4#custom-image {
     margin: 60px 0;
 }
 
+.quiz #clock {
+    font-size: 20px;
+    padding: 10px 0 15px;
+}
+
+.quiz #clock .glyphicon-time {
+    padding-right: 10px;
+}
+
+.quiz .minutes,
+.quiz .seconds {
+    padding: 5px 8px 4px;
+    border-radius: .1em;
+}
+
 .quiz-report h1 {
     line-height: 1.5em;
     margin-bottom: 30px;
