@@ -54,12 +54,10 @@
         <table class="table courses-table">
             <thead>
                 <tr>
-                    <th>Course number</th>
+                    <th>Code</th>
                     <th>Title/instructor</th>
                     <th>Description</th>
-                    <th>Number of chapters</th>
-                    <th>Start date</th>
-                    <th>End date</th>
+                    <th>Chapters</th>
                     <th>Enrolled</th>
                     <th></th>
                 </tr>
@@ -73,8 +71,6 @@
                         <!-- should be the instructor name --> </td>
                     <td>${it.description}</td>
                     <td>${it.getChapters().size()}</td>
-                    <td>${it.startDate}</td>
-                    <td>${it.endDate}</td>
                     <td>${Registration.countByCourse(it)}</td>
                     <td>
                         <sec:ifAllGranted roles="ROLE_STUDENT">
