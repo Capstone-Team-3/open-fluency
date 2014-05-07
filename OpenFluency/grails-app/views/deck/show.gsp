@@ -71,20 +71,19 @@
 			<g:paginate controller="deck" action="show" id="${deckInstance.id}" total="${flashcardCount ?: 0}" />
 		</div>
 
-		<div class="modal fade" id="myModal">
+		<div class="modal csv-modal fade" id="myModal">
 			<div class="modal-dialog">
 				<g:form action="loadFlashcardsFromCSV" id="${deckInstance.id}" enctype="multipart/form-data">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Load flashcards from CSV</h4>
+							<h4 class="modal-title">Load Flashcards from CSV File</h4>
 						</div>
 						<div class="modal-body">
 							<p>
-								Upload a CSV with your flashcard definitions. Download a sample CSV to see how the file is structured
-								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>
+								Upload a CSV file with your flashcard definitions. (You can download a sample CSV to see how the file is structured
+								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>.)
 							</p>
-							<h4>Upload</h4>
 							<input name="csvData" type="file" name="csvData"/>
 						</div>
 						<div class="modal-footer">
