@@ -27,33 +27,61 @@
 			</li>
 		</ul>
 
-		<div class="chapter-header">
-			<h1 class="chapter-title">
-				${chapterInstance.title}
-				<g:if test="${isOwner}">
-					<g:link action="edit" id="${chapterInstance?.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
-				</g:if>
-			</h1>
-			<p class="chapter-description">${chapterInstance.description}</p>
-			<g:if test="${chapterInstance.deck.flashcardCount >
-				0 && Registration.findAllByCourseAndUser(chapterInstance.course, userInstance)}">
-				<div class="btn-group text-left">
-					<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-						Practice Flashcards <span class="caret"></span>
-					</button>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="chapter-header">
+					<h1 class="chapter-title">
+						${chapterInstance.title}
+						<g:if test="${isOwner}">
+							<g:link action="edit" id="${chapterInstance?.id}" class="btn btn-warning">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</g:link>
+						</g:if>
+					</h1>
+					<p class="chapter-description">${chapterInstance.description}</p>
+				</div>
+			</div>
 
-					<ul class="dropdown-menu" role="menu">
-						<li><g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.MEANING]">Practice ${chapterInstance.deck.language} to ${chapterInstance.deck.sourceLanguage}</g:link></li>
-						<li><g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.SYMBOL]">Practice ${chapterInstance.deck.sourceLanguage} to ${chapterInstance.deck.language}</g:link></li>
-						<li><g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.PRONUNCIATION]">Practice pronunciations of ${chapterInstance.deck.language} words/characters</g:link></li>
-					</ul>
-				</div><!-- end btn-group -->
-			</g:if>
-			<g:if test="${isOwner}">
-				<g:link class="btn btn-info add-flashcard" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
-			</g:if>
+			<div class="col-lg-4 col-lg-offset-4">
+				<g:render template="/deck/allProgress" model="[deckInstance: chapterInstance.deck, progress: chapterInstance.deck.progress, id: chapterInstance.deck.id]"/>
+				<br/>
+				<div class="center">
+					<g:if test="${chapterInstance.deck.flashcardCount >
+						0 && Registration.findAllByCourseAndUser(chapterInstance.course, userInstance)}">
+						<div class="btn-group text-left">
+							<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+								Practice Flashcards
+								<span class="caret"></span>
+							</button>
+
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.MEANING]">
+										Practice ${chapterInstance.deck.language} to ${chapterInstance.deck.sourceLanguage}
+									</g:link>
+								</li>
+								<li>
+									<g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.SYMBOL]">
+										Practice ${chapterInstance.deck.sourceLanguage} to ${chapterInstance.deck.language}
+									</g:link>
+								</li>
+								<li>
+									<g:link action="practice" id="${chapterInstance.id}" controller="chapter" params="[rankingType: Constants.PRONUNCIATION]">
+										Practice pronunciations of ${chapterInstance.deck.language} words/characters
+									</g:link>
+								</li>
+							</ul>
+						</div>
+						<!-- end btn-group -->
+					</g:if>
+					<g:if test="${isOwner}">
+						<g:link class="btn btn-info add-flashcard" action="search" controller="unit" params="${[deckId: chapterInstance.deck.id, 'filter-alph': chapterInstance.deck.language.id]}">Add Flashcards</g:link>
+					</g:if>
+				</div>
+			</div>
+			<!-- end chapter-header -->
 		</div>
-		<!-- end chapter-header -->
+		<br/>
 
 		<div class="row">
 			<g:each in="${flashcardInstanceList}">
@@ -70,6 +98,6 @@
 		</div>
 	</div>
 	<!-- end container -->
-	<g:javascript>initializeAudio();</g:javascript>
+	<g:javascript>initializeAudio(); initializeDonuts();</g:javascript>
 </body>
 </html>
