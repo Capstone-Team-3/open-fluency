@@ -98,6 +98,9 @@ class ChapterController {
             return
         }
 
+        // Add the progress to the deck
+        chapterInstance.deck.metaClass.progress = deckService.getDeckProgress(chapterInstance.deck)
+
         [
         flashcardInstanceList: Flashcard.findAllByDeck(chapterInstance.deck, [max: Math.min(max ?: 12, 100)]),
         chapterInstance: chapterInstance, 

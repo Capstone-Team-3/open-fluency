@@ -22,7 +22,7 @@ class HomeController {
         	owner {
         		eq('id', springSecurityService.principal.id)
         	}
-        	maxResults(4)
+        	maxResults(3)
         	order("lastUpdated", "desc")
         }
 
@@ -31,7 +31,7 @@ class HomeController {
         	owner {
         		eq('id', springSecurityService.principal.id)
         	}
-        	maxResults(4)
+        	maxResults(3)
         	order("lastUpdated", "desc")
         }
 
