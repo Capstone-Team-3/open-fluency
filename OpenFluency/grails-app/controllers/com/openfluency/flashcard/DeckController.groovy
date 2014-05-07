@@ -119,8 +119,6 @@ class DeckController {
         }
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
-        println "--log-- ${deckInstance}"
-        params.each {k,v -> println "--log-- ${k}: ${v}"}
         CardUsage cardUsageInstance = deckService.getNextFlashcard(deckInstance, params.cardUsageId, params.ranking as Integer, params.rankingType as Integer)
         
         Customization customizationInstance = Customization?.findByOwnerAndCard(userInstance, cardUsageInstance.flashcard)
