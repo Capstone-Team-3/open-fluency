@@ -387,7 +387,11 @@ h4#custom-image {
 }
 
 .dashboard-decks .panel-body {
-    height: 160px;
+    height: 170px;
+}
+
+.dashboard-decks .progress-donut {
+    padding: 0px 5px !important;
 }
 
 .dashboard .panel h3 {
