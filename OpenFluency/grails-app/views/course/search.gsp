@@ -79,10 +79,10 @@
                     <td>
                         <sec:ifAllGranted roles="ROLE_STUDENT">
                             <g:if test="${Registration.countByCourseAndUser(it, userInstance) == 0}">
-                                <g:link action="enroll" controller="course" id="${it.id}" class="enroll btn btn-info">Enroll</g:link>
+                                <g:link action="enroll" controller="course" id="${it.id}" class="enroll pull-right btn btn-info">Enroll</g:link>
                             </g:if>
                             <g:else>
-                                <g:link class="btn btn-danger" action="drop" controller="course" id="${it.id}">Drop</g:link>
+                                <g:link class="btn btn-danger pull-right" action="drop" controller="course" id="${it.id}">Drop Course</g:link>
                             </g:else>
                         </sec:ifAllGranted>
                     </td>
