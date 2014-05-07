@@ -120,10 +120,10 @@ class QuizService {
     			eq('quiz', quizInstance) 
     		}
     		eq('status', Constants.NOT_ANSWERED) 
-           }[0]
+         }[0]
 
         // Change the status of this answer to viewed
-    	if(answer && ((sessionId == null) || (answer.sessionId == sessionId))) {
+        if(answer && ((sessionId == null) || (answer.sessionId == sessionId))) {
     		// Here it might be a good idea to change the session so that the user can continue the test
     		answer.status = Constants.VIEWED
     		answer.save()
@@ -139,10 +139,23 @@ class QuizService {
     }
 
     /**
-    * Answer a question - it will only be answered if the status is VIEWED and the session is the same
+    * Answer a question - it will only be answered if the status is VIEWED, the session is the same and the timing is right
     */
     Boolean answerQuestion(Answer answer, Long selection, String sessionId) {
 
+        if(answer.question.quiz.maxCardTime != 0) {
+            // If questions are timed, calculate how much time passed since the user viewed the answer and it actually answered it
+            long l1 = answer.lastUpdated.getTime()
+            long l2 = new Date().getTime();
+            long diff = (l2 - l1)/1000;   
+            // Oops, user took longer than expected!
+            if(diff > answer.question.quiz.maxCardTime) {
+                answer.status = Constants.ANSWERED
+                answer.save()
+                return false
+            }
+        }
+        
 		// Check that the answer can actually be answered
 		if(answer.status == Constants.VIEWED && answer.sessionId == sessionId) {
 			answer.selection = Flashcard.load(selection)
@@ -193,14 +206,14 @@ class QuizService {
 
         // only finalize it if the if the user has completed all questions or if the quiz is forced to finalize
         if((quizInstance.countQuestions() == completedQuestions) || force)  {
-           Integer correctAnswers = Answer.executeQuery("""
+         Integer correctAnswers = Answer.executeQuery("""
             SELECT count(id) 
             FROM Answer 
             WHERE status = ? AND question.quiz.id = ? AND user.id = ? AND selection.id = question.flashcard.id
             """, [Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
 
-           return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
-       }
+         return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
+     }
 
 		// The user has not completed the course yet
 		return null

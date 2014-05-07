@@ -22,6 +22,9 @@ class Answer {
 
 	String sessionId 	// The session that the user was in when the answer was created
 
+	Date dateCreated
+	Date lastUpdated
+
     static constraints = {
     	selection nullable: true
     	status defaultValue: Constants.NOT_ANSWERED

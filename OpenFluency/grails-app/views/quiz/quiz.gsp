@@ -26,8 +26,12 @@
 				</ul>
 
 				<g:form action="nextQuestion" controller="quiz" id="${answerInstance.id}">
+					<input type="hidden" name="maxCardTime" id="maxCardTime" value="${quizInstance.maxCardTime}" />
 					<input type="hidden" name="quiz" value="${quizInstance.id}" />
 
+					<div class="alert alert-warning center">
+						<div id="clock" class="clock"></div>
+					</div>
 					<g:if test="${testElement == Constants.SYMBOL}">
 						<h1 class="unit text-center">${answerInstance.question.flashcard.secondaryUnit.print}</h1>
 					</g:if>
@@ -57,4 +61,5 @@
 			</div>
 		</div>
 	</div>
+	<g:javascript>initCountdown();</g:javascript>
 </body>
