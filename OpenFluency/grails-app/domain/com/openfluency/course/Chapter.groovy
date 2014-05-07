@@ -3,10 +3,15 @@ package com.openfluency.course
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
 
+/**
+ *  The chapter domain class acts as a thin wrapper around a deck which
+ *  allows decks to be added to courses
+ */
 class Chapter {
-
-	Deck deck 	// only one deck can be assigned to a Course
-	Course course // Courses can have many chapters
+	/** only one deck can be assigned to a Chapter */
+	Deck deck 	
+	/** Courses the chapter belongs in */
+	Course course 
 
 	String title
 	String description

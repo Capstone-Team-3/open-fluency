@@ -2,6 +2,10 @@ package com.openfluency.auth
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
+/**
+ *  The UserRole class is defined by the SpringSecurity plug in.  See SpringSecurity docs for more detail
+ *  It acts as a map between users and their authorized roles.
+ */
 class UserRole implements Serializable {
 
 	private static final long serialVersionUID = 1
