@@ -93,6 +93,7 @@
 							<sec:username/>
 						</g:link>
 					</li>
+					<li><a href="${createLink(uri: '/help')}">Help</a></li>
 					<li>
 						<g:link controller="logout">Logout</g:link>
 					</li>
