@@ -1,5 +1,9 @@
 package com.openfluency.auth
 
+/**
+ *  The Role class is required by SpringSecurity.  It us a simple class that maps user
+ *  rolls to users by name.
+ */
 class Role {
 
 	String authority
