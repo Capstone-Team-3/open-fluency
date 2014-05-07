@@ -96,5 +96,6 @@
 			</div>
 		</div>
 	</div>
+	<g:javascript>initializeAudio();</g:javascript>
 </body>
 </html>

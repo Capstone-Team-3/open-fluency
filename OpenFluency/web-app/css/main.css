@@ -246,6 +246,11 @@ h2.sub-heading {
     top: 3px;
 }
 
+.flashcard .play-audio {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
 /* ---------------------------------------------------------------------------*/
 /* CUSTOMIZATION STYLES
 /* ---------------------------------------------------------------------------*/
@@ -281,6 +286,10 @@ h4#custom-image {
 
 #c_audioClip, #audioClip {
     margin-top: 5px;
+}
+
+.audio-warning {
+    color: red;
 }
 
 .customize-image {

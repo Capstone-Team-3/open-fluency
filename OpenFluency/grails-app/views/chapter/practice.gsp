@@ -43,7 +43,9 @@
     </div>
     
     <!-- end container -->
-    <g:javascript>initializePracticeCards();</g:javascript>
+    <g:javascript>
+        initializePracticeCards();
+    </g:javascript>
 
 </body>
 </html>

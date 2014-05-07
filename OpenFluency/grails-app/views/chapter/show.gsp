@@ -70,6 +70,6 @@
 		</div>
 	</div>
 	<!-- end container -->
-
+	<g:javascript>initializeAudio();</g:javascript>
 </body>
 </html>

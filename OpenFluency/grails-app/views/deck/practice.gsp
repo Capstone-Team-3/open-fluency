@@ -35,6 +35,8 @@
         <g:render template="/deck/practiceCards" model="[id: deckInstance.id, practiceDeckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck', imageURL: imageURL, audioSysId: audioSysId]"/>
     </div>
     <!-- end container -->
-    <g:javascript>initializePracticeCards();</g:javascript>
+    <g:javascript>
+        initializePracticeCards();
+    </g:javascript>
 </body>
 </html>

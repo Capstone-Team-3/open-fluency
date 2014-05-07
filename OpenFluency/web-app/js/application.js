@@ -66,14 +66,14 @@ var initializePracticeCards = function() {
 */
 var hideElement = function(title, selector, id) {
 	var $elementContainer = $(selector);
-	var pron = $elementContainer.html();
+	var elementHTML = $elementContainer.html();
 	
 	$elementContainer.html('<button class="btn" id="' + id + '">Show ' + title + '</button>');
 	$('#' + id).on('click', function() {
-		$elementContainer.html(pron);
-		/*if (title === "Pronunciation"){
-			initializePracticeAudio();
-		}*/
+		$elementContainer.html(elementHTML);
+		if (title === "Pronunciation"){
+			initializeAudio();
+		}
 	});
 };
 
@@ -88,11 +88,12 @@ var initializePracticeRanking = function() {
     });
 };
 
-/*var initializePracticeAudio = function() {
-	$("#play-audio").click(function() {
-		$("#flashcard-audio").load();
+var initializeAudio = function() {
+	$(".play-audio").click(function() {
+		var audioSrcID = $(this).next(".flashcard-audio").attr("id");
+		$('#' + audioSrcID).load().get(0).play();
 	});
-};*/
+};
 
 /**
 * Initialize the form used to create Quizes

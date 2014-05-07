@@ -114,7 +114,7 @@
 							Record an audio pronunciation file:
 						</label>
 						
-						<small class="clearfix"><strong>Note:</strong> A browser pop-up may appear asking you to 'Allow' microphone use!</small>
+						<small class="clearfix audio-warning"><strong>Note:</strong> A browser pop-up may appear asking you to 'Allow' microphone use!</small>
 						
 						<audio id="audioClip" controls autoplay></audio>
 						
