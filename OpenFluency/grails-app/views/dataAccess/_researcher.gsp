@@ -19,7 +19,7 @@
 						<h4 class="pull-left">Flashcard Practice Usage Data</h4>
 						<div class="pull-right h4"><span class="glyphicon glyphicon-download"></span><export:formats class="pull-right" id="practice-data" formats="['csv']" action="exportPracticeData" controller="${controller}"/></div>
 					</div>
-					<p class="list-group-item-text">Detailed data on each flashcard usage during deck practice sessions including the time taken on the card and the user selected difficulty ranking on each interaction.  ID fields are provided, allowing the researcher to link to other tables.</p>
+					<p class="list-group-item-text">Detailed data on each flashcard usage during deck practice sessions.  The data includes the time taken on the card, and the user selected difficulty ranking, from each interaction.  ID fields are provided, allowing the researcher to link to other tables.</p>
 				</li>	
 				<li class="list-group-item">
 					<div class="list-group-item-heading">
