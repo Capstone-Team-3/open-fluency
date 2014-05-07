@@ -9,13 +9,16 @@ import com.openfluency.auth.User
 * CardRanking holds the last ranking the user gave to the flashcard
 */
 class CardRanking {
-
+    /** the Flashcard being ranked */
 	Flashcard flashcard
+    /** the User ranking the flashcard */
 	User user
-
-    Integer symbolRanking           // the difficulty level the user assigned to the symbol on the flashcard
-	Integer meaningRanking 			// the difficulty level the user assigned to the meaning of a flaschard 
-	Integer pronunciationRanking 	// the difficulty level the user assigned to the pronunciation of a flaschard 
+    /** the difficulty level the user assigned to the symbol on the flashcard */
+    Integer symbolRanking           
+	/** the difficulty level the user assigned to the meaning of a flaschard */
+    Integer meaningRanking 			 
+	/** the difficulty level the user assigned to the pronunciation of a flaschard */
+    Integer pronunciationRanking 	 
 
 	Date dateCreated
 	Date lastUpdated

@@ -7,8 +7,9 @@ import com.openfluency.auth.User
 * created. A Share is also created when a user adds someone else's Deck to it's own.
 */
 class Share {
-
+	/** Deck that the user is sharing */
 	Deck deck
+	/** the User accessing the deck */
 	User receiver
 	
     static constraints = {

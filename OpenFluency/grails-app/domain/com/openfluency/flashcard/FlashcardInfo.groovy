@@ -20,23 +20,30 @@ import com.openfluency.auth.User
 */
 @EqualsAndHashCode
 class FlashcardInfo implements Comparable<FlashcardInfo> {
-
+    /** the Flashcard this info object is for */
 	Flashcard flashcard
+    /** the User interacting with the card and deck */
 	User user
+    /** the Deck that the flashcard belongs to */
     Deck deck
+    /** the CardServer algorithm being used - identified by unique string name */
     String algoName
+    /** the queue pertaining to the Flashcard Element being studied - Corresponds to learning mode in decks, Constants.CARD_ELEMENT */
     int queue
-
+    /** the key field for ordering the priority queue - the lower the view priority, the sooner the card is seen - must be updated by SR algos */
     double viewPriority
-
+    /** field available to store number of times the user has practiced the card */
     int numberOfRepetitions
+    /** optional field available for calculating a difficulty / easiness ranking for the card based on user feedback */
     double easinessFactor
+    /** optional - this field maps directly to a parameter needed by our out of the box SR algorithm */
     double interval
-
+    /** three String data fields are provided to allow users flexible data storage in implementations of CardServer algorithms */
 	String data1
     String data2
     String data3
 
+    /** provides a detailed map of which fields are required or nullable */
     static constraints = {
     	flashcard nullable: false
         user nullable: false
@@ -51,7 +58,7 @@ class FlashcardInfo implements Comparable<FlashcardInfo> {
         data2 nullable: true
         data3 nullable: true
     }
-
+    /** provides an override of the compareTo method for the Comparable interface - orders based on viewPriority */
     @Override
     int compareTo(FlashcardInfo that){
     	return Double.compare(this.viewPriority, that.viewPriority)
