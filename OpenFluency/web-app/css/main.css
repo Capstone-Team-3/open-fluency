@@ -20,7 +20,7 @@
 
 body {
     padding-top: 70px;
-    padding-bottom: 0;
+    padding-bottom: 40px;
 }
 
 h2.sub-heading {
@@ -321,6 +321,10 @@ h4#custom-image {
 /* ---------------------------------------------------------------------------*/
 /* LANDING PAGE STYLES
 /* ---------------------------------------------------------------------------*/
+.landing-page {
+    margin-bottom: -40px; /* to offset padding on body tag */
+}
+
 .landing-page .container-fluid {
     background-color: #1084AC;
     border-top: 1px solid #333;
@@ -331,6 +335,7 @@ h4#custom-image {
 .landing-content {
     max-width: 970px;
     margin: auto;
+    padding-bottom: 15px;
 }
 
 .landing-page .jumbotron {
