@@ -4,7 +4,7 @@
 			<g:message code="chapter.title.label" default="Title" />
 			<span class="required-indicator">*</span>
 		</label>
-		<input class="form-control" type="text" name="title"  required="" value="${chapterInstance?.title}"/>
+		<input class="form-control" type="text" name="title"  required value="${chapterInstance?.title}"/>
 	</div>
 </div>
 
@@ -14,7 +14,7 @@
 			<g:message code="chapter.description.label" default="Description" />
 			<span class="required-indicator">*</span>
 		</label>
-		<textarea class="form-control" name="description" required="">${chapterInstance?.description}</textarea>
+		<textarea class="form-control" name="description" required>${chapterInstance?.description}</textarea>
 	</div>
 </div>
 
@@ -24,6 +24,6 @@
 			<g:message code="chapter.choose a deck.label" default="Choose a deck" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:select class="form-control" name="deckId" required="" from="${userDecks}" value="${chapterInstance?.deck?.id}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
+		<g:select class="form-control" name="deckId" required from="${userDecks}" value="${chapterInstance?.deck?.id}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
 	</div>
 </div>
