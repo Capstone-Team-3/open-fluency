@@ -20,6 +20,7 @@
 					<div class="col-lg-6 col-lg-offset-3">
 						<g:render template="form" model="[quizInstance: quizInstance, courseInstance: quizInstance.course]"/>
 						<button type="submit" class="btn btn-info">Update</button>
+						<g:link class="btn btn-default" controller="course" action="show" id="${quizInstance.course.id}">Cancel</g:link>
 					</div>
 					<div class="row" id="include-chapters"></div>
 				</g:form>
@@ -30,11 +31,11 @@
 		<br>
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>Questions</h2>
-				<g:each in="${quizInstance.questions}">
-					<g:render template="/quiz/question" model="[questionInstance: it, isOwner: isOwner]"/>
-				</g:each>
+				<h2 class="h3">Quiz Questions</h2>
 			</div>
+			<g:each in="${quizInstance.questions}">
+				<g:render template="/quiz/question" model="[questionInstance: it, isOwner: isOwner]"/>
+			</g:each>
 		</div>
 	</div>
 	<!-- end container -->
