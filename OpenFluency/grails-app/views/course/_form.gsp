@@ -1,12 +1,12 @@
 <%@ page import="com.openfluency.language.Language" %>
 <div class="form-group">
 	<label>Title</label>
-	<input class="form-control" type="text" name="title" value="${courseInstance?.title}"/>
+	<input required class="form-control" type="text" name="title" value="${courseInstance?.title}"/>
 </div>
 
 <div class="form-group">
 	<label>Description</label>
-	<textarea class="form-control" name="description">${courseInstance?.description}</textarea>
+	<textarea required class="form-control" name="description">${courseInstance?.description}</textarea>
 </div>
 
 <div class="form-group">
