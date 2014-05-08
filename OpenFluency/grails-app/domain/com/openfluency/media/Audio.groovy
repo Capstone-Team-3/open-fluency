@@ -4,15 +4,17 @@ import com.openfluency.auth.User
 import com.openfluency.language.Pronunciation
 
 /**
-* Every Unit has many Pronunciations in different Alphabets. Each Pronunciation can have different Audio files depending on the context (UnitMapping)
+*  Audio objects contain audio clips for specific pronunciations.  Size is restricted to 1MB.
 */
 class Audio { 
-
-	User owner 	// The user that uploaded the audio. 
-	String url		// The URL or the audio file, probably an S3 url
+    /** the User who created the audio */
+	User owner
+    /** an optional string field that can link to a url */ 
+	String url
+    /** byte array for storing raw audio recordings */
 	byte[] audioWAV
-
-	Pronunciation pronunciation 	// This is the Audio for a Pronunciation in some Alphabet
+    /** the pronunciation that the audio is tied to */
+	Pronunciation pronunciation
 
 	Date dateCreated
 	Date lastUpdated
@@ -23,7 +25,7 @@ class Audio {
     }
 
     String toString(){
-    	"${pronunciation} -> ${url}"
+    	"${pronunciation}"
     }
 
 }

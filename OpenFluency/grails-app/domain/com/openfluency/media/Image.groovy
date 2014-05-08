@@ -10,11 +10,12 @@ import com.openfluency.auth.User
 * Each mapping represents how the units are used in different contexts, and will have one or many Images associated.
 */
 class Image { 
-
-	User owner 		// The user that uploaded the image.
-	String url		// The URL or the image, probably an S3 url
-
-	UnitMapping unitMapping 	// The mapping that this Image represents
+	/** The user that uploaded the image. */
+	User owner 		
+	/** The URL point to the image - probably a Flickr link, but could be to anywhere accessible */
+	String url		
+	// The mapping (concept, translation...) that this Image represents
+	UnitMapping unitMapping 	
 
 	Date dateCreated
 	Date lastUpdated

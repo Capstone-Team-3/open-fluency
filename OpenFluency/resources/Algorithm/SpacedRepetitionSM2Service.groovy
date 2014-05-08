@@ -5,6 +5,9 @@ import groovy.time.TimeCategory
 import com.openfluency.flashcard.Flashcard
 
 /**
+ * ***This is the raw implementation of a spaced repetition algorithm.  Go to the 
+ *    OpenFluency/grails-app/src/groovy/com/openfluency/algorithm/SM2SpacedRepetition.groovy file to
+ *    view the version that implements a CardServer interface and is active in the system ***
  * An implementation of the Spaced Repetition algorithm.
  * The algorithm is based on the SuperMemo 2 algorithm:
  * http://www.supermemo.com/english/ol/sm2.htm
