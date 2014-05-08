@@ -1,3 +1,11 @@
+/**
+ * Recorder.js
+ * A plugin for recording/exporting the output of Web Audio API nodes 
+ * Created by Matt Diamond
+ * Source: https://github.com/mattdiamond/Recorderjs
+ */
+ /*---------------------------------------------------------------------------*/
+
 (function(window){
 
   //var WORKER_PATH = "../js/recorderWorker.js";
