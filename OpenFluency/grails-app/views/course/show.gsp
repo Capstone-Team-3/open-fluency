@@ -141,7 +141,10 @@
 										</div>
 									</g:if>
 									<h4>
-										<g:link action="show" id="${it.id}" controller="quiz">${it.title}</g:link>
+										<g:if test="${isOwner}">
+											<g:link action="show" id="${it.id}" controller="quiz">${it.title}</g:link>
+										</g:if>
+										<g:else>${it.title}</g:else>
 									</h4>
 									<p>${it.questions.size()} questions</p>
 								</div>
