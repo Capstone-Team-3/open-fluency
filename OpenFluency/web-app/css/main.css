@@ -7,7 +7,7 @@
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 .right {
@@ -173,19 +173,16 @@ h2.sub-heading {
 .flashcard .panel {
     font-size: 20px;
     text-align: center;
-    width: 100%;
-    margin: 0px auto 20px auto;
 }
 
 .flashcard .panel-body {
-    padding: 0px;
+    padding: 0px 0px 20px 0px;
 }
 
 .flashcard-header {
-    background-repeat: no-repeat;
-    background-size: 100% auto;
+    background: #A6BDD3;
+    margin-bottom: 10px;
     padding-bottom: 10px;
-    height: 300px;
     position: relative;
 }
 
@@ -200,8 +197,6 @@ h2.sub-heading {
 }
 
 .flashcard-unit {
-    color: whiteSmoke;
-    text-shadow: 0px 0px 10px #000;
     font-size: 100px;
     margin: 0;
     padding: 20px 0 10px;
@@ -225,6 +220,7 @@ h2.sub-heading {
 .practice-body .practice-flashcard {
     float: none;
     margin: auto;
+    width: 310px;
 }
 
 .progress-container {
