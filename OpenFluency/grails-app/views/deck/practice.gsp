@@ -21,10 +21,14 @@
                 </li>
                 <li>
                     <g:if test="${Constants.CARD_ELEMENTS[rankingType as Integer] == "Meaning"}">
-                        <a href="#">Practice ${deckInstance?.language} to ${deckInstance?.sourceLanguage}</a>
+                        <a href="#">
+                            Practice ${deckInstance?.language} to ${deckInstance?.sourceLanguage}
+                        </a>
                     </g:if>
                     <g:elseif test="${Constants.CARD_ELEMENTS[rankingType as Integer] == "Symbol"}">
-                        <a href="#">Practice ${deckInstance?.sourceLanguage} to ${deckInstance?.language}</a>
+                        <a href="#">
+                            Practice ${deckInstance?.sourceLanguage} to ${deckInstance?.language}
+                        </a>
                     </g:elseif>
                     <g:else>
                         <a href="#">Practice ${deckInstance?.language} Pronunciation</a>
@@ -32,11 +36,13 @@
                 </li>
             </ul>
         </div>
-        <g:render template="/deck/practiceCards" model="[id: deckInstance.id, practiceDeckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck', imageURL: imageURL, audioSysId: audioSysId]"/>
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <g:render template="/deck/practiceCards" model="[id: deckInstance.id, practiceDeckInstance: deckInstance, cardUsageInstance: cardUsageInstance, controller: 'deck', imageURL: imageURL, audioSysId: audioSysId]"/>
+            </div>
+        </div>
     </div>
     <!-- end container -->
-    <g:javascript>
-        initializePracticeCards();
-    </g:javascript>
+    <g:javascript>initializePracticeCards();</g:javascript>
 </body>
 </html>
