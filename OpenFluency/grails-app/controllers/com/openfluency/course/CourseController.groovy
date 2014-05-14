@@ -62,7 +62,8 @@ class CourseController {
 		courseInstance: courseInstance, 
 		isOwner: springSecurityService?.principal?.id == courseInstance.owner.id, 
 		userInstance: User.load(springSecurityService.principal.id),
-		students: Registration.findAllByCourse(courseInstance)]
+		students: Registration.findAllByCourse(courseInstance),
+		userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
 	}
 
 	@Secured(['isAuthenticated()'])

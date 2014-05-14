@@ -35,7 +35,7 @@
 
 				<g:form action="save" controller="chapter" name="createChapterForm">
 					<input type="hidden" value="${courseInstance.id}" name="courseId"/>
-					<g:render template="form" model="[courseInstance: courseInstance]"/>
+					<g:render template="form" model="[courseInstance: courseInstance, 'userDecks': userDecks]"/>
 					<button class="btn btn-info" id="create-chapter">Create</button>
 				</g:form>
 			</div>

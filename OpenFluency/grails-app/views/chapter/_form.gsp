@@ -24,6 +24,8 @@
 			<g:message code="chapter.choose a deck.label" default="Choose a deck" />
 			<span class="required-indicator">*</span>
 		</label>
-		<g:select class="form-control" name="deckId" required from="${userDecks}" value="${chapterInstance?.deck?.id}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
+							
+		<g:select class="form-control" name="deckId" from="${userDecks}" value="${deck?.id}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/>
+		<!--g:select class="form-control" name="deckId" from="${userDecks}" value="${chapterInstance?.deck?.id}" noSelection="['':'-Choose a deck-']" optionKey="id" optionValue="title"/-->
 	</div>
 </div>

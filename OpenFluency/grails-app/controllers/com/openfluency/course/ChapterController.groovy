@@ -15,7 +15,10 @@ class ChapterController {
 
     @Secured(['ROLE_INSTRUCTOR'])
     def create(Course courseInstance) {
-        render view: "create", model: [courseInstance: courseInstance, userDecks: Deck.findAllByOwner(User.load(springSecurityService.principal.id))]
+        println "IN THE CREATE.............."
+        def userDecks = Deck.findAllByOwner(User.load(springSecurityService.principal.id))
+        userDecks?.each{println "${it}"}
+        render view: "create", model: [courseInstance: courseInstance, userDecks: userDecks]
     }
 
     @Secured(['ROLE_INSTRUCTOR'])
