@@ -29,7 +29,7 @@ class FlashcardService {
     Flashcard createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioId, String deckId) {
 
         Unit unitInstance = Unit.load(unitId)
-
+        println "....${unitInstance.literal}...."
         Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
         Audio audioInstance = null;
         if (audioId != "") { audioInstance = Audio.load(audioId); }

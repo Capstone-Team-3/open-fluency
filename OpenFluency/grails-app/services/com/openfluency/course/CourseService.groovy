@@ -49,6 +49,9 @@ class CourseService {
         chapter.save()
         //make sure the chapter maker has a fresh set of flashcardInfos for the deck
         flashcardInfoService.resetDeckFlashcardInfo(courseInstance.owner, deckInstance)
+        //add for students
+        def students = Registration.findByCourse(courseInstance)
+        students.each{flashcardInfoService.resetDeckFlashcardInfo(it.user, deckInstance)}
         return chapter
     }
 
