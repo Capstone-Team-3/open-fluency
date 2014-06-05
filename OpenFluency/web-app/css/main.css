@@ -643,6 +643,18 @@ h4#custom-image {
 /* QUIZZES
 /* ---------------------------------------------------------------------------*/
 
+.quiz form {
+    font-size: 16px;
+}
+
+.quiz form li {
+    font-size: 22px;
+}
+
+.quiz form li label {
+    font-weight: normal;
+}
+
 .quiz-show h1 {
     margin-bottom: 10px;
     margin-top: 30px;
