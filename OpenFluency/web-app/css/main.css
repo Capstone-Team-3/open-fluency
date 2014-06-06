@@ -130,6 +130,18 @@ h2.sub-heading {
     padding-bottom: 5px;
 }
 
+.flashcard-image-create {
+    height: 200px;
+    width: 100%;
+    border: 1px solid #EEEEEE;
+    margin-bottom: 10px;
+    background-color: white;
+    background-position: 50% 50%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-image: url('../images/no-image.png');
+}
+
 .flashcard-create .audio-controls input {
     margin-top: 0;
 }
