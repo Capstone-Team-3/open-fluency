@@ -1,0 +1,8 @@
+This directory contains the confusers that are used by the confuser algorithm
+to determine what kanji should be used for substitutions. The files are being 
+stored in simple text format with pound signs indicated a line with a comment.
+Comments are only respected when the pound sign is the first character in the
+line.
+
+# Example file
+[Kanji] [Kanji] [Kanji]
