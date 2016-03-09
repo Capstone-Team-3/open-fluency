@@ -12,6 +12,7 @@ class AlgorithmServiceSpec extends Specification {
 
 	def algorithmService
 
+	/*
 	void "addCardServer(cardServerName, cardServer) should add a cardServer to the algorithmService "(){
     	given: "a cardServer instance"
     		CardServer linearWithShuffle = new LinearWithShuffle()
@@ -20,7 +21,9 @@ class AlgorithmServiceSpec extends Specification {
     	then: "the algorithmService.cardServers should not be empty"
     		algorithmService.cardServers.size() > 0
     }
-
+	*/
+	
+	/*
     void "cardServerByName() should return the Linear-With-Shuffle server or null for other requests"() {
     	given: "we define a card server and add it to the algorithmService"
     		CardServer linearWithShuffle = new LinearWithShuffle()
@@ -32,6 +35,5 @@ class AlgorithmServiceSpec extends Specification {
         	linearAlgo.name == "Linear-With-Shuffle"
         	noAlgo == null
     }
-
-
+    */
 }
