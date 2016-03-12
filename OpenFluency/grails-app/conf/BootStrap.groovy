@@ -85,7 +85,7 @@ class BootStrap {
                 // Build a few flashcards for the business deck
                 flashcardService.createRandomFlashcards(business, kanji)  
 
-                log.info "Built the business flahscards and queues"      
+                log.info "Built the business flashcards and queues"      
 
                 // Build a few decks to be used in a course and a bunch of flashcards in each
                 Deck chapterDeck1_1 = new Deck(sourceLanguage: english, language: japanese, title: "Kanji for Dummies 1", description: "Simple phrases 1", owner: instructor, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
@@ -111,7 +111,40 @@ class BootStrap {
                 // Create a test for the course
                 quizService.createQuiz("Chapter 1 Quiz", new Date(), 20, Constants.MEANING, chapter1_1.deck.flashcards.collect {it.id}, chapter1_1.course)
                 quizService.createQuiz("Chapter 2 Quiz", new Date(), 0, Constants.PRONUNCIATION, chapter1_2.deck.flashcards.collect {it.id}, chapter1_2.course)
+				
+				// Create a quiz manually, just to see if it works
+				Quiz quizInstance = new Quiz(
+					course: chapter1_2.course,
+					title: "Manually Created Quiz",
+					testElement: Constants.MANUAL,
+					enabled: true,
+					liveTime: new Date(),
+					maxCardTime: 20
+					).save(failOnError: true)
+					
+				Question question = new Question(quiz: quizInstance, question: "Person", questionType: Constants.MANUAL).save(failOnError: true)
+				
+				new QuestionOption(question: question, option: "人", answerKey: 1).save(failOnError: true)
+				new QuestionOption(question: question, option: "その", answerKey: 0).save(failOnError: true)
+				new QuestionOption(question: question, option: "猫", answerKey: 0).save(failOnError: true)
+				new QuestionOption(question: question, option: "ありがとう", answerKey: 0).save(failOnError: true)
 
+				
+				// Create a confuser quiz
+				Quiz confuserQuiz = new Quiz(
+					course: chapter1_2.course,
+					title: "Confuser Quiz",
+					testElement: Constants.MANUAL,
+					enabled: true,
+					liveTime: new Date(),
+					maxCardTime: 20
+					).save(failOnError: true)
+					
+				quizService.createConfuserQuestion(confuserQuiz, "Thank you", "ありがとう", japanese, hiragana)
+				quizService.createConfuserQuestion(confuserQuiz, "Hello", "こんにちは", japanese, hiragana)
+				quizService.createConfuserQuestion(confuserQuiz, "Certificates", "卷", japanese, kanji)
+				quizService.createConfuserQuestion(confuserQuiz, "End", "末", japanese, kanji)
+				
                 // Sign up the student for course 1
                 new Registration(user: student, course: kanji1).save()
                 flashcardInfoService.resetCourseFlashcardInfo(student, kanji1)
