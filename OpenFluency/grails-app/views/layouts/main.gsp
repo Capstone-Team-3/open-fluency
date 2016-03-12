@@ -47,6 +47,9 @@
 									<g:link action="list" controller="deck" class="my-decks">My decks</g:link>
 								</li>
 								<li>
+									<g:link action="create" controller="document" class="create">Upload anki deck</g:link>
+								</li>
+								<li>
 									<g:link action="create" controller="deck" class="create-deck">Create new deck</g:link>
 								</li>
 								<li>

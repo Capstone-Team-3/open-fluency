@@ -14,6 +14,7 @@ class BootStrap {
     def quizService
     def algorithmService
     def deckService
+    def documentService
     def flashcardInfoService
     def userService
 
