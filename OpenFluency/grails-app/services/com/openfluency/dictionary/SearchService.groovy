@@ -2,6 +2,11 @@ package com.openfluency.dictionary
 
 import grails.transaction.Transactional
 
+class OSDetails{
+	String arch
+	String exeExt
+}
+
 /**
  * A class to determine the OS of the machine
  *
@@ -21,15 +26,15 @@ class GetOS {
 		return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );		
 	}
 	
-	public static String name() {	
+	public static OSDetails details() {	
 		if(isWindows()){
-			return "win"
+			return new OSDetails(arch: "win", exeExt : ".exe")
 		}
 		else if(isUnix()) {
-			return "linux";
+			return new OSDetails(arch: "linux", exeExt : "")
 		} 
 		else if(isMac()) {
-		   return "mac";
+		   return new OSDetails(arch: "mac", exeExt : "")
 		}			
 	}
 }
@@ -66,9 +71,14 @@ class SearchService {
 	 */
 	private void init() {
 		 if(!init){
+			 OSDetails details = GetOS.details()
 			 indexSearchToolPath = new java.io.File(
 				 servletContext.getRealPath(
-					 '/../resources/dictionaries/index_search_tools/' + GetOS.name() + '/csearch '
+					 '/../resources/dictionaries/index_search_tools/' + 
+					    details.arch + 
+						'/csearch' + 
+						details.exeExt +
+						' '
 				 )).getCanonicalPath()
 			 indexPath = new java.io.File(
 				 servletContext.getRealPath(
