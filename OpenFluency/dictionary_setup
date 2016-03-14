@@ -1,0 +1,38 @@
+##############################################################################
+##                                                                          ##
+##  Set up the Dictionary index                                             ## 
+##                                                                          ##
+##############################################################################
+
+PROGNAME=`basename "$0"`
+DIRNAME=`dirname "$0"`
+
+case "`uname`" in
+    CYGWIN*)
+        ARCH=win
+        ;;
+
+    Darwin*)
+        ARCH=mac
+        ;;
+
+    Linux*)
+        ARCH=linux
+        ;;
+esac
+
+CUR_DIR=$DIRNAME
+DICTIONARY_BASE_DIR=$CUR_DIR/resources/dictionaries/
+#DICTIONARY_BASE_DIR=$CUR_DIR
+
+CINDEXER=$DICTIONARY_BASE_DIR/index_search_tools/$ARCH/cindex
+SOURCE_PATH=$DICTIONARY_BASE_DIR/japanese_dictionary/jp-en.txt
+INDEX_DIR=$DICTIONARY_BASE_DIR/index/$ARCH
+INDEX_PATH=$INDEX_DIR/jp-en.index
+
+mkdir -p $INDEX_DIR
+`$CINDEXER -indexpath $INDEX_PATH -logskip -maxtrigrams 100000 $SOURCE_PATH`
+
+#CSEARCH=$DICTIONARY_BASE_DIR/index_search_tools/$ARCH/csearch
+#Check the index using
+#$CSEARCH -indexpath $INDEX_PATH -m 10 <search_string> 
