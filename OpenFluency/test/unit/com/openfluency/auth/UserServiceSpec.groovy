@@ -1,6 +1,6 @@
 package com.openfluency.auth
 
-import grails.test.mixin.*
+import spock.lang.Ignore
 import spock.lang.Specification
 import com.openfluency.language.*
 import com.openfluency.Constants
@@ -20,8 +20,8 @@ class UserServiceSpec extends Specification {
     }  
     
 
-    //keep getting null pointer errors that are an artifact of setup, not the test - will come back to
-    /*void "createUser() with valid params should create a valid user"() {
+    @Ignore("keep getting null pointer errors that are an artifact of setup, not the test - will come back to")
+    void "createUser() with valid params should create a valid user"() {
     	given: "the elements needed for valid registration params"
     		Language japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
     		def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(flush: true, failOnError: true)
@@ -33,15 +33,16 @@ class UserServiceSpec extends Specification {
     		newUser.hasErrors() == false
     		newUser.username == params.username 
     }
-*/
+
     void "createUser() with invalid params should trigger 'hasErrors'"() {
     	when: "we try to create an underdefined new user"
     		def newUser = service.createUser("Bob", null, "", "", "", null, null)
     	then: "we should get errors"
     		newUser.hasErrors() == true
     }
-    //can't test it - got to learn how to test things that are saving to db behind the scenes.
-    /*void "editUser should change provided parameters"(){
+    
+	@Ignore("can't test it - got to learn how to test things that are saving to db behind the scenes.")
+	void "editUser should change provided parameters"(){
     	given:
     		def studentRole = Role.load(0L)
     		def japanese = Language.load(0L)
@@ -56,7 +57,7 @@ class UserServiceSpec extends Specification {
     		testUser.password != null
     		testUser.email != eml
     		testUser.email == "aNewEmail@c.om"
-    }*/
+    }
 
     void "resetUserPassword behavior"(){
     	when: "we provide emails but no student to match"

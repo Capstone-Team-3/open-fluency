@@ -29,8 +29,8 @@ class ImageControllerSpec extends Specification {
         then:"The model is correctly created"
             model.imageInstance!= null
     }
-
-	/*
+	
+	@Ignore("doesn't work")
     void "Test the save action correctly persists an instance"() {
 
         when:"The save action is executed with an invalid instance"
@@ -55,7 +55,6 @@ class ImageControllerSpec extends Specification {
             controller.flash.message != null
             Image.count() == 1
     }
-	*/
 	
     void "Test that the show action returns the correct model"() {
         when:"The show action is executed with a null domain"
@@ -89,7 +88,7 @@ class ImageControllerSpec extends Specification {
             model.imageInstance == image
     }
 
-	/*
+	@Ignore("doesn't work")
     void "Test the update action performs an update on a valid domain instance"() {
         when:"Update is called for a domain instance that doesn't exist"
             request.contentType = FORM_CONTENT_TYPE
@@ -120,9 +119,8 @@ class ImageControllerSpec extends Specification {
             response.redirectedUrl == "/image/show/$image.id"
             flash.message != null
     }
-	*/
 	
-	/*
+	@Ignore("doesn't work")
     void "Test that the delete action deletes an instance if it exists"() {
         when:"The delete action is called for a null instance"
             request.contentType = FORM_CONTENT_TYPE
@@ -148,5 +146,4 @@ class ImageControllerSpec extends Specification {
             response.redirectedUrl == '/image/index'
             flash.message != null
     }
-    */
 }
