@@ -21,6 +21,7 @@ class Image {
 	Date lastUpdated
 
     static constraints = {
+		unitMapping nullable: true
     }
 
     String toString(){

@@ -104,6 +104,11 @@ class FlashcardService {
             it.delete()
         }
 
+		// Delete all the language units
+		Unit.findAllByFlashcard(flashcardInstance).each {
+			it.delete()
+		}
+
         // Delete all the questions and options that use this card
         QuestionOption.findAllByFlashcard(flashcardInstance).each {
             it.delete()

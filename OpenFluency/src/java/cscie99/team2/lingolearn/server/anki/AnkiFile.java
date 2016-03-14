@@ -7,12 +7,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -48,11 +49,14 @@ public class AnkiFile {
 	private String ankiFilename = "";
 	private HashMap<String, CardModel> models;
 	// Field names and field types for all the cards in this deck
-	private LinkedHashMap<String,AnkiFieldTypes> fieldTypes;
+	private LinkedHashMap<String,AnkiFieldTypes> hashedFieldTypes;
+	private ArrayList<String> fieldNames = new ArrayList<String>();
+	private ArrayList<AnkiFieldTypes> fieldTypes = new ArrayList<AnkiFieldTypes>();
 	private Boolean hasField=false;
+	private Boolean mapped=false;
 	private int totalCards = 0;
+	private long cardId = 0;
 	private int totalDeckModels = 0;
-	private long cardId = 1;
 	private HashMap<String, Deck> parsedDecks;
 	private AnkiModelSqlJetTransaction modelTransaction;
 	private AnkiCardSqlJetTransaction cardTransaction;
@@ -78,8 +82,7 @@ public class AnkiFile {
 			this.zipFileStream = new FileInputStream(fileName);
 			this.parsedDecks = new HashMap<String, Deck>();
 			this.ankiFilename = fileName;
-		    this.fieldTypes = new LinkedHashMap<String,AnkiFieldTypes>();	
-            this.cardId = 1;  // All card id starts at 1 for each deck at import
+		    this.hashedFieldTypes = new LinkedHashMap<String,AnkiFieldTypes>();	
 			this.importData();
 		}catch( SqlJetException sje ){
 			throw new AnkiException(
@@ -150,9 +153,6 @@ public class AnkiFile {
 		db.close();
 	}
 	
-    public String getTmpFolder(){
-        return (this.tmpFolder);
-    }
 
 	/**
 	 * Add a Card to the collection of parsed cards and decks
@@ -167,8 +167,6 @@ public class AnkiFile {
 			totalDeckModels++;
 			deck.setName( getNextDeckName() );
 		}
-        card.setId(this.cardId);
-        this.cardId++;
 		deck.add(card);
 		
 		parsedDecks.put( deckName, deck );
@@ -176,6 +174,12 @@ public class AnkiFile {
 	
 	}
 	
+	public String getTmpDir(){
+		return this.tmpFolder;
+	}
+	static String getUniqueName() {
+		return UUID.randomUUID().toString();
+	}
 	/**
 	 * Parse a Card object based on the fields and model read from the 
 	 * Anki file.
@@ -194,40 +198,67 @@ public class AnkiFile {
 		Card card = new Card();
 		String cardFieldValue;
 		CardField modelFields[] = model.getFlds();
+		CardField modelField;
 		int allFields=modelFields.length;
+		card.setId(++this.cardId);
+		if (!mapped) {
+			for( int i = 0; i < modelFields.length; i++ ){
+				String fname="__placeXholder__";
+				try { // Array out of bound in some of them, how?
+					modelField = modelFields[i];
+					fname = modelField.getName();
+				} catch (Exception e) {}
+				fieldNames.add(fname);
+				fieldTypes.add(AnkiFieldTypes.Unknown);
+			}
+			mapped = true;
+		}
 		for( int i = 0; i < modelFields.length; i++ ){
 			AnkiFieldTypes fieldType;
-			CardField modelField;
+			/*
 			try { // Array out of bound in some of them, how?
 				modelField = modelFields[i];
-				String p[] = modelField.getMedia();
+				//String p[] = modelField.getMedia();
 			} catch (Exception e) {
 				modelField = null;
 			}
+			*/
 			try {
 				cardFieldValue = cardFields[i];
 			} catch (Exception e) {
 				cardFieldValue = "";
-				logger.error("Card field "+ i +" is missing "+ ((modelField != null)?modelField.getName():"unknown"), e);
+				logger.error("Card field "+ i +" is missing "+ fieldNames.get(i),e);// ((modelField != null)?modelField.getName():"unknown"), e);
 			}
-			// If mapped, use it
 			if (!hasField) {
-				if (this.fieldTypes.containsKey(modelField.getName())
-				&& this.fieldTypes.get(modelField.getName())!= AnkiFieldTypes.Unknown ) {
-					fieldType=this.fieldTypes.get(modelField.getName());
+				if (this.fieldTypes.get(i)!= AnkiFieldTypes.Unknown ) {
+					fieldType=this.fieldTypes.get(i);
 					--allFields;
 				} else {  // See if it is image, text or otherwise
 					fieldType = getModelFieldMap(cardFieldValue);
-					this.fieldTypes.put(modelField.getName(), fieldType);
+					this.hashedFieldTypes.put(fieldNames.get(i), fieldType);
+					this.fieldTypes.set(i,fieldType);
+				}
+			} else 
+				fieldType=this.fieldTypes.get(i);
+			// If mapped, use it
+			/*
+			if (!hasField) {
+				if (this.hashedFieldTypes.containsKey(modelField.getName())
+				&& this.hashedFieldTypes.get(modelField.getName())!= AnkiFieldTypes.Unknown ) {
+					fieldType=this.hashedFieldTypes.get(modelField.getName());
+					--allFields;
+				} else {  // See if it is image, text or otherwise
+					fieldType = getModelFieldMap(cardFieldValue);
+					this.hashedFieldTypes.put(modelField.getName(), fieldType);
 				}
 			}
 			else
 				if (modelField != null)
-					fieldType=this.fieldTypes.get(modelField.getName());
+					fieldType=this.hashedFieldTypes.get(modelField.getName());
 				else // out of bound for 1 large file
 					fieldType = getModelFieldMap(cardFieldValue);
+			*/
 			card.addField(cardFieldValue);
-            // Most cards don't have front back, keep it here for giggles
 			switch( fieldType ){
 			// Front and Back are 
 				case Front:
@@ -343,24 +374,27 @@ public class AnkiFile {
 		Set<String> keys = models.keySet();
 		for( String mid : keys ){
 			CardModel model = models.get(mid);
-			System.out.println(model.getId());
+			//System.out.println(model.getId());
 		}
 		
 		return models;
 	}
 	
+	
+	
 	public HashMap<String, Deck> getParsedDecks() {
 		return parsedDecks;
 	}
-
-	public Iterator getDeckIterator() {
-        if (parsedDecks != null) {
-            Collection c = parsedDecks.values();
-            System.out.println("parsedDecks "+ parsedDecks );
-            return c.iterator();
-        }
-        return null;
+	
+	public Iterator<Deck> getDeckIterator() {
+		if (parsedDecks != null) {
+			Collection<Deck> c = parsedDecks.values();
+			System.out.println("parsedDecks "+ parsedDecks );
+			return c.iterator();
+		}
+		return null;
 	}
+
 
 	public HashMap<String, CardModel> getModels() {
 		return models;

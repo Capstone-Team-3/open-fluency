@@ -1,5 +1,7 @@
 package com.openfluency.language
 
+import com.openfluency.flashcard.Flashcard
+
 /**
  *  Unit objects are key in our domain model (see uml and user guides).  Units can repesent any element or composition
  *  of elements in a language (letter, word, phrase)
@@ -7,6 +9,8 @@ package com.openfluency.language
 class Unit {
     /** the alphabet in which the unit is defined - eg Kanji, Katakana, etc */
 	Alphabet alphabet 	
+	UnitType type;
+	Flashcard flashcard;
 	/** 
      *  This is the literal character, word or phrase in the alphabet. For alphabets that require 
      *  unicode encoding, this will be the unicodes (4e9c, 5516, etc)
@@ -24,6 +28,8 @@ class Unit {
     	frequency nullable: true
     	strokeCount nullable: true
     	grade nullable: true
+		type  nullable: true // For now, but should have a meaning
+		flashcard nullable: true // For now
     }
 
     /**

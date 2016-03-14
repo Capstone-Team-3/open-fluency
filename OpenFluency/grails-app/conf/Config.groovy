@@ -38,8 +38,8 @@ grails.mime.types = [ // the first one is the default format
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
-grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**']
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*','/card-media/*']
+grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**','/card-media/**']
 
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
@@ -95,17 +95,17 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-		uploadFolder = "/tmp/upload/"
+		uploadFolder = "/tmp"
         grails.plugin.databasemigration.reports.updateOntart = true
         grails.plugin.databasemigration.reports.changelogFileName = changelog-reports.groovy
     }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
-		uploadFolder = "/tmp/upload/"
+		uploadFolder = "/tmp"
     }
     test {
-		uploadFolder = "/tmp/upload/"
+		uploadFolder = "/tmp"
     }
 }
 
@@ -143,6 +143,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
+	'/**/card-media/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll']
 ]
 

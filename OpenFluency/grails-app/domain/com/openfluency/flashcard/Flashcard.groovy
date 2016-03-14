@@ -34,6 +34,7 @@ class Flashcard {
 	 *  Gets the primaray / focal language unit of the card - this is the symbol the user will learn
 	 *  @Return the Unit representing the focal symbol
 	 */
+	// Front
 	Unit getPrimaryUnit() {
 		return unitMapping.unit1.alphabet == primaryAlphabet ? unitMapping.unit1 : unitMapping.unit2
 	}
@@ -41,11 +42,12 @@ class Flashcard {
 	 *  Gets the secondary / meaning language unit of the card - this is the 'translation' that the user knows
 	 *  @Return the unit representing the meaning in a known language
 	 */
+	// Back
 	Unit getSecondaryUnit() {
 		return unitMapping.unit1.alphabet != primaryAlphabet ? unitMapping.unit1 : unitMapping.unit2
 	}
     /**
-     *  Get all language units associated with card
+     *  Get all language units associated with card - when more than front back
     */
 	List<Unit> getUnits() {
 		return UnitMapping.findAllByFlashcard(this)

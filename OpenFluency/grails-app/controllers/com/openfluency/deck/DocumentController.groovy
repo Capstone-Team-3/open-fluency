@@ -4,6 +4,7 @@ import com.openfluency.Constants
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
 import com.openfluency.language.Language
+import com.openfluency.deck.DocumentService
 import cscie99.team2.lingolearn.server.anki.AnkiFile
 
 @Secured(['isAuthenticated()'])
@@ -26,53 +27,40 @@ class DocumentController {
 		def file = request.getFile('file')
 		def lang = params['filter-lang']
 		def ofdeck = params['filter-deck']
+		def ankiDeck = null
 		if(file.empty) {
 			flash.message = "File cannot be empty"
 		} else {
             User user = User.load(springSecurityService.principal.id)
 			String filename = file.originalFilename
 			String fullPath = grailsApplication.config.uploadFolder + "/" + filename
-            try {
-				/*
-				Deck deckInstance = deckController.create(filename, filename, null, null, cardServerName)
-				deckService.createDeck(filename, filename, params['language.id'], params['sourceLanguage.    id'], params.cardServerAlgo)
-				cardServerAlgos: algorithmService.cardServerNames()
-				*/
+			try {
+				file.transferTo(new File(fullPath))
+			File ga = grailsApplication.getParentContext().getResource("card-media").file
+			String applicationPath = request.getSession().getServletContext().getRealPath("")
+			String mediaDir= ga.getAbsolutePath()
 				flash.message = "Loading "+ fullPath + " for User " + user
-				def documentInstance = documentService.createDocument(fullPath, filename);
+				Language l = Language.load(lang)
+				Document documentInstance = documentService.createDocument(fullPath, filename, l);
 				documentInstance.owner = user
+				// Doesn't work - owner always=null
 				//documentInstance.save()
-				flash.message = "Loading "+ file.originalFilename +" for User "+ user + " -> "+ grailsApplication.config
+				flash.message = "Loading "+ file.originalFilename +" for User "+ user 
             } catch (Exception e) {
 				flash.message = "Cannot save document"+e.message;	
 				e.printStackTrace();
             }
-			file.transferTo(new File(fullPath))
-            AnkiFile anki = new AnkiFile(fullPath)
-            def nCards = anki.totalCards
-            def folder = anki.getTmpFolder()
-            def decks = anki.getDeckIterator()
-            def cardfields = anki.getModels().values()
-			flash.message = "Imported "+ nCards +" cards";	
-			while (decks.hasNext()) {
-				def deck = decks.next();
-                def arrayList =  deck.getCardList() //deck.getCardSet()
-                for (card in arrayList) {
-                    // matches anki.fieldTypes (Linked HashMap)
-                    // matches anki.models.values.get(0).flds[n]
-                    // returns CardField array
-                    for (field in card.fields) {
-						// display 5 flashcards
-                    }
-                }
-			}
+			ankiDeck = documentService.createNewDeck(fullPath,lang);
+			//def alphabetInstanceList=Alphabet.findAllByLanguage(lang);
 			//def fields = cardfields.getFlds()
 		}
-		redirect (action:'list')
+		redirect (action:'list', params: ankiDeck)
 	}
+
 	def index() {
 		redirect(action: "list", params: params)
 	}
+
 	def list() {
         User user = User.load(springSecurityService?.principal?.id)
 		params.max = 10
