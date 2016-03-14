@@ -24,6 +24,7 @@ class BootStrap {
                 // Create languages
                 Language japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
                 Language english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
+				Language chinese = new Language(name: 'Chinese', code: 'CHN').save(failOnError: true)
 
                 log.info "Created ${Language.count()} languages"
 
@@ -31,6 +32,7 @@ class BootStrap {
                 Alphabet kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save(failOnError: true)
                 Alphabet katakana = new Alphabet(name: 'Katakana', language: japanese, code: "ja_on", encodeEntities: true).save(failOnError: true)
                 Alphabet hiragana = new Alphabet(name: 'Hiragana', language: japanese, code: "ja_kun", encodeEntities: true).save(failOnError: true)
+				Alphabet hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "hanzi", encodeEntities: true).save(failOnError: true)
                 Alphabet latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
 
                 log.info "Created ${Alphabet.count()} alphabets"
@@ -97,7 +99,7 @@ class BootStrap {
                 flashcardService.createRandomFlashcards(chapterDeck2_1, kanji)
                 flashcardService.createRandomFlashcards(chapterDeck2_2, kanji)
 
-                // Create 2 courses
+                // Create 2 Japanese courses
                 Course kanji1 = new Course(visible: true, open: true, language: japanese, title: "Kanji for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
                 // Create two chapters for this course
                 Chapter chapter1_1 = new Chapter(title: "Chapter 1: The basics", description: "If you get lost in Japan, at least you need to know these words", deck: chapterDeck1_1, course: kanji1).save(failOnError: true)
@@ -107,6 +109,9 @@ class BootStrap {
                 // Create two chapters for this course
                 Chapter chapter2_1 = new Chapter(title: "Chapter 1: Welcome back!", description: "Continuing to learn more Japanese", deck: chapterDeck2_1, course: kanji2).save(failOnError: true)
                 Chapter chapter2_2 =new Chapter(title: "Chapter 2: Still a dummy? Don't think so!", description: "Now that's what I call a Japanese-speaking dummy", deck: chapterDeck2_2, course: kanji2).save(failOnError: true)
+				
+				// Create a Chinese course
+				Course chineseCourse = new Course(visible: true, open: true, language: chinese, title: "Chinese for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
 
                 // Create a test for the course
                 quizService.createQuiz("Chapter 1 Quiz", new Date(), 20, Constants.MEANING, chapter1_1.deck.flashcards.collect {it.id}, chapter1_1.course)
@@ -114,7 +119,7 @@ class BootStrap {
 				
 				// Create a quiz manually, just to see if it works
 				Quiz quizInstance = new Quiz(
-					course: chapter1_2.course,
+					course: kanji1,
 					title: "Manually Created Quiz",
 					testElement: Constants.MANUAL,
 					enabled: true,
@@ -132,8 +137,8 @@ class BootStrap {
 				
 				// Create a confuser quiz
 				Quiz confuserQuiz = new Quiz(
-					course: chapter1_2.course,
-					title: "Confuser Quiz",
+					course: kanji1,
+					title: "Japanese Confuser Quiz",
 					testElement: Constants.MANUAL,
 					enabled: true,
 					liveTime: new Date(),
@@ -144,6 +149,21 @@ class BootStrap {
 				quizService.createConfuserQuestion(confuserQuiz, "Hello", "こんにちは", japanese, hiragana)
 				quizService.createConfuserQuestion(confuserQuiz, "Certificates", "卷", japanese, kanji)
 				quizService.createConfuserQuestion(confuserQuiz, "End", "末", japanese, kanji)
+				
+				// Create a confuser quiz
+				Quiz chineseConfuserQuiz = new Quiz(
+					course: chineseCourse,
+					title: "Chinese Confuser Quiz",
+					testElement: Constants.MANUAL,
+					enabled: true,
+					liveTime: new Date(),
+					maxCardTime: 20
+					).save(failOnError: true)
+					
+				quizService.createConfuserQuestion(chineseConfuserQuiz, "Big", "大", chinese, hanzi)
+				quizService.createConfuserQuestion(chineseConfuserQuiz, "Arrow", "矢", chinese, hanzi)
+				quizService.createConfuserQuestion(chineseConfuserQuiz, "Outlaw", "无法无天", chinese, hanzi)
+				quizService.createConfuserQuestion(chineseConfuserQuiz, "Field", "田", chinese, hanzi)
 				
                 // Sign up the student for course 1
                 new Registration(user: student, course: kanji1).save()

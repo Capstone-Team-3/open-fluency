@@ -15,6 +15,9 @@ public class ConfuserFactory {
 		if (language.getCode().equals("JAP")) {
 			return true;
 		}
+		else if (language.getCode().equals("CHN")) {
+			return true;
+		}
 		
 		return false;
 	}
@@ -27,6 +30,9 @@ public class ConfuserFactory {
 		
 		if (language.getCode().equals("JAP")) {
 			return new JapaneseConfuser();
+		}
+		else if (language.getCode().equals("CHN")) {
+			return new ChineseConfuser();
 		}
 		
 		return null;
