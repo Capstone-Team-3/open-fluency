@@ -10,7 +10,7 @@ class Quiz {
 	Course course
 	String title
 	/** This indicates if in this test we're testing pronunciation, meaning, or symbol */
-	Integer testElement 	
+	Integer testElement // TODO remove this - question type should be determined by the question, not the quiz
 	/** If the current time is less than the liveTime, the test will not be viewable */
 	Date liveTime		
 	/** This allows control using a checkbox instead of time to be able to disable the test when needed */
