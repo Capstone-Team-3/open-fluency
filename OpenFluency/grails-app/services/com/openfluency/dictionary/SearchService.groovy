@@ -44,9 +44,9 @@ class GetOS {
  *
  */
 class DictionaryEntry {
-	String concept
-	String pronounciation
-	String meaning
+	public String concept
+	public String pronunciation
+	public String meaning
 }
 
 /**
@@ -82,7 +82,7 @@ class SearchService {
 				 )).getCanonicalPath()
 			 indexPath = new java.io.File(
 				 servletContext.getRealPath(
-					 '/../resources/dictionaries/index/jp-en.index '
+					 '/../resources/dictionaries/index/win/jp-en.index '
 				 )).getCanonicalPath()
 				 
 			 commandBase = indexSearchToolPath + " -indexpath " +  indexPath;
@@ -134,7 +134,7 @@ class SearchService {
 			if(matcher.getCount()) {
 				DictionaryEntry match = new DictionaryEntry(
 					            concept : matcher[0][2], 
-								pronounciation : matcher[0][3], 
+								pronunciation : matcher[0][3], 
 								meaning : matcher[0][4] )
 				ret.add(match)
 			}
