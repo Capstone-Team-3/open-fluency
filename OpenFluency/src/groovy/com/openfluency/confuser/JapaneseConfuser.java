@@ -29,6 +29,10 @@ public class JapaneseConfuser implements ConfuserInterface {
 		
 		Card card = new Card();
 		
+		card.setKanji("");
+		card.setHiragana("");
+		card.setKatakana("");
+		
 		CharacterType characterType = CharacterType.Unknown;
 		
 		if (alphabet.getCode().equals("kanji")) {
