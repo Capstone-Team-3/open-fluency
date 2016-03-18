@@ -47,7 +47,7 @@ class FlashcardController {
     * /OpenFluency/flashcard/show/1 --> this will display the flashcard with id = 1
     */
     def show(Flashcard flashcardInstance) {
-        [flashcardInstance: flashcardInstance]
+        [flashcardInstance: flashcardInstance] 
     }
 
     def delete(Flashcard flashcardInstance) {

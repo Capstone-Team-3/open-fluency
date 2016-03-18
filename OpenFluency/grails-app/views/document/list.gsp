@@ -15,13 +15,19 @@
                 <thead>
                     <tr>
                         <g:sortableColumn property="filename" title="Filename" />
+                        <g:sortableColumn property="description" title="Description" />
                         <g:sortableColumn property="uploadDate" title="Upload Date" />
+                        <g:sortableColumn property="importedDate" title="Date Imported" />
                     </tr>
                 </thead>
                 <tbody>
                 <g:each in="${documentInstanceList}" status="i" var="documentInstance">
                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                        <td><g:link action="/previewdeck" id="${documentInstance.filename}">${documentInstance.filename}</g:link></td>
+                    <!-- 
                         <td><g:link action="download" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
+                     -->
+                        <td><span class="property-value">${documentInstance.description} </span></td>
                         <td><g:formatDate date="${documentInstance.uploadDate}" /></td>
                     </tr>
                 </g:each>

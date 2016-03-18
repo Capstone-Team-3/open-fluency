@@ -50,6 +50,9 @@
 									<g:link action="create" controller="document" class="create">Upload anki deck</g:link>
 								</li>
 								<li>
+									<g:link action="" controller="previewDeck" class="create-deck">Active Import</g:link>
+								</li>
+								<li>
 									<g:link action="create" controller="deck" class="create-deck">Create new deck</g:link>
 								</li>
 								<li>

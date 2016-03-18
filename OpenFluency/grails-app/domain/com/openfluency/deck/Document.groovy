@@ -10,13 +10,16 @@ class Document {
     User   owner
 	String filename
 	String fullPath
-    String language
+    Language language
 	String description
 	Date uploadDate = new Date()
+	Date importedDate
 	static constraints = {
 		filename(blank:false,nullable:false)
 		fullPath(blank:false,nullable:false)
         description(blank:true,nullable:true)
+        importedDate nullable:true
+		// Add unique name/owner
 	}
 	String toString() {return filename}
 }

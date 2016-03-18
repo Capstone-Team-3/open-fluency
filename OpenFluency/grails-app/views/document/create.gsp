@@ -34,6 +34,7 @@
             <g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
             <g:uploadForm action="upload">
                 <fieldset class="form">
+                    <!--
                     Existing Deck:<select id="filter-deck" class="form-control" name="filter-deck">
                         <option value="0" selected>Create New Deck</option>
                         <g:each in="${deckInstanceList}">
@@ -45,6 +46,7 @@
                             </g:else>
                         </g:each>
                     </select>
+                    -->
                     Description:<input type="text" class = "form-control" name="Description" />
                     Language:<select id="filter-lang" class="form-control" name="filter-lang">
                         <g:each in="${languageInstanceList}">

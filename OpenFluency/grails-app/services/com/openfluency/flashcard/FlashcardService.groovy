@@ -39,26 +39,17 @@ class FlashcardService {
         
         def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
-            unitMapping: UnitMapping.load(unitMappingId), // Phoebe: remove this ? or leave it?
+            unitMapping: UnitMapping.load(unitMappingId), 
             pronunciation: Pronunciation.load(pronunciationId), 
             image: imageInstance, 
             audio: audioInstance, 
             deck: deckInstance).save(flush: true, failOnError: true)
-
 
         //build the flashcardInfo objs for all users following this deck
         flashcardInfoService.addNewFlashcardInfoAllDeckUsers(deckInstance, flashcardInstance)
 
         println "Created flashcard $flashcardInstance"
         return flashcardInstance
-    }
-
-    /**
-     * Add a language unit to this flash card - Phoebe 
-     */
-    void addUnit(Flashcard flashcardInstance, Unit unit){
-        unit.flashcard = flashcardInstance
-        unit.save(flush: true, failOnError: true)
     }
 
     /**
@@ -103,11 +94,6 @@ class FlashcardService {
         FlashcardInfo.findAllByFlashcard(flashcardInstance).each {
             it.delete()
         }
-
-		// Delete all the language units
-		Unit.findAllByFlashcard(flashcardInstance).each {
-			it.delete()
-		}
 
         // Delete all the questions and options that use this card
         QuestionOption.findAllByFlashcard(flashcardInstance).each {

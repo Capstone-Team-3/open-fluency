@@ -3,10 +3,8 @@ grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
-// Phoebe changed level from 1.6 to 1.7
 grails.project.target.level = 1.7
 grails.project.source.level = 1.7
-
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 grails.project.fork = [
@@ -38,6 +36,7 @@ grails.project.dependency.resolution = {
     // Testing frameworks
     def gebVersion = "0.9.2"
     def seleniumVersion = "2.32.0"
+    // latest version doesn't seem to work
     //def gebVersion = "0.13.0"
     //def seleniumVersion = "2.52.0"
 

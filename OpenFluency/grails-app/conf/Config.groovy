@@ -95,17 +95,17 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-		uploadFolder = "/tmp"
+		uploadFolder = "/tmp/upload"
         grails.plugin.databasemigration.reports.updateOntart = true
         grails.plugin.databasemigration.reports.changelogFileName = changelog-reports.groovy
     }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
-		uploadFolder = "/tmp"
+		uploadFolder = "/tmp/upload"
     }
     test {
-		uploadFolder = "/tmp"
+		uploadFolder = "/tmp/upload"
     }
 }
 

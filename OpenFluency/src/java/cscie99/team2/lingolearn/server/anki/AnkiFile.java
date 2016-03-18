@@ -46,6 +46,7 @@ public class AnkiFile {
 	//private static String TmpFolder = "TMP";
 	private static String TmpFolder = System.getProperty("java.io.tmpdir");
 	private String tmpFolder;
+	private String mediaTopDir;
 	private String ankiFilename = "";
 	private HashMap<String, CardModel> models;
 	// Field names and field types for all the cards in this deck
@@ -61,6 +62,7 @@ public class AnkiFile {
 	private AnkiModelSqlJetTransaction modelTransaction;
 	private AnkiCardSqlJetTransaction cardTransaction;
 	private File mediaFile; // This holds all the image/sound files
+	private File mediaRepo;
 	private static final Logger logger = 
 			LoggerFactory.getLogger(AnkiCardSqlJetTransaction.class);
 	private static final int FILE_COPY_BUFFER_SIZE = 1024;	
@@ -69,13 +71,14 @@ public class AnkiFile {
 		this(fileName, TmpFolder);
 	}
 
-	public AnkiFile(String fileName, String tmpDir) throws AnkiException, IOException
+	public AnkiFile(String fileName, String mediaTopDir) throws AnkiException, IOException
 	{
 		File folder = File.createTempFile(fileName, null); // use for unpacking anki files
 		folder.deleteOnExit();	// cleans up at exit
 		folder.delete();		// if reuse a folder name - clean out folder first
 		folder.mkdir();
 		this.tmpFolder = folder.getAbsolutePath();
+		this.mediaTopDir= mediaTopDir;
 		try{
 			this.modelTransaction = new AnkiModelSqlJetTransaction(this);
 			this.cardTransaction = new AnkiCardSqlJetTransaction(this);
@@ -125,7 +128,7 @@ public class AnkiFile {
 	    		this.mediaFile = new File(this.tmpFolder + File.separator + ze.getName());
 	    		//Create parent folder, ok if already exists
 	    		new File(this.mediaFile.getParent()).mkdirs();
-	    		 
+	    		
 	            FileOutputStream fos = new FileOutputStream(this.mediaFile);   
 	            byte[] buffer = new byte[FILE_COPY_BUFFER_SIZE];
 	 
@@ -139,18 +142,26 @@ public class AnkiFile {
 	    }
 	    zis.closeEntry();
     	zis.close();
-	    
-    	MediaFileMap mediaMapper = new MediaFileMap(
-    			this.ankiFilename,
-				this.mediaFile,		// "media" file
-				this.tmpFolder		// All the files will be unpacked here
-			);
-    	mediaMapper.parse(); // This will unpack all the media into mediaFolder
+
+    	if (this.mediaFile.length() != 0) {
+			// Create a unique UUID folder to put all the media
+			this.mediaRepo = new File(this.mediaTopDir + File.separator + getUniqueName());
+			this.mediaRepo.mkdirs();
+    	}
+
 		SqlJetDb db = SqlJetDb.open(this.sqliteFile, false);
-        
 		db.runReadTransaction( this.modelTransaction );
 		db.runReadTransaction( this.cardTransaction );
 		db.close();
+		// Don't unpack media if the db import fails - exception
+    	if (this.mediaFile.length() != 0) {
+			MediaFileMap mediaMapper = new MediaFileMap(
+    			this.ankiFilename,
+				this.mediaFile,		// "media" file
+				this.mediaRepo.getAbsolutePath()		// All the files will be unpacked here
+			);
+			mediaMapper.parse(); // This will unpack all the media into mediaFolder
+    	}
 	}
 	
 
@@ -176,6 +187,17 @@ public class AnkiFile {
 	
 	public String getTmpDir(){
 		return this.tmpFolder;
+	}
+	// The media directory will have a unique dir - return it
+	public String getMediaAbsoluteDir(){
+		if (this.mediaRepo!= null)
+			return this.mediaRepo.getAbsolutePath();
+		else return this.mediaTopDir;
+	}
+	public String getMediaDir(){
+		if (this.mediaRepo!= null)
+			return this.mediaRepo.getName();
+		else return "";
 	}
 	static String getUniqueName() {
 		return UUID.randomUUID().toString();
@@ -227,7 +249,7 @@ public class AnkiFile {
 				cardFieldValue = cardFields[i];
 			} catch (Exception e) {
 				cardFieldValue = "";
-				logger.error("Card field "+ i +" is missing "+ fieldNames.get(i),e);// ((modelField != null)?modelField.getName():"unknown"), e);
+				logger.error("Card field "+ i +" is missing "+ fieldNames.get(i),e.getMessage());
 			}
 			if (!hasField) {
 				if (this.fieldTypes.get(i)!= AnkiFieldTypes.Unknown ) {
@@ -240,25 +262,7 @@ public class AnkiFile {
 				}
 			} else 
 				fieldType=this.fieldTypes.get(i);
-			// If mapped, use it
-			/*
-			if (!hasField) {
-				if (this.hashedFieldTypes.containsKey(modelField.getName())
-				&& this.hashedFieldTypes.get(modelField.getName())!= AnkiFieldTypes.Unknown ) {
-					fieldType=this.hashedFieldTypes.get(modelField.getName());
-					--allFields;
-				} else {  // See if it is image, text or otherwise
-					fieldType = getModelFieldMap(cardFieldValue);
-					this.hashedFieldTypes.put(modelField.getName(), fieldType);
-				}
-			}
-			else
-				if (modelField != null)
-					fieldType=this.hashedFieldTypes.get(modelField.getName());
-				else // out of bound for 1 large file
-					fieldType = getModelFieldMap(cardFieldValue);
-			*/
-			card.addField(cardFieldValue);
+
 			switch( fieldType ){
 			// Front and Back are 
 				case Front:
@@ -276,23 +280,30 @@ public class AnkiFile {
 					break;
 				
 				case Image:
-					//TODO: setImage Handler!
-					String image = Media.isImage(cardFields[i]);
-					Image im = new Image();
-					im.setImageUri(image);
-					card.setImage(im);
+					//String image = Media.getImage(cardFields[i], this.getMediaDir());
+					if (cardFieldValue.length() > 5) {
+						String image = Media.getImage(cardFieldValue, this.getMediaDir());
+						Image im = new Image();
+						im.setImageUri(image);
+						card.setImage(im);
+						cardFieldValue = Media.addImagePath(cardFieldValue,this.getMediaDir()); // Substitute paths
+					}
 					break;
 					
 				case Sound:
-					//TODO: set Sound Handler!
-					String audio = Media.isSound(cardFields[i]);
-					Sound sound = new Sound();
-					sound.setSoundUri(audio);
-					card.setSound(sound);
+					//String audio = Media.getSound(cardFields[i], this.getMediaDir());
+					if (cardFieldValue.length() > 5) {
+						String audio = Media.getSound(cardFieldValue, this.getMediaDir());
+						Sound sound = new Sound();
+						sound.setSoundUri(audio);
+						card.setSound(sound);
+						cardFieldValue = Media.addSoundPath(cardFieldValue,this.getMediaDir()); // Substitute paths
+					}
 					break;
 				default:
-					continue;
+					break;
 			}
+			card.addField(cardFieldValue);
 		}
 		if (allFields == 0)	// All fields are mapped
 			this.hasField = true;
@@ -343,10 +354,10 @@ public class AnkiFile {
 	*/
 	private AnkiFieldTypes getModelFieldMap( String cardFieldValue ){
 		//AnkiFieldTypes types[] = AnkiFieldTypes.values();
-		String path = Media.isSound(cardFieldValue);
-		if (path!=null) return AnkiFieldTypes.Sound;
-		path = Media.isImage(cardFieldValue);
-		if (path!=null) return AnkiFieldTypes.Image;
+		if (Media.isSound(cardFieldValue))
+			return AnkiFieldTypes.Sound;
+		if (Media.isImage(cardFieldValue))
+			return AnkiFieldTypes.Image;
 		if (cardFieldValue.length() > 1) return AnkiFieldTypes.Text;
 		else return AnkiFieldTypes.Unknown;
 	}	
@@ -380,8 +391,6 @@ public class AnkiFile {
 		return models;
 	}
 	
-	
-	
 	public HashMap<String, Deck> getParsedDecks() {
 		return parsedDecks;
 	}
@@ -394,7 +403,6 @@ public class AnkiFile {
 		}
 		return null;
 	}
-
 
 	public HashMap<String, CardModel> getModels() {
 		return models;

@@ -46,12 +46,6 @@ class Flashcard {
 	Unit getSecondaryUnit() {
 		return unitMapping.unit1.alphabet != primaryAlphabet ? unitMapping.unit1 : unitMapping.unit2
 	}
-    /**
-     *  Get all language units associated with card - when more than front back
-    */
-	List<Unit> getUnits() {
-		return UnitMapping.findAllByFlashcard(this)
-	}
     static constraints = {
     	audio nullable: true
     	image nullable: true

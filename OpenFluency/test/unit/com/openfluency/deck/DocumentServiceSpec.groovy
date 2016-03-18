@@ -3,6 +3,8 @@ package com.openfluency.deck
 import com.openfluency.language.Alphabet
 import com.openfluency.language.Unit
 
+import cscie599.openfluency2.CharSetIdentifier
+import cscie599.openfluency2.CharSetIdentifier.Charset
 import cscie99.team2.lingolearn.server.anki.AnkiFieldTypes;
 import cscie99.team2.lingolearn.server.anki.AnkiFile
 import cscie99.team2.lingolearn.shared.Deck
@@ -39,6 +41,7 @@ class DocumentServiceSpec extends Specification {
 		expect:
 			anki.getTmpDir() != null
 	}
+
 	void "test Field Mappings"() {
         expect:
             anki.fieldTypes.size() == 4
@@ -46,11 +49,16 @@ class DocumentServiceSpec extends Specification {
             anki.fieldNames.size() == 4
         and:
             this.anki.hashedFieldTypes["Picture"] == AnkiFieldTypes.Image
-		assert(this.anki.hashedFieldTypes["Japanese"] == AnkiFieldTypes.Text);
-		assert(anki.fieldNames.get(0) == "Picture");
-		assert(anki.fieldNames.get(3) == "English");
-		assert(anki.fieldTypes.get(0) == AnkiFieldTypes.Image);
-		assert(anki.fieldTypes.get(3) == AnkiFieldTypes.Text);
+		and:
+			this.anki.hashedFieldTypes["Japanese"] == AnkiFieldTypes.Text;
+		and:
+			anki.fieldNames.get(0) == "Picture";
+		and:
+			anki.fieldNames.get(3) == "English";
+		and:
+			anki.fieldTypes.get(0) == AnkiFieldTypes.Image;
+		and:
+			anki.fieldTypes.get(3) == AnkiFieldTypes.Text;
 		//documentService.createNewDeck(fullPath,lang);
     }
 
@@ -75,6 +83,30 @@ class DocumentServiceSpec extends Specification {
         and:
             card.fields.get(1) != null
 	}
+
+    void "test Charset"() {
+		def decks = anki.getDeckIterator()
+		Deck  deck = decks.next();
+		def arrayList =  deck.getCardList() 
+		CharSetIdentifier ci_3=new CharSetIdentifier();
+		CharSetIdentifier ci_2=new CharSetIdentifier();
+		CharSetIdentifier ci_1=new CharSetIdentifier();
+		def field = anki.fieldNames.get(1)
+		Charset b = ci_2.testField(field);
+		for (Card card : arrayList) {
+			ci_1.addText(card.fields.get(1))
+			ci_2.addText(card.fields.get(2))
+		}
+		System.out.println(b);
+		expect:
+			ci_1.getCharSet() == Charset.Kanji
+		and:
+			ci_2.getCharSet() == Charset.Hiragana
+		and:
+			ci_3.getCharSet() == Charset.English
+		and:
+			b == Charset.Hiragana
+    }
 
     void "test Service"() {
     }

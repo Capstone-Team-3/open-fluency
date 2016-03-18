@@ -24,7 +24,10 @@ import org.slf4j.LoggerFactory;
 
 import cscie99.team2.lingolearn.server.anki.AnkiCardSqlJetTransaction;
 /***
- * Copied much logic from Anki-Android
+ * A module to extract media files from an anki zip file. 
+ * All the files are put into a tmp directory.
+ * 
+ * Copied much logic and code from Anki-Android
  * @author phoebemiller
  *
  */
@@ -79,6 +82,7 @@ public class MediaFileMap {
         for (Map.Entry<String, String> entry : mNameToNum.entrySet()) {
             String file = entry.getKey();
             String c = entry.getValue();
+            // Fonts and latex templates
             if (file.startsWith("_") || file.startsWith("latex-")) {
                 continue;
             }   
