@@ -41,7 +41,8 @@ class DocumentService {
     		fullPath: fullPath,
     		filename: filename,
     		description: description,
-    		language: language
+    		language: language,
+			status: "Attempted"
     	).save(flush: true, failOnError: true)
     	return documentInstance
     }
@@ -102,7 +103,7 @@ class DocumentService {
 	}
 	
 	@Transactional
-	def createPreviewDeck(String fullPath, String mediaDir, String filename, String description, Language language){
+	def createPreviewDeck(String fullPath, String mediaDir, String filename, String description, Language language, Document document){
 		AnkiFile anki = new AnkiFile(fullPath,mediaDir)
 		def nCards = anki.totalCards
 		def folder = anki.getTmpDir()
@@ -112,7 +113,7 @@ class DocumentService {
 		def user= User.load(springSecurityService.principal.id)
 		user.id = springSecurityService.principal.id
 		def owner = springSecurityService.currentUser
-		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: filename, description:description,language:language);
+		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: filename, description:description,language:language,document: document);
 		previewDeckInstance.save(flush:true)
 		def nfields = anki.fieldNames.size()
 		while (decks.hasNext()) {

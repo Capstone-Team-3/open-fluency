@@ -7,6 +7,7 @@ import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import com.openfluency.auth.User
 
+@Secured(['isAuthenticated()'])
 @Transactional(readOnly = true)
 class PreviewDeckController {
 	def springSecurityService
@@ -16,7 +17,7 @@ class PreviewDeckController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT', 'ROLE_ADMIN'])
+	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def index(Integer max) {
 		def user = User.load(springSecurityService.principal.id)
         params.max = Math.min(max ?: 10, 100)
@@ -25,18 +26,29 @@ class PreviewDeckController {
 		respond previewdecks , model:[previewDeckInstanceCount: PreviewDeck.countByOwner(user)]
     }
 
-	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT', 'ROLE_ADMIN'])
-    def show(PreviewDeck previewDeckInstance) {
+	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
+    def display(Document document) {
 		def user = User.load(springSecurityService.principal.id)
-        def max = 20
-        params.max = Math.min(max ?: 10, 100)
-		def previewCards= PreviewCard.findAllByDeck(previewDeckInstance, params)
-        [ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
+        PreviewDeck previewDeckInstance =  PreviewDeck.findByDocumentAndOwner(document,user)
+        redirect action: "show", id: previewDeckInstance.id
     }
 
-    def create() {
-        respond new PreviewDeck(params)
+	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
+    def show(PreviewDeck previewDeckInstance) {
+		def user = User.load(springSecurityService.principal.id)
+        if (previewDeckInstance.ownerId != user.id) {
+            flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
+            redirect(uri: request.getHeader('referer'))
+            return
+        } else {
+			def max = 20
+			params.max = Math.min(max ?: 10, 100)
+			def previewCards= PreviewCard.findAllByDeck(previewDeckInstance, params)
+        [ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
+        }
     }
+
+    //def create() { respond new PreviewDeck(params) }
 
     @Transactional
     def save(PreviewDeck previewDeckInstance) {

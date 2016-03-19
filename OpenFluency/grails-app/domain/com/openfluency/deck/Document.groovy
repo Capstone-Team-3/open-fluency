@@ -12,12 +12,14 @@ class Document {
 	String fullPath
     Language language
 	String description
+	String status  // uploaded, Failed, Imported
 	Date uploadDate = new Date()
 	Date importedDate
 	static constraints = {
 		filename(blank:false,nullable:false)
 		fullPath(blank:false,nullable:false)
         description(blank:true,nullable:true)
+		status(blank:true,nullable:true)
         importedDate nullable:true
 		// Add unique name/owner
 	}

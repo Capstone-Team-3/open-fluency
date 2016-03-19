@@ -14,6 +14,7 @@ class PreviewDeck {
 	String description
 	Language language
 	Language sourceLanguage
+	Document	document
 	Date uploadDate = new Date()
 	static hasMany = [cards: PreviewCard]
 
@@ -24,5 +25,6 @@ class PreviewDeck {
 		language nullable: true
 		sourceLanguage nullable: true
 		owner nullable: true
+		document nullable: true
 	}
 }

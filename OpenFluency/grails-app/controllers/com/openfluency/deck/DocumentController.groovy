@@ -24,6 +24,7 @@ class DocumentController {
 
 	// Researchers will not be able to upload decks
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
+	@Transactional
 	def upload()
 	{
 		def file = request.getFile('file')
@@ -39,8 +40,9 @@ class DocumentController {
 			String filename = file.originalFilename
 			String fullPath = grailsApplication.config.uploadFolder + "/" + filename
 			Language l = Language.get(lang)
+			Document documentInstance;
 			try {
-				Document documentInstance = documentService.createDocument(fullPath, filename, l, description);
+				documentInstance = documentService.createDocument(fullPath, filename, l, description);
 			} catch (Exception ex) {
 				flash.message = "Must login first"
 				ex.printStackTrace()
@@ -53,10 +55,11 @@ class DocumentController {
 				//String applicationPath = request.getSession().getServletContext().getRealPath("")
 				String mediaDir= ga.getAbsolutePath()
 				flash.message = "Loading "+ fullPath + " for User " + user
-				ankiDeck = documentService.createPreviewDeck(fullPath,mediaDir,filename,description,l);
+				ankiDeck = documentService.createPreviewDeck(fullPath,mediaDir,filename,description,l,documentInstance);
+				documentInstance.status="Uploaded";
+				documentInstance.save(flush:true)
 				flash.message = "Loading "+ filename +" for User "+ user
-                //params['previewDeckInstance']= ankiDeck
-				redirect(controller:'previewDeckController',action:'show',params:[deck_id:ankiDeck.id])
+				redirect(controller:'previewDeck',action:'show',params:[deck_id:ankiDeck.id])
 			} catch (Exception e) {
 				flash.message = "Cannot save document"+e.message;
 				e.printStackTrace();
@@ -77,10 +80,11 @@ class DocumentController {
         User user = User.load(springSecurityService?.principal?.id)
         //params.max = Math.min(max ?: 12, 100)
         //List<Document> docInstanceList = Document.findAllByOwner(user, params)
-        List<Document> docInstanceList = 
+        List<Document> documentInstanceList = 
         Document.findAll("from Document where owner_id=? order by uploadDate",[ user.id ],[max: 10])
         //List<Document> deckInstanceList = Document.getAll()
-		[documentInstanceList:docInstanceList, documentInstanceTotal: Document.countByOwner(user)]
+		//[documentInstanceList:documentInstanceList, documentInstanceTotal: Document.countByOwner(user)]
+        respond documentInstanceList , model:[documentInstanceTotal: Document.countByOwner(user)]
 		//[documentInstanceList: Document.list(params), documentInstanceTotal: Document.count()]
 	}
 

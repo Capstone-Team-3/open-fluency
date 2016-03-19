@@ -23,7 +23,7 @@
                 <tbody>
                 <g:each in="${documentInstanceList}" status="i" var="documentInstance">
                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                        <td><g:link action="/previewdeck" id="${documentInstance.filename}">${documentInstance.filename}</g:link></td>
+                        <td><g:link controller="previewDeck" action="display" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
                     <!-- 
                         <td><g:link action="download" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
                      -->
