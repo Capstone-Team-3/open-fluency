@@ -1,16 +1,20 @@
 package com.openfluency.media
 
+import com.openfluency.Constants
+import com.openfluency.auth.Role
+import com.openfluency.auth.User
+import com.openfluency.flashcard.Deck
+import com.openfluency.flashcard.Flashcard
+import com.openfluency.language.Alphabet
+import com.openfluency.language.Language
+import com.openfluency.language.Pronunciation
+import com.openfluency.language.Unit
+import com.openfluency.language.UnitMapping
 import spock.lang.*
 
 @TestFor(CustomizationController)
-@Mock(Customization)
+@Mock([Customization, Role, Language, Alphabet, User, UnitMapping, Unit, Deck, Pronunciation, Flashcard])
 class CustomizationControllerSpec extends Specification {
-
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
 
     void "Test the index action returns the correct model"() {
 
@@ -30,25 +34,50 @@ class CustomizationControllerSpec extends Specification {
             model.customizationInstance!= null
     }
 
-	@Ignore("doesn't work")
+	@Ignore("needs work")
+	void "Test the save action returns to the create view when passed invalid parameters"() {
+		setup:
+			MediaService mediaService = Stub() {
+				createCustomization(_) >> {
+					def customization = new Customization()
+					customization.validate()
+					return customization
+				}
+			}
+			controller.mediaService = mediaService
+		
+		when:"The save action is executed with an invalid instance"
+			request.contentType = FORM_CONTENT_TYPE
+			controller.save()
+
+		then:"The create view is rendered again with the correct model"
+			model.customizationInstance!= null
+			view == 'create'
+	}
+	
+	@Ignore("needs work")
     void "Test the save action correctly persists an instance"() {
-
-        when:"The save action is executed with an invalid instance"
-            request.contentType = FORM_CONTENT_TYPE
-            def customization = new Customization()
-            customization.validate()
-            controller.save(customization)
-
-        then:"The create view is rendered again with the correct model"
-            model.customizationInstance!= null
-            view == 'create'
-
+		given: "A mock MediaService"
+			MediaService mediaService = Stub()
+			controller.mediaService = mediaService
+		
+		and:"A valid Customization object"
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save()
+			def english = new Language(name: 'English', code: 'ENG-US').save()
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save()
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save()
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save()
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save()
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save()
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one')
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck)
+			def customization = new Customization(owner: user, card: flashcard)
+		
         when:"The save action is executed with a valid instance"
-            response.reset()
-            populateValidParams(params)
-            customization = new Customization(params)
-
-            controller.save(customization)
+            request.contentType = FORM_CONTENT_TYPE
+            controller.save()
 
         then:"A redirect is issued to the show action"
             response.redirectedUrl == '/customization/show/1'
@@ -64,7 +93,6 @@ class CustomizationControllerSpec extends Specification {
             response.status == 404
 
         when:"A domain instance is passed to the show action"
-            populateValidParams(params)
             def customization = new Customization(params)
             controller.show(customization)
 
@@ -80,7 +108,6 @@ class CustomizationControllerSpec extends Specification {
             response.status == 404
 
         when:"A domain instance is passed to the edit action"
-            populateValidParams(params)
             def customization = new Customization(params)
             controller.edit(customization)
 
@@ -88,31 +115,35 @@ class CustomizationControllerSpec extends Specification {
             model.customizationInstance == customization
     }
 	
-	@Ignore("doesn't work")
+	void "Test the update action returns to the edit view when passed invalid parameters"() {
+		when:"An invalid domain instance is passed to the update action"
+			request.contentType = FORM_CONTENT_TYPE
+			def customization = new Customization()
+			customization.validate()
+			controller.update(customization)
+
+		then:"The edit view is rendered again with the invalid instance"
+			view == 'edit'
+			model.customizationInstance == customization
+	}
+	
     void "Test the update action performs an update on a valid domain instance"() {
-        when:"Update is called for a domain instance that doesn't exist"
-            request.contentType = FORM_CONTENT_TYPE
-            controller.update(null)
-
-        then:"A 404 error is returned"
-            response.redirectedUrl == '/customization/index'
-            flash.message != null
-
-
-        when:"An invalid domain instance is passed to the update action"
-            response.reset()
-            def customization = new Customization()
-            customization.validate()
-            controller.update(customization)
-
-        then:"The edit view is rendered again with the invalid instance"
-            view == 'edit'
-            model.customizationInstance == customization
-
+		given:"A valid Customization object"
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save()
+			def english = new Language(name: 'English', code: 'ENG-US').save()
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save()
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save()
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save()
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save()
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save()
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one')
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck)
+			def customization = new Customization(owner: user, card: flashcard)
+				
         when:"A valid domain instance is passed to the update action"
-            response.reset()
-            populateValidParams(params)
-            customization = new Customization(params).save(flush: true)
+			request.contentType = FORM_CONTENT_TYPE
             controller.update(customization)
 
         then:"A redirect is issues to the show action"
@@ -120,25 +151,26 @@ class CustomizationControllerSpec extends Specification {
             flash.message != null
     }
 	
-	@Ignore("doesn't work")
     void "Test that the delete action deletes an instance if it exists"() {
-        when:"The delete action is called for a null instance"
-            request.contentType = FORM_CONTENT_TYPE
-            controller.delete(null)
-
-        then:"A 404 is returned"
-            response.redirectedUrl == '/customization/index'
-            flash.message != null
-
         when:"A domain instance is created"
-            response.reset()
-            populateValidParams(params)
-            def customization = new Customization(params).save(flush: true)
+            def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save()
+			def english = new Language(name: 'English', code: 'ENG-US').save()
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save()
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save()
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save()
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save()
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save()
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save()
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one').save()
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck).save()
+			def customization = new Customization(owner: user, card: flashcard).save()
 
         then:"It exists"
             Customization.count() == 1
 
         when:"The domain instance is passed to the delete action"
+			request.contentType = FORM_CONTENT_TYPE
             controller.delete(customization)
 
         then:"The instance is deleted"

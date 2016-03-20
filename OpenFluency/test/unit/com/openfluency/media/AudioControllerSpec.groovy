@@ -1,16 +1,19 @@
 package com.openfluency.media
 
+import com.openfluency.Constants
+import com.openfluency.auth.Role
+import com.openfluency.auth.User
+import com.openfluency.flashcard.Deck
+import com.openfluency.language.Alphabet
+import com.openfluency.language.Language
+import com.openfluency.language.Pronunciation
+import com.openfluency.language.Unit
+import com.openfluency.language.UnitMapping
 import spock.lang.*
 
 @TestFor(AudioController)
-@Mock(Audio)
+@Mock([Audio, Role, Language, Alphabet, Pronunciation, Unit, User])
 class AudioControllerSpec extends Specification {
-
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
 
     void "Test the index action returns the correct model"() {
 
@@ -29,23 +32,26 @@ class AudioControllerSpec extends Specification {
         then:"The model is correctly created"
             model.audioInstance!= null
     }
+	
+	@Ignore("doesn't work")
+	void "Test the save action  returns to the create view when passed invalid parameters"() {
+		
+		when:"The save action is executed with an invalid instance"
+			request.contentType = FORM_CONTENT_TYPE
+			def audio = new Audio()
+			audio.validate()
+			controller.save(audio)
+
+		then:"The create view is rendered again with the correct model"
+			model.audioInstance!= null
+			view == 'create'
+	}
 
 	@Ignore("doesn't work")
     void "Test the save action correctly persists an instance"() {
 
-        when:"The save action is executed with an invalid instance"
-            request.contentType = FORM_CONTENT_TYPE
-            def audio = new Audio()
-            audio.validate()
-            controller.save(audio)
-
-        then:"The create view is rendered again with the correct model"
-            model.audioInstance!= null
-            view == 'create'
-
         when:"The save action is executed with a valid instance"
             response.reset()
-            populateValidParams(params)
             audio = new Audio(params)
 
             controller.save(audio)
@@ -64,7 +70,6 @@ class AudioControllerSpec extends Specification {
             response.status == 404
 
         when:"A domain instance is passed to the show action"
-            populateValidParams(params)
             def audio = new Audio(params)
             controller.show(audio)
 
@@ -80,7 +85,6 @@ class AudioControllerSpec extends Specification {
             response.status == 404
 
         when:"A domain instance is passed to the edit action"
-            populateValidParams(params)
             def audio = new Audio(params)
             controller.edit(audio)
 
@@ -111,7 +115,6 @@ class AudioControllerSpec extends Specification {
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
-            populateValidParams(params)
             audio = new Audio(params).save(flush: true)
             controller.update(audio)
 
@@ -120,25 +123,21 @@ class AudioControllerSpec extends Specification {
             flash.message != null
     }
 	
-	@Ignore("doesn't work")
     void "Test that the delete action deletes an instance if it exists"() {
-        when:"The delete action is called for a null instance"
-            request.contentType = FORM_CONTENT_TYPE
-            controller.delete(null)
-
-        then:"A 404 is returned"
-            response.redirectedUrl == '/audio/index'
-            flash.message != null
-
         when:"A domain instance is created"
-            response.reset()
-            populateValidParams(params)
-            def audio = new Audio(params).save(flush: true)
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(failOnError: true)
+			def english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one').save(failOnError: true)
+			def audio = new Audio(owner: user, pronunciation: pronunciation).save(failOnError: true, flush: true)
 
         then:"It exists"
             Audio.count() == 1
 
         when:"The domain instance is passed to the delete action"
+			request.contentType = FORM_CONTENT_TYPE
             controller.delete(audio)
 
         then:"The instance is deleted"
