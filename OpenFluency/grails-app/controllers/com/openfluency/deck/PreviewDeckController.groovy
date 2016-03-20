@@ -26,18 +26,27 @@ class PreviewDeckController {
 		respond previewdecks , model:[previewDeckInstanceCount: PreviewDeck.countByOwner(user)]
     }
 
+	// Display a preview deck associated with a document
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def display(Document document) {
 		def user = User.load(springSecurityService.principal.id)
         PreviewDeck previewDeckInstance =  PreviewDeck.findByDocumentAndOwner(document,user)
-        redirect action: "show", id: previewDeckInstance.id
+		if (previewDeckInstance != null) {
+			redirect action: "show", id: previewDeckInstance.id
+			return
+		}
+		else {
+			flash.message="Deck already imported or deleted"
+			redirect controller: "Document", action: "list"
+			return
+		}
     }
 
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def show(PreviewDeck previewDeckInstance) {
 		def user = User.load(springSecurityService.principal.id)
         if (previewDeckInstance.ownerId != user.id) {
-            flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
+            flash.message = "You're not allowed to view this flashdeck "
             redirect(uri: request.getHeader('referer'))
             return
         } else {
@@ -47,8 +56,6 @@ class PreviewDeckController {
         [ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
         }
     }
-
-    //def create() { respond new PreviewDeck(params) }
 
     @Transactional
     def save(PreviewDeck previewDeckInstance) {
@@ -114,6 +121,9 @@ class PreviewDeckController {
             return
         }
 
+		def doc = Document.findById(previewDeckInstance.document)
+		doc.status="Deleted"
+		doc.save()
         previewDeckInstance.delete flush:true
 
         request.withFormat {
