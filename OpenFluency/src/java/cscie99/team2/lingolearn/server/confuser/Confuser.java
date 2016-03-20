@@ -301,14 +301,18 @@ public class Confuser {
 		char choonpu = 'ー';
 		char n = 'ン'; 
 		char xtsu = 'っ';
-		String invalidFollowers = "ャュョェ";
+		char smallTsu = 'ッ';
+		char openingParentheses = '(';
+		char closingParentheses = ')';
+				
+		String invalidFollowers = "ャュョェッ";
 		// Start scanning through the phrase for relevant matches and either
 		// add or remove the choopu as required
 		List<String> phrases = new ArrayList<String>();
 		for (int ndx = 0; ndx < phrase.length(); ndx++) {
 			char ch = phrase.charAt(ndx);
 			// Press on if we can't insert after this character
-			if (ch == n || ch == xtsu) {
+			if (ch == n || ch == xtsu || ch == smallTsu || ch == openingParentheses || ch == closingParentheses) {
 				continue;
 			}
 			// Check to make sure the next character is not an extension
@@ -421,7 +425,7 @@ public class Confuser {
 		if (ConfuserTools.checkCharacter(phrase.charAt(0)) == CharacterType.Katakana) {
 			xtsu = 'ッ';
 			characters = "カキクケコサシタチツテトハヒフヘホパピプペポ";
-			invalidFollowers = "アイウエオンナニヌネノ";
+			invalidFollowers = "アイウエオンナニヌネノーァ";
 		}
 		// Now start scanning through the phrase for relevant matches for this 
 		// we are only focusing on the characters that are in the middle of 
