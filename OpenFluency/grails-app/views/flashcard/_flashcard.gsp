@@ -13,7 +13,7 @@
 						</a>
 					</g:if>
 				</div>
-				<h1 class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
+				<h1 id="flashcard-unit-text" class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
 				<div class="pronunciation">
 					pronounced "${flashcardInstance?.pronunciation.literal}"
 
@@ -44,3 +44,23 @@
 		</div>
 	</div>
 </div>
+
+<script>
+
+console.log($('#flashcard-unit-text').text());
+var str = $('#flashcard-unit-text').text();
+var result = "";
+
+for (var i = 0; i < str.length; i++) {
+	result += "<span class='clickable-character'>" + str[i] + "</span>";
+}
+
+$('#flashcard-unit-text').html(result);
+
+
+$('.clickable-character').click(function() {
+	$('#dictionary-search-textbox').val($(this).text());
+	$('#dictionary-search-button').click();
+});
+
+</script>

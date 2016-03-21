@@ -312,7 +312,9 @@ function countdown(element, minutes, seconds) {
 
 
 
-/* ----------------------OpenFluency2---------------------------------*/
+/* --------------------------------------------------------------------*/
+//						OpenFluency2
+/* --------------------------------------------------------------------*/
 
 /**
  * toggles dictionary modal
@@ -334,7 +336,7 @@ $('#dictionary-search-button').click(function() {
 		url: "/OpenFluency/dictionary/search",
 		data: {
 			term: searchTerm,
-			count: 5
+			count: 15
 		},
 		dataType: "html",
 		success: function(output) {
