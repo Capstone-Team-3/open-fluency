@@ -144,7 +144,7 @@ class StudentSpec extends GebReportingSpec {
 		searchCourse.click()
 		then:
 		at SearchCoursePage
-		$(".course-result").size() == 3
+		$(".course-result").size() == 4
 	}
 
 	def "Student searches for english courses - should return 0 results"() {
@@ -153,7 +153,7 @@ class StudentSpec extends GebReportingSpec {
 		searchCourseButton.click()
 		then:
 		at SearchCoursePage
-		$(".deck-result").size() == 0
+		$(".course-result").size() == 0
 	}
 
 	def "Student searches for course with keywords 'Advanced' - should get 1 result"() {

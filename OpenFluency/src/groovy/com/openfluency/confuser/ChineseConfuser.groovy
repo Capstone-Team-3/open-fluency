@@ -1,21 +1,12 @@
 package com.openfluency.confuser;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.openfluency.language.Alphabet;
 
 import cscie99.team2.lingolearn.server.confuser.CharacterType;
 import cscie99.team2.lingolearn.server.confuser.ConfuserTools;
 import cscie99.team2.lingolearn.shared.error.ConfuserException;
 
-public class ChineseConfuser implements ConfuserInterface {
+class ChineseConfuser implements ConfuserInterface {
 
 	// The path to the directory of confusers
 	private final static String CONFUSER_DIRECTORY = "/confusers/";
@@ -37,13 +28,12 @@ public class ChineseConfuser implements ConfuserInterface {
 	 * all results are returned without processing.
 	 * @return List of strings containing the confuser results, The length of the list will be between 0 and the requested count.
 	 */
-	@Override
-	public List<String> getConfusers(String word, Alphabet alphabet, int count) throws ConfuserException {
+	List<String> getConfusers(String word, Alphabet alphabet, int count) {
 		
 		try {
-			List<String> results = new ArrayList<String>();
+			List<String> results = [];
 			
-			if (alphabet.getCode() != "hanzi") {
+			if (alphabet.code != "hanzi") {
 				throw new ConfuserException("Invalid alphabet (" + alphabet.getCode() +" ).");
 			}
 		
@@ -79,7 +69,7 @@ public class ChineseConfuser implements ConfuserInterface {
 	 * @param card
 	 * @return
 	 */
-	public List<String> getHanziSubsitution(String phrase) throws ConfuserException, IOException {
+	List<String> getHanziSubsitution(String phrase) {
 		// Read the confusers from the resource file
 		List<String> confusers = readConfusers();
 		

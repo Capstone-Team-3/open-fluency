@@ -1,16 +1,18 @@
 package com.openfluency.flashcard
 
+import com.openfluency.Constants
+import com.openfluency.auth.Role
+import com.openfluency.auth.User
+import com.openfluency.language.Alphabet
+import com.openfluency.language.Language
+import com.openfluency.language.Pronunciation
+import com.openfluency.language.Unit
+import com.openfluency.language.UnitMapping
 import spock.lang.*
 
 @TestFor(FlashcardInfoController)
-@Mock(FlashcardInfo)
+@Mock([FlashcardInfo, Role, Language, Alphabet, User, UnitMapping, Unit, Deck, Pronunciation, Flashcard])
 class FlashcardInfoControllerSpec extends Specification {
-
-    def populateValidParams(params) {
-        assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-    }
 
     void "Test the index action returns the correct model"() {
 
@@ -29,25 +31,38 @@ class FlashcardInfoControllerSpec extends Specification {
         then:"The model is correctly created"
             model.flashcardInfoInstance!= null
     }
+	
+	void "Test the save action redirects to the create view when passed invalid parameters"() {
 
-	@Ignore("Doesn't work")
+		when:"The save action is executed with an invalid instance"
+			request.contentType = FORM_CONTENT_TYPE
+			def flashcardInfo = new FlashcardInfo()
+			flashcardInfo.validate()
+			controller.save(flashcardInfo)
+
+		then:"The create view is rendered again with the correct model"
+			model.flashcardInfoInstance!= null
+			view == 'create'
+	}
+
     void "Test the save action correctly persists an instance"() {
 
-        when:"The save action is executed with an invalid instance"
-            request.contentType = FORM_CONTENT_TYPE
-            def flashcardInfo = new FlashcardInfo()
-            flashcardInfo.validate()
-            controller.save(flashcardInfo)
-
-        then:"The create view is rendered again with the correct model"
-            model.flashcardInfoInstance!= null
-            view == 'create'
-
+        given:"A valid FlashcardInfo instance"
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(failOnError: true)
+			def english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save(failOnError: true)
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save(failOnError: true)
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save(failOnError: true)
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one').save(failOnError: true)
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck).save(failOnError: true)
+			def flashcardInfo = new FlashcardInfo(flashcard: flashcard, user: user, deck: deck, algoName: 'algoName', queue: 1, viewPriority: 0).save(failOnError: true, flush: true)
+			
         when:"The save action is executed with a valid instance"
-            response.reset()
-            populateValidParams(params)
-            flashcardInfo = new FlashcardInfo(params)
-
+            request.contentType = FORM_CONTENT_TYPE
             controller.save(flashcardInfo)
 
         then:"A redirect is issued to the show action"
@@ -64,7 +79,6 @@ class FlashcardInfoControllerSpec extends Specification {
             response.status == 404
 
         when:"A domain instance is passed to the show action"
-            populateValidParams(params)
             def flashcardInfo = new FlashcardInfo(params)
             controller.show(flashcardInfo)
 
@@ -80,39 +94,46 @@ class FlashcardInfoControllerSpec extends Specification {
             response.status == 404
 
         when:"A domain instance is passed to the edit action"
-            populateValidParams(params)
             def flashcardInfo = new FlashcardInfo(params)
             controller.edit(flashcardInfo)
 
         then:"A model is populated containing the domain instance"
             model.flashcardInfoInstance == flashcardInfo
     }
+	
+	void "Test the update action redirects to the edit view when passed invalid parameters"() {
+		
+		given:"A invalid FlashcardInfo instance"
+			def flashcardInfo = new FlashcardInfo()
+			flashcardInfo.validate()
+			
+		when:"An invalid domain instance is passed to the update action"
+			request.contentType = FORM_CONTENT_TYPE
+			controller.update(flashcardInfo)
 
-	@Ignore("doesn't work")
+		then:"The edit view is rendered again with the invalid instance"
+			view == 'edit'
+			model.flashcardInfoInstance == flashcardInfo
+	}
+
     void "Test the update action performs an update on a valid domain instance"() {
-        when:"Update is called for a domain instance that doesn't exist"
-            request.contentType = FORM_CONTENT_TYPE
-            controller.update(null)
-
-        then:"A 404 error is returned"
-            response.redirectedUrl == '/flashcardInfo/index'
-            flash.message != null
-
-
-        when:"An invalid domain instance is passed to the update action"
-            response.reset()
-            def flashcardInfo = new FlashcardInfo()
-            flashcardInfo.validate()
-            controller.update(flashcardInfo)
-
-        then:"The edit view is rendered again with the invalid instance"
-            view == 'edit'
-            model.flashcardInfoInstance == flashcardInfo
-
+		
+		given:"A valid FlashcardInfo instance"
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(failOnError: true)
+			def english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save(failOnError: true)
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save(failOnError: true)
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save(failOnError: true)
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one').save(failOnError: true)
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck).save(failOnError: true)
+			def flashcardInfo = new FlashcardInfo(flashcard: flashcard, user: user, deck: deck, algoName: 'algoName', queue: 1, viewPriority: 0).save(failOnError: true, flush: true)
+		
         when:"A valid domain instance is passed to the update action"
-            response.reset()
-            populateValidParams(params)
-            flashcardInfo = new FlashcardInfo(params).save(flush: true)
+			request.contentType = FORM_CONTENT_TYPE
             controller.update(flashcardInfo)
 
         then:"A redirect is issues to the show action"
@@ -120,25 +141,26 @@ class FlashcardInfoControllerSpec extends Specification {
             flash.message != null
     }
 	
-	@Ignore("doesn't work")
     void "Test that the delete action deletes an instance if it exists"() {
-        when:"The delete action is called for a null instance"
-            request.contentType = FORM_CONTENT_TYPE
-            controller.delete(null)
-
-        then:"A 404 is returned"
-            response.redirectedUrl == '/flashcardInfo/index'
-            flash.message != null
-
         when:"A domain instance is created"
-            response.reset()
-            populateValidParams(params)
-            def flashcardInfo = new FlashcardInfo(params).save(flush: true)
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(failOnError: true)
+			def english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save(failOnError: true)
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save(failOnError: true)
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save(failOnError: true)
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one').save(failOnError: true)
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck).save(failOnError: true)
+            def flashcardInfo = new FlashcardInfo(flashcard: flashcard, user: user, deck: deck, algoName: 'algoName', queue: 1, viewPriority: 0).save(failOnError: true, flush: true)
 
         then:"It exists"
             FlashcardInfo.count() == 1
 
         when:"The domain instance is passed to the delete action"
+			request.contentType = FORM_CONTENT_TYPE
             controller.delete(flashcardInfo)
 
         then:"The instance is deleted"

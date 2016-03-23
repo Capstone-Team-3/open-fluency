@@ -1,16 +1,12 @@
 package com.openfluency.confuser;
 
-import java.util.List;
-
 import com.openfluency.language.Alphabet;
-
-import cscie99.team2.lingolearn.shared.error.ConfuserException;
 
 /**
  * This interface encapsulates a means of getting characters that are similar to a
  * given example for the purposes of confusing humans.
  */
-public interface ConfuserInterface {
+interface ConfuserInterface {
 	
 	/**
 	 * Get a random list of confusers of given type limited to the count 
@@ -23,6 +19,6 @@ public interface ConfuserInterface {
 	 * all results are returned without processing.
 	 * @return List of strings containing the confuser results, The length of the list will be between 0 and the requested count.
 	 */
-	public List<String> getConfusers(String word, Alphabet alphabet, int count) throws ConfuserException;
+	List<String> getConfusers(String word, Alphabet alphabet, int count);
 	
 }
