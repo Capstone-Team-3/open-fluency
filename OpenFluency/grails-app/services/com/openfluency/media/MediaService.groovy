@@ -28,7 +28,7 @@ class MediaService {
     	return imageInstance
     }
 
-    def createAudio(String audioLink, byte[] audioFile, String pronunciationId){ 
+    Audio createAudio(String audioLink, byte[] audioFile, String pronunciationId){ 
 
         if ((!audioLink) && (!audioFile)){ 
             return null 

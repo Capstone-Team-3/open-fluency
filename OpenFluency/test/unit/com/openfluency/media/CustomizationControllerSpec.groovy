@@ -34,16 +34,9 @@ class CustomizationControllerSpec extends Specification {
             model.customizationInstance!= null
     }
 
-	@Ignore("needs work")
 	void "Test the save action returns to the create view when passed invalid parameters"() {
 		setup:
-			MediaService mediaService = Stub() {
-				createCustomization(_) >> {
-					def customization = new Customization()
-					customization.validate()
-					return customization
-				}
-			}
+			MediaService mediaService = Stub()
 			controller.mediaService = mediaService
 		
 		when:"The save action is executed with an invalid instance"
@@ -55,28 +48,31 @@ class CustomizationControllerSpec extends Specification {
 			view == 'create'
 	}
 	
-	@Ignore("needs work")
-    void "Test the save action correctly persists an instance"() {
-		given: "A mock MediaService"
+    void "Test the save action correctly persists an instance"() {					
+		given:"A valid Customization object"
+			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(failOnError: true)
+			def english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
+			def japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
+			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
+			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save(failOnError: true)
+			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
+			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save(failOnError: true)
+			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save(failOnError: true)
+			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
+			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one').save(failOnError: true)
+			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck).save(failOnError: true)
+			def customization = new Customization(owner: user, card: flashcard).save(failOnError: true)
+			Customization.metaClass.hasErrors() { return false } // So the object returned by the mock MediaService will be considered valid by the controller
+			Customization.metaClass.id = 1
+		
+		and:"A mock MediaService"
 			MediaService mediaService = Stub()
 			controller.mediaService = mediaService
-		
-		and:"A valid Customization object"
-			def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save()
-			def english = new Language(name: 'English', code: 'ENG-US').save()
-			def japanese = new Language(name: 'Japanese', code: 'JAP').save()
-			def latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save()
-			def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save()
-			User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
-			def user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save()
-			def unitMapping = new UnitMapping(unit1: new Unit(alphabet: latin, literal: 'one'), unit2: new Unit(alphabet: kanji, literal: '壱' )).save()
-			def deck = new Deck(sourceLanguage: english, language: japanese, title: "Numbers", description: "Numbers", owner: user, cardServerName: "Linear-With-Shuffle").save(failOnError: true)
-			def pronunciation = new Pronunciation(unit: new Unit(alphabet: latin, literal: 'one'), alphabet: latin, literal: 'one')
-			def flashcard = new Flashcard(primaryAlphabet: kanji, unitMapping: unitMapping, pronunciation: pronunciation, deck: deck)
-			def customization = new Customization(owner: user, card: flashcard)
-		
+			
         when:"The save action is executed with a valid instance"
             request.contentType = FORM_CONTENT_TYPE
+			params.flashcardId = String.valueOf(flashcard.id)
+			params.unitMappingId = String.valueOf(unitMapping.id)
             controller.save()
 
         then:"A redirect is issued to the show action"
