@@ -18,6 +18,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
+import org.apache.tools.ant.util.FileUtils;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -74,8 +75,8 @@ public class AnkiFile {
 	public AnkiFile(String fileName, String mediaTopDir) throws AnkiException, IOException
 	{
 		File folder = File.createTempFile(fileName, null); // use for unpacking anki files
+		folder.delete();       // clean out folder first - must be there!
 		folder.deleteOnExit();	// cleans up at exit
-		folder.delete();		// if reuse a folder name - clean out folder first
 		folder.mkdir();
 		this.tmpFolder = folder.getAbsolutePath();
 		this.mediaTopDir= mediaTopDir;
@@ -97,6 +98,7 @@ public class AnkiFile {
 			throw new AnkiException(
 					"An error occured parsing the Anki file.", ioe);
 		}
+		FileUtils.delete(folder); // Don't wait for JVM to exit, clean up the unpacked files
 	}
 	
 	/*
@@ -286,7 +288,7 @@ public class AnkiFile {
 						Image im = new Image();
 						im.setImageUri(image);
 						card.setImage(im);
-						cardFieldValue = Media.addImagePath(cardFieldValue,this.getMediaDir()); // Substitute paths
+						cardFieldValue = image;// Media.addImagePath(cardFieldValue,this.getMediaDir()); // Substitute paths
 					}
 					break;
 					
@@ -297,7 +299,7 @@ public class AnkiFile {
 						Sound sound = new Sound();
 						sound.setSoundUri(audio);
 						card.setSound(sound);
-						cardFieldValue = Media.addSoundPath(cardFieldValue,this.getMediaDir()); // Substitute paths
+						cardFieldValue = audio;// Media.addSoundPath(cardFieldValue,this.getMediaDir()); // Substitute paths
 					}
 					break;
 				default:

@@ -27,6 +27,7 @@ class DocumentController {
 	@Transactional
 	def upload()
 	{
+		def mediaTopDir= grailsApplication.config.tmpMediaFolder // For preview only
 		def file = request.getFile('file')
 		def lang = params['filter-lang']
 		def ofdeck = params['filter-deck']
@@ -49,9 +50,11 @@ class DocumentController {
 				throw ex
 			}
 			try {
-				new File(fullPath).mkdirs()
+				File newupload = new File(fullPath)
+				newupload.mkdirs()
 				file.transferTo(new File(fullPath))
-				File ga = grailsApplication.getParentContext().getResource("card-media").file
+				File ga = grailsApplication.getParentContext().getResource(mediaTopDir).file
+				fullPath = newupload.getAbsolutePath()
 				//String applicationPath = request.getSession().getServletContext().getRealPath("")
 				String mediaDir= ga.getAbsolutePath()
 				flash.message = "Loading "+ fullPath + " for User " + user
@@ -59,14 +62,12 @@ class DocumentController {
 				documentInstance.status="Uploaded";
 				documentInstance.save(flush:true)
 				flash.message = "Loading "+ filename +" for User "+ user
-				redirect(controller:'previewDeck',action:'show',params:[deck_id:ankiDeck.id])
+				redirect(controller:'previewDeck', action:'show', id:ankiDeck.id)
 			} catch (Exception e) {
 				flash.message = "Cannot save document"+e.message;
 				e.printStackTrace();
 				redirect (action:'list', params: params)
 			}
-			//def alphabetInstanceList=Alphabet.findAllByLanguage(lang);
-			//def fields = cardfields.getFlds()
 		}
 	}
 
@@ -81,9 +82,7 @@ class DocumentController {
         //params.max = Math.min(max ?: 12, 100)
         //List<Document> docInstanceList = Document.findAllByOwner(user, params)
         List<Document> documentInstanceList = 
-        Document.findAll("from Document where owner_id=? order by uploadDate",[ user.id ],[max: 10])
-        //List<Document> deckInstanceList = Document.getAll()
-		//[documentInstanceList:documentInstanceList, documentInstanceTotal: Document.countByOwner(user)]
+        Document.findAll("from Document where owner_id=? order by uploadDate desc",[ user.id ],[max: 10])
         respond documentInstanceList , model:[documentInstanceTotal: Document.countByOwner(user)]
 		//[documentInstanceList: Document.list(params), documentInstanceTotal: Document.count()]
 	}

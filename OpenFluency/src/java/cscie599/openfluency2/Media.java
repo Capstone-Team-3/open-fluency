@@ -32,6 +32,7 @@ public class Media {
     private static final Pattern fSoundRegexps = Pattern.compile("(?i)(\\[sound:([^]]+)\\])");
     private static final Pattern fImgRegExpQ = Pattern.compile("(?i)(<img[^>]* src=([\\\"'])([^>]+?)(\\2)[^>]*>)");
     private static final Pattern fImgRegExpU = Pattern.compile("(?i)(<img[^>]* src=(?!['\\\"])([^ >]+)[^>]*?>)");
+    private static final Pattern spacePattern = Pattern.compile("\\s+");
     /**
      * Pattern used to parse URI (according to http://tools.ietf.org/html/rfc3986#page-50)
      */
@@ -117,6 +118,8 @@ public class Media {
                     //dont't do any escaping if remote image
                 } else {
                 	if (path != null)
+						//fname = path + File.separator + encodeURI(fname);
+						fname = spacePattern.matcher(fname.trim()).replaceAll("_");
 						fname = path + File.separator + encodeURI(fname);
                 }
         	   return fname;
@@ -174,7 +177,7 @@ public class Media {
     public static String getSound(String content,String soundDir) {
         Matcher matcher = fSoundRegexps.matcher(content);
         if (matcher.find()) {
-            String sound = matcher.group(1).trim();
+            String sound = matcher.group(2).trim();
 			if (hasURIScheme(sound)) {
 				return sound;
 			}

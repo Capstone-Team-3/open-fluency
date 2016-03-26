@@ -15,6 +15,7 @@ class PreviewDeck {
 	Language language
 	Language sourceLanguage
 	Document	document
+	String mediaDir	//Location 
 	Date uploadDate = new Date()
 	static hasMany = [cards: PreviewCard]
 
@@ -26,5 +27,6 @@ class PreviewDeck {
 		sourceLanguage nullable: true
 		owner nullable: true
 		document nullable: true
+		mediaDir nullable: true
 	}
 }

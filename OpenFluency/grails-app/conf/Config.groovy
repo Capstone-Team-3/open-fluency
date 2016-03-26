@@ -38,8 +38,8 @@ grails.mime.types = [ // the first one is the default format
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*','/card-media/*']
-grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**','/card-media/**']
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*','/card-media/*','/media/*']
+grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**','/card-media/**','/media/**']
 
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
@@ -95,17 +95,23 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-		uploadFolder = "/tmp/upload"
+		uploadFolder = "tmp/upload"
         grails.plugin.databasemigration.reports.updateOntart = true
         grails.plugin.databasemigration.reports.changelogFileName = changelog-reports.groovy
+		mediaFolder="media/"
+		tmpMediaFolder="card-media/"
     }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
-		uploadFolder = "/tmp/upload"
+		uploadFolder = "tmp/upload"
+		tmpMediaFolder="card-media/"
+		mediaFolder="media/"
     }
     test {
-		uploadFolder = "/tmp/upload"
+		uploadFolder = "tmp/upload"
+		tmpMediaFolder="card-media/"
+		mediaFolder="media/"
     }
 }
 
@@ -136,6 +142,7 @@ grails.plugin.springsecurity.authority.className = 'com.openfluency.auth.Role'
 grails.plugin.springsecurity.rejectIfNoRule = false
 grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 
+// media is the final media location for the cards
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
@@ -143,7 +150,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/card-media/**':                  ['permitAll'],
+	'/**/card-media/**':              ['permitAll'],
+	'/**/media/**':                  ['permitAll'],	
 	'/**/favicon.ico':                ['permitAll']
 ]
 

@@ -14,8 +14,9 @@ class PreviewDeckController {
 	def flashcardService
 	def algorithmService
 	def flashcardInfoService
+	def previewDeckService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", importDeck:"POST"]
 
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def index(Integer max) {
@@ -46,7 +47,7 @@ class PreviewDeckController {
     def show(PreviewDeck previewDeckInstance) {
 		def user = User.load(springSecurityService.principal.id)
         if (previewDeckInstance.ownerId != user.id) {
-            flash.message = "You're not allowed to view this flashdeck "
+            flash.message = "You're not allowed to view this flashdeck "+previewDeckInstance.ownerId
             redirect(uri: request.getHeader('referer'))
             return
         } else {
@@ -84,14 +85,36 @@ class PreviewDeckController {
 
     def edit(PreviewDeck previewDeckInstance) {
 		User user = User.load(springSecurityService.principal.id)
-		previewDeckInstance.owner = user
-        respond previewDeckInstance
+		if (previewDeckInstance.owner == user) {
+			respond previewDeckInstance
+		}
     }
+
+	@Transactional
+	def importDeck(PreviewDeck previewDeckInstance) {
+		User user = User.load(springSecurityService.principal.id)
+		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
+		def mediaDir= grailsApplication.config.mediaFolder
+		new File(mediaDir).mkdirs()
+		if (previewDeckInstance.ownerId == user.id) {
+			previewDeckService.importDeck(previewDeckInstance,  mediaTmpDir, mediaDir)	
+			def doc = Document.findById(previewDeckInstance.document)
+			doc.status="Deleted"
+			doc.save()
+			previewDeckInstance.delete flush:true
+			redirect controller:"Deck", action: "list"
+			return
+		}
+		redirect action: "notowner"
+	}
 
     @Transactional
     def update(PreviewDeck previewDeckInstance) {
 		User user = User.load(springSecurityService.principal.id)
-		previewDeckInstance.owner = user
+		if (previewDeckInstance.owner != user) {
+			redirect action: "notowner"
+			return
+		}
         if (previewDeckInstance == null) {
             notFound()
             return
@@ -121,7 +144,7 @@ class PreviewDeckController {
             return
         }
 
-		def doc = Document.findById(previewDeckInstance.document)
+		def doc = Document.findById(previewDeckInstance.document.id)
 		doc.status="Deleted"
 		doc.save()
         previewDeckInstance.delete flush:true
@@ -135,6 +158,10 @@ class PreviewDeckController {
         }
     }
 
+    protected void notOwner() {
+       flash.message = "You do not have permission to access this item"
+    }
+	
     protected void notFound() {
         request.withFormat {
             form multipartForm {

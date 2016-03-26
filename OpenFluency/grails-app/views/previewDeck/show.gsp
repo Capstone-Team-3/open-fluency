@@ -100,6 +100,11 @@
                     </tr>
                 </g:each>
 
+			<g:form url="[resource:previewDeckInstance, action:'importDeck']" method="POST">
+				<fieldset class="buttons">
+					<g:actionSubmit class="edit" action="importDeck" value="${message(code: 'default.button.save.label', default: 'Import')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+				</fieldset>
+			</g:form>
 			<g:form url="[resource:previewDeckInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${previewDeckInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
