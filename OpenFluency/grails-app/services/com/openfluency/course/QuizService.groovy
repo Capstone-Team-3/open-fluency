@@ -37,6 +37,12 @@ class QuizService {
 
         return quizInstance
     }
+	
+	Quiz createQuiz(String title, Date liveTime, Integer maxCarTime, List<Question> questions, Course courseInstance) {
+		
+		// Save all of the Questions
+		
+	}
 
     void updateQuiz(Quiz quizInstance, String title, Date liveTime, Integer maxCardTime, Integer testElement, List flashcardIds) {
     	// Create the quiz
