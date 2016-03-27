@@ -26,7 +26,7 @@ class UserService {
     * @Param languageIds - a List of String-ified Long identifiers of the user's other languages
     * @Param proficiencyIds - a List of String-ified Lond identifiers of the proficiencies for the user's languages (should match 1-1)
     */
-    def createUser(String username, String password, String email, String userTypeId, String nativeLanguageId, 
+    User createUser(String username, String password, String email, String userTypeId, String nativeLanguageId, 
                    List<String> languageIds, List<String> proficiencyIds) {
         
         // Create the user - the account will only be enabled if the user is a student

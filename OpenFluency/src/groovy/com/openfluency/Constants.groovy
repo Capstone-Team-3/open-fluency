@@ -17,6 +17,7 @@ public class Constants {
 	public static final int PRONUNCIATION = 1
 	public static final int SYMBOL = 2
 	public static final int RANDOM = 3
+	public static final int MANUAL = 4 // not included in CARD_ELEMENTS so its not currently a random choice
 	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol", "Random"]
 
 	// Answer statuses

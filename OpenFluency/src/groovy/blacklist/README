@@ -1,0 +1,9 @@
+This directory contains the blacklists that are used by the confuser algorithm
+to determine if a word shouldn't be displayed. All of the files should take the
+format of [language code].blacklist The files allow for comments on lines that
+start with a pound sign (#) and anything following a pound sign will also be
+treated as a comment. Words should be limited to one per line. For example,
+
+# Example file
+[Word] # Slang we wish to avoid
+[Word]
