@@ -161,7 +161,7 @@ class PreviewDeckService {
 			Unit symbol = languageService.getUnit(symbolString, lang )
 			Unit meaning = languageService.getUnit(meaningString, deckInstance.sourceLanguage)
 
-			if (pronunciationString != null) {
+			if (pronunciationString != null && pronunciationString.length() > 0) {
 				Pronunciation pronunciation
 				def audioInstance=null
 				try {
@@ -180,7 +180,10 @@ class PreviewDeckService {
 						pronunciationString = pronunciation.id.toString()
 				} catch (Exception e) {
 					println("Problem with audio, skip the audio")
+					
 				}
+			} else {
+				pronunciationString = null
 			}
 			UnitMapping unitMapping = languageService.getUnitMapping(symbol, meaning)
 			flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciationString, imageURL, audioInstanceId, deckInstance.id.toString())

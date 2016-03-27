@@ -91,11 +91,12 @@ class DocumentServiceSpec extends Specification {
 		CharSetIdentifier ci_3=new CharSetIdentifier();
 		CharSetIdentifier ci_2=new CharSetIdentifier();
 		CharSetIdentifier ci_1=new CharSetIdentifier();
-		def field = anki.fieldNames.get(1)
-		Charset b = ci_2.testField(field);
+		def field = anki.fieldNames.get(2)
+		Charset b = CharSetIdentifier.testField(field);
 		for (Card card : arrayList) {
 			ci_1.addText(card.fields.get(1))
 			ci_2.addText(card.fields.get(2))
+			ci_3.addText(card.fields.get(3))
 		}
 		System.out.println(b);
 		expect:
@@ -103,7 +104,7 @@ class DocumentServiceSpec extends Specification {
 		and:
 			ci_2.getCharSet() == Charset.Hiragana
 		and:
-			ci_3.getCharSet() == Charset.English
+			ci_3.getCharSet() == Charset.Latin
 		and:
 			b == Charset.Hiragana
     }
