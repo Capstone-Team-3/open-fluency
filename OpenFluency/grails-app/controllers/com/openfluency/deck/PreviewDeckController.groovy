@@ -98,10 +98,10 @@ class PreviewDeckController {
 		new File(mediaDir).mkdirs()
 		if (previewDeckInstance.ownerId == user.id) {
 			previewDeckService.importDeck(previewDeckInstance,  mediaTmpDir, mediaDir)	
-			def doc = Document.findById(previewDeckInstance.document)
-			doc.status="Deleted"
+			def doc = Document.findById(previewDeckInstance.documentId)
+			doc.status="Imported"
 			doc.save()
-			previewDeckInstance.delete flush:true
+			//previewDeckInstance.delete flush:true
 			redirect controller:"Deck", action: "list"
 			return
 		}
