@@ -82,7 +82,7 @@ class SearchService {
 				 )).getCanonicalPath()
 			 indexPath = new java.io.File(
 				 servletContext.getRealPath(
-					 '/../resources/dictionaries/index/win/jp-en.index '
+					 '/../resources/dictionaries/index/' + details.arch + '/jp-en.index '
 				 )).getCanonicalPath()
 				 
 			 commandBase = indexSearchToolPath + " -indexpath " +  indexPath;
