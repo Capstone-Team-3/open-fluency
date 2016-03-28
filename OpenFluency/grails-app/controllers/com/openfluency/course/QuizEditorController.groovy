@@ -74,6 +74,7 @@ class QuizEditorController {
 		catch (Exception e) {
 			response.setContentType("application/json")
 			render "{status: 'Error', message: '${e.message}' }"
+			return
 		} 
 		
 		response.setContentType("application/json")
