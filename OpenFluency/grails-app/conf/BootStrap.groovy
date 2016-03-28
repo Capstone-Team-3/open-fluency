@@ -34,7 +34,7 @@ class BootStrap {
                 Alphabet katakana = new Alphabet(name: 'Katakana', language: japanese, code: "ja_on", encodeEntities: false).save(failOnError: true)
                 Alphabet hiragana = new Alphabet(name: 'Hiragana', language: japanese, code: "ja_kun", encodeEntities: false).save(failOnError: true)
                 Alphabet romaji = new Alphabet(name: "Romaji", language: japanese, code: "ja_ro").save(failOnError: true)
-                Alphabet Hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "Hanzi", encodeEntities: false).save(failOnError: true)
+                Alphabet hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "Hanzi", encodeEntities: false).save(failOnError: true)
                 Alphabet latin = new Alphabet(name: "Latin", language: english, code: "latin").save(failOnError: true)
 
                 log.info "Created ${Alphabet.count()} alphabets"

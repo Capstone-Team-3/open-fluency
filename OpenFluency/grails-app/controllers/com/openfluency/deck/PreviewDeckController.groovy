@@ -20,6 +20,7 @@ class PreviewDeckController {
 
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def index(Integer max) {
+		//def user = springSecurityService.currentUser
 		def user = User.load(springSecurityService.principal.id)
         params.max = Math.min(max ?: 10, 100)
        // respond PreviewDeck.list(params), model:[previewDeckInstanceCount: PreviewDeck.count()]
@@ -45,7 +46,11 @@ class PreviewDeckController {
 
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def show(PreviewDeck previewDeckInstance) {
-		def user = User.load(springSecurityService.principal.id)
+		if (previewDeckInstance == null) {
+			notFound()
+			return
+		}
+		def user = springSecurityService.currentUser // User.load(springSecurityService.principal.id)
         if (previewDeckInstance.ownerId != user.id) {
             flash.message = "You're not allowed to view this flashdeck "+previewDeckInstance.ownerId
             redirect(uri: request.getHeader('referer'))

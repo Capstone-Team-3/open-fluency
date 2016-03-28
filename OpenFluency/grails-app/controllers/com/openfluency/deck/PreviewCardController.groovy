@@ -20,11 +20,11 @@ class PreviewCardController {
     }
     */
 	
-	def index(PreviewDeck  deckid) {
+	def index(PreviewDeck deckid) {
 		def max = 10
         params.max = Math.min(max ?: 10, 100)
-		def previewCardInstanceList = PreviewCard.findAllByDeck(deckid, [max: max])
-        respond previewCardInstanceList, model:[previewCardInstanceCount: previewCardInstanceList.count()]
+		List<PreviewCard> previewCardInstanceList = PreviewCard.findAllByDeck(deckid, [max: max])
+        respond previewCardInstanceList, model:[previewCardInstanceCount: previewCardInstanceList.size()]
 	}
 
     def show(PreviewCard previewCardInstance) {
