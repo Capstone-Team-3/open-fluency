@@ -123,7 +123,7 @@ public class CharSetIdentifier {
 			/*from <ucs>3041</ucs><utf-8>E38181</utf-8> 
 		  to <ucs>3093</ucs><utf-8>E38293</utf-8>
 			 */
-			if ( 'ぁ' <= str.charAt(i) && str.charAt(i) <= 'ん') {
+			if ( 'ぁ' <= str.charAt(i) && str.charAt(i) <= 'ぁ') {
 				alpha.put(Charset.Hiragana,alpha.get(Charset.Hiragana) + 1);
 			}
 			/*
@@ -140,7 +140,7 @@ public class CharSetIdentifier {
 			else if (0xE384B1 <= str.charAt(i) && str.charAt(i) <= 0xECAD8C) {
 				alpha.put(Charset.Hangul,alpha.get(Charset.Hangul) + 1);
 			}
-			// UCS range = 3007 -> 〇 
+			// UCS range = 3007 -> ã€‡ 
 			// 4E00 to 9FD5
 			else if (('一' <= str.charAt(i) && str.charAt(i) <= '䲤') 
 					|| ( '〇' == str.charAt(i))) {

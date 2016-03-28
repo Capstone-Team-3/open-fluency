@@ -306,3 +306,98 @@ function countdown(element, minutes, seconds) {
 		time--;
 	}, 1000);
 }
+
+
+
+
+
+/*----------------------------------------------------------------------------*/
+/* Unit Mapping
+/*----------------------------------------------------------------------------*/
+
+var initializeUnitMappingDraggable = function() {
+	console.log('initializing draggable');
+	
+	window.unitMappingLiteral = null;
+	window.unitMappingPronunciation = null;
+	window.unitMappingAudioUrl = null;
+	window.unitMappingBackgroundImage = null;
+	window.unitMappingMeaning = null;
+	
+    $( ".draggable" ).draggable({
+        helper: 'clone',
+		cursor: "move",
+		start: function(e, ui) {
+			$(ui.helper).addClass('unit-dragging');
+		},
+		stop: function(e, ui) {
+			$(ui.helper).removeClass('unit-dragging');
+		}
+     });
+    
+    $( "#flashcard-literal" ).droppable({
+    	hoverClass: "ui-state-hover",
+    	drop: function( event, ui ) {
+	        $(this).html($(ui.draggable).html());
+	        unitMappingLiteral = $(ui.draggable).data("index");
+    	}
+  	});
+    
+    $( "#pronunciation-droppable" ).droppable({
+    	hoverClass: "droppable-hover-white",
+        drop: function( event, ui ) {
+        	$('#pronounced').html("pronounced " + $(ui.draggable).html());
+        	unitMappingPronunciation = $(ui.draggable).data("index");
+        }
+     });
+
+    $('#audio-url-droppable').droppable({
+    	hoverClass: "droppable-hover-white",
+		drop: function(event, ui) {
+			$('#audio-url-display').html($(ui.draggable).html());
+			$('.play-audio').css('visibility', 'visible');
+			unitMappingAudioUrl = $(ui.draggable).data("index");
+		}
+    });
+
+    $("#flashcard-image").droppable({
+    	hoverClass: "ui-state-hover",
+		drop: function(event, ui) {
+			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).html() + ")");
+			unitMappingBackgroundImage = $(ui.draggable).data("index");
+		}
+    });
+
+    $("#meaning-droppable").droppable({
+    	hoverClass: "ui-state-hover",
+		drop: function(event, ui) {
+			$("#meaning-display").html($(ui.draggable).html());
+			unitMappingMeaning = $(ui.draggable).data("index");
+		}
+    });
+
+    $('#clear-literal').click(function() {
+    	$('#flashcard-literal').html("");
+    	unitMappingLiteral = null;
+    });
+
+    $('#clear-pronunciation').click(function(){
+    	$('#pronounced').html('pronunciation text');
+    	unitMappingPronunciation = null;
+    });
+
+    $('#clear-audio-url').click(function(){
+    	$('#audio-url-display').html("(audio url)");
+    	unitMappingAudioUrl = null;
+    });
+
+    $('#clear-image').click(function(){
+    	$('#flashcard-image').css('background-image', '');
+    	unitMappingBackgroundImage = null;
+    });
+
+    $('#clear-meaning').click(function(){
+    	$('#meaning-display').html("(meaning text)");
+    	unitMappingMeaning = null;
+    });  
+}
