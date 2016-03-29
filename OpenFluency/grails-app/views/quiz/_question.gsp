@@ -11,6 +11,9 @@
 			<g:if test="${testElement == Constants.SYMBOL}">
 				<h1>${questionInstance.flashcard.secondaryUnit.print}</h1>
 			</g:if>
+			<g:elseif test="${testElement == Constants.MANUAL}">
+				<h1>${questionInstance.question}</h1>
+			</g:elseif>
 			<g:else>
 				<h1>${questionInstance.flashcard.primaryUnit.print}</h1>
 			</g:else>
@@ -24,12 +27,15 @@
 						<g:if test="${testElement == Constants.MEANING}">
 							<td>${it.flashcard.secondaryUnit.print}</td>
 						</g:if>
+						<g:elseif test="${testElement == Constants.PRONUNCIATION}">
+							<td>${it.flashcard.pronunciation}</td>
+						</g:elseif>
 						<g:elseif test="${testElement == Constants.SYMBOL}">
 							<td>${it.flashcard.primaryUnit.print}</td>
 						</g:elseif>
-						<g:else>
-							<td>${it.flashcard.pronunciation}</td>
-						</g:else>
+						<g:elseif test="${testElement == Constants.MANUAL}">
+							<td>${it.option}</td>
+						</g:elseif>
 					</tr>
 				</g:each>
 			</table>
