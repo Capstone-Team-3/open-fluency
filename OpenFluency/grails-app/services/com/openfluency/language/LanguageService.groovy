@@ -38,7 +38,10 @@ class LanguageService {
 		int i = 0
 		for(ch in dictionary.ch) {
 			// Find or create Unit
-			Unit unit = getUnit(sourceAlphabet, ch.uc.toString(), ch.gr.toString(), ch.sc.toString(), ch.freq.toString()).save()
+			String utf8 = new String(hexStringToByteArray(ch.uc.toString()), "UTF-16");
+
+			//Unit unit = getUnit(sourceAlphabet, ch.uc.toString(), ch.gr.toString(), ch.sc.toString(), ch.freq.toString()).save()
+			Unit unit = getUnit(sourceAlphabet, utf8, ch.gr.toString(), ch.sc.toString(), ch.freq.toString()).save()
 
 			// For every reading in this character, create a unit mapping
 			ch.mn.each {
@@ -56,9 +59,20 @@ class LanguageService {
 				new Pronunciation(unit: unit, alphabet: Alphabet.findByCode(it.@r_type), literal: literal).save()
 			}
 
-			log.info "Loaded ${i++}: ${ch.uc}"
+//			log.info "Loaded ${i++}: ${ch.uc}"
+			log.info "Loaded ${i++}: ${utf8}"
 		}
 	}
+
+	public static byte[] hexStringToByteArray(String s) {
+		byte[] b = new byte[s.length() / 2];
+		for (int i = 0; i < b.length; i++) {
+		  int index = i * 2;
+		  int v = Integer.parseInt(s.substring(index, index + 2), 16);
+		  b[i] = (byte) v;
+		}
+		return b;
+	  }
 
 	/**
 	* Utility to retrieve a Unit. If the unit exists (found by literal), then return it, otherwise create it and then return it
