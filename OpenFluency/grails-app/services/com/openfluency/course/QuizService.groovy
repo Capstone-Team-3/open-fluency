@@ -2,9 +2,12 @@ package com.openfluency.course
 
 import com.openfluency.Constants
 import com.openfluency.flashcard.Flashcard
+import com.openfluency.language.Alphabet
 import com.openfluency.language.Language
 import com.openfluency.flashcard.Deck
 import com.openfluency.auth.User
+import com.openfluency.confuser.ConfuserFactory
+import com.openfluency.confuser.ConfuserInterface
 import grails.transaction.Transactional
 
 @Transactional
@@ -57,7 +60,7 @@ class QuizService {
         	Flashcard flashcardInstance = Flashcard.get(it)
 
             // First create the question itself
-            Question question = new Question(quiz: quizInstance, flashcard: flashcardInstance).save()
+            Question question = new Question(quiz: quizInstance, flashcard: flashcardInstance, questionType: Constants.MEANING).save()
             
             // Now create a number of options - right now it's hard coded to 3 but it can be easily user defined
             int maxOptions = 3
@@ -71,11 +74,31 @@ class QuizService {
             Flashcard flashcard2 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id])
             Flashcard flashcard3 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id, flashcard2.id])
 
-            new QuestionOption(question: question, flashcard: flashcard1).save(failOnError: true)
-            new QuestionOption(question: question, flashcard: flashcard2).save(failOnError: true)
-            new QuestionOption(question: question, flashcard: flashcard3).save(failOnError: true)
+			new QuestionOption(question: question, flashcard: flashcardInstance, answerKey: 1).save(failOnError: true)
+            new QuestionOption(question: question, flashcard: flashcard1, answerKey: 0).save(failOnError: true)
+            new QuestionOption(question: question, flashcard: flashcard2, answerKey: 0).save(failOnError: true)
+            new QuestionOption(question: question, flashcard: flashcard3, answerKey: 0).save(failOnError: true)
         }
     }
+	
+	void createConfuserQuestion(Quiz quizInstance, String question, String answer, Language language, Alphabet alphabet) {
+		
+		ConfuserFactory consuferFactory = new ConfuserFactory();
+		ConfuserInterface confuser = consuferFactory.getConfuser(language);
+		
+		List<String> confusers = confuser.getConfusers(answer, alphabet, 3);
+		
+		Question q = new Question(quiz: quizInstance, question: question, questionType: Constants.MANUAL).save(failOnError: true)
+		
+		new QuestionOption(question: q, option: answer, answerKey: 1).save(failOnError: true)
+		
+		confusers.each {
+			new QuestionOption(question: q, option: it, answerKey: 0).save(failOnError: true)
+		}
+		
+		
+		
+	}
 
     /**
     * Initialize the quiz: create an answer for every question in the quiz for the logged student
@@ -158,7 +181,7 @@ class QuizService {
         
 		// Check that the answer can actually be answered
 		if(answer.status == Constants.VIEWED && answer.sessionId == sessionId) {
-			answer.selection = Flashcard.load(selection)
+			answer.selection = QuestionOption.load(selection)
 			answer.status = Constants.ANSWERED
 			answer.save()
 			return true
@@ -206,11 +229,17 @@ class QuizService {
 
         // only finalize it if the if the user has completed all questions or if the quiz is forced to finalize
         if((quizInstance.countQuestions() == completedQuestions) || force)  {
-         Integer correctAnswers = Answer.executeQuery("""
-            SELECT count(id) 
-            FROM Answer 
-            WHERE status = ? AND question.quiz.id = ? AND user.id = ? AND selection.id = question.flashcard.id
-            """, [Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
+		
+			
+		List<Answer> answers = getAnswers(quizInstance, springSecurityService.principal.id)
+			
+         Integer correctAnswers = 0;
+		 
+		 answers.each() {
+			 if (it.selection.id == it.question.getCorrectOption().id) {
+				 correctAnswers++;
+			 }
+		 }
 
          return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
      }

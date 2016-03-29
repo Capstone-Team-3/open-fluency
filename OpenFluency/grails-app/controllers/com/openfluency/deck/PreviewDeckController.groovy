@@ -15,11 +15,13 @@ class PreviewDeckController {
 	def flashcardService
 	def algorithmService
 	def flashcardInfoService
+	def previewDeckService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", importDeck:"POST"]
 
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def index(Integer max) {
+		//def user = springSecurityService.currentUser
 		def user = User.load(springSecurityService.principal.id)
         params.max = Math.min(max ?: 10, 100)
        // respond PreviewDeck.list(params), model:[previewDeckInstanceCount: PreviewDeck.count()]
@@ -27,18 +29,31 @@ class PreviewDeckController {
 		respond previewdecks , model:[previewDeckInstanceCount: PreviewDeck.countByOwner(user)]
     }
 
+	// Display a preview deck associated with a document
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def display(Document document) {
 		def user = User.load(springSecurityService.principal.id)
         PreviewDeck previewDeckInstance =  PreviewDeck.findByDocumentAndOwner(document,user)
-        redirect action: "show", id: previewDeckInstance.id
+		if (previewDeckInstance != null) {
+			redirect action: "show", id: previewDeckInstance.id
+			return
+		}
+		else {
+			flash.message="Deck already imported or deleted"
+			redirect controller: "Document", action: "list"
+			return
+		}
     }
 
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
     def show(PreviewDeck previewDeckInstance) {
-		def user = User.load(springSecurityService.principal.id)
+		if (previewDeckInstance == null) {
+			notFound()
+			return
+		}
+		def user = springSecurityService.currentUser // User.load(springSecurityService.principal.id)
         if (previewDeckInstance.ownerId != user.id) {
-            flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
+            flash.message = "You're not allowed to view this flashdeck "+previewDeckInstance.ownerId
             redirect(uri: request.getHeader('referer'))
             return
         } else {
@@ -63,8 +78,6 @@ class PreviewDeckController {
 		[ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
 		}
 	}
-
-    //def create() { respond new PreviewDeck(params) }
 
     @Transactional
     def save(PreviewDeck previewDeckInstance) {
@@ -93,14 +106,36 @@ class PreviewDeckController {
 
     def edit(PreviewDeck previewDeckInstance) {
 		User user = User.load(springSecurityService.principal.id)
-		previewDeckInstance.owner = user
-        respond previewDeckInstance
+		if (previewDeckInstance.owner == user) {
+			respond previewDeckInstance
+		}
     }
+
+	@Transactional
+	def importDeck(PreviewDeck previewDeckInstance) {
+		User user = User.load(springSecurityService.principal.id)
+		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
+		def mediaDir= grailsApplication.config.mediaFolder
+		new File(mediaDir).mkdirs()
+		if (previewDeckInstance.ownerId == user.id) {
+			previewDeckService.importDeck(previewDeckInstance,  mediaTmpDir, mediaDir)	
+			def doc = Document.findById(previewDeckInstance.documentId)
+			doc.status="Imported"
+			doc.save()
+			//previewDeckInstance.delete flush:true
+			redirect controller:"Deck", action: "list"
+			return
+		}
+		redirect action: "notowner"
+	}
 
     @Transactional
     def update(PreviewDeck previewDeckInstance) {
 		User user = User.load(springSecurityService.principal.id)
-		previewDeckInstance.owner = user
+		if (previewDeckInstance.owner != user) {
+			redirect action: "notowner"
+			return
+		}
         if (previewDeckInstance == null) {
             notFound()
             return
@@ -130,6 +165,9 @@ class PreviewDeckController {
             return
         }
 
+		def doc = Document.findById(previewDeckInstance.document.id)
+		doc.status="Deleted"
+		doc.save()
         previewDeckInstance.delete flush:true
 
         request.withFormat {
@@ -141,6 +179,10 @@ class PreviewDeckController {
         }
     }
 
+    protected void notOwner() {
+       flash.message = "You do not have permission to access this item"
+    }
+	
     protected void notFound() {
         request.withFormat {
             form multipartForm {

@@ -168,15 +168,17 @@
 									<g:else>
 										<ul class="list-unstyled text-left">
 										<li><strong>Tests:</strong> 
-											<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
-												Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
+											<g:if test="${Constants.CARD_ELEMENTS[it.testElement] != null}">
+												<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
+													Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
+												</g:if>
+												<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
+													Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
+												</g:elseif>
+												<g:else>
+													Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
+												</g:else>
 											</g:if>
-											<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
-												Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
-											</g:elseif>
-											<g:else>
-												Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
-											</g:else>
 										</li>
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
 										</ul>

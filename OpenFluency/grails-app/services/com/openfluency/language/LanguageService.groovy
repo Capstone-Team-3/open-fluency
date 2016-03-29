@@ -136,6 +136,25 @@ class LanguageService {
         return unit
     }
 
+	Unit getUnitByAlphabet(String literal, Alphabet alphabet) {
+		
+		Unit unit
+		
+		// First check if there's an existing unit for the symbol
+		def existingSymbols = Unit.withCriteria {
+			eq('literal', literal)
+			eq('alphabet',alphabet)
+		}
+
+		if(existingSymbols) {
+			unit = existingSymbols[0]
+		}
+		else {
+			unit = new Unit(literal: literal, alphabet: alphabet).save()
+		}
+
+		return unit
+	}
     /**
     * Find an existing pronunciation by literal and by unit
     */
@@ -161,6 +180,28 @@ class LanguageService {
 
         return pronunciation
     }
+	
+	Pronunciation getPronunciationAlphabet(String literal, Unit unit, Alphabet alphabet) {
+		
+		 Pronunciation pronunciation
+ 
+		 // Check if there is a pronunciation for this literal
+		 def existingPronunciations = Pronunciation.withCriteria {
+			 eq('literal', literal)
+			 eq('unit', unit)
+			 eq('alphabet',alphabet)
+		 }
+ 
+		 if(existingPronunciations) {
+			 pronunciation = existingPronunciations[0]
+		 }
+		 else {
+			 pronunciation = new Pronunciation(literal: literal, alphabet: alphabet, unit: unit).save(flush:true)
+		 }
+ 
+		 return pronunciation
+	 }
+ 
 
     /**
     * Find a unit mapping between the two given units or create it

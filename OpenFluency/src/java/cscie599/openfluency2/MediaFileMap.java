@@ -1,16 +1,25 @@
 package cscie599.openfluency2;
 
 import java.io.BufferedInputStream;
+
+import static java.nio.file.StandardCopyOption.*;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -61,6 +70,7 @@ public class MediaFileMap {
         	    if(JsonToken.FIELD_NAME.equals(jsonToken)){
 					String num = jParser.getCurrentName();
 					String name = jParser.nextTextValue(); //.getText();
+					name = nfcNormalized2(name);	// escape the spaces etc
 					mNameToNum.put(name, num);
 					numToName.put(num, name);
         	    }
@@ -86,7 +96,7 @@ public class MediaFileMap {
             if (file.startsWith("_") || file.startsWith("latex-")) {
                 continue;
             }   
-            File path = new File(tmpDir, nfcNormalized(file));
+            File path = new File(tmpDir, file);
             if (!path.exists()) {
                 try {
                     unzipFiles(zipfile, tmpDir.getAbsolutePath(),new String[]{c}, numToName);
@@ -118,8 +128,15 @@ public class MediaFileMap {
         }    
         return txt; 
     }    
-
-	
+    // Phoebe: The above leaves weird %00 for spaces
+    public static String nfcNormalized2(String txt) {
+	Pattern spacePattern=Pattern.compile("\\s+");
+    if (!Normalizer.isNormalized(txt, Normalizer.Form.NFC)) {
+			return Normalizer.normalize(spacePattern.matcher(txt.trim()).replaceAll("_"), Normalizer.Form.NFC);
+		} else {
+			return spacePattern.matcher(txt.trim()).replaceAll("_") ;
+		}	
+    }
     /***
      * unzips apkg files into target dir
      * @param zipFile
@@ -179,8 +196,14 @@ public class MediaFileMap {
      * @throws IOException
      */
     public static void copyFile(File sourceFile, File destFile) throws IOException {
-        if(!destFile.exists()) {
+    	try {
+if(!destFile.exists()) {
+        	destFile.mkdirs();
             destFile.createNewFile();
+        }
+    	}
+        catch (Exception e) {
+        	e.printStackTrace();
         }
 
         FileChannel source = null;
@@ -199,4 +222,21 @@ public class MediaFileMap {
             }
         }
     }
+    
+    public static String remapMedia(String media, String oldDir,String newDir) throws Exception {
+		//String newFile = this.mediaDir + File.separator + media
+    	media = java.net.URLDecoder.decode(media,"UTF-8");
+		File oldmedia = new File( oldDir + File.separator + media);
+		File newmedia=  new File( newDir + File.separator + media);
+		if (!newmedia.getParentFile().exists()) {
+            newmedia.mkdirs();
+		}
+		if(!newmedia.exists()) {
+            newmedia.createNewFile();
+    	}
+		Path oldFile = oldmedia.toPath() ;
+		Path newFile = newmedia.toPath();
+		Files.copy(oldFile, newFile, REPLACE_EXISTING);
+		return newDir + File.separator + media;
+	}
 }

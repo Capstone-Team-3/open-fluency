@@ -16,6 +16,7 @@
                     <tr>
                         <g:sortableColumn property="filename" title="Filename" />
                         <g:sortableColumn property="description" title="Description" />
+                        <g:sortableColumn property="status" title="Status" />
                         <g:sortableColumn property="uploadDate" title="Upload Date" />
                         <g:sortableColumn property="importedDate" title="Date Imported" />
                     </tr>
@@ -28,7 +29,9 @@
                         <td><g:link action="download" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
                      -->
                         <td><span class="property-value">${documentInstance.description} </span></td>
+                        <td><span class="property-value">${documentInstance.status} </span></td>
                         <td><g:formatDate date="${documentInstance.uploadDate}" /></td>
+                        <td><g:formatDate date="${documentInstance.importedDate}" /></td>
                     </tr>
                 </g:each>
                 </tbody>

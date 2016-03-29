@@ -50,13 +50,13 @@ class CustomizationController {
             notFound()
             return
         }
+		
+		customizationInstance.save(flush:true)
 
         if (customizationInstance.hasErrors()) {
             respond customizationInstance.errors, view:'create'
             return
         }
-
-        customizationInstance.save flush:true
 
         request.withFormat {
             form multipartForm {

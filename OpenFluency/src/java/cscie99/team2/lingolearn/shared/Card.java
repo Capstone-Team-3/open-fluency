@@ -2,7 +2,6 @@ package cscie99.team2.lingolearn.shared;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
 /**
  * A single card within a Deck of cards.
  */
@@ -20,8 +19,9 @@ public class Card implements Serializable {
 	private Image image;			// Image
 	private Sound sound;			// Sound
 	private ArrayList<String> fields;		// All Fields in the order encountered
+
 	/**
-	 * Constructor.
+	 * Constructor
 	 */
 	public Card () {
 		if( this.nativeLanguage == null )
@@ -32,7 +32,6 @@ public class Card implements Serializable {
 		this.katakana = "";
 		this.fields = new ArrayList<String>();
 	};
-	
 	/**
 	 * Constructor.
 	 */
@@ -46,13 +45,35 @@ public class Card implements Serializable {
 		this.desc = description;
 	}
 
-
 	public String getField(int index) {
 		return fields.get(index);
 	}
 
 	public void addField(String field) {
 		this.fields.add(field);
+	}
+	
+	/**
+	 * Check to see if this card equals the object provided. For the purposes
+	 * of this application, this does not imply exactly equal but that the 
+	 * core language content is the same.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		// Null always returns false
+		if (obj == null) {
+			return false;
+		}
+		// Make sure the object actually is a card
+		if (!(obj instanceof Card)) {
+			return false;
+		}
+		// See if they are equal
+		Card card = (Card)obj;
+		return ((this.desc + this.hiragana + this.kanji + 
+				this.katakana + this.nativeLanguage + this.translation)
+				.equalsIgnoreCase(card.getDesc() + card.getHiragana() + card.getKanji() + 
+								  card.getKatakana() + card.getNativeLanguage() + card.getTranslation()));
 	}
 
 	public Long getId() {
@@ -144,6 +165,7 @@ public class Card implements Serializable {
 		return result;
 	}
 
+	/*
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -200,6 +222,17 @@ public class Card implements Serializable {
 			return false;
 		return true;
 	}	
+	*/	
 	
-	
+	public String getDisplayString() {
+		String res = "";
+		res += getKanji();
+		if (!getHiragana().equals("")) {
+		  res += "  —  " + getHiragana();
+		}
+		if (!getKatakana().equals("")) {
+		  res += " " + getKatakana();
+		}
+		return res;
+	}
 }

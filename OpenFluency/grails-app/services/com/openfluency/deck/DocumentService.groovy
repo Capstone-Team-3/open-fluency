@@ -47,73 +47,19 @@ class DocumentService {
     	return documentInstance
     }
 	
-	def createNewDeck(fullPath,description,language,mediaDir) {
-		AnkiFile anki = new AnkiFile(fullPath,mediaDir)
-		def nCards = anki.totalCards
-		def folder = anki.getTmpDir()
-		def decks = anki.getDeckIterator()
-		def alphabets = Alphabet.findAllByLanguage(language);
-		def cardfields = anki.getModels().values()
-		// A place to hold all the cards
-		def ArrayList<ArrayList> flashDeck = new ArrayList<ArrayList>();
-		
-		while (decks.hasNext()) {
-			def deck = decks.next();
-			ArrayList cardList =  deck.getCardList() //deck.getCardSet()
-			ArrayList alphaList = new ArrayList<Alphabet>();
-			def typeList;
-			def ncards = cardList.size();
-			ArrayList<CharSetIdentifier>ci = new ArrayList<CharSetIdentifier>(ncards);
-			for (int i=0;i<ncards;i++){
-				def field = anki.fieldNames.get(1)
-				Charset b = CharSetIdentifier.testField(field);
-				for (Card card : cardList) {
-					int j=0;
-					for (cardfield in card.fields) {
-						ci.get(i).addText(cardfield.get(j))
-						j++;
-					}
-				}
-			} 
-			//Charset.Kanji Charset.Hiragana Charset.English Charset.Hiragana
-			for (Card card in cardList) {
-				/*
-				Flashcard fc = new Flashcard()
-				fc.image = new Image()
-				fc.image.url= card.getImage().getImageUri()
-				fc.audio = new Audio()
-				fc.image.url= card.getSound().getSoundUri()
-				*/
-				def fieldTypes = anki.fieldTypes;
-				def fieldNames = anki.fieldNames;
-				ArrayList<Unit> units = createUnits(anki.fieldTypes,card, alphaList)
-				//PreviewCard precard = new PreviewCard(PreviewDeck deckId, units: units, fields: fieldNames,types: fieldTypes );
-				//def um = [units: units.get(0),unit2:units.get(1)]
-				flashDeck.add(units);
-			}
-		}
-		return flashDeck;
-	}
-	
-	// create open fluency deck
-	def createDeck(String title, String description, String languageId){
-		def cardServerName = algorithmService.getDefault();
-		deckService.createDeck(title, description,languageId, cardServerName);
-		return deck
-	}
-	
 	@Transactional
 	def createPreviewDeck(String fullPath, String mediaDir, String filename, String description, Language language, Document document){
 		AnkiFile anki = new AnkiFile(fullPath,mediaDir)
 		def nCards = anki.totalCards
 		def folder = anki.getTmpDir()
+		def ankiMediaDir = mediaDir + File.separator + anki.getMediaDir()
 		def decks = anki.getDeckIterator()
 		def cardfields = anki.getModels().values()
 		// A place to hold all the cards
 		def user= User.load(springSecurityService.principal.id)
 		user.id = springSecurityService.principal.id
 		def owner = springSecurityService.currentUser
-		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: filename, description:description,language:language,document: document);
+		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: filename, description:description,language:language,document: document,mediaDir:ankiMediaDir);
 		previewDeckInstance.save(flush:true)
 		def nfields = anki.fieldNames.size()
 		while (decks.hasNext()) {
@@ -136,23 +82,5 @@ class DocumentService {
 			}
 		}
 		return previewDeckInstance;
-	}
-
-	/**
-	 * Creates an arraylist of all the fields imported
-	 * @param fieldList
-	 * @param card - contains all the fields in the card
-	 * @param alphabet
-	 * @return
-	 */
-	def createPreviewUnits(fieldList,card){
-		ArrayList<Unit> units=new ArrayList<Unit>()
-		int i=0;
-		for (field in card.fields) {
-			def unit = new Unit(alphabet: alphabetList.get(i), literal: field);
-			units.add(unit);
-			i++;
-		}
-		return units;
 	}
 }

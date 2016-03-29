@@ -10,3 +10,8 @@ OpenFluency/test/functional/GebConfig.groovy
 
 OpenFluency-dev.h2.db
 OpenFluency-dev.lock.db
+
+OpenFluency/.project
+OpenFluency/.settings/org.eclipse.core.resources.prefs
+OpenFluency/.settings/org.eclipse.jdt.groovy.core.prefs
+OpenFluency/OpenFluency-dev.h2.db

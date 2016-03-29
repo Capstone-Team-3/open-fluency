@@ -17,16 +17,25 @@
 				<div class="pronunciation">
 					pronounced "${flashcardInstance?.pronunciation.literal}"
 
+					<g:if test="${!audioSysURL}">
+						<g:set var="audioSysURL" value="${flashcardInstance?.audio?.url}" />
+					</g:if>
 					<g:if test="${!audioSysId}">
 						<g:set var="audioSysId" value="${flashcardInstance?.audio?.id}" />
 					</g:if>
 
-					<g:if test="${audioSysId}">
+					<g:if test="${audioSysURL}">
+						<g:set var="audioSource" value="/"/>
+						<g:set var="audioId" value="${audioSysURL}"/>
+						<span class="play-audio glyphicon glyphicon-volume-up"></span>
+						<audio class="flashcard-audio hidden" id=${audioSysId} src="${audioSource + audioId}" controls></audio>
+					</g:if>
+					<g:elseif test="${audioSysId}">
 						<g:set var="audioSource" value="/OpenFluency/audio/sourceAudio/"/>
 						<g:set var="audioId" value="${audioSysId}"/>
 						<span class="play-audio glyphicon glyphicon-volume-up"></span>
 						<audio class="flashcard-audio hidden" id="flashcard-audio-${audioId}" src="${audioSource + audioId}" controls></audio>
-					</g:if>
+					</g:elseif>
 				</div>
 			</div>
 
@@ -36,7 +45,7 @@
 			</g:if>
 			<g:if test="${imageSource}">
 				<div id="image-container">
-					<div id="flashcard-image" class="flashcard-img" style="background-image: url(${imageSource});"></div>
+					<div id="flashcard-image" class="flashcard-img" style="background-image: url(/${imageSource}) ; background-size: 100% 100%"></div>
 				</div>
 			</g:if>
 
