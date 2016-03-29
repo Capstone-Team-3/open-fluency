@@ -22,27 +22,38 @@
 
 <div class="question panel panel-default question-panel">
 
-		<label>Question</label>
-		<input name="question" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-		<br/>
+		<div>
+			<label>Question</label>
+			<input name="question" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
+		</div>
 
-		<label>Correct Answer:</label>
-		<input name="correctAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-		<br/>
-
-		<label>Wrong Answer 1:</label>
-		<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-		<br/>
-
-		<label>Wrong Answer 2:</label>
-		<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-		<br/>
-
-		<label>Wrong Answer 3:</label>
-		<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-		<br/>
+		<div>
+			<label>Correct Answer:</label>
+			<input name="correctAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
+			<div class="btn btn-info" onclick="getConfusers(this);">Generate Confuser Answers</div>
+		</div>
+		
+		<div class="btn btn-info" onclick="addWrongAnswer(this); writeCSV();">Add Wrong Answer</div>
 		
 		<div class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Question</div>
+
+		<div>
+			<label>Wrong Answer:</label>
+			<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
+			<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
+		</div>
+
+		<div>
+			<label>Wrong Answer:</label>
+			<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
+			<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
+		</div>
+
+		<div>
+			<label>Wrong Answer:</label>
+			<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
+			<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
+		</div>
 </div>
 
  <div class="form-group">
@@ -52,6 +63,42 @@
  </div>
  
  <script type="text/javascript">
+
+		function getConfusers(that) {
+			var question = $(that).parent().parent();
+			var input = question.find("input[name=correctAnswer]").val();
+
+			$.ajax({
+				url: "/OpenFluency/Confuser/generate?languageCode=JAP&number=-1&word=" + input
+			})
+			.done(function(jarray) {
+
+				console.log(jarray);
+				
+				var wrongAnswers = question.find("input[name=wrongAnswer]");
+				var length = wrongAnswers.length;
+				
+				wrongAnswers.each(function(index, item) {
+					if (index <= jarray.length) {
+						$(item).val(jarray[index]);
+					}
+				});
+
+				writeCSV();
+			});
+	 	}
+ 
+ 		function addWrongAnswer(that) {
+ 			var question = $(that).parent();
+
+ 			var wrongAnswerHtml = "<div>";
+ 			wrongAnswerHtml += "<label>Wrong Answer:</label>";
+ 			wrongAnswerHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
+ 			wrongAnswerHtml += "<span class=\"btn btn-danger\" onclick=\"$(this).parent().remove(); writeCSV();\">Remove Wrong Answer</span>";
+ 			wrongAnswerHtml += "</div>";
+
+ 			question.append(wrongAnswerHtml);
+ 	 	}
 
  		function showCSV() {
 	 		if ($("textArea").is(':visible')) {
@@ -67,22 +114,32 @@
  		function addQuestion() {
 
 			var questionHtml = "<div class=\"question panel panel-default question-panel\">";
+			questionHtml += "<div>";
 			questionHtml += "<label>Question</label>";
 			questionHtml += "<input name=\"question\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
-			questionHtml += "<br/>";
+			questionHtml += "</div>";
+			questionHtml += "<div>";
 			questionHtml += "<label>Correct Answer:</label>";
 			questionHtml += "<input name=\"correctAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
-			questionHtml += "<br/>";
-			questionHtml += "<label>Wrong Answer 1:</label>";
-			questionHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
-			questionHtml += "<br/>";
-			questionHtml += "<label>Wrong Answer 2:</label>";
-			questionHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
-			questionHtml += "<br/>";
-			questionHtml += "<label>Wrong Answer 3:</label>";
-			questionHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
-			questionHtml += "<br/>";
+			questionHtml += "<div class=\"btn btn-info\" onclick=\"getConfusers(this);\">Generate Confuser Answers</div>";
+			questionHtml += "</div>";
+			questionHtml += "<div class=\"btn btn-info\" onclick=\"addWrongAnswer(this); writeCSV();\">Add Wrong Answer</div>";
 			questionHtml += "<div class=\"btn btn-danger\" onclick=\"$(this).parent().remove(); writeCSV();\">Remove Question</div>";
+			questionHtml += "<div>";
+			questionHtml += "<label>Wrong Answer:</label>";
+			questionHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
+			questionHtml += "<span class=\"btn btn-danger\" onclick=\"$(this).parent().remove(); writeCSV();\">Remove Wrong Answer</span>";
+			questionHtml += "</div>";
+			questionHtml += "<div>";
+			questionHtml += "<label>Wrong Answer:</label>";
+			questionHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
+			questionHtml += "<span class=\"btn btn-danger\" onclick=\"$(this).parent().remove(); writeCSV();\">Remove Wrong Answer</span>";
+			questionHtml += "</div>";
+			questionHtml += "<div>";
+			questionHtml += "<label>Wrong Answer:</label>";
+			questionHtml += "<input name=\"wrongAnswer\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\"></input>";
+			questionHtml += "<span class=\"btn btn-danger\" onclick=\"$(this).parent().remove(); writeCSV();\">Remove Wrong Answer</span>";
+			questionHtml += "</div>";
 			questionHtml += "</div>";
 
  			var questionList = $("#questionList");
