@@ -4,6 +4,7 @@ package com.openfluency.deck
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import com.openfluency.auth.User
 
@@ -47,6 +48,21 @@ class PreviewDeckController {
         [ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
         }
     }
+	
+	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
+	def map(PreviewDeck previewDeckInstance) {
+		def user = User.load(springSecurityService.principal.id)
+		if (previewDeckInstance.ownerId != user.id) {
+			flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
+			redirect(uri: request.getHeader('referer'))
+			return
+		} else {
+			def max = 3
+			params.max = Math.min(max ?: 10, 100)
+			def previewCards= PreviewCard.findAllByDeck(previewDeckInstance, params) as JSON
+		[ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
+		}
+	}
 
     //def create() { respond new PreviewDeck(params) }
 
