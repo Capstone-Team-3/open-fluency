@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import groovy.json.JsonSlurper
 import com.openfluency.auth.User
 
 @Secured(['isAuthenticated()'])
@@ -72,11 +73,35 @@ class PreviewDeckController {
 			redirect(uri: request.getHeader('referer'))
 			return
 		} else {
-			def max = 3
+			def max = 10
 			params.max = Math.min(max ?: 10, 100)
 			def previewCards= PreviewCard.findAllByDeck(previewDeckInstance, params) as JSON
 		[ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
 		}
+	}
+	
+	def unitMappingSubmit(PreviewDeck previewDeckInstance) {
+		def jsonSlurper = new JsonSlurper();  
+		// hack.. sending json string as text plain.. Json always null for some reason even with empty args.
+		def payload = jsonSlurper.parseText(params.payload); 
+		
+		def fieldInd = payload.fieldIndices;
+		def alphInd = payload.alphaIndices;
+		
+//		// ensure fieldIndices have at least [ literal, pronunciation, meaning ]
+//		if (! (fieldInd.literal && fieldInd.pronunciation && fieldInd.meaning) ) {
+//			// return bad request
+//		}	
+		
+		HashMap<String, Integer> fieldIndices = (HashMap<String, Integer>) fieldInd;
+		HashMap<Integer, String> alphaIndices = (HashMap<String, Integer>) alphInd;
+		
+	
+		
+//		previewDeckService.createOpenFluencyDeck(previewDeckInstance.sourceLanguage, previewDeckInstance,
+//			fieldIndices, alphaIndices, algorithmService.cardServerNames()[0]);
+		
+		render ", field:" + fieldIndices + ", alph: " + alphaIndices
 	}
 
     @Transactional

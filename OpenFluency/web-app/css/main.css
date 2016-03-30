@@ -787,7 +787,7 @@ h4#custom-image {
 	
 	#units-list-container li:hover { 
 		background-color:#e6e6ff; 
-		border-right: 5px solid #F5876E;
+		border-right: 5px solid #ff33cc;
 	}
 	
 	#units-list-container li:hover { 
@@ -808,7 +808,7 @@ h4#custom-image {
     	cursor: pointer;
 	}  
 
-	.orange { border-left: 5px solid #F5876E; }
+	.orange {/* border-left: 5px solid #ff33cc; */}
 
 	.item-mapping-span {
 		font-size: 12px;
@@ -905,5 +905,30 @@ h4#custom-image {
 	}
 	
 	.droppable-hover-white {
-		border: 1px dashed gray;
+		border: 3px dashed gray;
+	}
+	
+	.light-green-hover-background {
+		background: #e6ffe6;
+	}
+	
+	.dashed-border-black {
+		border: 3px dashed;
+	}
+	
+	.ul-container {
+	display: table;
+	margin: 0 auto;
+	}
+	
+	modal-body ul {
+		min-width: 400px;
+		list-style: none;
+		padding-top: 20px;
+	}
+
+	.modal-body ul li {
+		display: inline;
+		margin: 10px;
+		
 	}

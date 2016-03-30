@@ -315,14 +315,17 @@ function countdown(element, minutes, seconds) {
 /* Unit Mapping
 /*----------------------------------------------------------------------------*/
 
+window.unitMappingLiteral = null;
+window.unitMappingPronunciation = null;
+window.unitMappingAudioUrl = null;
+window.unitMappingBackgroundImage = null;
+window.unitMappingMeaning = null;
+
+
 var initializeUnitMappingDraggable = function() {
 	console.log('initializing draggable');
 	
-	window.unitMappingLiteral = null;
-	window.unitMappingPronunciation = null;
-	window.unitMappingAudioUrl = null;
-	window.unitMappingBackgroundImage = null;
-	window.unitMappingMeaning = null;
+
 	
     $( ".draggable" ).draggable({
         helper: 'clone',
@@ -336,23 +339,25 @@ var initializeUnitMappingDraggable = function() {
      });
     
     $( "#flashcard-literal" ).droppable({
-    	hoverClass: "ui-state-hover",
+    	hoverClass: "dashed-border-black",
     	drop: function( event, ui ) {
 	        $(this).html($(ui.draggable).html());
 	        unitMappingLiteral = $(ui.draggable).data("index");
+	        $('#literal-options').modal();
     	}
   	});
     
     $( "#pronunciation-droppable" ).droppable({
-    	hoverClass: "droppable-hover-white",
+    	hoverClass: "light-green-hover-background",
         drop: function( event, ui ) {
         	$('#pronounced').html("pronounced " + $(ui.draggable).html());
         	unitMappingPronunciation = $(ui.draggable).data("index");
+        	$('#pronunciation-options').modal();
         }
      });
 
     $('#audio-url-droppable').droppable({
-    	hoverClass: "droppable-hover-white",
+    	hoverClass: "light-green-hover-background",
 		drop: function(event, ui) {
 			$('#audio-url-display').html($(ui.draggable).html());
 			$('.play-audio').css('visibility', 'visible');
@@ -361,7 +366,7 @@ var initializeUnitMappingDraggable = function() {
     });
 
     $("#flashcard-image").droppable({
-    	hoverClass: "ui-state-hover",
+    	hoverClass: "dashed-border-black",
 		drop: function(event, ui) {
 			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).html() + ")");
 			unitMappingBackgroundImage = $(ui.draggable).data("index");
@@ -369,7 +374,7 @@ var initializeUnitMappingDraggable = function() {
     });
 
     $("#meaning-droppable").droppable({
-    	hoverClass: "ui-state-hover",
+    	hoverClass: "dashed-border-black",
 		drop: function(event, ui) {
 			$("#meaning-display").html($(ui.draggable).html());
 			unitMappingMeaning = $(ui.draggable).data("index");
@@ -388,6 +393,7 @@ var initializeUnitMappingDraggable = function() {
 
     $('#clear-audio-url').click(function(){
     	$('#audio-url-display').html("(audio url)");
+    	$('.play-audio').css('visibility', 'hidden');
     	unitMappingAudioUrl = null;
     });
 
