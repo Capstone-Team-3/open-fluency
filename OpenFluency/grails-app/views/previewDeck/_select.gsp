@@ -70,11 +70,11 @@
 	        <div class="modal-body">
 	        	<div class="ul-container">
 		        	<ul>
-		        		<li><button data-alph="mixed" class="btn btn-sm btn-info l-alpha-options">English</button></li>
-		        		<li><button data-alph="kanji" class="btn btn-sm btn-info l-alpha-options">Japanese</button></li>
-		        		<li><button data-alph="katakana" class="btn btn-sm btn-info l-alpha-options">Katakana</button></li>
-		        		<li><button data-alph="hiragana" class="btn btn-sm btn-info l-alpha-options">Hiragana</button></li>
-		        		<li><button data-alph="romaji" class="btn btn-sm btn-info p-alpha-options">Romaji</button></li>
+		        		<li><button data-alph="English" class="btn btn-sm btn-info l-alpha-options">English</button></li>
+		        		<li><button data-alph="Japanese" class="btn btn-sm btn-info l-alpha-options">Japanese</button></li>
+		        		<li><button data-alph="Katakana" class="btn btn-sm btn-info l-alpha-options">Katakana</button></li>
+		        		<li><button data-alph="Hiragana" class="btn btn-sm btn-info l-alpha-options">Hiragana</button></li>
+		        		<li><button data-alph="Romaji" class="btn btn-sm btn-info p-alpha-options">Romaji</button></li>
 		        	</ul>
 	        	</div>
 	        </div>
@@ -97,10 +97,11 @@
 	        <div class="modal-body">
 	        	<div class="ul-container">
 		        	<ul>
-		        		<li><button data-alph="kana" class="btn btn-sm btn-info p-alpha-options">Japanese</button></li>
-		        		<li><button data-alph="katakana" class="btn btn-sm btn-info p-alpha-options">Katakana</button></li>
-		        		<li><button data-alph="hiragana" class="btn btn-sm btn-info p-alpha-options">Hiragana</button></li>
-		        		<li><button data-alph="reading" class="btn btn-sm btn-info p-alpha-options">Reading</button></li>
+		        		<li><button data-alph="English" class="btn btn-sm btn-info p-alpha-options">English</button></li>
+		        		<li><button data-alph="Japanese" class="btn btn-sm btn-info p-alpha-options">Japanese</button></li>
+		        		<li><button data-alph="Katakana" class="btn btn-sm btn-info p-alpha-options">Katakana</button></li>
+		        		<li><button data-alph="Hiragana" class="btn btn-sm btn-info p-alpha-options">Hiragana</button></li>
+		        		<li><button data-alph="Romaji" class="btn btn-sm btn-info p-alpha-options">Romaji</button></li>
 		        	</ul>
 	        	</div>
 	        </div>
@@ -181,18 +182,18 @@ function test123() {
 	var alphaIndices = {};
 	var fieldIndices = {};
 	
-	if (unitMappingLiteral != null) fieldIndices['literal'] = unitMappingLiteral;
-	if (unitMappingPronunciation != null) fieldIndices['pronunciation'] = unitMappingPronunciation;
-	if (unitMappingAudioUrl != null) fieldIndices['audio'] = unitMappingAudioUrl;
+	if (unitMappingLiteral != null) fieldIndices['Literal'] = unitMappingLiteral;
+	if (unitMappingPronunciation != null) fieldIndices['Pronunciation'] = unitMappingPronunciation;
+	if (unitMappingAudioUrl != null) fieldIndices['Sound'] = unitMappingAudioUrl;
 	
 	if (unitMappingBackgroundImage != null) {
 		// ensure is of type image
 		if (previewCardData[cardIndex].types[unitMappingBackgroundImage] == "Image") {
-			fieldIndices['image'] = unitMappingBackgroundImage;
+			fieldIndices['Image'] = unitMappingBackgroundImage;
 		}		
 	}
 	
-	if (unitMappingMeaning != null) fieldIndices['meaning'] = unitMappingMeaning;
+	if (unitMappingMeaning != null) fieldIndices['Meaning'] = unitMappingMeaning;
 
 	var dat = { 
 		fieldIndices: fieldIndices,

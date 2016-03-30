@@ -94,7 +94,7 @@ class PreviewDeckController {
 //		}	
 		
 		HashMap<String, Integer> fieldIndices = (HashMap<String, Integer>) fieldInd;
-		HashMap<Integer, String> alphaIndices = (HashMap<String, Integer>) alphInd;
+		HashMap<Integer, String> alphaIndices = (HashMap<Integer, String>) alphInd;
 		
 	
 		
