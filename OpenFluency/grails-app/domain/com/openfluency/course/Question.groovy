@@ -1,5 +1,6 @@
 package com.openfluency.course
 
+import com.openfluency.Constants
 import com.openfluency.confuser.*;
 import com.openfluency.flashcard.Flashcard
 import com.openfluency.language.Language
@@ -8,14 +9,11 @@ import com.openfluency.language.Language
  *  The Question domain class represents a single question on a quiz
  */
 class Question {
-	/** the flashcard the question is based on */
-	Flashcard flashcard
 	/** the Quiz the question belongs to */
 	Quiz quiz
 	
 	/** This indicates if in this test we're testing pronunciation, meaning, or symbol */
-	Integer questionType // renamed from testElement
-	
+	Integer questionType
 	
 	String question;
 	
@@ -54,9 +52,4 @@ class Question {
 			 return questionType
 		 }
 	 }
-
-    static constraints = {
-		question blank: true, nullable: true
-		flashcard nullable: true
-    }
 }

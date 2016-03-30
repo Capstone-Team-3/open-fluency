@@ -121,13 +121,12 @@ class BootStrap {
 				Quiz quizInstance = new Quiz(
 					course: kanji1,
 					title: "Manually Created Quiz",
-					testElement: Constants.MANUAL,
 					enabled: true,
 					liveTime: new Date(),
 					maxCardTime: 20
 					).save(failOnError: true)
 					
-				Question question = new Question(quiz: quizInstance, question: "Person", questionType: Constants.MANUAL).save(failOnError: true)
+				Question question = new Question(quiz: quizInstance, question: "Person", questionType: Constants.SYMBOL).save(failOnError: true)
 				
 				new QuestionOption(question: question, option: "人", answerKey: 1).save(failOnError: true)
 				new QuestionOption(question: question, option: "その", answerKey: 0).save(failOnError: true)
@@ -139,7 +138,6 @@ class BootStrap {
 				Quiz confuserQuiz = new Quiz(
 					course: kanji1,
 					title: "Japanese Confuser Quiz",
-					testElement: Constants.MANUAL,
 					enabled: true,
 					liveTime: new Date(),
 					maxCardTime: 20
@@ -154,7 +152,6 @@ class BootStrap {
 				Quiz chineseConfuserQuiz = new Quiz(
 					course: chineseCourse,
 					title: "Chinese Confuser Quiz",
-					testElement: Constants.MANUAL,
 					enabled: true,
 					liveTime: new Date(),
 					maxCardTime: 20

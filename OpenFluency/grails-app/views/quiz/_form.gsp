@@ -14,10 +14,9 @@
 <div class="form-group">
 	<label for="testElement">Test students on:</label>
 	<select class="form-control" name="testElement">
-		<option value="${Constants.SYMBOL}" ${quizInstance?.testElement == Constants.SYMBOL ? "selected":""}>Meanings of words/characters (${courseInstance.chapters[0].deck.language} to ${courseInstance.chapters[0].deck.sourceLanguage})</option>
-		<option value="${Constants.MEANING}" ${quizInstance?.testElement == Constants.MEANING ? "selected":""}>Meanings of words/characters (${courseInstance.chapters[0].deck.sourceLanguage} to ${courseInstance.chapters[0].deck.language})</option>
-		<option value="${Constants.PRONUNCIATION}" ${quizInstance?.testElement == Constants.PRONUNCIATION ? "selected":""}>Pronunciations of ${courseInstance.chapters[0].deck.language} words/characters</option>
-		<option value="${Constants.RANDOM}" ${quizInstance?.testElement == Constants.RANDOM ? "selected":""}>Random mix of all of the above.</option>
+		<option value="${Constants.SYMBOL}">Meanings of words/characters (${courseInstance.chapters[0].deck.language} to ${courseInstance.chapters[0].deck.sourceLanguage})</option>
+		<option value="${Constants.MEANING}"}>Meanings of words/characters (${courseInstance.chapters[0].deck.sourceLanguage} to ${courseInstance.chapters[0].deck.language})</option>
+		<option value="${Constants.PRONUNCIATION}"}>Pronunciations of ${courseInstance.chapters[0].deck.language} words/characters</option>
 	</select>
 </div>
 

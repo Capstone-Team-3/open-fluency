@@ -39,7 +39,6 @@ class QuizEditorController {
 			Quiz quizInstance = new Quiz(
 				course: courseInstance,
 				title: title,
-				testElement: Constants.MANUAL,
 				enabled: true,
 				liveTime: liveTime,
 				maxCardTime: maxCardTime
@@ -70,14 +69,15 @@ class QuizEditorController {
 					}
 				}
 			}
+			
+			redirect controller: "quiz", action: "show", id: quizInstance.id
 		}
 		catch (Exception e) {
-			response.setContentType("application/json")
-			render "{status: 'Error', message: '${e.message}' }"
-			return
+			
+			log.error "Error: ${e.message}", e
+			
+			flash.message = "Something went wrong, please try again"
+			redirect action: "create", id: courseInstance.id
 		} 
-		
-		response.setContentType("application/json")
-		render "{status: 'Success'}"
 	}
 }

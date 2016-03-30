@@ -22,7 +22,6 @@ class QuizService {
 		Quiz quizInstance = new Quiz(
 			course: courseInstance, 
 			title: title, 
-			testElement: Constants.MANUAL, 
 			enabled: true, 
 			liveTime: liveTime, 
 			maxCardTime: maxCardTime
@@ -47,7 +46,6 @@ class QuizService {
     void updateQuiz(Quiz quizInstance, String title, Date liveTime, Integer maxCardTime, Integer testElement, List flashcardIds) {
     	// Create the quiz
     	quizInstance.title = title
-    	quizInstance.testElement = testElement
     	quizInstance.enabled = true
     	quizInstance.liveTime = liveTime
     	quizInstance.maxCardTime = maxCardTime
@@ -116,7 +114,7 @@ class QuizService {
 		
 		List<String> confusers = confuser.getConfusers(answer, alphabet, 3);
 		
-		Question q = new Question(quiz: quizInstance, question: question, questionType: Constants.MANUAL).save(failOnError: true)
+		Question q = new Question(quiz: quizInstance, question: question, questionType: Constants.CONFUSER).save(failOnError: true)
 		
 		new QuestionOption(question: q, option: answer, answerKey: 1).save(failOnError: true)
 		
