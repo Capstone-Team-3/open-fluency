@@ -309,6 +309,44 @@ function countdown(element, minutes, seconds) {
 
 
 
+/* --------------------------------------------------------------------*/
+//						OpenFluency2
+/* --------------------------------------------------------------------*/
+
+/**
+ * toggles dictionary modal
+ */
+$('.show-dictionary-button').click(function() {
+	$('#dictionary-table').show();
+	$('.show-dictionary-button').hide();
+});
+
+
+/**
+ * Sends ajax request to dictionary service
+ */
+$('#dictionary-search-button').click(function() {
+	var searchTerm = $('#dictionary-search-textbox').val();
+
+	$.ajax({
+		type: "GET",
+		url: "/OpenFluency/dictionary/search",
+		data: {
+			term: searchTerm,
+			count: 15
+		},
+		dataType: "html",
+		success: function(output) {
+			
+			$("#dictionary-results-table").html(output);
+			
+		},
+		error: function(err) {
+			console.log(err);
+		}
+	});
+	console.log(searchTerm);
+});
 
 
 /*----------------------------------------------------------------------------*/

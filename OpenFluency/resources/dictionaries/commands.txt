@@ -1,0 +1,5 @@
+index_search_tools/linux/cindex -indexpath index/jp-en.index  -logskip -maxtrigrams 100000 /local/abinani/installers/xenoglass/dictionary-upload/japanese/jp–en
+index_search_tools/linux/csearch -indexpath index/jp-en.index -m 9 '^.*な.*\['
+
+~/google-codesearch/codesearch_v2_linux_amd64/cindex -indexpath /tmp/jp4 -logskip -maxtrigrams 100000 /local/abinani/installers/xenoglass/dictionary-upload/japanese/jp–en
+~/google-codesearch/codesearch_v2_linux_amd64/csearch -indexpath /tmp/jp4 -m 10 '^.*な.*['

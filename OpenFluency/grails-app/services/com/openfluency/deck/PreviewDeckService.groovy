@@ -42,23 +42,25 @@ class PreviewDeckService {
     def deckService
 	def mediaTmpDir;
 	def mediaDir;
+	//import org.jsoup.Jsoup;
 
 	// This is for guessing how a deck should import
 	Pattern isId = Pattern.compile("id",Pattern.CASE_INSENSITIVE)
 	Pattern english = Pattern.compile("english",Pattern.CASE_INSENSITIVE)
 	Pattern japanese = Pattern.compile("japanese|kanji",Pattern.CASE_INSENSITIVE)
 	Pattern katakana = Pattern.compile("katakana",Pattern.CASE_INSENSITIVE)
+	Pattern pinyin = Pattern.compile("pinyin",Pattern.CASE_INSENSITIVE)
 	Pattern kana = Pattern.compile("hiragana|kana",Pattern.CASE_INSENSITIVE)
 	Pattern romaji = Pattern.compile("romaji|romanji|roumaji",Pattern.CASE_INSENSITIVE)
 	Pattern picture = Pattern.compile("picture|image",Pattern.CASE_INSENSITIVE)
 	Pattern sound = Pattern.compile("sound",Pattern.CASE_INSENSITIVE)
 	Pattern expression = Pattern.compile("expression|front",Pattern.CASE_INSENSITIVE)
 	Pattern meaning = Pattern.compile("meaning|back",Pattern.CASE_INSENSITIVE)
-	Pattern reading = Pattern.compile("reading",Pattern.CASE_INSENSITIVE)
+	Pattern reading = Pattern.compile("reading|transcript",Pattern.CASE_INSENSITIVE)
 	def langMap=["English":english,"Japanese":japanese,
 		"Katakana":katakana, "Hiragana":kana, "Romaji":romaji ]
 	def fieldMap=["Meaning":[english,meaning],"Literal":[expression,japanese],
-		"Pronunciation":[kana,katakana,romaji,reading]]
+		"Pronunciation":[kana,katakana,romaji,reading,pinyin]]
 
 	// This is a desperate guessing function - Should be a test function instead
 	def importDeck(PreviewDeck previewDeckInstance, String mediaTmpDir, String mediaDir) {
@@ -140,6 +142,10 @@ class PreviewDeckService {
 
 			if (symbolString == null || symbolString.length() < 1 || meaningString == null || meaningString.length() < 1)
 				continue // Skip if missing data
+			symbolString = removeHtml(symbolString)
+			meaningString = removeHtml(meaningString)
+			if (symbolString.length() < 1 || meaningString.length() < 1)
+				continue // Skip if data is blank
 			try { // Missing media is OK
 				imageURL = card.units.get( fieldIndices.get("Image"));
 				imageURL = remapMedia(imageURL)
@@ -156,21 +162,20 @@ class PreviewDeckService {
 					alphabetp = Alphabet.findByLanguage(lang)
 				}
 			} catch (Exception e){}
-					
 			// Objects to build flashcard
 			Unit symbol = languageService.getUnit(symbolString, lang )
 			Unit meaning = languageService.getUnit(meaningString, deckInstance.sourceLanguage)
 
 			if (pronunciationString != null && pronunciationString.length() > 0) {
 				Pronunciation pronunciation
-				def audioInstance=null
+				pronunciationString = removeHtml(pronunciationString)
 				try {
 					if (alphabetp != null)
 						pronunciation =  languageService.getPronunciationAlphabet(pronunciationString, symbol, alphabetp)
 					else
 						pronunciation = languageService.getPronunciation(pronunciationString, symbol, deckInstance.language)
 					if (audioURL != null) {
-						audioInstance = mediaService.createAudio(audioURL,null, pronunciation.id.toString())
+						def audioInstance = mediaService.createAudio(audioURL,null, pronunciation.id.toString())
 						audioInstanceId= audioInstance.id.toString()
 					}
 					if (pronunciationString == null || pronunciationString.length() < 1) {
@@ -180,7 +185,7 @@ class PreviewDeckService {
 						pronunciationString = pronunciation.id.toString()
 				} catch (Exception e) {
 					println("Problem with audio, skip the audio")
-					
+					pronunciationString = null
 				}
 			} else {
 				pronunciationString = null
@@ -345,77 +350,7 @@ class PreviewDeckService {
         PreviewCard.executeQuery(query, [max: 1])[0]
     }
 
-    /**
-    * Load a deck from a CSV - returns a list with any errors that might have happened during upload
-    */
-    List loadFlashcardsFromCSV(PreviewDeck deckInstance, def f) {
-        List result
-
-        if(f.fileItem){
-            // Create a temporary file with the uploaded contents
-            def extension = f.fileItem.name.lastIndexOf('.').with {it != -1 ? f.fileItem.name.substring(it + 1) : f.fileItem.name}
-            def outputFile = new File("${new Date().time}.${extension}")
-            f.transferTo(outputFile)
-
-            // Validate the file first
-            result = validateCSV(outputFile.path)
-            if(!result.isEmpty()) {
-                return result
-            }
-            
-            // Everything looks ok, lets save
-            new File(outputFile.path).toCsvReader(['skipLines':1]).eachLine { tokens ->
-                String symbolString = tokens[0]
-                String meaningString = tokens[1]
-                String pronunciationString = tokens[2]
-                String imageURL = tokens[3]
-
-                // Objects to build flashcard
-                Unit symbol = languageService.getUnit(symbolString, deckInstance.language)
-                Unit meaning = languageService.getUnit(meaningString, deckInstance.sourceLanguage)
-                Pronunciation pronunciation = languageService.getPronunciation(pronunciationString, symbol, deckInstance.language)
-                UnitMapping unitMapping = languageService.getUnitMapping(symbol, meaning)
-                
-                // Now build the card
-				/********* DO NOT USE *********/
-                flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciation.id.toString(), imageURL, null, deckInstance.id.toString())
-            }
-
-            // Cleanup
-            outputFile.delete()
-        } 
-        else {
-            result << "File not found"
-        }
-
-        return result
-    }
-
-    /**
-    * Check that each row has a unit, a meaning and a pronunciation
-    * Returns a list with any errors
-    */
-    List validateCSV(String filePath) {
-        List result = []
-        int i = 0
-        new File(filePath).toCsvReader(['skipLines':1]).eachLine { tokens ->
-
-            // Check that there's a meaning a pronunciation and a symbol
-            if(!tokens[0]) {
-                result << "Row ${i} is missing a symbol"
-            }
-
-            if(!tokens[1]) {
-                result << "Row ${i} is missing a meaning"   
-            }
-            
-            if(!tokens[2]) {
-                result << "Row ${i} is missing a pronunciation"
-            }
-
-            i++
-        }
-
-        return result
-    }
+	String removeHtml(String str) {
+		return str.replaceAll("\\<.*?>","");
+	}
 }

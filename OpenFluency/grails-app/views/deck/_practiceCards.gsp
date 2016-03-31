@@ -26,6 +26,10 @@
 <!-- end row -->
 
 <div class="practice-body row">
+
+<g:render template="/dictionary/dictionaryTable"/>
+
+
     <div class="practice-flashcard center-block">
         <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
 
@@ -61,3 +65,7 @@
         </g:elseif>
     </div>
 </div> 
+
+
+
+

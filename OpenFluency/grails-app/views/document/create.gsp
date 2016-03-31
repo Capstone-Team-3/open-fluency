@@ -47,6 +47,7 @@
                         </g:each>
                     </select>
                     -->
+                    Name:<input type="text" class = "form-control" name="Name" />
                     Description:<input type="text" class = "form-control" name="Description" />
                     Language:<select id="filter-lang" class="form-control" name="filter-lang">
                         <g:each in="${languageInstanceList}">
