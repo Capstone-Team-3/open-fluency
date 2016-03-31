@@ -51,7 +51,7 @@ class DocumentController {
 				throw ex
 			}
 			try {
-				if (name.isEmpty()) name = file
+				if (name.isEmpty()) name = filename
 				File newupload = new File(fullPath)
 				newupload.mkdirs()
 				file.transferTo(new File(fullPath))

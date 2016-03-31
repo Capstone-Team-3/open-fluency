@@ -8,6 +8,8 @@ import com.openfluency.media.Image
 import cscie599.openfluency2.CharSetIdentifier
 import cscie599.openfluency2.CharSetIdentifier.Charset
 import cscie99.team2.lingolearn.server.anki.AnkiFile
+import cscie99.team2.lingolearn.server.anki.AnkiConverter
+import cscie99.team2.lingolearn.shared.Card
 
 import com.openfluency.language.Language
 import com.openfluency.language.Alphabet
@@ -17,8 +19,6 @@ import com.openfluency.Constants
 import com.openfluency.deck.Document
 import com.openfluency.deck.PreviewCard
 import com.openfluency.deck.PreviewDeck
-import cscie99.team2.lingolearn.server.anki.AnkiConverter
-import cscie99.team2.lingolearn.shared.Card
 
 import grails.transaction.Transactional
 import com.openfluency.auth.User
@@ -73,9 +73,12 @@ class DocumentService {
 				def fieldNames = anki.fieldNames;
 				PreviewCard pc=new PreviewCard(deck: previewDeckInstance)
 				for (String cardfield in card.fields) {
-					pc.addToUnits(cardfield.take(255)) }
+                    if (cardfield == null) cardfield=""
+					pc.addToUnits(cardfield.take(255))
+                    }
 				for (String fieldtype in fieldTypes) {
-					 pc.addToTypes(fieldtype) }
+					 pc.addToTypes(fieldtype)
+                     }
 				for (String fieldname in fieldNames) {
 					 pc.addToFields(fieldname) }
 				pc.save flush:true
