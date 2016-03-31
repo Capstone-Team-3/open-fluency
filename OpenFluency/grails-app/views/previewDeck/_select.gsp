@@ -113,6 +113,34 @@
 	  </div>
 	  
 	  
+	  
+	  
+	  <!-- Modal -->
+	  <div class="modal fade" id="meaning-options" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">Select Alphabet Type</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="ul-container">
+		        	<ul>
+		        		<li><button data-alph="English" class="btn btn-sm btn-info m-alpha-options">English</button></li>
+		        		<li><button data-alph="Japanese" class="btn btn-sm btn-info m-alpha-options">Japanese</button></li>
+		        		<li><button data-alph="Katakana" class="btn btn-sm btn-info m-alpha-options">Katakana</button></li>
+		        		<li><button data-alph="Hiragana" class="btn btn-sm btn-info m-alpha-options">Hiragana</button></li>
+		        		<li><button data-alph="Romaji" class="btn btn-sm btn-info m-alpha-options">Romaji</button></li>
+		        	</ul>
+	        	</div>
+	        </div>
+	        <div class="modal-footer">
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
 	
 </div>
 
@@ -177,6 +205,12 @@ $('.p-alpha-options').click(function() {
 	$('#pronunciation-options').modal('hide');
 });
 
+$('.m-alpha-options').click(function() {
+	if (unitMappingMeaning == null) return;
+	alphab['' + unitMappingMeaning] = this.dataset.alph;
+	$('#meaning-options').modal('hide');
+});
+
 function test123() {
 	console.log("posting unit mapping to server");
 	var alphaIndices = {};
@@ -204,7 +238,7 @@ function test123() {
 	
 	$.ajax({
 		type: "POST",
-		url: "/OpenFluency/previewDeck/unitMappingSubmit",
+		url: "/OpenFluency/previewDeck/unitMappingSubmit/3",
 		data: {payload: obj},
 		success: function(output) {
 			console.log(output);

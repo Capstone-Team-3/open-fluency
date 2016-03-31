@@ -8,6 +8,7 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.JsonSlurper
 import com.openfluency.auth.User
+import com.openfluency.language.Language;
 
 @Secured(['isAuthenticated()'])
 @Transactional(readOnly = true)
@@ -88,18 +89,19 @@ class PreviewDeckController {
 		def fieldInd = payload.fieldIndices;
 		def alphInd = payload.alphaIndices;
 		
-//		// ensure fieldIndices have at least [ literal, pronunciation, meaning ]
-//		if (! (fieldInd.literal && fieldInd.pronunciation && fieldInd.meaning) ) {
-//			// return bad request
-//		}	
-		
 		HashMap<String, Integer> fieldIndices = (HashMap<String, Integer>) fieldInd;
 		HashMap<Integer, String> alphaIndices = (HashMap<Integer, String>) alphInd;
 		
-	
+		if (!fieldIndices.containsKey("Literal") && "Pronunciation" in fieldIndices.keySet())
+		fieldIndices.put("Literal",fieldIndices.get("Pronunciation")) {
+			// return bad request
+		}
+
+		def srcLang = previewDeckInstance.sourceLanguage;
+		if (previewDeckInstance.sourceLanguage == null)
+			srcLang = Language.findByName("English"); 
 		
-//		previewDeckService.createOpenFluencyDeck(previewDeckInstance.sourceLanguage, previewDeckInstance,
-//			fieldIndices, alphaIndices, algorithmService.cardServerNames()[0]);
+		previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[0]);
 		
 		render ", field:" + fieldIndices + ", alph: " + alphaIndices
 	}

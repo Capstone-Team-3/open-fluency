@@ -378,6 +378,7 @@ var initializeUnitMappingDraggable = function() {
 		drop: function(event, ui) {
 			$("#meaning-display").html($(ui.draggable).html());
 			unitMappingMeaning = $(ui.draggable).data("index");
+			$('#meaning-options').modal();
 		}
     });
 
