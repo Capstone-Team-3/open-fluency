@@ -28,10 +28,12 @@
 					<input type="hidden" name="maxCardTime" id="maxCardTime" value="${quizInstance.maxCardTime}" />
 					<input type="hidden" name="quiz" value="${quizInstance.id}" />
 
-					<div class="center">
-						<strong><span class="glyphicon glyphicon-time"></span> Time Remaining</strong>
-						<div id="clock" class="clock"></div>
-					</div>
+					<g:if test="${quizInstance.maxCardTime > 0}">
+						<div class="center">
+							<strong><span class="glyphicon glyphicon-time"></span> Time Remaining</strong>
+							<div id="clock" class="clock"></div>
+						</div>
+					</g:if>
 					
 					<h1 class="unit text-center">${answerInstance.question.question}</h1>
 
@@ -55,5 +57,8 @@
 			</div>
 		</div>
 	</div>
-	<g:javascript>initCountdown();</g:javascript>
+	
+	<g:if test="${quizInstance.maxCardTime > 0}">
+		<g:javascript>initCountdown();</g:javascript>
+	</g:if>
 </body>
