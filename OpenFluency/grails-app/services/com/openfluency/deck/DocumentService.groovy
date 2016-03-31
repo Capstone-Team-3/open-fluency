@@ -48,7 +48,7 @@ class DocumentService {
     }
 	
 	@Transactional
-	def createPreviewDeck(String fullPath, String mediaDir, String filename, String description, Language language, Document document){
+	def createPreviewDeck(String fullPath, String mediaDir, String name, String filename, String description, Language language, Document document){
 		AnkiFile anki = new AnkiFile(fullPath,mediaDir)
 		def nCards = anki.totalCards
 		def folder = anki.getTmpDir()
@@ -59,7 +59,7 @@ class DocumentService {
 		def user= User.load(springSecurityService.principal.id)
 		user.id = springSecurityService.principal.id
 		def owner = springSecurityService.currentUser
-		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: filename, description:description,language:language,document: document,mediaDir:ankiMediaDir);
+		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: name, description:description,language:language,document: document,mediaDir:ankiMediaDir);
 		previewDeckInstance.save(flush:true)
 		def nfields = anki.fieldNames.size()
 		while (decks.hasNext()) {
