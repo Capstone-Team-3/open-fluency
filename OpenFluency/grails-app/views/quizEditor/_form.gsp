@@ -58,7 +58,7 @@
 
  <div class="form-group">
  <div id="showCSV" class="btn btn-info" onclick="showCSV()">Show Raw Quiz CSV</div>
- <textArea class="form-control" name="questions" style="display:none">
+ <textArea class="form-control" name="questions" style="display:none" readonly>
  </textArea>
  </div>
  
@@ -147,7 +147,6 @@
  			var html = questionList.append(questionHtml);
  	 	}	
  
- 		// TODO what if one of the inputs contains a comma
         function writeCSV() {
             var s = "";
 			$(".question").each(function(index,item) {
@@ -157,7 +156,13 @@
 				var inputs = $(this).find("input");
 				var length = inputs.length;
 				inputs.each(function(index, item) { 
-					s += $(this).val();
+
+					// Use quotes in case the string contains commas
+					// Convert quote in string to double quote
+					s += '"';
+					s += $(this).val().replace(/"/g, '""');
+					s += '"';
+					
 					if (index != (length - 1)) {
 						s += ",";	
 					} 
