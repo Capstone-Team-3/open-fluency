@@ -36,6 +36,9 @@ grails.project.dependency.resolution = {
     // Testing frameworks
     def gebVersion = "0.9.2"
     def seleniumVersion = "2.32.0"
+    // latest version doesn't seem to work
+    //def gebVersion = "0.13.0"
+    //def seleniumVersion = "2.52.0"
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
@@ -57,7 +60,8 @@ grails.project.dependency.resolution = {
         test "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
         test "org.gebish:geb-spock:$gebVersion"
         test "org.gebish:geb-junit4:$gebVersion"
-        test "org.seleniumhq.selenium:selenium-support:2.31.0"
+        test "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+        //test "org.seleniumhq.selenium:selenium-support:2.31.0"
     }
 
     plugins {
@@ -70,9 +74,11 @@ grails.project.dependency.resolution = {
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate:3.6.10.9" // or ":hibernate4:4.3.4"
-        runtime ":database-migration:1.3.8"
         runtime ":jquery:1.11.0.2"
         runtime ":resources:1.2.7"
+        //runtime ":database-migration:1.3.8"
+        // For development - domain changes  - phoebe
+        runtime "org.grails.plugins:database-migration:1.4.1"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"

@@ -3,6 +3,9 @@ package cscie99.team2.lingolearn.shared;
 import java.io.Serializable;
 
 /**
+ * CSCIE99 TEAM 2
+ * @author YPolyanskyy
+ *
  * This class represents Image, corresponding to the individual card.
  */
 public class Image implements Serializable {

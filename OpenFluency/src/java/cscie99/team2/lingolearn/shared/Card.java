@@ -1,7 +1,7 @@
 package cscie99.team2.lingolearn.shared;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
 /**
  * A single card within a Deck of cards.
  */
@@ -18,12 +18,20 @@ public class Card implements Serializable {
 	private String nativeLanguage;	// Native language of the translation, example "en-us"
 	private Image image;			// Image
 	private Sound sound;			// Sound
+	private ArrayList<String> fields;		// All Fields in the order encountered
 
 	/**
-	 * Constructor.
+	 * Constructor
 	 */
-	public Card () {};
-	
+	public Card () {
+		if( this.nativeLanguage == null )
+			this.nativeLanguage = "English";
+		
+		this.kanji = "";
+		this.hiragana = "";
+		this.katakana = "";
+		this.fields = new ArrayList<String>();
+	};
 	/**
 	 * Constructor.
 	 */
@@ -35,6 +43,14 @@ public class Card implements Serializable {
 		this.translation = translation;
 		this.nativeLanguage = nativeLanguage;
 		this.desc = description;
+	}
+
+	public String getField(int index) {
+		return fields.get(index);
+	}
+
+	public void addField(String field) {
+		this.fields.add(field);
 	}
 	
 	/**
@@ -59,7 +75,6 @@ public class Card implements Serializable {
 				.equalsIgnoreCase(card.getDesc() + card.getHiragana() + card.getKanji() + 
 								  card.getKatakana() + card.getNativeLanguage() + card.getTranslation()));
 	}
-
 
 	public Long getId() {
 		return cardId;
@@ -131,7 +146,83 @@ public class Card implements Serializable {
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	/*
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cardId == null) ? 0 : cardId.hashCode());
+		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+		result = prime * result
+				+ ((hiragana == null) ? 0 : hiragana.hashCode());
+		result = prime * result + ((kanji == null) ? 0 : kanji.hashCode());
+		result = prime * result
+				+ ((katakana == null) ? 0 : katakana.hashCode());
+
+		result = prime * result
+				+ ((translation == null) ? 0 : translation.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (cardId == null) {
+			if (other.cardId != null)
+				return false;
+		} else if (!cardId.equals(other.cardId))
+			return false;
+		if (desc == null) {
+			if (other.desc != null)
+				return false;
+		} else if (!desc.equals(other.desc))
+			return false;
+		if (hiragana == null) {
+			if (other.hiragana != null)
+				return false;
+		} else if (!hiragana.equals(other.hiragana))
+			return false;
+		if (image == null) {
+			if (other.image != null)
+				return false;
+		} else if (!image.equals(other.image))
+			return false;
+		if (kanji == null) {
+			if (other.kanji != null)
+				return false;
+		} else if (!kanji.equals(other.kanji))
+			return false;
+		if (katakana == null) {
+			if (other.katakana != null)
+				return false;
+		} else if (!katakana.equals(other.katakana))
+			return false;
+		if (nativeLanguage == null) {
+			if (other.nativeLanguage != null)
+				return false;
+		} else if (!nativeLanguage.equals(other.nativeLanguage))
+			return false;
+		if (sound == null) {
+			if (other.sound != null)
+				return false;
+		} else if (!sound.equals(other.sound))
+			return false;
+		if (translation == null) {
+			if (other.translation != null)
+				return false;
+		} else if (!translation.equals(other.translation))
+			return false;
+		return true;
 	}	
+	*/	
 	
 	public String getDisplayString() {
 		String res = "";
