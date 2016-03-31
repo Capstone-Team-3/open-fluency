@@ -48,7 +48,7 @@ class DocumentService {
     }
 	
 	@Transactional
-	def createPreviewDeck(String fullPath, String mediaDir, String filename, String description, Language language, Document document){
+	def createPreviewDeck(String fullPath, String mediaDir, String name, String filename, String description, Language language, Document document){
 		AnkiFile anki = new AnkiFile(fullPath,mediaDir)
 		def nCards = anki.totalCards
 		def folder = anki.getTmpDir()
