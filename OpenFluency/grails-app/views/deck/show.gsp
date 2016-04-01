@@ -5,6 +5,7 @@
 	<meta name="layout" content="main"/>
 </head>
 <body>
+
 	<div class="container deck-show">
 
 		<ul class="breadcrumb">
@@ -132,6 +133,64 @@
 			</div>
 		</div>
 	</div>
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+      <!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Modal Header</h4>
+</div>
+<div class="modal-body">
+    <div>
+        <h1>
+            My Decks
+            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
+        </h1>
+        <ul>
+           <g:each in="${deckInstanceList}">
+              <li class="deck-list" data-id="${it.id}">
+                 ${it.id}
+              </li>
+           </g:each>
+        </ul>
+    </div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
 	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
+<script> 
+var dsFlashCardId = null;
+
+$('.reassign-btn').click(function() {
+    $('#myModal2').modal();
+    dsFlashCardId = this.dataset.id;
+});
+
+$('.deck-list').click(function(){ 
+ if(dsFlashCardId == null) return;
+
+ console.log(this.dataset.id);
+ var deckdest_id=this.dataset.id;
+ $.ajax({
+     url:"/OpenFluency/flashcard/reassign?flashcard_id="+dsFlashCardId+"&deckdest_id="+deckdest_id,
+     success : function(output) {
+        dsFlashCardId = null;
+        console.log("OK");
+     },
+     error : function(err) {
+        console.log(err);
+     }
+ });
+});        
+
+</script>
 </body>
 </html>

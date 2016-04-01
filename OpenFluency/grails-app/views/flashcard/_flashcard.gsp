@@ -6,6 +6,7 @@
 				<div class="card-actions">
 					<g:if test="${isOwner}">
 						<g:link action="delete" controller="flashcard" id="${flashcardInstance.id}" class="btn btn-danger btn-xs flashcard-delete-${flashcardInstance.id}"><span class="glyphicon glyphicon-remove"></span></g:link>
+						<button id="${flashcardInstance.id}" data-id="${flashcardInstance.id}" class="reassign-btn btn btn-warning btn-xs flashcard-delete-${flashcardInstance.id}"><span class="glyphicon glyphicon-move"></span></button>
 					</g:if>
 					<g:if test="${practicing}">
 						<a href="#" id="customizationBtn" title="Add your own image or audio pronunciation file to help you learn!">
@@ -71,5 +72,6 @@ $('.clickable-character').click(function() {
 	$('#dictionary-search-textbox').val($(this).text());
 	$('#dictionary-search-button').click();
 });
+
 
 </script>
