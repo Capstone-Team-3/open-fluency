@@ -74,7 +74,7 @@ public class AnkiFile {
 
 	public AnkiFile(String fileName, String mediaTopDir) throws AnkiException, IOException
 	{
-		File folder = File.createTempFile(fileName, null); // use for unpacking anki files
+		File folder = File.createTempFile("anki", null); // use for unpacking anki files
 		folder.delete();       // clean out folder first - must be there!
 		folder.deleteOnExit();	// cleans up at exit
 		folder.mkdir();
