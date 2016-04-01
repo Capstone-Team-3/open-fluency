@@ -39,13 +39,27 @@
 				</div>
 			</div>
 
-			<g:set var="imageSource" value="${flashcardInstance?.image?.url}"/>
+			<%
+			
+				String imageSource = flashcardInstance?.image?.url
+			
+				if (imageSource != null) {
+			
+					if (File.separatorChar=='\\') {
+						imageSource = java.nio.file.Paths.get("/", imageSource).normalize();
+						imageSource =  imageSource.replace('\\', '/');
+					}
+			
+					String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+					imageSource = baseUrl + imageSource;
+				}
+			 %>
 			<g:if test="${imageURL}">
 				<g:set var="imageSource" value="${imageURL}"/>
 			</g:if>
 			<g:if test="${imageSource}">
 				<div id="image-container">
-					<div id="flashcard-image" class="flashcard-img" style="background-image: url(/${imageSource}) ; background-size: 100% 100%"></div>
+					<div id="flashcard-image" class="flashcard-img" style="background-image: url('${imageSource}') ; background-size: 100% 100%"></div>
 				</div>
 			</g:if>
 
