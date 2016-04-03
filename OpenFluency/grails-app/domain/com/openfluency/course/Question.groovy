@@ -24,6 +24,12 @@ class Question {
 
 		return query.find()
 	}
+	
+	List<QuestionOption> getWrongOptions() {
+		return QuestionOption.findAll {
+			question == this && answerKey == 0
+		}
+	}
 
 	/** Get all the other options that the user can choose from in addition to the correct answer
 	 *  @Return a list of the QuestionOption available

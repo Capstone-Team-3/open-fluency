@@ -14,7 +14,7 @@
 						<g:link action="list" controller="course">My Courses</g:link>
 					</li>
 					<li>
-						<g:link action="show" controller="course" id="${courseInstance.id}">${courseInstance.getCourseNumber()}: ${courseInstance.title}</g:link>
+						<g:link action="show" controller="course" id="${quizInstance.course.id}">${quizInstance.course.title}</g:link>
 					</li>
 					<li>
 						<g:link action="create" controller="quiz">Add Quiz</g:link>
@@ -22,13 +22,13 @@
 				</ul>
 			</div>
 
-			<g:form action="save" controller="quizEditor">
-				<input name="course.id" value="${courseInstance.id}" type="hidden"/>
+			<g:form action="update" controller="quizEditor">
+				<input name="course.id" value="${quizInstance.course.id}" type="hidden"/>
 				<div class="col-lg-6 col-lg-offset-3">
 
-					<h1 class="text-center">Create Quiz for ${courseInstance.title}</h1>
+					<h1 class="text-center">Edit Quiz for ${quizInstance.course.title}</h1>
 					<g:render template="form" model="[quizInstance: quizInstance, courseInstance: courseInstance]"/>
-					<button type="submit" class="btn btn-info">Create Quiz</button>
+					<button type="submit" class="btn btn-info">Save Quiz</button>
 				</div>
 			</g:form>
 		</div>

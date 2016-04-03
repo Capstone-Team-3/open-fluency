@@ -18,42 +18,38 @@
 
 <div class="btn btn-info" onclick="addQuestion(); writeCSV();"> Add a Question</div>
 
-<div id="questionList"></div>
+<div id="questionList">
 
-<div class="question panel panel-default question-panel">
+	<g:each var="question" in="${quizInstance?.questions}">
 
-		<div>
-			<label>Question</label>
-			<input name="question" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-		</div>
-
-		<div>
-			<label>Correct Answer:</label>
-			<input name="correctAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-			<div class="btn btn-info" onclick="getConfusers(this);">Generate Confuser Answers</div>
-		</div>
+		<div class="question panel panel-default question-panel">
 		
-		<div class="btn btn-info" onclick="addWrongAnswer(this); writeCSV();">Add Wrong Answer</div>
+				<div>
+					<label>Question</label>
+					<input name="question" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.question}"></input>
+				</div>
 		
-		<div class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Question</div>
-
-		<div>
-			<label>Wrong Answer:</label>
-			<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-			<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
+				<div>
+					<label>Correct Answer:</label>
+					<input name="correctAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.correctOption.option}"></input>
+					<div class="btn btn-info" onclick="getConfusers(this);">Generate Confuser Answers</div>
+				</div>
+				
+				<div class="btn btn-info" onclick="addWrongAnswer(this); writeCSV();">Add Wrong Answer</div>
+				
+				<div class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Question</div>
+		
+				<g:each var="wrongOption" in="${question.wrongOptions}">
+					<div>
+						<label>Wrong Answer:</label>
+						<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${wrongOption.option}"></input>
+						<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
+					</div>
+				</g:each>
 		</div>
+	
+	</g:each>
 
-		<div>
-			<label>Wrong Answer:</label>
-			<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-			<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
-		</div>
-
-		<div>
-			<label>Wrong Answer:</label>
-			<input name="wrongAnswer" type="text" onchange="writeCSV();" onkeyup="writeCSV();"></input>
-			<span class="btn btn-danger" onclick="$(this).parent().remove(); writeCSV();">Remove Wrong Answer</span>
-		</div>
 </div>
 
  <div class="form-group">
