@@ -17,7 +17,7 @@
 						<g:link action="show" controller="course" id="${quizInstance.course.id}">${quizInstance.course.title}</g:link>
 					</li>
 					<li>
-						<g:link action="create" controller="quiz">Add Quiz</g:link>
+						<g:link action="edit" controller="quizEditor" id="${quizInstance.id}">Edit Quiz</g:link>
 					</li>
 				</ul>
 			</div>

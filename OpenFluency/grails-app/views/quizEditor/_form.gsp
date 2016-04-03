@@ -61,11 +61,15 @@
  <script type="text/javascript">
 
 		function getConfusers(that) {
+			
 			var question = $(that).parent().parent();
 			var input = question.find("input[name=correctAnswer]").val();
 
+			var languageCode = "${courseInstance?.language?.code}" || "JAP";
+			var url = "/OpenFluency/Confuser/generate?languageCode=" + languageCode + "&number=-1&word=" + input;
+
 			$.ajax({
-				url: "/OpenFluency/Confuser/generate?languageCode=JAP&number=-1&word=" + input
+				url: url
 			})
 			.done(function(jarray) {
 
