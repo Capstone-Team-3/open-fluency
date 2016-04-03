@@ -1,4 +1,6 @@
 <div  id="unit-mapping-div" class="row" style="margin-left: auto; margin-right: auto;">
+
+
 	<button id="submit-unitMapping-button" class="btn btn-success btn-sm" style="float:right">Submit</button>
 
 	<div id="units-div">
@@ -31,7 +33,7 @@
 							<div id="pronunciation-droppable">
 								<span id="pronounced">(pronunciation text)</span>
 								<span class="play-audio glyphicon glyphicon-volume-up" style="visibility: hidden;"></span>
-								<audio class="flashcard-audio hidden" id="flashcard-audio-4" src="/OpenFluency/audio/sourceAudio/4" controls></audio>
+								<audio class="flashcard-audio hidden" id="um-flashcard-audio" src="" controls></audio>
 							</div>
 						</div>
 						<div id="audio-url-droppable">
@@ -141,112 +143,43 @@
 	      
 	    </div>
 	  </div>
+	  
+	  
+	  <!-- Modal -->
+	  <div class="modal fade" id="algorithm-options" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">Select algorithm type</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="ul-container">
+		        	<ul>
+		        		<li><button data-algorithm="sm2" class="btn btn-sm btn-info algorithm-options">SM2-Spaced-Repetition</button></li>
+		        		<li><button data-algorithm="lws" class="btn btn-sm btn-info algorithm-options">Linear-With-Shuffle</button></li>
+		        	</ul>
+	        	</div>
+	        </div>
+	        <div class="modal-footer">Selecting will create OpenFluencyDeck</div>
+	      </div>
+	      
+	    </div>
+	  </div>
 	
 </div>
 
+<!-- storing values that need to be visible by the js functionality -->
+<input type="hidden" id="preview-deck-instance-id" value="${previewDeckInstance.id}"/>
+<input type="hidden" id="preview-card-instance-list" value="${previewCardInstanceList}"/>
 
-<g:javascript>
-window.unitMappingLiteral = null;
-window.unitMappingPronunciation = null;
-window.unitMappingAudioUrl = null;
-window.unitMappingBackgroundImage = null;
-window.unitMappingMeaning = null;
-
-var cardIndex = 0;
-var previewCardData = JSON.parse('${previewCardInstanceList}');
-
-loadUnitMappingPreviewCard(previewCardData, 0);
-
-
-function loadUnitMappingPreviewCard(previewCardData, cardIndex) {
-	$('#unit-ul').html("");
-	for (var i = 0; i < previewCardData[cardIndex].units.length; i++) {
-		$('#unit-ul').append('<li class="orange unit-li"><h6><span style="background: #ccffcc;">' + previewCardData[cardIndex].fields[i] + '</span>-<span style="background: #66ffff;">' + previewCardData[cardIndex].types[i] + '</span></h6><div class="draggable draggable-unit" data-index="' + i + '">' + previewCardData[cardIndex].units[i] + '</div></li>');
-	}
-	if (unitMappingLiteral != null) $('#flashcard-literal').html(previewCardData[cardIndex].units[unitMappingLiteral]);
-	if (unitMappingPronunciation != null) $('#pronounced').html(previewCardData[cardIndex].units[unitMappingPronunciation]);
-	if (unitMappingAudioUrl != null) $('#audio-url-display').html(previewCardData[cardIndex].units[unitMappingAudioUrl]);
-	if (unitMappingBackgroundImage != null) $('#flashcard-image').css("background-image", "url(" + units[unitMappingBackgroundImage] + ")");
-	if (unitMappingMeaning != null) $('#meaning-display').html(previewCardData[cardIndex].units[unitMappingMeaning]);
-	
-	initializeUnitMappingDraggable();
-}
-
-$('#submit-unitMapping-button').click(function() {
-	test123();
-});
-
-$('#previous-unit').click(function(){
-	if (cardIndex > 0) {
-		loadUnitMappingPreviewCard(previewCardData, --cardIndex)
-	}
-});
-
-$('#next-unit').click(function(){
-	if (cardIndex < previewCardData.length - 1) {
-		loadUnitMappingPreviewCard(previewCardData, ++cardIndex)
-	}
-});
-
-</g:javascript>
-
+<g:javascript src="unitMapping.js" />
 <script>
-var alphab = {};
-
-$('.l-alpha-options').click(function() {
-	if (unitMappingLiteral == null) return;
-	alphab['' + unitMappingLiteral] = this.dataset.alph;
-	$('#literal-options').modal('hide');
+$(document).ready(function(){
+	initializeAudio();
+	initializeUnitMappingDraggable();
 });
-
-$('.p-alpha-options').click(function() {
-	if (unitMappingPronunciation == null) return;
-	alphab['' + unitMappingPronunciation] = this.dataset.alph;
-	$('#pronunciation-options').modal('hide');
-});
-
-$('.m-alpha-options').click(function() {
-	if (unitMappingMeaning == null) return;
-	alphab['' + unitMappingMeaning] = this.dataset.alph;
-	$('#meaning-options').modal('hide');
-});
-
-function test123() {
-	console.log("posting unit mapping to server");
-	var alphaIndices = {};
-	var fieldIndices = {};
 	
-	if (unitMappingLiteral != null) fieldIndices['Literal'] = unitMappingLiteral;
-	if (unitMappingPronunciation != null) fieldIndices['Pronunciation'] = unitMappingPronunciation;
-	if (unitMappingAudioUrl != null) fieldIndices['Sound'] = unitMappingAudioUrl;
-	
-	if (unitMappingBackgroundImage != null) {
-		// ensure is of type image
-		if (previewCardData[cardIndex].types[unitMappingBackgroundImage] == "Image") {
-			fieldIndices['Image'] = unitMappingBackgroundImage;
-		}		
-	}
-	
-	if (unitMappingMeaning != null) fieldIndices['Meaning'] = unitMappingMeaning;
-
-	var dat = { 
-		fieldIndices: fieldIndices,
-		alphaIndices: alphab
-	};
-	
-	var obj = JSON.stringify(dat);
-	
-	$.ajax({
-		type: "POST",
-		url: "/OpenFluency/previewDeck/unitMappingSubmit/3",
-		data: {payload: obj},
-		success: function(output) {
-			console.log(output);
-		},
-		error: function(err) {
-			console.log('err', err);
-		}
-	});
-}
-
 </script>
+

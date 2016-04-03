@@ -88,22 +88,29 @@ class PreviewDeckController {
 		
 		def fieldInd = payload.fieldIndices;
 		def alphInd = payload.alphaIndices;
+		def algorithm = payload.algorithm;
 		
+		int algoIndex = 0;  //sw2 is default
+		if (algorithm.equals("lws"))
+			algoIndex = 1;
+				
 		HashMap<String, Integer> fieldIndices = (HashMap<String, Integer>) fieldInd;
 		HashMap<Integer, String> alphaIndices = (HashMap<Integer, String>) alphInd;
 		
-		if (!fieldIndices.containsKey("Literal") && "Pronunciation" in fieldIndices.keySet())
-		fieldIndices.put("Literal",fieldIndices.get("Pronunciation")) {
-			// return bad request
+		if (!fieldIndices.containsKey("Literal") || !fieldIndices.containsKey("Pronunciation") || !fieldIndices.containsKey("Meaning")) {
+			render (status: 400, text: 'Either "Literal", "Pronunciation", or "Meaning" missing')
+			return;
 		}
-
-		def srcLang = previewDeckInstance.sourceLanguage;
-		if (previewDeckInstance.sourceLanguage == null)
-			srcLang = Language.findByName("English"); 
-		
-		previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[0]);
-		
-		render ", field:" + fieldIndices + ", alph: " + alphaIndices
+		else {
+			def srcLang = previewDeckInstance.sourceLanguage;
+			if (previewDeckInstance.sourceLanguage == null)
+				srcLang = Language.findByName("English");
+			
+			// should do exception checking here..
+			previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
+			
+			render "succes"
+		}		
 	}
 
     @Transactional

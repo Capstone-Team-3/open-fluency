@@ -374,7 +374,7 @@ var initializeUnitMappingDraggable = function() {
 		stop: function(e, ui) {
 			$(ui.helper).removeClass('unit-dragging');
 		}
-     });
+    });
     
     $( "#flashcard-literal" ).droppable({
     	hoverClass: "dashed-border-black",
@@ -399,6 +399,7 @@ var initializeUnitMappingDraggable = function() {
 		drop: function(event, ui) {
 			$('#audio-url-display').html($(ui.draggable).html());
 			$('.play-audio').css('visibility', 'visible');
+			$('#um-flashcard-audio').attr('src', $(ui.draggable).html());
 			unitMappingAudioUrl = $(ui.draggable).data("index");
 		}
     });

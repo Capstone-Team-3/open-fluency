@@ -53,10 +53,9 @@
 			
 			</ol>
 				
-				<g:render template="select" />
-
-	             
+				<g:render template="select" />  <!--  renders units + card display -->
 
 		</div>
+		
 	</body>
 </html>
