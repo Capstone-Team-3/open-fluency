@@ -30,6 +30,10 @@ public class Constants {
 	public static final int NOT_STARTED = 0
 	public static final int IN_PROGRESS = 1
 	public static final int COMPLETED = 2
+	
+	// Quiz Type
+	public static final int MANUAL_QUIZ = 0
+	public static final int FLASHCARD_QUIZ = 1
 
 	// Registration Status
 	public static final int PENDING_APPROVAL = 0

@@ -18,6 +18,9 @@ class Quiz {
 	 *  submits the answer after the counter reaches 0 then it will be counted as incorrect
 	 */
 	Integer maxCardTime 
+	
+	Integer quizType = Constants.MANUAL_QUIZ
+	
 	/**
 	 *  @Return a list of all the question in a Quiz
 	 */

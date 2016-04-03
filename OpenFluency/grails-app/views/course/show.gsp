@@ -137,7 +137,12 @@
 								<div class="panel-heading">
 									<g:if test="${isOwner}">
 										<div class="card-actions">
-											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:if test="${it.quizType == com.openfluency.Constants.MANUAL_QUIZ}">
+												<g:link action="edit" controller="quizEditor" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											</g:if>
+											<g:else>
+												<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											</g:else>
 											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>

@@ -24,7 +24,8 @@ class QuizService {
 			title: title, 
 			enabled: true, 
 			liveTime: liveTime, 
-			maxCardTime: maxCardTime
+			maxCardTime: maxCardTime,
+			quizType: Constants.FLASHCARD_QUIZ
 			).save()
 
 		if(quizInstance.hasErrors()) {
