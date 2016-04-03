@@ -120,7 +120,7 @@ public class Media {
                 	if (path != null)
 						//fname = path + File.separator + encodeURI(fname);
 						fname = spacePattern.matcher(fname.trim()).replaceAll("_");
-						fname = path + File.separator + encodeURI(fname);
+						fname = path + File.separator +fname;
                 }
         	   return fname;
             }
@@ -182,7 +182,8 @@ public class Media {
 				return sound;
 			}
 			else
-				return soundDir + File.separator + encodeURI(sound);
+				//return soundDir + File.separator + encodeURI(sound);
+				return soundDir + File.separator + sound;
         }
 		return null;
     }

@@ -20,6 +20,7 @@ import grails.transaction.Transactional
 
 import java.io.File;
 import java.util.regex.Pattern
+import java.net.URLEncoder
 
 import com.openfluency.auth.User
 import com.openfluency.course.Chapter
@@ -29,6 +30,7 @@ import com.openfluency.algorithm.*
 import cscie99.team2.lingolearn.server.anki.AnkiFile
 import cscie99.team2.lingolearn.shared.Card
 import cscie599.openfluency2.*
+import cscie599.openfluency2.CharSetIdentifier.Charset
 
 @Transactional
 class PreviewDeckService {
@@ -108,12 +110,17 @@ class PreviewDeckService {
 	}
 
 
-	// This should move the file to a new directory and return the new name
-	// When the upload is successful, delete the preview deck and all media
+	// This should copy the file to a new directory and return the URL to the new path
 	String remapMedia(String media) {
-		String prefix = "web-app" + File.separator
-		MediaFileMap.remapMedia(media, prefix + this.mediaTmpDir, prefix + this.mediaDir )
-		return "OpenFluency" + File.separator  + this.mediaDir + File.separator + media
+        if (media == null) return null
+        try {
+            String prefix = "web-app" + File.separator
+            MediaFileMap.remapMedia(media, prefix + this.mediaTmpDir, prefix + this.mediaDir )
+            return "OpenFluency/" + this.mediaDir + "/" + media.replaceAll("\\\\","/") // if windows
+        } catch (Exception e) {
+            println("remap media "+ media + " "+ e )
+        }
+        return null
 	}
 
 	// create open fluency deck from PreviewDeck with
@@ -127,14 +134,11 @@ class PreviewDeckService {
 		Language lang = previewDeckInstance.language
 		Language lang2 = sourceLanguage
 		for ( card in previewCardInstances) {
-			// Remove html
-			//if ("Text".equals(card.types.get(i)))
-			  // unit = unit.replaceAll("\\<.*?>"," ");
 			String symbolString = card.units.get( fieldIndices.get("Literal"));
 			String meaningString = card.units.get( fieldIndices.get("Meaning"));
-			String imageURL = null
 			String pronunciationString = null
 			String audioInstanceId=null
+			String imageURL = null
 			String audioURL = null
 			String alphabet1 = null
 			String alphabet2 = null
@@ -146,45 +150,56 @@ class PreviewDeckService {
 			meaningString = removeHtml(meaningString)
 			if (symbolString.length() < 1 || meaningString.length() < 1)
 				continue // Skip if data is blank
-			try { // Missing media is OK
-				imageURL = card.units.get( fieldIndices.get("Image"));
-				imageURL = remapMedia(imageURL)
-			} catch (Exception e) {}
-			try { audioURL = card.units.get( fieldIndices.get("Sound"));
-				audioURL = remapMedia(audioURL)
-			} catch (Exception e){}
-			try { pronunciationString = card.units.get( fieldIndices.get("Pronunciation")); } catch (Exception e){}
-			try { alphabet1 = alphaIndices.get(fieldIndices.get("Literal")); } catch (Exception e){}
-			try { alphabet2 = alphaIndices.get(fieldIndices.get("Meaning")); } catch (Exception e){}
-			try { def al = alphaIndices.get(fieldIndices.get("Pronunciation"));
-				alphabetp = Alphabet.findByName(al)
-				if (alphabetp == null) {
-					alphabetp = Alphabet.findByLanguage(lang)
-				}
-			} catch (Exception e){}
+            try {
+                imageURL = remapMedia(card.units.get( fieldIndices.get("Image")))
+            } catch (Exception e){}
+            try {
+                audioURL = remapMedia(card.units.get( fieldIndices.get("Sound")))
+            } catch (Exception e){}
+			try {
+                  String alpha = getCharSet(symbolString)
+                  alphabet1 = alphaIndices.get(fieldIndices.get("Literal"));
+                  if (!"Unknown".equals(alpha)) alphabet1= alpha;
+                  println("Literal "+ alpha1)
+            } catch (Exception e){}
+			try { alphabet2 = alphaIndices.get(fieldIndices.get("Meaning"));
+            } catch (Exception e){}
+			try { pronunciationString = card.units.get( fieldIndices.get("Pronunciation"));
+            } catch (Exception e){}
+                // if pronunication is missing, perhaps the literal string can be used
+            if ((pronunciationString == null || pronunciationString.length() < 1 ) 
+                && ("Hiragana".equals(alphabet1) || "Katakana".equals(alphabet1))) {
+                pronunciationString = symbolString
+            }
+
 			// Objects to build flashcard
+            // TODO:  Literal can be hiragana instead of Kanji
 			Unit symbol = languageService.getUnit(symbolString, lang )
 			Unit meaning = languageService.getUnit(meaningString, deckInstance.sourceLanguage)
 
-			if (pronunciationString != null && pronunciationString.length() > 0) {
+			pronunciationString = removeHtml(pronunciationString)
+			if (pronunciationString != null && !pronunciationString.isEmpty()) {
 				Pronunciation pronunciation
-				pronunciationString = removeHtml(pronunciationString)
+                String alpha = getCharSet(pronunciationString)
+                // Parsed charset takes precedence
+                def al = ("Unknown".equals(alpha))? alphaIndices.get(fieldIndices.get("Pronunciation")) : alpha;
+                alphabetp = Alphabet.findByName(al)
+                if (alphabetp == null)
+                    alphabetp = Alphabet.findByLanguage(lang)
+                //println("Pronunciation al " + al + " = " + " alpha " + alphabetp)
 				try {
 					if (alphabetp != null)
 						pronunciation =  languageService.getPronunciationAlphabet(pronunciationString, symbol, alphabetp)
 					else
 						pronunciation = languageService.getPronunciation(pronunciationString, symbol, deckInstance.language)
+                    println("Pronunciation "+ pronunciation + alphabetp)
+					pronunciationString = pronunciation.id.toString()
 					if (audioURL != null) {
 						def audioInstance = mediaService.createAudio(audioURL,null, pronunciation.id.toString())
 						audioInstanceId= audioInstance.id.toString()
 					}
-					if (pronunciationString == null || pronunciationString.length() < 1) {
-						println(symbol +" has no pronunciation " +  alphabetp)
-						pronunciationString = null
-					} else
-						pronunciationString = pronunciation.id.toString()
 				} catch (Exception e) {
-					println("Problem with audio, skip the audio")
+					println("Problem with audio, skip the audio "+e)
 					pronunciationString = null
 				}
 			} else {
@@ -193,6 +208,7 @@ class PreviewDeckService {
 			UnitMapping unitMapping = languageService.getUnitMapping(symbol, meaning)
 			flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciationString, imageURL, audioInstanceId, deckInstance.id.toString())
 		}
+        println("deckInstance ="+ deckInstance)
 		return deckInstance
 	}
 	
@@ -232,6 +248,14 @@ class PreviewDeckService {
 		return previewDeckInstance;
 	}
 
+    def getCharSet(str) {
+        CharSetIdentifier cs=new CharSetIdentifier();
+        cs.addText(str)
+        String result = cs.getCharSet()
+        if (result != "Mixed")  // Can't deal with mixed
+            return result.toString()
+        return "Unknown"
+    }   
 
 	/**
 	 * Creates an arraylist of all the fields imported
@@ -351,6 +375,7 @@ class PreviewDeckService {
     }
 
 	String removeHtml(String str) {
+        if (str == null)   return null
 		return str.replaceAll("\\<.*?>","");
 	}
 }

@@ -25,7 +25,6 @@ class BootStrap {
                 Language japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
                 Language english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
 				Language chinese = new Language(name: 'Chinese', code: 'CHN').save(failOnError: true)
-				Language korean = new Language(name: 'Korean', code: 'KOR').save(failOnError: true)
 
                 log.info "Created ${Language.count()} languages"
 
@@ -36,8 +35,6 @@ class BootStrap {
 				Alphabet hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "hanzi", encodeEntities: false).save(failOnError: true)
                 Alphabet romaji = new Alphabet(name: "Romaji", language: japanese, code: "romaji").save(failOnError: true)
 
-                Alphabet hangul = new Alphabet(name: "Hangul", language: korean, code: "hangul").save(failOnError: true)
-                Alphabet hanja = new Alphabet(name: "Hanja", language: korean, code: "hanja").save(failOnError: true)
                 Alphabet latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
 
                 log.info "Created ${Alphabet.count()} alphabets"
