@@ -3,6 +3,53 @@
 <html>
 <head>
 	<meta name="layout" content="main"/>
+	
+	
+	<style>
+	
+	
+	d change the background color on hover.
+
+
+h2 {
+  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#deck-list-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.deck-list-li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+.deck-list-li:last-child {
+  border: none;
+}
+
+.deck-list-li {
+  text-decoration: none;
+  color: #000;
+  display: block;
+
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.deck-list-li:hover {
+  font-size: 21px;
+  background: #b3e6ff;
+}
+	</style>
+	
 </head>
 <body>
 
@@ -144,15 +191,15 @@
 <h4 class="modal-title">Modal Header</h4>
 </div>
 <div class="modal-body">
-    <div>
-        <h1>
+    <div id='ul-contaier'>
+        <h2>
             My Decks
             <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
-        </h1>
-        <ul>
+        </h2>
+        <ul id="deck-list-ul">
            <g:each in="${deckInstanceList}">
-              <li class="deck-list" data-id="${it.id}">
-                 ${it.id}
+              <li class="deck-list deck-list-li" data-id="${it.id}">
+                 ${it} (id: ${it.id})  (Note: decide content here)
               </li>
            </g:each>
         </ul>
