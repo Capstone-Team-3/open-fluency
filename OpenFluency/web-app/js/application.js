@@ -309,9 +309,6 @@ function countdown(element, minutes, seconds) {
 
 
 
-
-
-
 /* --------------------------------------------------------------------*/
 //						OpenFluency2
 /* --------------------------------------------------------------------*/
@@ -350,3 +347,103 @@ $('#dictionary-search-button').click(function() {
 	});
 	console.log(searchTerm);
 });
+
+
+/*----------------------------------------------------------------------------*/
+/* Unit Mapping
+/*----------------------------------------------------------------------------*/
+
+window.unitMappingLiteral = null;
+window.unitMappingPronunciation = null;
+window.unitMappingAudioUrl = null;
+window.unitMappingBackgroundImage = null;
+window.unitMappingMeaning = null;
+
+
+var initializeUnitMappingDraggable = function() {
+	console.log('initializing draggable');
+	
+
+	
+    $( ".draggable" ).draggable({
+        helper: 'clone',
+		cursor: "move",
+		start: function(e, ui) {
+			$(ui.helper).addClass('unit-dragging');
+		},
+		stop: function(e, ui) {
+			$(ui.helper).removeClass('unit-dragging');
+		}
+    });
+    
+    $( "#flashcard-literal" ).droppable({
+    	hoverClass: "dashed-border-black",
+    	drop: function( event, ui ) {
+	        $(this).html($(ui.draggable).html());
+	        unitMappingLiteral = $(ui.draggable).data("index");
+	        $('#literal-options').modal();
+    	}
+  	});
+    
+    $( "#pronunciation-droppable" ).droppable({
+    	hoverClass: "light-green-hover-background",
+        drop: function( event, ui ) {
+        	$('#pronounced').html("pronounced " + $(ui.draggable).html());
+        	unitMappingPronunciation = $(ui.draggable).data("index");
+        	$('#pronunciation-options').modal();
+        }
+     });
+
+    $('#audio-url-droppable').droppable({
+    	hoverClass: "light-green-hover-background",
+		drop: function(event, ui) {
+			$('#audio-url-display').html($(ui.draggable).html());
+			$('.play-audio').css('visibility', 'visible');
+			$('#um-flashcard-audio').attr('src', $(ui.draggable).html());
+			unitMappingAudioUrl = $(ui.draggable).data("index");
+		}
+    });
+
+    $("#flashcard-image").droppable({
+    	hoverClass: "dashed-border-black",
+		drop: function(event, ui) {
+			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).html() + ")");
+			unitMappingBackgroundImage = $(ui.draggable).data("index");
+		}
+    });
+
+    $("#meaning-droppable").droppable({
+    	hoverClass: "dashed-border-black",
+		drop: function(event, ui) {
+			$("#meaning-display").html($(ui.draggable).html());
+			unitMappingMeaning = $(ui.draggable).data("index");
+			$('#meaning-options').modal();
+		}
+    });
+
+    $('#clear-literal').click(function() {
+    	$('#flashcard-literal').html("");
+    	unitMappingLiteral = null;
+    });
+
+    $('#clear-pronunciation').click(function(){
+    	$('#pronounced').html('pronunciation text');
+    	unitMappingPronunciation = null;
+    });
+
+    $('#clear-audio-url').click(function(){
+    	$('#audio-url-display').html("(audio url)");
+    	$('.play-audio').css('visibility', 'hidden');
+    	unitMappingAudioUrl = null;
+    });
+
+    $('#clear-image').click(function(){
+    	$('#flashcard-image').css('background-image', '');
+    	unitMappingBackgroundImage = null;
+    });
+
+    $('#clear-meaning').click(function(){
+    	$('#meaning-display').html("(meaning text)");
+    	unitMappingMeaning = null;
+    });  
+}

@@ -4,8 +4,11 @@ package com.openfluency.deck
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import groovy.json.JsonSlurper
 import com.openfluency.auth.User
+import com.openfluency.language.Language;
 
 @Secured(['isAuthenticated()'])
 @Transactional(readOnly = true)
@@ -62,6 +65,53 @@ class PreviewDeckController {
         [ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
         }
     }
+	
+	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
+	def map(PreviewDeck previewDeckInstance) {
+		def user = User.load(springSecurityService.principal.id)
+		if (previewDeckInstance.ownerId != user.id) {
+			flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
+			redirect(uri: request.getHeader('referer'))
+			return
+		} else {
+			def max = 10
+			params.max = Math.min(max ?: 10, 100)
+			def previewCards= PreviewCard.findAllByDeck(previewDeckInstance, params) as JSON
+		[ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
+		}
+	}
+	
+	def unitMappingSubmit(PreviewDeck previewDeckInstance) {
+		def jsonSlurper = new JsonSlurper();  
+		// hack.. sending json string as text plain.. Json always null for some reason even with empty args.
+		def payload = jsonSlurper.parseText(params.payload); 
+		
+		def fieldInd = payload.fieldIndices;
+		def alphInd = payload.alphaIndices;
+		def algorithm = payload.algorithm;
+		
+		int algoIndex = 0;  //sw2 is default
+		if (algorithm.equals("lws"))
+			algoIndex = 1;
+				
+		HashMap<String, Integer> fieldIndices = (HashMap<String, Integer>) fieldInd;
+		HashMap<Integer, String> alphaIndices = (HashMap<Integer, String>) alphInd;
+		
+		if (!fieldIndices.containsKey("Literal") || !fieldIndices.containsKey("Pronunciation") || !fieldIndices.containsKey("Meaning")) {
+			render (status: 400, text: 'Either "Literal", "Pronunciation", or "Meaning" missing')
+			return;
+		}
+		else {
+			def srcLang = previewDeckInstance.sourceLanguage;
+			if (previewDeckInstance.sourceLanguage == null)
+				srcLang = Language.findByName("English");
+			
+			// should do exception checking here..
+			previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
+			
+			render "succes"
+		}		
+	}
 
     @Transactional
     def save(PreviewDeck previewDeckInstance) {
