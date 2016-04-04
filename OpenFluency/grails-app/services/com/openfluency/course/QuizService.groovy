@@ -27,6 +27,10 @@ class QuizService {
 			maxCardTime: maxCardTime,
 			quizType: Constants.FLASHCARD_QUIZ
 			).save()
+			
+		if (quizInstance == null) {
+			return null;
+		}
 
 		if(quizInstance.hasErrors()) {
 			return quizInstance
