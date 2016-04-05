@@ -251,6 +251,7 @@ $('.deck-list').click(function(){
  });
 });        
 
+var selectedCards = [];
 
 $('.flashcard-result').click(function() {
 	console.log('.flashcard-result clicked')
