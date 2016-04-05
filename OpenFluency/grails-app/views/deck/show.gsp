@@ -48,6 +48,17 @@ h2 {
   font-size: 21px;
   background: #b3e6ff;
 }
+
+
+.card-selected {
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	background: lavender;
+}
+
+
+
+
 	</style>
 	
 </head>
@@ -216,7 +227,9 @@ h2 {
 <script> 
 var dsFlashCardId = null;
 
-$('.reassign-btn').click(function() {
+$('.reassign-btn').click(function(event) {
+	event.stopImmediatePropagation();
+	console.log('hello');
     $('#myModal2').modal();
     dsFlashCardId = this.dataset.id;
 });
@@ -237,6 +250,17 @@ $('.deck-list').click(function(){
      }
  });
 });        
+
+
+$('.flashcard-result').click(function() {
+	console.log('.flashcard-result clicked')
+	var selected = $(this).hasClass('card-selected');
+	
+	if (selected)
+		$(this).removeClass('card-selected');
+	else
+		$(this).addClass('card-selected');
+});
 
 </script>
 </body>
