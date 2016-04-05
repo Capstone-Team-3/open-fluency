@@ -342,6 +342,7 @@ $('#dictionary-search-button').click(function() {
 		success: function(output) {
 			
 			$("#dictionary-results-table").html(output);
+			$("#dictionary-results-table").css('visibility', 'visible');
 			
 		},
 		error: function(err) {

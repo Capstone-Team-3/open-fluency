@@ -816,9 +816,11 @@ h4#custom-image {
 }
 
 #dictionary-results-table {
+	visibility: hidden;
 	mix-height: 300px;
 	overflow-y:scroll;
-	display:block
+	display:block;
+	border: 1px solid #66ccff;
 }
 
 .clickable-character {
