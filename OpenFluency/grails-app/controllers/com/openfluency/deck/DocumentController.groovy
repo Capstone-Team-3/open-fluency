@@ -29,6 +29,7 @@ class DocumentController {
 	{
 		def mediaTopDir= grailsApplication.config.tmpMediaFolder // For preview only
 		def file = request.getFile('file')
+		def name = params['Name']
 		def lang = params['filter-lang']
 		def ofdeck = params['filter-deck']
 		def description = params['Description']
@@ -50,6 +51,7 @@ class DocumentController {
 				throw ex
 			}
 			try {
+				if (name.isEmpty()) name = filename
 				File newupload = new File(fullPath)
 				newupload.mkdirs()
 				file.transferTo(new File(fullPath))
@@ -58,10 +60,10 @@ class DocumentController {
 				//String applicationPath = request.getSession().getServletContext().getRealPath("")
 				String mediaDir= ga.getAbsolutePath()
 				flash.message = "Loading "+ fullPath + " for User " + user
-				ankiDeck = documentService.createPreviewDeck(fullPath,mediaDir,filename,description,l,documentInstance);
+				ankiDeck = documentService.createPreviewDeck(fullPath,mediaDir,name,filename,description,l,documentInstance);
 				documentInstance.status="Uploaded";
 				documentInstance.save(flush:true)
-				flash.message = "Loading "+ filename +" for User "+ user
+				flash.message = "Loading "+ name +" for User "+ user
 				redirect(controller:'previewDeck', action:'show', id:ankiDeck.id)
 			} catch (Exception e) {
 				flash.message = "Cannot save document"+e.message;

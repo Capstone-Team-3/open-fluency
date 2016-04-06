@@ -8,7 +8,7 @@ import grails.util.Environment
 
 class BootStrap {
 
-	def languageService
+    def languageService
     def flashcardService
     def grailsApplication
     def quizService
@@ -24,7 +24,8 @@ class BootStrap {
                 // Create languages
                 Language japanese = new Language(name: 'Japanese', code: 'JAP').save(failOnError: true)
                 Language english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
-				Language chinese = new Language(name: 'Chinese', code: 'CHN').save(failOnError: true)
+                Language chinese = new Language(name: 'Chinese', code: 'CHN').save(failOnError: true)
+                Language korean = new Language(name: 'Korean', code: 'KOR').save(failOnError: true)
 
                 log.info "Created ${Language.count()} languages"
 
@@ -32,7 +33,11 @@ class BootStrap {
                 Alphabet kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: false).save(failOnError: true)
                 Alphabet katakana = new Alphabet(name: 'Katakana', language: japanese, code: "ja_on", encodeEntities: false).save(failOnError: true)
                 Alphabet hiragana = new Alphabet(name: 'Hiragana', language: japanese, code: "ja_kun", encodeEntities: false).save(failOnError: true)
-				Alphabet hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "hanzi", encodeEntities: false).save(failOnError: true)
+                Alphabet hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "hanzi", encodeEntities: false).save(failOnError: true)
+                Alphabet romaji = new Alphabet(name: "Romaji", language: japanese, code: "romaji").save(failOnError: true)
+
+                Alphabet hangul = new Alphabet(name: "Hangul", language: korean, code: "hangul").save(failOnError: true)
+                Alphabet hanja = new Alphabet(name: "Hanja", language: korean, code: "hanja").save(failOnError: true)
                 Alphabet latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
 
                 log.info "Created ${Alphabet.count()} alphabets"
@@ -109,62 +114,60 @@ class BootStrap {
                 // Create two chapters for this course
                 Chapter chapter2_1 = new Chapter(title: "Chapter 1: Welcome back!", description: "Continuing to learn more Japanese", deck: chapterDeck2_1, course: kanji2).save(failOnError: true)
                 Chapter chapter2_2 =new Chapter(title: "Chapter 2: Still a dummy? Don't think so!", description: "Now that's what I call a Japanese-speaking dummy", deck: chapterDeck2_2, course: kanji2).save(failOnError: true)
-				
-				// Create a Chinese course
-				Course chineseCourse = new Course(visible: true, open: true, language: chinese, title: "Chinese for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
+                
+                // Create a Chinese course
+                Course chineseCourse = new Course(visible: true, open: true, language: chinese, title: "Chinese for Dummies", description: "Start here if you have no idea what you're doing", owner: instructor).save(failOnError: true)
 
                 // Create a test for the course
-                quizService.createQuiz("Chapter 1 Quiz", new Date(), 20, Constants.MEANING, chapter1_1.deck.flashcards.collect {it.id}, chapter1_1.course)
-                quizService.createQuiz("Chapter 2 Quiz", new Date(), 0, Constants.PRONUNCIATION, chapter1_2.deck.flashcards.collect {it.id}, chapter1_2.course)
-				
-				// Create a quiz manually, just to see if it works
-				Quiz quizInstance = new Quiz(
-					course: kanji1,
-					title: "Manually Created Quiz",
-					testElement: Constants.MANUAL,
-					enabled: true,
-					liveTime: new Date(),
-					maxCardTime: 20
-					).save(failOnError: true)
-					
-				Question question = new Question(quiz: quizInstance, question: "Person", questionType: Constants.MANUAL).save(failOnError: true)
-				
-				new QuestionOption(question: question, option: "人", answerKey: 1).save(failOnError: true)
-				new QuestionOption(question: question, option: "その", answerKey: 0).save(failOnError: true)
-				new QuestionOption(question: question, option: "猫", answerKey: 0).save(failOnError: true)
-				new QuestionOption(question: question, option: "ありがとう", answerKey: 0).save(failOnError: true)
-
-				
-				// Create a confuser quiz
-				Quiz confuserQuiz = new Quiz(
-					course: kanji1,
-					title: "Japanese Confuser Quiz",
-					testElement: Constants.MANUAL,
-					enabled: true,
-					liveTime: new Date(),
-					maxCardTime: 20
-					).save(failOnError: true)
-					
-				quizService.createConfuserQuestion(confuserQuiz, "Thank you", "ありがとう", japanese, hiragana)
-				quizService.createConfuserQuestion(confuserQuiz, "Hello", "こんにちは", japanese, hiragana)
-				quizService.createConfuserQuestion(confuserQuiz, "Certificates", "卷", japanese, kanji)
-				quizService.createConfuserQuestion(confuserQuiz, "End", "末", japanese, kanji)
-				
-				// Create a confuser quiz
-				Quiz chineseConfuserQuiz = new Quiz(
-					course: chineseCourse,
-					title: "Chinese Confuser Quiz",
-					testElement: Constants.MANUAL,
-					enabled: true,
-					liveTime: new Date(),
-					maxCardTime: 20
-					).save(failOnError: true)
-					
-				quizService.createConfuserQuestion(chineseConfuserQuiz, "Big", "大", chinese, hanzi)
-				quizService.createConfuserQuestion(chineseConfuserQuiz, "Arrow", "矢", chinese, hanzi)
-				quizService.createConfuserQuestion(chineseConfuserQuiz, "Outlaw", "无法无天", chinese, hanzi)
-				quizService.createConfuserQuestion(chineseConfuserQuiz, "Field", "田", chinese, hanzi)
-				
+                quizService.createQuiz("Chapter 1 Quiz", new Date(),new Date('12/31/2018'), 20, Constants.MEANING, chapter1_1.deck.flashcards.collect {it.id}, chapter1_1.course)
+                quizService.createQuiz("Chapter 2 Quiz", new Date(),new Date('12/31/2018'), 0, Constants.PRONUNCIATION, chapter1_2.deck.flashcards.collect {it.id}, chapter1_2.course)
+                
+                // Create a quiz manually, just to see if it works
+                Quiz quizInstance = new Quiz(
+                    course: kanji1,
+                    title: "Fill in the Blank Quiz",
+                    enabled: true,
+                    liveTime: new Date(),
+                    endTime: new Date('12/31/2018'),
+                    maxCardTime: 20
+                    ).save(failOnError: true)
+                    
+                Question question = new Question(quiz: quizInstance, question: "私は日本語を ______ ます", questionType: Constants.FILL_IN_BLANK).save(failOnError: true)
+                
+                new QuestionOption(question: question, option: "話し", answerKey: 1).save(failOnError: true)
+                new QuestionOption(question: question, option: "食べ", answerKey: 0).save(failOnError: true)
+                new QuestionOption(question: question, option: "飲み", answerKey: 0).save(failOnError: true)
+                
+                // Create a confuser quiz
+                Quiz confuserQuiz = new Quiz(
+                    course: kanji1,
+                    title: "Japanese Confuser Quiz",
+                    enabled: true,
+                    liveTime: new Date(),
+                    endTime: new Date('12/31/2018'),
+                    maxCardTime: 20
+                    ).save(failOnError: true)
+                    
+                quizService.createConfuserQuestion(confuserQuiz, "Thank you", "ありがとう", japanese, hiragana)
+                quizService.createConfuserQuestion(confuserQuiz, "Hello", "こんにちは", japanese, hiragana)
+                quizService.createConfuserQuestion(confuserQuiz, "Certificates", "卷", japanese, kanji)
+                quizService.createConfuserQuestion(confuserQuiz, "End", "末", japanese, kanji)
+                
+                // Create a confuser quiz
+                Quiz chineseConfuserQuiz = new Quiz(
+                    course: chineseCourse,
+                    title: "Chinese Confuser Quiz",
+                    enabled: true,
+                    liveTime: new Date(),
+                    endTime: new Date('12/31/2018'),
+                    maxCardTime: 20
+                    ).save(failOnError: true)
+                    
+                quizService.createConfuserQuestion(chineseConfuserQuiz, "Big", "大", chinese, hanzi)
+                quizService.createConfuserQuestion(chineseConfuserQuiz, "Arrow", "矢", chinese, hanzi)
+                quizService.createConfuserQuestion(chineseConfuserQuiz, "Outlaw", "无法无天", chinese, hanzi)
+                quizService.createConfuserQuestion(chineseConfuserQuiz, "Field", "田", chinese, hanzi)
+                
                 // Sign up the student for course 1
                 new Registration(user: student, course: kanji1).save()
                 flashcardInfoService.resetCourseFlashcardInfo(student, kanji1)

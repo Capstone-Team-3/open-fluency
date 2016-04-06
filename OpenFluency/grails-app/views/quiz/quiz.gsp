@@ -1,5 +1,4 @@
 <%@ page import="com.openfluency.Constants" %>
-<g:set var="testElement" value="${answerInstance.question.quiz.effectiveTestElement}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +28,14 @@
 					<input type="hidden" name="maxCardTime" id="maxCardTime" value="${quizInstance.maxCardTime}" />
 					<input type="hidden" name="quiz" value="${quizInstance.id}" />
 
-					<div class="center">
-						<strong><span class="glyphicon glyphicon-time"></span> Time Remaining</strong>
-						<div id="clock" class="clock"></div>
-					</div>
-					<g:if test="${testElement == Constants.SYMBOL}">
-						<h1 class="unit text-center">${answerInstance.question.flashcard.secondaryUnit.print}</h1>
+					<g:if test="${quizInstance.maxCardTime > 0}">
+						<div class="center">
+							<strong><span class="glyphicon glyphicon-time"></span> Time Remaining</strong>
+							<div id="clock" class="clock"></div>
+						</div>
 					</g:if>
-					<g:elseif test="${testElement == Constants.MANUAL}">
-						<h1 class="unit text-center">${answerInstance.question.question}</h1>
-					</g:elseif>
-					<g:else>
-						<h1 class="unit text-center">${answerInstance.question.flashcard.primaryUnit.print}</h1>
-					</g:else>
+					
+					<h1 class="unit text-center">${answerInstance.question.question}</h1>
 
 					<div class="col-lg-6 col-lg-offset-3">
 						<p> <strong>Select the correct answer:</strong> 
@@ -51,10 +45,7 @@
 								<li class="list-group-item">
 									<label>
 										<input type="radio" name="option" id="option" value="${it.id}" checked>
-										<g:if test="${testElement == Constants.MEANING}">${it.flashcard.secondaryUnit.print}</g:if>
-										<g:elseif test="${testElement == Constants.PRONUNCIATION}">${it.flashcard.pronunciation}</g:elseif>
-										<g:elseif test="${testElement == Constants.SYMBOL}">${it.flashcard.primaryUnit.print}</g:elseif>
-										<g:elseif test="${testElement == Constants.MANUAL}">${it.option}</g:elseif>
+										${it.option}
 									</label>
 								</li>
 							</g:each>
@@ -66,5 +57,8 @@
 			</div>
 		</div>
 	</div>
-	<g:javascript>initCountdown();</g:javascript>
+	
+	<g:if test="${quizInstance.maxCardTime > 0}">
+		<g:javascript>initCountdown();</g:javascript>
+	</g:if>
 </body>

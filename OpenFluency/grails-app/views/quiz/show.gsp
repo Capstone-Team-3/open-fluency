@@ -1,4 +1,4 @@
-<%@ page import="com.openfluency.Constants" %>
+v<%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <!DOCTYPE html>
 <html>
@@ -40,38 +40,6 @@
 
 				<div class="description">
 					<ul class="list-unstyled">
-						<li> <strong>Tests:</strong>
-							<%
-							
-								def lang = "";
-								def sourceLang = "";
-							
-								try {
-									lang = quizInstance.course.chapters[0].deck.language;
-									sourceLang = quizInstance.course.chapters[0].deck.sourceLanguage;
-								}
-								catch (Exception e) {
-
-								}
-							%>
-
-
-							<g:if test="${Constants.MEANING == quizInstance.testElement}">
-								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
-							</g:if>
-							<g:elseif test="${Constants.SYMBOL == quizInstance.testElement}">
-								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
-							</g:elseif>
-							<g:elseif test="${Constants.PRONUNCIATION == quizInstance.testElement}">
-								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of ${lang} words/characters
-							</g:elseif>
-							<g:elseif test="${Constants.RANDOM == quizInstance.testElement}">
-								Random mix of pronunciations, ${sourceLang} to ${lang}, and ${lang} to ${sourceLang}. <strong>The quiz changes for every student.</strong>
-							</g:elseif>
-							<g:else>
-								
-							</g:else>
-						</li>
 						<li> 
 							<strong>Maximum time allowed per card:</strong>
 							<g:if test="${quizInstance.maxCardTime > 0}">
@@ -84,6 +52,10 @@
 						<li>
 							<strong>Quiz available starting:</strong>
 							${quizInstance.liveTime.format('MM/dd/yyyy')}
+						</li>
+						<li>
+							<strong>Quiz available until:</strong>
+							${quizInstance.endTime.format('MM/dd/yyyy')}
 						</li>
 					</ul>
 				</div>

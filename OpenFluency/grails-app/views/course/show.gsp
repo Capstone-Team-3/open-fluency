@@ -1,4 +1,4 @@
--<%@ page import="com.openfluency.course.Registration" %>
+<%@ page import="com.openfluency.course.Registration" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.QuizService" %>
@@ -126,6 +126,8 @@
 					<g:if test="${isOwner}">
 						<!-- This is only displayed for the owner of the course -->
 						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
+						<g:link class="btn btn-xs btn-info" action="quizImport" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-import"></span></g:link>
+					
 					</g:if>
 				</h2>
 
@@ -136,6 +138,7 @@
 								<div class="panel-heading">
 									<g:if test="${isOwner}">
 										<div class="card-actions">
+										    <g:link action="export" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-export"></span></g:link>
 											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
@@ -160,27 +163,15 @@
 											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
 												<div class="take-quiz">
 													<p>Ready to take the quiz?</p>
-													<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
+		     										<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
 												</div>
 											</g:if>
 										</g:elseif>
 									</g:if>
 									<g:else>
 										<ul class="list-unstyled text-left">
-										<li><strong>Tests:</strong> 
-											<g:if test="${Constants.CARD_ELEMENTS[it.testElement] != null}">
-												<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
-													Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
-												</g:if>
-												<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
-													Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
-												</g:elseif>
-												<g:else>
-													Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
-												</g:else>
-											</g:if>
-										</li>
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
+											<li><strong>Available Until:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
 										</ul>
 									</g:else>
 								</div><!-- end panel-body -->
@@ -194,4 +185,4 @@
 
 	<g:javascript>initializeDonuts();</g:javascript>
 </body>
-</html>
+</html>		
