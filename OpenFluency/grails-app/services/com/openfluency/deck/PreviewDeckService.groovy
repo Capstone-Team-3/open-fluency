@@ -116,7 +116,7 @@ class PreviewDeckService {
         try {
             String prefix = "web-app" + File.separator
             MediaFileMap.remapMedia(media, prefix + this.mediaTmpDir, prefix + this.mediaDir )
-            return "OpenFluency/" + this.mediaDir + "/" + media.replaceAll("\\\\","/") // if windows
+            return "/OpenFluency/" + this.mediaDir + "/" + media.replaceAll("\\\\","/") // if windows
         } catch (Exception e) {
             println("remap media "+ media + " "+ e )
         }
