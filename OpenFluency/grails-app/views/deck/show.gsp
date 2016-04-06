@@ -188,7 +188,7 @@ h2 {
 <div class="modal-content">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal">&times;</button>
-<h4 class="modal-title">Modal Header</h4>
+<h4 class="modal-title">Reassign Flashcard to deck</h4>
 </div>
 <div class="modal-body">
     <div id='ul-contaier'>
@@ -196,17 +196,15 @@ h2 {
             My Decks
             <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
         </h2>
-        <ul id="deck-list-ul">
-           <g:each in="${deckInstanceList}">
-              <li class="deck-list deck-list-li" data-id="${it.id}">
-                 ${it} (id: ${it.id})  (Note: decide content here)
-              </li>
-           </g:each>
-        </ul>
+       <g:each in="${deckInstanceList}">
+        <div class="radio">
+              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
+        </div>
+        </g:each>
     </div>
 </div>
 <div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
 </div>
 </div>
 
@@ -221,11 +219,12 @@ $('.reassign-btn').click(function() {
     dsFlashCardId = this.dataset.id;
 });
 
-$('.deck-list').click(function(){ 
- if(dsFlashCardId == null) return;
+$('#reassign-submit').click(function(){ 
+ console.log("Here");
+ var deckdest_id = $('.decks-rb:checked').val();
+ if(!deckdest_id) return;
 
  console.log(this.dataset.id);
- var deckdest_id=this.dataset.id;
  $.ajax({
      url:"/OpenFluency/flashcard/reassign?flashcard_id="+dsFlashCardId+"&deckdest_id="+deckdest_id,
      success : function(output) {
@@ -237,6 +236,10 @@ $('.deck-list').click(function(){
      }
  });
 });        
+
+$('#myModal2').on('hidden.bs.modal', function () {
+document.location.reload(true);
+});
 
 </script>
 </body>
