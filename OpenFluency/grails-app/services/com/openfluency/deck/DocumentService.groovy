@@ -59,7 +59,7 @@ class DocumentService {
 		def user= User.load(springSecurityService.principal.id)
 		user.id = springSecurityService.principal.id
 		def owner = springSecurityService.currentUser
-        if (description==null) description=filename // description must not be null in OF deck
+        if (description==null || description.length()<1) description=filename // description must not be null in OF deck
 		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: name, description:description,language:language,document: document,mediaDir:ankiMediaDir);
 		previewDeckInstance.save(flush:true)
 		def nfields = anki.fieldNames.size()

@@ -123,6 +123,11 @@ class PreviewDeckService {
         return null
 	}
 
+    def setDirs(String mediaTmp,String  mediaDir) {
+        this.mediaTmpDir= mediaTmp
+        this.mediaDir= mediaDir
+    }
+
 	// create open fluency deck from PreviewDeck with
 	@Transactional
 	def createOpenFluencyDeck(Language sourceLanguage, PreviewDeck previewDeckInstance,
@@ -160,7 +165,7 @@ class PreviewDeckService {
                   String alpha = getCharSet(symbolString)
                   alphabet1 = alphaIndices.get(fieldIndices.get("Literal"));
                   if (!"Unknown".equals(alpha)) alphabet1= alpha;
-                  println("Literal "+ alpha1)
+                  //println("Literal "+ alpha1)
             } catch (Exception e){}
 			try { alphabet2 = alphaIndices.get(fieldIndices.get("Meaning"));
             } catch (Exception e){}
@@ -192,7 +197,7 @@ class PreviewDeckService {
 						pronunciation =  languageService.getPronunciationAlphabet(pronunciationString, symbol, alphabetp)
 					else
 						pronunciation = languageService.getPronunciation(pronunciationString, symbol, deckInstance.language)
-                    println("Pronunciation "+ pronunciation + alphabetp)
+                    //println("Pronunciation "+ pronunciation + alphabetp)
 					pronunciationString = pronunciation.id.toString()
 					if (audioURL != null) {
 						def audioInstance = mediaService.createAudio(audioURL,null, pronunciation.id.toString())
