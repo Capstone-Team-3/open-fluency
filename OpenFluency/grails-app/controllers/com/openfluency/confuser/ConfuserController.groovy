@@ -56,3 +56,7 @@ class ConfuserController {
 		return alphabet;
 	}
 }
+
+
+
+

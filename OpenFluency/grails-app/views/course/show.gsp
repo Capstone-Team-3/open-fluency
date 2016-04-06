@@ -1,4 +1,4 @@
--<%@ page import="com.openfluency.course.Registration" %>
+<%@ page import="com.openfluency.course.Registration" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.QuizService" %>
@@ -127,6 +127,7 @@
 						<!-- This is only displayed for the owner of the course -->
 						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz from Chapters</g:link>
 						<g:link class="btn btn-xs btn-info" action="create" controller="quizEditor" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz Manually</g:link>
+						<g:link class="btn btn-xs btn-info" action="quizImport" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-import"></span>Import Quiz</g:link>
 					</g:if>
 				</h2>
 
@@ -143,6 +144,7 @@
 											<g:else>
 												<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 											</g:else>
+											 <g:link action="export" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-export"></span></g:link>
 											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>
@@ -166,7 +168,7 @@
 											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
 												<div class="take-quiz">
 													<p>Ready to take the quiz?</p>
-													<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
+		     										<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
 												</div>
 											</g:if>
 										</g:elseif>
@@ -174,6 +176,7 @@
 									<g:else>
 										<ul class="list-unstyled text-left">
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
+											<li><strong>Available Until:</strong> ${it.endTime.format('MM/dd/yyyy hh:mm')}</li>
 										</ul>
 									</g:else>
 								</div><!-- end panel-body -->
@@ -187,4 +190,4 @@
 
 	<g:javascript>initializeDonuts();</g:javascript>
 </body>
-</html>
+</html>		

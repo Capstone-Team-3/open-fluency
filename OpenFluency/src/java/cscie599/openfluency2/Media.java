@@ -20,6 +20,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cscie99.team2.lingolearn.server.anki.AnkiCardSqlJetTransaction;
+
 /**
  * Code to identify different media types
  * @author phoebemiller
@@ -27,6 +32,8 @@ import java.util.regex.Pattern;
  *
  */
 public class Media {
+	private static final Logger logger = 
+			LoggerFactory.getLogger(Media.class);
 	private static final Pattern fIllegalCharReg = Pattern.compile("[><:\"/?*^\\\\|\\x00\\r\\n]");
     private static final Pattern fRemotePattern  = Pattern.compile("(https?|ftp)://");
     private static final Pattern fSoundRegexps = Pattern.compile("(?i)(\\[sound:([^]]+)\\])");
@@ -120,7 +127,7 @@ public class Media {
                 	if (path != null)
 						//fname = path + File.separator + encodeURI(fname);
 						fname = spacePattern.matcher(fname.trim()).replaceAll("_");
-						fname = path + File.separator + encodeURI(fname);
+						fname = path + File.separator + MediaFileMap.nfcNormalized2(fname);
                 }
         	   return fname;
             }
@@ -182,7 +189,10 @@ public class Media {
 				return sound;
 			}
 			else
-				return soundDir + File.separator + encodeURI(sound);
+				sound = spacePattern.matcher(sound.trim()).replaceAll("_");
+				//return soundDir + File.separator + encodeURI(sound);
+				logger.info("sound =" + sound + " Normalized " + MediaFileMap.nfcNormalized2(sound));
+				return soundDir + File.separator + MediaFileMap.nfcNormalized2(sound);
         }
 		return null;
     }

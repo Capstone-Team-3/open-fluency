@@ -1,4 +1,4 @@
-<%@ page import="com.openfluency.Constants" %>
+v<%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <!DOCTYPE html>
 <html>
@@ -52,6 +52,10 @@
 						<li>
 							<strong>Quiz available starting:</strong>
 							${quizInstance.liveTime.format('MM/dd/yyyy')}
+						</li>
+						<li>
+							<strong>Quiz available until:</strong>
+							${quizInstance.endTime.format('MM/dd/yyyy')}
 						</li>
 					</ul>
 				</div>

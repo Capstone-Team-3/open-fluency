@@ -228,15 +228,20 @@ if(!destFile.exists()) {
     	media = java.net.URLDecoder.decode(media,"UTF-8");
 		File oldmedia = new File( oldDir + File.separator + media);
 		File newmedia=  new File( newDir + File.separator + media);
-		if (!newmedia.getParentFile().exists()) {
-            newmedia.mkdirs();
-		}
-		if(!newmedia.exists()) {
-            newmedia.createNewFile();
-    	}
-		Path oldFile = oldmedia.toPath() ;
-		Path newFile = newmedia.toPath();
-		Files.copy(oldFile, newFile, REPLACE_EXISTING);
-		return newDir + File.separator + media;
-	}
+        try {
+            if (!newmedia.getParentFile().exists()) {
+                newmedia.mkdirs();
+            }
+            if(!newmedia.exists()) {
+                newmedia.createNewFile();
+            }
+            Path oldFile = oldmedia.toPath() ;
+            Path newFile = newmedia.toPath();
+            Files.copy(oldFile, newFile, REPLACE_EXISTING);
+            return newDir + File.separator + media;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+     }
 }

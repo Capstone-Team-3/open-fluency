@@ -13,8 +13,7 @@
 
 <div class="form-group">
 	<label for="testElement">Test students on:</label>
-	<select class="form-control" name="testElement">
-		
+	<select class="form-control" name="testElement">		
 		<g:set var="language" value="${courseInstance.chapters[0]?.deck?.language ? courseInstance.chapters[0].deck.language : courseInstance.language }"/>
 		<g:set var="sourceLanguage" value="${courseInstance.chapters[0]?.deck?.sourceLanguage ? courseInstance.chapters[0].deck.sourceLanguage : 'English' }"/>
 	
@@ -27,6 +26,11 @@
 <div class="form-group live-time-group">
 	<label for="liveTime">Available starting:</label>
 	<g:datePicker name="liveTime" value="${quizInstance ? quizInstance.liveTime : new Date()}" class="form-control"/>
+</div>
+
+<div class="form-group end-time-group">
+	<label for="endTime">Available until:</label>
+	<g:datePicker name="endTime" value="${quizInstance ? quizInstance.endTime : new Date()}" class="form-control"/>
 </div>
 
 <label for="included-chapters">Chapters to include:</label>
@@ -42,3 +46,9 @@
 		</ul>
 	</div>
 </div>
+
+
+
+
+
+

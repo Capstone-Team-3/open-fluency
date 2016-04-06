@@ -1,3 +1,4 @@
+
 package com.openfluency.course
 
 import grails.plugin.springsecurity.annotation.Secured
@@ -42,6 +43,7 @@ class QuizEditorController {
 		String title = params.title
 		Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
 		Date liveTime = params.liveTime
+		Date endTime = params.endTime
 		
 		// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 		String csv = params.questions
@@ -53,6 +55,7 @@ class QuizEditorController {
 				title: title,
 				enabled: true,
 				liveTime: liveTime,
+				endTime: endTime,
 				maxCardTime: maxCardTime
 				).save(failOnError: true)
 			
@@ -82,12 +85,14 @@ class QuizEditorController {
 			String title = params.title
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
 			Date liveTime = params.liveTime
+			Date endTime = params.endTime
 			
 			// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 			String csv = params.questions
 			
 			quizInstance.title = title
 			quizInstance.liveTime = liveTime
+			quizInstance.endTime = endTime
 			quizInstance.maxCardTime = maxCardTime
 			quizInstance.save(failOnError: true)
 			
