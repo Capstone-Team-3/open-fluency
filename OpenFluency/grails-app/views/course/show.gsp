@@ -142,9 +142,9 @@
 												<g:link action="edit" controller="quizEditor" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 											</g:if>
 											<g:else>
-											    <g:link action="export" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-export"></span></g:link>
 												<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
 											</g:else>
+											 <g:link action="export" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-export"></span></g:link>
 											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>
@@ -176,7 +176,7 @@
 									<g:else>
 										<ul class="list-unstyled text-left">
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
-											<li><strong>Available Until:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
+											<li><strong>Available Until:</strong> ${it.endTime.format('MM/dd/yyyy hh:mm')}</li>
 										</ul>
 									</g:else>
 								</div><!-- end panel-body -->
