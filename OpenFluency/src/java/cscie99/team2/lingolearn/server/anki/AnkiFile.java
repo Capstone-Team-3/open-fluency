@@ -40,7 +40,7 @@ import cscie599.openfluency2.*;
 // Phoebe: Borrowed heavily from ankiAndroid to deal with media
 // Handle multi media - see https://github.com/ankidroid/Anki-Android/blob/develop/AnkiDroid/src/main/java/com/ichi2/libanki/Media.java
 public class AnkiFile {
-    
+
     private File sqliteFile;
     private FileInputStream zipFileStream;
     private SqlJetDb db;
@@ -64,19 +64,19 @@ public class AnkiFile {
     private AnkiCardSqlJetTransaction cardTransaction;
     private File mediaFile; // This holds all the image/sound files
     private File mediaRepo;
-    private static final Logger logger =
-    LoggerFactory.getLogger(AnkiCardSqlJetTransaction.class);
-    private static final int FILE_COPY_BUFFER_SIZE = 1024;
-    
+    private static final Logger logger = 
+            LoggerFactory.getLogger(AnkiCardSqlJetTransaction.class);
+    private static final int FILE_COPY_BUFFER_SIZE = 1024;  
+
     public AnkiFile(String fileName) throws AnkiException, IOException  {
         this(fileName, TmpFolder);
     }
-    
+
     public AnkiFile(String fileName, String mediaTopDir) throws AnkiException, IOException
     {
         File folder = File.createTempFile("anki", null); // use for unpacking anki files
         folder.delete();       // clean out folder first - must be there!
-        folder.deleteOnExit();	// cleans up at exit
+        folder.deleteOnExit();  // cleans up at exit
         folder.mkdir();
         this.tmpFolder = folder.getAbsolutePath();
         this.mediaTopDir= mediaTopDir;
@@ -86,17 +86,17 @@ public class AnkiFile {
             this.zipFileStream = new FileInputStream(fileName);
             this.parsedDecks = new HashMap<String, Deck>();
             this.ankiFilename = fileName;
-            this.hashedFieldTypes = new LinkedHashMap<String,AnkiFieldTypes>();
+            this.hashedFieldTypes = new LinkedHashMap<String,AnkiFieldTypes>(); 
             this.importData();
         }catch( SqlJetException sje ){
             throw new AnkiException(
-                                    "An error occured parsing the Anki SqlLite databse", sje);
+                    "An error occured parsing the Anki SqlLite databse", sje);
         }catch(FileNotFoundException fnf ){
             throw new AnkiException(
-                                    "The specified Anki file was not found: " + fileName, fnf);
+                    "The specified Anki file was not found: " + fileName, fnf);
         }catch( IOException ioe ){
             throw new AnkiException(
-                                    "An error occured parsing the Anki file.", ioe);
+                    "An error occured parsing the Anki file.", ioe);
         }
         FileUtils.delete(folder); // Don't wait for JVM to exit, clean up the unpacked files
     }
@@ -109,48 +109,48 @@ public class AnkiFile {
         
         ZipInputStream zis = new ZipInputStream(zipFileStream);
         
-        ZipEntry ze = zis.getNextEntry();
+        ZipEntry ze = zis.getNextEntry();    
         while (ze!=null) {
             if (ze.getName().contains(".anki2")) {
                 this.sqliteFile = new File(this.tmpFolder + File.separator + ze.getName());
-                
+        
                 //Create parent folder
                 new File(this.sqliteFile.getParent()).mkdirs();
-                
-                FileOutputStream fos = new FileOutputStream(this.sqliteFile);
+                 
+                FileOutputStream fos = new FileOutputStream(this.sqliteFile);   
                 byte[] buffer = new byte[FILE_COPY_BUFFER_SIZE];
-                
+     
                 int len;
                 while ((len = zis.read(buffer)) > 0) {
                     fos.write(buffer, 0, len);
                 }
-                fos.close();
+                fos.close();   
             }
             else if (ze.getName().equals("media")) {
                 this.mediaFile = new File(this.tmpFolder + File.separator + ze.getName());
                 //Create parent folder, ok if already exists
                 new File(this.mediaFile.getParent()).mkdirs();
                 
-                FileOutputStream fos = new FileOutputStream(this.mediaFile);
+                FileOutputStream fos = new FileOutputStream(this.mediaFile);   
                 byte[] buffer = new byte[FILE_COPY_BUFFER_SIZE];
-                
+     
                 int len;
                 while ((len = zis.read(buffer)) > 0) {
                     fos.write(buffer, 0, len);
                 }
-                fos.close();
+                fos.close();   
             }
             ze = zis.getNextEntry();
         }
         zis.closeEntry();
         zis.close();
-        
+
         if (this.mediaFile.length() != 0) {
             // Create a unique UUID folder to put all the media
             this.mediaRepo = new File(this.mediaTopDir + File.separator + getUniqueName());
             this.mediaRepo.mkdirs();
         }
-        
+
         SqlJetDb db = SqlJetDb.open(this.sqliteFile, false);
         db.runReadTransaction( this.modelTransaction );
         db.runReadTransaction( this.cardTransaction );
@@ -158,18 +158,18 @@ public class AnkiFile {
         // Don't unpack media if the db import fails - exception
         if (this.mediaFile.length() != 0) {
             MediaFileMap mediaMapper = new MediaFileMap(
-                                                        this.ankiFilename,
-                                                        this.mediaFile,		// "media" file
-                                                        this.mediaRepo.getAbsolutePath()		// All the files will be unpacked here
-                                                        );
+                this.ankiFilename,
+                this.mediaFile,     // "media" file
+                this.mediaRepo.getAbsolutePath()        // All the files will be unpacked here
+            );
             mediaMapper.parse(); // This will unpack all the media into mediaFolder
         }
     }
     
-    
+
     /**
      * Add a Card to the collection of parsed cards and decks
-     * @param deckName the name of the deck as parsed from the anki file.  If
+     * @param deckName the name of the deck as parsed from the anki file.  If 
      * no "name" exists this will be the model id.
      * @param card the card object as parsed from the anki file.
      */
@@ -184,7 +184,7 @@ public class AnkiFile {
         
         parsedDecks.put( deckName, deck );
         totalCards++;
-        
+    
     }
     
     public String getTmpDir(){
@@ -205,7 +205,7 @@ public class AnkiFile {
         return UUID.randomUUID().toString();
     }
     /**
-     * Parse a Card object based on the fields and model read from the
+     * Parse a Card object based on the fields and model read from the 
      * Anki file.
      * @param cardFields an array of fields read in from the Anki file that represent
      * an individual card.
@@ -240,13 +240,13 @@ public class AnkiFile {
         for( int i = 0; i < modelFields.length; i++ ){
             AnkiFieldTypes fieldType;
             /*
-             try { // Array out of bound in some of them, how?
-             modelField = modelFields[i];
-             //String p[] = modelField.getMedia();
-             } catch (Exception e) {
-             modelField = null;
-             }
-             */
+            try { // Array out of bound in some of them, how?
+                modelField = modelFields[i];
+                //String p[] = modelField.getMedia();
+            } catch (Exception e) {
+                modelField = null;
+            }
+            */
             try {
                 cardFieldValue = cardFields[i];
             } catch (Exception e) {
@@ -262,16 +262,16 @@ public class AnkiFile {
                     this.hashedFieldTypes.put(fieldNames.get(i), fieldType);
                     this.fieldTypes.set(i,fieldType);
                 }
-            } else
+            } else 
                 fieldType=this.fieldTypes.get(i);
-            
+
             switch( fieldType ){
-                    // Front and Back are
+            // Front and Back are 
                 case Front:
                     // Determine if value is Hiragana or other alphabet
                     card.setHiragana( cardFieldValue );
                     break;
-                    
+                
                 case Back:
                     String cardBack = cardFieldValue;
                     // Use RegEx to remove chars between [ ].  Some anki files
@@ -280,7 +280,7 @@ public class AnkiFile {
                     cardBack = cardBack.replaceAll("(.*)(\\[.*\\])", "$1");
                     card.setTranslation( cardBack );
                     break;
-                    
+                
                 case Image:
                     //String image = Media.getImage(cardFields[i], this.getMediaDir());
                     if (cardFieldValue.length() > 5) {
@@ -307,7 +307,7 @@ public class AnkiFile {
             }
             card.addField(cardFieldValue);
         }
-        if (allFields == 0)	// All fields are mapped
+        if (allFields == 0) // All fields are mapped
             this.hasField = true;
         return card;
     }
@@ -349,11 +349,11 @@ public class AnkiFile {
     }
     
     /***
-     Phoebe: Parses the content file to get content type,
-     what if the first card is bad - need to parse cards until
-     all the fields are mapped to image,sound or text
-     What about markups?
-     */
+      Phoebe: Parses the content file to get content type,
+      what if the first card is bad - need to parse cards until
+      all the fields are mapped to image,sound or text
+      What about markups?
+    */
     private AnkiFieldTypes getModelFieldMap( String cardFieldValue ){
         //AnkiFieldTypes types[] = AnkiFieldTypes.values();
         if (Media.isSound(cardFieldValue))
@@ -362,7 +362,7 @@ public class AnkiFile {
             return AnkiFieldTypes.Image;
         if (cardFieldValue.length() > 1) return AnkiFieldTypes.Text;
         else return AnkiFieldTypes.Unknown;
-    }	
+    }   
     /**
      * Return a Map of the Card Model structures that are represented
      * in the Anki file.  This is performed by parsing the JSON that
@@ -382,8 +382,8 @@ public class AnkiFile {
         
         ObjectMapper mapper = new ObjectMapper();
         HashMap<String, CardModel> models = mapper.readValue( 
-                                                             modelMap, new TypeReference<HashMap<String, CardModel>>(){});
-        
+                modelMap, new TypeReference<HashMap<String, CardModel>>(){});
+                
         Set<String> keys = models.keySet();
         for( String mid : keys ){
             CardModel model = models.get(mid);
@@ -405,27 +405,27 @@ public class AnkiFile {
         }
         return null;
     }
-    
+
     public HashMap<String, CardModel> getModels() {
         return models;
     }
-    
+
     public void setModels(HashMap<String, CardModel> models) {
         this.models = models;
     }
-    
+
     public int getTotalCards() {
         return totalCards;
     }
-    
+
     public void setTotalCards(int totalCards) {
         this.totalCards = totalCards;
     }
-    
+
     public int getTotalDeckModels() {
         return totalDeckModels;
     }
-    
+
     public void setTotalDeckModels(int totalDeckModels) {
         this.totalDeckModels = totalDeckModels;
     }

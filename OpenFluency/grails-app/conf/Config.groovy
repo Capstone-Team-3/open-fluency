@@ -170,3 +170,5 @@ grails {
 }
 
 grails.mail.default.from="OpenFluency<ofluency@gmail.org>"
+
+grails.dbconsole.enabled = true

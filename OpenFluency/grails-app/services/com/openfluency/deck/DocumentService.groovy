@@ -8,6 +8,8 @@ import com.openfluency.media.Image
 import cscie599.openfluency2.CharSetIdentifier
 import cscie599.openfluency2.CharSetIdentifier.Charset
 import cscie99.team2.lingolearn.server.anki.AnkiFile
+import cscie99.team2.lingolearn.server.anki.AnkiConverter
+import cscie99.team2.lingolearn.shared.Card
 
 import com.openfluency.language.Language
 import com.openfluency.language.Alphabet
@@ -17,8 +19,6 @@ import com.openfluency.Constants
 import com.openfluency.deck.Document
 import com.openfluency.deck.PreviewCard
 import com.openfluency.deck.PreviewDeck
-import cscie99.team2.lingolearn.server.anki.AnkiConverter
-import cscie99.team2.lingolearn.shared.Card
 
 import grails.transaction.Transactional
 import com.openfluency.auth.User
@@ -48,7 +48,7 @@ class DocumentService {
     }
 	
 	@Transactional
-	def createPreviewDeck(String fullPath, String mediaDir, String filename, String description, Language language, Document document){
+	def createPreviewDeck(String fullPath, String mediaDir, String name, String filename, String description, Language language, Document document){
 		AnkiFile anki = new AnkiFile(fullPath,mediaDir)
 		def nCards = anki.totalCards
 		def folder = anki.getTmpDir()
@@ -59,7 +59,8 @@ class DocumentService {
 		def user= User.load(springSecurityService.principal.id)
 		user.id = springSecurityService.principal.id
 		def owner = springSecurityService.currentUser
-		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: filename, description:description,language:language,document: document,mediaDir:ankiMediaDir);
+        if (description==null || description.length()<1) description=filename // description must not be null in OF deck
+		PreviewDeck previewDeckInstance = new PreviewDeck(owner: owner, filename: filename, name: name, description:description,language:language,document: document,mediaDir:ankiMediaDir);
 		previewDeckInstance.save(flush:true)
 		def nfields = anki.fieldNames.size()
 		while (decks.hasNext()) {
@@ -73,9 +74,12 @@ class DocumentService {
 				def fieldNames = anki.fieldNames;
 				PreviewCard pc=new PreviewCard(deck: previewDeckInstance)
 				for (String cardfield in card.fields) {
-					pc.addToUnits(cardfield.take(255)) }
+                    if (cardfield == null) cardfield=""
+					pc.addToUnits(cardfield.take(255))
+                    }
 				for (String fieldtype in fieldTypes) {
-					 pc.addToTypes(fieldtype) }
+					 pc.addToTypes(fieldtype)
+                     }
 				for (String fieldname in fieldNames) {
 					 pc.addToFields(fieldname) }
 				pc.save flush:true

@@ -38,7 +38,7 @@
 				<g:each in="${previewDeckInstanceList}" status="i" var="previewDeckInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${previewDeckInstance.id}">${fieldValue(bean: previewDeckInstance, field: "filename")}</g:link></td>
+						<td><g:link action="map" id="${previewDeckInstance.id}">${fieldValue(bean: previewDeckInstance, field: "filename")}</g:link></td>
 					
 						<td>${fieldValue(bean: previewDeckInstance, field: "description")}</td>
 					

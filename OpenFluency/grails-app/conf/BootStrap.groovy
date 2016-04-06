@@ -33,11 +33,13 @@ class BootStrap {
                 Alphabet kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: false).save(failOnError: true)
                 Alphabet katakana = new Alphabet(name: 'Katakana', language: japanese, code: "ja_on", encodeEntities: false).save(failOnError: true)
                 Alphabet hiragana = new Alphabet(name: 'Hiragana', language: japanese, code: "ja_kun", encodeEntities: false).save(failOnError: true)
+
                 Alphabet hanzi = new Alphabet(name: 'Hanzi', language: chinese, code: "hanzi", encodeEntities: false).save(failOnError: true)
                 Alphabet romaji = new Alphabet(name: "Romaji", language: japanese, code: "romaji").save(failOnError: true)
 
                 Alphabet hangul = new Alphabet(name: "Hangul", language: korean, code: "hangul").save(failOnError: true)
                 Alphabet hanja = new Alphabet(name: "Hanja", language: korean, code: "hanja").save(failOnError: true)
+
                 Alphabet latin = new Alphabet(name: "Latin", language: english, code: "pinyin").save(failOnError: true)
 
                 log.info "Created ${Alphabet.count()} alphabets"
@@ -167,7 +169,7 @@ class BootStrap {
                 quizService.createConfuserQuestion(chineseConfuserQuiz, "Arrow", "矢", chinese, hanzi)
                 quizService.createConfuserQuestion(chineseConfuserQuiz, "Outlaw", "无法无天", chinese, hanzi)
                 quizService.createConfuserQuestion(chineseConfuserQuiz, "Field", "田", chinese, hanzi)
-                
+               
                 // Sign up the student for course 1
                 new Registration(user: student, course: kanji1).save()
                 flashcardInfoService.resetCourseFlashcardInfo(student, kanji1)

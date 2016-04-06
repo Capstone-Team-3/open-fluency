@@ -10,9 +10,7 @@ class Quiz {
 	Course course
 	String title
 	/** If the current time is less than the liveTime, the test will not be viewable */
-	Date liveTime	
-	/** If the current time is greater than the endTime, students will not be able to take the quiz */
-	Date endTime		
+	Date liveTime		
 	/** This allows control using a checkbox instead of time to be able to disable the test when needed */
 	boolean enabled 	
 	/** Used to enable time limits on quiz questions
@@ -20,6 +18,9 @@ class Quiz {
 	 *  submits the answer after the counter reaches 0 then it will be counted as incorrect
 	 */
 	Integer maxCardTime 
+	
+	Integer quizType = Constants.MANUAL_QUIZ
+	
 	/**
 	 *  @Return a list of all the question in a Quiz
 	 */
@@ -30,9 +31,13 @@ class Quiz {
 	Integer countQuestions() {
 		Question.countByQuiz(this)
 	}
-
+	
     static constraints = {
     	liveTime nullable: true
     	endTime nullable: true
     }
 }
+
+
+
+

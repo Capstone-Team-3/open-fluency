@@ -28,7 +28,6 @@ class QuizService {
             maxCardTime: maxCardTime,
             quizType: Constants.FLASHCARD_QUIZ
             ).save()
-
         if(quizInstance.hasErrors()) {
             return quizInstance
         }
@@ -62,7 +61,7 @@ class QuizService {
 
         createQuestions(quizInstance, flashcardIds, testElement)
     }
-    
+
     void createQuestions(Quiz quizInstance, List flashcardIds, Integer testElement) {
         
         // Now create the questions for each flashcard

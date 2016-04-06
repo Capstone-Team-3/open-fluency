@@ -17,16 +17,12 @@ class ConfuserController {
 		Alphabet alphabet = null
 		
 		if (alphabetCode == null) {
-			PhraseType phraseType = ConfuserTools.checkPhrase(word)
 			
-			if (phraseType == PhraseType.Hiragana) {
-				alphabet = Alphabet.findByCode("ja_kun")
+			if (language.code == "JAP") {
+				alphabet = getJapaneseAlphabet(word);
 			}
-			else if (phraseType == PhraseType.Katakana) {
-				alphabet = Alphabet.findByCode("ja_on")
-			}
-			else if (phraseType == PhraseType.Kanji) {
-				alphabet = Alphabet.findByCode("kanji")
+			else if (language.code == "CHN") {
+				alphabet = Alphabet.findByCode("hanzi")
 			}
 		}
 		else {
@@ -40,4 +36,27 @@ class ConfuserController {
 		
 		render confusers as JSON
 	}
+	
+	private Alphabet getJapaneseAlphabet(String phrase) {
+		
+		Alphabet alphabet = null;
+		
+		PhraseType phraseType = ConfuserTools.checkPhrase(phrase)
+		
+		if (phraseType == PhraseType.Hiragana) {
+			alphabet = Alphabet.findByCode("ja_kun")
+		}
+		else if (phraseType == PhraseType.Katakana) {
+			alphabet = Alphabet.findByCode("ja_on")
+		}
+		else if (phraseType == PhraseType.Kanji) {
+			alphabet = Alphabet.findByCode("kanji")
+		}
+		
+		return alphabet;
+	}
 }
+
+
+
+
