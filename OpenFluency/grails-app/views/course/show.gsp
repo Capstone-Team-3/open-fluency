@@ -92,15 +92,15 @@
 								<g:if test="${!isOwner}">
 									<div class="donut-container">
 										<div class="panel-body">
-											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
+											<div class="col-lg-4  col-md-4 col-sm-4 col-xs-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
 												<p>${it.deck.language} to ${it.deck.sourceLanguage}</p>
 											</div>
 
-											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.SYMBOL]}" id="symbol-progress-${it.id}">
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 progress-donut center" data-progress="${it.progress[Constants.SYMBOL]}" id="symbol-progress-${it.id}">
 												<p>${it.deck.sourceLanguage} to ${it.deck.language}</p>
 											</div>
 
-											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
 												<p>Pronunciations in ${it.deck.language}</p>
 											</div>
 										</div>

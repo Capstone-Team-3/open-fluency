@@ -47,7 +47,7 @@ class FlashcardController {
     * /OpenFluency/flashcard/show/1 --> this will display the flashcard with id = 1
     */
     def show(Flashcard flashcardInstance) {
-        [flashcardInstance: flashcardInstance] 
+        [flashcardInstance: flashcardInstance]
     }
 
     def delete(Flashcard flashcardInstance) {
@@ -57,7 +57,35 @@ class FlashcardController {
             return
         }
 
+
         flashcardService.deleteFlashcard(flashcardInstance)
         redirect(uri: request.getHeader('referer'))
     }
+	
+	//Param String: ?flashcard_id=125&flashcard_id=126&deckdest_id=18
+	def reassign() {
+		def flashcard_ids = params.flashcard_id
+		def deck_dest_id  = params.deckdest_id
+		
+		def flashcard_ids_norm = [];
+		flashcard_ids_norm.addAll(flashcard_ids)
+		
+		def dest = Deck.findById(deck_dest_id)
+		
+		
+		flashcard_ids_norm.each {
+			def flashcardInstance = Flashcard.findById(it)
+			
+			if(springSecurityService.principal.id != flashcardInstance.deck.owner.id) {
+				flash.message = "You're not allowed to reassign this flashcard"
+				redirect(uri: request.getHeader('referer'))
+				return
+			}
+	
+			flashcardService.reassignFlashcard(flashcardInstance, dest)
+		}
+		
+		redirect(uri: request.getHeader('referer'))
+	}
+	
 }

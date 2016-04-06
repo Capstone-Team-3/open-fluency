@@ -54,6 +54,10 @@ class FlashcardService {
         println "Created flashcard $flashcardInstance"
         return flashcardInstance
     }
+	
+	void reassignFlashcard(Flashcard card, Deck dest){
+		card.deck = dest;
+	}
 
     /**
     * Get the last ranking that the user gave this flashcard
