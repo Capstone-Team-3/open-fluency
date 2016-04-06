@@ -106,6 +106,7 @@ class PreviewDeckController {
 			if (previewDeckInstance.sourceLanguage == null)
 				srcLang = Language.findByName("English");
 			
+            previewDeckService.setDirs(grailsApplication.config.tmpMediaFolder,grailsApplication.config.mediaFolder)
 			// should do exception checking here..
 			previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
 			

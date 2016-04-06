@@ -116,6 +116,11 @@ class PreviewDeckService {
 		return "OpenFluency" + File.separator  + this.mediaDir + File.separator + media
 	}
 
+    def setDirs(String mediaTmp,String  mediaDir) {
+        this.mediaTmpDir= mediaTmp
+        this.mediaDir= mediaDir
+    }
+
 	// create open fluency deck from PreviewDeck with
 	@Transactional
 	def createOpenFluencyDeck(Language sourceLanguage, PreviewDeck previewDeckInstance,
@@ -146,22 +151,28 @@ class PreviewDeckService {
 			meaningString = removeHtml(meaningString)
 			if (symbolString.length() < 1 || meaningString.length() < 1)
 				continue // Skip if data is blank
-			try { // Missing media is OK
-				imageURL = card.units.get( fieldIndices.get("Image"));
-				imageURL = remapMedia(imageURL)
-			} catch (Exception e) {}
-			try { audioURL = card.units.get( fieldIndices.get("Sound"));
-				audioURL = remapMedia(audioURL)
-			} catch (Exception e){}
-			try { pronunciationString = card.units.get( fieldIndices.get("Pronunciation")); } catch (Exception e){}
-			try { alphabet1 = alphaIndices.get(fieldIndices.get("Literal")); } catch (Exception e){}
-			try { alphabet2 = alphaIndices.get(fieldIndices.get("Meaning")); } catch (Exception e){}
-			try { def al = alphaIndices.get(fieldIndices.get("Pronunciation"));
-				alphabetp = Alphabet.findByName(al)
-				if (alphabetp == null) {
-					alphabetp = Alphabet.findByLanguage(lang)
-				}
-			} catch (Exception e){}
+            try {
+                imageURL = remapMedia(card.units.get( fieldIndices.get("Image")))
+            } catch (Exception e){}
+            try {
+                audioURL = remapMedia(card.units.get( fieldIndices.get("Sound")))
+            } catch (Exception e){}
+			try {
+                  String alpha = getCharSet(symbolString)
+                  alphabet1 = alphaIndices.get(fieldIndices.get("Literal"));
+                  if (!"Unknown".equals(alpha)) alphabet1= alpha;
+                  //println("Literal "+ alpha1)
+            } catch (Exception e){}
+			try { alphabet2 = alphaIndices.get(fieldIndices.get("Meaning"));
+            } catch (Exception e){}
+			try { pronunciationString = card.units.get( fieldIndices.get("Pronunciation"));
+            } catch (Exception e){}
+                // if pronunication is missing, perhaps the literal string can be used
+            if ((pronunciationString == null || pronunciationString.length() < 1 ) 
+                && ("Hiragana".equals(alphabet1) || "Katakana".equals(alphabet1))) {
+                pronunciationString = symbolString
+            }
+
 			// Objects to build flashcard
 			Unit symbol = languageService.getUnit(symbolString, lang )
 			Unit meaning = languageService.getUnit(meaningString, deckInstance.sourceLanguage)
@@ -174,6 +185,8 @@ class PreviewDeckService {
 						pronunciation =  languageService.getPronunciationAlphabet(pronunciationString, symbol, alphabetp)
 					else
 						pronunciation = languageService.getPronunciation(pronunciationString, symbol, deckInstance.language)
+                    //println("Pronunciation "+ pronunciation + alphabetp)
+					pronunciationString = pronunciation.id.toString()
 					if (audioURL != null) {
 						def audioInstance = mediaService.createAudio(audioURL,null, pronunciation.id.toString())
 						audioInstanceId= audioInstance.id.toString()

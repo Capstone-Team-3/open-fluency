@@ -64,7 +64,7 @@ class DocumentController {
 				documentInstance.status="Uploaded";
 				documentInstance.save(flush:true)
 				flash.message = "Loading "+ name +" for User "+ user
-				redirect(controller:'previewDeck', action:'show', id:ankiDeck.id)
+				redirect(controller:'previewDeck', action:'map', id:ankiDeck.id)
 			} catch (Exception e) {
 				flash.message = "Cannot save document"+e.message;
 				e.printStackTrace();

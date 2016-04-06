@@ -24,7 +24,7 @@ class MediaService {
     		lastUpdated: new Date()
     	).save(flush: true, failOnError: true)
     	
-    	println "Associated Image ${imageInstance}"
+        //   	println "Associated Image ${imageInstance}"
     	return imageInstance
     }
 
@@ -43,7 +43,7 @@ class MediaService {
     		lastUpdated: new Date()
     	).save(flush: true, failOnError: true)
 
-    	println "Associated Audio ${audioInstance}"
+    	// println "Associated Audio ${audioInstance}"
     	return audioInstance
     }
 
