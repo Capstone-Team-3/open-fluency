@@ -122,26 +122,22 @@ class BootStrap {
 				// Create a quiz manually, just to see if it works
 				Quiz quizInstance = new Quiz(
 					course: kanji1,
-					title: "Manually Created Quiz",
-					testElement: Constants.MANUAL,
+					title: "Fill in the Blank Quiz",
 					enabled: true,
 					liveTime: new Date(),
 					maxCardTime: 20
 					).save(failOnError: true)
 					
-				Question question = new Question(quiz: quizInstance, question: "Person", questionType: Constants.MANUAL).save(failOnError: true)
+				Question question = new Question(quiz: quizInstance, question: "私は日本語を ______ ます", questionType: Constants.FILL_IN_BLANK).save(failOnError: true)
 				
-				new QuestionOption(question: question, option: "人", answerKey: 1).save(failOnError: true)
-				new QuestionOption(question: question, option: "その", answerKey: 0).save(failOnError: true)
-				new QuestionOption(question: question, option: "猫", answerKey: 0).save(failOnError: true)
-				new QuestionOption(question: question, option: "ありがとう", answerKey: 0).save(failOnError: true)
-
+				new QuestionOption(question: question, option: "話し", answerKey: 1).save(failOnError: true)
+				new QuestionOption(question: question, option: "食べ", answerKey: 0).save(failOnError: true)
+				new QuestionOption(question: question, option: "飲み", answerKey: 0).save(failOnError: true)
 				
 				// Create a confuser quiz
 				Quiz confuserQuiz = new Quiz(
 					course: kanji1,
 					title: "Japanese Confuser Quiz",
-					testElement: Constants.MANUAL,
 					enabled: true,
 					liveTime: new Date(),
 					maxCardTime: 20
@@ -156,7 +152,6 @@ class BootStrap {
 				Quiz chineseConfuserQuiz = new Quiz(
 					course: chineseCourse,
 					title: "Chinese Confuser Quiz",
-					testElement: Constants.MANUAL,
 					enabled: true,
 					liveTime: new Date(),
 					maxCardTime: 20

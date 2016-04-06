@@ -39,6 +39,11 @@ class ChineseConfuser implements ConfuserInterface {
 		
 			results.addAll(getHanziSubsitution(word));
 			
+			// Should we return everything?
+			if (count == -1) {
+				return results;
+			}
+			
 			// Check to make sure all of the results are appropriate
 			for (int ndx = 0; ndx < results.size(); ndx++) {
 				if (ConfuserTools.onBlackList(results.get(ndx), "jp")) {

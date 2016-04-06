@@ -22,26 +22,35 @@ class QuizService {
 		Quiz quizInstance = new Quiz(
 			course: courseInstance, 
 			title: title, 
-			testElement: testElement, 
 			enabled: true, 
 			liveTime: liveTime, 
-			maxCardTime: maxCardTime
+			maxCardTime: maxCardTime,
+			quizType: Constants.FLASHCARD_QUIZ
 			).save()
+			
+		if (quizInstance == null) {
+			return null;
+		}
 
 		if(quizInstance.hasErrors()) {
 			return quizInstance
 		}
 
         // Now create the questions for each flashcard
-        createQuestions(quizInstance, flashcardIds)
+		createQuestions(quizInstance, flashcardIds, testElement)
 
         return quizInstance
     }
+	
+	Quiz createQuiz(String title, Date liveTime, Integer maxCarTime, List<Question> questions, Course courseInstance) {
+		
+		// Save all of the Questions
+		
+	}
 
     void updateQuiz(Quiz quizInstance, String title, Date liveTime, Integer maxCardTime, Integer testElement, List flashcardIds) {
     	// Create the quiz
     	quizInstance.title = title
-    	quizInstance.testElement = testElement
     	quizInstance.enabled = true
     	quizInstance.liveTime = liveTime
     	quizInstance.maxCardTime = maxCardTime
@@ -51,35 +60,57 @@ class QuizService {
             return
         }
 
-        createQuestions(quizInstance, flashcardIds)
+        createQuestions(quizInstance, flashcardIds, testElement)
     }
+	
+	void createQuestions(Quiz quizInstance, List flashcardIds, Integer testElement) {
+		
+		// Now create the questions for each flashcard
+		flashcardIds.each {
+			Flashcard flashcardInstance = Flashcard.get(it)
 
-    void createQuestions(Quiz quizInstance, List flashcardIds) {
-    	// Now create the questions for each flashcard
-        flashcardIds.each {
-        	Flashcard flashcardInstance = Flashcard.get(it)
 
-            // First create the question itself
-            Question question = new Question(quiz: quizInstance, flashcard: flashcardInstance, questionType: Constants.MEANING).save()
-            
-            // Now create a number of options - right now it's hard coded to 3 but it can be easily user defined
-            int maxOptions = 3
+			// Create a number of options - right now it's hard coded to 3 but it can be easily user defined
+			int maxOptions = 3
 
-            if(flashcardInstance.deck.flashcardCount < maxOptions + 1) { // need at least 4 cards in the deck
-                log.info "Cannot create a quiz for a deck that has less cards than the required options"                
-            }
+			if(flashcardInstance.deck.flashcardCount < maxOptions + 1) { // need at least 4 cards in the deck
+				log.info "Cannot create a quiz for a deck that has less cards than the required options"
+			}
 
-            // Create 3 options that are different
-            Flashcard flashcard1 = deckService.getRandomFlashcard(flashcardInstance)
-            Flashcard flashcard2 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id])
-            Flashcard flashcard3 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id, flashcard2.id])
-
-			new QuestionOption(question: question, flashcard: flashcardInstance, answerKey: 1).save(failOnError: true)
-            new QuestionOption(question: question, flashcard: flashcard1, answerKey: 0).save(failOnError: true)
-            new QuestionOption(question: question, flashcard: flashcard2, answerKey: 0).save(failOnError: true)
-            new QuestionOption(question: question, flashcard: flashcard3, answerKey: 0).save(failOnError: true)
-        }
-    }
+			// Create 3 options that are different
+			Flashcard flashcard1 = deckService.getRandomFlashcard(flashcardInstance)
+			Flashcard flashcard2 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id])
+			Flashcard flashcard3 = deckService.getRandomFlashcard(flashcardInstance, [flashcardInstance.id, flashcard1.id, flashcard2.id])
+			
+			// Create the question itself
+			
+			switch (testElement) {
+	
+				case Constants.PRONUNCIATION:
+					Question question = new Question(quiz: quizInstance, question: flashcardInstance.primaryUnit.print, questionType: Constants.MANUAL).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcardInstance.pronunciation.print, answerKey: 1).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard1.pronunciation.print, answerKey: 0).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard2.pronunciation.print, answerKey: 0).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard3.pronunciation.print, answerKey: 0).save(failOnError: true)
+					break;
+				case Constants.SYMBOL:
+					Question question = new Question(quiz: quizInstance, question: flashcardInstance.secondaryUnit.print, questionType: Constants.MANUAL).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcardInstance.primaryUnit.print, answerKey: 1).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard1.primaryUnit.print, answerKey: 0).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard2.primaryUnit.print, answerKey: 0).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard3.primaryUnit.print, answerKey: 0).save(failOnError: true)
+					break;
+				case Constants.MEANING:
+				default:
+					Question question = new Question(quiz: quizInstance, question: flashcardInstance.primaryUnit.print, questionType: Constants.MANUAL).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcardInstance.secondaryUnit.print, answerKey: 1).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard1.secondaryUnit.print, answerKey: 0).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard2.secondaryUnit.print, answerKey: 0).save(failOnError: true)
+					new QuestionOption(question: question, option: flashcard3.secondaryUnit.print, answerKey: 0).save(failOnError: true)
+					break;
+			}
+		}
+	}
 	
 	void createConfuserQuestion(Quiz quizInstance, String question, String answer, Language language, Alphabet alphabet) {
 		
@@ -88,7 +119,7 @@ class QuizService {
 		
 		List<String> confusers = confuser.getConfusers(answer, alphabet, 3);
 		
-		Question q = new Question(quiz: quizInstance, question: question, questionType: Constants.MANUAL).save(failOnError: true)
+		Question q = new Question(quiz: quizInstance, question: question, questionType: Constants.CONFUSER).save(failOnError: true)
 		
 		new QuestionOption(question: q, option: answer, answerKey: 1).save(failOnError: true)
 		
