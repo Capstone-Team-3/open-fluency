@@ -11,6 +11,9 @@ class Quiz {
 	String title
 	/** If the current time is less than the liveTime, the test will not be viewable */
 	Date liveTime		
+	/** If the current time is less than the endTime, the test will not be viewable */
+	Date endTime	
+
 	/** This allows control using a checkbox instead of time to be able to disable the test when needed */
 	boolean enabled 	
 	/** Used to enable time limits on quiz questions

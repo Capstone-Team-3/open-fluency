@@ -31,6 +31,7 @@ class QuizEditorControllerSpec extends Specification {
 			params["course.id"] = kanji.id
 			params.maxCardTime = 20
 			params.liveTime = new Date()
+			params.endTime = new Date('12/31/2018')
 			params.questions = "MANUAL,Person,人,その,猫,ありがとう"
 			
 		and: "A mock SpringSecurityService"
