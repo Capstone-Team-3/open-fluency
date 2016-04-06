@@ -6,7 +6,7 @@ package com.openfluency.language
 class Language {
 	/** the Language name as it will be seen in the system - typically the English version of the name */
 	String name
-	/** the code for the Language - allows flexability to have the native name of the language */
+	/** the code for the Language - allows flexibility to have the native name of the language */
 	String code
 
 	String toString() { 

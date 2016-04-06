@@ -15,7 +15,7 @@ class Answer {
 	/** the question being answered */
 	Question question 		
 	/** the option that the user chose between the questions options */
-	Flashcard selection 	
+	QuestionOption selection 	
 	/** Status of the answer */
 	Integer status 		// Status of the answer for a given user:
 						// NOT_ANSWERED: 	As soon as the user starts a quiz, we create an answer 

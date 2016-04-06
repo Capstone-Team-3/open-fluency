@@ -39,10 +39,13 @@ class QuizController {
 		if(!quizInstance) {
 			flash.message = "Something went wrong, please try again"
 			redirect action: "create", id: params["course.id"]
+			return
 		}
 
 		if(quizInstance.hasErrors()) {
 			flash.message = "Something went wrong, please try again"
+			redirect action: "edit", model: [quizInstance: quizInstance]
+			return
 		}
 
 		redirect action: "show", id: quizInstance.id

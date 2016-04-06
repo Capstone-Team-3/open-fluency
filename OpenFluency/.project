@@ -26,7 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-			<location>/Users/iftach/Desktop/open-fluency/OpenFluency/target/work/plugins</location>
+			<location>/home/msilva/Code/open-fluency2/OpenFluency/target/work/plugins</location>
 		</link>
 	</linkedResources>
 </projectDescription>

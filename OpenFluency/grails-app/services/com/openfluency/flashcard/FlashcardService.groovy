@@ -29,15 +29,18 @@ class FlashcardService {
     Flashcard createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioId, String deckId) {
 
         Unit unitInstance = Unit.load(unitId)
-        println "....${unitInstance.literal}...."
+		if (pronunciationId== null) {
+			println "....${unitInstance.literal}... missing pronunciation  - skipped"
+			return null	
+		} else
+			println "....${unitInstance.literal}...."
         Image imageInstance = mediaService.createImage(imageLink, unitMappingId)
         Audio audioInstance = null;
         if (audioId != "") { audioInstance = Audio.load(audioId); }
 
         //build info to add flashcard to queueing system
         Deck deckInstance = Deck.load(deckId)
-        
-        def flashcardInstance = new Flashcard(
+		def flashcardInstance = new Flashcard(
             primaryAlphabet: unitInstance?.alphabet, 
             unitMapping: UnitMapping.load(unitMappingId), 
             pronunciation: Pronunciation.load(pronunciationId), 

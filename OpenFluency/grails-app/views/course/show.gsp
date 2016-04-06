@@ -125,7 +125,8 @@
 					Quizzes
 					<g:if test="${isOwner}">
 						<!-- This is only displayed for the owner of the course -->
-						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
+						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz from Chapters</g:link>
+						<g:link class="btn btn-xs btn-info" action="create" controller="quizEditor" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz Manually</g:link>
 					</g:if>
 				</h2>
 
@@ -136,7 +137,12 @@
 								<div class="panel-heading">
 									<g:if test="${isOwner}">
 										<div class="card-actions">
-											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:if test="${it.quizType == com.openfluency.Constants.MANUAL_QUIZ}">
+												<g:link action="edit" controller="quizEditor" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											</g:if>
+											<g:else>
+												<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											</g:else>
 											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>
@@ -167,17 +173,6 @@
 									</g:if>
 									<g:else>
 										<ul class="list-unstyled text-left">
-										<li><strong>Tests:</strong> 
-											<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
-												Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
-											</g:if>
-											<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
-												Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
-											</g:elseif>
-											<g:else>
-												Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
-											</g:else>
-										</li>
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
 										</ul>
 									</g:else>
