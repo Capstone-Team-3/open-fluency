@@ -808,3 +808,19 @@ h4#custom-image {
 .tg .tg-yw4l {
 	vertical-align:top
 }
+
+#dictionary {
+	margin-bottom: -80px;
+	float:right; 
+	clear:right;
+}
+
+#dictionary-results-table {
+	mix-height: 300px;
+	overflow-y:scroll;
+	display:block
+}
+
+.clickable-character {
+	cursor: pointer;
+}

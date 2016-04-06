@@ -67,5 +67,13 @@
 </div> 
 
 
+<script>
+// set height for dictionary table to match height of card
+$(document).ready(function() {
+	$('#dictionary-results-table').css('max-height', $('.panel-body')[0].clientHeight);
+});
+
+
+</script>
 
 
