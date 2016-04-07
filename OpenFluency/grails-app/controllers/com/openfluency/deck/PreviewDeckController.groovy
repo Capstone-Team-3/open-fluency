@@ -66,9 +66,13 @@ class PreviewDeckController {
         }
     }
 	
+
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
 	def map(PreviewDeck previewDeckInstance) {
 		def user = User.load(springSecurityService.principal.id)
+		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
+		def mediaDir= grailsApplication.config.mediaFolder
+		new File(mediaDir).mkdirs()
 		if (previewDeckInstance.ownerId != user.id) {
 			flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
 			redirect(uri: request.getHeader('referer'))
@@ -110,7 +114,15 @@ class PreviewDeckController {
 			// should do exception checking here..
 			previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
 			
-			render "succes"
+            try { // Modify the download doc record
+                def doc = Document.findById(previewDeckInstance.documentId)
+                doc.status="Imported"
+                doc.save()
+            } catch(Exception e) {}
+            
+            //previewDeckInstance.delete flush:true
+			render "success"
+			//redirect controller:"Deck", action: "list"
 		}		
 	}
 
