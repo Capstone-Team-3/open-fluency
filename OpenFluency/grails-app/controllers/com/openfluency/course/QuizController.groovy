@@ -271,8 +271,6 @@ def export(Quiz quizInstance) {
 
 	def loadQuizFromCSV(){
 
-		//log.info "This hiddenField should display the date Rendered ${params.course.id}" 
-
 		 Course courseInstance = Course.load(params["course.id"] as Long)
 
 		 //First check that it's the owner of the course who's creating it
@@ -286,22 +284,18 @@ def export(Quiz quizInstance) {
 			String lTime = params.liveTime;
 			String eTime = params.endTime;
 			Date liveTime = null;
-			log.info "the value for liveTime ${lTime}"
+
 			if (lTime==null || lTime==""){
-				//flash.message = "You failed to enter a date for when the quiz will go live.  The quiz has been set to immediately go live."
-				//redirect(action: "show", controller: "course", id: courseInstance.id)
+  			// if liveTime is not set simply default to today's date.
 				liveTime = new Date();
 			} else {
-			log.info lTime
-			DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
 			liveTime = format.parse(lTime);
-			log.info "The date is now bogus2: ${liveTime}"
 			}
 			Date endTime = null;
 			if (eTime==null || eTime==""){
 				endTime = null;
 			} else {
-			log.info eTime
 			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
 			endTime = format.parse(eTime);
 			}
