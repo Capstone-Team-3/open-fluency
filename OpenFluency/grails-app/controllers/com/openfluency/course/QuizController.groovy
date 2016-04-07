@@ -307,7 +307,7 @@ def export(Quiz quizInstance) {
 					if(result.isEmpty()) {
 						flash.message = "You succesfully uploaded your Quiz!"
 					}
-					else {av
+					else {
 						flash.message = result.join(",\n")
 					}
 			}
