@@ -11,6 +11,10 @@
     border-radius: 16px;
     margin-bottom: 5px;
 }
+
+.clickable-character {
+	cursor: pointer;
+}
 </style>
 
 
