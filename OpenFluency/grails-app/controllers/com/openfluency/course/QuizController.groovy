@@ -220,6 +220,7 @@ def export(Quiz quizInstance) {
 
 		List llist = quizInstance ? Question.findAllByQuiz(quizInstance) : []	
 		String quesiton_type = "multiple_choice"
+		// need to revise.
 		String language = "Japanese"
 		String default_image = "";
 		String default_audio = "";	
@@ -270,7 +271,7 @@ def export(Quiz quizInstance) {
 
 	def loadQuizFromCSV(){
 
-		log.info "This hiddenField should display the date Rendered ${params.course.id}" 
+		//log.info "This hiddenField should display the date Rendered ${params.course.id}" 
 
 		 Course courseInstance = Course.load(params["course.id"] as Long)
 
@@ -283,31 +284,36 @@ def export(Quiz quizInstance) {
 			String title = params.title
 			// convert string formatted tate to date objects
 			String lTime = params.liveTime;
-			log.info lTime
-			DateFormat format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
-			Date liveTime = format.parse(lTime);
-			log.info liveTime
-			if (liveTime==null){
-				redirect(action: "show", controller: "course", id: courseInstance.id)
-			}
 			String eTime = params.endTime;
-			format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
-			Date endTime = format.parse(eTime);
-			if (endTime==null){
-				redirect(action: "show", controller: "course", id: courseInstance.id)
+			Date liveTime = null;
+			log.info "the value for liveTime ${lTime}"
+			if (lTime==null || lTime==""){
+				//flash.message = "You failed to enter a date for when the quiz will go live.  The quiz has been set to immediately go live."
+				//redirect(action: "show", controller: "course", id: courseInstance.id)
+				liveTime = new Date();
+			} else {
+			log.info lTime
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			liveTime = format.parse(lTime);
+			log.info "The date is now bogus2: ${liveTime}"
+			}
+			Date endTime = null;
+			if (eTime==null || eTime==""){
+				endTime = null;
+			} else {
+			log.info eTime
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+			endTime = format.parse(eTime);
 			}
 
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
-		
-			log.info "course instance: ${courseInstance}"
-			log.info request.getMultiFileMap()
 
 			request.getMultiFileMap().csvData.eachWithIndex { f, i ->
 				List result = quizService.loadQuizFromCSV(title, liveTime, endTime, maxCardTime, courseInstance, f)
 					if(result.isEmpty()) {
 						flash.message = "You succesfully uploaded your Quiz!"
 					}
-					else {
+					else {av
 						flash.message = result.join(",\n")
 					}
 			}
