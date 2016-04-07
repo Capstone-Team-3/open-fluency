@@ -68,6 +68,9 @@ class PreviewDeckController {
 	
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
 	def map(PreviewDeck previewDeckInstance) {
+		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
+		def mediaDir= grailsApplication.config.mediaFolder
+		new File(mediaDir).mkdirs()
 		def user = User.load(springSecurityService.principal.id)
 		if (previewDeckInstance.ownerId != user.id) {
 			flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
