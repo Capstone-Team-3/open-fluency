@@ -26,7 +26,7 @@
 					</g:if>
 
 					<g:if test="${audioSysURL}">
-						<g:set var="audioSource" value="/"/>
+						<g:set var="audioSource" value=""/>
 						<g:set var="audioId" value="${audioSysURL}"/>
 						<span class="play-audio glyphicon glyphicon-volume-up"></span>
 						<audio class="flashcard-audio hidden" id=${audioSysId} src="${audioSource + audioId}" controls></audio>
