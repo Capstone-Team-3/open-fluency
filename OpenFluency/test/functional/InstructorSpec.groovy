@@ -9,6 +9,7 @@ import pages.*
 import pages.deck.*
 import pages.course.*
 import pages.chapter.*
+import pages.quiz.*
 
 
 @Stepwise
@@ -118,6 +119,7 @@ class InstructorSpec extends GebReportingSpec {
 		at ShowDeckPage
 		flashcardResult.size() == 6
 	}
+	
 	/*
 	def "Instructor navigates to Edit Deck"() {
 		when:
@@ -150,6 +152,21 @@ class InstructorSpec extends GebReportingSpec {
 		flashcardResult.size() == 5
 	}
 */
+	
+	def "Instructor creates quiz"() {
+		when:
+			go "/OpenFluency/quiz/create/1"
+		then:
+			at CreateChapterQuizPage
+			
+		when: "fill out form"
+			quizTitle = "Test Quiz"
+			maxCardTime = "20"
+			quizType.value('0')
+			createQuizButton.click()
+		then:
+			at ShowQuizPage			
+	}
 	
 
 	
