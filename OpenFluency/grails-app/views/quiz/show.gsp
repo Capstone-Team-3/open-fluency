@@ -54,8 +54,10 @@ v<%@ page import="com.openfluency.Constants" %>
 							${quizInstance.liveTime.format('MM/dd/yyyy')}
 						</li>
 						<li>
-							<strong>Quiz available until:</strong>
-							${quizInstance.endTime.format('MM/dd/yyyy')}
+							<g:if test="${quizInstance.endTime != null}">
+							<strong>Quiz available until:</strong>	
+							${quizInstance.endTime.format('MM/dd/yyyy hh:mm')}</li>
+							</g:if>
 						</li>
 					</ul>
 				</div>

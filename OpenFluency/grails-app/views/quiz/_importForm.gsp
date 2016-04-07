@@ -11,7 +11,7 @@
      $( "#endTime_id" ).datepicker({ defaultDate: new Date() });
      
   });
-    function hello(){
+    function test2(){
     document.getElementById("liveTime_id").innerHTML = new Date();
     }
   </script>
@@ -27,22 +27,7 @@
 	<g:field type="number" min="0" max="60" name="maxCardTime"
 		value="${quizInstance?.maxCardTime}" class="form-control" />
 </div>
-<!--
-<div class="form-group live-time-group">
-	<label for="liveTime">Available starting:</label>
-	<g:datePicker name="liveTime"
-		value="${quizInstance ? quizInstance.liveTime : new Date()}"
-		class="form-control" />
-</div>
-<g:hiddenField name="courseInstanceId" value="${courseInstance.id}" />
 
-<div class="form-group end-time-group">
-	<label for="endTime">Available until:</label>
-	<g:datePicker name="endTime" noSelection="${['':'--']}"  default="none"		
-		class="form-control" />
-</div>
-
--->
 <div class="form-group live-time-group">
 	<label for="liveTime">Available starting:</label>
 	    <p><input type="text" name="liveTime" id="liveTime_id"</p> 

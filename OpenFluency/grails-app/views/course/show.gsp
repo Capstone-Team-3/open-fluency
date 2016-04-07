@@ -176,7 +176,9 @@
 									<g:else>
 										<ul class="list-unstyled text-left">
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
+											<g:if test="${it.endTime != null}">
 											<li><strong>Available Until:</strong> ${it.endTime.format('MM/dd/yyyy hh:mm')}</li>
+											</g:if>
 										</ul>
 									</g:else>
 								</div><!-- end panel-body -->

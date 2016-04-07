@@ -220,6 +220,7 @@ def export(Quiz quizInstance) {
 
 		List llist = quizInstance ? Question.findAllByQuiz(quizInstance) : []	
 		String quesiton_type = "multiple_choice"
+		// need to revise.
 		String language = "Japanese"
 		String default_image = "";
 		String default_audio = "";	
@@ -270,8 +271,6 @@ def export(Quiz quizInstance) {
 
 	def loadQuizFromCSV(){
 
-		log.info "This hiddenField should display the date Rendered ${params.course.id}" 
-
 		 Course courseInstance = Course.load(params["course.id"] as Long)
 
 		 //First check that it's the owner of the course who's creating it
@@ -283,24 +282,25 @@ def export(Quiz quizInstance) {
 			String title = params.title
 			// convert string formatted tate to date objects
 			String lTime = params.liveTime;
-			log.info lTime
-			DateFormat format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
-			Date liveTime = format.parse(lTime);
-			log.info liveTime
-			if (liveTime==null){
-				redirect(action: "show", controller: "course", id: courseInstance.id)
-			}
 			String eTime = params.endTime;
-			format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
-			Date endTime = format.parse(eTime);
-			if (endTime==null){
-				redirect(action: "show", controller: "course", id: courseInstance.id)
+			Date liveTime = null;
+
+			if (lTime==null || lTime==""){
+  			// if liveTime is not set simply default to today's date.
+				liveTime = new Date();
+			} else {
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+			liveTime = format.parse(lTime);
+			}
+			Date endTime = null;
+			if (eTime==null || eTime==""){
+				endTime = null;
+			} else {
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+			endTime = format.parse(eTime);
 			}
 
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
-		
-			log.info "course instance: ${courseInstance}"
-			log.info request.getMultiFileMap()
 
 			request.getMultiFileMap().csvData.eachWithIndex { f, i ->
 				List result = quizService.loadQuizFromCSV(title, liveTime, endTime, maxCardTime, courseInstance, f)
