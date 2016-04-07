@@ -5,6 +5,7 @@
 			<div class="flashcard-header">
 				<div class="card-actions">
 					<g:if test="${isOwner}">
+						<button id="${flashcardInstance.id}" data-id="${flashcardInstance.id}" class="reassign-btn btn btn-warning btn-xs flashcard-delete-${flashcardInstance.id}"><span class="glyphicon glyphicon-move"></span></button>
 						<g:link action="delete" controller="flashcard" id="${flashcardInstance.id}" class="btn btn-danger btn-xs flashcard-delete-${flashcardInstance.id}"><span class="glyphicon glyphicon-remove"></span></g:link>
 					</g:if>
 					<g:if test="${practicing}">
@@ -85,5 +86,6 @@ $('.clickable-character').click(function() {
 	$('#dictionary-search-textbox').val($(this).text());
 	$('#dictionary-search-button').click();
 });
+
 
 </script>
