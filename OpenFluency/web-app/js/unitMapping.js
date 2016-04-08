@@ -104,6 +104,7 @@ $('.algorithm-options').click(function() {
  * @param algo
  */
 function requestCreateOpenFluencyDeck(algo) {
+	$('.spinner').css('visibility', "visible");
 	var algorithm = algo || "sw2";
 	console.log("posting unit mapping to server");
 	var alphaIndices = {};
@@ -143,6 +144,7 @@ function requestCreateOpenFluencyDeck(algo) {
 		data: {payload: obj},
 		success: function(output) {
 			console.log(output);
+			$('.spinner').attr('visibility', 'hidden');
 			alert("OpenFluency deck created!");
 		},
 		error: function(err) {
