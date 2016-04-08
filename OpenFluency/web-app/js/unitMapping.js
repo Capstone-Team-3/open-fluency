@@ -21,11 +21,24 @@ function loadUnitMappingPreviewCard(previewCardData, cardIndex) {
 	$('#unit-ul').html("");
 		
 	for (var i = 0; i < previewCardData[cardIndex].units.length; i++) {
-		var unitContent = previewCardData[cardIndex].units[i];
-		if((previewCardData[cardIndex].types[i] == "Image" || previewCardData[cardIndex].types[i] == "Sound") && previewCardData[cardIndex].units[i] != "") {
-			var unitContent = '/OpenFluency/card-media/' + unitContent.replace('\\', '/');
+		var unitContent = previewCardData[cardIndex].units[i];  // what we'll see
+		var transferData = unitContent; // what the receiving end will process
+		var mediaLocation = '/OpenFluency/card-media/' + unitContent.replace('\\', '/');  // uri if it is an image/sound resource 
+		
+		
+		if (previewCardData[cardIndex].types[i] == "Image" && previewCardData[cardIndex].units[i] != "") {
+			unitContent = '<div style="height:200px;width:300px;background-image:url(' + mediaLocation + '); background-repeat:no-repeat;background-position:50% 50%; background-size:100% auto;"></div>';
+			transferData = mediaLocation;
 		}
-		$('#unit-ul').append('<li class="orange unit-li"><h6><span style="background: #ccffcc;">' + previewCardData[cardIndex].fields[i] + '</span>-<span style="background: #66ffff;">' + previewCardData[cardIndex].types[i] + '</span></h6><div id="unit-' + i + '" class="draggable draggable-unit" data-index="' + i + '">' + unitContent + '</div></li>');
+		else if (previewCardData[cardIndex].types[i] == "Sound") {
+			unitContent = '<span class="play-unit-audio glyphicon glyphicon-volume-up" data-audio="' + mediaLocation + '"></span>'
+			transferData = mediaLocation;
+		}
+		
+//		if((previewCardData[cardIndex].types[i] == "Image" || previewCardData[cardIndex].types[i] == "Sound") && previewCardData[cardIndex].units[i] != "") {
+//			var unitContent = '/OpenFluency/card-media/' + unitContent.replace('\\', '/');
+//		}
+		$('#unit-ul').append('<li class="orange unit-li"><h6><span style="background: #ccffcc;">' + previewCardData[cardIndex].fields[i] + '</span>-<span style="background: #66ffff;">' + previewCardData[cardIndex].types[i] + '</span></h6><div id="unit-' + i + '" class="draggable draggable-unit" data-index="' + i + '" data-transfer="' + transferData +'">' + unitContent + '</div></li>');
 	}
 	if (unitMappingLiteral != null) $('#flashcard-literal').html(previewCardData[cardIndex].units[unitMappingLiteral]);
 	if (unitMappingPronunciation != null) $('#pronounced').html(previewCardData[cardIndex].units[unitMappingPronunciation]);
@@ -38,6 +51,7 @@ function loadUnitMappingPreviewCard(previewCardData, cardIndex) {
 	
 	try {
 		initializeUnitMappingDraggable();	// new elements are not registered as draggable.. refresh draggables.
+		initializeAudio();					// idem
 	} catch(err){}
 }
 
@@ -83,6 +97,7 @@ $('.algorithm-options').click(function() {
 	}
 	$('#algorithm-options').modal('hide');
 });
+
 
 /**
  * Sends ajax post request to server. Creates deck with chosen unit mappings

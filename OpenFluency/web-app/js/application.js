@@ -121,6 +121,14 @@ var initializeAudio = function() {
 		var audioSrcID = $(this).next(".flashcard-audio").attr("id");
 		$('#' + audioSrcID).load().get(0).play();
 	});
+	
+
+	$('.play-unit-audio').click(function() {
+	    var resource = this.dataset.audio;
+	    console.log(resource);
+	    var audio = new Audio(resource);
+	    audio.play();
+	});
 };
 
 /*----------------------------------------------------------------------------*/
@@ -397,9 +405,9 @@ var initializeUnitMappingDraggable = function() {
     $('#audio-url-droppable').droppable({
     	hoverClass: "light-green-hover-background",
 		drop: function(event, ui) {
-			$('#audio-url-display').html($(ui.draggable).html());
+			$('#audio-url-display').html($(ui.draggable).data('transfer'));
 			$('.play-audio').css('visibility', 'visible');
-			$('#um-flashcard-audio').attr('src', $(ui.draggable).html());
+			$('#um-flashcard-audio').attr('src', $(ui.draggable).data('transfer'));
 			unitMappingAudioUrl = $(ui.draggable).data("index");
 		}
     });
@@ -407,7 +415,7 @@ var initializeUnitMappingDraggable = function() {
     $("#flashcard-image").droppable({
     	hoverClass: "dashed-border-black",
 		drop: function(event, ui) {
-			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).html() + ")");
+			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).data('transfer') + ")");
 			unitMappingBackgroundImage = $(ui.draggable).data("index");
 		}
     });
