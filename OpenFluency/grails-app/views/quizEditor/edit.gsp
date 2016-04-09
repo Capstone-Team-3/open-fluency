@@ -22,8 +22,7 @@
 				</ul>
 			</div>
 
-			<g:form action="update" controller="quizEditor">
-				<input name="course.id" value="${quizInstance.course.id}" type="hidden"/>
+			<g:form action="update" controller="quizEditor" id="${quizInstance.id}">
 				<div class="col-lg-6 col-lg-offset-3">
 
 					<h1 class="text-center">Edit Quiz for ${quizInstance.course.title}</h1>
