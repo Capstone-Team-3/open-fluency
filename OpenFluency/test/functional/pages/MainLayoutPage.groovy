@@ -11,6 +11,7 @@ class MainLayoutPage extends Page {
 		
 		deckNavList { $(".deckNavList") }
 		myDecks { $(".my-decks") }
+		uploadAnkiDeck { $(".create") }
 		createDeck { $(".create-deck") }
 		searchDeck { $(".deck-search") }
 		

@@ -184,6 +184,17 @@ class InstructorSpec extends GebReportingSpec {
 		then:
 			at ShowQuizPage
 	}
+	
+	def "Instructor navigates to anki deck import"() {
+		when:
+		decksNav.click()
+		waitFor {
+			deckNavList .present
+		}
+		uploadAnkiDeck.click()
+		then:
+		at UploadNewAnkiDeckPage
+	}
 
 	
 }
