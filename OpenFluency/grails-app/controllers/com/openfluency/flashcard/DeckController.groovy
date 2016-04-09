@@ -36,6 +36,24 @@ class DeckController {
         [deckInstanceList: deckInstanceList, othersDeckInstanceList: othersDeckInstanceList, userInstance: loggedUser]
     }
 
+    def listPreview() {
+
+        User loggedUser = User.load(springSecurityService?.principal?.id)
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
+        List<Deck> othersDeckInstanceList = Share.findAllByReceiver(loggedUser).collect {it.deck}
+        
+        // Get the progress for each deck
+        deckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
+        othersDeckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
+        [deckInstanceList: deckInstanceList, othersDeckInstanceList: othersDeckInstanceList, userInstance: loggedUser]
+    }
+
     def create() {
         [deckInstance: new Deck(params), cardServerAlgos: algorithmService.cardServerNames()]
     }
@@ -58,10 +76,13 @@ class DeckController {
     	params.max = Math.min(max ?: 12, 100)
         List<Flashcard> flashcards = Flashcard.findAllByDeck(deckInstance, params)
 
+        User loggedUser = User.load(springSecurityService?.principal?.id)
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
+
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
 
-        respond flashcards, model:[deckProgress: deckService.getDeckProgress(deckInstance), deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id)]
+        respond flashcards, model:[deckProgress: deckService.getDeckProgress(deckInstance), deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id), deckInstanceList:deckInstanceList]
     }
 
     def edit(Deck deckInstance) {

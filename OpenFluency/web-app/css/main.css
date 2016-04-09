@@ -974,6 +974,16 @@ h4#custom-image {
 
 	.modal-body ul li {
 		display: inline;
-		margin: 10px;
-		
+		margin: 10px;	
 	}
+
+	#dictionary-results-table {
+	 	visibility: hidden;
+	  	mix-height: 300px;
+	  	overflow-y:scroll;
+	 	display:block;
+	 	border: 1px solid #66ccff;
+  	}		  
+	
+	
+	

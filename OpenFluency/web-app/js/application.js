@@ -336,10 +336,9 @@ $('#dictionary-search-button').click(function() {
 			count: 15
 		},
 		dataType: "html",
-		success: function(output) {
-			
+		success: function(output) {			
 			$("#dictionary-results-table").html(output);
-			
+			$("#dictionary-results-table").css('visibility', 'visible');
 		},
 		error: function(err) {
 			console.log(err);

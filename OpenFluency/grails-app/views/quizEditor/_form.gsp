@@ -16,6 +16,11 @@
 	<g:datePicker name="liveTime" value="${quizInstance ? quizInstance.liveTime : new Date()}" class="form-control"/>
 </div>
 
+<div class="form-group end-time-group">
+	<label for="endTime">Available until:</label>
+	<g:datePicker name="endTime" value="${quizInstance ? quizInstance.endTime : new Date()}" class="form-control"/>
+</div>
+
 <div class="btn btn-info" onclick="addQuestion(); writeCSV();"> Add a Question</div>
 
 <div id="questionList">

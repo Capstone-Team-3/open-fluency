@@ -85,6 +85,7 @@ class QuizEditorController {
 			String title = params.title
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
 			Date liveTime = params.liveTime
+			Date endTime = params.endTime
 			
 			// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 			String csv = params.questions
