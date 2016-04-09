@@ -133,6 +133,15 @@ var initializeAudio = function() {
  */
 var initializePracticeCards = function() {
 	var type = $('#practice-container').data("rank-type").toLowerCase();
+	var pArray = $('.pronunciation');
+	var uArray = $('.flashcard-unit');
+	
+	// ensure that pronunciation is hidden if it equals unit literal
+	for (var i = 0; i < uArray.length; i++) {
+	    if (uArray[i].dataset.unit.replace(/^\s+|\s+$/g,'') != pArray[i].dataset.pronunciation.replace(/^\s+|\s+$/g,'')) {
+	        $(pArray[i]).hide();
+	    }
+	}
 
 	if (type === 'meaning' || type === 'pronunciation'){
 		hideElement("Meaning", ".meaning", "show-meaning");
@@ -142,7 +151,7 @@ var initializePracticeCards = function() {
 		hideElement("Word/Character", ".flashcard-unit", "show-flashcard-unit");
 		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	}
-
+		
 	initializePracticeRanking();
 };
 

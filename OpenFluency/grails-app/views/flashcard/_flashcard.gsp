@@ -14,10 +14,17 @@
 						</a>
 					</g:if>
 				</div>
-				<h1 id="flashcard-unit-text" class="flashcard-unit">${flashcardInstance?.primaryUnit.print}</h1>
-				<div class="pronunciation">
-					pronounced "${flashcardInstance?.pronunciation.literal}"
-
+				<h1 id="flashcard-unit-text" class="flashcard-unit" data-unit="${flashcardInstance?.primaryUnit.print}">
+					<% 	def flashcardPrimaryUnitStr = flashcardInstance?.primaryUnit.getPrint().trim();
+						def charArr = flashcardPrimaryUnitStr.toCharArray();  %>
+					<g:each in="${ charArr }">
+						<span class='clickable-character'>${it;}</span>				
+					</g:each>
+				</h1>
+				<div class="pronunciation" data-pronunciation="${flashcardInstance?.pronunciation.literal }">
+					<g:if test="${flashcardPrimaryUnitStr != flashcardInstance?.pronunciation.literal }">
+						pronounced "${flashcardInstance?.pronunciation.literal}"	
+					</g:if>
 					<g:if test="${!audioSysURL}">
 						<g:set var="audioSysURL" value="${flashcardInstance?.audio?.url}" />
 					</g:if>
@@ -57,19 +64,9 @@
 
 <script>
 
-console.log($('#flashcard-unit-text').text());
-var str = $('#flashcard-unit-text').text();
-var result = "";
-
-for (var i = 0; i < str.length; i++) {
-	result += "<span class='clickable-character'>" + str[i] + "</span>";
-}
-
-$('#flashcard-unit-text').html(result);
-
 
 $('.clickable-character').click(function() {
-	$('#dictionary-search-textbox').val($(this).text());
+	$('#dictionary-search-textbox').val($(this).text().replace(/^\s+|\s+$/g,''));
 	$('#dictionary-search-button').click();
 });
 
