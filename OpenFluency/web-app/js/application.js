@@ -214,9 +214,12 @@ var initializeDonuts = function() {
 var drawDonut = function(value, selector) {
 	var	percentages = [value, (100 - value)];
 	
-	var width = $(selector).width();
-
-	var height = width, radius = Math.min(width, height) / 2;
+	//var width = $(selector).width();
+	var height = $(selector).height();
+	var width = height;
+	var radius = radius = Math.min(width, height) / 2;
+	
+	//var height = width, radius = Math.min(width, height) / 2;
 
 	var color = d3.scale.category20();
 
