@@ -74,7 +74,7 @@ h2 {
 					<h1 class="deck-title">
 						${deckInstance?.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">
+							<g:link action="edit" id="${deckInstance.id}" elementId="edit-deck" class="btn btn-warning">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</g:link>
 							<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">

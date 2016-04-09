@@ -84,14 +84,16 @@ class StudentSpec extends GebReportingSpec {
 		$(".deck-result").size() == 0
 	}
 
-	def "Student searches for deck with keywords 'Test Deck' - should get 1 result"() {
+	// Instructor renames deck to 'Test Deck - Edit' in InstructorSpec
+	// Tests are run in alphabetical order so InstructorSpec is run before StudentSpec
+	def "Student searches for deck with keywords 'Test Deck' - should get 2 results"() {
 		when:
 		keywordFilter = "Test Deck"
 		languageFilter.value('1')
 		searchDeckButton.click()
 		then:
 		at SearchDeckPage
-		$(".deck-result").size() == 1
+		$(".deck-result").size() == 2
 	}
 
 	def "Student searches for japanese decks - should return 8 results"() {
@@ -109,7 +111,7 @@ class StudentSpec extends GebReportingSpec {
 		$('.add-deck-4').click()
 		then: 
 		at ListDeckPage
-		flashMessage.text() == "You succesfully added Kanji for Dummies 1 to your decks!"
+		flashMessage.text() == "You succesfully added Test Deck - Edit to your decks!"
 		$(".show-deck-4").size() == 1
 		$('.other-decks tbody tr').size() == 1
 	}
@@ -119,7 +121,7 @@ class StudentSpec extends GebReportingSpec {
 		$(".remove-deck-4").click()
 		then: 
 		at ListDeckPage
-		flashMessage.text() == "You succesfully removed Kanji for Dummies 1 from your decks!"
+		flashMessage.text() == "You succesfully removed Test Deck - Edit from your decks!"
 		$('.other-decks tbody tr').size() == 0	
 	}
 

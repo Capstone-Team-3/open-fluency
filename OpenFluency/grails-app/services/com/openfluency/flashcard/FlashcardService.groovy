@@ -102,19 +102,6 @@ class FlashcardService {
             it.delete()
         }
 
-        // Delete all the questions and options that use this card
-        QuestionOption.findAllByFlashcard(flashcardInstance).each {
-            it.delete()
-        }
-
-        Question.findAllByFlashcard(flashcardInstance).each {
-            QuestionOption.findAllByQuestion(it).each {
-                it.delete()
-            }
-
-            it.delete()
-        }
-
         // Delete all card usages and rankings for this card
         CardUsage.findAllByFlashcard(flashcardInstance).each {
             it.delete()

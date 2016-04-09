@@ -120,14 +120,15 @@ class InstructorSpec extends GebReportingSpec {
 		flashcardResult.size() == 6
 	}
 	
-	/*
+
 	def "Instructor navigates to Edit Deck"() {
 		when:
 		editDeckButton.click()
 		then:
 		at EditDeckPage
 	}
-	def "Instractur edits a deck"() {
+	
+	def "Instructor edits a deck"() {
 		when:
 		deckTitle = "Test Deck - Edit"
 		deckDescription = "This is a test deck!"
@@ -137,23 +138,25 @@ class InstructorSpec extends GebReportingSpec {
 		saveDeckButton.click()
 		then:
 		at ShowDeckPage
-		flashMessage.text() == "Well done! You succesfully created a new deck!"
 		deckTitle.text() == "Test Deck - Edit"
 		deckDescription.text() == "This is a test deck!"
 	}
+	
 	def "Instructor deletes a Flashcard from a deck"() {
 		when:
-		$('.flashcard-delete-6').click()
+		def numberOfFlashcards = flashcardResult.size()
+		// http://stackoverflow.com/questions/20903513/how-do-i-test-that-the-page-has-reloaded-when-i-click-a-link-to-the-current-page
+		browser.js.exec '$(document.body).attr("data-not-reloaded",true);'
+		$('a', class: contains('flashcard-delete-')).click()
 		waitFor {
-			flashcardResult.present
+			browser.js.exec 'return $(document.body).attr("data-not-reloaded") === undefined';
 		}
 		then:
 		at ShowDeckPage
-		flashcardResult.size() == 5
+		flashcardResult.size() == (numberOfFlashcards - 1)
 	}
-*/
 	
-	def "Instructor creates quiz"() {
+	def "Instructor creates chapter quiz"() {
 		when:
 			go "/OpenFluency/quiz/create/1"
 		then:
@@ -168,6 +171,19 @@ class InstructorSpec extends GebReportingSpec {
 			at ShowQuizPage			
 	}
 	
+	def "Instructor creates manual quiz"() {
+		when:
+			go "/OpenFluency/quizEditor/create/1"
+		then:
+			at CreateManualQuizPage
+			
+		when: "fill out form"
+			quizTitle = "Test Quiz"
+			maxCardTime = "20"
+			createQuizButton.click()
+		then:
+			at ShowQuizPage
+	}
 
 	
 }

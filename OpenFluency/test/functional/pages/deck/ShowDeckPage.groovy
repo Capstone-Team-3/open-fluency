@@ -14,7 +14,7 @@ class ShowDeckPage extends MainLayoutPage {
 		deckTitle(wait: true) { $(".deck-title") }
 		deckDescription(wait: true) { $(".deck-description") }
 		addFlashcardsButton(wait: true) { $(".add-flashcards") }
-		editDeckButton(wait: true) { $(".btn btn-warning") }
+		editDeckButton(wait: true) { $("#edit-deck") }
 		flashcardResult(wait: true) { $(".flashcard-result") }
 	}
 }
