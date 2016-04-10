@@ -363,3 +363,28 @@ $('#dictionary-search-button').click(function() {
 	});
 	console.log(searchTerm);
 });
+
+
+
+
+/* --------------------------------------------------------------
+ *    OpenFluency2 - Flashcard 
+ * --------------------------------------------------------------*/
+
+var of2FlashcardFontSize = function() {
+	// get all cards
+	var flashcardUnitsArray = $('.flashcard-unit');
+	
+	// get the height of a card would have with a single character as literal
+			// TODO: avoid hardcoding height of card
+
+	for (var i = 0; i < flashcardUnitsArray.length; i++) {
+	    var h = $(flashcardUnitsArray[i]).height();
+	    var fontSize = $(flashcardUnitsArray[i]).css('font-size').replace(/[^-\d\.]/g, '');
+	    while (h > 110) {
+	        $(flashcardUnitsArray[i]).css('font-size', --fontSize + 'px');
+	        h = $(flashcardUnitsArray[i]).height();
+	    } 
+	    $(flashcardUnitsArray[i]).height(110);
+	}
+}
