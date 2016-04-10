@@ -138,7 +138,7 @@ var initializePracticeCards = function() {
 	
 	// ensure that pronunciation is hidden if it equals unit literal
 	for (var i = 0; i < uArray.length; i++) {
-	    if (uArray[i].dataset.unit.replace(/^\s+|\s+$/g,'') != pArray[i].dataset.pronunciation.replace(/^\s+|\s+$/g,'')) {
+	    if (uArray[i].dataset.unit.replace(/^\s+|\s+$/g,'') == pArray[i].dataset.pronunciation.replace(/^\s+|\s+$/g,'')) {
 	        $(pArray[i]).hide();
 	    }
 	}
