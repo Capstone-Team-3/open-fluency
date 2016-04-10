@@ -8,9 +8,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.error.ConfuserException;
@@ -57,16 +59,59 @@ public class Confuser {
 		try {
 			// Start by running the relevant functions
 			List<String> results = new ArrayList<String>();
+			Set<String> phrases = new HashSet<String>();
+			List<String> tempResults = new ArrayList<String>();
+			
 			switch (type) {
 				case Hiragana:
-					results.addAll(getNManipulation(card.getHiragana()));
-					results.addAll(getSmallTsuManiuplation(card.getHiragana()));
-					results.addAll(getHiraganaManipulation(card.getHiragana()));
+					phrases.add(card.getHiragana());
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getNManipulation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getSmallTsuManiuplation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getHiraganaManipulation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					phrases.remove(card.getHiragana());
+					results.addAll(phrases);
+					
 					break;
 				case Katakana:
-					results.addAll(getNManipulation(card.getKatakana()));
-					results.addAll(getSmallTsuManiuplation(card.getKatakana()));
-					results.addAll(getKatakanaManiuplation(card.getKatakana()));
+
+					phrases.add(card.getKatakana());
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getNManipulation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getSmallTsuManiuplation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					for (String phrase : phrases) {
+						tempResults.addAll(getKatakanaManiuplation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					phrases.remove(card.getKatakana());
+					results.addAll(phrases);
+					
 					break;
 				case Kanji:
 					results.addAll(getKanjiBoundries(card));
@@ -305,7 +350,7 @@ public class Confuser {
 		char openingParentheses = '(';
 		char closingParentheses = ')';
 				
-		String invalidFollowers = "ャュョェッ";
+		String invalidFollowers = "ャュョェッら";
 		// Start scanning through the phrase for relevant matches and either
 		// add or remove the choopu as required
 		List<String> phrases = new ArrayList<String>();
@@ -425,7 +470,7 @@ public class Confuser {
 		if (ConfuserTools.checkCharacter(phrase.charAt(0)) == CharacterType.Katakana) {
 			xtsu = 'ッ';
 			characters = "カキクケコサシタチツテトハヒフヘホパピプペポ";
-			invalidFollowers = "アイウエオンナニヌネノーァ";
+			invalidFollowers = "アイウエオンナニヌネノーァリラ";
 		}
 		// Now start scanning through the phrase for relevant matches for this 
 		// we are only focusing on the characters that are in the middle of 
