@@ -6,9 +6,11 @@
   <script>
      $(function() {
      var newDate = new Date();   
-    $("#liveTime_id").datepicker();
-    $("#liveTime_id").datepicker("setDate", newDate);
-     $( "#endTime_id" ).datepicker({ defaultDate: new Date() });
+    $("#liveTime_id").datepicker(newDate)
+    $("#liveTime_id").datepicker("setDate", newDate);  
+ 	$("#liveTime_id").datepicker("option", "minDate", 0); 
+     $("#endTime_id").datepicker({ defaultDate: new Date() });
+     $("#endTime_id").datepicker("option", "minDate", 1);
      
   });
     function test2(){

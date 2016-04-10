@@ -51,8 +51,8 @@ class CourseController {
 		}
 
 		// Get quizes
-		List<Quiz> quizesInstanceList = courseService.getLiveQuizes(courseInstance)
-
+		//List<Quiz> quizesInstanceList = courseService.getLiveQuizes(courseInstance)
+		List<Quiz> quizesInstanceList =  Quiz.findAll()
 		// Get student grades for each quiz
 		quizesInstanceList.each {
 			it.metaClass.finalGrade = quizService.getPercentageGrade(it)

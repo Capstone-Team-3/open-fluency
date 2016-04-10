@@ -164,7 +164,7 @@
 												<g:link class="btn btn-info" action="take" controller="quiz" id="${it.id}">View Report</g:link>
 											</div>
 										</g:if>
-										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
+										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date() && it.endTime >= new Date())) }" >
 											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
 												<div class="take-quiz">
 													<p>Ready to take the quiz?</p>
