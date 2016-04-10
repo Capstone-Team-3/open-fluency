@@ -3,17 +3,12 @@ import geb.spock.GebReportingSpec
 import spock.lang.*
 
 import com.openfluency.auth.User
-import pages.user.RegisterPage
-import pages.DashboardPage
 
-import pages.deck.CreateDeckPage
-import pages.deck.ShowDeckPage
-import pages.deck.ListDeckPage
-import pages.deck.SearchDeckPage
-
-import pages.course.ListCoursePage
-import pages.course.SearchCoursePage
-import pages.course.ShowCoursePage
+import pages.*
+import pages.chapter.*
+import pages.course.*
+import pages.deck.*
+import pages.user.*
 
 @Stepwise
 class StudentSpec extends GebReportingSpec {
@@ -175,5 +170,19 @@ class StudentSpec extends GebReportingSpec {
 		at ShowCoursePage
 		flashMessage.text() == "Well done! Your registration is pending approval!"
 		courseTitle.text() == "Kanji for More Advanced Dummies"
+	}
+	
+	def "Student navigates to help page"() {
+		when:
+		help.click()
+		then:
+		at HelpPage
+	}
+	
+	def "Student navigates to profile page"() {
+		when:
+		profile.click()
+		then:
+		at ProfilePage
 	}
 }

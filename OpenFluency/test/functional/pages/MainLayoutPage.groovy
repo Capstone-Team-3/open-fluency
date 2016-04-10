@@ -20,6 +20,9 @@ class MainLayoutPage extends Page {
 		myCourses { $(".my-courses") }
 		createCourse { $(".create-course") }
 		searchCourse { $(".course-search") }
+		
+		profile { $("a[href='/OpenFluency/user/profile']") }
+		help { $("a", text: contains('Help')) }
 
 		flashMessage { $(".alert.alert-info") }
 	}

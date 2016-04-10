@@ -51,4 +51,18 @@ class ResearcherSpec extends GebReportingSpec {
 		at DashboardPage
 		$(".dashboard > h1").text() == "researcher's Dashboard"
 	}
+	
+	def "Researcher navigates to help page"() {
+		when:
+		help.click()
+		then:
+		at HelpPage
+	}
+	
+	def "Researcher navigates to profile page"() {
+		when:
+		profile.click()
+		then:
+		at ProfilePage
+	}
 }

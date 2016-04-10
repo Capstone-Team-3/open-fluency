@@ -196,5 +196,17 @@ class InstructorSpec extends GebReportingSpec {
 		at UploadNewAnkiDeckPage
 	}
 
+	def "Instructor navigates to help page"() {
+		when:
+		help.click()
+		then:
+		at HelpPage
+	}
 	
+	def "Instructor navigates to profile page"() {
+		when:
+		profile.click()
+		then:
+		at ProfilePage
+	}
 }
