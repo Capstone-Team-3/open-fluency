@@ -149,7 +149,7 @@ class DataAccessController {
             Map formatters = ["quiz": idify, 
                               "course": valIdify,
                               "numQuestions": {domain, value -> domain.countQuestions()}, 
-                              "questions": {domain, value -> domain.getQuestions().collect{"${it.id}:${it.flashcard.id}"}.toString()},
+                              "questions": {domain, value -> domain.getQuestions().collect{"${it.id}:${it.question}"}.toString()},
                               "grades": {domain, value -> Grade.findAllByQuiz(domain).collect{"${it.user.id}:${it.correctAnswers}"}.toString()}]
             //map additional parameters
             Map parameters = ["separator": "\t"]
