@@ -67,6 +67,10 @@ grails.project.dependency.resolution = {
     plugins {
         // plugins for the build system only
         build ":tomcat:7.0.52.1"
+		
+		// plugins for static analysis'
+		compile "org.grails.plugins:codenarc:0.25.2"
+		compile "org.grails.plugins:gmetrics:0.3.1"
 
         // plugins for the compile step
         compile ":scaffolding:2.0.2"
