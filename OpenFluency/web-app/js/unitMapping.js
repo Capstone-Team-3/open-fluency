@@ -152,6 +152,7 @@ function requestCreateOpenFluencyDeck(algo) {
 		},
 		error: function(err) {
 			console.log('err', err);
+			$('.spinner').hide();
 			alert("An error has occurred");
 		}
 	}); 
