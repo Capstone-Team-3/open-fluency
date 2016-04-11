@@ -123,10 +123,14 @@ class PreviewDeckService {
 
 	// create open fluency deck from PreviewDeck with
 	@Transactional
-	def createOpenFluencyDeck(Language sourceLanguage, PreviewDeck previewDeckInstance,
+	def createOpenFluencyDeck(String deckName, String deckDescription, Language sourceLanguage, PreviewDeck previewDeckInstance,
 		HashMap<String,Integer> fieldIndices, HashMap<String,Integer> alphaIndices, String cardServerName){
-		Deck deckInstance = deckService.createDeck(previewDeckInstance.name,
-			previewDeckInstance.description, previewDeckInstance.language.id.toString(),sourceLanguage.id.toString(),cardServerName);
+		
+		String name = (deckName && !deckName.isEmpty()) ? deckName : previewDeckInstance.name;
+		String description = (deckDescription && !deckDescription.isEmpty()) ? deckDescription : previewDeckInstance.description;
+		
+		Deck deckInstance = deckService.createDeck(name,
+			description, previewDeckInstance.language.id.toString(),sourceLanguage.id.toString(),cardServerName);
 			
 		def previewCardInstances= PreviewCard.findAllByDeck(previewDeckInstance)
 		Language lang = previewDeckInstance.language
