@@ -42,7 +42,7 @@ h2.sub-heading {
     margin-top: -50px;
     background: url(../images/squares-spinner.gif);
     background-size: 100%;
-    visibility: hidden;
+    display: none;
 }
 
 /* ---------------------------------------------------------------------------*/
