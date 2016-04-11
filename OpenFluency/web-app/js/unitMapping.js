@@ -152,3 +152,12 @@ function requestCreateOpenFluencyDeck(algo) {
 		}
 	}); 
 }
+
+
+$('#edit-preview-deck-name').click(function() {
+	console.log('clicked');
+});
+
+$('#edit-preview-deck-description').click(function() {
+	console.log('clicked2')
+});
