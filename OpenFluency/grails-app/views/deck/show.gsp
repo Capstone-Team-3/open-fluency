@@ -3,8 +3,67 @@
 <html>
 <head>
 	<meta name="layout" content="main"/>
+	
+	
+	<style>
+	
+	
+	d change the background color on hover.
+
+
+h2 {
+  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#deck-list-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.deck-list-li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+.deck-list-li:last-child {
+  border: none;
+}
+
+.deck-list-li {
+  text-decoration: none;
+  color: #000;
+  display: block;
+
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.deck-list-li:hover {
+  font-size: 21px;
+  background: #b3e6ff;
+}
+
+
+.card-selected {
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	background: lavender;
+}
+
+
+
+
+	</style>
+	
 </head>
 <body>
+
 	<div class="container deck-show">
 
 		<ul class="breadcrumb">
@@ -132,6 +191,37 @@
 			</div>
 		</div>
 	</div>
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+      <!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Reassign Flashcard to deck</h4>
+</div>
+<div class="modal-body">
+    <div id='ul-contaier'>
+        <h2>
+            My Decks
+            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
+        </h2>
+       <g:each in="${deckInstanceList}">
+        <div class="radio">
+              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
+        </div>
+        </g:each>
+    </div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
+</div>
+</div>
+
+</div>
+</div>
 	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
+	<g:javascript src="reassignCard.js" />
 </body>
 </html>
