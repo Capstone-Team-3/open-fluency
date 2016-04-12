@@ -100,12 +100,10 @@ public class CharSetIdentifier {
 		float max=0;
 		float nextmax=0;
 		Charset m=null;
-		Charset nextm=null;
 		for (Charset e : Charset.values()){
 			if (alpha.get(e) > max) {
 				nextmax = max;
 				max = alpha.get(e);
-				nextm=m;
 				m=e;
 			}
 			else if (alpha.get(e) > nextmax) {

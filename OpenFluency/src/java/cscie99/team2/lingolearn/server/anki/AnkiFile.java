@@ -1,7 +1,5 @@
 package cscie99.team2.lingolearn.server.anki;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,10 +10,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Set;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 import org.apache.tools.ant.util.FileUtils;
@@ -43,8 +39,6 @@ public class AnkiFile {
 
     private File sqliteFile;
     private FileInputStream zipFileStream;
-    private SqlJetDb db;
-    //private static String TmpFolder = "TMP";
     private static String TmpFolder = System.getProperty("java.io.tmpdir");
     private String tmpFolder;
     private String mediaTopDir;
@@ -336,7 +330,8 @@ public class AnkiFile {
      * Return the AnkiFieldTypes enum represented in the CardField
      * passed.
      */
-    private AnkiFieldTypes getModelFieldType( CardField field ){
+    @SuppressWarnings("unused")
+	private AnkiFieldTypes getModelFieldType( CardField field ){
         AnkiFieldTypes types[] = AnkiFieldTypes.values();
         String fieldName = field.getName();
         for( int i = 0; i < types.length; i++ ){
@@ -384,12 +379,13 @@ public class AnkiFile {
         HashMap<String, CardModel> models = mapper.readValue( 
                 modelMap, new TypeReference<HashMap<String, CardModel>>(){});
                 
+        /*
         Set<String> keys = models.keySet();
         for( String mid : keys ){
             CardModel model = models.get(mid);
             //System.out.println(model.getId());
         }
-        
+        */
         return models;
     }
     
