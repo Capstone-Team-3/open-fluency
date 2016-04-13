@@ -73,9 +73,6 @@ class PreviewDeckController {
 		def mediaDir= grailsApplication.config.mediaFolder
 		new File(mediaDir).mkdirs()
 		def user = User.load(springSecurityService.principal.id)
-		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
-		def mediaDir= grailsApplication.config.mediaFolder
-		new File(mediaDir).mkdirs()
 		if (previewDeckInstance.ownerId != user.id) {
 			flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
 			redirect(uri: request.getHeader('referer'))
