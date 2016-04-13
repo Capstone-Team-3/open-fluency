@@ -25,6 +25,9 @@
 					<g:if test="${flashcardPrimaryUnitStr != flashcardInstance?.pronunciation.literal }">
 						pronounced "${flashcardInstance?.pronunciation.literal}"	
 					</g:if>
+					<g:else>
+						&nbsp;
+					</g:else>
 					<g:if test="${!audioSysURL}">
 						<g:set var="audioSysURL" value="${flashcardInstance?.audio?.url}" />
 					</g:if>

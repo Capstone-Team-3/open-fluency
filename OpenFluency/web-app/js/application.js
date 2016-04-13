@@ -488,7 +488,7 @@ var of2FlashcardFontSize = function() {
 	        $(flashcardUnitsArray[i]).css('font-size', --fontSize + 'px');
 	        h = $(flashcardUnitsArray[i]).height();
 	    } 
-	    $(flashcardUnitsArray[i]).height(110);
+	    $(flashcardUnitsArray[i]).height(139.593);
 	}
 }
 

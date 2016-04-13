@@ -221,7 +221,7 @@ h2 {
 
 </div>
 </div>
-	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
+	<g:javascript>initializeAudio();initializeDonuts();of2FlashcardFontSize();</g:javascript>
 	<g:javascript src="reassignCard.js" />
 </body>
 </html>
