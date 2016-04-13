@@ -66,12 +66,16 @@ class PreviewDeckController {
         }
     }
 	
+
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
 	def map(PreviewDeck previewDeckInstance) {
 		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
 		def mediaDir= grailsApplication.config.mediaFolder
 		new File(mediaDir).mkdirs()
 		def user = User.load(springSecurityService.principal.id)
+		def mediaTmpDir= grailsApplication.config.tmpMediaFolder
+		def mediaDir= grailsApplication.config.mediaFolder
+		new File(mediaDir).mkdirs()
 		if (previewDeckInstance.ownerId != user.id) {
 			flash.message = "You're "+ user + " not allowed to view this flashdeck " + previewDeckInstance
 			redirect(uri: request.getHeader('referer'))
@@ -92,6 +96,8 @@ class PreviewDeckController {
 		def fieldInd = payload.fieldIndices;
 		def alphInd = payload.alphaIndices;
 		def algorithm = payload.algorithm;
+		def deckName = payload.name;
+		def deckDescription = payload.description;
 		
 		int algoIndex = 0;  //sw2 is default
 		if (algorithm.equals("lws"))
@@ -111,9 +117,22 @@ class PreviewDeckController {
 			
             previewDeckService.setDirs(grailsApplication.config.tmpMediaFolder,grailsApplication.config.mediaFolder)
 			// should do exception checking here..
-			previewDeckService.createOpenFluencyDeck(srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
 			
-			render "succes"
+			try {
+				previewDeckService.createOpenFluencyDeck(deckName, deckDescription, srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
+			} catch(Exception e) {
+				render (status: 500, text: 'An error has occurred while creating the deck');
+			}
+			
+            try { // Modify the download doc record
+                def doc = Document.findById(previewDeckInstance.documentId)
+                doc.status="Imported"
+                doc.save()
+            } catch(Exception e) {}
+            
+            //previewDeckInstance.delete flush:true
+			render (status: 200, text: "success")
+			//redirect controller:"Deck", action: "list"
 		}		
 	}
 
