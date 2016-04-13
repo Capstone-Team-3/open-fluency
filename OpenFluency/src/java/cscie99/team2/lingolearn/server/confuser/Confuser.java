@@ -155,7 +155,7 @@ public class Confuser {
 	public List<String> getHiraganaManipulation(String phrase) {
 		// The following are the parameters for the manipulation
 		char n = 'ん';
-		String invalidFollowers = "ゃゅょ";
+		String invalidFollowers = "ゃゅょっ";
 		// Start by iterating through each of the characters in the phrase
 		List<String> phrases = new ArrayList<String>();
 		for (int ndx = 0; ndx < phrase.length(); ndx++) {
@@ -470,7 +470,7 @@ public class Confuser {
 		if (ConfuserTools.checkCharacter(phrase.charAt(0)) == CharacterType.Katakana) {
 			xtsu = 'ッ';
 			characters = "カキクケコサシタチツテトハヒフヘホパピプペポ";
-			invalidFollowers = "アイウエオンナニヌネノーァリラ";
+			invalidFollowers = "アイウエオンナニヌネノーァリラル";
 		}
 		// Now start scanning through the phrase for relevant matches for this 
 		// we are only focusing on the characters that are in the middle of 
