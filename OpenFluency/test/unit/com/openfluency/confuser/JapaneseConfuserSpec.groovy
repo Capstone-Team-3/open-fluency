@@ -5,6 +5,8 @@ import com.openfluency.language.Language
 import spock.lang.Specification
 import spock.lang.Ignore
 
+import cscie99.team2.lingolearn.shared.error.ConfuserException;
+
 class JapaneseConfuserSpec extends Specification {
 
     void "Test rule that cannot have long 'nothing' before a word. Should have the long dash inside the parentheses"() {
@@ -147,6 +149,20 @@ class JapaneseConfuserSpec extends Specification {
 			confusers.contains('みいぎ')
 			confusers.contains('みぎい')
 			confusers.contains('みいぎい')
+	}
+	
+	void "If pass non-Japanese alphabet to JapaneseConfuser then ConfuserException will be thrown"() {
+		setup:
+			String word = 'shì'
+			Language chinese = new Language(name: 'Chinese', code: 'CHN')
+			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
+			JapaneseConfuser japaneseConfuser = new JapaneseConfuser()
+		
+		when:
+			japaneseConfuser.getConfusers(word, pinyin, -1)
+			
+		then:
+			thrown ConfuserException
 	}
 	
 }

@@ -1,7 +1,9 @@
 package com.openfluency.confuser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.openfluency.language.Alphabet;
 
@@ -35,12 +37,34 @@ class ChineseConfuser implements ConfuserInterface {
 		
 		try {
 			List<String> results = [];
-			
-			if (alphabet.code != "hanzi") {
+		
+			if (alphabet.code == "hanzi") {
+				results.addAll(getHanziSubsitution(word));
+			}
+			else if (alphabet.code == "pinyin") {
+				Set<String> phrases = new HashSet<String>();
+				List<String> tempResults = new ArrayList<String>();
+				
+				phrases.add(word);
+				
+				tempResults.clear();
+				for (String phrase : phrases) {
+					tempResults.addAll(getPinyinToneSubstitution(phrase))
+				}
+				phrases.addAll(tempResults);
+				
+				tempResults.clear();
+				for (String phrase : phrases) {
+					tempResults.addAll(getPinyinSubstitution(phrase));
+				}
+				phrases.addAll(tempResults);
+				
+				phrases.remove(word);
+				results.addAll(phrases);
+			}
+			else {
 				throw new ConfuserException("Invalid alphabet (" + alphabet.getCode() +" ).");
 			}
-		
-			results.addAll(getHanziSubsitution(word));
 			
 			// Should we return everything?
 			if (count == -1) {
@@ -312,6 +336,84 @@ class ChineseConfuser implements ConfuserInterface {
 		List<String> results = new ArrayList<String>();
 		results.addAll(phraseSet)
 		return results;
+	}
+	
+	List<String> getPinyinSubstitution(String phrase) {
+		List<String> results = new ArrayList<String>();
+		
+		for (int ndx = 0; ndx < phrase.length(); ndx++) {
+			char ch = phrase.charAt(ndx);
+			
+			if (ch == 'j') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'q'))
+			}
+			else if (ch == 'J') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'Q'))
+			}
+			else if (ch == 'q') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'j'))
+			}
+			else if (ch == 'Q') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'J'))
+			}
+			else if (ch == 'z') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'c'))
+			}
+			else if (ch == 'Z') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'C'))
+			}
+			else if (ch == 'c') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'z'))
+			}
+			else if (ch == 'C') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'Z'))
+			}
+			else if (ch == 't') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'d'))
+			}
+			else if (ch == 'T') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'D'))
+			}
+			else if (ch == 'd') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'t'))
+			}
+			else if (ch == 'D') {
+				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'T'))
+			}
+			else if (ch == 'r') {
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if ((ndx+2) <= phrase.length()) {
+					endString = phrase.substring(ndx+2)
+				}
+		
+				return beginString+"zh"+endString;
+			}
+			else if (ch == 'R') {
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+		
+				if ((ndx+2) <= phrase.length()) {
+					endString = phrase.substring(ndx+2)
+				}
+				
+				return beginString+"Zh"+endString;
+			}
+		}
+		
+		return results;
+	}
+	
+	private String addCharacterToStringAtPosition(String phrase, int index, char character) {
+		String beginString = phrase.substring(0,index)
+		String endString = ""
+		
+		if (index < phrase.length()) {
+			endString = phrase.substring(index+1)
+		}
+		
+		return beginString+character+endString;
 	}
 	
 	/**
