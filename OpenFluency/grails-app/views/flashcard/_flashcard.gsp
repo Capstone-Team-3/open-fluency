@@ -1,5 +1,5 @@
 <%@ page import="com.openfluency.media.Audio" %>
-<div class="flashcard animated slideInRight">
+<div class="flashcard animated slideInRight" data-id="${flashcardInstance.id}">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="flashcard-header">
