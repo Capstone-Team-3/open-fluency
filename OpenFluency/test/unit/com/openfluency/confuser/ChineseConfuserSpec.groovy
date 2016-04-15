@@ -4,13 +4,12 @@ import com.openfluency.language.Alphabet
 import com.openfluency.language.Language
 import spock.lang.Specification;
 import cscie99.team2.lingolearn.shared.error.ConfuserException;
-import spock.lang.Ignore
 
 class ChineseConfuserSpec extends Specification {
 	void "Test pin1yin1 tone substitution with word 'yes'"() {		given: "The word 'yes' written in pin1yin1"			String word = 'shi4'		when: "Pinyin Tone substitution generated for this word"			Language chinese = new Language(name: 'Chinese', code: 'CHN')			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")			ChineseConfuser japaneseConfuser = new ChineseConfuser()			List<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)		then: "Correct results are returned"			confusers != null			confusers.contains("shi1")
 			confusers.contains("shi2")
 			confusers.contains("shi3")
-			//confusers.contains("shi")	}
+			confusers.contains("shi")	}
 	
 	void "Test pin1yin1 tone substitution with word 'no'"() {
 		given: "The word 'yes' written in pin1yin1"
@@ -26,29 +25,29 @@ class ChineseConfuserSpec extends Specification {
 			confusers.contains("bu1 shi2")
 			confusers.contains("bu1 shi3")
 			confusers.contains("bu1 shi4")
-			//confusers.contains("bu1 shi")
+			confusers.contains("bu1 shi")
 			
 			confusers.contains("bu2 shi1")
 			confusers.contains("bu2 shi2")
 			confusers.contains("bu2 shi3")
-			//confusers.contains("bu2 shi")
+			confusers.contains("bu2 shi")
 			
 			confusers.contains("bu3 shi1")
 			confusers.contains("bu3 shi2")
 			confusers.contains("bu3 shi3")
 			confusers.contains("bu3 shi4")
-			//confusers.contains("bu3 shi")
+			confusers.contains("bu3 shi")
 			
 			confusers.contains("bu4 shi1")
 			confusers.contains("bu4 shi2")
 			confusers.contains("bu4 shi3")
 			confusers.contains("bu4 shi4")
-			//confusers.contains("bu4 shi")
+			confusers.contains("bu4 shi")
 			
 			//confusers.contains("bu shi1")
 			//confusers.contains("bu shi2")
 			//confusers.contains("bu shi3")
-			//confusers.contains("bu shi4")
+			confusers.contains("bu shi4")
 			//confusers.contains("bu shi")
 	}
 	
@@ -148,7 +147,6 @@ class ChineseConfuserSpec extends Specification {
 			confusers.contains("tiàn")
 	}
 	
-	@Ignore("TODO")
 	void "Test pinyin substituion of vowel+n with vowel+ng"() {
 		given: "The word 'you' written in pīnyīn"
 		String word = 'nín'
@@ -162,7 +160,6 @@ class ChineseConfuserSpec extends Specification {
 		confusers.contains("níng")
 	}
 	
-	@Ignore("TODO")
 	void "Test pinyin substituion of vowel+ng with vowel+n"() {
 		given: "The word 'ocean' written in pīnyīn"
 		String word = 'yáng'
@@ -176,7 +173,6 @@ class ChineseConfuserSpec extends Specification {
 		confusers.contains("yán")
 	}
 	
-	@Ignore("TODO")
 	void "Test pinyin substituion of zh with r"() {
 		given: "The word 'straight' written in pīnyīn"
 		String word = 'zhí'

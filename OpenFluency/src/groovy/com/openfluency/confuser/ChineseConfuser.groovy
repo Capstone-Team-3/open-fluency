@@ -96,14 +96,35 @@ class ChineseConfuser implements ConfuserInterface {
 		Set<String> phraseSet = new HashSet<String>();
 		phraseSet.add(phrase);
 		
+		// This is used to add the confuser results that can't go into the phraseSet
+		// Confusers that change the number of letters in the string can't go into phraseSet
+		Set<String> breakingPhraseSet = new HashSet<String>();
+		
 		for (int ndx = 0; ndx < phrase.length(); ndx++) {
 			char ch = phrase.charAt(ndx);
 			
 			Set<String> tempPhraseSet = new HashSet<String>();
 			
-
-			
-			if (ch == '1' || ch == '2' || ch == '3' || ch == '4') {			
+			if (ch == '1' || ch == '2' || ch == '3' || ch == '4') {
+				
+				// check the preceding character to ensure that valid tone number
+				if (ndx != 0) {
+					char charBefore = phrase.charAt(ndx - 1);
+					
+					if (!Character.isLetter(charBefore)) {
+						continue;
+					}
+				}
+				
+				// check the next character to ensure that valid tone number
+				if ((ndx + 1) < phrase.length()) {
+					char charAfter = phrase.charAt(ndx+1);
+					
+					if (Character.isDigit(charAfter)) {
+						continue;
+					}
+				}
+							
 				for (String p : phraseSet) {
 					String beginString = p.substring(0,ndx)
 					String endString = ""
@@ -116,7 +137,7 @@ class ChineseConfuser implements ConfuserInterface {
 					tempPhraseSet.add(beginString+'2'+endString);
 					tempPhraseSet.add(beginString+'3'+endString);
 					tempPhraseSet.add(beginString+'4'+endString);
-					// tempPhraseSet.add(beginString+endString);
+					breakingPhraseSet.add(beginString+endString);
 				}
 			}
 			else if (ch == 'ā' || ch == 'á' || ch == 'ǎ' || ch == 'à') {
@@ -331,6 +352,7 @@ class ChineseConfuser implements ConfuserInterface {
 			phraseSet.addAll(tempPhraseSet)
 		}
 		
+		phraseSet.addAll(breakingPhraseSet)
 		phraseSet.remove(phrase);
 		
 		List<String> results = new ArrayList<String>();
@@ -341,10 +363,44 @@ class ChineseConfuser implements ConfuserInterface {
 	List<String> getPinyinSubstitution(String phrase) {
 		List<String> results = new ArrayList<String>();
 		
+		String vowels = "āɑ̄ēīōūǖĀĒĪŌŪǕáɑ́éíóúǘÁÉÍÓÚǗǎɑ̌ěǐǒǔǚǍĚǏǑǓǙàɑ̀èìòùǜÀÈÌÒÙǛaɑeiouüAEIOUÜ"
+
 		for (int ndx = 0; ndx < phrase.length(); ndx++) {
 			char ch = phrase.charAt(ndx);
 			
-			if (ch == 'j') {
+			if (vowels.indexOf((int)ch) >= 0) {
+				// swap vowel+n with vowel + ng
+				if ((ndx + 1) < phrase.length()) {
+					char charAfterN = phrase.charAt(ndx+1);
+					char charAfterG = '\0' as char;
+					
+					if ((ndx + 2) < phrase.length()) {
+						charAfterG = phrase.charAt(ndx+2)
+					}
+					
+					if (charAfterN == 'n' && charAfterG == 'g') {
+						String beginString = phrase.substring(0,ndx+1)
+						String endString = ""
+						
+						if ((ndx+3) <= phrase.length()) {
+							endString = phrase.substring(ndx+3)
+						}
+						
+						results.add(beginString+'n'+endString);
+					}
+					else if (charAfterN == 'n') {
+						String beginString = phrase.substring(0,ndx+1)
+						String endString = ""
+						
+						if ((ndx+2) < phrase.length()) {
+							endString = phrase.substring(ndx+2)
+						}
+						
+						results.add(beginString+'ng'+endString)
+					}
+				}
+			}
+			else if (ch == 'j') {
 				results.add(addCharacterToStringAtPosition(phrase, ndx, (char)'q'))
 			}
 			else if (ch == 'J') {
@@ -388,7 +444,7 @@ class ChineseConfuser implements ConfuserInterface {
 					endString = phrase.substring(ndx+2)
 				}
 		
-				return beginString+"zh"+endString;
+				results.add(beginString+"zh"+endString)
 			}
 			else if (ch == 'R') {
 				String beginString = phrase.substring(0,ndx)
@@ -398,9 +454,38 @@ class ChineseConfuser implements ConfuserInterface {
 					endString = phrase.substring(ndx+2)
 				}
 				
-				return beginString+"Zh"+endString;
+				results.add(beginString+"Zh"+endString)
+			}
+			else if (ch == 'h') {
+				// swap zh with r
+				if (ndx != 0) {
+					char charBefore = phrase.charAt(ndx - 1);
+					
+					if (charBefore == (char)'z') {
+						String beginString = phrase.substring(0,ndx-1)
+						String endString = ""
+				
+						if ((ndx+2) <= phrase.length()) {
+							endString = phrase.substring(ndx+1)
+						}
+						
+						results.add(beginString+"r"+endString)
+					}
+					else if (charBefore == (char)'Z') {
+						String beginString = phrase.substring(0,ndx-1)
+						String endString = ""
+				
+						if ((ndx+1) <= phrase.length()) {
+							endString = phrase.substring(ndx+1)
+						}
+						
+						results.add(beginString+"R"+endString)
+					}
+				}
 			}
 		}
+		
+
 		
 		return results;
 	}
@@ -413,7 +498,7 @@ class ChineseConfuser implements ConfuserInterface {
 			endString = phrase.substring(index+1)
 		}
 		
-		return beginString+character+endString;
+		return beginString+character+endString
 	}
 	
 	/**
