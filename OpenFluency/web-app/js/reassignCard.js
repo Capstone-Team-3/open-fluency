@@ -1,3 +1,6 @@
+var dsFlashcardId = null;
+var selectedCards = [];
+
 $('.reassign-btn').click(function(event) {
 	event.stopImmediatePropagation();
     $('#myModal2').modal();
@@ -22,4 +25,18 @@ $('#reassign-submit').click(function(){
 	        alert('reassign failed');
 	     }
 	 });
-});   
+});  
+
+
+$('.flashcard-result').click(function() {
+	console.log('.flashcard-result clicked')
+	var selected = $(this).hasClass('card-selected');
+	
+	if (selected) {
+		$(this).removeClass('card-selected');
+		console.log(this);
+	}		
+	else {
+		$(this).addClass('card-selected');
+	}
+});

@@ -144,6 +144,15 @@ h2 {
 							</li>
 						</ul>
 					</div>
+					
+					<div class="btn-group text-left">
+						<g:if test="${isOwner}">
+							<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+								Move Flashcards
+								<span class="glyphicon glyphicon-move"></span>
+							</button>
+						</g:if>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -202,7 +211,7 @@ h2 {
 <h4 class="modal-title">Reassign Flashcard to deck</h4>
 </div>
 <div class="modal-body">
-    <div id='ul-contaier'>
+    <div id='ul-container'>
         <h2>
             My Decks
             <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
