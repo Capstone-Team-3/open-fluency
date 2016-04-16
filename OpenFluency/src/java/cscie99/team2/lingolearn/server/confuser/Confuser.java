@@ -60,7 +60,7 @@ public class Confuser {
 			// Start by running the relevant functions
 			List<String> results = new ArrayList<String>();
 			Set<String> phrases = new HashSet<String>();
-			List<String> tempResults = new ArrayList<String>();
+			Set<String> tempResults = new HashSet<String>();
 			
 			switch (type) {
 				case Hiragana:
@@ -77,12 +77,33 @@ public class Confuser {
 						tempResults.addAll(getSmallTsuManiuplation(phrase));
 					}
 					phrases.addAll(tempResults);
+						
+					boolean updates = false;
 					
+					do {
+						updates = false;
+						int length = phrases.size();
+
+						tempResults.clear();
+						for (String phrase : phrases) {
+							tempResults.addAll(getHiraganaManipulation(phrase));
+						}
+						phrases.addAll(tempResults);
+							
+						if (phrases.size() > length) {
+							updates = true;
+							length = phrases.size();
+						}
+					} while (updates);
+
+					phrases.addAll(tempResults);
+						
 					tempResults.clear();
 					for (String phrase : phrases) {
-						tempResults.addAll(getHiraganaManipulation(phrase));
+						tempResults.addAll(removeHiraganaVowelElongation(phrase));
 					}
 					phrases.addAll(tempResults);
+
 					
 					phrases.remove(card.getHiragana());
 					results.addAll(phrases);
@@ -198,6 +219,32 @@ public class Confuser {
 				}
 			}
 		}
+		return phrases;
+	}
+	
+	public List<String> removeHiraganaVowelElongation(String phrase) {
+		List<String> phrases = new ArrayList<String>();
+		
+		// Start by iterating through each of the characters in the phrase
+		for (int ndx = 1; ndx < phrase.length(); ndx++) {
+			char ch = phrase.charAt(ndx);
+			
+			char charBefore = phrase.charAt(ndx - 1);
+			
+			if (vowelCombinations.keySet().contains(ch)) {
+				if (vowelCombinations.get(ch).contains(String.valueOf(charBefore))) {
+					String beginString = phrase.substring(0,ndx);
+					String endString = "";
+					
+					if (ndx < phrase.length()) {
+						endString = phrase.substring(ndx+1);
+					}
+					
+					phrases.add(beginString+endString);
+				}
+			}
+		}
+		
 		return phrases;
 	}
 	

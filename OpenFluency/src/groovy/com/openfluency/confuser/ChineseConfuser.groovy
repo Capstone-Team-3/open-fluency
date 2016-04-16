@@ -43,15 +43,28 @@ class ChineseConfuser implements ConfuserInterface {
 			}
 			else if (alphabet.code == "pinyin") {
 				Set<String> phrases = new HashSet<String>();
-				List<String> tempResults = new ArrayList<String>();
+				Set<String> tempResults = new HashSet<String>();
 				
-				phrases.add(word);
+				phrases.add(word);				
 				
-				tempResults.clear();
-				for (String phrase : phrases) {
-					tempResults.addAll(getPinyinToneSubstitution(phrase))
+				boolean updates = true;
+				
+				while(updates) {
+					updates = false;
+					
+					int length = phrases.size();
+
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getPinyinToneSubstitution(phrase))
+					}
+					phrases.addAll(tempResults);
+						
+					if (phrases.size() > length) {
+						updates = true;
+						length = phrases.size();
+					}
 				}
-				phrases.addAll(tempResults);
 				
 				tempResults.clear();
 				for (String phrase : phrases) {
@@ -92,13 +105,8 @@ class ChineseConfuser implements ConfuserInterface {
 		}
 	}
 	
-	List<String> getPinyinToneSubstitution(String phrase) {
+	Set<String> getPinyinToneSubstitution(String phrase) {
 		Set<String> phraseSet = new HashSet<String>();
-		phraseSet.add(phrase);
-		
-		// This is used to add the confuser results that can't go into the phraseSet
-		// Confusers that change the number of letters in the string can't go into phraseSet
-		Set<String> breakingPhraseSet = new HashSet<String>();
 		
 		for (int ndx = 0; ndx < phrase.length(); ndx++) {
 			char ch = phrase.charAt(ndx);
@@ -125,239 +133,206 @@ class ChineseConfuser implements ConfuserInterface {
 					}
 				}
 							
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'1'+endString);
-					tempPhraseSet.add(beginString+'2'+endString);
-					tempPhraseSet.add(beginString+'3'+endString);
-					tempPhraseSet.add(beginString+'4'+endString);
-					breakingPhraseSet.add(beginString+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'1'+endString);
+				tempPhraseSet.add(beginString+'2'+endString);
+				tempPhraseSet.add(beginString+'3'+endString);
+				tempPhraseSet.add(beginString+'4'+endString);
+				tempPhraseSet.add(beginString+endString);
 			}
 			else if (ch == 'ā' || ch == 'á' || ch == 'ǎ' || ch == 'à') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ā'+endString);
-					tempPhraseSet.add(beginString+'á'+endString);
-					tempPhraseSet.add(beginString+'ǎ'+endString);
-					tempPhraseSet.add(beginString+'à'+endString);
-					tempPhraseSet.add(beginString+'a'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ā'+endString);
+				tempPhraseSet.add(beginString+'á'+endString);
+				tempPhraseSet.add(beginString+'ǎ'+endString);
+				tempPhraseSet.add(beginString+'à'+endString);
+				tempPhraseSet.add(beginString+'a'+endString);
 			}
 			else if (ch == 'ɑ̄' || ch == 'ɑ́' || ch == 'ɑ̌' || ch == 'ɑ̀') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ɑ̄'+endString);
-					tempPhraseSet.add(beginString+'ɑ́'+endString);
-					tempPhraseSet.add(beginString+'ɑ̌'+endString);
-					tempPhraseSet.add(beginString+'ɑ̀'+endString);
-					tempPhraseSet.add(beginString+'ɑ'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ɑ̄'+endString);
+				tempPhraseSet.add(beginString+'ɑ́'+endString);
+				tempPhraseSet.add(beginString+'ɑ̌'+endString);
+				tempPhraseSet.add(beginString+'ɑ̀'+endString);
+				tempPhraseSet.add(beginString+'ɑ'+endString);
 			}
 			else if (ch == 'ē' || ch == 'é' || ch == 'ě' || ch == 'è') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ē'+endString);
-					tempPhraseSet.add(beginString+'é'+endString);
-					tempPhraseSet.add(beginString+'ě'+endString);
-					tempPhraseSet.add(beginString+'è'+endString);
-					tempPhraseSet.add(beginString+'e'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ē'+endString);
+				tempPhraseSet.add(beginString+'é'+endString);
+				tempPhraseSet.add(beginString+'ě'+endString);
+				tempPhraseSet.add(beginString+'è'+endString);
+				tempPhraseSet.add(beginString+'e'+endString);
 			}
 			else if (ch == 'ī' || ch == 'í' || ch == 'ǐ' || ch == 'ì') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ī'+endString);
-					tempPhraseSet.add(beginString+'í'+endString);
-					tempPhraseSet.add(beginString+'ǐ'+endString);
-					tempPhraseSet.add(beginString+'ì'+endString);
-					tempPhraseSet.add(beginString+'i'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ī'+endString);
+				tempPhraseSet.add(beginString+'í'+endString);
+				tempPhraseSet.add(beginString+'ǐ'+endString);
+				tempPhraseSet.add(beginString+'ì'+endString);
+				tempPhraseSet.add(beginString+'i'+endString);
 			}
 			else if (ch == 'ō' || ch == 'ó' || ch == 'ǒ' || ch == 'ò') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ō'+endString);
-					tempPhraseSet.add(beginString+'ó'+endString);
-					tempPhraseSet.add(beginString+'ǒ'+endString);
-					tempPhraseSet.add(beginString+'ò'+endString);
-					tempPhraseSet.add(beginString+'o'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ō'+endString);
+				tempPhraseSet.add(beginString+'ó'+endString);
+				tempPhraseSet.add(beginString+'ǒ'+endString);
+				tempPhraseSet.add(beginString+'ò'+endString);
+				tempPhraseSet.add(beginString+'o'+endString);
 			}
 			else if (ch == 'ū' || ch == 'ú' || ch == 'ǔ' || ch == 'ù') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ū'+endString);
-					tempPhraseSet.add(beginString+'ú'+endString);
-					tempPhraseSet.add(beginString+'ǔ'+endString);
-					tempPhraseSet.add(beginString+'ù'+endString);
-					tempPhraseSet.add(beginString+'u'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ū'+endString);
+				tempPhraseSet.add(beginString+'ú'+endString);
+				tempPhraseSet.add(beginString+'ǔ'+endString);
+				tempPhraseSet.add(beginString+'ù'+endString);
+				tempPhraseSet.add(beginString+'u'+endString);
 			}
 			else if (ch == 'ǖ' || ch == 'ǘ' || ch == 'ǚ' || ch == 'ǜ') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'ǖ'+endString);
-					tempPhraseSet.add(beginString+'ǘ'+endString);
-					tempPhraseSet.add(beginString+'ǚ'+endString);
-					tempPhraseSet.add(beginString+'ǜ'+endString);
-					tempPhraseSet.add(beginString+'ü'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'ǖ'+endString);
+				tempPhraseSet.add(beginString+'ǘ'+endString);
+				tempPhraseSet.add(beginString+'ǚ'+endString);
+				tempPhraseSet.add(beginString+'ǜ'+endString);
+				tempPhraseSet.add(beginString+'ü'+endString);
 			}
 			else if (ch == 'Ā' || ch == 'Á' || ch == 'Ǎ' || ch == 'À') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'Ā'+endString);
-					tempPhraseSet.add(beginString+'Á'+endString);
-					tempPhraseSet.add(beginString+'Ǎ'+endString);
-					tempPhraseSet.add(beginString+'À'+endString);
-					tempPhraseSet.add(beginString+'A'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'Ā'+endString);
+				tempPhraseSet.add(beginString+'Á'+endString);
+				tempPhraseSet.add(beginString+'Ǎ'+endString);
+				tempPhraseSet.add(beginString+'À'+endString);
+				tempPhraseSet.add(beginString+'A'+endString);
 			}
 			else if (ch == 'Ē' || ch == 'É' || ch == 'Ě' || ch == 'È') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'Ē'+endString);
-					tempPhraseSet.add(beginString+'É'+endString);
-					tempPhraseSet.add(beginString+'Ě'+endString);
-					tempPhraseSet.add(beginString+'È'+endString);
-					tempPhraseSet.add(beginString+'E'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'Ē'+endString);
+				tempPhraseSet.add(beginString+'É'+endString);
+				tempPhraseSet.add(beginString+'Ě'+endString);
+				tempPhraseSet.add(beginString+'È'+endString);
+				tempPhraseSet.add(beginString+'E'+endString);
 			}
 			else if (ch == 'Ī' || ch == 'Í' || ch == 'Ǐ' || ch == 'Ì') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'Ī'+endString);
-					tempPhraseSet.add(beginString+'Í'+endString);
-					tempPhraseSet.add(beginString+'Ǐ'+endString);
-					tempPhraseSet.add(beginString+'Ì'+endString);
-					tempPhraseSet.add(beginString+'I'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'Ī'+endString);
+				tempPhraseSet.add(beginString+'Í'+endString);
+				tempPhraseSet.add(beginString+'Ǐ'+endString);
+				tempPhraseSet.add(beginString+'Ì'+endString);
+				tempPhraseSet.add(beginString+'I'+endString);
 			}
 			else if (ch == 'Ō' || ch == 'Ó' || ch == 'Ǒ' || ch == 'Ò') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'Ō'+endString);
-					tempPhraseSet.add(beginString+'Ó'+endString);
-					tempPhraseSet.add(beginString+'Ǒ'+endString);
-					tempPhraseSet.add(beginString+'Ò'+endString);
-					tempPhraseSet.add(beginString+'O'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'Ō'+endString);
+				tempPhraseSet.add(beginString+'Ó'+endString);
+				tempPhraseSet.add(beginString+'Ǒ'+endString);
+				tempPhraseSet.add(beginString+'Ò'+endString);
+				tempPhraseSet.add(beginString+'O'+endString);
 			}
 			else if (ch == 'Ū' || ch == 'Ú' || ch == 'Ǔ' || ch == 'Ù') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'Ū'+endString);
-					tempPhraseSet.add(beginString+'Ú'+endString);
-					tempPhraseSet.add(beginString+'Ǔ'+endString);
-					tempPhraseSet.add(beginString+'Ù'+endString);
-					tempPhraseSet.add(beginString+'U'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'Ū'+endString);
+				tempPhraseSet.add(beginString+'Ú'+endString);
+				tempPhraseSet.add(beginString+'Ǔ'+endString);
+				tempPhraseSet.add(beginString+'Ù'+endString);
+				tempPhraseSet.add(beginString+'U'+endString);
 			}
 			else if (ch == 'Ǖ' || ch == 'Ǘ' || ch == 'Ǚ' || ch == 'Ǜ') {
-				for (String p : phraseSet) {
-					String beginString = p.substring(0,ndx)
-					String endString = ""
-					
-					if (ndx < phrase.length()) {
-						endString = p.substring(ndx+1)
-					}
-					
-					tempPhraseSet.add(beginString+'Ǖ'+endString);
-					tempPhraseSet.add(beginString+'Ǘ'+endString);
-					tempPhraseSet.add(beginString+'Ǚ'+endString);
-					tempPhraseSet.add(beginString+'Ǜ'+endString);
-					tempPhraseSet.add(beginString+'Ü'+endString);
+				String beginString = phrase.substring(0,ndx)
+				String endString = ""
+				
+				if (ndx < phrase.length()) {
+					endString = phrase.substring(ndx+1)
 				}
+				
+				tempPhraseSet.add(beginString+'Ǖ'+endString);
+				tempPhraseSet.add(beginString+'Ǘ'+endString);
+				tempPhraseSet.add(beginString+'Ǚ'+endString);
+				tempPhraseSet.add(beginString+'Ǜ'+endString);
+				tempPhraseSet.add(beginString+'Ü'+endString);
 			}
 			
 			phraseSet.addAll(tempPhraseSet)
 		}
 		
-		phraseSet.addAll(breakingPhraseSet)
-		phraseSet.remove(phrase);
-		
-		List<String> results = new ArrayList<String>();
-		results.addAll(phraseSet)
-		return results;
+		return phraseSet
 	}
 	
 	List<String> getPinyinSubstitution(String phrase) {
