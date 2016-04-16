@@ -198,6 +198,15 @@ public class Confuser {
 			if (vowelCombinations.keySet().contains(ch)) {
 				// The only vowels that are doubled in regular use are お (o) and  え (e)
 				if (next != ch && (ch == 'え' || ch == 'お')) {
+					
+					// Don't double again if already doubled
+					if (ndx != 0) {
+						char charBefore = phrase.charAt(ndx - 1);
+						if (ch == charBefore) {
+							continue;
+						}
+					}
+					
 					phrases.add(insertCharacter(phrase, ndx, ch));
 				}
 				continue;
@@ -222,8 +231,8 @@ public class Confuser {
 		return phrases;
 	}
 	
-	public List<String> removeHiraganaVowelElongation(String phrase) {
-		List<String> phrases = new ArrayList<String>();
+	public Set<String> removeHiraganaVowelElongation(String phrase) {
+		Set<String> phrases = new HashSet<String>();
 		
 		// Start by iterating through each of the characters in the phrase
 		for (int ndx = 1; ndx < phrase.length(); ndx++) {
