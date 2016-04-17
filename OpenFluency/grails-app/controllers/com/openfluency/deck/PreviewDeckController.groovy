@@ -28,7 +28,7 @@ class PreviewDeckController {
         params.max = Math.min(max ?: 10, 100)
        // respond PreviewDeck.list(params), model:[previewDeckInstanceCount: PreviewDeck.count()]
         def previewdecks = PreviewDeck.findAll("from PreviewDeck where owner_id= ? order by uploadDate desc",[user.id], params)
-		respond previewdecks , model:[previewDeckInstanceCount: PreviewDeck.countByOwner(user)]
+		respond previewdecks , model:[previewDeckInstanceCount: previewdecks.size() ]
     }
 
 	// Display a preview deck associated with a document
