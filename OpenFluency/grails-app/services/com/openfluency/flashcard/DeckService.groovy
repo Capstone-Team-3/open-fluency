@@ -111,7 +111,7 @@ class DeckService {
 	/**
     * Create a new deck owned by the currently logged in user
     */
-    Deck createDeck(String title, String description, String languageId, String sourceLanguageId, String cardServerName) {
+    Deck createDeck(String title, String description, String languageId, String sourceLanguageId, String cardServerName, boolean privateDeck) {
     	User theUser = User.load(springSecurityService.principal.id)
     	
     	Deck deck = new Deck(title: title, 
@@ -119,7 +119,8 @@ class DeckService {
     		owner: theUser, 
     		language: Language.load(languageId),
     		sourceLanguage: Language.load(sourceLanguageId),
-    		cardServerName: cardServerName)
+    		cardServerName: cardServerName,
+			privateDeck: privateDeck)
     	deck.save()
 
     	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
@@ -174,7 +175,7 @@ class DeckService {
     /**
     * Search for Decks
     */
-    List<Deck> searchDecks(Long languageId, String keyword) {
+    List<Deck> searchDecks(Long languageId, String keyword, User user) {
     	log.info "Searching Decks with languageId: $languageId and Keywords: $keyword"
 
     	Deck.withCriteria {
@@ -185,6 +186,7 @@ class DeckService {
             		eq('id', languageId)
             	}
             }
+			
 
             // Search using keywords in the title or description
             if(keyword) {
@@ -193,6 +195,11 @@ class DeckService {
             		ilike("description", "%${keyword}%")
             	}
             }
+			
+			or {
+				eq("privateDeck", false)
+				eq("owner", user)
+			}
         }
     }
 
