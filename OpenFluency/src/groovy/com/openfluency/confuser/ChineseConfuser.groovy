@@ -21,7 +21,97 @@ class ChineseConfuser implements ConfuserInterface {
 	
 	// The language code we are working with
 	private final static String CONFUSER_LANGUAGE = "ch";
-	
+
+    private String[] legalSoundList = [
+        "a","o","e","er","aiao","ou","an","en","ang","eng","yi","ya",
+        "yao","ye","you","yan","yin","yang","ying","yong","wu","wa","wo","wai","wei","wan","wen",
+        "wang","weng","yu","yue","yuan","yun",
+        "ba","bo","bai","bei","bao","ban","ben","bang","beng","bi","biao","bie","bian","bin","bing","bu",
+        "pa","po","pai","pei","pao","pou","pan","pen","pang","peng","pi","piao","pie","pian","pin","ping","pu",
+        "ma","mo","me","mai","mei","mao","mou","man","men","mang","meng","mi","miao","mie","miu","mian","min","ming","mu",
+        "fa","fo","fei","fou","fan","fen","fang","feng",
+        "da","de","dai","dei","dao","dou","dan","den","dang","deng","dong","di","diao","die","diu","dian","ding","du","duo","dui","duan","dun",
+        "ta","te","tai","tei","tao","tou","tan","tang","teng","tong","ti","tiao","tie","tian","ting","tu","tuo","tui","tuan","tun",
+        "na","ne","nai","nei","nao","nou","nan","nen","nang","neng","nong","ni","niao","nie","niu","nian","nin","niang","ning","nu","nuo","nuan","nü","nüe","nue", //nue is a simplified nüe
+        "la","le","lai","lei","lao","lou","lan","lang","leng","long","li","lia","liao","lie","liu","lian","lin","liang","ling","lu","luo","luan","lun","lü","lüe", "lue", //lue to catche lüe
+        "ga","ge","gai","gei","gao","gou","gan","gen","gang","geng","gong","gu","gua","guo","guai","gui","guan","gun","guang",
+        "ka","ke","kai","kei","kao","kou","kan","ken","kang","keng","kong","ku","kua","kuo","kuai","kui","kuan","kun","kuang",
+        "ha","he","hai","hei","hao","hou","han","hen","hang","heng","hong","hu","hua","huo","huai","hui","huan","hun","huang",
+        "za","ze","zi","zai","zei","zao","zou","zan","zen","zang","zeng","zong","zu","zuo","zui","zuan","zun",
+        "ca","ce","ci","cai","cao","cou","can","cen","cang","ceng","cong","cu","cuo","cui","cuan","cun",
+        "sa","se","si","sai","sao","sou","san","sen","sang","seng","song","su","suo","sui","suan","sun",
+        "zha","zhe","zhi","zhai","zhei","zhao","zhou","zhan","zhen","zhang","zheng","zhong","zhu","zhua","zhuo","zhuai","zhui","zhuan","zhun","zhuang",
+        "cha","che","chi","chai","chao","chou","chan","chen","chang","cheng","chong","chu","chua","chuo","chuai","chui","chuan","chun","chuang",
+        "sha","she","shi","shai","shei","shao","shou","shan","shen","shang","sheng","shu","shua","shuo","shuai","shui","shuan","shun","shuang",
+        "re","ri","rao","rou","ran","ren","rang","reng","rong","ru","rua","ruo","rui","ruan","run",
+        "ji","jia","jiao","jie","jiu","jian","jin","jiang","jing","jiong","ju","jue","juan","jun",
+        "qi","qia","qiao","qie","qiu","qian","qin","qiang","qing","qiong","qu","que","quan","qun",
+		"xi","xia","xiao","xie","xiu","xian","xin","xiang","xing","xiong","xu","xue","xuan","xun"];
+
+    private Set<String> legalSounds;
+
+    public ChineseConfuser() {
+        legalSounds = new HashSet<String>(Arrays.asList(legalSoundList));
+    }
+
+    public static String removeTone(String s)
+    {
+		StringBuilder sb=new StringBuilder();
+		final String [] tone = ["ɑ̄ɑ́ɑ̀ǎ","ēéěè","īíǐì","ōóǒò","ūǖúǘǔǚùǜ","1234"];
+		for (int ndx = 0; ndx < s.length(); ndx++) {
+			char ch = s.charAt(ndx);
+			if ( tone[0].indexOf((int)ch) >= 0)	sb.append('a');
+			else if (tone[1].indexOf((int)ch) >= 0)	sb.append('e');
+			else if (tone[2].indexOf((int)ch) >= 0)	sb.append('i');
+			else if (tone[3].indexOf((int)ch) >= 0)	sb.append('o');
+			else if (tone[4].indexOf((int)ch) >= 0)	sb.append('u');
+			else if ("1234".indexOf((int)ch) < 0)	sb.append(ch);
+        }
+		return sb.toString();
+    }
+
+    public boolean isLegal(String s){
+		String t=removeTone(s.toLowerCase());
+        if (legalSounds.contains(removeTone(s.toLowerCase()))) {
+            return true;
+        }
+    }
+
+// TODO:
+// This will only work if the user put spaces between each syllable, 
+// We may need a better tokenizer if they mush them together like "rénmínbì"
+    public String[] tokenize(String str) {
+        return str.split("\\s+");    
+    }
+
+    public List<String> getAlteredString(String str) {
+		String option = ""; // no syllables
+        String[] syllables = tokenize(str); 
+        List<String> results=new ArrayList<String>();
+        for (String s : syllables) {
+            List<String> tr= getPinyinSubstitution(s);
+			boolean filled=false;
+			for (String altered : tr) {
+				// If altered syllable is legal, use it, else use the original
+				if (isLegal(altered)) {
+					if (!filled) {
+						for (int i=0; i < results.size(); i++) {
+							results.set(i, results.get(i) + " " + altered);   
+						}
+						filled = true;
+					}
+					results.add(option + (option.isEmpty()?"":" ") + altered);  // Add the new alternative as an option  
+				}
+			}
+			if (!filled) // Add the syllable to the existing options
+				for (int i=0; i < results.size(); i++) {
+					results.set(i, results.get(i) + " " + s);   
+				}
+			option += (option.isEmpty()?"":" ") +  s;
+        }
+		return results;
+    }
+
 	/**
 	 * Get a random list of confusers of given type limited to the count 
 	 * provided, these results are checked against the black list to 
@@ -47,8 +137,14 @@ class ChineseConfuser implements ConfuserInterface {
 				
 				phrases.add(word);				
 				
+				tempResults.clear();
+				for (String phrase : phrases) {
+					//tempResults.addAll(getPinyinSubstitution(phrase));
+					tempResults.addAll(getAlteredString(phrase));
+				}
+
 				boolean updates = true;
-				
+				phrases.addAll(tempResults);
 				while(updates) {
 					updates = false;
 					
@@ -65,12 +161,6 @@ class ChineseConfuser implements ConfuserInterface {
 						length = phrases.size();
 					}
 				}
-				
-				tempResults.clear();
-				for (String phrase : phrases) {
-					tempResults.addAll(getPinyinSubstitution(phrase));
-				}
-				phrases.addAll(tempResults);
 				
 				phrases.remove(word);
 				results.addAll(phrases);
@@ -459,8 +549,8 @@ class ChineseConfuser implements ConfuserInterface {
 				}
 			}
 		}
-		
 
+		
 		
 		return results;
 	}

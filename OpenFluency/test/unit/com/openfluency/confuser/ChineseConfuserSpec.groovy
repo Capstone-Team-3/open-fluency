@@ -173,6 +173,7 @@ class ChineseConfuserSpec extends Specification {
 		confusers.contains("yán")
 	}
 	
+	
 	void "Test pinyin substituion of zh with r"() {
 		given: "The word 'straight' written in pīnyīn"
 		String word = 'zhí'
@@ -184,5 +185,33 @@ class ChineseConfuserSpec extends Specification {
 	then: "Correct results are returned"
 		confusers != null
 		confusers.contains("rí")
+	}
+
+	void "Test pinyin substitution of unused sounds"() {
+		given: "Pinyin that would give bad substitution"
+		String word = 'zhǎ'
+	when: "Pinyin Tone substitution generated"
+		Language chinese = new Language(name: 'Chinese', code: 'CHN')
+		Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
+		ChineseConfuser japaneseConfuser = new ChineseConfuser()
+		List<String> confusers = japaneseConfuser.getAlteredString(word)
+	then: "Bad results are not returned"
+		confusers != null
+		!confusers.contains("rǎ")
+		confusers.contains("chǎ")
+	}
+
+	void "Test pinyin substitution of unused sounds with n/ng"() {
+		given: "Pinyin that would give bad substitution"
+		String word = 'dén'
+	when: "Pinyin Tone substitution generated"
+		Language chinese = new Language(name: 'Chinese', code: 'CHN')
+		Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
+		ChineseConfuser japaneseConfuser = new ChineseConfuser()
+		List<String> confusers = japaneseConfuser.getAlteredString(word)
+	then: "Bad results are not returned"
+		confusers != null
+		!confusers.contains("tén")
+		confusers.contains("déng")
 	}
 }
