@@ -117,7 +117,7 @@ class DeckController {
     def delete(Deck deckInstance) {
         // Check for permissions
         if(springSecurityService.principal.id != deckInstance.owner.id) {
-            flash.message = "You don't have permissions to edit this deck!"
+            flash.message = "You don't have permissions to delete this deck!"
             redirect(uri: request.getHeader('referer'))
             return
         }
