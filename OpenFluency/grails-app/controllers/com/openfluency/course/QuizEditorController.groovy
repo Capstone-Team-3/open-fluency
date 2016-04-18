@@ -25,7 +25,9 @@ class QuizEditorController {
 			return
 		}
 
-		[quizInstance: quizInstance]
+		Course courseInstance = quizInstance.course
+		
+		[quizInstance: quizInstance, courseInstance: courseInstance]
 	}
 	
 	@Secured(['ROLE_INSTRUCTOR'])
