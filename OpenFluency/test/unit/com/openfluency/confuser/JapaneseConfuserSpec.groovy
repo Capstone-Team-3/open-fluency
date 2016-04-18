@@ -120,7 +120,6 @@ class JapaneseConfuserSpec extends Specification {
 			!confusers2.contains('とうっき')
 	}
 	
-	@Ignore("TODO")
 	void "there are more options for this such as the removal of the long vowel"() {
 		given: "A word written in Hiragana"
 			String word = "わふう"
@@ -135,7 +134,6 @@ class JapaneseConfuserSpec extends Specification {
 			confusers.contains('わふ') // removal of the long vowel
 	}
 	
-	@Ignore("TODO")
 	void "a third option would be to have both long"() {
 		given: "A word written in Hiragana"
 			String word = "みぎ"

@@ -1,10 +1,7 @@
 package com.openfluency.confuser
 
-import com.openfluency.course.Chapter;
 import com.openfluency.language.Alphabet
 import com.openfluency.language.Language
-import cscie99.team2.lingolearn.server.confuser.PhraseType
-import cscie99.team2.lingolearn.server.confuser.ConfuserTools
 import grails.converters.JSON
 
 class ConfuserController {

@@ -6,7 +6,7 @@ import spock.lang.Specification;
 import cscie99.team2.lingolearn.shared.error.ConfuserException;
 
 class ChineseConfuserSpec extends Specification {
-	void "Test pin1yin1 tone substitution with word 'yes'"() {		given: "The word 'yes' written in pin1yin1"			String word = 'shi4'		when: "Pinyin Tone substitution generated for this word"			Language chinese = new Language(name: 'Chinese', code: 'CHN')			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")			ChineseConfuser japaneseConfuser = new ChineseConfuser()			List<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)		then: "Correct results are returned"			confusers != null			confusers.contains("shi1")
+	void "Test pin1yin1 tone substitution with word 'yes'"() {		given: "The word 'yes' written in pin1yin1"			String word = 'shi4'		when: "Pinyin Tone substitution generated for this word"			Language chinese = new Language(name: 'Chinese', code: 'CHN')			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")			ChineseConfuser japaneseConfuser = new ChineseConfuser()			Set<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)		then: "Correct results are returned"			confusers != null			confusers.contains("shi1")
 			confusers.contains("shi2")
 			confusers.contains("shi3")
 			confusers.contains("shi")	}
@@ -18,7 +18,7 @@ class ChineseConfuserSpec extends Specification {
 			Language chinese = new Language(name: 'Chinese', code: 'CHN')
 			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
 			ChineseConfuser japaneseConfuser = new ChineseConfuser()
-			List<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)
+			List<String> confusers = japaneseConfuser.getConfusers(word, pinyin, -1)
 		then: "Correct results are returned"
 			confusers != null
 			confusers.contains("bu1 shi1")
@@ -44,11 +44,11 @@ class ChineseConfuserSpec extends Specification {
 			confusers.contains("bu4 shi4")
 			confusers.contains("bu4 shi")
 			
-			//confusers.contains("bu shi1")
-			//confusers.contains("bu shi2")
-			//confusers.contains("bu shi3")
+			confusers.contains("bu shi1")
+			confusers.contains("bu shi2")
+			confusers.contains("bu shi3")
 			confusers.contains("bu shi4")
-			//confusers.contains("bu shi")
+			confusers.contains("bu shi")
 	}
 	
 	void "Test pīnyīn tone substitution with word 'yes'"() {
@@ -58,7 +58,7 @@ class ChineseConfuserSpec extends Specification {
 			Language chinese = new Language(name: 'Chinese', code: 'CHN')
 			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
 			ChineseConfuser japaneseConfuser = new ChineseConfuser()
-			List<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)
+			Set<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)
 		then: "Correct results are returned"
 			confusers != null
 			confusers.contains("shī")
@@ -74,7 +74,7 @@ class ChineseConfuserSpec extends Specification {
 			Language chinese = new Language(name: 'Chinese', code: 'CHN')
 			Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
 			ChineseConfuser japaneseConfuser = new ChineseConfuser()
-			List<String> confusers = japaneseConfuser.getPinyinToneSubstitution(word)
+			Set<String> confusers = japaneseConfuser.getConfusers(word, pinyin, -1)
 		then: "Correct results are returned"
 			confusers != null
 			confusers.contains("bū shī")
@@ -173,6 +173,7 @@ class ChineseConfuserSpec extends Specification {
 		confusers.contains("yán")
 	}
 	
+	
 	void "Test pinyin substituion of zh with r"() {
 		given: "The word 'straight' written in pīnyīn"
 		String word = 'zhí'
@@ -184,5 +185,33 @@ class ChineseConfuserSpec extends Specification {
 	then: "Correct results are returned"
 		confusers != null
 		confusers.contains("rí")
+	}
+
+	void "Test pinyin substitution of unused sounds"() {
+		given: "Pinyin that would give bad substitution"
+		String word = 'zhǎ'
+	when: "Pinyin Tone substitution generated"
+		Language chinese = new Language(name: 'Chinese', code: 'CHN')
+		Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
+		ChineseConfuser japaneseConfuser = new ChineseConfuser()
+		List<String> confusers = japaneseConfuser.getAlteredString(word)
+	then: "Bad results are not returned"
+		confusers != null
+		!confusers.contains("rǎ")
+		confusers.contains("chǎ")
+	}
+
+	void "Test pinyin substitution of unused sounds with n/ng"() {
+		given: "Pinyin that would give bad substitution"
+		String word = 'dén'
+	when: "Pinyin Tone substitution generated"
+		Language chinese = new Language(name: 'Chinese', code: 'CHN')
+		Alphabet pinyin = new Alphabet(name: "Pinyin", language: chinese, code: "pinyin")
+		ChineseConfuser japaneseConfuser = new ChineseConfuser()
+		List<String> confusers = japaneseConfuser.getAlteredString(word)
+	then: "Bad results are not returned"
+		confusers != null
+		!confusers.contains("tén")
+		confusers.contains("déng")
 	}
 }

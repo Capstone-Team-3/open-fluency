@@ -43,7 +43,7 @@ class ResearcherSpec extends GebReportingSpec {
 	
 	def "Researcher sign-in with known username and password"() {
 		when:
-		// sign-in with instructor username
+		// sign-in with researcher username
 		username = "researcher"
 		password = "test"
 		signinButton.click()

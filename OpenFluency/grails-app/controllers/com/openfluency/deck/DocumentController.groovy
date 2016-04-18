@@ -18,7 +18,7 @@ class DocumentController {
     def create() {
         Long languageId = params['filter-lang'] as Long
         String keyword = null // params['search-text']
-        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword), 
+        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword, User.load(springSecurityService.principal.id)), 
         languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
     }
 
