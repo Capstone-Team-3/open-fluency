@@ -1,6 +1,28 @@
 var dsFlashcardId = null;
 var selectedCards = {};
 
+
+
+if (typeof localStorage.selectedCards != 'undefined') {
+	selectedCards = JSON.parse(localStorage.selectedCards);
+	localStorage.removeItem('selectedCards');
+	
+	// mark selected if any
+	var flashcards = $('.flashcard');
+	for (var i = 0; i < flashcards.length; i++) {
+		for (var key in selectedCards) {
+			if (selectedCards.hasOwnProperty(key)) {
+				if (selectedCards[key] == flashcards[i].dataset.id) {
+					$(flashcards[i].parentElement).addClass('card-selected');
+				}
+			}
+		}
+	}
+}
+
+$('#selected-cards-number').text(Object.keys(selectedCards).length);
+
+
 $('.reassign-btn').click(function(event) {
 	event.stopImmediatePropagation();
     $('#myModal2').modal();
@@ -8,12 +30,11 @@ $('.reassign-btn').click(function(event) {
 });
 
 $('#reassign-submit').click(function(){ 
-     console.log("Here");
-     var deckdest_id = $('.decks-rb:checked').val();
+	console.log('clicked');
+	var query_string = ''; 
+	var deckdest_id = $('.decks-rb:checked').val();
      if(!deckdest_id) return;
-
-     console.log(this.dataset.id);
-     var query_string = '';
+     
      for(var key in selectedCards) {
          query_string += 'flashcard_id=' + selectedCards[key] + '&';
      }
@@ -47,4 +68,14 @@ $('.flashcard-result').click(function() {
         var flashcard_id = $(this).children().data('id');
         selectedCards['card_' + flashcard_id] = flashcard_id;
 	}
+	$('#selected-cards-number').text(Object.keys(selectedCards).length);
+});
+
+
+$('.step').click(function() {
+	localStorage.selectedCards = JSON.stringify(selectedCards);
+});
+
+$('#move-cards-menu-button').click(function() {
+	$('#myModal2').modal();
 });
