@@ -10,6 +10,9 @@ import pages.deck.*
 import pages.course.*
 import pages.chapter.*
 
+/**
+ * This functional test script tests the general researcher functionalities
+ */
 
 @Stepwise
 class ResearcherSpec extends GebReportingSpec {
@@ -49,7 +52,7 @@ class ResearcherSpec extends GebReportingSpec {
 		signinButton.click()
 		then:
 		at DashboardPage
-		$(".dashboard > h1").text() == "researcher's Dashboard"
+		dashboardHeading.text() == "researcher's Dashboard"
 	}
 	
 	def "Researcher navigates to help page"() {

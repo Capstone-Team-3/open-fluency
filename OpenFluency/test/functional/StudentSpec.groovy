@@ -10,6 +10,10 @@ import pages.course.*
 import pages.deck.*
 import pages.user.*
 
+/**
+ * This functional test script tests the general student functionalities
+ */
+
 @Stepwise
 class StudentSpec extends GebReportingSpec {
 
@@ -30,7 +34,7 @@ class StudentSpec extends GebReportingSpec {
 		then: "Register"
 		at DashboardPage
 		flashMessage.text() == "testuser, welcome to OpenFluency!"
-		$(".dashboard > h1").text() == "testuser's Dashboard"
+		dashboardHeading.text() == "testuser's Dashboard"
 	}
 
 	def "Student navigates to deck creation"() {

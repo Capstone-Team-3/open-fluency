@@ -10,8 +10,15 @@ import pages.course.*
 import pages.deck.*
 import pages.user.*
 
+/**
+ * This functional test script tests for the following uses cases:
+ *    - As a student, I want to be able to have a personal deck that is viewable and editable only by me
+ *    - As a student, I want to create private decks of flashcards from existing decks to study
+ */
+
 @Stepwise
 class PrivateDeckSpec extends GebReportingSpec {
+	
 	def "Navigate to AuthPage"() {
 		when:
 		to AuthPage
@@ -26,7 +33,7 @@ class PrivateDeckSpec extends GebReportingSpec {
 		signinButton.click()
 		then:
 		at DashboardPage
-		$(".dashboard > h1").text() == "student's Dashboard"
+		dashboardHeading.text() == "student's Dashboard"
 	}
 
 	def "Student navigates to deck creation"() {
@@ -94,7 +101,7 @@ class PrivateDeckSpec extends GebReportingSpec {
 		signinButton.click()
 		then:
 		at DashboardPage
-		$(".dashboard > h1").text() == "instructor's Dashboard"
+		dashboardHeading.text() == "instructor's Dashboard"
 	}
 	
 	def "Instructor navigates to search decks"() {

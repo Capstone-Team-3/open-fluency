@@ -11,6 +11,6 @@ class DashboardPage extends MainLayoutPage {
 	}
 
 	static content = {
-		
+		dashboardHeading { $(".dashboard > h1") }
 	}
 }
