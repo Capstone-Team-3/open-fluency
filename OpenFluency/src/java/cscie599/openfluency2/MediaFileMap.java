@@ -7,12 +7,8 @@ import static java.nio.file.StandardCopyOption.*;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,8 +26,6 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import cscie99.team2.lingolearn.server.anki.AnkiCardSqlJetTransaction;
 /***
  * A module to extract media files from an anki zip file. 
  * All the files are put into a tmp directory.
@@ -226,6 +220,7 @@ if(!destFile.exists()) {
     public static String remapMedia(String media, String oldDir,String newDir) throws Exception {
 		//String newFile = this.mediaDir + File.separator + media
     	media = java.net.URLDecoder.decode(media,"UTF-8");
+    	if (media == null || media.isEmpty()) return null;
 		File oldmedia = new File( oldDir + File.separator + media);
 		File newmedia=  new File( newDir + File.separator + media);
         try {

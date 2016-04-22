@@ -81,11 +81,9 @@ class DocumentController {
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
 	def list() {
         User user = User.load(springSecurityService?.principal?.id)
-        //params.max = Math.min(max ?: 12, 100)
-        //List<Document> docInstanceList = Document.findAllByOwner(user, params)
         List<Document> documentInstanceList = 
         Document.findAll("from Document where owner_id=? order by uploadDate desc",[ user.id ],[max: 10])
-        respond documentInstanceList , model:[documentInstanceTotal: Document.countByOwner(user)]
+        respond documentInstanceList , model:[documentInstanceTotal: documentInstanceList.size() ]
 		//[documentInstanceList: Document.list(params), documentInstanceTotal: Document.count()]
 	}
 

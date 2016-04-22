@@ -105,8 +105,8 @@ class PreviewDeckService {
 			println("There are no front and back assignments (such as expression,meaning,etc) for the cards")
 			return null
 		}
-		return createOpenFluencyDeck(Language.findByName("English"), previewDeckInstance,
-				fieldIndices, alphaIndices, algorithmService.cardServerNames()[0]) //getDefault())
+		return createOpenFluencyDeck(previewDeckInstance.name, previewDeckInstance.description,Language.findByName("English"), previewDeckInstance,
+				fieldIndices, alphaIndices, algorithmService.cardServerNames()[0],false) //getDefault())
 	}
 
 
@@ -130,10 +130,14 @@ class PreviewDeckService {
 
 	// create open fluency deck from PreviewDeck with
 	@Transactional
-	def createOpenFluencyDeck(Language sourceLanguage, PreviewDeck previewDeckInstance,
-		HashMap<String,Integer> fieldIndices, HashMap<String,Integer> alphaIndices, String cardServerName){
-		Deck deckInstance = deckService.createDeck(previewDeckInstance.name,
-			previewDeckInstance.description, previewDeckInstance.language.id.toString(),sourceLanguage.id.toString(),cardServerName);
+	def createOpenFluencyDeck(String deckName, String deckDescription, Language sourceLanguage, PreviewDeck previewDeckInstance,
+		HashMap<String,Integer> fieldIndices, HashMap<String,Integer> alphaIndices, String cardServerName,boolean privateDeck){
+		
+		String name = (deckName && !deckName.isEmpty()) ? deckName : previewDeckInstance.name;
+		String description = (deckDescription && !deckDescription.isEmpty()) ? deckDescription : previewDeckInstance.description;
+		
+		Deck deckInstance = deckService.createDeck(name,
+			description, previewDeckInstance.language.id.toString(),sourceLanguage.id.toString(),cardServerName,privateDeck);
 			
 		def previewCardInstances= PreviewCard.findAllByDeck(previewDeckInstance)
 		Language lang = previewDeckInstance.language

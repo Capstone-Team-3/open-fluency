@@ -39,7 +39,7 @@ public class AnkiCardSqlJetTransaction implements ISqlJetTransaction {
 		ISqlJetCursor cursor = dbloc.getTable("notes").open();
 		try {
 			cursor.first();
-			while (cursor.next()) {
+			while (true) {
 				String modelId = cursor.getString("mid");
 				String fldsString = cursor.getString("flds");
 				String[] flds = fldsString.split("");
@@ -50,6 +50,7 @@ public class AnkiCardSqlJetTransaction implements ISqlJetTransaction {
 			    }
 			    else
 					logger.info("Card Cannot be Parsed: " + flds[0]);
+			    if (!cursor.next()) break;
 			}
 		} finally {
 			cursor.close();

@@ -48,6 +48,17 @@ h2 {
   font-size: 21px;
   background: #b3e6ff;
 }
+
+
+.card-selected {
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	background: lavender;
+}
+
+
+
+
 	</style>
 	
 </head>
@@ -210,37 +221,7 @@ h2 {
 
 </div>
 </div>
-	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
-<script> 
-var dsFlashCardId = null;
-
-$('.reassign-btn').click(function() {
-    $('#myModal2').modal();
-    dsFlashCardId = this.dataset.id;
-});
-
-$('#reassign-submit').click(function(){ 
- console.log("Here");
- var deckdest_id = $('.decks-rb:checked').val();
- if(!deckdest_id) return;
-
- console.log(this.dataset.id);
- $.ajax({
-     url:"/OpenFluency/flashcard/reassign?flashcard_id="+dsFlashCardId+"&deckdest_id="+deckdest_id,
-     success : function(output) {
-        dsFlashCardId = null;
-        console.log("OK");
-     },
-     error : function(err) {
-        console.log(err);
-     }
- });
-});        
-
-$('#myModal2').on('hidden.bs.modal', function () {
-document.location.reload(true);
-});
-
-</script>
+	<g:javascript>initializeAudio();initializeDonuts();of2FlashcardFontSize();</g:javascript>
+	<g:javascript src="reassignCard.js" />
 </body>
 </html>

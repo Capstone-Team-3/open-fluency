@@ -121,6 +121,14 @@ var initializeAudio = function() {
 		var audioSrcID = $(this).next(".flashcard-audio").attr("id");
 		$('#' + audioSrcID).load().get(0).play();
 	});
+	
+
+	$('.play-unit-audio').click(function() {
+	    var resource = this.dataset.audio;
+	    console.log(resource);
+	    var audio = new Audio(resource);
+	    audio.play();
+	});
 };
 
 /*----------------------------------------------------------------------------*/
@@ -133,6 +141,15 @@ var initializeAudio = function() {
  */
 var initializePracticeCards = function() {
 	var type = $('#practice-container').data("rank-type").toLowerCase();
+	var pArray = $('.pronunciation');
+	var uArray = $('.flashcard-unit');
+	
+	// ensure that pronunciation is hidden if it equals unit literal
+	for (var i = 0; i < uArray.length; i++) {
+	    if (uArray[i].dataset.unit.replace(/^\s+|\s+$/g,'') == pArray[i].dataset.pronunciation.replace(/^\s+|\s+$/g,'')) {
+	        $(pArray[i]).hide();
+	    }
+	}
 
 	if (type === 'meaning' || type === 'pronunciation'){
 		hideElement("Meaning", ".meaning", "show-meaning");
@@ -142,7 +159,7 @@ var initializePracticeCards = function() {
 		hideElement("Word/Character", ".flashcard-unit", "show-flashcard-unit");
 		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	}
-
+		
 	initializePracticeRanking();
 };
 
@@ -205,9 +222,12 @@ var initializeDonuts = function() {
 var drawDonut = function(value, selector) {
 	var	percentages = [value, (100 - value)];
 	
-	var width = $(selector).width();
-
-	var height = width, radius = Math.min(width, height) / 2;
+	//var width = $(selector).width();
+	var height = $(selector).height();
+	var width = height;
+	var radius = radius = Math.min(width, height) / 2;
+	
+	//var height = width, radius = Math.min(width, height) / 2;
 
 	var color = d3.scale.category20();
 
@@ -348,6 +368,7 @@ $('#dictionary-search-button').click(function() {
 });
 
 
+
 /*----------------------------------------------------------------------------*/
 /* Unit Mapping
 /*----------------------------------------------------------------------------*/
@@ -396,9 +417,9 @@ var initializeUnitMappingDraggable = function() {
     $('#audio-url-droppable').droppable({
     	hoverClass: "light-green-hover-background",
 		drop: function(event, ui) {
-			$('#audio-url-display').html($(ui.draggable).html());
+			$('#audio-url-display').html($(ui.draggable).data('transfer'));
 			$('.play-audio').css('visibility', 'visible');
-			$('#um-flashcard-audio').attr('src', $(ui.draggable).html());
+			$('#um-flashcard-audio').attr('src', $(ui.draggable).data('transfer'));
 			unitMappingAudioUrl = $(ui.draggable).data("index");
 		}
     });
@@ -406,7 +427,7 @@ var initializeUnitMappingDraggable = function() {
     $("#flashcard-image").droppable({
     	hoverClass: "dashed-border-black",
 		drop: function(event, ui) {
-			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).html() + ")");
+			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).data('transfer') + ")");
 			unitMappingBackgroundImage = $(ui.draggable).data("index");
 		}
     });
@@ -446,3 +467,28 @@ var initializeUnitMappingDraggable = function() {
     	unitMappingMeaning = null;
     });  
 }
+
+
+
+/* --------------------------------------------------------------
+ *    OpenFluency2 - Flashcard 
+ * --------------------------------------------------------------*/
+
+var of2FlashcardFontSize = function() {
+	// get all cards
+	var flashcardUnitsArray = $('.flashcard-unit');
+	
+	// get the height of a card would have with a single character as literal
+			// TODO: avoid hardcoding height of card
+
+	for (var i = 0; i < flashcardUnitsArray.length; i++) {
+	    var h = $(flashcardUnitsArray[i]).height();
+	    var fontSize = $(flashcardUnitsArray[i]).css('font-size').replace(/[^-\d\.]/g, '');
+	    while (h > 110) {
+	        $(flashcardUnitsArray[i]).css('font-size', --fontSize + 'px');
+	        h = $(flashcardUnitsArray[i]).height();
+	    } 
+	    $(flashcardUnitsArray[i]).height(139.593);
+	}
+}
+
