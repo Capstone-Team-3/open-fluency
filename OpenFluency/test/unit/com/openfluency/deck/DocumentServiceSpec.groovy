@@ -35,7 +35,7 @@ class DocumentServiceSpec extends Specification {
     void "test Deck Size"() {
 		System.out.println (anki.getTotalCards())
 		expect:
-			anki.getTotalCards() == 49
+			anki.getTotalCards() == 50
     }
 	void "test Folder"() {
 		expect:
