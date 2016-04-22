@@ -1,21 +1,4 @@
 <%@ page import="com.openfluency.Constants" %>
- 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script>
-     $(function() {
-     var newDate = new Date();   
-    $("#liveTime_id").datepicker();
-    $("#liveTime_id").datepicker("setDate", newDate);
-     $( "#endTime_id" ).datepicker({ defaultDate: new Date() });
-     
-  });
-    function test2(){
-    document.getElementById("liveTime_id").innerHTML = new Date();
-    }
-  </script>  
-  
 <div class="form-group">
 	<label for="title">Title:</label>
 	<input required name="title" type="text"  value="${quizInstance?.title}" class="form-control"/>
@@ -30,13 +13,12 @@
 
 <div class="form-group live-time-group">
 	<label for="liveTime">Available starting:</label>
-	    <p><input type="text" name="liveTime" id="liveTime_id"></p> 
+	<g:datePicker name="liveTime" value="${quizInstance ? quizInstance.liveTime : new Date()}" class="form-control"/>
 </div>
-<g:hiddenField name="courseInstanceId" value="${courseInstance.id}" />
 
 <div class="form-group end-time-group">
 	<label for="endTime">Available until:</label>
-		<p><input type="text" name="endTime" id="endTime_id"> </p> 
+	<g:datePicker name="endTime" value="${quizInstance ? quizInstance.endTime : new Date()}" class="form-control"/>
 </div>
 
 <div class="form-group" id="questionList">

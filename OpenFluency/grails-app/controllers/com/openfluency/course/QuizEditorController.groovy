@@ -46,26 +46,8 @@ class QuizEditorController {
 		
 		String title = params.title
 		Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0		
-		
-		// convert string formatted date to date objects
-		String lTime = params.liveTime;
-		String eTime = params.endTime;
-		Date liveTime = null;
-		
-		if (lTime==null || lTime==""){
-		  // if liveTime is not set simply default to today's date.
-			liveTime = new Date();
-		} else {
-		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-		liveTime = format.parse(lTime);
-		}
-		Date endTime = null;
-		if (eTime==null || eTime==""){
-			endTime = null;
-		} else {
-		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-		endTime = format.parse(eTime);
-		}
+		Date liveTime = params.liveTime
+		Date endTime = params.endTime
 		
 		// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 		String csv = params.questions
@@ -106,26 +88,8 @@ class QuizEditorController {
 		try {
 			String title = params.title
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
-
-			// convert string formatted date to date objects
-			String lTime = params.liveTime;
-			String eTime = params.endTime;
-			Date liveTime = null;
-			
-			if (lTime==null || lTime==""){
-			  // if liveTime is not set simply default to today's date.
-				liveTime = new Date();
-			} else {
-			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-			liveTime = format.parse(lTime);
-			}
-			Date endTime = null;
-			if (eTime==null || eTime==""){
-				endTime = null;
-			} else {
-			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-			endTime = format.parse(eTime);
-			}
+			Date liveTime = params.liveTime
+			Date endTime = params.endTime
 			
 			// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 			String csv = params.questions
