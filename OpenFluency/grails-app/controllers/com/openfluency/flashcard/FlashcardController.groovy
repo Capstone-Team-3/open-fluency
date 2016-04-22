@@ -25,6 +25,9 @@ class FlashcardController {
         def deckId = params.deckId
     	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language), deckId: deckId]
     }
+    def createFromDictionary() {
+        render(view: "createFromDictionary")
+    }
 
     /**
     * Save the flashcard for the selected unit
