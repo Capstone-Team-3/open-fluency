@@ -4,6 +4,8 @@ package com.openfluency.course
 import grails.plugin.springsecurity.annotation.Secured
 import au.com.bytecode.opencsv.CSVReader
 import grails.converters.JSON
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 import com.openfluency.Constants
 
@@ -43,9 +45,27 @@ class QuizEditorController {
 		}
 		
 		String title = params.title
-		Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
-		Date liveTime = params.liveTime
-		Date endTime = params.endTime
+		Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0		
+		
+		// convert string formatted date to date objects
+		String lTime = params.liveTime;
+		String eTime = params.endTime;
+		Date liveTime = null;
+		
+		if (lTime==null || lTime==""){
+		  // if liveTime is not set simply default to today's date.
+			liveTime = new Date();
+		} else {
+		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+		liveTime = format.parse(lTime);
+		}
+		Date endTime = null;
+		if (eTime==null || eTime==""){
+			endTime = null;
+		} else {
+		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+		endTime = format.parse(eTime);
+		}
 		
 		// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 		String csv = params.questions
@@ -86,8 +106,26 @@ class QuizEditorController {
 		try {
 			String title = params.title
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
-			Date liveTime = params.liveTime
-			Date endTime = params.endTime
+
+			// convert string formatted date to date objects
+			String lTime = params.liveTime;
+			String eTime = params.endTime;
+			Date liveTime = null;
+			
+			if (lTime==null || lTime==""){
+			  // if liveTime is not set simply default to today's date.
+				liveTime = new Date();
+			} else {
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+			liveTime = format.parse(lTime);
+			}
+			Date endTime = null;
+			if (eTime==null || eTime==""){
+				endTime = null;
+			} else {
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+			endTime = format.parse(eTime);
+			}
 			
 			// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 			String csv = params.questions
@@ -119,7 +157,7 @@ class QuizEditorController {
 			log.error "Error: ${e.message}", e
 			
 			flash.message = "Something went wrong, please try again"
-			redirect action: "create", id: courseInstance.id
+			redirect action: "create", id: quizInstance.course.id
 		}
 	}
 	
