@@ -4,6 +4,8 @@ package com.openfluency.course
 import grails.plugin.springsecurity.annotation.Secured
 import au.com.bytecode.opencsv.CSVReader
 import grails.converters.JSON
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 import com.openfluency.Constants
 
@@ -43,7 +45,7 @@ class QuizEditorController {
 		}
 		
 		String title = params.title
-		Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
+		Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0		
 		Date liveTime = params.liveTime
 		Date endTime = params.endTime
 		
@@ -119,7 +121,7 @@ class QuizEditorController {
 			log.error "Error: ${e.message}", e
 			
 			flash.message = "Something went wrong, please try again"
-			redirect action: "create", id: courseInstance.id
+			redirect action: "create", id: quizInstance.course.id
 		}
 	}
 	
