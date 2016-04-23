@@ -4,8 +4,10 @@ import com.openfluency.Constants
 import com.openfluency.confuser.*;
 import com.openfluency.flashcard.Flashcard
 import com.openfluency.language.Language
-import com.openfluency.media.Image
-import com.openfluency.media.Audio
+//import com.openfluency.media.Image
+//import com.openfluency.media.Audio
+import cscie99.team2.lingolearn.shared.Image;
+import cscie99.team2.lingolearn.shared.Sound;
 
 /**
  *  The Question domain class represents a single question on a quiz
@@ -22,7 +24,7 @@ class Question {
 	/** The image to be displayed as the quiz question- this is optional */
 	Image image 					
 	/** Audio of the quiz questions - this is optional*/
-	Audio audio 
+	Sound sound 
 
 
 	
@@ -69,7 +71,7 @@ class Question {
 	 }
 
 	  static constraints = {
-    	audio nullable: true
+    	sound nullable: true
     	image nullable: true
     }
 }

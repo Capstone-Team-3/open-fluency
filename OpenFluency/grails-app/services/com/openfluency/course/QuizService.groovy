@@ -16,14 +16,32 @@
     import java.io.FileOutputStream;
     import java.io.IOException;
     import java.util.List;
-    import java.util.zip.ZipEntry;
     import java.util.zip.ZipInputStream;
+    import java.util.zip.ZipEntry;
+    import java.util.zip.ZipFile;
+
+    //import com.openfluency.media.Image
+   // import com.openfluency.media.Audio
+
+    import cscie99.team2.lingolearn.shared.Image;
+    import cscie99.team2.lingolearn.shared.Sound;
+    import cscie599.openfluency2.*;
 
     @Transactional
     class QuizService {
 
         def deckService
         def springSecurityService
+        def grailsApplication
+
+            private FileInputStream zipFileStream;
+            private File csvFile;
+            private File mediaFile;
+            private String mediaTopDir;
+            private String mediaFolder;
+            private String topFolder
+
+
         Quiz createQuiz(String title, Date liveTime, Date endTime, Integer maxCardTime, Integer testElement, List flashcardIds, Course courseInstance) {
        
             // Create the quiz
@@ -330,48 +348,48 @@
             return "${gradeInstance.correctAnswers/getAnswersByLoggedUser(quizInstance).size()*100}"
         }
 
-    	/**
-    	 * Load a deck from a CSV - returns a list with any errors that might have happened during upload
-    	 */
-    	 List loadQuizFromCSV(String title, Date liveTime, Date endTime, Integer maxCardTime, Course courseInstance, def f) {
+        /**
+         * Load a deck from a CSV - returns a list with any errors that might have happened during upload
+         */
+         List loadQuizFromCSV(String title, Date liveTime, Date endTime, Integer maxCardTime, Course courseInstance, def f) {
            log.info "In Quiz Service Service"
-    		 
-    		 List result
+             
+             List result
              result = []
-    		 
-    		 if(f.fileItem){
-    			 // Create a temporary file with the uploaded contents
-    			 def extension = f.fileItem.name.lastIndexOf('.').with {it != -1 ? f.fileItem.name.substring(it + 1) : f.fileItem.name}
+            def csvFile          
+             if(f.fileItem){
+                 // Create a temporary file with the uploaded contents
+                 def extension = f.fileItem.name.lastIndexOf('.').with {it != -1 ? f.fileItem.name.substring(it + 1) : f.fileItem.name}
                  log.info "The extension is: ${extension}"
 
                  Class cls = f.getClass()
-                 log.info f.getClass()
-                 log.info  "Class Name ${f.getName()}"
-    			 def outputFile = new File("${new Date().time}.${extension}")
-    			 f.transferTo(outputFile)
+                 def outputFile = new File("${new Date().time}.${extension}")
+                 f.transferTo(outputFile)
                   log.info "extension ${extension}"
                   if (extension != "zip" && extension != "csv"){
                     return result << "File needs to be a .zip file or .csv file.  No other types supported."
-
                  } 
-                 if (extension == "zip"){
-                  // unZipIt(outputFile, "/cs599")
-                   //unzip(outputFile, "/cs599")
-                  List zList = getJarFiles(outputFile)
-                  log.info zList
-                   zList.each {
-                   log.info "File or Folder: $it" 
-                 }
-                 return
 
-                 }
-     
-    			 // Validate the file first
-    			//result = validateCSV(outputFile.path)
-    			// if(!result.isEmpty()) {
-    			//	 return result
-    			// }
-    			 
+                if (extension == "csv"){
+                   csvFile = outputFile
+                    }
+                else if (extension == "zip"){
+                  List zList = importQuiz(outputFile)
+                  log.info "ZIP FILE: ${outputFile.getName()}"
+                   zList.each {
+                    if (it.contains(".csv")){
+                    csvFile = it
+                }
+                }
+            }
+
+
+                 // Validate the file first
+                //result = validateCSV(outputFile.path)
+                // if(!result.isEmpty()) {
+                //   return result
+                // }
+                 
                  
                  Quiz quizInstance = new Quiz(
                          course: courseInstance, //courseId,
@@ -382,44 +400,56 @@
                          endTime: endTime,
                          maxCardTime: maxCardTime
                          ).save(failOnError: true)
-
-    			 // Everything looks ok, lets save
-    			// new File(outputFile.path).toCsvReader(['skipLines':1, 'charset':'UTF-8']).eachLine { tokens ->
-                    // FILE theFile = new File(this.tmpFolder + File.separator + ze.getName());
-
-                   // log.info "outputfile path: ${outputfile.path}"
-                    FileInputStream fis = new FileInputStream(outputFile.path); 
+            
+                    FileInputStream fis = new FileInputStream(csvFile); 
+                    Sound snd = null
+                    Image im = null
 
                     fis.toCsvReader(['charset':'UTF-8','skipLines':1],).eachLine { tokens -> 
 
                      if (tokens[3].equals("")){
                         return
                      }
-    				 log.info "this should be printing Japanese characters ${tokens[3]}"	 
-    				 Question question = new Question(quiz: quizInstance, question: tokens[3], questionType: Constants.MANUAL).save(failOnError: true)
-    				 new QuestionOption(question: question, option: tokens[4].substring(1, tokens[4].length()-1), answerKey: 1).save(failOnError: true)
 
-                    log.info "token 5 ${tokens[5]}"
+                     if (!tokens[6].equals("")){
+                        im = new Image()
+                        int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
+                        String theFolder = mediaFolder.substring(x)
+                        im.setImageUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[6])
+                        log.info "GetImageUri: ${im.getImageUri()}"
+                      }
+
+                        if (!tokens[7].equals("")){
+                        snd = new Sound()
+                        int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
+                        String theFolder = mediaFolder.substring(x)
+                        snd.setSoundUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[7])
+                        log.info "GetSoundUri: ${snd.getSoundUri()}"
+                      }
+
+  
+                     Question question = new Question(quiz: quizInstance, question: tokens[3], questionType: Constants.MANUAL, image: im, sound: snd).save(failOnError: true)
+                     new QuestionOption(question: question, option: tokens[4].substring(1, tokens[4].length()-1), answerKey: 1).save(failOnError: true)
+
                     String[] wrongAnswers = tokens[5].substring(1, tokens[5].length()-1).split(",[ ]*");
-                    log.info "the OTOKEN length: ${wrongAnswers.length}"
                     for (int i = 0; i < wrongAnswers.length; i++) {
                     new QuestionOption(question: question, option: wrongAnswers[i], answerKey: 0).save(failOnError: true)
                      }
 
-    			 }
+                 }
      
-    			 // Cleanup
-    			 outputFile.delete()
-    		 }
-    		 else {
-    			 result << "File not found"
-    		 }
+                 // Cleanup
+                 outputFile.delete()
+             }
+             else {
+                 result << "File not found"
+             }
      
-    		 return result
-    	 }
+             return result
+         }
 
              /**
-        * Check that each row has a unit, a meaning and a pronunciation
+        * Check that each row has a question, an answer and an option
         * Returns a list with any errors
         */
         List validateCSV(String filePath) {
@@ -427,7 +457,7 @@
             int i = 0
             new File(filePath).toCsvReader(['skipLines':1]).eachLine { tokens ->
 
-                // Check that there's a meaning a pronunciation and a symbol
+                // Check that there's a meaning an answer and option
                 if(!tokens[3]) {
                     result << "Row ${i} is missing a question"
                 }
@@ -447,75 +477,80 @@
         }
 
 
-        /**
-         * Extracts a zip file specified by the zipFilePath to a directory specified by
-         * destDirectory (will be created if does not exists)
-         * @param zipFilePath
-         * @param destDirectory
-         * @throws IOException
-         */
-        public void unzip(File zipFilePath, String destDirectory) throws IOException {
-            File destDir = new File(destDirectory);
-            if (!destDir.exists()) {
-                destDir.mkdir();
+        
+     
+
+    private List<String> importQuiz(File zipFile) throws Exception {
+            List<String> zipFiles=new ArrayList<String>();
+            File destinationname = new File("web-app/media");
+            File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); // creates temp folder
+            Boolean isDeleted = folder.delete();    // clean out folder first - must be there!
+            folder.deleteOnExit();  // cleans up at exit
+            folder.mkdir();
+            mediaFolder = folder.getAbsolutePath();
+
+            log.info "media folder ${folder.getAbsolutePath()}"
+
+           zipFileStream = new FileInputStream(zipFile);
+        
+           ZipInputStream zis = new ZipInputStream(zipFileStream);
+            ZipEntry ze = zis.getNextEntry();
+            log.info "the first damn name ${ze.getName()} Blah" 
+            topFolder = ze.getName() 
+
+            while (ze!=null) {
+                if (!ze.getName().contains("__MACOSX")){
+                zipFiles.add(folder.getAbsolutePath() + File.separator + ze.getName());
+                }
+                if (ze.getName().contains(".csv")) {
+                    this.csvFile = new File(mediaFolder + File.separator + ze.getName());
+                    //Create parent folder
+                    new File(this.csvFile.getParent()).mkdirs();
+                     
+                    FileOutputStream fos = new FileOutputStream(this.csvFile);   
+                    byte[] buffer = new byte[2048];
+         
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                    fos.close();   
+                }
+
+                else if (ze.getName().contains(".mp3")||(ze.getName().contains(".jpg"))) {
+                    this.mediaFile = new File(mediaFolder + File.separator + ze.getName());
+                    //Create parent folder, ok if already exists
+                    new File(this.mediaFile.getParent()).mkdirs();
+                    
+                    FileOutputStream fos = new FileOutputStream(this.mediaFile);   
+                    byte[] buffer = new byte[2048];
+         
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                    fos.close();      
+                }
+                ze = zis.getNextEntry();
+              //  if (ze!=null){
+               //     System.out.println(ze.getName());
+              //  }
             }
-            ZipInputStream zipIn = new ZipInputStream(new FileInputStream(zipFilePath));
-            ZipEntry entry = zipIn.getNextEntry();
-            // iterates over entries in the zip file
-           
-            while (entry != null) {
-                String filePath = destDirectory + File.separator + entry.getName();
-                if (!entry.isDirectory()) {
-                // if the entry is a file, extracts it
-                File parent = new File(filePath).getParentFile();
-                if(!parent.exists()) {
-                parent.mkdirs();
-                }
-                extractFile(zipIn, filePath);
-                } else {
-                // if the entry is a directory, make the directory
-                File dir = new File(filePath);
-                dir.mkdir();
-                }
-               
-                entry = zipIn.getNextEntry();
-                }
-             zipIn.closeEntry();
+            zis.closeEntry();
+            zis.close();
 
-
-
-            zipIn.close();
+            return zipFiles;
         }
-        /**
-         * Extracts a zip entry (file entry)
-         * @param zipIn
-         * @param filePath
-         * @throws IOException
-         */
-        private void extractFile(ZipInputStream zipIn, String filePath) throws IOException {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
-            byte[] bytesIn = new byte[4096];
-            int read = 0;
-            while ((read = zipIn.read(bytesIn)) != -1) {
-                bos.write(bytesIn, 0, read);
+        
+         static String getUniqueName() {
+                return UUID.randomUUID().toString();
+    }
+        
+        
             }
-            bos.close();
-        }
-    
 
-public static List<String> getJarFiles(File jarFile) throws IOException {
-  List<String> jarFiles=new ArrayList<String>();
-  FileInputStream fileInputStream=new FileInputStream(jarFile);
-  ZipInputStream zipInputStream=new ZipInputStream(fileInputStream);
-  ZipEntry zipEntry;
-  while ((zipEntry=zipInputStream.getNextEntry()) != null) {
-    jarFiles.add(zipEntry.getName());
-  }
-  zipInputStream.close();
-  fileInputStream.close();
-  return jarFiles;
-}
-}
+         
+
 
 
 
