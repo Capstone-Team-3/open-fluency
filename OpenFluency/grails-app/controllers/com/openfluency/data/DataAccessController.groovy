@@ -132,7 +132,7 @@ class DataAccessController {
             //set fields
             List fields = ["quiz", 
                            "course", 
-                           "testElement",
+                           "quizType",
                            "maxCardTime", 
                            "numQuestions",
                            "questions",
@@ -140,10 +140,10 @@ class DataAccessController {
             //map headings
             Map labels = ["quiz": "QuizID", 
                           "course": "CourseID", 
-                          "testElement": "TestedElement",
+						  "quizType": "QuizType",
                           "maxCardTime": "QuestionTimeLimit",
                           "numQuestions": "NumberOfQuestions",
-                          "questions": "QuestionToFlashcardIDs",
+                          "questions": "Questions",
                           "grades": "UserGrades"]
             //map field data formatters
             Map formatters = ["quiz": idify, 
