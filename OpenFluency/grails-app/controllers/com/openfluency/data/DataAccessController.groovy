@@ -172,7 +172,7 @@ class DataAccessController {
                            "course",
                            "quiz",
                            "question",
-                           "testElement", 
+                           "quizType", 
                            "selection",
                            "correctAnswer", 
                            "correct",
@@ -183,7 +183,7 @@ class DataAccessController {
                           "course": "CourseID",
                           "quiz": "QuizID",
                           "question": "QuestionID",
-                          "testElement": "TestedElement", 
+                          "quizType": "QuizType", 
                           "selection": "UserAnswerID",
                           "correctAnswer": "CorrectAnswerID", 
                           "correct": "AnsweredCorrectly",
@@ -194,9 +194,9 @@ class DataAccessController {
                               "course": {domain, value -> domain.question.quiz.course.id},
                               "quiz": {domain, value -> domain.question.quiz.id},
                               "question": valIdify,
-                              "testElement": {domain, value -> domain.question.quiz.testElement}, 
+                              "quizType": {domain, value -> domain.question.quiz.quizType}, 
                               "selection": valIdify,
-                              "correctAnswer": {domain, value -> domain.question.flashcard.id}, 
+                              "correctAnswer": {domain, value -> domain.question.getCorrectOption().id}, 
                               "correct": {domain, value -> (value) ? 1 : 0}]
             //map additional parameters
             Map parameters = ["separator": "\t"]
