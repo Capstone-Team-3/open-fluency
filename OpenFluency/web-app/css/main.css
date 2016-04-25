@@ -1028,3 +1028,8 @@ h4#custom-image {
 	cursor: pointer;
 }
 
+.grade-star {
+	position:relative;
+	margin:0 auto;
+	background:transparent url(../images/goldstar.png) no-repeat top center;
+}

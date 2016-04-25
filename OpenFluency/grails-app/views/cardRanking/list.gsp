@@ -9,7 +9,7 @@
 	</g:if>
 	<div class="container">
     <h1>
-        Learning Summary - Words Practiced 
+        Learning Summary
     </h1>
 	<form>
 	<select name="course">
@@ -31,6 +31,9 @@
     -->
 	<g:submitButton name="Course" value="Filter"/>
 	</form>
+    <g:render template="quiz" model="[quizzes: quizzes]"/>
+    <p>
+    <h4>Words And Phrases Learned From Flashcard Practice</h4>
     <table class="summarytable" width="100%">
         <col/><col/>
         <col style='background:#f2dede;'/><col style='background:#fcf8e3;'/><col style='background:#dff0d8;'/>
@@ -40,7 +43,6 @@
             <th> ${it} </th>
         </g:each>
         </thead>
-
         <tbody>
         <g:if test="${meaningSummary}">
           <g:render template="summarytd" model="[summaryList: meaningSummary, label: 'Meaning from Literal']"/>
