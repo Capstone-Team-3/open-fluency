@@ -4,8 +4,6 @@ import com.openfluency.Constants
 import com.openfluency.confuser.*;
 import com.openfluency.flashcard.Flashcard
 import com.openfluency.language.Language
-//import com.openfluency.media.Image
-//import com.openfluency.media.Audio
 import cscie99.team2.lingolearn.shared.Image;
 import cscie99.team2.lingolearn.shared.Sound;
 

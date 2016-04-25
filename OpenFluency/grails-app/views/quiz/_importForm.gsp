@@ -49,17 +49,17 @@
 </div>
 <div class="modal csv-modal fade" id="myModal">
 	<div class="modal-dialog">
-		<g:form action="loadQuizFromCSV" id="${courseInstance.id}"
+		<g:form action="importQuiz" id="${courseInstance.id}"
 			enctype="multipart/form-data">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Load Quiz CSV File</h4>
+					<h4 class="modal-title">Import Quiz</h4>
 				</div>
 				<div class="modal-body">
 					<p>
-						Upload a CSV file with your Quiz definitions. 
+						Upload a .csv or .zip file with your Quiz questions. 
 					</p>
 					<input name="csvData" type="file" name="csvData" />
 				</div>

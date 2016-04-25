@@ -20,9 +20,6 @@
     import java.util.zip.ZipEntry;
     import java.util.zip.ZipFile;
 
-    //import com.openfluency.media.Image
-   // import com.openfluency.media.Audio
-
     import cscie99.team2.lingolearn.shared.Image;
     import cscie99.team2.lingolearn.shared.Sound;
     import cscie599.openfluency2.*;
@@ -349,50 +346,52 @@
         }
 
         /**
-         * Load a deck from a CSV - returns a list with any errors that might have happened during upload
+         * Import a quiz from a CSV or zip file - returns a list with any errors that might have happened during upload
          */
-         List loadQuizFromCSV(String title, Date liveTime, Date endTime, Integer maxCardTime, Course courseInstance, def f) {
-           log.info "In Quiz Service Service"
-             
+         List importQuiz(String title, Date liveTime, Date endTime, Integer maxCardTime, Course courseInstance, def f) {           
              List result
              result = []
-            def csvFile          
+             File csvFile 
+            
+             FileInputStream fis        
              if(f.fileItem){
                  // Create a temporary file with the uploaded contents
                  def extension = f.fileItem.name.lastIndexOf('.').with {it != -1 ? f.fileItem.name.substring(it + 1) : f.fileItem.name}
-                 log.info "The extension is: ${extension}"
-
                  Class cls = f.getClass()
-                 def outputFile = new File("${new Date().time}.${extension}")
-                 f.transferTo(outputFile)
-                  log.info "extension ${extension}"
+                 File outputFile = new File("${new Date().time}.${extension}")
+                  f.transferTo(outputFile)
+                 
                   if (extension != "zip" && extension != "csv"){
+                    outputFile.delete()
                     return result << "File needs to be a .zip file or .csv file.  No other types supported."
                  } 
 
                 if (extension == "csv"){
-                   csvFile = outputFile
+                    csvFile = outputFile
+                    result = validateCSV(csvFile)
+                if(!result.isEmpty()) {
+                    return result
                     }
+                }
+
+                // need to find the reference to the csv file within the list
+                // for both validation and to do the import
                 else if (extension == "zip"){
-                  List zList = importQuiz(outputFile)
-                  log.info "ZIP FILE: ${outputFile.getName()}"
-                   zList.each {
+                    List zList = importQuizFromZip(outputFile)
+                    zList.each {
+
                     if (it.contains(".csv")){
-                    csvFile = it
+                    def csvPath = it
+                    csvFile =  new File(csvPath)
+                    result = validateCSV(csvFile)
+                         if(!result.isEmpty()) {
+                         return result
+                         }
+                    }   
                 }
-                }
-            }
-
-
-                 // Validate the file first
-                //result = validateCSV(outputFile.path)
-                // if(!result.isEmpty()) {
-                //   return result
-                // }
-                 
-                 
+            }        
                  Quiz quizInstance = new Quiz(
-                         course: courseInstance, //courseId,
+                         course: courseInstance, 
                          title: title,
                          testElement: Constants.MANUAL,
                          enabled: true,
@@ -400,45 +399,42 @@
                          endTime: endTime,
                          maxCardTime: maxCardTime
                          ).save(failOnError: true)
-            
-                    FileInputStream fis = new FileInputStream(csvFile); 
+
                     Sound snd = null
                     Image im = null
 
-                    fis.toCsvReader(['charset':'UTF-8','skipLines':1],).eachLine { tokens -> 
+                    csvFile.toCsvReader(['charset':'UTF-8','skipLines':1],).eachLine { tokens -> 
 
-                     if (tokens[3].equals("")){
+                     if (tokens[1].equals("")){
                         return
                      }
 
-                     if (!tokens[6].equals("")){
+                     if (!tokens[2].equals("")){
                         im = new Image()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
-                        im.setImageUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[6])
-                        log.info "GetImageUri: ${im.getImageUri()}"
+                        im.setImageUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[2])
+                      } else{
+                        im = null
                       }
 
-                        if (!tokens[7].equals("")){
+                        if (!tokens[3].equals("")){
                         snd = new Sound()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
-                        snd.setSoundUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[7])
-                        log.info "GetSoundUri: ${snd.getSoundUri()}"
+                        snd.setSoundUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[3])
+                      } else {
+                        snd = null
                       }
 
-  
-                     Question question = new Question(quiz: quizInstance, question: tokens[3], questionType: Constants.MANUAL, image: im, sound: snd).save(failOnError: true)
+                     Question question = new Question(quiz: quizInstance, question: tokens[1], questionType: Constants.MANUAL, image: im, sound: snd).save(failOnError: true)
                      new QuestionOption(question: question, option: tokens[4].substring(1, tokens[4].length()-1), answerKey: 1).save(failOnError: true)
 
                     String[] wrongAnswers = tokens[5].substring(1, tokens[5].length()-1).split(",[ ]*");
                     for (int i = 0; i < wrongAnswers.length; i++) {
                     new QuestionOption(question: question, option: wrongAnswers[i], answerKey: 0).save(failOnError: true)
                      }
-
                  }
-     
-                 // Cleanup
                  outputFile.delete()
              }
              else {
@@ -448,58 +444,54 @@
              return result
          }
 
-             /**
-        * Check that each row has a question, an answer and an option
+        /**
+        * Check that each row has a question(standard_question, image_question, audio_question), correct_answer and wrong_answer(s)
         * Returns a list with any errors
         */
-        List validateCSV(String filePath) {
+        List validateCSV(File csvFile) {
             List result = []
             int i = 0
-            new File(filePath).toCsvReader(['skipLines':1]).eachLine { tokens ->
+           // FileInputStream fis = new FileInputStream(csvFile); 
+               csvFile.toCsvReader(['skipLines':1]).eachLine { tokens ->
 
-                // Check that there's a meaning an answer and option
-                if(!tokens[3]) {
-                    result << "Row ${i} is missing a question"
+                // Check that there's a standard_question or image_question or audio_question)
+              
+                if(!(tokens[1])&&!(tokens[2])&&!(tokens[3])){
+                    result << "Quiz question ${i+1} on row ${i} within the .csv file must contain a standard_question, image_question or audio_question"
                 }
 
                 if(!tokens[4]) {
-                    result << "Row ${i} is missing the answer"   
+                    result << "Quiz question ${i+1} on row ${i} within the .csv file is missing the answer"   
                 }
                 
                 if(!tokens[5]) {
-                    result << "Row ${i} is missing an option"
+                    result << "Quiz question ${i+1} on row ${i} within the .csv file is missing a wrong_answer(s)"
                 }
-
                 i++
             }
-
             return result
         }
 
 
-        
-     
-
-    private List<String> importQuiz(File zipFile) throws Exception {
+    private List<String> importQuizFromZip(File zipFile) {
             List<String> zipFiles=new ArrayList<String>();
-            File destinationname = new File("web-app/media");
-            File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); // creates temp folder
-            Boolean isDeleted = folder.delete();    // clean out folder first - must be there!
-            folder.deleteOnExit();  // cleans up at exit
+            File destinationname = new File("web-app" + File.separator + "media");
+            File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); 
+            Boolean isDeleted = folder.delete(); 
+            folder.deleteOnExit();
             folder.mkdir();
             mediaFolder = folder.getAbsolutePath();
-
-            log.info "media folder ${folder.getAbsolutePath()}"
-
-           zipFileStream = new FileInputStream(zipFile);
+            zipFileStream = new FileInputStream(zipFile);
         
-           ZipInputStream zis = new ZipInputStream(zipFileStream);
+            ZipInputStream zis = new ZipInputStream(zipFileStream);
             ZipEntry ze = zis.getNextEntry();
-            log.info "the first damn name ${ze.getName()} Blah" 
-            topFolder = ze.getName() 
+            topFolder = ze.getName()
+            if (topFolder.contains(".csv")){
+               topFolder = ""
+            } 
 
             while (ze!=null) {
-                if (!ze.getName().contains("__MACOSX")){
+                if (!(ze.getName().contains("__MACOSX"))){
                 zipFiles.add(folder.getAbsolutePath() + File.separator + ze.getName());
                 }
                 if (ze.getName().contains(".csv")) {
@@ -515,13 +507,12 @@
                         fos.write(buffer, 0, len);
                     }
                     fos.close();   
-                }
+                } 
 
                 else if (ze.getName().contains(".mp3")||(ze.getName().contains(".jpg"))) {
                     this.mediaFile = new File(mediaFolder + File.separator + ze.getName());
                     //Create parent folder, ok if already exists
-                    new File(this.mediaFile.getParent()).mkdirs();
-                    
+                    new File(this.mediaFile.getParent()).mkdirs();      
                     FileOutputStream fos = new FileOutputStream(this.mediaFile);   
                     byte[] buffer = new byte[2048];
          
@@ -532,9 +523,6 @@
                     fos.close();      
                 }
                 ze = zis.getNextEntry();
-              //  if (ze!=null){
-               //     System.out.println(ze.getName());
-              //  }
             }
             zis.closeEntry();
             zis.close();
@@ -544,13 +532,5 @@
         
          static String getUniqueName() {
                 return UUID.randomUUID().toString();
-    }
-        
-        
+    }  
             }
-
-         
-
-
-
-
