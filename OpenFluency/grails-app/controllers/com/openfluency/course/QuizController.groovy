@@ -3,7 +3,7 @@ package com.openfluency.course
 import grails.plugin.springsecurity.annotation.Secured
 import java.text.DateFormat
 import java.text.SimpleDateFormat
- import java.util.zip.*
+import java.util.zip.*
 
 class QuizController {
 
@@ -382,7 +382,7 @@ def export(Quiz quizInstance) {
 
 
 
-	def createZipFile(File sourceDir, File zipFile) {
+	private createZipFile(File sourceDir, File zipFile) {
                			log.info "Started creating Zip file";
                         FileOutputStream fileOutputStream = new FileOutputStream(zipFile);
                         ZipOutputStream zipOutputStream  = new ZipOutputStream(fileOutputStream)
@@ -391,7 +391,7 @@ def export(Quiz quizInstance) {
                         log.info "Finished creating Zip file";
         }
  
-    def addDirectory(ZipOutputStream zipOutputStream, File fileSource) {
+    private addDirectory(ZipOutputStream zipOutputStream, File fileSource) {
                
                 File[] files = fileSource.listFiles();
 
