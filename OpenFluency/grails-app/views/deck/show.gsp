@@ -56,7 +56,17 @@ h2 {
 	background: lavender;
 }
 
-
+#selectedCardsMenu {
+	position: fixed;
+	right: 0;
+	top: 10%;
+	width: 91px;
+	list-style-type: none;
+	border: 1px solid black;
+	background: lavender;
+	font-size: 14px;
+	padding: 0px;
+}
 
 
 	</style>
@@ -144,6 +154,7 @@ h2 {
 							</li>
 						</ul>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -193,34 +204,40 @@ h2 {
 	</div>
 <!-- Modal -->
 <div id="myModal2" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+ 	<div class="modal-dialog">
+	
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Reassign Flashcard to deck</h4>
+			</div>
+			<div class="modal-body">
+			    <div id='ul-container'>
+			        <h2>
+			            My Decks
+			            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
+			        </h2>
+			       <g:each in="${deckInstanceList}">
+			        <div class="radio">
+			              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
+			        </div>
+			        </g:each>
+			    </div>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
 
-      <!-- Modal content-->
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-<h4 class="modal-title">Reassign Flashcard to deck</h4>
-</div>
-<div class="modal-body">
-    <div id='ul-contaier'>
-        <h2>
-            My Decks
-            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
-        </h2>
-       <g:each in="${deckInstanceList}">
-        <div class="radio">
-              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
-        </div>
-        </g:each>
-    </div>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
-</div>
-</div>
+<ul id="selectedCardsMenu">
+	<li>Selected Cards: <span id="selected-cards-number"></span></li>
+	<li><button class="btn btn-sm btn-link">Reset</button></li>
+	<li><button class="btn btn-sm btn-primary" id="move-cards-menu-button">Move Cards</button></li>
+</ul>
 
-</div>
-</div>
 	<g:javascript>initializeAudio();initializeDonuts();of2FlashcardFontSize();</g:javascript>
 	<g:javascript src="reassignCard.js" />
 </body>

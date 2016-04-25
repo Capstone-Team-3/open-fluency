@@ -7,7 +7,10 @@ import com.openfluency.language.Alphabet
 import com.openfluency.media.MediaService
 import com.openfluency.auth.User
 import com.openfluency.language.Unit
-
+import com.openfluency.language.Language
+import com.openfluency.course.Course
+import com.openfluency.course.Grade
+import com.openfluency.course.Registration
 import grails.plugin.springsecurity.annotation.Secured
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -30,23 +33,41 @@ class CardRankingController {
 		boolean matches = matcher.matches();
 		if (matches) {
 			params['deck_id']= matches.group(1)
-			System.out.println ("matches "+ matches.group(0) + " "+ matches.group(1))
+			log.info ("matches "+ matches.group(0) + " "+ matches.group(1))
 		}
 		list(params)
 	}
 
 	def list = {
-		params.max = Math.min(params.max ? params.int('max') : 20, 100)
 		User user = User.load(springSecurityService.principal.id)
-		def ranking = CardRanking.findAllByUser(user,
+		params.max = Math.min(params.max ? params.int('max') : 20, 100)
+		params.offset = Math.min(params.offset ? params.int('offset') : 0, 0)
+		def course = params.course ? Course.load(params.long('course')) : null
+		def ranking
+		def quizzes = null
+		def total
+		if (course) {   // Getting all the stats for a course only
+            def q4 = (params.sort)? ("order by "+ params.sort +" "+ params.order): ""
+            def q3="select deck from Chapter where course_id =:course"
+            def q2 ="select id from Flashcard where deck.id in (" + q3 +")"
+            def query = "from CardRanking where user.id=:user and flashcard.id in (" + q2 + ")" + q4
+            ranking = CardRanking.executeQuery(query,
+                [user:user.id, course:course.id],
+                [max: params.max, offset: params.offset])
+			total = getCardRankingCountByCourse(course, user )
+            quizzes = getQuizGradeByCourse(course, user)
+		}
+		else {
+			ranking = CardRanking.findAllByUser(user,
 				[max: params.max, offset: params.offset, sort:params.sort, order:params.order])
-		def total = CardRanking.where { user == user }.count()
+			total = CardRanking.where { user == user }.count()
+		}
 
-		def meaning =  getStudyStatsDisplay("meaningRanking",user)
-		def symbol =  getStudyStatsDisplay("symbolRanking",user)
-		def pronunciation =  getStudyStatsDisplay("pronunciationRanking",user)
+		def meaning =  getStudyStatsDisplay("meaningRanking",user,course)
+		def symbol =  getStudyStatsDisplay("symbolRanking",user,course)
+		def pronunciation =  getStudyStatsDisplay("pronunciationRanking",user,course)
 		def summaries = ["Meaning": meaning, "Symbol": symbol, "Pronunciation": pronunciation ]
-
+		def courses = getCourses(user)
 		if (request.xhr) {
 			// ajax request
 			def model=[cardRankingInstanceList: ranking,cardRankingInstanceTotal:total, summaries: summaries,
@@ -55,12 +76,17 @@ class CardRankingController {
 		}
 		else {
 			respond ranking, model:[cardRankingInstanceTotal:total, meaningSummary:meaning,
-				pronunciationSummary: pronunciation, symbolSummary: symbol]
+				pronunciationSummary: pronunciation, symbolSummary: symbol, courses: courses, quizzes: quizzes]
 		}
 	}
 
-	def getStudyStatsDisplay(String statName, User user) {
-		def stats =  getStudyStats(statName,user)
+
+	def getStudyStatsDisplay(String statName, User user, Course course) {
+		def stats;
+		if (course)
+		 	stats = getStudyStatsByCourse(statName, course, user)
+		else
+			stats =  getStudyStats(statName,user)
 		def total = 0
 		def slist = [0,0,0,0]
 		for (it in stats) {
@@ -93,5 +119,55 @@ class CardRankingController {
 			}
 			order (stat, 'desc')
 		}
+	}
+	
+	def getCourses(User user) {
+        def courses = Registration.findAllByUser(user,[sort: "course.title", order: "desc"])
+    }
+
+	def getCourseMenu(User user) {
+        def courses = Registration.findAllByUser(user,[sort: "course.title", order: "desc"])
+        List options=[]
+          options.add([id:"", title:"All decks",selected:false]) 
+		for (it in courses) {
+          options.add([id: it.course.id, title:it.course.title, selected: it.course.id == params.course]) 
+        }
+        return options
+    }
+
+
+	def getStudyStatsByCourse(String stat, Course course, User user) {
+		def q4=" group by "+stat;
+		def q3="select deck from Chapter where course_id = :course"
+		def q2 ="select id from Flashcard where deck.id in ("+q3 +")"
+		def query = "from CardRanking where user.id= :user and flashcard.id in ("+ q2 + ")"
+		def c = CardRanking.executeQuery("SELECT "+stat+", count(id) as total "+query + q4,
+            [course:course.id, user: user.id])
+		return c
+   }
+
+	def getFlashcardsByCourse(String stat, Course course, User user) {
+		def q1="select deck from Chapter where course_id = :course"
+		def query ="select id from Flashcard where deck.id in ("+q3 +")"
+		def c= Flashcard.executeQuery(query,  [course:course.id])
+        return c
+    }
+
+	def getCardRankingCountByCourse(Course course, User user) {
+		def q3="select deck from Chapter where course_id = :course"
+		def q2 ="select id from Flashcard where deck.id in ("+q3 +")"
+		def query = "select count(*) from CardRanking where user.id= :user and flashcard.id in ("+ q2 + ")"
+		def c= CardRanking.executeQuery(query,
+            [course:course.id, user: user.id])
+        return c
+	}
+	
+	def getQuizGradeByCourse(Course course, User user) {
+		def q2="select id from Quiz where course_id = :course"
+		def query = "from Grade where user.id= :user and quiz.id in ("+ q2 + ")"
+		def c= Grade.executeQuery(query,
+				[course:course.id, user: user.id]
+			 )
+		return c
 	}
 }

@@ -1,15 +1,15 @@
 <table class="table">
 	<thead>
 		<tr>
-            <g:sortableColumn colspan="2" property="flashcard" title="Flashcard (ordered by deck)" />
-            <g:sortableColumn property="symbolRanking" title="Symbol" />
+            <g:sortableColumn colspan="2" property="flashcard" title="Flashcard (ordered by deck)" params="${params}"/>
+            <g:sortableColumn property="symbolRanking" title="Symbol" params="${params}"/>
             <!--
 			<th class="tooltiper hidden-md hidden-sm hidden-xs"  data-toggle="tooltip"  data-placement="top" title="How well you can recall the symbols when you see the meaning of characters/words in a deck, according to your ranking" >
 			</th>
             -->
-            <g:sortableColumn property="meaningRanking" title="Meaning" />
-            <g:sortableColumn property="pronunciationRanking" title="Pronunciation" />
-            <g:sortableColumn property="lastUpdated" title="Last Update" />
+            <g:sortableColumn property="meaningRanking" title="Meaning" params="${params}"/>
+            <g:sortableColumn property="pronunciationRanking" title="Pronunciation" params="${params}"/>
+            <g:sortableColumn property="lastUpdated" title="Last Update" params="${params}"/>
             <g:set var="level" value='["","hard","medium","easy"]'></g:set>
             <g:set var="colors" value='["none","danger","warning","success"]'></g:set>
 		</tr>

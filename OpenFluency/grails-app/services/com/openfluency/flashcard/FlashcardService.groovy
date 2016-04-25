@@ -54,6 +54,49 @@ class FlashcardService {
         println "Created flashcard $flashcardInstance"
         return flashcardInstance
     }
+
+    Flashcard createFlashcardUsingDictionaryInfo(String primaryString, String otherString, String pronunciationString, int deckId) {
+
+        Unit primaryUnit = Unit.findByLiteral(primaryString);
+        if(primaryUnit == null)
+        {
+           def alphabet = Alphabet.findByName("Kanji"); 
+           primaryUnit = new Unit(alphabet : alphabet, literal : primaryString);
+           primaryUnit.save();
+        }
+
+        Unit secondaryUnit = Unit.findByLiteral(otherString);
+        if(secondaryUnit == null)
+        {
+           def alphabet = Alphabet.findByName("Latin"); 
+           secondaryUnit = new Unit(alphabet: alphabet, literal: otherString);
+           secondaryUnit.save();
+        }
+
+        UnitMapping mapping = UnitMapping.findByUnit1AndUnit2(primaryUnit, secondaryUnit);
+        if(mapping == null)
+        {
+            mapping = new UnitMapping(unit1: primaryUnit, unit2 : secondaryUnit);
+            mapping.save();
+        }
+
+        def pronunciation = Pronunciation.findByLiteral(pronunciationString);
+        if(pronunciation == null)
+        {
+           def alphabet = Alphabet.findByName("Latin"); 
+           pronunciation = new Pronunciation(unit: primaryUnit, alphabet : alphabet, literal : pronunciationString).save();
+        }
+
+		def flashcardInstance = new Flashcard(
+            primaryAlphabet: primaryUnit.alphabet, 
+            unitMapping: mapping, 
+            pronunciation: pronunciation, 
+            image: null, 
+            audio: null, 
+            deck: Deck.load(deckId)).save(flush: true, failOnError: true)
+        /* flashcardService.createFlashcard(primaryUnit.id.toString(), mapping.id.toString(), pronunciation.id.toString(), "", "", "2" ); */
+    }
+
 	
 	void reassignFlashcard(Flashcard card, Deck dest){
 		card.deck = dest;

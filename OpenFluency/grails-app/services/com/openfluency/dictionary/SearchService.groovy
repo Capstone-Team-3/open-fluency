@@ -73,17 +73,17 @@ class SearchService {
 		 if(!init){
 			 OSDetails details = GetOS.details()
 			 indexSearchToolPath = new java.io.File(
-				 servletContext.getRealPath(
+				 servletContext.getRealPath('.') + 
 					 '/../resources/dictionaries/index_search_tools/' + 
 					    details.arch + 
 						'/csearch' + 
 						details.exeExt +
 						' '
-				 )).getCanonicalPath()
+				 ).getCanonicalPath()
 			 indexPath = new java.io.File(
-				 servletContext.getRealPath(
+				 servletContext.getRealPath('.') +
 					 '/../resources/dictionaries/index/' + details.arch + '/jp-en.index '
-				 )).getCanonicalPath()
+				 ).getCanonicalPath()
 				 
 			 commandBase = indexSearchToolPath + " -indexpath " +  indexPath;
 			 

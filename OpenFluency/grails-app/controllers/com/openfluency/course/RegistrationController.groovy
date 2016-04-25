@@ -1,11 +1,13 @@
 package com.openfluency.course
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import com.openfluency.Constants
+import com.openfluency.auth.User
 
 class RegistrationController {
 
-	def courseService
+	def courseService, springSecurityService
 
 	@Secured(['ROLE_INSTRUCTOR'])
 	def approve(Registration registrationInstance) { 
@@ -27,5 +29,12 @@ class RegistrationController {
 		}
 		
 		redirect controller: "course", action: "students", id: registrationInstance.course.id
+	}
+
+	@Secured(['isAuthenticated()'])
+	def enrolledCourses() {
+		User user = User.load(springSecurityService.principal.id)
+		def reg=Registration.findAllByUser(user)
+		render reg?.course as JSON
 	}
 }

@@ -26,6 +26,19 @@ class FlashcardController {
     	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language), deckId: deckId]
     }
 
+    def createFromDictionary() {
+        render(view: "createFromDictionary")
+    }
+
+    def createTest(){
+        def primaryString = "<japanesestring>";
+        def otherString = "<englishString>";
+        def pronunciationString = "<pronounciation>"; 
+
+        flashcardService.createFlashcardUsingDictionaryInfo(primaryString, otherString, pronunciationString, 2);
+        render(view: "createFromDictionary") 
+    }
+
     /**
     * Save the flashcard for the selected unit
     */
