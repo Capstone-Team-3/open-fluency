@@ -100,6 +100,7 @@ environments {
         grails.plugin.databasemigration.reports.changelogFileName = changelog-reports.groovy
 		mediaFolder="media/"
 		tmpMediaFolder="card-media/"
+		grails.resources.debug = true
     }
     production {
         grails.logging.jul.usebridge = false
@@ -112,6 +113,7 @@ environments {
 		uploadFolder = "tmp/upload"
 		tmpMediaFolder="card-media/"
 		mediaFolder="media/"
+		grails.resources.debug = true
     }
 }
 

@@ -170,7 +170,10 @@ $(document).ready(function(){
         custData.append('flashcardId', $('#c_fId').val());
         custData.append('unitMappingId', $('#c_umId').val());
         custData.append('imageLink', $('#c_imageLink').val());
-        custData.append('audioId', $('#c_audio_id').val());
+        
+        if ($('#c_audio_id').length > 0) {
+        	custData.append('audioId', $('#c_audio_id').val());
+        }
         // Send it
         $.ajax({
             type: 'POST',
