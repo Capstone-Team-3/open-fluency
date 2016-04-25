@@ -1,5 +1,14 @@
-<div  id="unit-mapping-div" class="row" style="margin-left: auto; margin-right: auto;">
+<style>
 
+#units-div {
+	height: 0px; 
+}
+
+</style>
+
+
+
+<div  id="unit-mapping-div" class="row" style="margin-left: auto; margin-right: auto;">
 
 	<button id="submit-unitMapping-button" class="btn btn-success btn-sm" style="float:right">Submit</button>
 

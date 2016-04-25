@@ -12,7 +12,6 @@ package cscie599.openfluency2;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
@@ -23,8 +22,6 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cscie99.team2.lingolearn.server.anki.AnkiCardSqlJetTransaction;
-
 /**
  * Code to identify different media types
  * @author phoebemiller
@@ -34,6 +31,7 @@ import cscie99.team2.lingolearn.server.anki.AnkiCardSqlJetTransaction;
 public class Media {
 	private static final Logger logger = 
 			LoggerFactory.getLogger(Media.class);
+	@SuppressWarnings("unused")
 	private static final Pattern fIllegalCharReg = Pattern.compile("[><:\"/?*^\\\\|\\x00\\r\\n]");
     private static final Pattern fRemotePattern  = Pattern.compile("(https?|ftp)://");
     private static final Pattern fSoundRegexps = Pattern.compile("(?i)(\\[sound:([^]]+)\\])");

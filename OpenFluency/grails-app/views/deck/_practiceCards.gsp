@@ -1,7 +1,7 @@
 <%@ page import="com.openfluency.Constants" %>
 
-
 <style>
+
 .btn-rounded.btn-lg {
     width: 100px;
     height: 67px;
@@ -12,9 +12,6 @@
     margin-bottom: 5px;
 }
 
-.clickable-character {
-	cursor: pointer;
-}
 </style>
 
 

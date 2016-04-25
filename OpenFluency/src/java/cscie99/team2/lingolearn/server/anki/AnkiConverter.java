@@ -10,7 +10,6 @@ import java.util.Iterator;
 import cscie99.team2.lingolearn.server.anki.error.AnkiException;
 import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.Deck;
-import cscie99.team2.lingolearn.shared.error.CardNotFoundException;
 
 public class AnkiConverter {
 	

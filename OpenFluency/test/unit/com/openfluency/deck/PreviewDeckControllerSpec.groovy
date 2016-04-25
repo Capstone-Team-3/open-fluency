@@ -1,6 +1,7 @@
 package com.openfluency.deck
 
-import grails.test.mixin.*
+import grails.test.mixin.TestFor
+import grails.test.mixin.Mock
 
 import com.openfluency.auth.Role;
 import com.openfluency.auth.User
@@ -36,31 +37,28 @@ class PreviewDeckControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        // Populate valid properties like...
 		Language language = new Language(name:"name",code:"code").save()
         params["name"] = 'someValidName'
         params["document_id"] = 1
         params["owner_id"] = user.id
         params["filename"] = "Filename"
         params["language_id"] = language.id
-		//mockSecurityService.demand.encodePassword { String passwd -> return expectedPassword}
-		//controller.springSecurityService = mockSecurityService.createMock()
     }
 
+	/*  This version of Grails Junit Does not support String query in GORM
+    This test cannot be performed
     void "Test the index action returns the correct model"() {
-	/* Does not support String query in GORM
         when:"The index action is executed"
             controller.index()
 
         then:"The model is correct"
             !model.previewDeckInstanceList
             model.previewDeckInstanceCount == 0
-    */
     }
+    */
 
     void "Test the save action correctly persists an instance"() {
-	/*
 		Role role = new Role(authority:"auth",name:"name")
 		Language language = new Language(name:"name",code:"code")
 		def loggedInUser = new User(username: "user",password:"pass",
@@ -76,7 +74,6 @@ class PreviewDeckControllerSpec extends Specification {
 			reauthenticate: { String u -> true},
 			loggedIn: true,
 			principal: loggedInUser]
-		controller.springSecurityService.metaClass.encodePassword = { password -> password }
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             def previewDeck = new PreviewDeck()
@@ -98,8 +95,8 @@ class PreviewDeckControllerSpec extends Specification {
             response.redirectedUrl == '/previewDeck/show/1'
             controller.flash.message != null
             PreviewDeck.count() == 1
-*/
     }
+
     void "Test that the show action returns the correct model"() {
         when:"The show action is executed with a null domain"
             controller.show(null)
@@ -107,7 +104,7 @@ class PreviewDeckControllerSpec extends Specification {
         then:"A 404 error is returned"
             response.status == 404
 
-			/*
+        /*
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
             def previewDeck = new PreviewDeck(params).save()
@@ -170,7 +167,6 @@ class PreviewDeckControllerSpec extends Specification {
     }
 
     void "Test that the delete action deletes an instance if it exists"() {
-		/*
         when:"The delete action is called for a null instance"
             request.contentType = FORM_CONTENT_TYPE
             controller.delete(null)
@@ -194,6 +190,5 @@ class PreviewDeckControllerSpec extends Specification {
             PreviewDeck.count() == 0
             response.redirectedUrl == '/previewDeck/index'
             flash.message != null
-            */
     }
 }
