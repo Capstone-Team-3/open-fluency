@@ -28,7 +28,7 @@ class PreviewDeckController {
         params.max = Math.min(max ?: 10, 100)
        // respond PreviewDeck.list(params), model:[previewDeckInstanceCount: PreviewDeck.count()]
         def previewdecks = PreviewDeck.findAll("from PreviewDeck where owner_id= ? order by uploadDate desc",[user.id], params)
-		respond previewdecks , model:[previewDeckInstanceCount: PreviewDeck.countByOwner(user)]
+		respond previewdecks , model:[previewDeckInstanceCount: previewdecks.size() ]
     }
 
 	// Display a preview deck associated with a document
@@ -89,7 +89,7 @@ class PreviewDeckController {
 		def jsonSlurper = new JsonSlurper();  
 		// hack.. sending json string as text plain.. Json always null for some reason even with empty args.
 		def payload = jsonSlurper.parseText(params.payload); 
-		
+		def privateDeck= false; /*** NEED to change UI **/
 		def fieldInd = payload.fieldIndices;
 		def alphInd = payload.alphaIndices;
 		def algorithm = payload.algorithm;
@@ -99,7 +99,7 @@ class PreviewDeckController {
 		int algoIndex = 0;  //sw2 is default
 		if (algorithm.equals("lws"))
 			algoIndex = 1;
-				
+			// TODO fix me
 		HashMap<String, Integer> fieldIndices = (HashMap<String, Integer>) fieldInd;
 		HashMap<Integer, String> alphaIndices = (HashMap<Integer, String>) alphInd;
 		
@@ -115,10 +115,12 @@ class PreviewDeckController {
             previewDeckService.setDirs(grailsApplication.config.tmpMediaFolder,grailsApplication.config.mediaFolder)
 			// should do exception checking here..
 			
+			def newdeck=null;
 			try {
-				previewDeckService.createOpenFluencyDeck(deckName, deckDescription, srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex]);
+				newdeck = previewDeckService.createOpenFluencyDeck(deckName, deckDescription, srcLang, previewDeckInstance, fieldIndices, alphaIndices, algorithmService.cardServerNames()[algoIndex],privateDeck);
 			} catch(Exception e) {
 				render (status: 500, text: 'An error has occurred while creating the deck');
+				return
 			}
 			
             try { // Modify the download doc record
@@ -128,7 +130,8 @@ class PreviewDeckController {
             } catch(Exception e) {}
             
             //previewDeckInstance.delete flush:true
-			render (status: 200, text: "success")
+			if (newdeck!=null)
+				render (status: 200, text: "success")
 			//redirect controller:"Deck", action: "list"
 		}		
 	}

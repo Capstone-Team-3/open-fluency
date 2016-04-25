@@ -11,6 +11,9 @@ import pages.course.*
 import pages.chapter.*
 import pages.quiz.*
 
+/**
+ * This functional test script tests the general instructor functionalities
+ */
 
 @Stepwise
 class InstructorSpec extends GebReportingSpec {
@@ -50,7 +53,7 @@ class InstructorSpec extends GebReportingSpec {
 		signinButton.click()
 		then:
 		at DashboardPage
-		$(".dashboard > h1").text() == "instructor's Dashboard"
+		dashboardHeading.text() == "instructor's Dashboard"
 	}
 
 	def "Instructor navigates to course creation"() {
@@ -79,7 +82,7 @@ class InstructorSpec extends GebReportingSpec {
 
 	def "Instructor adds chapter to course"() {
 		when:
-		$('.add-chapter').click()
+		createChapterButton.click()
 		then:
 		at CreateChapterPage
 	}
@@ -154,35 +157,6 @@ class InstructorSpec extends GebReportingSpec {
 		then:
 		at ShowDeckPage
 		flashcardResult.size() == (numberOfFlashcards - 1)
-	}
-	
-	def "Instructor creates chapter quiz"() {
-		when:
-			go "/OpenFluency/quiz/create/1"
-		then:
-			at CreateChapterQuizPage
-			
-		when: "fill out form"
-			quizTitle = "Test Quiz"
-			maxCardTime = "20"
-			quizType.value('0')
-			createQuizButton.click()
-		then:
-			at ShowQuizPage			
-	}
-	
-	def "Instructor creates manual quiz"() {
-		when:
-			go "/OpenFluency/quizEditor/create/1"
-		then:
-			at CreateManualQuizPage
-			
-		when: "fill out form"
-			quizTitle = "Test Quiz"
-			maxCardTime = "20"
-			createQuizButton.click()
-		then:
-			at ShowQuizPage
 	}
 	
 	def "Instructor navigates to anki deck import"() {

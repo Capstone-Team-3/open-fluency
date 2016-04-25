@@ -64,6 +64,11 @@
 					<h4><strong>Owner</strong></h4>
 					<span class="property-value" aria-labelledby="owner-label"><g:link controller="user" action="show" id="${previewDeckInstance?.owner?.id}">${previewDeckInstance?.owner?.encodeAsHTML()}</g:link></span>
 				</li>
+
+				<li class="fieldcontain">
+					<h4><strong>Private</strong></h4>
+					<span class="property-value" aria-labelledby="private-label"><checkbox name="{previewDeckInstance}" value=true/>False</span>
+				</li>
 			
 			</ul>
 		</div>

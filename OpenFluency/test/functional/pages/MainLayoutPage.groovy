@@ -23,6 +23,7 @@ class MainLayoutPage extends Page {
 		
 		profile { $("a[href='/OpenFluency/user/profile']") }
 		help { $("a", text: contains('Help')) }
+		logout { $("a", text: contains('Logout')) }
 
 		flashMessage { $(".alert.alert-info") }
 	}

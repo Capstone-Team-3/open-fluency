@@ -16,6 +16,7 @@ import spock.lang.*
 
 class PreviewDeckControllerSpec extends Specification {
 	def user
+	def document
 	def setup() {
 		def studentRole = new Role(name: "Student", authority: Constants.ROLE_STUDENT).save(failOnError: true)
 		def english = new Language(name: 'English', code: 'ENG-US').save(failOnError: true)
@@ -24,8 +25,9 @@ class PreviewDeckControllerSpec extends Specification {
 		def kanji = new Alphabet(name: 'Kanji', language: japanese, code: "kanji", encodeEntities: true).save(failOnError: true)
 		User.metaClass.encodePassword = {  } // Change encodePassword to do nothing since SpringSecurityService doesn't exist in mocked domain object
 		user = new User(username: "username", password: "password", enabled: true, accountExpired: false, accountLocked: false, passwordExpired: false, email: "email@email.com", userType: studentRole, nativeLanguage: english).save(failOnError: true)
+		document = new Document(filename: 'doc', fullPath: "path", language: japanese, owner: user).save(failOnError: true)
 		Document.metaClass.hasErrors() { return false } // So the object returned by the mock documentService will be considered valid by the controller
-		Document.metaClass.id = 1
+		Document.metaClass.id = document.id
 		controller.springSecurityService = [
 			encodePassword: 'password',
 			reauthenticate: { String u -> true},
@@ -40,7 +42,7 @@ class PreviewDeckControllerSpec extends Specification {
         // Populate valid properties like...
 		Language language = new Language(name:"name",code:"code").save()
         params["name"] = 'someValidName'
-        params["document_id"] = 1
+        params["document"] = document.id
         params["owner_id"] = user.id
         params["filename"] = "Filename"
         params["language_id"] = language.id
@@ -115,8 +117,8 @@ class PreviewDeckControllerSpec extends Specification {
             */
     }
 
-    void "Test that the edit action returns the correct model"() {
 	/*
+    void "Test that the edit action returns the correct model"() {
         when:"The edit action is executed with a null domain"
             controller.edit(null)
 
@@ -130,11 +132,11 @@ class PreviewDeckControllerSpec extends Specification {
 
         then:"A model is populated containing the domain instance"
             model.previewDeckInstance == previewDeck
-    */
     }
+    */
 
-    void "Test the update action performs an update on a valid domain instance"() {
 	/*
+    void "Test the update action performs an update on a valid domain instance"() {
         when:"Update is called for a domain instance that doesn't exist"
             request.contentType = FORM_CONTENT_TYPE
             controller.update(null)
@@ -163,8 +165,8 @@ class PreviewDeckControllerSpec extends Specification {
         then:"A redirect is issues to the show action"
             response.redirectedUrl == "/previewDeck/show/$previewDeck.id"
             flash.message != null
-            */
     }
+            */
 
     void "Test that the delete action deletes an instance if it exists"() {
         when:"The delete action is called for a null instance"
