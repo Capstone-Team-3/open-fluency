@@ -1,6 +1,13 @@
 <%@ page import="com.openfluency.Constants" %>
+<style>
+#player {
+ width: 90%;
+ padding: 0px 0px 0px;
+}​
+</style>
+
 <div class="col-lg-3">
-	<div class="panel panel-default question-panel">
+	<div class="panel panel-default flashcard-panel">
 		<div class="panel-heading center">
 			<g:if test="${isOwner}">
 				<div class="card-actions">
@@ -8,36 +15,23 @@
 				</div>
 			</g:if>
 			<g:if test="${questionInstance?.question == "image"}">
-			<div id="flashcard-image" class="flashcard-img" style="background-image: url(${questionInstance?.image.getImageUri()})"></div>
+			
+			<div id="question-image" class="question-img" style="background-image: url('${questionInstance?.image.getImageUri()}')"></div>
+		
 			</g:if>
 			<g:elseif test="${questionInstance?.question == "sound"}">
-
-            <br/>
-			<audio controls="controls" preload="metadata">
- 			 <source src="${questionInstance.sound.getSoundUri()}" />
+			<audio id="player" controls="controls" preload="metadata">
+ 			<source src="${questionInstance.sound.getSoundUri()}" />
   			<b>Your browser does not support HTML5 audio element</b>
-			</audio><br />
-
-			<!--
-			<span id="pronounced">(pronunciation text)</span>
-			<span class="play-audio glyphicon glyphicon-volume-up"></span>
-			<audio class="flashcard-audio" id="um-flashcard-audio" src="${questionInstance.sound.getSoundUri()}" controls></audio>
-
-			<div id="audio-url-droppable">
-			<span id="clear-audio-url" class="close-thin"></span>
-			<span id="audio-url-display">(audio url)</span>
-			</div>
-			-->
-			<!-- <div id="flashcard-image" class="flashcard-img" style="background-image: url(${questionInstance.sound.getSoundUri()})"></div>  -->
+			</audio>
 			</g:elseif>
 			<g:else>
-			<h1>${questionInstance.question}</h1>
+			<h4>${questionInstance.question}<h4>
 			</g:else>
 		</div>
 		<div class="panel-body text-center">
 			<h4>Multiple choice options:</h4>
-			<table class="table">
-				
+			<table class="table">			
 				<g:each in="${questionInstance.options}">
 					<tr>
 						<td>${it.option}</td>
@@ -46,9 +40,7 @@
 			</table>
 		</div>
 	</div>
-	<!-- end panel -->
 </div>
-<!-- end col-lg-3 -->
 
 <script>
 $(document).ready(function(){

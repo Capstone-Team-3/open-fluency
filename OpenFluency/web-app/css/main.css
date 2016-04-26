@@ -235,7 +235,7 @@ h2.sub-heading {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-color: whiteSmoke;
-    height: 200px;;
+    height: 200px;
     margin: 20px auto 0;
 }
 
@@ -451,7 +451,7 @@ h4#custom-image {
     position: relative;
 }
 
-.dashboard .panel-default > .panel-heading,
+.dashboard .panel-heading center-default > .panel-heading,
 .dashboard .panel-footer {
     background-color: #fafafa;
 }
@@ -691,13 +691,17 @@ h4#custom-image {
 }
 
 .question-img {
-    background-size: 100% auto;
+    height: 150px;
+    width: 100%;
+    margin-bottom: 10px;
     background-position: 50% 50%;
+    background-size: auto 100%;
     background-repeat: no-repeat;
-    background-color: whiteSmoke;
-    height: 200px;;
-    margin: 20px auto 0;
 }
+
+.question-audio-player {
+ width: 50%;
+}​
 
 .question-panel {
     position: relative;

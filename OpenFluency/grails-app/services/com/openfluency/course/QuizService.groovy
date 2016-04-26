@@ -395,24 +395,26 @@
 
                     csvFile.toCsvReader(['charset':'UTF-8','skipLines':1],).eachLine { tokens -> 
 
-                     if (tokens[1].equals("")){
+              /*       if (tokens[1].equals("")){
                         return
-                     }
+                     }  */
 
-                     if (!tokens[2].equals("")){
+                     if (!tokens[2].trim().equals("")){
                         im = new Image()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
                         im.setImageUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[2])
+                        tokens[1] = "image"
                       } else{
                         im = null
                       }
 
-                        if (!tokens[3].equals("")){
+                        if (!tokens[3].trim().equals("")){
                         snd = new Sound()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
                         snd.setSoundUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[3])
+                        tokens[1] = "sound"
                       } else {
                         snd = null
                       }
@@ -463,7 +465,7 @@
         }
 
 
-    private List<String> importQuizFromZip(File zipFile) {
+    List<String> importQuizFromZip(File zipFile) {
             List<String> zipFiles=new ArrayList<String>();
             File destinationname = new File("web-app" + File.separator + "media");
             File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); 
