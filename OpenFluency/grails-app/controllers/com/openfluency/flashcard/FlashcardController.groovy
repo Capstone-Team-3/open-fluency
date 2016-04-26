@@ -34,10 +34,10 @@ class FlashcardController {
     }
 
     def createTest(){
-        def primaryString = params.concept;
-        def otherString = params.meaning;
-        def pronunciationString = params.pronunciation; 
-        def deckId = params.deckId;
+        def primaryString = params.concept.trim();
+        def otherString = params.meaning.trim();
+        def pronunciationString = params.pronunciation.trim(); 
+        def deckId = params.deckId.trim();
 
         flashcardService.createFlashcardUsingDictionaryInfo(primaryString, otherString, pronunciationString, deckId.toInteger());
         redirect(action: "createFromDictionary") 

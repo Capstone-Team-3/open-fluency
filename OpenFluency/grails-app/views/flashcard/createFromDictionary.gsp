@@ -45,6 +45,69 @@
                         </div>
                     </div>
 
+					<h3 class="customize-heading">Add an Image (optional)</h3>
+
+					<div class="form-group-image">
+
+						<div class="flashcard-image-create">
+						</div>
+
+						<div class="hide">
+							<div class="form-group">
+								<label class="control-label">Paste an image URL:</label>
+								<g:textField class="form-control" size = "70" id="imageLink" name="imageLink" value="${flashcardInstance?.image}"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="query" class="control-label">Or, search Flickr for an image:</label>
+							<div class="input-group">
+								<g:textField class="form-control" name="query" placeholder="Type a keyword" id="query" />
+								<span class="input-group-btn">
+									<input type="button" class="btn btn-info" id="flickr_search" value="Search" />
+								</span>
+							</div>
+						</div>
+						%{--
+						<input id="show_flickr_search" style="margin-bottom:10px;" type="button" onclick="showHideFlickrSearch()" value="Flickr Search" class="btn btn-info"/>
+						--}%
+					</div>
+					<!-- end form-group-image -->
+
+					<g:if test="${flashcardInstance?.audio}">
+						<div class="form-group">
+
+							<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What audio clip provides pronunciation for this card?">Audio</label>
+
+							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
+
+						</div>
+						<!-- end form-group -->
+					</g:if>
+
+					<h3 class="customize-heading">Add Audio (optional)</h3>
+
+					<div class="form-group-audio">
+
+						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Record a pronunciation" >Record an audio pronunciation file:</label>
+
+						<small class="clearfix audio-warning"> <strong>Note:</strong>
+							A browser pop-up may appear asking you to 'Allow' microphone use!
+						</small>
+
+						<audio id="audioClip" controls autoplay></audio>
+
+						<div class="audio-controls">
+							<input id="start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
+							<input id="stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
+							<input id="save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
+							<input id="audio_id" name="audio_id" type="hidden" value=""/>
+						</div>
+						<!-- end audio-controls -->
+
+					</div>
+					<!-- end form-group audio -->
+
 
                     <div class="form-group row">
                         <div class="col-sm-offset-2 col-sm-10">
