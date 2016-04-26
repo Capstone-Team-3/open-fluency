@@ -18,37 +18,31 @@
            <g:render template="/dictionary/dictionaryTable"/>
         </div> 
         <div class="col-lg-6">
-        <form>
+
+        <g:form action="createTest" >
   <div class="form-group row">
     <label for="inputConcept" class="col-sm-2 form-control-label">Concept</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputConcept" placeholder="concept">
+      <input type="text" class="form-control" id="inputConcept" name="concept" placeholder="concept">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputMeaning" class="col-sm-2 form-control-label">Meaning</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputMeaning" placeholder="meaning">
+      <input type="text" class="form-control" id="inputMeaning" name="meaning" placeholder="meaning">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPronunciation" class="col-sm-2 form-control-label">Pronunciation</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPronunciation" placeholder="pronunciation">
+      <input type="text" class="form-control" id="inputPronunciation" name="pronunciation" placeholder="pronunciation">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="select" class="col-sm-2 form-control-label">Deck Select</label>
     <div class="col-sm-10">
-      <select id="select">
-        <option value="">Choose...</option>
-        <optgroup label="Option group 1">
-          <option value="">Option 1</option>
-          <option value="">Option 2</option>
-          <option value="">Option 3</option>
-        </optgroup>
-      </select>
+      <g:select name="deckId" from="${deckInstanceList}" optionKey="id" optionValue="${{xx->"${xx}"}}"  />  
     </div>
   </div>
 
@@ -58,7 +52,7 @@
       <button type="submit" class="btn btn-secondary">Submit</button>
     </div>
   </div>
-</form>
+</g:form>
 </div> 
 </div>
 <g:javascript>

@@ -94,6 +94,7 @@ class FlashcardService {
             image: null, 
             audio: null, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
+        return flashcardInstance;
         /* flashcardService.createFlashcard(primaryUnit.id.toString(), mapping.id.toString(), pronunciation.id.toString(), "", "", "2" ); */
     }
 
