@@ -395,11 +395,11 @@
 
                     csvFile.toCsvReader(['charset':'UTF-8','skipLines':1],).eachLine { tokens -> 
 
-                     if (tokens[1].equals("")){
+              /*       if (tokens[1].equals("")){
                         return
-                     }
+                     }  */
 
-                     if (!tokens[2].equals("")){
+                     if (!tokens[2].trim().equals("")){
                         im = new Image()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
@@ -408,7 +408,7 @@
                         im = null
                       }
 
-                        if (!tokens[3].equals("")){
+                        if (!tokens[3].trim().equals("")){
                         snd = new Sound()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
@@ -463,7 +463,8 @@
         }
 
 
-    private List<String> importQuizFromZip(File zipFile) {
+    List<String> importQuizFromZip(File zipFile) {
+            
             List<String> zipFiles=new ArrayList<String>();
             File destinationname = new File("web-app" + File.separator + "media");
             File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); 
@@ -476,7 +477,7 @@
             ZipInputStream zis = new ZipInputStream(zipFileStream);
             ZipEntry ze = zis.getNextEntry();
             topFolder = ze.getName()
-            if (topFolder.contains(".csv")){
+            if (topFolder.length() > 3 && topFolder.contains(".")){
                topFolder = ""
             } 
 
@@ -498,8 +499,7 @@
                     }
                     fos.close();   
                 } 
-
-                else if (ze.getName().contains(".mp3")||(ze.getName().contains(".jpg"))) {
+                else if (ze.getName().contains(".")) {
                     this.mediaFile = new File(mediaFolder + File.separator + ze.getName());
                     //Create parent folder, ok if already exists
                     new File(this.mediaFile.getParent()).mkdirs();      

@@ -58,7 +58,9 @@
 				</div>
 				<div class="modal-body">
 					<p>
-						Upload a .csv or .zip file with your Quiz questions. 
+								Upload a CSV or ZIP file with your Quiz questions. 
+								(You can download a sample ZIP file to see how quizzes containing audio or images are structured
+								<a href="../../resources/Sample quiz containing audio and images.zip">here</a>.)	
 					</p>
 					<input name="csvData" type="file" name="csvData" required/>
 				</div>
