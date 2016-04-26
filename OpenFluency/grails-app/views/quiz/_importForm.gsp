@@ -19,8 +19,7 @@
   </script>
 <div class="form-group">
 	<label for="title">Title:</label>
-	<g:textField name="title" value="${quizInstance?.title}"
-		class="form-control" />
+	 <input type="text" name="title" id="title" required class="form-control">
 </div>
 
 <div class="form-group">
@@ -61,7 +60,7 @@
 					<p>
 						Upload a .csv or .zip file with your Quiz questions. 
 					</p>
-					<input name="csvData" type="file" name="csvData" />
+					<input name="csvData" type="file" name="csvData" required/>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
