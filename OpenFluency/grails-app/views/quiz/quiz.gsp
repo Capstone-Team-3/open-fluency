@@ -41,7 +41,7 @@
 				</g:if>
 				<g:elseif test="${answerInstance?.question.question == "sound"}">
 
-					<audio controls="controls" preload="metadata">
+					<audio controls="controls" autoplay preload="metadata">
  					 <source src="${answerInstance.question.sound.getSoundUri()}" />
   					<b>Your browser does not support HTML5 audio element</b>
 					</audio>
