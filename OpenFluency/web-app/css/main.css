@@ -230,7 +230,6 @@ h2.sub-heading {
 .flashcard .pronunciation {
     font-size: .85em;
 }
-
 .flashcard-img {
     background-size: 100% auto;
     background-position: 50% 50%;
@@ -689,6 +688,15 @@ h4#custom-image {
     background-color: #efefef;
     margin: 30px 0 20px;
     padding: 20px 20px 10px;
+}
+
+.question-img {
+    background-size: 100% auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: whiteSmoke;
+    height: 200px;;
+    margin: 20px auto 0;
 }
 
 .question-panel {

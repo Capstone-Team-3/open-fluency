@@ -50,9 +50,8 @@ class CourseController {
 			it.metaClass.progress = deckService.getDeckProgress(it.deck)
 		}
 
-		// Get quizes
-		List<Quiz> quizesInstanceList = courseService.getLiveQuizes(courseInstance)
-
+		// Get quizzes
+		List<Quiz> quizesInstanceList =  Quiz.findAll()
 		// Get student grades for each quiz
 		quizesInstanceList.each {
 			it.metaClass.finalGrade = quizService.getPercentageGrade(it)

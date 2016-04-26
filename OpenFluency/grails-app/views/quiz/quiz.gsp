@@ -35,8 +35,20 @@
 						</div>
 					</g:if>
 					
-					<h1 class="unit text-center">${answerInstance.question.question}</h1>
 
+				<g:if test="${answerInstance?.question.question == "image"}">
+				<div id="flashcard-image" class="flashcard-img" style="background-image: url(${answerInstance?.question.image.getImageUri()})"></div>
+				</g:if>
+				<g:elseif test="${answerInstance?.question.question == "sound"}">
+
+					<audio controls="controls" preload="metadata">
+ 					 <source src="${answerInstance.question.sound.getSoundUri()}" />
+  					<b>Your browser does not support HTML5 audio element</b>
+					</audio>
+					</g:elseif>
+					<g:else>
+					<h1 class="unit text-center">${answerInstance.question.question}</h1>
+					</g:else>
 					<div class="col-lg-6 col-lg-offset-3">
 						<p> <strong>Select the correct answer:</strong> 
 						</p>
