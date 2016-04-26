@@ -30,9 +30,12 @@ v<%@ page import="com.openfluency.Constants" %>
 					<h1>
 						Quiz: ${quizInstance.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${quizInstance.id}" controller="quiz" class="btn btn-warning">
-								<span class="glyphicon glyphicon-pencil"></span>
-							</g:link>
+							<g:if test="${quizInstance.quizType == com.openfluency.Constants.MANUAL_QUIZ}">
+								<g:link action="edit" controller="quizEditor" id="${quizInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+							</g:if>
+							<g:else>
+								<g:link action="edit" controller="quiz" id="${quizInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+							</g:else>
 						</g:if>
 					</h1>
 					<h3>${quizInstance.course.title}</h3>

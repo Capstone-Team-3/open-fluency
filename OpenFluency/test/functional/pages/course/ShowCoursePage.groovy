@@ -14,5 +14,13 @@ class ShowCoursePage extends MainLayoutPage {
 		courseTitle(wait: true) { $(".course-title") }
 		courseDescription(wait: true) { $(".course-description") }
 		
+		// TODO editCourseButton(wait: true) {}
+		// TODO deleteCourseButton(wait: true) {}
+		
+		createChapterButton(wait: true) { $('.add-chapter') }
+		
+		// TODO createChapterQuizButton(wait: true) {}
+		// TODO createManualQuizButton(wait: true) {}
+		// TODO importQuizButton(wait: true) {}
 	}
 }

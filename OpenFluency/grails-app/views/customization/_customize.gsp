@@ -43,35 +43,12 @@
 			</div><!-- end custom-image-container -->
 
 		</div><!-- end customize-image -->
-
-		<div class="customize-audio">
-			
-			<h4 id="custom-audio"><span class="small glyphicon glyphicon-chevron-right"></span> Add/Change Audio</h4>
-			
-			<div class="form-group" id="custom-audio-container">
-				
-				<small class="clearfix audio-warning"><strong>Note:</strong> A browser pop-up may appear asking you to 'Allow' microphone use!</small>
-				<audio id="c_audioClip" controls autoplay></audio>
-				<div class="audio-controls">
-					<input id="c_start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
-					<input id="c_stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
-					<input id="c_save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
-					<input id="c_audio_id" name="c_audio_id" type="hidden" value=""/> 
-				</div>
-
-			</div><!-- end custom-audio-container -->
-
-		</div><!-- end form-group audio -->
 		
 		<button id="customizationCreate" class="center btn btn-success">Save Changes</button>
 		<button id="customizationDelete" class="center btn btn-danger">Remove Current Customizations</button>
 		<a href="#" id="cancel-customize">Cancel</a>
-		<span id="c_audioSaveMessage" class="audio-save-message hidden">* Did you save your audio recording?</span>
 	<!--/g:form-->
 
 </div><!-- end customize-container -->
 
-<g:javascript src="recorderWorker.js"/>
-<g:javascript src="recorder.js"/>
-<g:javascript src="create_audio.js"/>
 <g:javascript src="customize.js"/>

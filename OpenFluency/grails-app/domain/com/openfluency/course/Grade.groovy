@@ -8,6 +8,8 @@ import com.openfluency.auth.User
 class Grade {
 	/** the quiz being graded */
 	Quiz quiz
+	/** the total number questions on the quiz */
+	Integer numberOfQuestions
 	/** the number of answers answered correctly on the quiz */
 	Integer correctAnswers
 	/** the User whos grade this is */

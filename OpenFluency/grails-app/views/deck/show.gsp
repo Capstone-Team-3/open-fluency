@@ -48,6 +48,27 @@ h2 {
   font-size: 21px;
   background: #b3e6ff;
 }
+
+
+.card-selected {
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	background: lavender;
+}
+
+#selectedCardsMenu {
+	position: fixed;
+	right: 0;
+	top: 10%;
+	width: 91px;
+	list-style-type: none;
+	border: 1px solid black;
+	background: lavender;
+	font-size: 14px;
+	padding: 0px;
+}
+
+
 	</style>
 	
 </head>
@@ -74,7 +95,7 @@ h2 {
 					<h1 class="deck-title">
 						${deckInstance?.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">
+							<g:link action="edit" id="${deckInstance.id}" elementId="edit-deck" class="btn btn-warning">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</g:link>
 							<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">
@@ -133,6 +154,7 @@ h2 {
 							</li>
 						</ul>
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -166,7 +188,7 @@ h2 {
 						<div class="modal-body">
 							<p>
 								Upload a CSV file with your flashcard definitions. (You can download a sample CSV to see how the file is structured
-								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>
+								<a href="../../resources/testDeck.csv">here</a>
 								.)
 							</p>
 							<input name="csvData" type="file" name="csvData"/>
@@ -182,65 +204,41 @@ h2 {
 	</div>
 <!-- Modal -->
 <div id="myModal2" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-      <!-- Modal content-->
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-<h4 class="modal-title">Reassign Flashcard to deck</h4>
+ 	<div class="modal-dialog">
+	
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Reassign Flashcard to deck</h4>
+			</div>
+			<div class="modal-body">
+			    <div id='ul-container'>
+			        <h2>
+			            My Decks
+			            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
+			        </h2>
+			       <g:each in="${deckInstanceList}">
+			        <div class="radio">
+			              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
+			        </div>
+			        </g:each>
+			    </div>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="modal-body">
-    <div id='ul-contaier'>
-        <h2>
-            My Decks
-            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
-        </h2>
-       <g:each in="${deckInstanceList}">
-        <div class="radio">
-              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
-        </div>
-        </g:each>
-    </div>
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
-</div>
-</div>
 
-</div>
-</div>
-	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
-<script> 
-var dsFlashCardId = null;
+<ul id="selectedCardsMenu">
+	<li>Selected Cards: <span id="selected-cards-number"></span></li>
+	<li><button class="btn btn-sm btn-link">Reset</button></li>
+	<li><button class="btn btn-sm btn-primary" id="move-cards-menu-button">Move Cards</button></li>
+</ul>
 
-$('.reassign-btn').click(function() {
-    $('#myModal2').modal();
-    dsFlashCardId = this.dataset.id;
-});
-
-$('#reassign-submit').click(function(){ 
- console.log("Here");
- var deckdest_id = $('.decks-rb:checked').val();
- if(!deckdest_id) return;
-
- console.log(this.dataset.id);
- $.ajax({
-     url:"/OpenFluency/flashcard/reassign?flashcard_id="+dsFlashCardId+"&deckdest_id="+deckdest_id,
-     success : function(output) {
-        dsFlashCardId = null;
-        console.log("OK");
-     },
-     error : function(err) {
-        console.log(err);
-     }
- });
-});        
-
-$('#myModal2').on('hidden.bs.modal', function () {
-document.location.reload(true);
-});
-
-</script>
+	<g:javascript>initializeAudio();initializeDonuts();of2FlashcardFontSize();</g:javascript>
+	<g:javascript src="reassignCard.js" />
 </body>
 </html>

@@ -18,7 +18,7 @@ class DocumentController {
     def create() {
         Long languageId = params['filter-lang'] as Long
         String keyword = null // params['search-text']
-        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword), 
+        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword, User.load(springSecurityService.principal.id)), 
         languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
     }
 
@@ -50,20 +50,21 @@ class DocumentController {
 				ex.printStackTrace()
 				throw ex
 			}
-			try {
+			try {   // Create new media file and any parent directories
 				if (name.isEmpty()) name = filename
 				File newupload = new File(fullPath)
 				newupload.mkdirs()
-				file.transferTo(new File(fullPath))
+				file.transferTo(newupload)
 				File ga = grailsApplication.getParentContext().getResource(mediaTopDir).file
 				fullPath = newupload.getAbsolutePath()
-				//String applicationPath = request.getSession().getServletContext().getRealPath("")
+
 				String mediaDir= ga.getAbsolutePath()
-				flash.message = "Loading "+ fullPath + " for User " + user
+				flash.message = "Loading "+ fullPath 
+                // Parse all the data into a preview deck
 				ankiDeck = documentService.createPreviewDeck(fullPath,mediaDir,name,filename,description,l,documentInstance);
 				documentInstance.status="Uploaded";
 				documentInstance.save(flush:true)
-				flash.message = "Loading "+ name +" for User "+ user
+				flash.message = "Loading "+ name 
 				redirect(controller:'previewDeck', action:'map', id:ankiDeck.id)
 			} catch (Exception e) {
 				flash.message = "Cannot save document"+e.message;
@@ -81,15 +82,14 @@ class DocumentController {
 	@Secured(['ROLE_INSTRUCTOR', 'ROLE_STUDENT'])
 	def list() {
         User user = User.load(springSecurityService?.principal?.id)
-        //params.max = Math.min(max ?: 12, 100)
-        //List<Document> docInstanceList = Document.findAllByOwner(user, params)
         List<Document> documentInstanceList = 
         Document.findAll("from Document where owner_id=? order by uploadDate desc",[ user.id ],[max: 10])
-        respond documentInstanceList , model:[documentInstanceTotal: Document.countByOwner(user)]
+        respond documentInstanceList , model:[documentInstanceTotal: documentInstanceList.size() ]
 		//[documentInstanceList: Document.list(params), documentInstanceTotal: Document.count()]
 	}
 
 	// Do not use
+	/*
 	def download(long id) {
 		Document documentInstance = Document.get(id)
 		if ( documentInstance == null) {
@@ -114,6 +114,7 @@ class DocumentController {
 			fileInputStream.close()
 		}
 	}
+	*/
 	
 	@Transactional
 	def save(Document documentInstance) {

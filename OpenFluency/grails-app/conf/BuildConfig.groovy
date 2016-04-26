@@ -11,8 +11,8 @@ grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
     //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
 
-    // configure settings for the test-app JVM, uses the daemon by default
-    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    // Grails forked mode is not supported for test code coverage plugin
+    test: false, 
     // configure settings for the run-app JVM
     run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
     // configure settings for the run-war JVM
@@ -103,5 +103,12 @@ grails.project.dependency.resolution = {
         compile ":mail:1.0.4"
         compile ":export:1.5"
         compile ":csv:0.3.1"
+		
+		// plugins for static analysis'
+		compile "org.grails.plugins:codenarc:0.25.2"
+		compile "org.grails.plugins:gmetrics:0.3.1"
+		
+		// plugin for test coverage
+		test "org.grails.plugins:code-coverage:2.0.3-3"
     }
 }

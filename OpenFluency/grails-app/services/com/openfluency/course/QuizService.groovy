@@ -285,9 +285,8 @@
                      correctAnswers++;
                  }
              }
-
-             return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
-         }
+         return new Grade(user: User.load(springSecurityService.principal.id), numberOfQuestions: quizInstance.countQuestions(), correctAnswers: correctAnswers, quiz: quizInstance).save()
+     }
 
             // The user has not completed the course yet
             return null
@@ -299,43 +298,42 @@
         Grade getGrade(Quiz quizInstance, Long userId) {
           return Grade.findByUserAndQuiz(User.load(userId), quizInstance)
       }
+ /**
+    * Return the number of correct answers for a quiz for the logged user
+    */
+    Grade getGrade(Quiz quizInstance) {
+        return getGrade(quizInstance, springSecurityService.principal.id)
+    }
 
-        /**
-        * Return the number of correct answers for a quiz for the logged user
-        */
-        Grade getGrade(Quiz quizInstance) {
-            return getGrade(quizInstance, springSecurityService.principal.id)
+    /**
+    * Return the percentage grade for a quiz for the logged user
+    */
+    String getPercentageGrade(Quiz quizInstance, Long userId) {
+
+        Grade gradeInstance = getGrade(quizInstance, userId)
+
+        // Check if the student has a grade for the quiz
+        if(!gradeInstance) {
+            return null
         }
 
-        /**
-        * Return the percentage grade for a quiz for the logged user
-        */
-        String getPercentageGrade(Quiz quizInstance, Long userId) {
+        return "${Math.ceil((gradeInstance.correctAnswers/gradeInstance.numberOfQuestions)*100)}"
+    }
 
-            Grade gradeInstance = getGrade(quizInstance, userId)
+    /**
+    * Return the percentage grade for a quiz for the logged user
+    */
+    String getPercentageGrade(Quiz quizInstance) {
 
-            // Check if the student has a grade for the quiz
-            if(!gradeInstance) {
-                return null
-            }
+        Grade gradeInstance = getGrade(quizInstance)
 
-            return "${Math.ceil(gradeInstance.correctAnswers/getAnswers(quizInstance, userId).size()*100)}"
+        // Check if the student has a grade for the quiz
+        if(!gradeInstance) {
+            return null
         }
 
-        /**
-        * Return the percentage grade for a quiz for the logged user
-        */
-        String getPercentageGrade(Quiz quizInstance) {
-
-            Grade gradeInstance = getGrade(quizInstance)
-
-            // Check if the student has a grade for the quiz
-            if(!gradeInstance) {
-                return null
-            }
-
-            return "${gradeInstance.correctAnswers/getAnswersByLoggedUser(quizInstance).size()*100}"
-        }
+        return "${Math.ceil((gradeInstance.correctAnswers/gradeInstance.numberOfQuestions)*100)}"
+    }
 
         /**
          * Import a quiz from a CSV or zip file - returns a list with any errors that might have happened during upload

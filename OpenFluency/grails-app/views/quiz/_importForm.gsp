@@ -32,7 +32,7 @@
 
 <div class="form-group live-time-group">
 	<label for="liveTime">Available starting:</label>
-	    <p><input type="text" name="liveTime" id="liveTime_id"</p> 
+	    <p><input type="text" name="liveTime" id="liveTime_id"></p> 
 </div>
 <g:hiddenField name="courseInstanceId" value="${courseInstance.id}" />
 

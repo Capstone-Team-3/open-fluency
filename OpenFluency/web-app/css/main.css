@@ -32,6 +32,19 @@ h2.sub-heading {
     padding: 10px 0;
 }
 
+.spinner{
+    position: fixed;
+    height: 100px;
+    width: 100px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px;
+    margin-top: -50px;
+    background: url(../images/squares-spinner.gif);
+    background-size: 100%;
+    display: none;
+}
+
 /* ---------------------------------------------------------------------------*/
 /* USER GUIDE STYLES
 /* ---------------------------------------------------------------------------*/
@@ -714,6 +727,26 @@ h4#custom-image {
     display: block;
 }
 
+.quiz-create .end-time-group select {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.quiz-create label[for="endTime"] {
+    display: block;
+}
+
 .quiz-create .list-unstyled {
     margin-bottom: 0;
 }
@@ -985,13 +1018,26 @@ h4#custom-image {
 		margin: 10px;	
 	}
 
-	#dictionary-results-table {
-	 	visibility: hidden;
-	  	mix-height: 300px;
-	  	overflow-y:scroll;
-	 	display:block;
-	 	border: 1px solid #66ccff;
-  	}		  
-	
-	
-	
+#dictionary {
+	margin-bottom: -80px;
+	float:right; 
+	clear:right;
+}
+
+#dictionary-results-table {
+	visibility: hidden;
+	mix-height: 300px;
+	overflow-y:scroll;
+	display:block;
+	border: 1px solid #66ccff;
+}
+
+.clickable-character {
+	cursor: pointer;
+}
+
+.grade-star {
+	position:relative;
+	margin:0 auto;
+	background:transparent url(../images/goldstar.png) no-repeat top center;
+}

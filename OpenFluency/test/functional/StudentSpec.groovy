@@ -3,17 +3,16 @@ import geb.spock.GebReportingSpec
 import spock.lang.*
 
 import com.openfluency.auth.User
-import pages.user.RegisterPage
-import pages.DashboardPage
 
-import pages.deck.CreateDeckPage
-import pages.deck.ShowDeckPage
-import pages.deck.ListDeckPage
-import pages.deck.SearchDeckPage
+import pages.*
+import pages.chapter.*
+import pages.course.*
+import pages.deck.*
+import pages.user.*
 
-import pages.course.ListCoursePage
-import pages.course.SearchCoursePage
-import pages.course.ShowCoursePage
+/**
+ * This functional test script tests the general student functionalities
+ */
 
 @Stepwise
 class StudentSpec extends GebReportingSpec {
@@ -35,7 +34,7 @@ class StudentSpec extends GebReportingSpec {
 		then: "Register"
 		at DashboardPage
 		flashMessage.text() == "testuser, welcome to OpenFluency!"
-		$(".dashboard > h1").text() == "testuser's Dashboard"
+		dashboardHeading.text() == "testuser's Dashboard"
 	}
 
 	def "Student navigates to deck creation"() {
@@ -84,14 +83,16 @@ class StudentSpec extends GebReportingSpec {
 		$(".deck-result").size() == 0
 	}
 
-	def "Student searches for deck with keywords 'Test Deck' - should get 1 result"() {
+	// Instructor renames deck to 'Test Deck - Edit' in InstructorSpec
+	// Tests are run in alphabetical order so InstructorSpec is run before StudentSpec
+	def "Student searches for deck with keywords 'Test Deck' - should get 2 results"() {
 		when:
 		keywordFilter = "Test Deck"
 		languageFilter.value('1')
 		searchDeckButton.click()
 		then:
 		at SearchDeckPage
-		$(".deck-result").size() == 1
+		$(".deck-result").size() == 2
 	}
 
 	def "Student searches for japanese decks - should return 8 results"() {
@@ -109,7 +110,7 @@ class StudentSpec extends GebReportingSpec {
 		$('.add-deck-4').click()
 		then: 
 		at ListDeckPage
-		flashMessage.text() == "You succesfully added Kanji for Dummies 1 to your decks!"
+		flashMessage.text() == "You succesfully added Test Deck - Edit to your decks!"
 		$(".show-deck-4").size() == 1
 		$('.other-decks tbody tr').size() == 1
 	}
@@ -119,7 +120,7 @@ class StudentSpec extends GebReportingSpec {
 		$(".remove-deck-4").click()
 		then: 
 		at ListDeckPage
-		flashMessage.text() == "You succesfully removed Kanji for Dummies 1 from your decks!"
+		flashMessage.text() == "You succesfully removed Test Deck - Edit from your decks!"
 		$('.other-decks tbody tr').size() == 0	
 	}
 
@@ -173,5 +174,19 @@ class StudentSpec extends GebReportingSpec {
 		at ShowCoursePage
 		flashMessage.text() == "Well done! Your registration is pending approval!"
 		courseTitle.text() == "Kanji for More Advanced Dummies"
+	}
+	
+	def "Student navigates to help page"() {
+		when:
+		help.click()
+		then:
+		at HelpPage
+	}
+	
+	def "Student navigates to profile page"() {
+		when:
+		profile.click()
+		then:
+		at ProfilePage
 	}
 }

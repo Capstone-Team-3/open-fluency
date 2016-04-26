@@ -1,7 +1,7 @@
 package com.openfluency.language
 
 /**
- *  Unit objects are key in our domain model (see uml and user guides).  Units can repesent any element or composition
+ *  Unit objects are key in our domain model (see uml and user guides).  Units can represent any element or composition
  *  of elements in a language (letter, word, phrase)
  */
 class Unit {
@@ -58,7 +58,7 @@ class Unit {
     }
 
     /**
-     *  This function conviniently detects whether decoding is needed for the unit and provides a useable text String
+     *  This function conveniently detects whether decoding is needed for the unit and provides a useable text String
      *  @Return a string of the Unit
      */
     String getPrint() {

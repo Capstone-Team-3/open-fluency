@@ -8,9 +8,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import cscie99.team2.lingolearn.shared.Card;
 import cscie99.team2.lingolearn.shared.error.ConfuserException;
@@ -57,16 +59,80 @@ public class Confuser {
 		try {
 			// Start by running the relevant functions
 			List<String> results = new ArrayList<String>();
+			Set<String> phrases = new HashSet<String>();
+			Set<String> tempResults = new HashSet<String>();
+			
 			switch (type) {
 				case Hiragana:
-					results.addAll(getNManipulation(card.getHiragana()));
-					results.addAll(getSmallTsuManiuplation(card.getHiragana()));
-					results.addAll(getHiraganaManipulation(card.getHiragana()));
+					phrases.add(card.getHiragana());
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getNManipulation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getSmallTsuManiuplation(phrase));
+					}
+					phrases.addAll(tempResults);
+						
+					boolean updates = false;
+					
+					do {
+						updates = false;
+						int length = phrases.size();
+
+						tempResults.clear();
+						for (String phrase : phrases) {
+							tempResults.addAll(getHiraganaManipulation(phrase));
+						}
+						phrases.addAll(tempResults);
+							
+						if (phrases.size() > length) {
+							updates = true;
+							length = phrases.size();
+						}
+					} while (updates);
+
+					phrases.addAll(tempResults);
+						
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(removeHiraganaVowelElongation(phrase));
+					}
+					phrases.addAll(tempResults);
+
+					
+					phrases.remove(card.getHiragana());
+					results.addAll(phrases);
+					
 					break;
 				case Katakana:
-					results.addAll(getNManipulation(card.getKatakana()));
-					results.addAll(getSmallTsuManiuplation(card.getKatakana()));
-					results.addAll(getKatakanaManiuplation(card.getKatakana()));
+
+					phrases.add(card.getKatakana());
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getNManipulation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					tempResults.clear();
+					for (String phrase : phrases) {
+						tempResults.addAll(getSmallTsuManiuplation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					for (String phrase : phrases) {
+						tempResults.addAll(getKatakanaManiuplation(phrase));
+					}
+					phrases.addAll(tempResults);
+					
+					phrases.remove(card.getKatakana());
+					results.addAll(phrases);
+					
 					break;
 				case Kanji:
 					results.addAll(getKanjiBoundries(card));
@@ -110,7 +176,7 @@ public class Confuser {
 	public List<String> getHiraganaManipulation(String phrase) {
 		// The following are the parameters for the manipulation
 		char n = 'ん';
-		String invalidFollowers = "ゃゅょ";
+		String invalidFollowers = "ゃゅょっ";
 		// Start by iterating through each of the characters in the phrase
 		List<String> phrases = new ArrayList<String>();
 		for (int ndx = 0; ndx < phrase.length(); ndx++) {
@@ -132,6 +198,15 @@ public class Confuser {
 			if (vowelCombinations.keySet().contains(ch)) {
 				// The only vowels that are doubled in regular use are お (o) and  え (e)
 				if (next != ch && (ch == 'え' || ch == 'お')) {
+					
+					// Don't double again if already doubled
+					if (ndx != 0) {
+						char charBefore = phrase.charAt(ndx - 1);
+						if (ch == charBefore) {
+							continue;
+						}
+					}
+					
 					phrases.add(insertCharacter(phrase, ndx, ch));
 				}
 				continue;
@@ -153,6 +228,32 @@ public class Confuser {
 				}
 			}
 		}
+		return phrases;
+	}
+	
+	public Set<String> removeHiraganaVowelElongation(String phrase) {
+		Set<String> phrases = new HashSet<String>();
+		
+		// Start by iterating through each of the characters in the phrase
+		for (int ndx = 1; ndx < phrase.length(); ndx++) {
+			char ch = phrase.charAt(ndx);
+			
+			char charBefore = phrase.charAt(ndx - 1);
+			
+			if (vowelCombinations.keySet().contains(ch)) {
+				if (vowelCombinations.get(ch).contains(String.valueOf(charBefore))) {
+					String beginString = phrase.substring(0,ndx);
+					String endString = "";
+					
+					if (ndx < phrase.length()) {
+						endString = phrase.substring(ndx+1);
+					}
+					
+					phrases.add(beginString+endString);
+				}
+			}
+		}
+		
 		return phrases;
 	}
 	
@@ -305,7 +406,7 @@ public class Confuser {
 		char openingParentheses = '(';
 		char closingParentheses = ')';
 				
-		String invalidFollowers = "ャュョェッ";
+		String invalidFollowers = "ャュョェッら";
 		// Start scanning through the phrase for relevant matches and either
 		// add or remove the choopu as required
 		List<String> phrases = new ArrayList<String>();
@@ -425,7 +526,7 @@ public class Confuser {
 		if (ConfuserTools.checkCharacter(phrase.charAt(0)) == CharacterType.Katakana) {
 			xtsu = 'ッ';
 			characters = "カキクケコサシタチツテトハヒフヘホパピプペポ";
-			invalidFollowers = "アイウエオンナニヌネノーァ";
+			invalidFollowers = "アイウエオンナニヌネノーァリラル";
 		}
 		// Now start scanning through the phrase for relevant matches for this 
 		// we are only focusing on the characters that are in the middle of 
