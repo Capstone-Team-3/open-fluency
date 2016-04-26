@@ -266,7 +266,7 @@ class QuizService {
          Integer correctAnswers = 0;
          
          answers.each() {
-             if (it.selection.id == it.question.getCorrectOption().id) {
+             if (it.selection?.id == it.question.getCorrectOption()?.id) {
                  correctAnswers++;
              }
          }

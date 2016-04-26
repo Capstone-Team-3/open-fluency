@@ -67,7 +67,10 @@
 			<div class="col-lg-12">
 
 				<h2 class="sub-heading">
-					Chapters
+                 <label class="tooltiper control-label"  data-toggle="tooltip"  data-placement="right" title="Each Chapter is a collection of flashcards for studying. There are three study modes. Click on a chapter to start">
+				Chapters
+                  </label>
+
 					<g:if test="${isOwner}">
 						<g:link class="btn btn-xs btn-info add-chapter"  action="create" controller="chapter" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
 					</g:if>
@@ -122,7 +125,9 @@
 			<div class="col-lg-12">
 
 				<h2 class="sub-heading">
+                 <label class="tooltiper control-label"  data-toggle="tooltip"  data-placement="right" title="Take a quiz to test how well you know the material">
 					Quizzes
+                    </label>
 					<g:if test="${isOwner}">
 						<!-- This is only displayed for the owner of the course -->
 						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz from Chapters</g:link>

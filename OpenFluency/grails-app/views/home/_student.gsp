@@ -56,6 +56,7 @@
             <p>You haven't added any decks yet! Get started:</p>
             <g:link class="btn btn-success" controller="deck" action="create">Create New Deck</g:link>
             <g:link class="btn btn-success" controller="deck" action="search">Search for Decks</g:link>
+            <g:link class="btn btn-success" controller="document" action="create">Import Anki Deck</g:link>
         </div>
     </div>
 </g:else>

@@ -37,7 +37,7 @@ class PreviewDeckController {
 		def user = User.load(springSecurityService.principal.id)
         PreviewDeck previewDeckInstance =  PreviewDeck.findByDocumentAndOwner(document,user)
 		if (previewDeckInstance != null) {
-			redirect action: "show", id: previewDeckInstance.id
+			redirect action: "map", id: previewDeckInstance.id
 			return
 		}
 		else {

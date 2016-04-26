@@ -9,6 +9,7 @@
 			<h1>
 				My Decks
 				<g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
+				<g:link action="create" controller="document" class="btn btn-info">Upload New Anki Deck</g:link>
 			</h1>
 			<g:render template="table" model="[deckInstanceList: deckInstanceList]"/>
 		</div>
