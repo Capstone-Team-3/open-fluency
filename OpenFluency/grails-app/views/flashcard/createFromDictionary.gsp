@@ -18,14 +18,8 @@
     </head>
     <body>
         <div class="container flashcard-create">
-
-            <ul class="breadcrumb">
-                <li>Home</li>
-            </ul>
-
-            <h1>Create Flashcard</h1>
-
             <div class="row marketing">
+                <h1>Create Flashcard</h1>
                 <div class="col-lg-6">
                 	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12' id="dictionary-container">
                     	<g:render template="/dictionary/dictionaryTable"/>
@@ -74,7 +68,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="query" class="control-label">Or, search Flickr for an image:</label>
+							<label for="query" class="control-label">Search Flickr for an image:</label>
 							<div class="input-group">
 								<g:textField class="form-control" name="query" placeholder="Type a keyword" id="query" />
 								<span class="input-group-btn">
@@ -122,12 +116,8 @@
 					</div>
 					<!-- end form-group audio -->
 
+					<button type="submit" id="goCreate" class="center btn btn-success">Create Flashcard</button>
 
-                    <div class="form-group row">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-secondary">Submit</button>
-                        </div>
-                    </div>
                     </g:form>
                 </div> 
             </div>
