@@ -163,7 +163,7 @@ h2 {
 						</g:if>
 						<ul class="text-left dropdown-menu" role="menu">
 							<li>
-								<g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link>
+								<g:link action="createFromDictionary" controller="flashcard" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Create From Dictionary</g:link>
 							</li>
 							<li>
 								<a data-toggle="modal" data-target="#myModal">Load from CSV file</a>

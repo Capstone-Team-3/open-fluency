@@ -103,7 +103,7 @@ var searchImage = function(query, results, urlField, resultPage) {
 				.appendTo(results)
 				.click(function(){
 					// when the image is clicked, set the url and also the imageLink in the input field
-					$(urlField).val($(this).data('imageLink'));
+					$(urlField).attr("value",$(this).data('imageLink'))
 					$('.flashcard-image-create').css('background-image', 'url(' + $(this).data('imageLink') + ')');
 				});
 
