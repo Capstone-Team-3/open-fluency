@@ -68,7 +68,6 @@ var setupFlashcardSearchPagination = function() {
  * be saved on click
  */
 var searchImage = function(query, results, urlField, resultPage) {
-	
 	// set helpful and need variables
 	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
 	var sMethod = "flickr.photos.search";
@@ -87,6 +86,9 @@ var searchImage = function(query, results, urlField, resultPage) {
 	// Build full URL
 	var queryStr = baseUrl + $(query).val() + respFormat;
 
+	
+	
+	
 	// Run query
 	$.getJSON(queryStr, function(data){
 
@@ -101,13 +103,17 @@ var searchImage = function(query, results, urlField, resultPage) {
 				.appendTo(results)
 				.click(function(){
 					// when the image is clicked, set the url and also the imageLink in the input field
-					$(urlField).val($(this).data('imageLink'));
+					$(urlField).attr("value",$(this).data('imageLink'))
 					$('.flashcard-image-create').css('background-image', 'url(' + $(this).data('imageLink') + ')');
 				});
 
 			if (i >= numPics) {
 				return false;
 			}
+			
+			try {
+				$('#image-modal-create').modal();
+			} catch(err){}
 		});
 	});
 };
@@ -492,3 +498,11 @@ var of2FlashcardFontSize = function() {
 	}
 }
 
+/* -----------------------------------------
+ * breadcrumb fixed
+ * ---------------------------------------*/
+$(document).ready(function() {
+	try {
+		$("#breadcrumb").sticky({topSpacing:50, zIndex: 1});
+	} catch(err){}
+});

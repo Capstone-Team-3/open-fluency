@@ -151,7 +151,11 @@ class SearchService {
 	 */
 	public Vector<DictionaryEntry> getDictionaryEntries(String term, int count) {
 		init();
-		String termRegexp = '^.*' + term + '.*\\['
+		String termRegexp = '^.*' + term 
+        /* if(inConcept) {                     */
+        /*     termRegexp = termRegexp + '.*[' */
+        /* }                                   */
+
 		Vector<String> entries = getDictionaryEntriesImpl(termRegexp, count)
 		Vector<DictionaryEntry> ret = parseDictionaryEntries(entries)
 		return ret;

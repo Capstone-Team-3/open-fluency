@@ -1,7 +1,6 @@
 var dsFlashcardId = null;
-var selectedCards = {};
-
-
+var selectedCards = {};		// ds with cards to move
+var moveCardsMode = false;  // can click card and select for reassign?
 
 if (typeof localStorage.selectedCards != 'undefined') {
 	selectedCards = JSON.parse(localStorage.selectedCards);
@@ -53,6 +52,7 @@ $('#reassign-submit').click(function(){
 });  
 
 $('.flashcard-result').click(function() {
+	if (!moveCardsMode) return;
     test = this;
 	console.log('.flashcard-result clicked')
 	var selected = $(this).hasClass('card-selected');
@@ -78,4 +78,35 @@ $('.step').click(function() {
 
 $('#move-cards-menu-button').click(function() {
 	$('#myModal2').modal();
+});
+
+$('#reset-card-selection').click(function() {
+	selectedCards = {};
+	var arr = $('.flashcard-result');
+	for (var i = 0; i < arr.length; i++) {
+		if ($(arr[i]).hasClass('card-selected'))
+			$(arr[i]).removeClass('card-selected');
+	}
+	$('#selected-cards-number').text("0"); 
+});
+
+
+$('#move-cards-button').click(function() {
+	if (!moveCardsMode) {
+		$('.donut-container').hide();
+		$('#selected-cards-display').show();
+		moveCardsMode = true;
+		$('#move-cards-button').html("Stop moving cards");
+		$('#move-cards-button').removeClass('btn-success');
+		$('#move-cards-button').addClass('btn-danger');
+	}
+	
+	else {
+		$('.donut-container').show();
+		$('#selected-cards-display').hide();
+		moveCardsMode = false;
+		$('#move-cards-button').html("Move cards");
+		$('#move-cards-button').removeClass('btn-danger');
+		$('#move-cards-button').addClass('btn-success');
+	}
 });

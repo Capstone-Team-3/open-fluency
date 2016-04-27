@@ -47,8 +47,9 @@
 	   <button id="medium" class="btn btn-warning btn-rounded btn-lg ranker" data-value="${Constants.MEDIUM}">Medium</button>
 	   <button id="hard" class="btn btn-danger btn-rounded btn-lg ranker" data-value="${Constants.HARD}">Hard</button>
 	</div>
-	<g:render template="/dictionary/dictionaryTable"/>
-
+	<div class='col-lg-4 col-md-3 col-sm-3 col-xs-3' style="float:right;">
+		<g:render template="/dictionary/dictionaryTable"/>
+	</div>
 
     <div class="practice-flashcard center-block">
         <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
