@@ -1,4 +1,4 @@
-v<%@ page import="com.openfluency.Constants" %>
+<%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <!DOCTYPE html>
 <html>

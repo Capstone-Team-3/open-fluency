@@ -6,9 +6,11 @@
   <script>
      $(function() {
      var newDate = new Date();   
-    $("#liveTime_id").datepicker();
-    $("#liveTime_id").datepicker("setDate", newDate);
-     $( "#endTime_id" ).datepicker({ defaultDate: new Date() });
+    $("#liveTime_id").datepicker(newDate)
+    $("#liveTime_id").datepicker("setDate", newDate);  
+ 	$("#liveTime_id").datepicker("option", "minDate", 0); 
+     $("#endTime_id").datepicker({ defaultDate: new Date() });
+     $("#endTime_id").datepicker("option", "minDate", 1);
      
   });
     function test2(){
@@ -17,8 +19,7 @@
   </script>
 <div class="form-group">
 	<label for="title">Title:</label>
-	<g:textField name="title" value="${quizInstance?.title}"
-		class="form-control" />
+	 <input type="text" name="title" id="title" required class="form-control">
 </div>
 
 <div class="form-group">
@@ -47,19 +48,21 @@
 </div>
 <div class="modal csv-modal fade" id="myModal">
 	<div class="modal-dialog">
-		<g:form action="loadQuizFromCSV" id="${courseInstance.id}"
+		<g:form action="importQuiz" id="${courseInstance.id}"
 			enctype="multipart/form-data">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Load Quiz CSV File</h4>
+					<h4 class="modal-title">Import Quiz</h4>
 				</div>
 				<div class="modal-body">
 					<p>
-						Upload a CSV file with your Quiz definitions. 
+								Upload a CSV or ZIP file with your Quiz questions. 
+								(You can download a sample ZIP file to see how quizzes containing audio or images are structured
+								<a href="../../resources/Sample quiz containing audio and images.zip">here</a>.)	
 					</p>
-					<input name="csvData" type="file" name="csvData" />
+					<input name="csvData" type="file" name="csvData" required/>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>

@@ -179,14 +179,14 @@ class CourseService {
     * Returns a list of all the courses that are enabled and have a live time that is either null or before the current date
     */
     List<Quiz> getLiveQuizes(Course courseInstance) {
-        Quiz.withCriteria {
+     Quiz.withCriteria {
             eq('course', courseInstance)
             eq('enabled', true)
             or {
-                le('liveTime', new Date())
+                le('liveTime', new Date()+10)
                 isNull('liveTime')
             }
-        }
+        }  
     }
 
     /**

@@ -3,6 +3,7 @@ package com.openfluency.course
 import grails.plugin.springsecurity.annotation.Secured
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.util.zip.*
 
 class QuizController {
 
@@ -12,10 +13,10 @@ class QuizController {
 		def exportService 
 		def grailsApplication 
 
-		@Secured(['ROLE_INSTRUCTOR'])
-		def create(Course courseInstance) { 
+	@Secured(['ROLE_INSTRUCTOR'])
+	def create(Course courseInstance) { 
 			[courseInstance: courseInstance]
-		}
+	}
 
 	@Secured(['ROLE_INSTRUCTOR'])
 		def save() {
@@ -210,66 +211,11 @@ class QuizController {
 			[courseInstance: courseInstance]
 		}
 
-
-@Secured(['ROLE_INSTRUCTOR'])
-def export(Quiz quizInstance) {
-		def quizTitle = quizInstance.title
-
-		response.contentType = grailsApplication.config.grails.mime.types[params.format]
-		response.setHeader("Content-disposition", "attachment; filename=${quizTitle}.csv")
-
-		List llist = quizInstance ? Question.findAllByQuiz(quizInstance) : []	
-		String quesiton_type = "multiple_choice"
-		// need to revise.
-		String language = "Japanese"
-		String default_image = "";
-		String default_audio = "";	
-		int i = 0
-
-		List fields = ["question_number",
-					   "language:alphabet",
-					   "question_type",
-					   "question",	  
-					   "correctAnswer",
-					   "wrongAnswers",
-					   "image_link",
-					   "audio_link"]
-					   
-		Map labels = ["question_number":"question_number",
-					   "language:alphabet":"language:alphabet",
-					   "question_type":"question_type",
-					   "question":"Question",		   
-					   "correctAnswer":"correct_answer",
-					   "wrongAnswers":"wrongAnswers",
-					   "image_link":"image_link",
-					   "audio_link":"audio_link"]
-					  
-					 
-		Map formatters = ["question_number": {domain, value -> return ++i},
-		                "language:alphabet": {domain, value -> return language},
-		                "question_type": {domain, value -> return quesiton_type},
-						"question": {domain, value -> return domain.question},
-						"correctAnswer": {domain, value -> return domain.getOptions().findAll{it.answerKey==1}.option},
-						"wrongAnswers": {domain, value -> return domain.getOptions().findAll{it.answerKey==0}.option},
-						"image_link": {domain, value -> return default_image},
-						"audio_link": {domain, value -> return default_audio}]
-
-		Map parameters = ["separator": ","]
-		
-		exportService.export("csv", response.outputStream, llist, fields, labels, formatters, parameters)
-		
-		 [questionInstanceList: Question.list(params)]
-		 
-	}
-
-
-
 	/**
-	 * Upload Quiz from a CSV file in the format
-	 *   Symbol,Meaning,Pronunciation,ImageURL
+	 * Upload Quiz from either a .csv or .zip file.  
 	 */
 
-	def loadQuizFromCSV(){
+	def importQuiz(){
 
 		 Course courseInstance = Course.load(params["course.id"] as Long)
 
@@ -303,7 +249,7 @@ def export(Quiz quizInstance) {
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
 
 			request.getMultiFileMap().csvData.eachWithIndex { f, i ->
-				List result = quizService.loadQuizFromCSV(title, liveTime, endTime, maxCardTime, courseInstance, f)
+				List result = quizService.importQuiz(title, liveTime, endTime, maxCardTime, courseInstance, f)
 					if(result.isEmpty()) {
 						flash.message = "You succesfully uploaded your Quiz!"
 					}
@@ -315,4 +261,174 @@ def export(Quiz quizInstance) {
 		redirect(action: "show", controller: "course", id: courseInstance.id)
 	}
 
+
+
+/*
+This method exports a quiz to a csv file or if it has images and/or sound associated with the quiz, exports the
+quiz to a .zip file.   It leverages the grails export plugin to create the csv file
+*/
+
+@Secured(['ROLE_INSTRUCTOR'])
+def export(Quiz quizInstance) {
+		def quizTitle = quizInstance.title
+
+		response.contentType = grailsApplication.config.grails.mime.types[params.format]
+		response.setHeader("Content-disposition", "attachment; filename=${quizTitle}.csv")
+		boolean hasMedia = false
+
+		def listQuestions = quizInstance.getQuestions()
+
+		def mediaList = listQuestions.findAll{it -> it.image != null || it.sound !=null}
+		// if it has any media associated with the qustions of the quiz, we need to export a .zip file
+		if (mediaList.size() > 0){
+			hasMedia = true
+		}
+
+		List llist = quizInstance ? Question.findAllByQuiz(quizInstance) : []	
+		int i = 0
+
+		List fields = ["question_number",
+					   "standard_question",	 
+					   "image_question",
+					   "audio_question", 
+					   "correct_answer",
+					   "wrong_answers"]
+					   
+		Map labels = ["question_number":"question_number",
+					   "standard_question":"standard_question",	
+					     "image_question":"image_question",
+					   "audio_question":"audio_question",	   
+					   "correct_answer":"correct_answer",
+					   "wrong_answers":"wrong_answers"]
+					  
+					 
+		Map formatters = ["question_number": {domain, value -> return ++i},
+						"standard_question": {domain, value -> return domain?.question},
+						"image_question": {domain, value -> String image_link = domain?.image?.getImageUri()
+                                       if (image_link != null){
+                                       	int x = image_link.lastIndexOf('/')
+                                       	String imageFile = image_link.substring(x)
+                                       	return "image" + imageFile
+                                       } else {return null}
+							},
+						"audio_question": {domain, value -> String audio_link = domain?.sound?.getSoundUri()
+ 										if (audio_link != null){
+                                       	int x = audio_link.lastIndexOf('/')
+                                       	String audioFile = audio_link.substring(x)
+                                       	return "sound" + audioFile
+                                       } else {return null}
+						},
+						"correct_answer": {domain, value -> return domain.getOptions().findAll{it.answerKey==1}.option},
+						"wrong_answers": {domain, value -> return domain.getOptions().findAll{it.answerKey==0}.option}]
+
+		Map parameters = ["separator": ","]
+		
+		if (hasMedia){
+		File quizDir = new File(quizInstance.title)
+		File quizDirZip = new File(quizDir.getName() + ".zip")
+		def fileOutputZipStream = new FileOutputStream(quizDirZip)
+		quizDir.mkdir()
+		File file = new File(quizDir.getName() + File.separator + "${quizTitle}.csv")
+    	def fileOutputStream = new FileOutputStream(file)
+    	exportService.export("csv", fileOutputStream, llist, fields, labels, formatters, parameters)
+    	File imageDir = new File(quizDir.getName() + File.separator + "image")
+    	File soundDir = new File(quizDir.getName() + File.separator + "sound")
+    	imageDir.mkdir()
+    	soundDir.mkdir()
+    	
+    	def imageList = listQuestions.findAll{it -> it.image != null
+
+    		String image_link = it?.image?.getImageUri()
+    		if (image_link != null){
+            String imageFile = image_link.substring(image_link.lastIndexOf('/'))
+            String sName = it.image.getImageUri()
+            String iFile = sName.substring(sName.indexOf('/media'))
+      
+    		def src = new File(request.getSession().getServletContext().getRealPath("/") + iFile)
+     		def dst = new File(quizDir.getName() + File.separator + "image" + imageFile)
+            dst << src.bytes
+    	}
+    }
+
+    	def soundList = listQuestions.findAll{it -> it.sound != null
+
+    		String sound_link = it?.sound?.getSoundUri()
+    		if (sound_link != null){
+            String soundFile = sound_link.substring(sound_link.lastIndexOf('/'))
+            String sName = it.sound.getSoundUri()
+            String iFile = sName.substring(sName.indexOf('/media'))
+      
+    		def src = new File(request.getSession().getServletContext().getRealPath("/") + iFile)
+     		def dst = new File(quizDir.getName() + File.separator + "sound" + soundFile)
+            dst << src.bytes
+    	}
+    }
+   	   createZipFile(quizDir, quizDirZip)
+
+       response.setContentType("application/octet-stream")
+       response.setHeader("Content-disposition", "attachment;filename=${quizDirZip.getName()}")
+       quizDirZip.withInputStream { response.outputStream << it }
+       quizDir.deleteDir()
+       quizDirZip.delete() 
+
+    	} else{
+    		// plain vanilla csv file
+    		exportService.export("csv", response.outputStream, llist, fields, labels, formatters, parameters)
+    	}
+		
+		 [questionInstanceList: Question.list(params)]
+		 
+	}
+
+
+
+	private createZipFile(File sourceDir, File zipFile) {
+               			log.info "Started creating Zip file";
+                        FileOutputStream fileOutputStream = new FileOutputStream(zipFile);
+                        ZipOutputStream zipOutputStream  = new ZipOutputStream(fileOutputStream)
+                      	addDirectory(zipOutputStream, sourceDir)
+                        zipOutputStream .close()
+                        log.info "Finished creating Zip file";
+        }
+ 
+    private addDirectory(ZipOutputStream zipOutputStream, File fileSource) {
+               
+                File[] files = fileSource.listFiles();
+
+                for(int i=0; i < files.length; i++)
+                {
+                        if(files[i].isDirectory())
+                        {
+                                addDirectory(zipOutputStream, files[i]);
+                                continue;
+                        }
+                                log.info "Adding file: {files[i].getName()}"
+                               
+                                byte[] buffer = new byte[1024];
+                               
+                                FileInputStream fileInputStream = new FileInputStream(files[i]);
+                                log.info "${files[i].getName()}"
+                                if (files[i].getName().contains(".mp3")||(files[i].getName().contains(".wav"))){
+                               	zipOutputStream.putNextEntry(new ZipEntry("/sound/"+files[i].getName()));
+                            	} else if (files[i].getName().contains(".jpg") || (files[i].getName().contains(".gif"))) {
+                            		  zipOutputStream.putNextEntry(new ZipEntry("/image/"+files[i].getName()));
+                            	}
+                            	else if (files[i].getName().contains(".csv")) {
+                            		  zipOutputStream.putNextEntry(new ZipEntry(files[i].getName()));
+                            	}
+
+                                int length;
+                         
+                                while((length = fileInputStream.read(buffer)) > 0)
+                                {
+                                   zipOutputStream.write(buffer, 0, length);
+                                }
+                                 zipOutputStream.closeEntry();
+                                 fileInputStream.close();
+
+                }
+               
+        }
+ 
 }
+

@@ -67,14 +67,17 @@
 					}
 				}
 			 %>
+			 
 			<g:if test="${imageURL}">
-				<g:set var="imageSource" value="${imageURL}"/>
+				<div id="image-container">
+					<div id="flashcard-image" class="flashcard-img" style="background-image: url('${imageURL}') ; background-size: 100% 100%"></div>
+				</div>
 			</g:if>
-			<g:if test="${imageSource}">
+			<g:elseif test="${imageSource}">
 				<div id="image-container">
 					<div id="flashcard-image" class="flashcard-img" style="background-image: url('${imageSource}') ; background-size: 100% 100%"></div>
 				</div>
-			</g:if>
+			</g:elseif>
 
 			<div class="meaning">${flashcardInstance?.secondaryUnit.print}</div>
 		</div>
