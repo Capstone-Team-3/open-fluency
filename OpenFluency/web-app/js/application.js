@@ -492,3 +492,11 @@ var of2FlashcardFontSize = function() {
 	}
 }
 
+/* -----------------------------------------
+ * breadcrumb fixed
+ * ---------------------------------------*/
+$(document).ready(function() {
+	try {
+		$("#breadcrumb").sticky({topSpacing:50, zIndex: 1});
+	} catch(err){}
+});

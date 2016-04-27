@@ -7,7 +7,9 @@ import grails.transaction.Transactional
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import groovy.json.JsonSlurper
+
 import com.openfluency.auth.User
+import com.openfluency.language.Alphabet;
 import com.openfluency.language.Language;
 
 @Secured(['isAuthenticated()'])
@@ -81,8 +83,20 @@ class PreviewDeckController {
 			def max = 10
 			params.max = Math.min(max ?: 10, 100)
 			def previewCards= PreviewCard.findAllByDeck(previewDeckInstance, params) as JSON
-		[ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards ]
+			def deckLanguage = previewDeckInstance.language;
+			def fieldIndices = Alphabet.findAllByLanguage(deckLanguage);
+			
+
+		[ previewDeckInstance: previewDeckInstance, previewCardInstanceList: previewCards, fieldIndices: fieldIndices, 
+			languageInstanceList: Language.list() ]
 		}
+	}
+	
+	def getalphabets(String language) {
+		def languageObj = Language.findByName(language);
+		def fieldIndices = Alphabet.findAllByLanguage(languageObj) as JSON;
+		
+		render fieldIndices;
 	}
 	
 	def unitMappingSubmit(PreviewDeck previewDeckInstance) {

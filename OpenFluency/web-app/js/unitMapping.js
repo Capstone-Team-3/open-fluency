@@ -74,19 +74,23 @@ $('#next-unit').click(function(){
 	}
 });
 
-$('.l-alpha-options').click(function() {
+// literal alphabet options
+$('#literal-options').on('click', '.l-alpha-options', function() {
 	if (unitMappingLiteral == null) return;
 	alphab['' + unitMappingLiteral] = this.dataset.alph;
 	$('#literal-options').modal('hide');
 });
 
-$('.p-alpha-options').click(function() {
+// pronunciation
+$('#pronunciation-alph-options').on('click', '.l-alpha-options', function() {
+	console.log('here');
 	if (unitMappingPronunciation == null) return;
 	alphab['' + unitMappingPronunciation] = this.dataset.alph;
 	$('#pronunciation-options').modal('hide');
 });
 
-$('.m-alpha-options').click(function() {
+// meaning
+$('#meaning-options').on('click', '.l-alpha-options', function() {
 	if (unitMappingMeaning == null) return;
 	alphab['' + unitMappingMeaning] = this.dataset.alph;
 	$('#meaning-options').modal('hide');
@@ -191,4 +195,72 @@ $('#map-change-deck-description-submit').click(function() {
 		window.unitMappingPreviewDeckDescription = description;
 		$('#map-preview-deck-description').text(description);
 	}
+});
+
+var test;
+
+$('#select-alpha').change(function() {
+	var option = $(this).find('option:selected').val();
+	console.log("option: " + option);
+	$.ajax({
+		type: "GET",
+		url: "/OpenFluency/previewDeck/getalphabets?language=" + option,
+		success: function(output) {
+			console.log(output);
+			$('#select-alphabet-results').html("");
+			try {
+				for (var i = 0; i < output.length; i++) {
+					$('#select-alphabet-results')
+					.append('<li><button data-alph="' + output[i].name + '" class="btn btn-sm btn-info l-alpha-options">' + output[i].name + '</button></li>')
+				}
+			} catch(err){}
+		},
+		error: function(err) {
+			console.log('err', err);
+		}
+	}); 
+});
+
+$('#p-select-alpha').change(function() {
+	var option = $(this).find('option:selected').val();
+	console.log("option: " + option);
+	$.ajax({
+		type: "GET",
+		url: "/OpenFluency/previewDeck/getalphabets?language=" + option,
+		success: function(output) {
+			console.log(output);
+			$('#select-alphabet-results').html("");
+			try {
+				for (var i = 0; i < output.length; i++) {
+					$('#p-select-alphabet-results')
+					.append('<li><button data-alph="' + output[i].name + '" class="btn btn-sm btn-info l-alpha-options">' + output[i].name + '</button></li>')
+				}
+			} catch(err){}
+		},
+		error: function(err) {
+			console.log('err', err);
+		}
+	}); 
+});
+
+$('#m-select-alpha').change(function() {
+	var option = $(this).find('option:selected').val();
+	console.log("option: " + option);
+	$.ajax({
+		type: "GET",
+		url: "/OpenFluency/previewDeck/getalphabets?language=" + option,
+		success: function(output) {
+			console.log(output);
+			$('#select-alphabet-results').html("");
+			try {
+				for (var i = 0; i < output.length; i++) {
+					$('#m-select-alphabet-results')
+					.append('<li><button data-alph="' + output[i].name + '" class="btn btn-sm btn-info l-alpha-options alpha-options">' + output[i].name + '</button></li>')
+				}
+			} catch(err){}
+		},
+		error: function(err) {
+			console.log('err', err);
+		}
+	}); 
 });

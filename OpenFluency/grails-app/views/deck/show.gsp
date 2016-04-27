@@ -56,16 +56,27 @@ h2 {
 	background: lavender;
 }
 
-#selectedCardsMenu {
-	position: fixed;
-	right: 0;
-	top: 10%;
-	width: 91px;
-	list-style-type: none;
-	border: 1px solid black;
+#selected-cards-display {
 	background: lavender;
-	font-size: 14px;
-	padding: 0px;
+	display: none;
+}
+
+#selected-cards-display h4{
+	text-align: center;
+}
+
+#selectedCardsMenu {
+	list-style-type: none;
+	font-size: 24px;
+	padding: 10px;
+}
+
+#selectedCardsMenu li {
+	text-align: center;
+}
+
+.deck-actions-2 {
+	margin-top: 15px;
 }
 
 
@@ -76,7 +87,7 @@ h2 {
 
 	<div class="container deck-show">
 
-		<ul class="breadcrumb">
+		<ul class="breadcrumb" id="breadcrumb">
 			<li>
 				<a href="${createLink(uri:'/') }">Home</a>
 			</li>
@@ -104,12 +115,17 @@ h2 {
 						</g:if>
 					</h1>
 					<p class="deck-description">${deckInstance?.description}</p>
+					
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-lg-offset-4">
+			<div class="col-lg-4 col-lg-offset-4" id="show-display">
 				<g:render template="/deck/allProgress" model="[deckInstance: deckInstance, progress: deckInstance.progress, id: deckInstance.id]"/>
+				<g:render template="/deck/selectedCardsDisplay" />
+				
+				
 				<br/>
+				
 				<div class="deck-actions center">
 					<g:if test="${flashcardCount}">
 						<div class="btn-group text-left">
@@ -154,8 +170,15 @@ h2 {
 							</li>
 						</ul>
 					</div>
-					
+					<div class="deck-actions center deck-actions-2">
+						<div class="btn-group text-left">
+							<button type="button" class="btn btn-success" id="move-cards-button">
+								Move Cards
+							</button>
+						</div>
+					</div>
 				</div>
+				
 			</div>
 		</div>
 
@@ -232,13 +255,8 @@ h2 {
 	</div>
 </div>
 
-<ul id="selectedCardsMenu">
-	<li>Selected Cards: <span id="selected-cards-number"></span></li>
-	<li><button class="btn btn-sm btn-link">Reset</button></li>
-	<li><button class="btn btn-sm btn-primary" id="move-cards-menu-button">Move Cards</button></li>
-</ul>
-
 	<g:javascript>initializeAudio();initializeDonuts();of2FlashcardFontSize();</g:javascript>
 	<g:javascript src="reassignCard.js" />
+	<g:javascript src="jquery.sticky.js" />
 </body>
 </html>
