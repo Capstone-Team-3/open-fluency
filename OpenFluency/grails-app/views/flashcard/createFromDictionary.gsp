@@ -49,7 +49,7 @@
                     <div class="form-group row">
                         <div class="col-sm-10">
                             <h3 class="customize-heading">Choose a Deck</h3>
-                            <g:select name="deckId" from="${deckInstanceList}" optionKey="id" optionValue="${{xx->"${xx}"}}"  />  
+                            <g:select name="deckId" from="${deckInstanceList}" value="${deckDefault?.id}" optionKey="id" />  
                         </div>
                     </div>
 
