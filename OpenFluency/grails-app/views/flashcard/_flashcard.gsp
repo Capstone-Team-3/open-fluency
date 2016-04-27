@@ -54,16 +54,16 @@
 				String imageSource = flashcardInstance?.image?.url
 			
 				if (imageSource != null) {
-			
-			/*
-					if (File.separatorChar=='\\') {
-						imageSource = java.nio.file.Paths.get("/", imageSource).normalize();
-						imageSource =  imageSource.replace('\\', '/');
+					if (!(imageSource.startsWith('http://') || imageSource.startsWith('https://'))) {
+						
+						if (File.separatorChar=='\\') {
+							imageSource = java.nio.file.Paths.get("/", imageSource).normalize()
+							imageSource =  imageSource.replace('\\', '/')
+						}
+				
+						String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+						imageSource = baseUrl + imageSource
 					}
-					*/
-			
-					//String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-					imageSource = imageSource;
 				}
 			 %>
 			<g:if test="${imageURL}">

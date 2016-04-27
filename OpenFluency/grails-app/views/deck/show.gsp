@@ -106,7 +106,7 @@ h2 {
 					<h1 class="deck-title">
 						${deckInstance?.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">
+							<g:link action="edit" id="${deckInstance.id}" elementId="edit-deck" class="btn btn-warning">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</g:link>
 							<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">
@@ -211,7 +211,7 @@ h2 {
 						<div class="modal-body">
 							<p>
 								Upload a CSV file with your flashcard definitions. (You can download a sample CSV to see how the file is structured
-								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>
+								<a href="../../resources/testDeck.csv">here</a>
 								.)
 							</p>
 							<input name="csvData" type="file" name="csvData"/>

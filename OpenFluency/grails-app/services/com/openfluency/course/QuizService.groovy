@@ -271,7 +271,7 @@ class QuizService {
              }
          }
 
-         return new Grade(user: User.load(springSecurityService.principal.id), correctAnswers: correctAnswers, quiz: quizInstance).save()
+         return new Grade(user: User.load(springSecurityService.principal.id), numberOfQuestions: quizInstance.countQuestions(), correctAnswers: correctAnswers, quiz: quizInstance).save()
      }
 
         // The user has not completed the course yet
@@ -304,7 +304,7 @@ class QuizService {
             return null
         }
 
-        return "${Math.ceil(gradeInstance.correctAnswers/getAnswers(quizInstance, userId).size()*100)}"
+        return "${Math.ceil((gradeInstance.correctAnswers/gradeInstance.numberOfQuestions)*100)}"
     }
 
     /**
@@ -319,7 +319,7 @@ class QuizService {
             return null
         }
 
-        return "${gradeInstance.correctAnswers/getAnswersByLoggedUser(quizInstance).size()*100}"
+        return "${Math.ceil((gradeInstance.correctAnswers/gradeInstance.numberOfQuestions)*100)}"
     }
 
 	/**

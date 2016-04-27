@@ -84,6 +84,11 @@
 								</li>
 							</ul>
 						</li>
+                        <li>
+                         <g:link controller="cardRanking" action="list">
+                         Learning Stats
+                         </g:link>
+                        </li>
 						<sec:ifAllGranted roles="ROLE_ADMIN">
 							<li>
 								<g:link action="index" controller="user">Users</g:link>

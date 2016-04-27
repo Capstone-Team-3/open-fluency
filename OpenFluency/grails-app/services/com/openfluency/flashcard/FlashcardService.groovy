@@ -94,6 +94,7 @@ class FlashcardService {
             image: null, 
             audio: null, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
+        return flashcardInstance;
         /* flashcardService.createFlashcard(primaryUnit.id.toString(), mapping.id.toString(), pronunciation.id.toString(), "", "", "2" ); */
     }
 
@@ -142,19 +143,6 @@ class FlashcardService {
 
         // Delete all the stats
         FlashcardInfo.findAllByFlashcard(flashcardInstance).each {
-            it.delete()
-        }
-
-        // Delete all the questions and options that use this card
-        QuestionOption.findAllByFlashcard(flashcardInstance).each {
-            it.delete()
-        }
-
-        Question.findAllByFlashcard(flashcardInstance).each {
-            QuestionOption.findAllByQuestion(it).each {
-                it.delete()
-            }
-
             it.delete()
         }
 
