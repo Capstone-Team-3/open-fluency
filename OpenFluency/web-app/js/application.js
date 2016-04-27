@@ -68,7 +68,6 @@ var setupFlashcardSearchPagination = function() {
  * be saved on click
  */
 var searchImage = function(query, results, urlField, resultPage) {
-	
 	// set helpful and need variables
 	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
 	var sMethod = "flickr.photos.search";
@@ -87,6 +86,9 @@ var searchImage = function(query, results, urlField, resultPage) {
 	// Build full URL
 	var queryStr = baseUrl + $(query).val() + respFormat;
 
+	
+	
+	
 	// Run query
 	$.getJSON(queryStr, function(data){
 
@@ -108,6 +110,10 @@ var searchImage = function(query, results, urlField, resultPage) {
 			if (i >= numPics) {
 				return false;
 			}
+			
+			try {
+				$('#image-modal-create').modal();
+			} catch(err){}
 		});
 	});
 };

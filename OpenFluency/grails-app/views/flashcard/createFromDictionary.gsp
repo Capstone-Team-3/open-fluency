@@ -3,6 +3,18 @@
     <head>
         <meta name="layout" content="main"/>
         <title>OpenFluency</title>
+        
+<style>
+
+#dictionary-container #dictionary{
+	float: left;
+}
+#dictionary-results-table {
+	cursor: pointer;
+}
+
+</style>
+        
     </head>
     <body>
         <div class="container flashcard-create">
@@ -15,7 +27,9 @@
 
             <div class="row marketing">
                 <div class="col-lg-6">
-                    <g:render template="/dictionary/dictionaryTable"/>
+                	<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12' id="dictionary-container">
+                    	<g:render template="/dictionary/dictionaryTable"/>
+                   	</div>
                 </div> 
                 <div class="col-lg-6">
                     <g:form action="createTest" >
@@ -117,7 +131,42 @@
                     </g:form>
                 </div> 
             </div>
+            
+            
+            
+            <div class="container">
+  <h2>Large Modal</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="image-modal-create" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <h3>Flickr Search Results</h3>
+				<div id="results"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            
+            
+            
+            
+            
             <g:javascript>
+            var createFlashcardPage = true;
+            
+            
             $(document).ajaxSuccess(function() {
             $("tr[id^='dictionary-row-']").each(function(){
             console.log("Hellol");
@@ -131,7 +180,26 @@
             });
             });
             });
+            
+            
+            
+            
             </g:javascript>
+            
+<!-- all page specific click event handlers relating to image searh and audio are in the create_flashcard.js file -->
+	<g:javascript src="create_flashcard.js"/>
+	<!-- all the javascript references needed for audio recording -->
+	<g:javascript src="recorderWorker.js"/>
+	<g:javascript src="recorder.js"/>
+	<g:javascript src="create_audio.js"/>
+	<!-- this line is left hear as it relies on taking a formData created in create_audio.js and passes to create_flashcard.js -->
+	<g:javascript>
+		$('#flickr_search').on('click', function() {
+			$('#flickr_div').css('display', 'block');
+		});
+	</g:javascript>
+            
+            
         </div>
     </body>
 </html>
