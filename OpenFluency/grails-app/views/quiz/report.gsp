@@ -31,7 +31,9 @@
 				<header class="text-center">
 					<h1>
 						Results for ${answerInstanceList[0].question.quiz.title}<br>
-						<span class="label label-info">Final grade: ${gradeInstance.correctAnswers/answerInstanceList.size()*100}%</span>
+						<span class="label label-info">Final grade: 
+						<g:formatNumber number="${gradeInstance.correctAnswers/answerInstanceList.size()*100}" type="number" maxFractionDigits="2" format="#" groupingUsed="false"/>%
+						</span>
 					</h1>
 				</header>
 

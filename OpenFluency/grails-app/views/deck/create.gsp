@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="container deck-create">
-		<ul class="breadcrumb">
+		<ul class="breadcrumb" id="breadcrumb">
 			<li>
 				<a href="${createLink(uri:'/') }">Home</a>
 			</li>
@@ -39,5 +39,6 @@
 			</div>
 		</div>
 	</div>
+	<g:javascript src="jquery.sticky.js" />
 </body>
 </html>

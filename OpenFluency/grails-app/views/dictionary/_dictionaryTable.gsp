@@ -1,4 +1,4 @@
-<div id='dictionary' class='col-lg-4 col-md-3 col-sm-3 col-xs-3'>
+<div id='dictionary'>
 
         <div>
         	<label>Search Dictionary</label>

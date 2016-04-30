@@ -22,7 +22,7 @@
 				</ul>
 			</div>
 						
-			<g:form action="loadQuizFromCSV" controller="quiz" enctype="multipart/form-data">
+			<g:form action="importQuiz" controller="quiz" enctype="multipart/form-data">
 				<input name="course.id" value="${courseInstance.id}" type="hidden"/>
 				<div class="col-lg-6 col-lg-offset-3">
 
