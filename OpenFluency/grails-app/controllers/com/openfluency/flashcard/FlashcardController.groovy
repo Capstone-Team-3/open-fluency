@@ -27,16 +27,25 @@ class FlashcardController {
     }
 
     def createFromDictionary() {
-        render(view: "createFromDictionary")
+        User loggedUser = User.load(springSecurityService?.principal?.id)
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
+        def deckDefault = null;
+        if(params.deckId){
+            deckDefault = deckInstanceList.find{ it.id.toString() == params.deckId };
+        }
+        render(view: "createFromDictionary", model : [deckInstanceList : deckInstanceList, deckDefault : deckDefault])
     }
 
     def createTest(){
-        def primaryString = "<japanesestring>";
-        def otherString = "<englishString>";
-        def pronunciationString = "<pronounciation>"; 
+        def primaryString = params.concept.trim();
+        def otherString = params.meaning.trim();
+        def pronunciationString = params.pronunciation.trim(); 
+        def deckId = params.deckId.trim();
+        def imageLink = params.imageLink.trim();
+        def audioLink = "";
 
-        flashcardService.createFlashcardUsingDictionaryInfo(primaryString, otherString, pronunciationString, 2);
-        render(view: "createFromDictionary") 
+        flashcardService.createFlashcardUsingDictionaryInfo(primaryString, otherString, pronunciationString, deckId.toInteger(), imageLink, audioLink );
+        redirect(action: "createFromDictionary", params: [deckId : params.deckId]) 
     }
 
     /**

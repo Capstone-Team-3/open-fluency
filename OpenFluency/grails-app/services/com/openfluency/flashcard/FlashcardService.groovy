@@ -55,46 +55,55 @@ class FlashcardService {
         return flashcardInstance
     }
 
-    Flashcard createFlashcardUsingDictionaryInfo(String primaryString, String otherString, String pronunciationString, int deckId) {
+    Flashcard createFlashcardUsingDictionaryInfo(String primaryString, String otherString, String pronunciationString, int deckId, String imageLink, String audioLink) {
 
         Unit primaryUnit = Unit.findByLiteral(primaryString);
         if(primaryUnit == null)
         {
            def alphabet = Alphabet.findByName("Kanji"); 
+           assert(alphabet != null);
            primaryUnit = new Unit(alphabet : alphabet, literal : primaryString);
-           primaryUnit.save();
+           primaryUnit.save(flush: true, failOnError: true);
         }
 
         Unit secondaryUnit = Unit.findByLiteral(otherString);
         if(secondaryUnit == null)
         {
            def alphabet = Alphabet.findByName("Latin"); 
+           assert(alphabet != null);
            secondaryUnit = new Unit(alphabet: alphabet, literal: otherString);
-           secondaryUnit.save();
+           secondaryUnit.save(flush: true, failOnError: true);
         }
 
         UnitMapping mapping = UnitMapping.findByUnit1AndUnit2(primaryUnit, secondaryUnit);
         if(mapping == null)
         {
             mapping = new UnitMapping(unit1: primaryUnit, unit2 : secondaryUnit);
-            mapping.save();
+            mapping.save(flush: true, failOnError: true);
         }
 
         def pronunciation = Pronunciation.findByLiteral(pronunciationString);
         if(pronunciation == null)
         {
            def alphabet = Alphabet.findByName("Latin"); 
-           pronunciation = new Pronunciation(unit: primaryUnit, alphabet : alphabet, literal : pronunciationString).save();
+           assert(alphabet != null);
+           pronunciation = new Pronunciation(unit: primaryUnit, alphabet : alphabet, literal : pronunciationString).save(flush: true, failOnError: true);
+        }
+
+        def image = null;
+        if(imageLink?.trim())
+        {
+            image = mediaService.createImage(imageLink, mapping.id.toString()) 
         }
 
 		def flashcardInstance = new Flashcard(
             primaryAlphabet: primaryUnit.alphabet, 
             unitMapping: mapping, 
             pronunciation: pronunciation, 
-            image: null, 
+            image: image, 
             audio: null, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
-        /* flashcardService.createFlashcard(primaryUnit.id.toString(), mapping.id.toString(), pronunciation.id.toString(), "", "", "2" ); */
+        return flashcardInstance;
     }
 
 	

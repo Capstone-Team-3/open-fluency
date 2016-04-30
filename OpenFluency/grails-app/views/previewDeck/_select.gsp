@@ -79,15 +79,34 @@
 	          <h4 class="modal-title">Select Alphabet Type</h4>
 	        </div>
 	        <div class="modal-body">
-	        	<div class="ul-container">
+	        	<div class="ul-container" id="literal-options">
 		        	<ul>
 		        		<li><button data-alph="English" class="btn btn-sm btn-info l-alpha-options">English</button></li>
-		        		<li><button data-alph="Japanese" class="btn btn-sm btn-info l-alpha-options">Japanese</button></li>
-		        		<li><button data-alph="Katakana" class="btn btn-sm btn-info l-alpha-options">Katakana</button></li>
-		        		<li><button data-alph="Hiragana" class="btn btn-sm btn-info l-alpha-options">Hiragana</button></li>
-		        		<li><button data-alph="Romaji" class="btn btn-sm btn-info p-alpha-options">Romaji</button></li>
+		        		<g:each in="${fieldIndices }">
+		        			<g:if test="${it != 'English' }" >
+		        				<li><button data-alph="${it }" class="btn btn-sm btn-info l-alpha-options">${it }</button></li>
+	        				</g:if>
+		        		</g:each>
 		        	</ul>
 	        	</div>
+	        	More Alphabets:<select id="select-alpha" class="form-control" name="select-alpha">
+	        			<option value="" selected></option>
+                        <g:each in="${languageInstanceList}">
+                            <g:if test="${it.id == languageId}">
+                                <option value="${it.name}" >${it.name}</option>
+                            </g:if>
+                            <g:else>
+                                <option value="${it.name}">${it.name}</option>
+                            </g:else>
+                        </g:each>
+                    </select>
+                   <br>
+	        	<div class="ul-container">
+		        	<ul id="select-alphabet-results">
+		        		
+		        	</ul>
+	        	</div>
+	        	
 	        </div>
 	        <div class="modal-footer">
 	        </div>
@@ -95,6 +114,7 @@
 	      
 	    </div>
 	  </div>
+	  
 	  
 	<!-- Modal -->
 	  <div class="modal fade" id="pronunciation-options" role="dialog">
@@ -105,16 +125,33 @@
 	        <div class="modal-header">
 	          <h4 class="modal-title">Select Alphabet Type</h4>
 	        </div>
-	        <div class="modal-body">
+	        <div class="modal-body" id="pronunciation-alph-options">
 	        	<div class="ul-container">
 		        	<ul>
-		        		<li><button data-alph="English" class="btn btn-sm btn-info p-alpha-options">English</button></li>
-		        		<li><button data-alph="Japanese" class="btn btn-sm btn-info p-alpha-options">Japanese</button></li>
-		        		<li><button data-alph="Katakana" class="btn btn-sm btn-info p-alpha-options">Katakana</button></li>
-		        		<li><button data-alph="Hiragana" class="btn btn-sm btn-info p-alpha-options">Hiragana</button></li>
-		        		<li><button data-alph="Romaji" class="btn btn-sm btn-info p-alpha-options">Romaji</button></li>
+		        		<g:each in="${fieldIndices }">
+		        			<li><button data-alph="${it }" class="btn btn-sm btn-info p-alpha-options">${it }</button></li>
+		        		</g:each>
 		        	</ul>
 	        	</div>
+	        	
+	        	More Alphabets:<select id="p-select-alpha" class="form-control" name="select-alpha">
+	        			<option value="" selected></option>
+                        <g:each in="${languageInstanceList}">
+                            <g:if test="${it.id == languageId}">
+                                <option value="${it.name}" >${it.name}</option>
+                            </g:if>
+                            <g:else>
+                                <option value="${it.name}">${it.name}</option>
+                            </g:else>
+                        </g:each>
+                    </select>
+                   <br>
+	        	<div class="ul-container">
+		        	<ul id="p-select-alphabet-results">
+		        		
+		        	</ul>
+	        	</div>
+	        	
 	        </div>
 	        <div class="modal-footer">
 	        </div>
@@ -135,16 +172,33 @@
 	        <div class="modal-header">
 	          <h4 class="modal-title">Select Alphabet Type</h4>
 	        </div>
-	        <div class="modal-body">
+	        <div class="modal-body" id="meaning-options">
 	        	<div class="ul-container">
 		        	<ul>
-		        		<li><button data-alph="English" class="btn btn-sm btn-info m-alpha-options">English</button></li>
-		        		<li><button data-alph="Japanese" class="btn btn-sm btn-info m-alpha-options">Japanese</button></li>
-		        		<li><button data-alph="Katakana" class="btn btn-sm btn-info m-alpha-options">Katakana</button></li>
-		        		<li><button data-alph="Hiragana" class="btn btn-sm btn-info m-alpha-options">Hiragana</button></li>
-		        		<li><button data-alph="Romaji" class="btn btn-sm btn-info m-alpha-options">Romaji</button></li>
+		        		<g:each in="${fieldIndices }">
+		        			<li><button data-alph="${it }" class="btn btn-sm btn-info m-alpha-options">${it }</button></li>
+		        		</g:each>
 		        	</ul>
 	        	</div>
+	        	
+	        	More Alphabets:<select id="m-select-alpha" class="form-control" name="select-alpha">
+	        			<option value="" selected></option>
+                        <g:each in="${languageInstanceList}">
+                            <g:if test="${it.id == languageId}">
+                                <option value="${it.name}" >${it.name}</option>
+                            </g:if>
+                            <g:else>
+                                <option value="${it.name}">${it.name}</option>
+                            </g:else>
+                        </g:each>
+                    </select>
+                   <br>
+	        	<div class="ul-container">
+		        	<ul id="m-select-alphabet-results">
+		        		
+		        	</ul>
+	        	</div>
+	        	
 	        </div>
 	        <div class="modal-footer">
 	        </div>

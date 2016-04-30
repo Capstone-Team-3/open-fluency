@@ -7,7 +7,7 @@
 /*----------------------------------------------------------------------------*/
 
 // search Flickr for images matching the query
-$("#flickr_search").click(function(){
+$("#flickr_search").click(function(){ 
 	$("#flickr_page_number").val(1).text(1);
 	searchImage("#query", "#results", "#imageLink", 1);
 });

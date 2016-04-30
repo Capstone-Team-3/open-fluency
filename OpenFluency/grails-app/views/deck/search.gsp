@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="container deck-search">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb" id="breadcrumb">
             <li>
                 <a href="${createLink(uri:'/') }">Home</a>
             </li>
@@ -82,6 +82,7 @@
         </div>
     </div>
     <!-- end container -->
+    <g:javascript src="jquery.sticky.js" />
 </div>
 </body>
 </html>

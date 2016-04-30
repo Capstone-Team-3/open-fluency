@@ -230,13 +230,12 @@ h2.sub-heading {
 .flashcard .pronunciation {
     font-size: .85em;
 }
-
 .flashcard-img {
     background-size: 100% auto;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-color: whiteSmoke;
-    height: 200px;;
+    height: 200px;
     margin: 20px auto 0;
 }
 
@@ -452,7 +451,7 @@ h4#custom-image {
     position: relative;
 }
 
-.dashboard .panel-default > .panel-heading,
+.dashboard .panel-heading center-default > .panel-heading,
 .dashboard .panel-footer {
     background-color: #fafafa;
 }
@@ -691,6 +690,19 @@ h4#custom-image {
     padding: 20px 20px 10px;
 }
 
+.question-img {
+    height: 150px;
+    width: 100%;
+    margin-bottom: 10px;
+    background-position: 50% 50%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.question-audio-player {
+ width: 50%;
+}​
+
 .question-panel {
     position: relative;
 }
@@ -759,7 +771,7 @@ h4#custom-image {
 }
 
 .quiz .unit {
-    font-size: 50px;
+    font-size: 30px;
     margin: 60px 0;
 }
 
