@@ -42,7 +42,7 @@ class FlashcardController {
         def pronunciationString = params.pronunciation.trim(); 
         def deckId = params.deckId.trim();
         def imageLink = params.imageLink.trim();
-        def audioLink = "";
+        def audioLink = params.audio_url.trim();
 
         flashcardService.createFlashcardUsingDictionaryInfo(primaryString, otherString, pronunciationString, deckId.toInteger(), imageLink, audioLink );
         redirect(action: "createFromDictionary", params: [deckId : params.deckId]) 

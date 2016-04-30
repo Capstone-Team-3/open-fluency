@@ -90,6 +90,11 @@ class FlashcardService {
            pronunciation = new Pronunciation(unit: primaryUnit, alphabet : alphabet, literal : pronunciationString).save(flush: true, failOnError: true);
         }
 
+		def audio=null
+		if (audioLink) {
+		    audio = mediaService.createAudio(audioLink,null,pronunciation.id.toString())
+		}
+		
         def image = null;
         if(imageLink?.trim())
         {
@@ -101,7 +106,7 @@ class FlashcardService {
             unitMapping: mapping, 
             pronunciation: pronunciation, 
             image: image, 
-            audio: null, 
+            audio: audio, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
         return flashcardInstance;
     }

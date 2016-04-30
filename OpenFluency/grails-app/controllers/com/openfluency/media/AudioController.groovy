@@ -50,16 +50,50 @@ class AudioController {
         }
     }
 
-	@Transactional
 	def saveFile() {
 		// Create new media file and any parent directories
 		def p = params
 		def audioName= null
+		def name
 		def file = params['audiofile']
 		try {
 			def pronunciation = params['pronunciation']
 			def blob = params['blob']
-			def name = file?.getOriginalFilename()
+			name = file?.getOriginalFilename()
+			def mediaTopDir= grailsApplication.config.mediaFolder
+			def dirname = UUID.randomUUID().toString()
+			File ga = grailsApplication.getParentContext().getResource(mediaTopDir).file
+			String mediaDir= ga.getAbsolutePath()
+			audioName= mediaDir + File.separator + "audio" + File.separator + dirname + File.separator + name
+			def audioUrl= "/OpenFluency/"+ mediaTopDir + "/audio/" + dirname +"/" + name
+			audioUrl = audioUrl.replaceAll("//","/")
+			def newupload = new File(audioName)
+			newupload.mkdirs()
+			file.transferTo(newupload)
+			flash.message = "Loading "+ name
+			//Audio audioInstance = mediaService.createAudio(audioUrl,blob,pronunciation)
+			// return audio object
+			def audioLink =["url": audioUrl]
+			render audioLink as JSON
+		} catch (Exception e) {
+			flash.message = "Failed: Loading "+ name
+		}
+		// Create the audio instance
+	}
+
+	/* 
+	 * This saves the media file as a static url
+	 */
+	def saveMediaFile() {
+		// Create new media file and any parent directories
+		def p = params
+		def audioName= null
+		def name
+		def file = params['audiofile']
+		try {
+			def pronunciation = params['pronunciation']
+			def blob = params['blob']
+			name = file?.getOriginalFilename()
 			def mediaTopDir= grailsApplication.config.mediaFolder
 			def dirname = UUID.randomUUID().toString()
 			File ga = grailsApplication.getParentContext().getResource(mediaTopDir).file
@@ -77,10 +111,9 @@ class AudioController {
 			// return audio object
 			render audioInstance as JSON
 		} catch (Exception e) {
-			flash.message = "Epic Failed: Loading "+ audioName
+			flash.message = "Failed: Loading "+ name
 		}
 		// Create the audio instance
-
 	}
 	
     @Transactional

@@ -93,8 +93,8 @@ $("#audio_search").click( function( event ) {
 	   data: fd,
 	   processData: false,
 	   contentType: false,
-	   success: function(audioInstance) {
-		   $("#audio_id").val(audioInstance.id);
+	   success: function(audiolink) {
+		   $("#audio_url").val(audiolink.url);
 	   },
 	   error: function(jqXHR, textStatus, errorMessage) {
 		   console.log(errorMessage); // Optional
