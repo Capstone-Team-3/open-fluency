@@ -217,7 +217,6 @@ class PreviewDeckService {
 			UnitMapping unitMapping = languageService.getUnitMapping(symbol, meaning)
 			flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciationString, imageURL, audioInstanceId, deckInstance.id.toString())
 		}
-        println("deckInstance ="+ deckInstance)
 		return deckInstance
 	}
 	

@@ -65,18 +65,39 @@ $("#save_rec_button").click(function(){
  * @param formDataObj: the audio file and related data to be saved.
  */
 function saveAudioRecording(formDataObj){
-	// Create the packet
-	var fd = formDataObj;
-	// Send it
-	$.ajax({
-		type: 'POST',
-		url: '/OpenFluency/audio/save',
-		data: fd,
-		processData: false,
-		contentType: false
-	}).done(function(audioInstance) {
-		if(audioInstance.id) {
-			$("#audio_id").val(audioInstance.id);
-		}
-	});
+       // Create the packet
+       var fd = formDataObj;
+       // Send it
+       $.ajax({
+               type: 'POST',
+               url: '/OpenFluency/audio/save',
+               data: fd,
+               processData: false,
+               contentType: false
+       }).done(function(audioInstance) {
+               if(audioInstance.id) {
+                       $("#audio_id").val(audioInstance.id);
+				}
+	   });
 }
+
+$("#audio_search").click( function( event ) {
+	event.preventDefault();
+	var fd = new FormData(document.forms.namedItem("createFlashcardForm"));
+	var url="${createLink(controller:'audio',action:'saveFile')}";
+	url = '/OpenFluency/audio/saveFile';
+	var audioFile=$("#audiofile").val()
+	var xm = $.ajax({
+	   url: url,
+	   type: "POST",
+	   data: fd,
+	   processData: false,
+	   contentType: false,
+	   success: function(audioInstance) {
+		   $("#audio_id").val(audioInstance.id);
+	   },
+	   error: function(jqXHR, textStatus, errorMessage) {
+		   console.log(errorMessage); // Optional
+	   }
+	});
+});

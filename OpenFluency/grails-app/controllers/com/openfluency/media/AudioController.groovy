@@ -5,6 +5,7 @@ import grails.transaction.Transactional
 import com.openfluency.auth.*
 import com.openfluency.language.*
 import grails.converters.JSON
+import java.util.UUID
 
 
 @Transactional(readOnly = true) 
@@ -49,10 +50,43 @@ class AudioController {
         }
     }
 
+	@Transactional
+	def saveFile() {
+		// Create new media file and any parent directories
+		def p = params
+		def audioName= null
+		def file = params['audiofile']
+		try {
+			def pronunciation = params['pronunciation']
+			def blob = params['blob']
+			def name = file?.getOriginalFilename()
+			def mediaTopDir= grailsApplication.config.mediaFolder
+			def dirname = UUID.randomUUID().toString()
+			File ga = grailsApplication.getParentContext().getResource(mediaTopDir).file
+			String mediaDir= ga.getAbsolutePath()
+			audioName= mediaDir + File.separator + "audio" + File.separator + dirname + File.separator + name
+			def audioUrl= "/OpenFluency/"+ mediaTopDir + "/audio/" + dirname +"/" + name
+			audioUrl = audioUrl.replaceAll("//","/")
+			def newupload = new File(audioName)
+			newupload.mkdirs()
+			file.transferTo(newupload)
+			flash.message = "Loading "+ audioName
+			Audio audioInstance = mediaService.createAudio(audioUrl,blob,pronunciation)
+
+			JSON.use('deep')
+			// return audio object
+			render audioInstance as JSON
+		} catch (Exception e) {
+			flash.message = "Epic Failed: Loading "+ audioName
+		}
+		// Create the audio instance
+
+	}
+	
     @Transactional
     def save() {
         // Create the audio instance
-        Audio audioInstance = mediaService.createAudio(params.url, params.blob.getBytes(), params['pronunciation.id'])
+        Audio audioInstance = mediaService.createAudio(params.url, params.blob?.getBytes(), params['pronunciation.id'])
 
         JSON.use('deep')
         render audioInstance as JSON            

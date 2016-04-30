@@ -35,7 +35,7 @@
 					</ul>
 				</g:hasErrors>
 
-				<g:form action="save" controller="flashcard" name="createFlashcardForm">
+				<g:form action="save" controller="flashcard" name="createFlashcardForm" enctype="multipart/form-data">
 
 					<input type="hidden" name="unit" value="${unitInstance.id}"/>
 					<div class="form-group">
@@ -114,7 +114,7 @@
 
 							<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What audio clip provides pronunciation for this card?">Audio</label>
 
-							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
+							<g:textField class="form-control" name="audio" type="text" value="${flashcardInstance?.audio}"/>
 
 						</div>
 						<!-- end form-group -->
@@ -124,22 +124,27 @@
 
 					<div class="form-group-audio">
 
+						<!--
 						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Record a pronunciation" >Record an audio pronunciation file:</label>
-
 						<small class="clearfix audio-warning"> <strong>Note:</strong>
 							A browser pop-up may appear asking you to 'Allow' microphone use!
 						</small>
-
 						<audio id="audioClip" controls autoplay></audio>
-
+						-->
 						<div class="audio-controls">
+						<!-- 
 							<input id="start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
 							<input id="stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
 							<input id="save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
+					   -->
 							<input id="audio_id" name="audio_id" type="hidden" value=""/>
-						</div>
 						<!-- end audio-controls -->
-
+						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio file (mp3, wav, oga, or aac)</label>
+						<input id="audiofile" name="audiofile" type="file" value=""/>
+						<span class="input-group-btn">
+							<input type="button" class="btn btn-info" name="audio_search" id="audio_search" value="Load Audio" />
+						</span>
+						</div>
 					</div>
 					<!-- end form-group audio -->
 
@@ -169,7 +174,7 @@
 	</div>
 	<!-- end container -->
 
-	<!-- all page specific click event handlers relating to image searh and audio are in the create_flashcard.js file -->
+	<!-- all page specific click event handlers relating to image search and audio are in the create_flashcard.js file -->
 	<g:javascript src="create_flashcard.js"/>
 	<!-- all the javascript references needed for audio recording -->
 	<g:javascript src="recorderWorker.js"/>
