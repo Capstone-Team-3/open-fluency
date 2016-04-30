@@ -14,7 +14,7 @@ import com.openfluency.flashcard.Deck;
 import static java.nio.file.StandardCopyOption.*
 import java.nio.file.Files
 import java.nio.file.Path
-import org.apache.tools.ant.util.FileUtils;
+import org.apache.commons.io.FileUtils;
 
 import grails.transaction.Transactional
 
@@ -32,7 +32,6 @@ import cscie99.team2.lingolearn.shared.Card
 import cscie599.openfluency2.*
 import cscie599.openfluency2.CharSetIdentifier.Charset
 
-@Transactional
 class PreviewDeckService {
 
 	def springSecurityService
@@ -129,7 +128,7 @@ class PreviewDeckService {
     }
 
 	// create open fluency deck from PreviewDeck with
-	@Transactional
+	// Do not lock all decks
 	def createOpenFluencyDeck(String deckName, String deckDescription, Language sourceLanguage, PreviewDeck previewDeckInstance,
 		HashMap<String,Integer> fieldIndices, HashMap<String,Integer> alphaIndices, String cardServerName,boolean privateDeck){
 		
@@ -208,14 +207,15 @@ class PreviewDeckService {
 						audioInstanceId= audioInstance.id.toString()
 					}
 				} catch (Exception e) {
-					println("Problem with audio, skip the audio "+e)
+					println("Problem with pronunciation, skip the card "+e)
 					pronunciationString = null
 				}
 			} else {
 				pronunciationString = null
 			}
 			UnitMapping unitMapping = languageService.getUnitMapping(symbol, meaning)
-			flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciationString, imageURL, audioInstanceId, deckInstance.id.toString())
+			if (pronunciationString)
+				flashcardService.createFlashcard(symbol.id.toString(), unitMapping.id.toString(), pronunciationString, imageURL, audioInstanceId, deckInstance.id.toString())
 		}
 		return deckInstance
 	}
@@ -272,6 +272,7 @@ class PreviewDeckService {
 	 * @param alphabet
 	 * @return
 	 */
+	@Transactional
 	def createPreviewUnits(fieldList,card){
 		ArrayList<Unit> units=new ArrayList<Unit>()
 		int i=0;
@@ -320,11 +321,6 @@ class PreviewDeckService {
     	deckInstance.save()
     }   	
 
-    Boolean removeDeck(PreviewDeck deck) {
-    	User theUser = User.load(springSecurityService.principal.id)
-		
-    }
-
     /**
     * Search for Decks
     */
@@ -355,18 +351,17 @@ class PreviewDeckService {
     */
     void deleteDeck(PreviewDeck deckInstance) {
     	// First delete all flashcards
-    	PreviewCard.findAllByDeck(deckInstance).each {
-    		it.delete(it)
-    	}
-		// Delete all associated media
+		//PreviewCard.executeUpdate("delete PreviewCard where deck = ?",[deckInstance])
 		try {
-			File mediaDir= new File(deckInstance.mediaDir)
-			FileUtils.delete(mediaDir)
+    	deckInstance.delete(flush:true)
+    	PreviewCard.findAllByDeck(deckInstance).each { it.delete(flush:true) } // cascade
+		// Delete all associated media
+		File mediaDir= new File(deckInstance.mediaDir)
+			FileUtils.deleteDirectory(mediaDir)
 		} catch (IOException) {
 			println("Cannot delete media")
 		}
     	// Now delete it
-    	deckInstance.delete()
     }
 
     
