@@ -2,7 +2,31 @@ var dsFlashcardId = null;
 var selectedCards = {};		// ds with cards to move
 var moveCardsMode = false;  // can click card and select for reassign?
 
+
+$('#move-cards-button').click(function() {
+	if (!moveCardsMode) {
+		$('.donut-container').hide();
+		$('#selected-cards-display').show();
+		moveCardsMode = true;
+		$('#move-cards-button').html("Stop moving cards");
+		$('#move-cards-button').removeClass('btn-success');
+		$('#move-cards-button').addClass('btn-danger');
+	}
+	
+	else {
+		$('.donut-container').show();
+		$('#selected-cards-display').hide();
+		moveCardsMode = false;
+		$('#move-cards-button').html("Move cards");
+		$('#move-cards-button').removeClass('btn-danger');
+		$('#move-cards-button').addClass('btn-success');
+	}
+});
+
+
 if (typeof localStorage.selectedCards != 'undefined') {
+	$('#move-cards-button').click();
+	console.log('here');
 	selectedCards = JSON.parse(localStorage.selectedCards);
 	localStorage.removeItem('selectedCards');
 	
@@ -76,6 +100,14 @@ $('.step').click(function() {
 	localStorage.selectedCards = JSON.stringify(selectedCards);
 });
 
+$('.nextLink').click(function() {
+	localStorage.selectedCards = JSON.stringify(selectedCards);
+});
+
+$('.prevLink').click(function() {
+	localStorage.selectedCards = JSON.stringify(selectedCards);
+});
+
 $('#move-cards-menu-button').click(function() {
 	$('#myModal2').modal();
 });
@@ -91,22 +123,3 @@ $('#reset-card-selection').click(function() {
 });
 
 
-$('#move-cards-button').click(function() {
-	if (!moveCardsMode) {
-		$('.donut-container').hide();
-		$('#selected-cards-display').show();
-		moveCardsMode = true;
-		$('#move-cards-button').html("Stop moving cards");
-		$('#move-cards-button').removeClass('btn-success');
-		$('#move-cards-button').addClass('btn-danger');
-	}
-	
-	else {
-		$('.donut-container').show();
-		$('#selected-cards-display').hide();
-		moveCardsMode = false;
-		$('#move-cards-button').html("Move cards");
-		$('#move-cards-button').removeClass('btn-danger');
-		$('#move-cards-button').addClass('btn-success');
-	}
-});
