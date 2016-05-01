@@ -13,20 +13,21 @@ The current release supports Japanese and Chinese flashcards.
 
 ###Installation:
 1. clone this distribution.
+2. Go to directory
+  > cd OpenFluency
 2. Install the dictionary
-> cd OpenFluency
-run (on mac or unix)
-> bash dictionary_setup or 
-run (on windows)
-> exec dictionary_setup.bat
+ * run (on mac or unix)
+   * bash dictionary_setup 
+ * or run (on windows)
+   * exec dictionary_setup.bat
 3. Start openfluency
-> grails run-app
+ * grails run-app
   
 ###Testing:
 * To run all the unit tests:
 > grails test-app -unit 
   
-* To run the functional tests, you need to edit Geb.config to the grails-app/conf directory, update all the text inside the < > brackets to the location of your chromedriver. A copy is included in the resource directory
+* To run the functional tests, you need to edit Geb.config to the grails-app/conf directory, update all the text inside the < > brackets to the location of your chromedriver. A copy of chromedriver is included in the resource directory
 
 ```
 import org.openqa.selenium.firefox.FirefoxDriver
@@ -53,5 +54,5 @@ environments {
     }   
  }
 ```
-This system has been tested on chrome, to run it 
+This set of functional tests has been tested only on chrome, to run it 
 > grails -Dgeb.env=chrome test-app
