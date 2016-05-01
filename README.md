@@ -2,12 +2,12 @@
 
 Openfluency2 is a flashcard learning system for the Japanese and Chinese language. It is adapted from Openfluency by
 adding new features:
-  a Japanese dictionaries
-  a "confuser" algorithm for generating plausible multichoice answers 
-  multimedia flashcard import from ankiweb
-  multimedia quiz editing, import and export
-  deck editing
-  student learning summary
+ *  a Japanese dictionaries
+ *  a "confuser" algorithm for generating plausible multichoice answers 
+ *  multimedia flashcard import from ankiweb
+ *  multimedia quiz editing, import and export
+ *  deck editing
+ *  student learning summary
 
 The current release supports Japanese and Chinese flashcards.
 
@@ -16,10 +16,15 @@ The current release supports Japanese and Chinese flashcards.
   1. clone this distribution.
   
   2. Install the dictionary
+
   > cd OpenFluency
+
   run (on mac or unix)
-  > bash dictionary_setup or 
+  
+> bash dictionary_setup or 
+
   run (on windows)
+
   > exec dictionary_setup.bat
   
   3. Start openfluency
@@ -27,6 +32,7 @@ The current release supports Japanese and Chinese flashcards.
   
   ### Testing:
   * To run all the unit tests:
+  * 
   > grails test-app -unit 
   
   * To run the functional tests, you need to edit Geb.config to the grails-app/conf directory, update all the text inside the < > brackets to the location of your chromedriver. A copy is included in the resource directory
