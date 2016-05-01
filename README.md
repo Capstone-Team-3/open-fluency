@@ -29,7 +29,7 @@ The current release supports Japanese and Chinese flashcards.
   * To run all the unit tests:
   > grails test-app -unit 
   
-  * To run the functional tests, you need to add a Geb.config to the grails-app/conf directory, consisting of the following:
+  * To run the functional tests, you need to edit Geb.config to the grails-app/conf directory, update all the text inside the < > brackets to the location of your chromedriver. A copy is included in the resource directory
 
 ```
 import org.openqa.selenium.firefox.FirefoxDriver
