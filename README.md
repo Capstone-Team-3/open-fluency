@@ -12,6 +12,7 @@ adding new features:
 
 The current release supports Japanese and Chinese flashcards.
 Installation:
+
   1) clone this distribution.
   
   2) Install the dictionary
@@ -52,6 +53,6 @@ environments {
     firefox {
         driver = { new FirefoxDriver() }
     }   
-}
+ }
 
   
