@@ -17,7 +17,7 @@
 					<% 	def flashcardPrimaryUnitStr = flashcardInstance?.primaryUnit.getPrint().trim();
 						def charArr = flashcardPrimaryUnitStr.toCharArray();  %>
 					<g:each in="${ charArr }">
-						<span class='clickable-character'>${it;}</span>				
+						<span class='clickable-character'>${it}</span>				
 					</g:each>
 				</h1>
 				<div class="pronunciation" data-pronunciation="${flashcardInstance?.pronunciation.literal }">
