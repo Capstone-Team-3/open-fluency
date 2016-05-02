@@ -405,7 +405,9 @@ var initializeUnitMappingDraggable = function() {
     $( "#flashcard-literal" ).droppable({
     	hoverClass: "dashed-border-black",
     	drop: function( event, ui ) {
+    		$('#flashcard-literal').css('font-size', '100px');
 	        $(this).html($(ui.draggable).html());
+	        resizeUnitMappingCard();
 	        unitMappingLiteral = $(ui.draggable).data("index");
 	        $('#literal-options').modal();
     	}
