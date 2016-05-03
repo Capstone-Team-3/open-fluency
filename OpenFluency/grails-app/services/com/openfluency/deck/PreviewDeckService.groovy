@@ -32,6 +32,7 @@ import cscie99.team2.lingolearn.shared.Card
 import cscie599.openfluency2.*
 import cscie599.openfluency2.CharSetIdentifier.Charset
 
+@Transactional
 class PreviewDeckService {
 
 	def springSecurityService

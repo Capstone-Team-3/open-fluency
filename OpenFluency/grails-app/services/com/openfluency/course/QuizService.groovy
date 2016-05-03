@@ -196,10 +196,7 @@
                 answer.status = Constants.VIEWED
                 answer.save()
             } 
-
-            // Have to finalize the quiz since no more answers can be submitted by the student
             else {
-                finalizeQuiz(quizInstance, true)
                 return null
             }
 
