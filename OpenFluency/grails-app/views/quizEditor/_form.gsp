@@ -71,7 +71,7 @@
 							<input id="audio_id" name="audio_id" type="hidden" value=""/>
 						<!-- end audio-controls -->
 						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio file (mp3, wav, oga, or aac)</label>
-						<input id="audiofile" accept=".mp3|.wav|.oga|.aac|.csv" name="audiofile" type="file" value=""/>
+						<input id="audiofile" accept=".mp3,.wav,.oga,.aac,.csv" name="audiofile" type="file" value=""/>
 						<span class="input-group-btn">
 							<input type="button" onclick="uploadAudioFile(this);" class="btn btn-info" name="audio_search" id="audio_search" value="Upload Audio File" />
 						</span>
