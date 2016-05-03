@@ -1,3 +1,5 @@
+<%@ page import="cscie99.team2.lingolearn.shared.Image" %>
+<%@ page import="cscie99.team2.lingolearn.shared.Sound" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +24,7 @@
 				</ul>
 			</div>
 
-			<g:form action="update" controller="quizEditor" id="${quizInstance.id}">
+			<g:form action="update" controller="quizEditor" id="${quizInstance.id}" enctype="multipart/form-data">
 				<div class="col-lg-6 col-lg-offset-3">
 
 					<h1 class="text-center">Edit Quiz for ${quizInstance.course.title}</h1>

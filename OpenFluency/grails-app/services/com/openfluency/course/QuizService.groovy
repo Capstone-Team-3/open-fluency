@@ -383,7 +383,6 @@
                  Quiz quizInstance = new Quiz(
                          course: courseInstance, 
                          title: title,
-                         testElement: Constants.MANUAL,
                          enabled: true,
                          liveTime: liveTime,
                          endTime: endTime,
@@ -392,8 +391,12 @@
 
                     Sound snd = null
                     Image im = null
+                    def qt = null
+                  
 
                     csvFile.toCsvReader(['charset':'UTF-8','skipLines':1],).eachLine { tokens -> 
+                         qt = com.openfluency.Constants.MANUAL
+                           def ques = tokens[1]
 
               /*       if (tokens[1].equals("")){
                         return
@@ -404,22 +407,32 @@
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
                         im.setImageUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[2])
+                        log.info im.getImageUri()
+                        qt = com.openfluency.Constants.IMAGE
+                        log.info qt
+                        ques = "Image"
                       } else{
                         im = null
                       }
 
                         if (!tokens[3].trim().equals("")){
+                         
                         snd = new Sound()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
                         snd.setSoundUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[3])
+                        log.info snd.getSoundUri()
+                        qt = com.openfluency.Constants.SOUND
+                        log.info qt
+                       ques = "Sound"
                       } else {
                         snd = null
                       }
 
-                     Question question = new Question(quiz: quizInstance, question: tokens[1], questionType: Constants.MANUAL, image: im, sound: snd).save(failOnError: true)
+                     Question question = new Question(quiz: quizInstance, question: ques, questionType: qt, image: im, sound: snd).save(failOnError: true)
                      new QuestionOption(question: question, option: tokens[4].substring(1, tokens[4].length()-1), answerKey: 1).save(failOnError: true)
-
+                     log.info question
+                     log.info snd?.getSoundUri()
                     String[] wrongAnswers = tokens[5].substring(1, tokens[5].length()-1).split(",[ ]*");
                     for (int i = 0; i < wrongAnswers.length; i++) {
                     new QuestionOption(question: question, option: wrongAnswers[i], answerKey: 0).save(failOnError: true)

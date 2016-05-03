@@ -4,6 +4,7 @@
 	<input required name="title" type="text"  value="${quizInstance?.title}" class="form-control"/>
 </div>
 
+
 <div class="form-group">
 	<label for="maxCardTime">
 		Maximum seconds allowed per card (if 0, the quiz will not be timed):
@@ -26,22 +27,67 @@
 	<g:each var="question" status="i" in="${quizInstance?.questions}">
 
 		<div class="question panel panel-default question-panel">
-		
+		   
 			<div class="panel-heading">
 				<label>Question ${i + 1}</label>
-				<div class="card-actions">
-					<span class="btn btn-xs btn-danger" onclick="if (confirm('are you sure?')) { $(this).parent().parent().parent().remove(); writeCSV(); }"><span class="glyphicon glyphicon-remove"></span></span>
+				    <!-- <div class="form-inline">  -->
+					<span class="btn btn-xs btn-danger" onclick="if (confirm('are you sure?')) { $(this).parent().parent().remove(); writeCSV(); }"><span class="glyphicon glyphicon-remove"></span></span>
+				   <!--   </div> -->
+			</div>
+
+<!--
+            <div class="panel-inline">
+				<div class="form-control">
+					  <input type="radio" class="btn-info" name="questiontype" value="question" checked> Question
+  					  <input type="radio" class="btn-info" name="questiontype" value="audio"> Audio
+                      <input type="radio" class="btn-info" name="questiontype" value="image"> Image
 				</div>
 			</div>
+-->
 		
-				<div class="form-group">
-					<input name="question" class="form-control" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.question}"/>
+				<div class="form-inline">
+					<input name="question" class="form-control" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.question}"/>	
+
+			       <!--
+					<g:if test="${question?.sound?.getSoundUri()}">
+						<div class="form-group">
+
+							<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What audio clip do you want to serve as the question?">Audio</label>
+
+							<g:textField class="form-control" name="audio" type="text" value="${question?.sound?.getSoundUri()}"/>
+
+						</div>
+						
+					</g:if>
+
+					-->
+
+					<h3 class="customize-heading">Add Audio (optional)</h3>
+
+					<div class="form-group-audio">
+
+					
+						<div class="audio-controls">
+							<input id="audio_id" name="audio_id" type="hidden" value=""/>
+						<!-- end audio-controls -->
+						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio file (mp3, wav, oga, or aac)</label>
+						<input id="audiofile" accept=".mp3|.wav|.oga|.aac|.csv" name="audiofile" type="file" value=""/>
+						<span class="input-group-btn">
+							<input type="button" onclick="uploadAudioFile(this);" class="btn btn-info" name="audio_search" id="audio_search" value="Upload Audio File" />
+						</span>
+						<audio id="player" controls="controls" preload="metadata">
+ 							<source src="${question?.sound?.getSoundUri()}" />
+  							<b>Your browser does not support HTML5 audio element</b>
+						</audio>
+						</div>
+					</div>
+			
 				</div>
 		
 				<label>Correct Answer</label>
 		
 				<div class="form-inline">
-					<input name="correctAnswer" class="form-control" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.correctOption.option}"/>
+					<input name="correctAnswer" class="form-control" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.correctOption?.option}"/>
 					<span class="btn btn-xs btn-info" onclick="getConfusers(this);"><span class="glyphicon glyphicon-cog"></span> Generate Confuser Answers</span>
 				</div>
 				
@@ -58,6 +104,7 @@
 				</g:each>
 		</div>
 	
+	
 	</g:each>
 </div>
 
@@ -70,7 +117,63 @@
 	 <textArea class="form-control" name="questions" style="display:none" readonly></textArea>
  </div>
  
+
+
+	<g:javascript src="create_flashcard.js"/>
+	<!-- all the javascript references needed for audio recording -->
+	<g:javascript src="recorderWorker.js"/>
+	<g:javascript src="recorder.js"/>
+	<g:javascript src="create_audio.js"/>
+
  <script type="text/javascript">
+
+/**
+ * Save the audio pronunciation file.
+ * @param formDataObj: the audio file and related data to be saved.
+ */
+
+
+
+function uploadAudioFile(that) {
+       
+           
+		//	var file_data = $("#avatar").prop("files")[0]; 
+		//	var form_data = new FormData();                  // Creating object of FormData class
+	    //    form_data.append("file", file_data) 
+
+	         var file = $('#audiofile').val()
+             var form_data = new FormData();
+             form_data.append("file", $('#audiofile').get(0).files[0]);
+			var url = "/OpenFluency/QuizEditor/uploadFile";
+
+			$.ajax({
+			   
+				type: 'POST',
+				url: url,
+				data: form_data, 
+				mimeType: "multipart/form-data",
+				processData: false,
+				contentType: false
+			})
+			.done(function(soundInstance) {
+
+				console.log(soundInstance);
+
+			//	if(soundInstance) {
+				console.log ("reach soundInstance.id");
+				var question = $(that).parent().parent();
+				console.log(question)
+ 			//				<source src="${question?.sound?.getSoundUri()}" />
+
+			//	var input = question.find("input[name=correctAnswer]").val();
+			 //  $("#audio_id").val(audioInstance.id);
+			$("#audiofile").attr("src","${soundIntance?.getSoundUri()}");
+		      // }
+
+			});
+	 	}
+
+
 
 		function getConfusers(that) {
 			
@@ -159,7 +262,9 @@
 
  			var questionList = $("#questionList");
 
+
  			var html = questionList.append(questionHtml);
+ 				
  	 	}	
  
         function writeCSV() {
@@ -168,9 +273,16 @@
 
 				s += "MANUAL,"
 				 
-				var inputs = $(this).find("input");
+			    var link = $("#imageLink").val(); 
+					
+				var inputs = $(this).find('input:not(.btn-info, .remove_form_control)');
 				var length = inputs.length;
+			//	console.log ("DAN" + $('input[name=questiontype]:checked').index());
 				inputs.each(function(index, item) { 
+					//console.log("item" + item);
+					//console.log("index" + index);
+
+
 
 					// Use quotes in case the string contains commas
 					// Convert quote in string to double quote
