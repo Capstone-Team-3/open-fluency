@@ -150,12 +150,19 @@ class SearchService {
                     //println("trimmed " + trimmed);
                     if(trimmed != "") 
                     {
+                        //Add back the parenthesis that was deleted as part of the split
                         def meaning = ("(" + trimmed).replaceAll(/\([\d]+\)|\/$/,"")
-                        DictionaryEntry de = new DictionaryEntry(
+                        //Ignore returns of type "(xx)"
+                        def goodContent = (meaning =~ /^[\s]*\([^()]*\)[\s]*$/)
+                        if(goodContent.getCount() == 0)
+                        {
+                            DictionaryEntry de = new DictionaryEntry(
 					            concept : concept, 
 								pronunciation : pronunciation, 
 								meaning : meaning )
-                        ret.add(de)
+                            ret.add(de)
+                        }
+
                     }
                 }
 			}
