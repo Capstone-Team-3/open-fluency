@@ -87,7 +87,7 @@ class SearchService {
 				 
 			 commandBase = indexSearchToolPath + " -indexpath " +  indexPath;
 			 
-			 entryRegexp = /^(:?.*)?:(.*)?\[(.*)?\](?:[^\/]*)?\/([^\/]*)?\/.*/
+             entryRegexp = /^.*?:([\s]*.*[\s*])\[(.*)?\](.*)/
 			 init = true;
 		 }
 	 }
@@ -99,7 +99,9 @@ class SearchService {
 	 * @return A vector of raw dictionary entries
 	 */
 	private Vector<String> getDictionaryEntriesImpl(String termRegexp, int count) {
+        // \\/( *\\(.*\\) *)*sumo\\/
 		String command = commandBase + " -m " + count + " " + termRegexp;
+        //println("command: " +  command);
 		Vector<String> ret = new Vector<String>();
 		
 		def proc = command.execute()
@@ -118,6 +120,7 @@ class SearchService {
 			System.err.println("Unable to Search the Dictionary. Error Is:")
 			System.err.println(errorPut)
 		}	
+        //println(ret);
         return ret
     }
 	 
@@ -132,11 +135,29 @@ class SearchService {
 		for(String entry : entries) {
 			def matcher = (entry =~ entryRegexp)
 			if(matcher.getCount()) {
-				DictionaryEntry match = new DictionaryEntry(
-					            concept : matcher[0][2], 
-								pronunciation : matcher[0][3], 
-								meaning : matcher[0][4] )
-				ret.add(match)
+                def concept = matcher[0][1];
+                def pronunciation = matcher[0][2];
+                def rest = matcher[0][3];
+                def u = rest.trim().split(/\/\(/);
+
+                //println("concept: " + concept);
+                //println("pronunciation" + pronunciation);
+                //println("rest: " + rest);
+                //println("u: " + u);
+
+                for(def ui : u) {
+                    def trimmed = ui.trim()
+                    //println("trimmed " + trimmed);
+                    if(trimmed != "") 
+                    {
+                        def meaning = ("(" + trimmed).replaceAll(/\([\d]+\)|\/$/,"")
+                        DictionaryEntry de = new DictionaryEntry(
+					            concept : concept, 
+								pronunciation : pronunciation, 
+								meaning : meaning )
+                        ret.add(de)
+                    }
+                }
 			}
 		}
 		
@@ -151,13 +172,16 @@ class SearchService {
 	 */
 	public Vector<DictionaryEntry> getDictionaryEntries(String term, int count) {
 		init();
-		String termRegexp = '^.*' + term 
-        /* if(inConcept) {                     */
-        /*     termRegexp = termRegexp + '.*[' */
-        /* }                                   */
 
-		Vector<String> entries = getDictionaryEntriesImpl(termRegexp, count)
-		Vector<DictionaryEntry> ret = parseDictionaryEntries(entries)
+        String primaryRegexp = "/([\\s]*\\(.*\\)[\\s]*)*${term}[\\s]*/";
+		Vector<String> entriesPrimary = getDictionaryEntriesImpl(primaryRegexp, count)
+		Vector<DictionaryEntry> ret = parseDictionaryEntries(entriesPrimary)
+        if(ret.size() < count) {
+            String termRegexp = '^.*' + term 
+            Vector<String> entries = getDictionaryEntriesImpl(termRegexp, count - ret.size())
+            Vector<DictionaryEntry> ret2 = parseDictionaryEntries(entries)
+            ret.addAll(ret2);
+        }
 		return ret;
 	}
 }
