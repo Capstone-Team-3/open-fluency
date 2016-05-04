@@ -64,13 +64,17 @@ $('#submit-unitMapping-button').click(function() {
 
 $('#previous-unit').click(function(){
 	if (cardIndex > 0) {
-		loadUnitMappingPreviewCard(previewCardData, --cardIndex)
+		$('#flashcard-literal').css('font-size', '100px');
+		loadUnitMappingPreviewCard(previewCardData, --cardIndex);
+		resizeUnitMappingCard();
 	}
 });
 
 $('#next-unit').click(function(){
 	if (cardIndex < previewCardData.length - 1) {
-		loadUnitMappingPreviewCard(previewCardData, ++cardIndex)
+		$('#flashcard-literal').css('font-size', '100px');
+		loadUnitMappingPreviewCard(previewCardData, ++cardIndex);
+		resizeUnitMappingCard();
 	}
 });
 
@@ -264,3 +268,13 @@ $('#m-select-alpha').change(function() {
 		}
 	}); 
 });
+
+
+function resizeUnitMappingCard() {
+	var h = $('#flashcard-literal').height();
+	var fontSize = $('#flashcard-literal').css('font-size').replace(/[^-\d\.]/g, '');
+	while (h > 150) {
+		$('#flashcard-literal').css('font-size', --fontSize + 'px');
+		h = $('#flashcard-literal').height();
+	}
+}

@@ -14,7 +14,6 @@ import com.openfluency.media.Image
 import com.openfluency.media.Audio
 import grails.transaction.Transactional
 
-@Transactional
 class FlashcardService {
 
 	def springSecurityService 
@@ -26,6 +25,7 @@ class FlashcardService {
 	* Creates a new flashcard - the alternative is to pass a Map as an argument 
     * does not currently support audio file storage
 	*/
+	@Transactional
     Flashcard createFlashcard(String unitId, String unitMappingId, String pronunciationId, String imageLink, String audioId, String deckId) {
 
         Unit unitInstance = Unit.load(unitId)
@@ -55,6 +55,7 @@ class FlashcardService {
         return flashcardInstance
     }
 
+	@Transactional
     Flashcard createFlashcardUsingDictionaryInfo(String primaryString, String otherString, String pronunciationString, int deckId, String imageLink, String audioLink) {
 
         Unit primaryUnit = Unit.findByLiteral(primaryString);
@@ -90,6 +91,11 @@ class FlashcardService {
            pronunciation = new Pronunciation(unit: primaryUnit, alphabet : alphabet, literal : pronunciationString).save(flush: true, failOnError: true);
         }
 
+		def audio=null
+		if (audioLink) {
+		    audio = mediaService.createAudio(audioLink,null,pronunciation.id.toString())
+		}
+		
         def image = null;
         if(imageLink?.trim())
         {
@@ -101,12 +107,13 @@ class FlashcardService {
             unitMapping: mapping, 
             pronunciation: pronunciation, 
             image: image, 
-            audio: null, 
+            audio: audio, 
             deck: Deck.load(deckId)).save(flush: true, failOnError: true)
         return flashcardInstance;
     }
 
 	
+	@Transactional
 	void reassignFlashcard(Flashcard card, Deck dest){
 		card.deck = dest;
 	}
@@ -114,6 +121,7 @@ class FlashcardService {
     /**
     * Get the last ranking that the user gave this flashcard
     */
+	@Transactional(readOnly = true)
     CardRanking getLastRanking(Long flashcardId) {
         return CardRanking.findByFlashcardAndUser(Flashcard.load(flashcardId), User.load(springSecurityService.principal.id))
     }
@@ -140,6 +148,7 @@ class FlashcardService {
         log.info "Created ${f} flashcards for deck: ${deck.title}"
     }
 
+	@Transactional
     void deleteFlashcard(Flashcard flashcardInstance) {
         
         // First delete customizations

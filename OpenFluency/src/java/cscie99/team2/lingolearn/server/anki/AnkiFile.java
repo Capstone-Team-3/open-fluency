@@ -277,7 +277,7 @@ public class AnkiFile {
                 
                 case Image:
                     //String image = Media.getImage(cardFields[i], this.getMediaDir());
-                    if (cardFieldValue.length() > 5) {
+                    if (cardFieldValue.length() > 4) {
                         String image = Media.getImage(cardFieldValue, this.getMediaDir());
                         Image im = new Image();
                         im.setImageUri(image);
@@ -288,7 +288,7 @@ public class AnkiFile {
                     
                 case Sound:
                     //String audio = Media.getSound(cardFields[i], this.getMediaDir());
-                    if (cardFieldValue.length() > 5) {
+                    if (cardFieldValue.length() > 4) {
                         String audio = Media.getSound(cardFieldValue, this.getMediaDir());
                         Sound sound = new Sound();
                         sound.setSoundUri(audio);

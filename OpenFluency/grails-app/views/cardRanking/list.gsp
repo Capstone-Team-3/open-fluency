@@ -23,17 +23,14 @@
              </g:else>
         </g:each>
 	</select>
-    <!--
-	<g:select class="form control" name="course"
-	  from="${courses}" value="${params.course}"
-	  noSelection="['':'All Decks']"
-	  optionKey="courseId" optionValue="${course?.title}"/>
-    -->
 	<g:submitButton name="Course" value="Filter"/>
 	</form>
     <g:render template="quiz" model="[quizzes: quizzes]"/>
     <p>
+	<div class="tooltiper hidden-md hidden-sm hidden-xs"  data-toggle="tooltip"  data-placement="top"
+		 title="How well you can recall the symbols, pronunciation or meaning of characters/phrases on a flashcard in a deck, according to your ranking" >
     <h4>Words And Phrases Learned From Flashcard Practice</h4>
+	</div>
     <table class="summarytable" width="100%">
         <col/><col/>
         <col style='background:#f2dede;'/><col style='background:#fcf8e3;'/><col style='background:#dff0d8;'/>

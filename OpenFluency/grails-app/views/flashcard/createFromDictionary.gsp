@@ -26,7 +26,7 @@
                    	</div>
                 </div> 
                 <div class="col-lg-6">
-                    <g:form action="createTest" >
+                    <g:form action="createTest" name="createFlashcardForm" enctype="multipart/form-data" >
                     <div class="form-group row">
                         <div class="col-sm-10">
                             <h3 class="customize-heading">Concept</h3>
@@ -84,11 +84,8 @@
 
 					<g:if test="${flashcardInstance?.audio}">
 						<div class="form-group">
-
 							<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What audio clip provides pronunciation for this card?">Audio</label>
-
 							<g:textField class="form-control" name="audio" value="${flashcardInstance?.audio}"/>
-
 						</div>
 						<!-- end form-group -->
 					</g:if>
@@ -97,20 +94,21 @@
 
 					<div class="form-group-audio">
 
+<!-- 
 						<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Record a pronunciation" >Record an audio pronunciation file:</label>
-
 						<small class="clearfix audio-warning"> <strong>Note:</strong>
 							A browser pop-up may appear asking you to 'Allow' microphone use!
 						</small>
-
 						<audio id="audioClip" controls autoplay></audio>
-
 						<div class="audio-controls">
-							<input id="start_rec_button" name="start_button" type="button" value="Start Recording" class="btn btn-info"/>
-							<input id="stop_rec_button" name="stop_button" type="button" value="Stop Recording" class="btn btn-info"/>
-							<input id="save_rec_button" name="save_button" type="button" value="Save Recording" class="btn btn-warning"/>
-							<input id="audio_id" name="audio_id" type="hidden" value=""/>
-						</div>
+ -->
+						<input id="audio_id" name="audio_id" type="hidden" value=""/>
+						<input id="audio_url" name="audio_url" type="hidden" value=""/>
+						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio file (mp3, wav, oga, or aac)</label>
+						<input id="audiofile" name="audiofile" type="file" value=""/>
+						<span class="input-group-btn">
+							<input type="button" class="btn btn-info" name="audio_search" id="audio_search" value="Load Audio" />
+						</span>
 						<!-- end audio-controls -->
 
 					</div>

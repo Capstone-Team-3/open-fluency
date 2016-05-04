@@ -20,11 +20,15 @@ class Unit {
     Integer frequency 	
 
     static constraints = {
-        literal unique: true
+        literal(blank:false,nullable:false)
     	frequency nullable: true
     	strokeCount nullable: true
     	grade nullable: true
     }
+	static mapping = {
+		literal index: 'item_literal_alphabet_idx'
+		alphabet index: 'item_literal_alphabet_idx'
+	  }
 
     /**
 	* This allows getting the language quicker -> unit.language

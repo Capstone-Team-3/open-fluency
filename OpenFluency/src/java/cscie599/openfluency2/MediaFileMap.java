@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
+import org.apache.commons.io.FilenameUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParser;
@@ -125,6 +125,8 @@ public class MediaFileMap {
     // Phoebe: The above leaves weird %00 for spaces
     public static String nfcNormalized2(String txt) {
 	Pattern spacePattern=Pattern.compile("\\s+");
+	txt = FilenameUtils.normalize(txt);
+	txt = txt.replaceAll("\\.\\.", "."); // a lot of files have form name..mp3
     if (!Normalizer.isNormalized(txt, Normalizer.Form.NFC)) {
 			return Normalizer.normalize(spacePattern.matcher(txt.trim()).replaceAll("_"), Normalizer.Form.NFC);
 		} else {
@@ -235,7 +237,7 @@ if(!destFile.exists()) {
             Files.copy(oldFile, newFile, REPLACE_EXISTING);
             return newDir + File.separator + media;
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Failed to remap static media file."+ e.getMessage());
             return null;
         }
      }

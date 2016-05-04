@@ -11,7 +11,7 @@
         <div class="content scaffold-list" role="main">
             <h1>Document List</h1>
             <g:if test="${flash.message}"><div class="message" role="status">${flash.message}</div></g:if>
-            <table>
+            <table width="100%">
                 <thead>
                     <tr>
                         <g:sortableColumn property="filename" title="Filename" />
@@ -25,9 +25,6 @@
                 <g:each in="${documentInstanceList}" status="i" var="documentInstance">
                     <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                         <td><g:link controller="previewDeck" action="display" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
-                    <!-- 
-                        <td><g:link action="download" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
-                     -->
                         <td><span class="property-value">${documentInstance.description} </span></td>
                         <td><span class="property-value">${documentInstance.status} </span></td>
                         <td><g:formatDate date="${documentInstance.uploadDate}" /></td>

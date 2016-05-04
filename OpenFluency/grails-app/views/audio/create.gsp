@@ -39,7 +39,7 @@
 				</g:eachError>
 			</ul>
 		</g:hasErrors>
-		<g:form url="[resource:audioInstance, action:'save']" >
+		<g:form url="[resource:audioInstance, action:'saveFile']" enctype="multipart/form-data" >
 			<fieldset class="form">
 				<g:render template="form"/>
 				<br/>
@@ -48,13 +48,15 @@
 				<input id="start_button" name="start_button" type="button" value="Start Recording"/>
 				<input id="stop_button" name="stop_button" type="button" value="Stop Recording"/>
 				<input id="audioWAV" name="audioWAV" value="" type="hidden"/>
+				<label for="Upload">Upload</label><input id="upload" name="file" type="file"/>
 				<br/>
 				<br/>
 
 			</fieldset>
 			<fieldset class="buttons">
 				<input id="create_button" name="create_button" type="button" value="Create Audio"/>
-				<!--g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /-->
+				<!--g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+				-->
 			</fieldset>
 		</g:form>
 	</div>
