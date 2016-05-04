@@ -15,26 +15,16 @@ class QuizEditorController {
 
 	def springSecurityService
 	def quizService
+	 def grailsApplication
 	 private File mediaFile;
      private String mediaTopDir;
      private String mediaFolder;
 
 	@Secured(['ROLE_INSTRUCTOR'])
-	  def uploadFile(){
-
-	  	log.info "Ajax is finally working"
-
-	  def f =params.file
-	  log.info "Do we have a file passed into controller?"
-	  log.info f
-	  Sound soundInstance
-      // File file=new File("demodan.mp3")
-   /*      if(file.exists())
-            f.transferTo(file)
-         else{
-            file.createNewFile()
-            f.transferTo(file)
-         }  */
+	  			def uploadFile(){
+	  			def f =params.file
+	  			Sound soundInstance
+  
 				def extension = f.fileItem.name.lastIndexOf('.').with {it != -1 ? f.fileItem.name.substring(it + 1) : f.fileItem.name}
                 File outputFile = new File("${new Date().time}.${extension}")
                 f.transferTo(outputFile)
@@ -52,9 +42,7 @@ class QuizEditorController {
             		folder.deleteOnExit();
            		    folder.mkdir();
            			mediaFolder = folder.getAbsolutePath();
-                    //csvFile = outputFile
                       this.mediaFile = new File(mediaFolder + File.separator + outputFile.getName());
-                   // this.mediaFile = new File(mediaFolder + File.separator + f.getName());
                     //Create parent folder, ok if already exists
                     new File(this.mediaFile.getParent()).mkdirs();      
                     FileOutputStream fos = new FileOutputStream(this.mediaFile);  
@@ -66,49 +54,22 @@ class QuizEditorController {
                         fos.write(buffer, 0, len);
                     }
                     fos.close(); 
-                       //  need 
-                        // /OpenFluency/media/28d304f3-74a3-4999-b325-87965a8055141904306693715463725/image/1.jpg')
-                        // have
-                       // /OpenFluency//cs599/project/OpenFluency/web-app/media/4e2ec1d6-19da-4841-aa2c-71f705527b75282433027753533035/1462297410876.mp3
+      
                         soundInstance = new Sound()
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
-                     /*   String soundUri = "/OpenFluency/" + theFolder + File.separator + this.mediaFile.getName()
-                     	soundInstance = new Sound(
-                        	soundUri : soundUri
-						).save(failOnError: true)   */
-                      // soundInstance.setSoundUri("/OpenFluency/" + theFolder + File.separator + this.mediaFile)
+    
                         soundInstance.setSoundUri("/OpenFluency/" + theFolder + File.separator + this.mediaFile.getName())
                         log.info soundInstance.getSoundUri()
-                    	
-                }
-
-	   //  soundInstance = new Sound()
-
-	  	   // Create the audio instance
-       // Audio audioInstance = mediaService.createAudio(params.url, params.blob.getBytes(), params['pronunciation.id'])
-
+                        outputFile.delete()
+                    
         //JSON.use('deep')
         render soundInstance as JSON   
 
-
-
-	  //	response.contentType = grailsApplication.config.grails.mime.types[params.format]
-	//	response.setHeader("Content-disposition", "attachment; filename=${quizTitle}.mp3")
-    /*   File file=new File("demo.csv")
-         if(file.exists())
-            fileData.transferTo(file)
-         else{
-            file.createNewFile()
-            fileData.transferTo(file)
-         }
-         render "Uploaded Successfully"
-         */
     }
+}
 
 
-
-	
 	@Secured(['ROLE_INSTRUCTOR'])
 	def create(Course courseInstance) {
 		[courseInstance: courseInstance]
@@ -147,6 +108,7 @@ class QuizEditorController {
 		
 		// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 		String csv = params.questions
+		log.info csv
 		
 		try {
 		
@@ -224,28 +186,65 @@ class QuizEditorController {
 	private void saveQuestions(Quiz quizInstance, String csv) {
 		CSVReader reader = new CSVReader(new StringReader(csv))
 		
-
+		int counter = 0
 		Sound snd = null
         Image im = null
+        def qt = null
+        File destinationname = new File("web-app" + File.separator + "media");
+        File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); 
+        Boolean isDeleted = folder.delete(); 
+        folder.deleteOnExit();
+        folder.mkdir();
+        mediaFolder = folder.getAbsolutePath();
+
 
 		String[] line;
 		while ((line = reader.readNext()) != null) {
 			int lineSize = line.size()
 			if (lineSize > 3) {
 				String questionType = line[0]
+				qt = com.openfluency.Constants.MANUAL
 				String questionString = line[1]
+
+
+
+				if (!line[2].trim().equals("")){
+				snd = new Sound()
+				int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
+                String theFolder = mediaFolder.substring(x)
+                snd.setSoundUri(line[2])
+                qt = com.openfluency.Constants.SOUND
+                questionString = "Sound"
+                } else {
+                   snd = null
+                }
+
+
+				if (!line[3].trim().equals("")){
 				im = new Image()
-                im.setImageUri(line[2])
-				String correctAnswer = line[3]
-				
+				int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
+                String theFolder = mediaFolder.substring(x)
+                im.setImageUri(line[3])
+                qt = com.openfluency.Constants.IMAGE
+                questionString = "Image"
+                } else {
+                   im = null
+                }
+             
+            	
+             
+            	
+            
+				String correctAnswer = line[4]
+				   
 				
 				List<String> wrongAnswers = new ArrayList<String>()
 				
-				for (int i = 4; i < lineSize; i++) {
+				for (int i = 5; i < lineSize; i++) {
 					wrongAnswers.add(line[i])
 				}
-					
-				Question question = new Question(quiz: quizInstance, question: questionString, questionType: Constants.MANUAL, image: im).save(failOnError: true)
+				log.info counter
+				Question question = new Question(quiz: quizInstance, question: questionString, questionType: qt, image: im, sound: snd).save(failOnError: true)
 				
 				new QuestionOption(question: question, option: correctAnswer, answerKey: 1).save(failOnError: true)
 				

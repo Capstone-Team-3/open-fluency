@@ -44,10 +44,10 @@
 				</div>
 			</div>
 -->
-		
+				<h3 class="customize-heading">Standard Text Based Question</h3>
 				<div class="form-inline">
-					<input name="question" class="form-control" type="text" onchange="writeCSV();" onkeyup="writeCSV();" value="${question.question}"/>	
-
+					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
+					value="${question.question}"/>
 			       <!--
 					<g:if test="${question?.sound?.getSoundUri()}">
 						<div class="form-group">
@@ -62,18 +62,18 @@
 
 					-->
 
-					<h3 class="customize-heading">Add Audio (optional)</h3>
+					<h3 class="customize-heading">Add Audio or Image Question(optional)</h3>
 
 					<div class="form-group-audio">
 
 					
 						<div class="audio-controls">
-							<input id="audio_id" name="audio_id" type="hidden" value=""/>
+							<input class="remove_form_control" id="audio_id" name="audio_id" type="hidden" value=""/>
 						<!-- end audio-controls -->
-						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio file (mp3, wav, oga, or aac)</label>
-						<input id="audiofile" accept=".mp3,.wav,.oga,.aac,.csv" name="audiofile" type="file" value=""/>
+						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio or image file (mp3, wav, oga, or aac) or Image file(gif, jpg)</label>
+						<input id="audiofile" class="remove_form_control" accept=".mp3,.wav,.oga,.aac,.gif,.jpg" name="audiofile" type="file" value=""/>
 						<span class="input-group-btn">
-							<input type="button" onclick="uploadAudioFile(this);" class="btn btn-info" name="audio_search" id="audio_search" value="Upload Audio File" />
+							<input type="button" onclick="uploadAudioFile(this);" class="btn btn-info" name="audio_search" id="audio_search" class="remove_form_control" value="Upload Audio or Image File" />
 						</span>
 						<audio id="player" controls="controls" preload="metadata">
  							<source src="${question?.sound?.getSoundUri()}" />
@@ -83,6 +83,11 @@
 					</div>
 			
 				</div>
+
+				<input name="hiddenAudio" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.sound?.getSoundUri()}"/>
+
+
+				<input name="hiddenImage" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.image?.getImageUri()}"/>
 		
 				<label>Correct Answer</label>
 		
@@ -167,7 +172,8 @@ function uploadAudioFile(that) {
 
 			//	var input = question.find("input[name=correctAnswer]").val();
 			 //  $("#audio_id").val(audioInstance.id);
-			$("#audiofile").attr("src","${soundIntance?.getSoundUri()}");
+			console.log(${soundIntance?.getSoundUri()})
+			$("#player").attr("src","${soundIntance?.getSoundUri()}");
 		      // }
 
 			});
@@ -266,24 +272,16 @@ function uploadAudioFile(that) {
  			var html = questionList.append(questionHtml);
  				
  	 	}	
- 
+
         function writeCSV() {
             var s = "";
 			$(".question").each(function(index,item) {
-
 				s += "MANUAL,"
 				 
-			    var link = $("#imageLink").val(); 
-					
+				//var inputs = $(this).find("input");
 				var inputs = $(this).find('input:not(.btn-info, .remove_form_control)');
 				var length = inputs.length;
-			//	console.log ("DAN" + $('input[name=questiontype]:checked').index());
 				inputs.each(function(index, item) { 
-					//console.log("item" + item);
-					//console.log("index" + index);
-
-
-
 					// Use quotes in case the string contains commas
 					// Convert quote in string to double quote
 					s += '"';
@@ -296,7 +294,6 @@ function uploadAudioFile(that) {
 				});
 				s += "\n"; 
 			});
-
 			$("textArea").val(s);
         }
 
