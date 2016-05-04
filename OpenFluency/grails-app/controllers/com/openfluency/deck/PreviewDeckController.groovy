@@ -39,7 +39,7 @@ class PreviewDeckController {
 		def user = User.load(springSecurityService.principal.id)
         PreviewDeck previewDeckInstance =  PreviewDeck.findByDocumentAndOwner(document,user)
 		if (previewDeckInstance != null) {
-			redirect action: "show", id: previewDeckInstance.id
+			redirect action: "map", id: previewDeckInstance.id
 			return
 		}
 		else {
@@ -140,13 +140,14 @@ class PreviewDeckController {
             try { // Modify the download doc record
                 def doc = Document.findById(previewDeckInstance.documentId)
                 doc.status="Imported"
-                doc.save()
+                doc.save(flush:true)
             } catch(Exception e) {}
             
-            //previewDeckInstance.delete flush:true
-			if (newdeck!=null)
-				render (status: 200, text: "success")
-			//redirect controller:"Deck", action: "list"
+			if (newdeck!=null) {
+				previewDeckService.deleteDeck(previewDeckInstance)
+				//render (status: 200, text: "success")
+				redirect controller:"deck", action: "show", id: newdeck.id
+			}
 		}		
 	}
 

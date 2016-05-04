@@ -128,8 +128,11 @@
 	        <div class="modal-body" id="pronunciation-alph-options">
 	        	<div class="ul-container">
 		        	<ul>
+		        		<li><button data-alph="English" class="btn btn-sm btn-info l-alpha-options">English</button></li>
 		        		<g:each in="${fieldIndices }">
-		        			<li><button data-alph="${it }" class="btn btn-sm btn-info p-alpha-options">${it }</button></li>
+		        			<g:if test="${it != 'English' }" >
+		        				<li><button data-alph="${it }" class="btn btn-sm btn-info l-alpha-options">${it }</button></li>
+	        				</g:if>
 		        		</g:each>
 		        	</ul>
 	        	</div>
@@ -175,8 +178,11 @@
 	        <div class="modal-body" id="meaning-options">
 	        	<div class="ul-container">
 		        	<ul>
+		        		<li><button data-alph="English" class="btn btn-sm btn-info l-alpha-options">English</button></li>
 		        		<g:each in="${fieldIndices }">
-		        			<li><button data-alph="${it }" class="btn btn-sm btn-info m-alpha-options">${it }</button></li>
+		        			<g:if test="${it != 'English' }" >
+		        				<li><button data-alph="${it }" class="btn btn-sm btn-info l-alpha-options">${it }</button></li>
+	        				</g:if>
 		        		</g:each>
 		        	</ul>
 	        	</div>

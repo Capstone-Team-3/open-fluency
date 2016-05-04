@@ -15,6 +15,10 @@
                         <h3 class="h4">Creating a flashcard deck:</h3>
                         <iframe width="768" height="450" src="//www.youtube.com/embed/RG0GH5AxsuA" frameborder="0" allowfullscreen></iframe>
                     </div>
+                    <div class="">
+                        <h3 class="h4">Import Anki FlashCard:</h3>
+                        <iframe width="768" height="450" src="//www.youtube.com/embed/R_LBmM_TxKU" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </section>
 
                 <section>

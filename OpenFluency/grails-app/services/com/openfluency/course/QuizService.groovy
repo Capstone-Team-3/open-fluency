@@ -196,10 +196,7 @@
                 answer.status = Constants.VIEWED
                 answer.save()
             } 
-
-            // Have to finalize the quiz since no more answers can be submitted by the student
             else {
-                finalizeQuiz(quizInstance, true)
                 return null
             }
 
@@ -260,37 +257,37 @@
             }
         }
 
-        /**
-        * Finalize the course and create a grade for the student, only if the student has viewed all the questions
-        */
-        Grade finalizeQuiz(Quiz quizInstance, boolean force=false) {
-            // Check if the number of answers that a user viewed or answered is the same as the number of questions in the quiz
-            Integer completedQuestions = Answer.executeQuery("""
+	/**
+	 * Finalize the course and create a grade for the student, only if the student has viewed all the questions
+	 */
+	Grade finalizeQuiz(Quiz quizInstance, boolean force=false) {
+		// Check if the number of answers that a user viewed or answered is the same as the number of questions in the quiz
+		Integer completedQuestions = Answer.executeQuery("""
                 SELECT count(id) 
                 FROM Answer 
                 WHERE (status = ? OR status = ?) AND question.quiz.id = ? AND user.id = ?
                 """,
-                [Constants.VIEWED, Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
+				[Constants.VIEWED, Constants.ANSWERED, quizInstance.id, springSecurityService.principal.id])[0]
 
-            // only finalize it if the if the user has completed all questions or if the quiz is forced to finalize
-            if((quizInstance.countQuestions() == completedQuestions) || force)  {
-            
-                
-            List<Answer> answers = getAnswers(quizInstance, springSecurityService.principal.id)
-                
-             Integer correctAnswers = 0;
-             
-             answers.each() {
-                 if (it.selection.id == it.question.getCorrectOption().id) {
-                     correctAnswers++;
-                 }
-             }
-         return new Grade(user: User.load(springSecurityService.principal.id), numberOfQuestions: quizInstance.countQuestions(), correctAnswers: correctAnswers, quiz: quizInstance).save()
-     }
+		// only finalize it if the if the user has completed all questions or if the quiz is forced to finalize
+		if((quizInstance.countQuestions() == completedQuestions) || force)  {
 
-            // The user has not completed the course yet
-            return null
-        }
+			List<Answer> answers = getAnswers(quizInstance, springSecurityService.principal.id)
+
+			Integer correctAnswers = 0;
+
+			answers.each() {
+				if (it.selection?.id == it.question.getCorrectOption()?.id) {
+					correctAnswers++;
+
+				}
+			}
+			return new Grade(user: User.load(springSecurityService.principal.id), numberOfQuestions: quizInstance.countQuestions(), correctAnswers: correctAnswers, quiz: quizInstance).save()
+		}
+
+		// The user has not completed the course yet
+		return null
+	}
 
         /**
         * Return the number of correct answers for a quiz for a given user

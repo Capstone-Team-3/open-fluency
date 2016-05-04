@@ -47,7 +47,7 @@
 					</thead>
 					<tbody>
 						<g:each in="${answerInstanceList}">
-							<g:if test="${it.selection.id == it.question.correctOption.id}">
+							<g:if test="${it.selection?.id == it.question.correctOption.id}">
 							<tr>
 							</g:if>
 							<g:else>
@@ -56,8 +56,8 @@
 								
 								<td>${it.question.question}</td>
 		
-								<td>${it.selection.option}</td>
-								<td>${it.question.correctOption.option} <span class="glyphicon glyphicon-ok pull-right"></span></td>
+								<td>${it.selection?.option}</td>
+								<td>${it.question.correctOption?.option} <span class="glyphicon glyphicon-ok pull-right"></span></td>
 
 							</tr>
 						</g:each>
