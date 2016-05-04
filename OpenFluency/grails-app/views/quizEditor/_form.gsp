@@ -35,36 +35,18 @@
 				   <!--   </div> -->
 			</div>
 
-<!--
-            <div class="panel-inline">
-				<div class="form-control">
-					  <input type="radio" class="btn-info" name="questiontype" value="question" checked> Question
-  					  <input type="radio" class="btn-info" name="questiontype" value="audio"> Audio
-                      <input type="radio" class="btn-info" name="questiontype" value="image"> Image
-				</div>
-			</div>
--->
 				<h3 class="customize-heading">Standard Text Based Question</h3>
 				<div class="form-inline">
 					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
 					value="${question.question}"/>
-			       <!--
-					<g:if test="${question?.sound?.getSoundUri()}">
-						<div class="form-group">
-
-							<label class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="What audio clip do you want to serve as the question?">Audio</label>
-
-							<g:textField class="form-control" name="audio" type="text" value="${question?.sound?.getSoundUri()}"/>
-
-						</div>
-						
-					</g:if>
-
-					-->
 
 					<h3 class="customize-heading">Add Audio or Image Question(optional)</h3>
 
 					<div class="form-group-audio">
+
+
+					<span class="play-audio glyphicon glyphicon-volume-up" style="visibility: hidden;"></span>
+								<audio class="flashcard-audio hidden" id="flashcard-audio-4" src="/OpenFluency/audio/sourceAudio/4" controls></audio>
 
 					
 						<div class="audio-controls">
@@ -243,6 +225,13 @@ function uploadAudioFile(that) {
 			questionHtml += "<div class=\"form-group\">";
 			questionHtml += "<input name=\"question\" class=\"form-control\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\" value=\"\"/>";
 			questionHtml += "</div>";
+
+
+			questionHtml += "<input name=\"hiddenAudio\" class=\"form-control\" type=\"hidden\" onchange=\"writeCSV();\"" 
+			questionHtml += "onkeyup=\"writeCSV();\" value=\"${question?.sound?.getSoundUri()}\"/>"
+			questionHtml += "<input name=\"hiddenImage\" class=\"form-control\" type=\"hidden\" onchange=\"writeCSV();\"" 
+			questionHtml += "onkeyup=\"writeCSV();\" value=\"${question?.image?.getImageUri()}\"/>"
+
 			questionHtml += "<label>Correct Answer</label>";
 			questionHtml += "<div class=\"form-inline\">";
 			questionHtml += "<input name=\"correctAnswer\" class=\"form-control\" type=\"text\" onchange=\"writeCSV();\" onkeyup=\"writeCSV();\" value=\"\"/>";
