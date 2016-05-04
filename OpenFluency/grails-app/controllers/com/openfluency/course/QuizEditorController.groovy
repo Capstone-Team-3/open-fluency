@@ -35,7 +35,6 @@ class QuizEditorController {
                 } 
 
                 if (extension == "mp3"){
-                	log.info "we have identified the file as an mp3 file...."
                 	File destinationname = new File("web-app" + File.separator + "media");
            			File folder = File.createTempFile(QuizService.getUniqueName(),"", destinationname); 
            			Boolean isDeleted = folder.delete(); 
@@ -64,7 +63,8 @@ class QuizEditorController {
                         outputFile.delete()
                     
         //JSON.use('deep')
-        render soundInstance as JSON   
+       // render soundInstance as JSON   
+       render soundInstance.getSoundUri() //as JSON 
 
     }
 }
@@ -108,7 +108,7 @@ class QuizEditorController {
 		
 		// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 		String csv = params.questions
-		log.info csv
+
 		
 		try {
 		
@@ -143,7 +143,8 @@ class QuizEditorController {
 			return
 		}
 
-		try {
+			Course courseInstance = quizInstance.getCourse();
+			//quizInstance.delete();
 			String title = params.title
 			Integer maxCardTime = params.maxCardTime ? params.maxCardTime as Integer : 0
 			Date liveTime = params.liveTime
@@ -151,35 +152,37 @@ class QuizEditorController {
 			
 			// The format is: question_type, question, correct_answer, wrong_answer1, wrong_answer2, ...
 			String csv = params.questions
-			
+
+		try {
+		
+			/*
 			quizInstance.title = title
 			quizInstance.liveTime = liveTime
 			quizInstance.endTime = endTime
 			quizInstance.maxCardTime = maxCardTime
-			quizInstance.save(failOnError: true)
+			quizInstance.save(failOnError: true
+			*/
+
+			Quiz updatedQuiz = new Quiz(
+			course: courseInstance,
+			title: title,
+			enabled: true,
+			liveTime: liveTime,
+			endTime: endTime,
+			maxCardTime: maxCardTime
+			).save(failOnError: true)
 			
-			List<QuestionOption> oldOptions = new ArrayList<QuestionOption>()
+			saveQuestions(updatedQuiz, csv)
 			
-			Question.findAllByQuiz(quizInstance).each {
-				QuestionOption.findAllByQuestion(it).each {
-					oldOptions.add(it)
-				}
-			}
-			
-			saveQuestions(quizInstance, csv)
-			
-			oldOptions.each {
-				it.delete();
-			}
-			
-			redirect controller: "quiz", action: "show", id: quizInstance.id
+			redirect controller: "quiz", action: "show", id: updatedQuiz.id
 		}
 		catch (Exception e) {
 			
 			log.error "Error: ${e.message}", e
 			
 			flash.message = "Something went wrong, please try again"
-			redirect action: "create", id: quizInstance.course.id
+			//redirect action: "create", id: quizInstance.course.id
+			//redirect action: "create", id: courseInstance.id
 		}
 	}
 	
@@ -197,7 +200,6 @@ class QuizEditorController {
         folder.mkdir();
         mediaFolder = folder.getAbsolutePath();
 
-
 		String[] line;
 		while ((line = reader.readNext()) != null) {
 			int lineSize = line.size()
@@ -205,8 +207,6 @@ class QuizEditorController {
 				String questionType = line[0]
 				qt = com.openfluency.Constants.MANUAL
 				String questionString = line[1]
-
-
 
 				if (!line[2].trim().equals("")){
 				snd = new Sound()
@@ -219,7 +219,6 @@ class QuizEditorController {
                    snd = null
                 }
 
-
 				if (!line[3].trim().equals("")){
 				im = new Image()
 				int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
@@ -230,14 +229,9 @@ class QuizEditorController {
                 } else {
                    im = null
                 }
-             
-            	
-             
-            	
-            
+       
 				String correctAnswer = line[4]
-				   
-				
+				   	
 				List<String> wrongAnswers = new ArrayList<String>()
 				
 				for (int i = 5; i < lineSize; i++) {

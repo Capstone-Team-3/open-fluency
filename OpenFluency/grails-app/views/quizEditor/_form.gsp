@@ -44,9 +44,9 @@
 
 					<div class="form-group-audio">
 
-
+					<!--
 					<span class="play-audio glyphicon glyphicon-volume-up" style="visibility: hidden;"></span>
-								<audio class="flashcard-audio hidden" id="flashcard-audio-4" src="/OpenFluency/audio/sourceAudio/4" controls></audio>
+								<audio class="flashcard-audio hidden" id="flashcard-audio-4" src="/OpenFluency/audio/sourceAudio/4" controls></audio>   -->
 
 					
 						<div class="audio-controls">
@@ -105,13 +105,13 @@
  </div>
  
 
-
+<!--
 	<g:javascript src="create_flashcard.js"/>
-	<!-- all the javascript references needed for audio recording -->
+	 all the javascript references needed for audio recording 
 	<g:javascript src="recorderWorker.js"/>
 	<g:javascript src="recorder.js"/>
 	<g:javascript src="create_audio.js"/>
-
+-->
  <script type="text/javascript">
 
 /**
@@ -122,15 +122,10 @@
 
 
 function uploadAudioFile(that) {
-       
-           
-		//	var file_data = $("#avatar").prop("files")[0]; 
-		//	var form_data = new FormData();                  // Creating object of FormData class
-	    //    form_data.append("file", file_data) 
 
-	         var file = $('#audiofile').val()
-             var form_data = new FormData();
-             form_data.append("file", $('#audiofile').get(0).files[0]);
+	        var file = $('#audiofile').val()
+            var form_data = new FormData();
+            form_data.append("file", $('#audiofile').get(0).files[0]);
 			var url = "/OpenFluency/QuizEditor/uploadFile";
 
 			$.ajax({
@@ -138,26 +133,19 @@ function uploadAudioFile(that) {
 				type: 'POST',
 				url: url,
 				data: form_data, 
+				dataType: "text",  //
 				mimeType: "multipart/form-data",
 				processData: false,
 				contentType: false
 			})
 			.done(function(soundInstance) {
+	
+			var question = $(that).parent().parent();
 
-				console.log(soundInstance);
-
-			//	if(soundInstance) {
-				console.log ("reach soundInstance.id");
-				var question = $(that).parent().parent();
-				console.log(question)
- 			//				<source src="${question?.sound?.getSoundUri()}" />
-
-			//	var input = question.find("input[name=correctAnswer]").val();
-			 //  $("#audio_id").val(audioInstance.id);
-			console.log(${soundIntance?.getSoundUri()})
-			$("#player").attr("src","${soundIntance?.getSoundUri()}");
-		      // }
-
+			console.log(soundInstance);
+			console.log("reach ajax return");
+			// this is WRONG... since its hard coded to an ID...but working on Fix
+			$("#player").attr("src",soundInstance);
 			});
 	 	}
 
