@@ -1,3 +1,5 @@
+<%@ page import="cscie99.team2.lingolearn.shared.Image" %>
+<%@ page import="cscie99.team2.lingolearn.shared.Sound" %>
 <!DOCTYPE html>
 <html>
 <head>
