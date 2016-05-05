@@ -36,18 +36,18 @@
 					</g:if>
 				
 				<div class="col-lg-6 col-lg-offset-3">	
-				<g:if test="${answerInstance?.question.questionType ==  Constants.IMAGE}">
-				<div id="question-image" class="question-img" style="background-image: url('${answerInstance?.question.image.getImageUri()}')"></div>
+				<g:if test="${answerInstance?.question?.questionType ==  Constants.IMAGE}">
+				<div id="question-image" class="question-img" style="background-image: url('${answerInstance?.question?.image?.getImageUri()}')"></div>
 				</g:if>	
-				<g:elseif test="${answerInstance?.question.questionType ==  Constants.SOUND}">
+				<g:elseif test="${answerInstance?.question?.questionType ==  Constants.SOUND}">
 				
 					<audio controls="controls" autoplay preload="metadata">
- 					 <source src="${answerInstance.question.sound.getSoundUri()}" />
+ 					 <source src="${answerInstance?.question?.sound?.getSoundUri()}" />
   					<b>You must have a browser that supports HTML5 audio element to see this question</b>	
 					</audio>
 					</g:elseif>
 					<g:else>
-					<h1 class="unit text-center">${answerInstance.question.question}</h1>
+					<h1 class="unit text-center">${answerInstance?.question?.question}</h1>
 					</g:else>
 						<p> <strong>Select the correct answer:</strong> 
 						</p>

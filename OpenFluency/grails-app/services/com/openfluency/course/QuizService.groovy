@@ -404,9 +404,8 @@
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
                         im.setImageUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[2])
-                        log.info im.getImageUri()
                         qt = com.openfluency.Constants.IMAGE
-                        log.info qt
+                     
                         ques = "Image"
                       } else{
                         im = null
@@ -418,9 +417,9 @@
                         int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                         String theFolder = mediaFolder.substring(x)
                         snd.setSoundUri("/OpenFluency/" + theFolder + File.separator + topFolder + tokens[3])
-                        log.info snd.getSoundUri()
+                    
                         qt = com.openfluency.Constants.SOUND
-                        log.info qt
+                      
                        ques = "Sound"
                       } else {
                         snd = null
@@ -428,8 +427,7 @@
 
                      Question question = new Question(quiz: quizInstance, question: ques, questionType: qt, image: im, sound: snd).save(failOnError: true)
                      new QuestionOption(question: question, option: tokens[4].substring(1, tokens[4].length()-1), answerKey: 1).save(failOnError: true)
-                     log.info question
-                     log.info snd?.getSoundUri()
+                     
                     String[] wrongAnswers = tokens[5].substring(1, tokens[5].length()-1).split(",[ ]*");
                     for (int i = 0; i < wrongAnswers.length; i++) {
                     new QuestionOption(question: question, option: wrongAnswers[i], answerKey: 0).save(failOnError: true)
