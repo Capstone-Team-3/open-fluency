@@ -36,10 +36,10 @@
 					</g:if>
 				
 				<div class="col-lg-6 col-lg-offset-3">	
-				<g:if test="${answerInstance?.question.question == "image"}">
+				<g:if test="${answerInstance?.question.questionType ==  Constants.IMAGE}">
 				<div id="question-image" class="question-img" style="background-image: url('${answerInstance?.question.image.getImageUri()}')"></div>
 				</g:if>	
-				<g:elseif test="${answerInstance?.question.question == "sound"}">
+				<g:elseif test="${answerInstance?.question.questionType ==  Constants.SOUND}">
 				
 					<audio controls="controls" autoplay preload="metadata">
  					 <source src="${answerInstance.question.sound.getSoundUri()}" />
