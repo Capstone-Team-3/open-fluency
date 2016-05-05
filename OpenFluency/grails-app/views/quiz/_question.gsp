@@ -14,14 +14,14 @@
 					<g:link action="deleteQuestion" id="${questionInstance.id}" controller="quiz" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 				</div>
 			</g:if>
-			<g:if test="${questionInstance?.question == "image"}">
+			<g:if test="${questionInstance?.question == "Image"}">
 			
-			<div id="question-image" class="question-img" style="background-image: url('${questionInstance?.image.getImageUri()}')"></div>
+			<div id="question-image" class="question-img" style="background-image: url('${questionInstance?.image?.getImageUri()}')"></div>
 		
 			</g:if>
-			<g:elseif test="${questionInstance?.question == "sound"}">
+			<g:elseif test="${questionInstance?.question ==  "Sound"}">
 			<audio id="player" controls="controls" preload="metadata">
- 			<source src="${questionInstance.sound.getSoundUri()}" />
+ 			<source src="${questionInstance?.sound?.getSoundUri()}" />
   			<b>Your browser does not support HTML5 audio element</b>
 			</audio>
 			</g:elseif>

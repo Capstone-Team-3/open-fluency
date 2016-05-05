@@ -71,5 +71,6 @@ class Question {
 	  static constraints = {
     	sound nullable: true
     	image nullable: true
+    	question nullable: true
     }
 }
