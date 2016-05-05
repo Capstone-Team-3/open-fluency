@@ -10,12 +10,16 @@ import cscie99.team2.lingolearn.shared.Image;
 import cscie99.team2.lingolearn.shared.Sound;
 
 import com.openfluency.Constants
+import grails.transaction.Transactional
+
+@Transactional
 
 class QuizEditorController {
 
 	def springSecurityService
 	def quizService
-	 def grailsApplication
+	def grailsApplication
+	def courseService
 	 private File mediaFile;
      private String mediaTopDir;
      private String mediaFolder;
@@ -174,6 +178,23 @@ class QuizEditorController {
 			
 			saveQuestions(updatedQuiz, csv)
 			
+
+			// Only allow editing for owner
+			if(springSecurityService.principal.id != quizInstance.course?.owner?.id) {
+				flash.message = "You don't have permissions to delete this quiz"
+					redirect action: "index", controller: "home"
+					return
+			}
+			Long courseId = quizInstance.course.id
+			courseService.deleteQuiz(quizInstance)
+			// Get course id to redirect afterwards
+			
+
+				// Delete it
+				//courseService.deleteQuiz(quizInstance.id)
+
+
+			
 			redirect controller: "quiz", action: "show", id: updatedQuiz.id
 		}
 		catch (Exception e) {
@@ -181,8 +202,9 @@ class QuizEditorController {
 			log.error "Error: ${e.message}", e
 			
 			flash.message = "Something went wrong, please try again"
+			//redirect action: "create", id: 
 			//redirect action: "create", id: quizInstance.course.id
-			//redirect action: "create", id: courseInstance.id
+			redirect action: "create", id: quizInstance.course.id 
 		}
 	}
 	
@@ -237,7 +259,7 @@ class QuizEditorController {
 				for (int i = 5; i < lineSize; i++) {
 					wrongAnswers.add(line[i])
 				}
-				log.info counter
+				
 				Question question = new Question(quiz: quizInstance, question: questionString, questionType: qt, image: im, sound: snd).save(failOnError: true)
 				
 				new QuestionOption(question: question, option: correctAnswer, answerKey: 1).save(failOnError: true)
