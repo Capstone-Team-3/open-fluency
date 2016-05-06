@@ -53,16 +53,16 @@
 							<input class="remove_form_control" id="audio_id" name="audio_id" type="hidden" value=""/>
 						<!-- end audio-controls -->
 						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio or image file (mp3, wav, oga, or aac) or Image file(gif, jpg)</label>
-						<input id="audiofile" class="remove_form_control" accept=".mp3,.wav,.oga,.aac,.gif,.jpg" name="audiofile" type="file" value=""/>
+						<input id= class="audiofile"  accept=".mp3,.wav,.oga,.aac,.gif,.jpg" name="audiofile" type="file" value=""/>
 						<span class="input-group-btn">
-							<input type="button" onclick="uploadAudioFile(this);" class="btn btn-info" name="audio_search" id="audio_search" class="remove_form_control" value="Upload Audio or Image File" />
+							<input type="button" class="btn btn-info" name="audio_search" class="remove_form_control" value="Upload Audio or Image File" />
 						</span>
-						<audio id="player" controls="controls" preload="metadata">
+						<audio class="mplayer" controls="controls" preload="metadata">
  							<source src="${question?.sound?.getSoundUri()}" />
   							<b>Your browser does not support HTML5 audio element</b>
 						</audio>
 						</div>
-					</div>
+					</div>  
 			
 				</div>
 
@@ -112,21 +112,30 @@
 	<g:javascript src="recorder.js"/>
 	<g:javascript src="create_audio.js"/>
 -->
- <script type="text/javascript">
+ <script>
 
-/**
- * Save the audio pronunciation file.
- * @param formDataObj: the audio file and related data to be saved.
- */
+    $(function() {
+    function handleFile(e) {
+      var file = e.target.files[0];
+      var src = URL.createObjectURL(file);
+      // would like to get the file info shown in the alert below
+      alert("name:" + file.name + " type:" + file.type);
+      $(this).siblings("audio")
+      .attr("src", src)
+        // would also like to know the jquery for updating the src attribute
+      
+    }
 
+    function uploadAudioFile(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).parent().siblings(":file").click();
 
-
-function uploadAudioFile(that) {
-
-	        var file = $('#audiofile').val()
-            var form_data = new FormData();
-            form_data.append("file", $('#audiofile').get(0).files[0]);
-			var url = "/OpenFluency/QuizEditor/uploadFile";
+  
+        var form_data = new FormData();
+        form_data.append("file",  $(this).parent().siblings(":file"));
+      // form_data.append("file", $('#audiofile').get(0).files[0]);
+		var url = "/OpenFluency/QuizEditor/uploadFile";
 
 			$.ajax({
 			   
@@ -139,15 +148,18 @@ function uploadAudioFile(that) {
 				contentType: false
 			})
 			.done(function(soundInstance) {
-	
-			var question = $(that).parent().parent();
+			console.log("returning from ajax");
 
 			console.log(soundInstance);
 			console.log("reach ajax return");
-			// this is WRONG... since its hard coded to an ID...but working on Fix
-			$("#player").attr("src",soundInstance);
+		//	$(that).parent().next("#mplayer").attr("src",soundInstance);
+			//$("#player").attr("src",soundInstance);
 			});
-	 	}
+
+    }
+    $(".btn.btn-info").click(uploadAudioFile);
+    $(":file").change(handleFile)
+ })
 
 
 
