@@ -508,3 +508,40 @@ $(document).ready(function() {
 		$("#breadcrumb").sticky({topSpacing:50, zIndex: 1});
 	} catch(err){}
 });
+
+
+
+/* -----------------------------------------
+ * resize
+ * ---------------------------------------*/
+var pronunciationResize = function() {
+	pHeight = 0;
+	var parr = $('.pronunciation');
+	
+	// determine highest height
+	for (var i = 0; i < parr.length; i++) {
+	    if ($(parr[i]).height() > pHeight)
+	        pHeight = $(parr[i]).height();    
+	}
+	
+	// make all the same height
+	for (var i = 0; i < parr.length; i++) {
+	    $(parr[i]).height(pHeight);    
+	}
+}
+
+var meaningResize = function() {
+	mHeight = 0;
+	var panelbodys = $('.panel-body');
+	
+	// determine highest
+	for (var i = 0; i < panelbodys.length; i++) {
+	    if ($(panelbodys[i]).height() > mHeight)
+	        mHeight = $(panelbodys[i]).height();    
+	}
+	
+	// make all the same height
+	for (var i = 0; i < panelbodys.length; i++) {
+	    $(panelbodys[i]).height(mHeight);    
+	}
+}
