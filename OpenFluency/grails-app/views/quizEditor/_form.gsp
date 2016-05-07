@@ -35,12 +35,12 @@
 				   <!--   </div> -->
 			</div>
 
-				<h3 class="customize-heading">Standard Text Based Question</h3>
+				<h3 class="customize-heading">Question</h3>
 				<div class="form-inline">
 					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
 					value="${question.question}"/>
 
-					<h3 class="customize-heading">Add Audio or Image Question(optional)</h3>
+					<h3 class="customize-heading">Audio or Image Question(optional)</h3>
 
 					<div class="form-group-audio">
 
@@ -52,22 +52,21 @@
 						<div class="audio-controls">
 							<input class="remove_form_control" id="audio_id" name="audio_id" type="hidden" value=""/>
 						<!-- end audio-controls -->
-						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio or image file (mp3, wav, oga, or aac) or Image file(gif, jpg)</label>
-						<input id= class="audiofile"  accept=".mp3,.wav,.oga,.aac,.gif,.jpg" name="audiofile" type="file" value=""/>
+
+
+						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio(mp3, wav, oga, or aac) or image(gif, jpg)</label>
+						<input class="audiofile remove_form_control"  accept=".mp3,.wav,.oga,.aac,.gif,.jpg" name="audiofile" type="file" value=""/>
 						<span class="input-group-btn">
-							<input type="button" class="btn btn-info" name="audio_search" class="remove_form_control" value="Upload Audio or Image File" />
+							<input type="button" onclick="uploadAudioFile(this)" class="btn btn-info remove_form_control" name="audio_search" value="Upload Audio or Image File" />
 						</span>
-						<audio class="mplayer" controls="controls" preload="metadata">
+						<audio controls="controls" preload="metadata">
  							<source src="${question?.sound?.getSoundUri()}" />
   							<b>Your browser does not support HTML5 audio element</b>
 						</audio>
+						<input name="hiddenAudio" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.sound?.getSoundUri()}"/>
 						</div>
-					</div>  
-			
+					</div>  		
 				</div>
-
-				<input name="hiddenAudio" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.sound?.getSoundUri()}"/>
-
 
 				<input name="hiddenImage" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.image?.getImageUri()}"/>
 		
@@ -90,8 +89,6 @@
 					</div>
 				</g:each>
 		</div>
-	
-	
 	</g:each>
 </div>
 
@@ -114,27 +111,13 @@
 -->
  <script>
 
-    $(function() {
-    function handleFile(e) {
-      var file = e.target.files[0];
-      var src = URL.createObjectURL(file);
-      // would like to get the file info shown in the alert below
-      alert("name:" + file.name + " type:" + file.type);
-      $(this).siblings("audio")
-      .attr("src", src)
-        // would also like to know the jquery for updating the src attribute
-      
-    }
+    function uploadAudioFile(that) {
 
-    function uploadAudioFile(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      $(this).parent().siblings(":file").click();
-
-  
+    	// e.preventDefault();
+ 		// e.stopPropagation();
         var form_data = new FormData();
-        form_data.append("file",  $(this).parent().siblings(":file"));
-      // form_data.append("file", $('#audiofile').get(0).files[0]);
+        var el = that
+        form_data.append("file",  $(that).parent().siblings(":file").get(0).files[0]);
 		var url = "/OpenFluency/QuizEditor/uploadFile";
 
 			$.ajax({
@@ -148,20 +131,12 @@
 				contentType: false
 			})
 			.done(function(soundInstance) {
-			console.log("returning from ajax");
-
-			console.log(soundInstance);
-			console.log("reach ajax return");
-		//	$(that).parent().next("#mplayer").attr("src",soundInstance);
-			//$("#player").attr("src",soundInstance);
+			  $(el).parent().siblings("audio").attr("src", soundInstance);
+			  $(el).parent().siblings("input[name='hiddenAudio']").val(soundInstance);
+			  writeCSV()
 			});
 
     }
-    $(".btn.btn-info").click(uploadAudioFile);
-    $(":file").change(handleFile)
- })
-
-
 
 		function getConfusers(that) {
 			
