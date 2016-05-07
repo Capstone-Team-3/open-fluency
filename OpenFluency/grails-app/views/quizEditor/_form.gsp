@@ -37,8 +37,22 @@
 
 				<h3 class="customize-heading">Question</h3>
 				<div class="form-inline">
+
+					<g:if test="${question.question == 'Image'}">
 					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
+					value=""/>
+					</g:if>
+					<g:elseif test="${question.question == 'Sound'}">
+   					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
+					value=""/>
+					</g:elseif>
+					<g:else>
+   					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
 					value="${question.question}"/>
+					</g:else>
+				
+
+
 
 					<h3 class="customize-heading">Audio or Image Question(optional)</h3>
 
@@ -63,13 +77,19 @@
  							<source src="${question?.sound?.getSoundUri()}" />
   							<b>Your browser does not support HTML5 audio element</b>
 						</audio>
+						<input name="hiddenImage" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.image?.getImageUri()}"/>
 						<input name="hiddenAudio" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.sound?.getSoundUri()}"/>
 						</div>
+
+						<g:if test="${question?.question == "Image"}">
+			
+						<div id="question-image" class="question-img" style="background-image: url('${question?.image?.getImageUri()}')"></div>
+
+					
+				</g:if>
 					</div>  		
 				</div>
 
-				<input name="hiddenImage" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.image?.getImageUri()}"/>
-		
 				<label>Correct Answer</label>
 		
 				<div class="form-inline">
@@ -110,6 +130,13 @@
 	<g:javascript src="create_audio.js"/>
 -->
  <script>
+
+	$(document).ready(function(){
+	    writeCSV();
+	//	$('#shares').val('');
+		});
+
+
 
     function uploadAudioFile(that) {
 

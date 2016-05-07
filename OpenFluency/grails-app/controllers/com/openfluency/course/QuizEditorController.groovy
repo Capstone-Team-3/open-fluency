@@ -230,27 +230,30 @@ class QuizEditorController {
 				qt = com.openfluency.Constants.MANUAL
 				String questionString = line[1]
 
+
 				if (!line[2].trim().equals("")){
+				im = new Image()
+				int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
+                String theFolder = mediaFolder.substring(x)
+                im.setImageUri(line[2])
+                qt = com.openfluency.Constants.IMAGE
+                questionString = "Image"
+                } else {
+                   im = null
+                }
+
+				if (!line[3].trim().equals("")){
 				snd = new Sound()
 				int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
                 String theFolder = mediaFolder.substring(x)
-                snd.setSoundUri(line[2])
+                snd.setSoundUri(line[3])
                 qt = com.openfluency.Constants.SOUND
                 questionString = "Sound"
                 } else {
                    snd = null
                 }
 
-				if (!line[3].trim().equals("")){
-				im = new Image()
-				int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
-                String theFolder = mediaFolder.substring(x)
-                im.setImageUri(line[3])
-                qt = com.openfluency.Constants.IMAGE
-                questionString = "Image"
-                } else {
-                   im = null
-                }
+				
        
 				String correctAnswer = line[4]
 				   	
