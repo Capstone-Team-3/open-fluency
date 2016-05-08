@@ -50,7 +50,7 @@ $(document).ready(function(){
 		$('#' + audioSrcID).load().get(0).play();
 	});
 };
-	initializeUnitMappingDraggable();
+	
 });
 	
 </script>

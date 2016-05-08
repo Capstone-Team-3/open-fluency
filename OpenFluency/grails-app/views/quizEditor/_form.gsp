@@ -22,6 +22,9 @@
 	<g:datePicker name="endTime" value="${quizInstance ? quizInstance.endTime : new Date()}" class="form-control"/>
 </div>
 
+<div id="danimage" class="question-img" style="background-image: url('${question?.image?.getImageUri()}')"></div>
+
+
 <div class="form-group" id="questionList">
 
 	<g:each var="question" status="i" in="${quizInstance?.questions}">
@@ -71,7 +74,7 @@
 						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio(mp3, wav, oga, or aac) or image(gif, jpg)</label>
 						<input class="audiofile remove_form_control"  accept=".mp3,.wav,.oga,.aac,.gif,.jpg" name="audiofile" type="file" value=""/>
 						<span class="input-group-btn">
-							<input type="button" onclick="uploadAudioFile(this)" class="btn btn-info remove_form_control" name="audio_search" value="Upload Audio or Image File" />
+							<input type="button" onclick="uploadMediaFile(this)" class="btn btn-info remove_form_control" name="audio_search" value="Upload Audio or Image File" />
 						</span>
 						<audio controls="controls" preload="metadata">
  							<source src="${question?.sound?.getSoundUri()}" />
@@ -79,14 +82,10 @@
 						</audio>
 						<input name="hiddenImage" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.image?.getImageUri()}"/>
 						<input name="hiddenAudio" class="form-control" type="hidden" onchange="writeCSV();" onkeyup="writeCSV();" value="${question?.sound?.getSoundUri()}"/>
+						
+
+						<div class="question-img" id="question-image" style="background-image: url('${question?.image?.getImageUri()}')"></div>
 						</div>
-
-						<g:if test="${question?.question == "Image"}">
-			
-						<div id="question-image" class="question-img" style="background-image: url('${question?.image?.getImageUri()}')"></div>
-
-					
-				</g:if>
 					</div>  		
 				</div>
 
@@ -133,19 +132,19 @@
 
 	$(document).ready(function(){
 	    writeCSV();
-	//	$('#shares').val('');
 		});
 
 
 
-    function uploadAudioFile(that) {
+    function uploadMediaFile(that) {
 
     	// e.preventDefault();
  		// e.stopPropagation();
+
         var form_data = new FormData();
         var el = that
         form_data.append("file",  $(that).parent().siblings(":file").get(0).files[0]);
-		var url = "/OpenFluency/QuizEditor/uploadFile";
+		var url = "/OpenFluency/QuizEditor/uploadMediaFile";
 
 			$.ajax({
 			   
@@ -157,9 +156,17 @@
 				processData: false,
 				contentType: false
 			})
-			.done(function(soundInstance) {
-			  $(el).parent().siblings("audio").attr("src", soundInstance);
-			  $(el).parent().siblings("input[name='hiddenAudio']").val(soundInstance);
+			.done(function(mediaLocation) {
+
+			  var ext = mediaLocation.substr(mediaLocation.length - 3); 
+
+			  if (ext=="jpg" || ext=="gif"){
+			  $(el).parent().siblings("input[name='hiddenImage']").val(mediaLocation);
+			  $(el).parent().siblings(".question-img").css('background-image', 'url(' + mediaLocation + ')');
+			  } else {
+			  $(el).parent().siblings("audio").attr("src", mediaLocation);
+			  $(el).parent().siblings("input[name='hiddenAudio']").val(mediaLocation);
+			  }
 			  writeCSV()
 			});
 
