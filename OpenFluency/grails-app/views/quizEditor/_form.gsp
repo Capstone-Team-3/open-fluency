@@ -33,9 +33,7 @@
 		   
 			<div class="panel-heading">
 				<label>Question ${i + 1}</label>
-				    <!-- <div class="form-inline">  -->
 					<span class="btn btn-xs btn-danger" onclick="if (confirm('are you sure?')) { $(this).parent().parent().remove(); writeCSV(); }"><span class="glyphicon glyphicon-remove"></span></span>
-				   <!--   </div> -->
 			</div>
 
 				<h3 class="customize-heading">Question</h3>
@@ -53,22 +51,13 @@
    					<input name="question" class="form-control" size="64" type="text" onchange="writeCSV();" onkeyup="writeCSV();" 
 					value="${question.question}"/>
 					</g:else>
-				
-
-
 
 					<h3 class="customize-heading">Audio or Image Question(optional)</h3>
 
 					<div class="form-group-audio">
 
-					<!--
-					<span class="play-audio glyphicon glyphicon-volume-up" style="visibility: hidden;"></span>
-								<audio class="flashcard-audio hidden" id="flashcard-audio-4" src="/OpenFluency/audio/sourceAudio/4" controls></audio>   -->
-
-					
 						<div class="audio-controls">
 							<input class="remove_form_control" id="audio_id" name="audio_id" type="hidden" value=""/>
-						<!-- end audio-controls -->
 
 
 						<label for="audiofile" class="tooltiper control-label" class="tooltiper"  data-toggle="tooltip"  data-placement="right" title="Tip: See forvo.com for samples">Upload audio(mp3, wav, oga, or aac) or image(gif, jpg)</label>
@@ -221,8 +210,9 @@
 	 			$("#showCSV").html("Hide Raw Quiz CSV");
 		 	}
 	 	}
- 
- 		function addQuestion() {
+
+
+	 	 	function addQuestion() {
 
 			var questionHtml = "<div class=\"question panel panel-default question-panel\">";
 			questionHtml += "<div class=\"panel-heading\">";
@@ -236,10 +226,30 @@
 			questionHtml += "</div>";
 
 
-			questionHtml += "<input name=\"hiddenAudio\" class=\"form-control\" type=\"hidden\" onchange=\"writeCSV();\"" 
-			questionHtml += "onkeyup=\"writeCSV();\" value=\"${question?.sound?.getSoundUri()}\"/>"
+
+
+			questionHtml += "<h3 class=\"customize-heading\">Audio or Image Question(optional)</h3>";
+			questionHtml += "<div class=\"form-group-audio\">";
+			questionHtml += "<div class=\"audio-controls\">";
+			questionHtml += "<input class=\"remove_form_control\" id=\"audio_id\" name=\"audio_id\" type=\"hidden\" value=\"\"/>";
+			questionHtml += "<label for=\"audiofile\" class=\"tooltiper control-label\" class=\"tooltiper\"  data-toggle=\"tooltip\"  data-placement=\"right\" title=\"Tip: See forvo.com for samples\">Upload audio(mp3, wav, oga, or aac) or image(gif, jpg)";
+			questionHtml += "</label>";
+			questionHtml += "<input class=\"audiofile remove_form_control\"  accept=\".mp3,.wav,.oga,.aac,.gif,.jpg\" name=\"audiofile\" type=\"file\" value=\"\"/>";
+			questionHtml += "<span class=\"input-group-btn\">";
+			questionHtml += "<input type=\"button\" onclick=\"uploadMediaFile(this)\" class=\"btn btn-info remove_form_control\" name=\"audio_search\" value=\"Upload Audio or Image File\" />";
+			questionHtml += "</span>";
+			questionHtml += "<audio controls=\"controls\" preload=\"metadata\">";
+ 			questionHtml += "<source src=\"${question?.sound?.getSoundUri()}\" />";
+  			questionHtml += "<b>Your browser does not support HTML5 audio element</b>";
+			questionHtml += "</audio>";
 			questionHtml += "<input name=\"hiddenImage\" class=\"form-control\" type=\"hidden\" onchange=\"writeCSV();\"" 
-			questionHtml += "onkeyup=\"writeCSV();\" value=\"${question?.image?.getImageUri()}\"/>"
+			questionHtml += "onkeyup=\"writeCSV();\" value=\"\"/>"
+			questionHtml += "<input name=\"hiddenAudio\" class=\"form-control\" type=\"hidden\" onchange=\"writeCSV();\"" 
+			questionHtml += "onkeyup=\"writeCSV();\" value=\"\"/>"
+
+			questionHtml += "<div class=\"question-img\" id=\"question-image\" style=\"background-image: url('${question?.image?.getImageUri()}')\"></div>";
+			questionHtml += "</div>";
+
 
 			questionHtml += "<label>Correct Answer</label>";
 			questionHtml += "<div class=\"form-inline\">";
@@ -271,13 +281,14 @@
  				
  	 	}	
 
+
         function writeCSV() {
             var s = "";
 			$(".question").each(function(index,item) {
 				s += "MANUAL,"
 				 
 				//var inputs = $(this).find("input");
-				var inputs = $(this).find('input:not(.btn-info, .remove_form_control)');
+				var inputs = $(this).find('input:not(.remove_form_control)');
 				var length = inputs.length;
 				inputs.each(function(index, item) { 
 					// Use quotes in case the string contains commas
