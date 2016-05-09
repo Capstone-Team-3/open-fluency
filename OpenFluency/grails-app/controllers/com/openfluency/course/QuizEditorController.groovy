@@ -250,7 +250,10 @@ class QuizEditorController {
 				new QuestionOption(question: question, option: correctAnswer, answerKey: 1).save(failOnError: true)
 
 				wrongAnswers.each {
+					// only create a question option if field is not blank
+					if (!it.trim().equals("")){
 					new QuestionOption(question: question, option: it, answerKey: 0).save(failOnError: true)
+					}
 				}
 			}
 		}
