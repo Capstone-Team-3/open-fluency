@@ -18,12 +18,13 @@
 			
 			<div id="question-image" class="question-img" style="background-image: url('${questionInstance?.image?.getImageUri()}')"></div>
 		
-			</g:if>
+			</g:if>	
 			<g:elseif test="${questionInstance?.question ==  "Sound"}">
 			<audio id="player" controls="controls" preload="metadata">
  			<source src="${questionInstance?.sound?.getSoundUri()}" />
   			<b>Your browser does not support HTML5 audio element</b>
 			</audio>
+	
 			</g:elseif>
 			<g:else>
 			<h4>${questionInstance.question}<h4>

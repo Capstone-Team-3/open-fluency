@@ -63,6 +63,7 @@ class QuizEditorController {
 
 		int x = mediaFolder.indexOf(grailsApplication.config.mediaFolder)
 		String theFolder = mediaFolder.substring(x)
+		outputFile.delete()
 		render "/OpenFluency/" + theFolder + File.separator + this.mediaFile.getName();
 	}
 
@@ -181,7 +182,7 @@ class QuizEditorController {
 
 			flash.message = "Something went wrong, please try again"
 
-			redirect action: "create", id: quizInstance.course.id
+			redirect action: "create", id: quizInstance.courseId
 		}
 	}
 
@@ -201,6 +202,10 @@ class QuizEditorController {
 
 		String[] line;
 		while ((line = reader.readNext()) != null) {
+
+			if (line[1].trim().equals("")&& line[2].trim().equals("") && line[3].trim().equals("")) {
+				continue;
+			}
 			int lineSize = line.size()
 			if (lineSize > 3) {
 				String questionType = line[0]
@@ -249,5 +254,6 @@ class QuizEditorController {
 				}
 			}
 		}
+
 	}
 }
