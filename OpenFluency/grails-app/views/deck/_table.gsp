@@ -5,7 +5,7 @@
 			<th>Source Language</th>
 			<th>Learning</th>
 			<th>Flashcards</th>
-			<th class="tooltiper"  data-toggle="tooltip"  data-placement="top" title="How well you know the characters/words in a deck, according to your ranking" >Progress</th>
+			<th class="tooltiper hidden-md hidden-sm hidden-xs"  data-toggle="tooltip"  data-placement="top" title="How well you know the characters/words in a deck, according to your ranking" >Progress</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -18,7 +18,7 @@
 				<td>${it.sourceLanguage.name}</td>
 				<td>${it.language.name}</td>
 				<td>${it.flashcardCount}</td>
-				<td class="list-progress">
+				<td class="list-progress hidden-md hidden-sm hidden-xs">
 					<div class="list-progress">
 						<g:render template="/deck/allProgress" model="[deckInstance: it, progress: it.progress, id: it.id]"/>
 					</div>

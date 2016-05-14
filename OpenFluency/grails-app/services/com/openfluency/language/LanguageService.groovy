@@ -38,7 +38,10 @@ class LanguageService {
 		int i = 0
 		for(ch in dictionary.ch) {
 			// Find or create Unit
-			Unit unit = getUnit(sourceAlphabet, ch.uc.toString(), ch.gr.toString(), ch.sc.toString(), ch.freq.toString()).save()
+			String utf8 = new String(hexStringToByteArray(ch.uc.toString()), "UTF-16");
+
+			//Unit unit = getUnit(sourceAlphabet, ch.uc.toString(), ch.gr.toString(), ch.sc.toString(), ch.freq.toString()).save()
+			Unit unit = getUnit(sourceAlphabet, utf8, ch.gr.toString(), ch.sc.toString(), ch.freq.toString()).save()
 
 			// For every reading in this character, create a unit mapping
 			ch.mn.each {
@@ -56,9 +59,20 @@ class LanguageService {
 				new Pronunciation(unit: unit, alphabet: Alphabet.findByCode(it.@r_type), literal: literal).save()
 			}
 
-			log.info "Loaded ${i++}: ${ch.uc}"
+//			log.info "Loaded ${i++}: ${ch.uc}"
+			log.info "Loaded ${i++}: ${utf8}"
 		}
 	}
+
+	public static byte[] hexStringToByteArray(String s) {
+		byte[] b = new byte[s.length() / 2];
+		for (int i = 0; i < b.length; i++) {
+		  int index = i * 2;
+		  int v = Integer.parseInt(s.substring(index, index + 2), 16);
+		  b[i] = (byte) v;
+		}
+		return b;
+	  }
 
 	/**
 	* Utility to retrieve a Unit. If the unit exists (found by literal), then return it, otherwise create it and then return it
@@ -136,6 +150,25 @@ class LanguageService {
         return unit
     }
 
+	Unit getUnitByAlphabet(String literal, Alphabet alphabet) {
+		
+		Unit unit
+		
+		// First check if there's an existing unit for the symbol
+		def existingSymbols = Unit.withCriteria {
+			eq('literal', literal)
+			eq('alphabet',alphabet)
+		}
+
+		if(existingSymbols) {
+			unit = existingSymbols[0]
+		}
+		else {
+			unit = new Unit(literal: literal, alphabet: alphabet).save()
+		}
+
+		return unit
+	}
     /**
     * Find an existing pronunciation by literal and by unit
     */
@@ -161,6 +194,28 @@ class LanguageService {
 
         return pronunciation
     }
+	
+	Pronunciation getPronunciationAlphabet(String literal, Unit unit, Alphabet alphabet) {
+		
+		 Pronunciation pronunciation
+ 
+		 // Check if there is a pronunciation for this literal
+		 def existingPronunciations = Pronunciation.withCriteria {
+			 eq('literal', literal)
+			 eq('unit', unit)
+			 eq('alphabet',alphabet)
+		 }
+ 
+		 if(existingPronunciations) {
+			 pronunciation = existingPronunciations[0]
+		 }
+		 else {
+			 pronunciation = new Pronunciation(literal: literal, alphabet: alphabet, unit: unit).save(flush:true)
+		 }
+ 
+		 return pronunciation
+	 }
+ 
 
     /**
     * Find a unit mapping between the two given units or create it

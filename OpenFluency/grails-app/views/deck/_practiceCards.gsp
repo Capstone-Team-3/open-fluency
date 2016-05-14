@@ -1,5 +1,20 @@
 <%@ page import="com.openfluency.Constants" %>
 
+<style>
+
+.btn-rounded.btn-lg {
+    width: 100px;
+    height: 67px;
+    padding: 10px 16px;
+    font-size: 15px;
+    line-height: 1.33;
+    border-radius: 16px;
+    margin-bottom: 5px;
+}
+
+</style>
+
+
 <div class="row">
     <div class="deck-header text-center">
         <g:if test="${chapterInstance}">
@@ -19,13 +34,23 @@
             <h2 class="h4">Practice ${practiceDeckInstance?.language} Pronunciation</h2>
         </g:else>
     </div>
-    <!-- end deck-heaer -->
+    <!-- end deck-header -->
 
     <g:render template="/customization/customize" model="[flashcardInstance: cardUsageInstance?.flashcard]"/>
 </div>
 <!-- end row -->
 
 <div class="practice-body row">
+
+	<div class="ranking-container col-lg-offset-1 col-md-2 col-sm-2 col-xs-2" style="float:left; font-size: 24px;">
+	   <button id="easy" class="btn btn-success btn-rounded btn-lg ranker" data-value="${Constants.EASY}">Easy</button>
+	   <button id="medium" class="btn btn-warning btn-rounded btn-lg ranker" data-value="${Constants.MEDIUM}">Medium</button>
+	   <button id="hard" class="btn btn-danger btn-rounded btn-lg ranker" data-value="${Constants.HARD}">Hard</button>
+	</div>
+	<div class='col-lg-4 col-md-3 col-sm-3 col-xs-3' style="float:right;">
+		<g:render template="/dictionary/dictionaryTable"/>
+	</div>
+
     <div class="practice-flashcard center-block">
         <g:render template="/flashcard/flashcard" model="[flashcardInstance: cardUsageInstance?.flashcard, practicing: true, imageURL: imageURL, audioSysId: audioSysId]"/>
 
@@ -35,11 +60,7 @@
             <input type="hidden" name="rankingType" value="${rankingType}"/>
         </g:form>
 
-        <div class="ranking-container btn-group center-block">
-            <button id="easy" class="btn btn-success ranker" data-value="${Constants.EASY}">Easy</button>
-            <button id="medium" class="btn btn-warning ranker" data-value="${Constants.MEDIUM}">Medium</button>
-            <button id="hard" class="btn btn-danger ranker" data-value="${Constants.HARD}">Hard</button>
-        </div>
+
 
     </div>
     <!-- end col-lg-4 -->
@@ -61,3 +82,14 @@
         </g:elseif>
     </div>
 </div> 
+
+
+<script>
+// set height for dictionary table to match height of card
+$(document).ready(function() {
+	$('#dictionary-results-table').css('max-height', $('.panel-body')[0].clientHeight);
+});
+</script>
+
+
+

@@ -1,7 +1,6 @@
 package com.openfluency.algorithm
 
 import grails.transaction.Transactional
-import java.util.*
 
 /**
  *  AlgorithmService provides functionality to statically store and serve instances of

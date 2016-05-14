@@ -36,12 +36,37 @@ class DeckController {
         [deckInstanceList: deckInstanceList, othersDeckInstanceList: othersDeckInstanceList, userInstance: loggedUser]
     }
 
+    def listPreview() {
+
+        User loggedUser = User.load(springSecurityService?.principal?.id)
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
+        List<Deck> othersDeckInstanceList = Share.findAllByReceiver(loggedUser).collect {it.deck}
+        
+        // Get the progress for each deck
+        deckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
+        othersDeckInstanceList.each {
+            it.metaClass.progress = deckService.getDeckProgress(it)
+        }
+
+        [deckInstanceList: deckInstanceList, othersDeckInstanceList: othersDeckInstanceList, userInstance: loggedUser]
+    }
+
     def create() {
         [deckInstance: new Deck(params), cardServerAlgos: algorithmService.cardServerNames()]
     }
 
     def save() {
-        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'], params.cardServerAlgo)
+		
+		boolean privateDeck = false;
+		
+		if (params.privateDeck == "true") {
+			privateDeck = true;
+		}
+		
+        def deckInstance = deckService.createDeck(params.title, params.description, params['language.id'], params['sourceLanguage.id'], params.cardServerAlgo, privateDeck)
 
     	// Check for errors
     	if (deckInstance.hasErrors()) {
@@ -55,13 +80,26 @@ class DeckController {
     }
 
     def show(Deck deckInstance, Integer max) {
+		
+		// Check for permissions
+		if (deckInstance.privateDeck) {
+			if(springSecurityService.principal.id != deckInstance.owner.id) {
+				flash.message = "You don't have permissions to see this deck!"
+				redirect(uri: request.getHeader('referer'))
+				return
+			}
+		}
+		
     	params.max = Math.min(max ?: 12, 100)
         List<Flashcard> flashcards = Flashcard.findAllByDeck(deckInstance, params)
+
+        User loggedUser = User.load(springSecurityService?.principal?.id)
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
 
         // Add the progress to the deck
         deckInstance.metaClass.progress = deckService.getDeckProgress(deckInstance)
 
-        respond flashcards, model:[deckProgress: deckService.getDeckProgress(deckInstance), deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id)]
+        respond flashcards, model:[deckProgress: deckService.getDeckProgress(deckInstance), deckInstance: deckInstance, flashcardCount: Flashcard.countByDeck(deckInstance), isOwner: (springSecurityService.principal.id == deckInstance.owner.id), deckInstanceList:deckInstanceList]
     }
 
     def edit(Deck deckInstance) {
@@ -79,7 +117,7 @@ class DeckController {
     def delete(Deck deckInstance) {
         // Check for permissions
         if(springSecurityService.principal.id != deckInstance.owner.id) {
-            flash.message = "You don't have permissions to edit this deck!"
+            flash.message = "You don't have permissions to delete this deck!"
             redirect(uri: request.getHeader('referer'))
             return
         }
@@ -93,7 +131,7 @@ class DeckController {
         
         // Check for permissions
         if(springSecurityService.principal.id != deckInstance.owner.id) {
-            flash.message = "You don't have permissions to edit this deck!"
+            flash.message = "You don't have permissions to update this deck!"
             redirect(uri: request.getHeader('referer'))
             return
         }
@@ -111,6 +149,16 @@ class DeckController {
     }
 
     def practice(Deck deckInstance) {
+		
+		// Check for permissions
+		if (deckInstance.privateDeck) {
+			if(springSecurityService.principal.id != deckInstance.owner.id) {
+				flash.message = "You don't have permissions to practice this deck!"
+				redirect(uri: request.getHeader('referer'))
+				return
+			}
+		}
+		
         User userInstance = User.load(springSecurityService.principal.id)
         
         //make sure user is registered - add deck if not
@@ -149,11 +197,21 @@ class DeckController {
     def search(Integer max) {
         Long languageId = params['filter-lang'] as Long
         String keyword = params['search-text']
-        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword), 
+        [keyword: keyword, languageId: languageId, deckInstanceList: deckService.searchDecks(languageId, keyword, User.load(springSecurityService.principal.id)), 
         languageInstanceList: Language.list(), userInstance: User.load(springSecurityService.principal.id)]
     }
 
     def add(Deck deckInstance) {
+		
+		// Check for permissions
+		if (deckInstance.privateDeck) {
+			if(springSecurityService.principal.id != deckInstance.owner.id) {
+				flash.message = "You don't have permissions to add this deck!"
+				redirect(uri: request.getHeader('referer'))
+				return
+			}
+		}
+		
         Share shareInstance
 
         if(deckInstance) {

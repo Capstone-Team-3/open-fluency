@@ -11,6 +11,7 @@ class MainLayoutPage extends Page {
 		
 		deckNavList { $(".deckNavList") }
 		myDecks { $(".my-decks") }
+		uploadAnkiDeck { $(".create") }
 		createDeck { $(".create-deck") }
 		searchDeck { $(".deck-search") }
 		
@@ -19,6 +20,10 @@ class MainLayoutPage extends Page {
 		myCourses { $(".my-courses") }
 		createCourse { $(".create-course") }
 		searchCourse { $(".course-search") }
+		
+		profile { $("a[href='/OpenFluency/user/profile']") }
+		help { $("a", text: contains('Help')) }
+		logout { $("a", text: contains('Logout')) }
 
 		flashMessage { $(".alert.alert-info") }
 	}

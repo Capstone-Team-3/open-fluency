@@ -47,6 +47,12 @@
 									<g:link action="list" controller="deck" class="my-decks">My decks</g:link>
 								</li>
 								<li>
+									<g:link action="create" controller="document" class="create">Upload anki deck</g:link>
+								</li>
+								<li>
+									<g:link action="" controller="previewDeck" class="import-decks">Active Import</g:link>
+								</li>
+								<li>
 									<g:link action="create" controller="deck" class="create-deck">Create new deck</g:link>
 								</li>
 								<li>
@@ -78,6 +84,11 @@
 								</li>
 							</ul>
 						</li>
+                        <li>
+                         <g:link controller="cardRanking" action="list">
+                         Learning Stats
+                         </g:link>
+                        </li>
 						<sec:ifAllGranted roles="ROLE_ADMIN">
 							<li>
 								<g:link action="index" controller="user">Users</g:link>

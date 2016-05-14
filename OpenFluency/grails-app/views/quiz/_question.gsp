@@ -1,40 +1,57 @@
 <%@ page import="com.openfluency.Constants" %>
-<g:set var="testElement" value="${questionInstance.quiz.effectiveTestElement}"/>
+<style>
+#player {
+ width: 90%;
+ padding: 0px 0px 0px;
+}​
+</style>
+
 <div class="col-lg-3">
-	<div class="panel panel-default question-panel">
+	<div class="panel panel-default flashcard-panel">
 		<div class="panel-heading center">
 			<g:if test="${isOwner}">
 				<div class="card-actions">
 					<g:link action="deleteQuestion" id="${questionInstance.id}" controller="quiz" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 				</div>
 			</g:if>
-			<g:if test="${testElement == Constants.SYMBOL}">
-				<h1>${questionInstance.flashcard.secondaryUnit.print}</h1>
-			</g:if>
+			<g:if test="${questionInstance?.question == "Image"}">
+			
+			<div id="question-image" class="question-img" style="background-image: url('${questionInstance?.image?.getImageUri()}')"></div>
+		
+			</g:if>	
+			<g:elseif test="${questionInstance?.question ==  "Sound"}">
+			<audio id="player" controls="controls" preload="metadata">
+ 			<source src="${questionInstance?.sound?.getSoundUri()}" />
+  			<b>Your browser does not support HTML5 audio element</b>
+			</audio>
+	
+			</g:elseif>
 			<g:else>
-				<h1>${questionInstance.flashcard.primaryUnit.print}</h1>
+			<h4>${questionInstance.question}<h4>
 			</g:else>
 		</div>
 		<div class="panel-body text-center">
 			<h4>Multiple choice options:</h4>
-			<table class="table">
-				
+			<table class="table">			
 				<g:each in="${questionInstance.options}">
 					<tr>
-						<g:if test="${testElement == Constants.MEANING}">
-							<td>${it.flashcard.secondaryUnit.print}</td>
-						</g:if>
-						<g:elseif test="${testElement == Constants.SYMBOL}">
-							<td>${it.flashcard.primaryUnit.print}</td>
-						</g:elseif>
-						<g:else>
-							<td>${it.flashcard.pronunciation}</td>
-						</g:else>
+						<td>${it.option}</td>
 					</tr>
 				</g:each>
 			</table>
 		</div>
 	</div>
-	<!-- end panel -->
 </div>
-<!-- end col-lg-3 -->
+
+<script>
+$(document).ready(function(){
+	var initializeAudio = function() {
+	$(".play-audio").click(function() {
+		var audioSrcID = $(this).next(".flashcard-audio").attr("id");
+		$('#' + audioSrcID).load().get(0).play();
+	});
+};
+	
+});
+	
+</script>

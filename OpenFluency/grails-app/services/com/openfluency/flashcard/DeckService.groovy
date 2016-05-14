@@ -13,7 +13,6 @@ import com.openfluency.course.Chapter
 import com.openfluency.Constants
 import com.openfluency.algorithm.*
 
-@Transactional
 class DeckService {
 
 	def springSecurityService
@@ -28,6 +27,7 @@ class DeckService {
 	* @param ranking that the user gave to this flashcard
 	* @return the new usage for the next flashcard
 	*/
+	@Transactional
 	CardUsage getNextFlashcard(Deck deckInstance, String cardUsageId, Integer ranking, Integer rankingType) {
 
 		log.info "deckInstance: ${deckInstance.id} - CardUsageID: ${cardUsageId} - Ranking: $ranking - Ranking Type: ${rankingType}"
@@ -79,6 +79,7 @@ class DeckService {
 	* @return 	Map that contains as keys the types of rankings that a user can give (Meaning, Pronunciation, etc)
 	*			and as values the progress for each
 	*/
+	@Transactional(readOnly=true)
 	List getDeckProgress(Deck deckInstance, Long userId) {
 		// Progress calculation:
 		// - When a user ranks a card, it gives him a certain number of points
@@ -111,7 +112,8 @@ class DeckService {
 	/**
     * Create a new deck owned by the currently logged in user
     */
-    Deck createDeck(String title, String description, String languageId, String sourceLanguageId, String cardServerName) {
+	@Transactional
+    Deck createDeck(String title, String description, String languageId, String sourceLanguageId, String cardServerName, boolean privateDeck) {
     	User theUser = User.load(springSecurityService.principal.id)
     	
     	Deck deck = new Deck(title: title, 
@@ -119,7 +121,8 @@ class DeckService {
     		owner: theUser, 
     		language: Language.load(languageId),
     		sourceLanguage: Language.load(sourceLanguageId),
-    		cardServerName: cardServerName)
+    		cardServerName: cardServerName,
+			privateDeck: privateDeck)
     	deck.save()
 
     	flashcardInfoService.resetDeckFlashcardInfo(theUser, deck)
@@ -130,6 +133,7 @@ class DeckService {
     /** 
     * Update an existing deck
     */
+	@Transactional
     void updateDeck(Deck deckInstance, String title, String description, String languageId, String sourceLanguageId, String cardServerName) {
     	deckInstance.title = title
     	deckInstance.description = description
@@ -142,6 +146,7 @@ class DeckService {
     /**
     * Add a deck to my list of shared courses
     */
+	@Transactional
     Share addDeck(Deck deckInstance) {
     	User userInstance = User.load(springSecurityService.principal.id)
     	
@@ -155,6 +160,7 @@ class DeckService {
     	return new Share(deck: deckInstance, receiver: userInstance).save(flush: true);
     }
 
+	@Transactional
     Boolean removeDeck(Deck deck) {
     	User theUser = User.load(springSecurityService.principal.id)
 
@@ -174,7 +180,7 @@ class DeckService {
     /**
     * Search for Decks
     */
-    List<Deck> searchDecks(Long languageId, String keyword) {
+    List<Deck> searchDecks(Long languageId, String keyword, User user) {
     	log.info "Searching Decks with languageId: $languageId and Keywords: $keyword"
 
     	Deck.withCriteria {
@@ -185,6 +191,7 @@ class DeckService {
             		eq('id', languageId)
             	}
             }
+			
 
             // Search using keywords in the title or description
             if(keyword) {
@@ -193,12 +200,18 @@ class DeckService {
             		ilike("description", "%${keyword}%")
             	}
             }
+			
+			or {
+				eq("privateDeck", false)
+				eq("owner", user)
+			}
         }
     }
 
     /**
     * Delete deck
     */
+	@Transactional
     void deleteDeck(Deck deckInstance) {
     	// First delete all flashcards
     	Flashcard.findAllByDeck(deckInstance).each {
@@ -222,6 +235,7 @@ class DeckService {
     /**
     * Get a random flashcard from a deck where the given flashcard lives but is not the given flashcard
     */
+	@Transactional(readOnly=true)
     Flashcard getRandomFlashcard(Flashcard flashcardInstance) {
     	Flashcard.executeQuery('FROM Flashcard WHERE deck = ? AND id <> ? ORDER BY rand()', [flashcardInstance.deck, flashcardInstance.id], [max: 1])[0]
     }
@@ -229,6 +243,7 @@ class DeckService {
     /**
     * Get a random flashcard from a deck where the given flashcard lives but is not any of the given flashcards
     */
+	@Transactional(readOnly=true)
     Flashcard getRandomFlashcard(Flashcard flashcardInstance, def flashcardIds) {
         def query = "FROM Flashcard WHERE deck.id = " + flashcardInstance.deck.id + " AND id NOT IN (" + flashcardIds.join(",") + ") ORDER BY rand()"
         Flashcard.executeQuery(query, [max: 1])[0]
@@ -237,6 +252,7 @@ class DeckService {
     /**
     * Load a deck from a CSV - returns a list with any errors that might have happened during upload
     */
+	@Transactional
     List loadFlashcardsFromCSV(Deck deckInstance, def f) {
         List result
 

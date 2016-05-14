@@ -68,7 +68,6 @@ var setupFlashcardSearchPagination = function() {
  * be saved on click
  */
 var searchImage = function(query, results, urlField, resultPage) {
-	
 	// set helpful and need variables
 	var apiKey = "ec50db25dd7a2b1d0c5d7b3ec404cce6";
 	var sMethod = "flickr.photos.search";
@@ -87,6 +86,9 @@ var searchImage = function(query, results, urlField, resultPage) {
 	// Build full URL
 	var queryStr = baseUrl + $(query).val() + respFormat;
 
+	
+	
+	
 	// Run query
 	$.getJSON(queryStr, function(data){
 
@@ -101,13 +103,17 @@ var searchImage = function(query, results, urlField, resultPage) {
 				.appendTo(results)
 				.click(function(){
 					// when the image is clicked, set the url and also the imageLink in the input field
-					$(urlField).val($(this).data('imageLink'));
+					$(urlField).attr("value",$(this).data('imageLink'))
 					$('.flashcard-image-create').css('background-image', 'url(' + $(this).data('imageLink') + ')');
 				});
 
 			if (i >= numPics) {
 				return false;
 			}
+			
+			try {
+				$('#image-modal-create').modal();
+			} catch(err){}
 		});
 	});
 };
@@ -121,6 +127,14 @@ var initializeAudio = function() {
 		var audioSrcID = $(this).next(".flashcard-audio").attr("id");
 		$('#' + audioSrcID).load().get(0).play();
 	});
+	
+
+	$('.play-unit-audio').click(function() {
+	    var resource = this.dataset.audio;
+	    console.log(resource);
+	    var audio = new Audio(resource);
+	    audio.play();
+	});
 };
 
 /*----------------------------------------------------------------------------*/
@@ -133,6 +147,15 @@ var initializeAudio = function() {
  */
 var initializePracticeCards = function() {
 	var type = $('#practice-container').data("rank-type").toLowerCase();
+	var pArray = $('.pronunciation');
+	var uArray = $('.flashcard-unit');
+	
+	// ensure that pronunciation is hidden if it equals unit literal
+	for (var i = 0; i < uArray.length; i++) {
+	    if (uArray[i].dataset.unit.replace(/^\s+|\s+$/g,'') == pArray[i].dataset.pronunciation.replace(/^\s+|\s+$/g,'')) {
+	        $(pArray[i]).hide();
+	    }
+	}
 
 	if (type === 'meaning' || type === 'pronunciation'){
 		hideElement("Meaning", ".meaning", "show-meaning");
@@ -142,7 +165,7 @@ var initializePracticeCards = function() {
 		hideElement("Word/Character", ".flashcard-unit", "show-flashcard-unit");
 		hideElement("Pronunciation", ".pronunciation", "show-pronunciation");
 	}
-
+		
 	initializePracticeRanking();
 };
 
@@ -205,9 +228,12 @@ var initializeDonuts = function() {
 var drawDonut = function(value, selector) {
 	var	percentages = [value, (100 - value)];
 	
-	var width = $(selector).width();
-
-	var height = width, radius = Math.min(width, height) / 2;
+	//var width = $(selector).width();
+	var height = $(selector).height();
+	var width = height;
+	var radius = radius = Math.min(width, height) / 2;
+	
+	//var height = width, radius = Math.min(width, height) / 2;
 
 	var color = d3.scale.category20();
 
@@ -305,4 +331,217 @@ function countdown(element, minutes, seconds) {
 		el.html(html);
 		time--;
 	}, 1000);
+}
+
+
+
+/* --------------------------------------------------------------------*/
+//						OpenFluency2
+/* --------------------------------------------------------------------*/
+
+/**
+ * toggles dictionary modal
+ */
+$('.show-dictionary-button').click(function() {
+	$('#dictionary-table').show();
+	$('.show-dictionary-button').hide();
+});
+
+
+/**
+ * Sends ajax request to dictionary service
+ */
+$('#dictionary-search-button').click(function() {
+	var searchTerm = $('#dictionary-search-textbox').val();
+
+	$.ajax({
+		type: "GET",
+		url: "/OpenFluency/dictionary/search",
+		data: {
+			term: searchTerm,
+			count: 15
+		},
+		dataType: "html",
+		success: function(output) {			
+			$("#dictionary-results-table").html(output);
+			$("#dictionary-results-table").css('visibility', 'visible');
+		},
+		error: function(err) {
+			console.log(err);
+		}
+	});
+	console.log(searchTerm);
+});
+
+
+
+/*----------------------------------------------------------------------------*/
+/* Unit Mapping
+/*----------------------------------------------------------------------------*/
+
+window.unitMappingLiteral = null;
+window.unitMappingPronunciation = null;
+window.unitMappingAudioUrl = null;
+window.unitMappingBackgroundImage = null;
+window.unitMappingMeaning = null;
+
+
+var initializeUnitMappingDraggable = function() {
+	console.log('initializing draggable');
+	
+
+	
+    $( ".draggable" ).draggable({
+        helper: 'clone',
+		cursor: "move",
+		start: function(e, ui) {
+			$(ui.helper).addClass('unit-dragging');
+		},
+		stop: function(e, ui) {
+			$(ui.helper).removeClass('unit-dragging');
+		}
+    });
+    
+    $( "#flashcard-literal" ).droppable({
+    	hoverClass: "dashed-border-black",
+    	drop: function( event, ui ) {
+    		$('#flashcard-literal').css('font-size', '100px');
+	        $(this).html($(ui.draggable).html());
+	        resizeUnitMappingCard();
+	        unitMappingLiteral = $(ui.draggable).data("index");
+	        $('#literal-options').modal();
+    	}
+  	});
+    
+    $( "#pronunciation-droppable" ).droppable({
+    	hoverClass: "light-green-hover-background",
+        drop: function( event, ui ) {
+        	$('#pronounced').html("pronounced " + $(ui.draggable).html());
+        	unitMappingPronunciation = $(ui.draggable).data("index");
+        	$('#pronunciation-options').modal();
+        }
+     });
+
+    $('#audio-url-droppable').droppable({
+    	hoverClass: "light-green-hover-background",
+		drop: function(event, ui) {
+			$('#audio-url-display').html($(ui.draggable).data('transfer'));
+			$('.play-audio').css('visibility', 'visible');
+			$('#um-flashcard-audio').attr('src', $(ui.draggable).data('transfer'));
+			unitMappingAudioUrl = $(ui.draggable).data("index");
+		}
+    });
+
+    $("#flashcard-image").droppable({
+    	hoverClass: "dashed-border-black",
+		drop: function(event, ui) {
+			$('#flashcard-image').css("background-image", "url(" + $(ui.draggable).data('transfer') + ")");
+			unitMappingBackgroundImage = $(ui.draggable).data("index");
+		}
+    });
+
+    $("#meaning-droppable").droppable({
+    	hoverClass: "dashed-border-black",
+		drop: function(event, ui) {
+			$("#meaning-display").html($(ui.draggable).html());
+			unitMappingMeaning = $(ui.draggable).data("index");
+			$('#meaning-options').modal();
+		}
+    });
+
+    $('#clear-literal').click(function() {
+    	$('#flashcard-literal').html("");
+    	unitMappingLiteral = null;
+    });
+
+    $('#clear-pronunciation').click(function(){
+    	$('#pronounced').html('pronunciation text');
+    	unitMappingPronunciation = null;
+    });
+
+    $('#clear-audio-url').click(function(){
+    	$('#audio-url-display').html("(audio url)");
+    	$('.play-audio').css('visibility', 'hidden');
+    	unitMappingAudioUrl = null;
+    });
+
+    $('#clear-image').click(function(){
+    	$('#flashcard-image').css('background-image', '');
+    	unitMappingBackgroundImage = null;
+    });
+
+    $('#clear-meaning').click(function(){
+    	$('#meaning-display').html("(meaning text)");
+    	unitMappingMeaning = null;
+    });  
+}
+
+
+
+/* --------------------------------------------------------------
+ *    OpenFluency2 - Flashcard 
+ * --------------------------------------------------------------*/
+
+var of2FlashcardFontSize = function() {
+	// get all cards
+	var flashcardUnitsArray = $('.flashcard-unit');
+	
+	// get the height of a card would have with a single character as literal
+			// TODO: avoid hardcoding height of card
+
+	for (var i = 0; i < flashcardUnitsArray.length; i++) {
+	    var h = $(flashcardUnitsArray[i]).height();
+	    var fontSize = $(flashcardUnitsArray[i]).css('font-size').replace(/[^-\d\.]/g, '');
+	    while (h > 110) {
+	        $(flashcardUnitsArray[i]).css('font-size', --fontSize + 'px');
+	        h = $(flashcardUnitsArray[i]).height();
+	    } 
+	    $(flashcardUnitsArray[i]).height(139.593);
+	}
+}
+
+/* -----------------------------------------
+ * breadcrumb fixed
+ * ---------------------------------------*/
+$(document).ready(function() {
+	try {
+		$("#breadcrumb").sticky({topSpacing:50, zIndex: 1});
+	} catch(err){}
+});
+
+
+
+/* -----------------------------------------
+ * resize
+ * ---------------------------------------*/
+var pronunciationResize = function() {
+	pHeight = 0;
+	var parr = $('.pronunciation');
+	
+	// determine highest height
+	for (var i = 0; i < parr.length; i++) {
+	    if ($(parr[i]).height() > pHeight)
+	        pHeight = $(parr[i]).height();    
+	}
+	
+	// make all the same height
+	for (var i = 0; i < parr.length; i++) {
+	    $(parr[i]).height(pHeight);    
+	}
+}
+
+var meaningResize = function() {
+	mHeight = 0;
+	var panelbodys = $('.panel-body');
+	
+	// determine highest
+	for (var i = 0; i < panelbodys.length; i++) {
+	    if ($(panelbodys[i]).height() > mHeight)
+	        mHeight = $(panelbodys[i]).height();    
+	}
+	
+	// make all the same height
+	for (var i = 0; i < panelbodys.length; i++) {
+	    $(panelbodys[i]).height(mHeight);    
+	}
 }

@@ -3,11 +3,91 @@
 <html>
 <head>
 	<meta name="layout" content="main"/>
+	
+	
+	<style>
+	
+	
+	d change the background color on hover.
+
+
+h2 {
+  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#deck-list-ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.deck-list-li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+.deck-list-li:last-child {
+  border: none;
+}
+
+.deck-list-li {
+  text-decoration: none;
+  color: #000;
+  display: block;
+
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+
+.deck-list-li:hover {
+  font-size: 21px;
+  background: #b3e6ff;
+}
+
+
+.card-selected {
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	background: lavender;
+}
+
+#selected-cards-display {
+	background: lavender;
+	display: none;
+}
+
+#selected-cards-display h4{
+	text-align: center;
+}
+
+#selectedCardsMenu {
+	list-style-type: none;
+	font-size: 24px;
+	padding: 10px;
+}
+
+#selectedCardsMenu li {
+	text-align: center;
+}
+
+.deck-actions-2 {
+	margin-top: 15px;
+}
+
+
+	</style>
+	
 </head>
 <body>
+
 	<div class="container deck-show">
 
-		<ul class="breadcrumb">
+		<ul class="breadcrumb" id="breadcrumb">
 			<li>
 				<a href="${createLink(uri:'/') }">Home</a>
 			</li>
@@ -26,7 +106,7 @@
 					<h1 class="deck-title">
 						${deckInstance?.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${deckInstance.id}" class="btn btn-warning">
+							<g:link action="edit" id="${deckInstance.id}" elementId="edit-deck" class="btn btn-warning">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</g:link>
 							<g:link action="delete" id="${deckInstance.id}" class="btn btn-danger">
@@ -35,12 +115,17 @@
 						</g:if>
 					</h1>
 					<p class="deck-description">${deckInstance?.description}</p>
+					
 				</div>
 			</div>
 
-			<div class="col-lg-4 col-lg-offset-4">
+			<div class="col-lg-4 col-lg-offset-4" id="show-display">
 				<g:render template="/deck/allProgress" model="[deckInstance: deckInstance, progress: deckInstance.progress, id: deckInstance.id]"/>
+				<g:render template="/deck/selectedCardsDisplay" />
+				
+				
 				<br/>
+				
 				<div class="deck-actions center">
 					<g:if test="${flashcardCount}">
 						<div class="btn-group text-left">
@@ -78,14 +163,22 @@
 						</g:if>
 						<ul class="text-left dropdown-menu" role="menu">
 							<li>
-								<g:link action="search" controller="unit" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Search Flashcards</g:link>
+								<g:link action="createFromDictionary" controller="flashcard" params="${['languageId': deckInstance.language.id, 'deckId': deckInstance.id]}">Create From Dictionary</g:link>
 							</li>
 							<li>
 								<a data-toggle="modal" data-target="#myModal">Load from CSV file</a>
 							</li>
 						</ul>
 					</div>
+					<div class="deck-actions center deck-actions-2">
+						<div class="btn-group text-left">
+							<button type="button" class="btn btn-success" id="move-cards-button">
+								Move Cards
+							</button>
+						</div>
+					</div>
 				</div>
+				
 			</div>
 		</div>
 
@@ -118,7 +211,7 @@
 						<div class="modal-body">
 							<p>
 								Upload a CSV file with your flashcard definitions. (You can download a sample CSV to see how the file is structured
-								<a href="https://s3.amazonaws.com/OpenFluency/resources/testDeck.csv">here</a>
+								<a href="../../resources/testDeck.csv">here</a>
 								.)
 							</p>
 							<input name="csvData" type="file" name="csvData"/>
@@ -132,6 +225,45 @@
 			</div>
 		</div>
 	</div>
-	<g:javascript>initializeAudio();initializeDonuts();</g:javascript>
+<!-- Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+ 	<div class="modal-dialog">
+	
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Reassign Flashcard to deck</h4>
+			</div>
+			<div class="modal-body">
+			    <div id='ul-container'>
+			        <h2>
+			            My Decks
+			            <g:link action="create" controller="deck" class="btn btn-info">Create New Deck</g:link>
+			        </h2>
+			       <g:each in="${deckInstanceList}">
+			        <div class="radio">
+			              <label> <input type="radio" name="decks" class="decks-rb"  value="${it.id}"> ${it} </label>
+			        </div>
+			        </g:each>
+			    </div>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-lg btn-default btn-info" data-dismiss="modal" id="reassign-submit">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<g:javascript>
+		initializeAudio();
+		initializeDonuts();
+		of2FlashcardFontSize();  /*literal resize*/
+		pronunciationResize();
+		meaningResize();
+	</g:javascript>
+	
+	<g:javascript src="reassignCard.js" />
+	<g:javascript src="jquery.sticky.js" />
 </body>
 </html>

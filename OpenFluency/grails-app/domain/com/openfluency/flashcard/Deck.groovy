@@ -5,7 +5,7 @@ import com.openfluency.auth.User
 
 /**
  *  Deck is a major domain object in this system.  Decks hold collections of flashcards
- *  and are a key component in the operatio of the system
+ *  and are a key component in the operation of the system
  */
 class Deck {
 
@@ -27,6 +27,8 @@ class Deck {
 
 	Date dateCreated
 	Date lastUpdated
+	
+	Boolean privateDeck = false;
 
 	/**
 	* Get a list of all the flashcards in this deck

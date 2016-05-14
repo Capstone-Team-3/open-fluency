@@ -12,7 +12,7 @@ class MediaService {
 
 	def springSecurityService
 
-    def createImage(String imageLink, String unitmappingId) {
+    Image createImage(String imageLink, String unitmappingId) {
     	
     	if (!imageLink){ return null }
 
@@ -24,11 +24,11 @@ class MediaService {
     		lastUpdated: new Date()
     	).save(flush: true, failOnError: true)
     	
-    	println "Associated Image ${imageInstance}"
+        //   	println "Associated Image ${imageInstance}"
     	return imageInstance
     }
 
-    def createAudio(String audioLink, byte[] audioFile, String pronunciationId){ 
+    Audio createAudio(String audioLink, byte[] audioFile, String pronunciationId){ 
 
         if ((!audioLink) && (!audioFile)){ 
             return null 
@@ -43,11 +43,11 @@ class MediaService {
     		lastUpdated: new Date()
     	).save(flush: true, failOnError: true)
 
-    	println "Associated Audio ${audioInstance}"
+    	// println "Associated Audio ${audioInstance}"
     	return audioInstance
     }
 
-    def createCustomization(String flashcardId, String unitMappingId, String imageLink, String audioId){
+    Customization createCustomization(String flashcardId, String unitMappingId, String imageLink, String audioId){
         //get all the intances needed for building a customization
         Image imageInstance = createImage(imageLink, unitMappingId)
         Audio audioInstance = null;

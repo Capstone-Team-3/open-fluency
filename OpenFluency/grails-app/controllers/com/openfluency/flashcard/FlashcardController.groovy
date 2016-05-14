@@ -26,6 +26,28 @@ class FlashcardController {
     	[flashcardInstance: new Flashcard(params), unitInstance: unit, userDecks: Deck.findAllByOwnerAndLanguage(User.load(springSecurityService.principal.id), unit.alphabet.language), deckId: deckId]
     }
 
+    def createFromDictionary() {
+        User loggedUser = User.load(springSecurityService?.principal?.id)
+        List<Deck> deckInstanceList = Deck.findAllByOwner(loggedUser)
+        def deckDefault = null;
+        if(params.deckId){
+            deckDefault = deckInstanceList.find{ it.id.toString() == params.deckId };
+        }
+        render(view: "createFromDictionary", model : [deckInstanceList : deckInstanceList, deckDefault : deckDefault])
+    }
+
+    def createTest(){
+        def primaryString = params.concept.trim();
+        def otherString = params.meaning.trim();
+        def pronunciationString = params.pronunciation.trim(); 
+        def deckId = params.deckId.trim();
+        def imageLink = params.imageLink.trim();
+        def audioLink = params.audio_url.trim();
+
+        flashcardService.createFlashcardUsingDictionaryInfo(primaryString, otherString, pronunciationString, deckId.toInteger(), imageLink, audioLink );
+        redirect(action: "createFromDictionary", params: [deckId : params.deckId]) 
+    }
+
     /**
     * Save the flashcard for the selected unit
     */
@@ -57,7 +79,35 @@ class FlashcardController {
             return
         }
 
+
         flashcardService.deleteFlashcard(flashcardInstance)
         redirect(uri: request.getHeader('referer'))
     }
+	
+	//Param String: ?flashcard_id=125&flashcard_id=126&deckdest_id=18
+	def reassign() {
+		def flashcard_ids = params.flashcard_id
+		def deck_dest_id  = params.deckdest_id
+		
+		def flashcard_ids_norm = [];
+		flashcard_ids_norm.addAll(flashcard_ids)
+		
+		def dest = Deck.findById(deck_dest_id)
+		
+		
+		flashcard_ids_norm.each {
+			def flashcardInstance = Flashcard.findById(it)
+			
+			if(springSecurityService.principal.id != flashcardInstance.deck.owner.id) {
+				flash.message = "You're not allowed to reassign this flashcard"
+				redirect(uri: request.getHeader('referer'))
+				return
+			}
+	
+			flashcardService.reassignFlashcard(flashcardInstance, dest)
+		}
+		
+		redirect(uri: request.getHeader('referer'))
+	}
+	
 }

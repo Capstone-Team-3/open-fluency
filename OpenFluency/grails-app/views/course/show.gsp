@@ -1,4 +1,4 @@
--<%@ page import="com.openfluency.course.Registration" %>
+<%@ page import="com.openfluency.course.Registration" %>
 <%@ page import="com.openfluency.course.Quiz" %>
 <%@ page import="com.openfluency.Constants" %>
 <%@ page import="com.openfluency.course.QuizService" %>
@@ -67,7 +67,10 @@
 			<div class="col-lg-12">
 
 				<h2 class="sub-heading">
-					Chapters
+                 <label class="tooltiper control-label"  data-toggle="tooltip"  data-placement="right" title="Each Chapter is a collection of flashcards for studying. There are three study modes. Click on a chapter to start">
+				Chapters
+                  </label>
+
 					<g:if test="${isOwner}">
 						<g:link class="btn btn-xs btn-info add-chapter"  action="create" controller="chapter" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
 					</g:if>
@@ -92,15 +95,15 @@
 								<g:if test="${!isOwner}">
 									<div class="donut-container">
 										<div class="panel-body">
-											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
+											<div class="col-lg-4  col-md-4 col-sm-4 col-xs-4 progress-donut center" data-progress="${it.progress[Constants.MEANING]}" id="meaning-progress-${it.id}">
 												<p>${it.deck.language} to ${it.deck.sourceLanguage}</p>
 											</div>
 
-											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.SYMBOL]}" id="symbol-progress-${it.id}">
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 progress-donut center" data-progress="${it.progress[Constants.SYMBOL]}" id="symbol-progress-${it.id}">
 												<p>${it.deck.sourceLanguage} to ${it.deck.language}</p>
 											</div>
 
-											<div class="col-lg-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
+											<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 progress-donut center" data-progress="${it.progress[Constants.PRONUNCIATION]}" id="pronunciation-progress-${it.id}">
 												<p>Pronunciations in ${it.deck.language}</p>
 											</div>
 										</div>
@@ -122,10 +125,14 @@
 			<div class="col-lg-12">
 
 				<h2 class="sub-heading">
+                 <label class="tooltiper control-label"  data-toggle="tooltip"  data-placement="right" title="Take a quiz to test how well you know the material">
 					Quizzes
+                    </label>
 					<g:if test="${isOwner}">
 						<!-- This is only displayed for the owner of the course -->
-						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span></g:link>
+						<g:link class="btn btn-xs btn-info" action="create" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz from Chapters</g:link>
+						<g:link class="btn btn-xs btn-info" action="create" controller="quizEditor" id="${courseInstance.id}"><span class="glyphicon glyphicon-plus"></span>Create Quiz Manually</g:link>
+						<g:link class="btn btn-xs btn-info" action="quizImport" controller="quiz" id="${courseInstance.id}"><span class="glyphicon glyphicon-import"></span>Import Quiz</g:link>
 					</g:if>
 				</h2>
 
@@ -136,7 +143,13 @@
 								<div class="panel-heading">
 									<g:if test="${isOwner}">
 										<div class="card-actions">
-											<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											<g:if test="${it.quizType == com.openfluency.Constants.MANUAL_QUIZ}">
+												<g:link action="edit" controller="quizEditor" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											</g:if>
+											<g:else>
+												<g:link action="edit" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+											</g:else>
+											 <g:link action="export" controller="quiz" id="${it.id}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-export"></span></g:link>
 											<g:link action="delete" controller="quiz" id="${it.id}" class="btn btn-xs btn-danger" onclick="return confirm('are you sure?')"><span class="glyphicon glyphicon-remove"></span></g:link>
 										</div>
 									</g:if>
@@ -151,34 +164,26 @@
 								<div class="panel-body text-center">
 									<g:if test="${!isOwner}">
 										<g:if test="${it.finalGrade}">
-											<div class="quiz-complete bg-success">
-												<p><strong>Completed - Grade: ${it.finalGrade}%</strong></p>
+											<div class="quiz-complete bg-success">										
+												<p><strong>Completed - Grade: <g:formatNumber number="${it.finalGrade}" type="number" maxFractionDigits="2" format="#" groupingUsed="false"/>%</strong></p>
 												<g:link class="btn btn-info" action="take" controller="quiz" id="${it.id}">View Report</g:link>
 											</div>
 										</g:if>
-										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date())) }" >
+										<g:elseif test="${ ( it?.liveTime && (it.liveTime <= new Date() && it.endTime >= new Date())) }" >
 											<g:if test="${Registration.countByCourseAndUser(courseInstance, userInstance) == 1}">
 												<div class="take-quiz">
 													<p>Ready to take the quiz?</p>
-													<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
+		     										<g:link action="take" controller="quiz" id="${it.id}" class="take-quiz-btn btn btn-success">Start Quiz</g:link>
 												</div>
 											</g:if>
 										</g:elseif>
 									</g:if>
 									<g:else>
 										<ul class="list-unstyled text-left">
-										<li><strong>Tests:</strong> 
-											<g:if test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "meaning"}">
-												Meanings of words/characters (${it.course.getChapters()[0].deck.language} to ${it.course.getChapters()[0].deck.sourceLanguage})
-											</g:if>
-											<g:elseif test="${Constants.CARD_ELEMENTS[it.testElement].toLowerCase() == "symbol"}">
-												Meanings of words/characters (${it.course.getChapters()[0].deck.sourceLanguage} to ${it.course.getChapters()[0].deck.language})
-											</g:elseif>
-											<g:else>
-												Pronunciations of ${it.course.getChapters()[0].deck.language} words/characters
-											</g:else>
-										</li>
 											<li><strong>Available:</strong> ${it.liveTime.format('MM/dd/yyyy hh:mm')}</li>
+											<g:if test="${it.endTime != null}">
+											<li><strong>Available Until:</strong> ${it.endTime.format('MM/dd/yyyy hh:mm')}</li>
+											</g:if>
 										</ul>
 									</g:else>
 								</div><!-- end panel-body -->
@@ -192,4 +197,4 @@
 
 	<g:javascript>initializeDonuts();</g:javascript>
 </body>
-</html>
+</html>		

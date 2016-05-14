@@ -16,8 +16,12 @@ public class Constants {
 	public static final int MEANING = 0
 	public static final int PRONUNCIATION = 1
 	public static final int SYMBOL = 2
-	public static final int RANDOM = 3
-	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol", "Random"]
+	public static final int CONFUSER = 3
+	public static final int FILL_IN_BLANK = 4
+	public static final int MANUAL = 5
+
+
+	public static final List CARD_ELEMENTS = ["Meaning", "Pronunciation", "Symbol", "Confuser", "Fill in the Blank", "Manual"]
 
 	// Answer statuses
 	public static final int NOT_ANSWERED = 0
@@ -28,6 +32,12 @@ public class Constants {
 	public static final int NOT_STARTED = 0
 	public static final int IN_PROGRESS = 1
 	public static final int COMPLETED = 2
+	public static final int IMAGE = 3
+	public static final int SOUND = 4
+	
+	// Quiz Type
+	public static final int MANUAL_QUIZ = 0
+	public static final int FLASHCARD_QUIZ = 1
 
 	// Registration Status
 	public static final int PENDING_APPROVAL = 0

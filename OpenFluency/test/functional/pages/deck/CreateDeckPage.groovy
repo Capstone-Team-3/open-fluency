@@ -19,5 +19,12 @@ class CreateDeckPage extends MainLayoutPage {
 		deckDescription(wait: true) { $("textarea", name: 'description') }
 		deckLanguage(wait: true) { $("select", name: 'language.id') }
 		createDeckButton(wait: true) { $("#create-deck") }
+		
+		privateDeckRadioButton {option -> $("input[type='radio']", name: "privateDeck", value: option)}
+	}
+	
+	// http://qastuffs.blogspot.com/2012/05/selecting-radio-button-value-in-geb.html
+	def selectPrivateDeckRadioButtonOption(String radioButtonValue) {
+		browser.privateDeckRadioButton(radioButtonValue).click()
 	}
 }

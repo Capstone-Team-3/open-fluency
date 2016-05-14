@@ -30,9 +30,12 @@
 					<h1>
 						Quiz: ${quizInstance.title}
 						<g:if test="${isOwner}">
-							<g:link action="edit" id="${quizInstance.id}" controller="quiz" class="btn btn-warning">
-								<span class="glyphicon glyphicon-pencil"></span>
-							</g:link>
+							<g:if test="${quizInstance.quizType == com.openfluency.Constants.MANUAL_QUIZ}">
+								<g:link action="edit" controller="quizEditor" id="${quizInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+							</g:if>
+							<g:else>
+								<g:link action="edit" controller="quiz" id="${quizInstance.id}" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></g:link>
+							</g:else>
 						</g:if>
 					</h1>
 					<h3>${quizInstance.course.title}</h3>
@@ -40,23 +43,6 @@
 
 				<div class="description">
 					<ul class="list-unstyled">
-						<li> <strong>Tests:</strong>
-							<g:set var="lang" value="${quizInstance.course.chapters[0].deck.language}" />
-							<g:set var="sourceLang" value="${quizInstance.course.chapters[0].deck.sourceLanguage}" />
-
-							<g:if test="${Constants.MEANING == quizInstance.testElement}">
-								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${lang} to ${sourceLang})
-							</g:if>
-							<g:elseif test="${Constants.SYMBOL == quizInstance.testElement}">
-								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of words/characters (${sourceLang} to ${lang})
-							</g:elseif>
-							<g:elseif test="${Constants.PRONUNCIATION == quizInstance.testElement}">
-								${Constants.CARD_ELEMENTS[quizInstance.testElement]}s of ${lang} words/characters
-							</g:elseif>
-							<g:else>
-								Random mix of pronunciations, ${sourceLang} to ${lang}, and ${lang} to ${sourceLang}. <strong>The quiz changes for every student.</strong>
-							</g:else>
-						</li>
 						<li> 
 							<strong>Maximum time allowed per card:</strong>
 							<g:if test="${quizInstance.maxCardTime > 0}">
@@ -69,6 +55,12 @@
 						<li>
 							<strong>Quiz available starting:</strong>
 							${quizInstance.liveTime.format('MM/dd/yyyy')}
+						</li>
+						<li>
+							<g:if test="${quizInstance.endTime != null}">
+							<strong>Quiz available until:</strong>	
+							${quizInstance.endTime.format('MM/dd/yyyy hh:mm')}</li>
+							</g:if>
 						</li>
 					</ul>
 				</div>

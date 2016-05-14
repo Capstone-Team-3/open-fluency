@@ -28,7 +28,7 @@
 
 					<h1 class="text-center">Create Quiz for ${courseInstance.title}</h1>
 					<g:render template="form" model="[quizInstance: quizInstance, courseInstance: courseInstance]"/>
-					<button type="submit" class="btn btn-info">Create Quiz</button>
+					<button type="submit" id="create-quiz" class="btn btn-info">Create Quiz</button>
 				</div>
 				<div class="row" id="include-chapters"></div>
 			</g:form>

@@ -32,3 +32,24 @@
 	</label>
 	<g:select from="${cardServerAlgos}" name="cardServerAlgo" class="form-control" value="${deckInstance?.cardServerName}"/>
 </div>
+
+<div class="form-group">
+	<label>Deck Visibility</label>
+	<g:if test="${deckInstance?.privateDeck}"> 
+	    <div class="radio">
+			<input type="radio" name="privateDeck" value="false"> Public
+		</div>
+		<div class="radio">
+		  	<input type="radio" name="privateDeck" value="true" checked> Private
+		</div>
+	</g:if>
+	<g:else>
+	    <div class="radio">
+			<input type="radio" name="privateDeck" value="false" checked> Public
+		</div>
+		<div class="radio">
+	  		<input type="radio" name="privateDeck" value="true"> Private
+		</div>
+	</g:else>
+	
+</div>

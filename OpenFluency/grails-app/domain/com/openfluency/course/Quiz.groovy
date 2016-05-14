@@ -9,10 +9,11 @@ class Quiz {
 	/** the Course a Quiz belongs to */
 	Course course
 	String title
-	/** This indicates if in this test we're testing pronunciation, meaning, or symbol */
-	Integer testElement 	
 	/** If the current time is less than the liveTime, the test will not be viewable */
 	Date liveTime		
+	/** If the current time is less than the endTime, the test will not be viewable */
+	Date endTime	
+
 	/** This allows control using a checkbox instead of time to be able to disable the test when needed */
 	boolean enabled 	
 	/** Used to enable time limits on quiz questions
@@ -20,6 +21,9 @@ class Quiz {
 	 *  submits the answer after the counter reaches 0 then it will be counted as incorrect
 	 */
 	Integer maxCardTime 
+	
+	Integer quizType = Constants.MANUAL_QUIZ
+	
 	/**
 	 *  @Return a list of all the question in a Quiz
 	 */
@@ -30,22 +34,13 @@ class Quiz {
 	Integer countQuestions() {
 		Question.countByQuiz(this)
 	}
-
-	/**
-	* Returns the test element to use during the test. If the test element is random, then a random test element is returned
-	*/
-	Integer getEffectiveTestElement() {
-		if(testElement == Constants.RANDOM) {
-			Random rand = new Random()
-			int max = Constants.CARD_ELEMENTS.size()
-			return rand.nextInt(max-1)
-		} 
-		else {
-			return testElement
-		}
-	}
-
+	
     static constraints = {
     	liveTime nullable: true
+    	endTime nullable: true
     }
 }
+
+
+
+
